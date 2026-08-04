@@ -173,6 +173,29 @@ def test_year_rolls_forward_across_new_year() -> None:
     assert windows[0].end.year == 2027
 
 
+def test_point_window_subsumed_by_range_is_dropped() -> None:
+    """實測玉山活動二：原文同時寫「8/20 17:00開放登錄」與
+    「2026/8/20 17:00~2026/8/31 23:59統一開放…登錄」。兩者是同一件事，
+    只保留資訊完整的區間，否則 UI 會顯示兩個看似衝突的登錄時間。"""
+    windows = find_windows(
+        "8/20 17:00開放登錄(限量1,300名) 登錄辦法：2026/8/20 17:00~2026/8/31 23:59統一開放登錄",
+        default_year=2026,
+        reference=date(2026, 8, 1),
+    )
+    assert len(windows) == 1
+    assert windows[0].kind == "range"
+    assert windows[0].end == datetime.fromisoformat("2026-08-31T23:59:00+08:00")
+
+
+def test_point_outside_any_range_is_kept() -> None:
+    windows = find_windows(
+        "8/17 10:00開放登錄 登錄辦法：2026/8/20 17:00~2026/8/31 23:59統一開放登錄",
+        default_year=2026,
+        reference=date(2026, 8, 1),
+    )
+    assert [w.kind for w in windows] == ["opens_at", "range"]
+
+
 def test_same_day_range() -> None:
     windows = find_windows("8/15 開放登錄 10:00~18:00", default_year=2026)
     assert len(windows) == 1

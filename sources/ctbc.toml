@@ -1,0 +1,23 @@
+# 中國信託。首版納入的理由：單頁 14 個活動（實測 31,220 字、14 次
+# 「活動・注意事項」），是驗證活動邊界切分最極端的案例。
+id = "ctbc"
+bank_name = "中國信託"
+domains = ["ctbcbank.com"]
+
+[listing]
+kind = "html_list"
+entry_url = "https://www.ctbcbank.com/content/dam/minisite/long/creditcard/LINEPay/store.html"
+link_pattern = 'href="([^"]*(?:activity|event|promotion)[^"]*)"'
+
+[detail]
+source = "html"
+cardinality = "many"
+boundary = '活動・注意事項'
+
+[registration]
+portal_url = "https://www.ctbcbank.com/twrbo/zh_tw/onlinecounter_index/cc_service/cc_service_register.html"
+portal_kind = "bank_portal"
+portal_hint = "於中國信託活動登錄頁找到對應活動"
+
+[conditions]
+known_cards = []

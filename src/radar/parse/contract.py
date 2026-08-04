@@ -101,15 +101,22 @@ def derive(
     elif period.start is not None:
         spend_from = datetime.combine(period.start, datetime.min.time())
 
+    # 兩個方向分開表達，不用一個會變負數的欄位
     days_left: int | None = None
+    grace_days: int | None = None
     if period.end is not None and last_chance is not None:
-        days_left = (period.end - last_chance.date()).days
+        delta = (period.end - last_chance.date()).days
+        if delta >= 0:
+            days_left = delta
+        else:
+            grace_days = -delta
 
     return TimingContract(
         kind=kind,
         spend_counts_from=spend_from,
         last_chance_to_register=last_chance,
         spend_days_left_after_registering=days_left,
+        grace_days_after_period_end=grace_days,
         confidence=round(confidence, 2),
     )
 

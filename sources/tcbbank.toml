@@ -1,0 +1,31 @@
+# 台中銀行。首版納入的理由：民國年寫法密度最高（實測明細頁 27 處），
+# 驗證正規化的民國年轉換與邊界（100–159 才視為民國年）。
+id = "tcbbank"
+bank_name = "台中銀行"
+domains = ["tcbbank.com.tw"]
+
+[listing]
+kind = "json_api"
+entry_url = "https://www.tcbbank.com.tw/creditcard/J_01.html"
+data_url = "https://www.tcbbank.com.tw/WWWAPI/api/Promotion/Entrance?ID=2"
+items_path = ["row"]
+
+[listing.fields]
+title = "Title"
+summary = "SubTitle"
+url = "Url"
+start = "StartDate"
+end = "EndDate"
+category = "PromotionType"
+
+[detail]
+source = "html"
+cardinality = "one"
+
+[registration]
+portal_url = "https://www.tcbbank.com.tw/CreditCard/RegQuery2/Act_login.aspx"
+portal_kind = "bank_portal"
+portal_hint = "於台中銀行活動登錄頁輸入卡號後登錄"
+
+[conditions]
+known_cards = []

@@ -1,0 +1,35 @@
+# 聯邦銀行。首版納入的理由：明細頁是 dt/th 階梯門檻表，是唯一能驗證
+# threshold_tiers 的來源（實測四階 35,000/50,000/65,000/75,000 元）。
+id = "ubot"
+bank_name = "聯邦銀行"
+domains = ["ubot.com.tw"]
+note = "Rewards API 提供七個 catalog；hotOrder 為強打標記，不重複建立活動"
+
+[listing]
+kind = "json_api"
+entry_url = "https://card.ubot.com.tw/CardActivity?category=%E7%B6%B2%E8%B3%BC%E6%95%B8%E4%BD%8D"
+data_url = "https://card.ubot.com.tw/eCardServiceAPI/api/Rewards"
+items_path = []
+categories = ["卡片優惠", "百貨零售", "旅遊優惠", "交通汽修", "網購數位", "生活繳費", "購物娛樂"]
+
+[listing.fields]
+title = "title"
+summary = "desc"
+url = "url"
+start = "sdt"
+end = "edt"
+category = "catalog"
+featured_rank = "hotOrder"
+
+[detail]
+source = "html"
+cardinality = "one"
+table_tiers = true
+
+[registration]
+portal_url = "https://card.ubot.com.tw/eCard/activity_login/register_activity.aspx"
+portal_kind = "bank_portal"
+portal_hint = "登入後於活動登錄清單找到對應活動"
+
+[conditions]
+known_cards = []

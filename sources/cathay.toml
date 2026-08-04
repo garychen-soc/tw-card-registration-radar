@@ -1,0 +1,27 @@
+# 國泰世華。首版納入的理由：明細頁為 SPA，純文字只有 31 字，
+# 必須走 API 的 campaignProps —— 驗證 detail.source = "api" 這條路徑。
+id = "cathay"
+bank_name = "國泰世華"
+domains = ["cathay-cube.com.tw", "cathaybk.com.tw"]
+
+[listing]
+kind = "json_api"
+entry_url = "https://www.cathay-cube.com.tw/cathaybk/personal/event/overview"
+data_url = "https://www.cathay-cube.com.tw/cathaybk/personal/event/overview/credit-card.model.list.json"
+items_path = []
+
+[listing.fields]
+url = "campaignPath"
+props = "campaignProps"
+
+[detail]
+source = "api"
+cardinality = "one"
+
+[registration]
+portal_url = "https://www.cathaybk.com.tw/cathaybk/personal/credit-card/event/"
+portal_kind = "bank_portal"
+portal_hint = "於國泰世華活動專區找到對應活動後登錄"
+
+[conditions]
+known_cards = []

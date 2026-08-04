@@ -306,7 +306,37 @@ def find_windows(
                 index += 1
 
     windows.sort(key=lambda w: (w.anchor, w.kind))
-    return windows
+    return _drop_subsumed(windows)
+
+
+def _drop_subsumed(windows: list[RegistrationWindow]) -> list[RegistrationWindow]:
+    """剔除被完整區間涵蓋的單點視窗。
+
+    真實案例（玉山活動二）：原文既寫「8/20 17:00開放登錄」也寫
+    「2026/8/20 17:00~2026/8/31 23:59統一開放…登錄」。兩者是同一件事，
+    但貪婪掃描會各自產生一個視窗。保留資訊較完整的 range，
+    否則 UI 會顯示兩個看起來衝突的登錄時間。
+    """
+    ranges = [
+        window
+        for window in windows
+        if window.kind == "range" and window.start is not None and window.end is not None
+    ]
+    if not ranges:
+        return windows
+    kept: list[RegistrationWindow] = []
+    for window in windows:
+        if window.kind == "range":
+            kept.append(window)
+            continue
+        anchor = window.anchor
+        covered = any(
+            span.start is not None and span.end is not None and span.start <= anchor <= span.end
+            for span in ranges
+        )
+        if not covered:
+            kept.append(window)
+    return kept
 
 
 def _assemble(

@@ -31,6 +31,15 @@ def test_fullwidth_tilde_becomes_ascii() -> None:
     assert "~" in normalize("8/1～8/31")
 
 
+def test_chinese_punctuation_is_preserved() -> None:
+    """evidence 要呈現給使用者核對，中文標點不得被折成半角。
+
+    這排除了 unicodedata.normalize("NFKC") —— 它會把「，。（）！？」一併轉成 ASCII。
+    """
+    body = "單筆滿10,000元享5%回饋，適用一次付清（含分期）。詳見活動辦法！"
+    assert normalize(body) == body
+
+
 def test_amount_range_is_not_corrupted() -> None:
     """不做 `至`→`~` 的全域替換。舊實作會把金額區間也改掉。"""
     assert "滿10,000元至20,000元" in normalize("單筆滿10,000元至20,000元")

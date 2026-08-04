@@ -44,7 +44,9 @@ def test_geometry_gives_retroactive_when_registration_outlasts_period() -> None:
         raw_text="登錄期間至9/10",
     )
     assert contract.kind == "retroactive_ok"
-    assert contract.spend_days_left_after_registering == -10
+    # 登錄比活動晚結束 → 表達成「活動結束後還能補登錄幾天」，不是負數的可消費天數
+    assert contract.grace_days_after_period_end == 10
+    assert contract.spend_days_left_after_registering is None
 
 
 def test_geometry_gives_closes_early_when_registration_ends_first() -> None:
@@ -64,6 +66,7 @@ def test_geometry_gives_closes_early_when_registration_ends_first() -> None:
     assert contract.kind == "registration_closes_early"
     # 登錄成功後還有 21 天可以消費
     assert contract.spend_days_left_after_registering == 21
+    assert contract.grace_days_after_period_end is None
 
 
 def test_recurrence_takes_precedence() -> None:

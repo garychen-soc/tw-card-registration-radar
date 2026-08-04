@@ -1,0 +1,29 @@
+# 元大銀行。首版納入的理由：純 HTML 清單加表單分頁，作為
+# html_list / form_paged 兩種型態的基準案例。
+id = "yuanta"
+bank_name = "元大銀行"
+domains = ["yuantabank.com.tw"]
+
+[listing]
+kind = "form_paged"
+entry_url = "https://www.yuantabank.com.tw/bank/creditCard/promotionActivity/list.do"
+item_selector = "li div.pic"
+link_pattern = 'href="([^"]*/promotionActivity/in\.do\?id=[^"]+)"'
+max_pages = 30
+
+[listing.form_fields]
+page = "pN"
+total_pages = "pA"
+total_items = "iA"
+
+[detail]
+source = "html"
+cardinality = "one"
+
+[registration]
+portal_url = "https://www.yuantabank.com.tw/bank/creditCard/productActivityMember/list.do"
+portal_kind = "bank_portal"
+portal_hint = "於元大銀行卡友活動登錄頁找到對應活動"
+
+[conditions]
+known_cards = []

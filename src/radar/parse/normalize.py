@@ -16,7 +16,6 @@
 from __future__ import annotations
 
 import re
-import unicodedata
 
 # 民國年合理範圍：100–159 → 2011–2070。舊實作用 `1\d{2}` 會把
 # 「滿 150 元」這類數字誤判成民國年。
@@ -25,15 +24,31 @@ _HMS = re.compile(r"(?<!\d)(\d{1,2}:\d{2}):\d{2}(?!\d)")
 _WHITESPACE = re.compile(r"[ \t　\xa0]+")
 _BLANK_LINES = re.compile(r"\n{2,}")
 
-# NFKC 之後仍需處理的破折號家族。統一成 U+FF5E 之外的單一半角 `~`
-# 交給 tokenizer；連字號保留原樣，因為 `2026-08-07` 需要它。
-_DASHES = {
-    "〜": "~",  # 〜
-    "～": "~",  # ～
-    "⁓": "~",  # ⁓
-    "—": "—",  # em dash 保留，tokenizer 視為範圍分隔
-    "–": "–",  # en dash 同上
-}
+# 刻意不使用 unicodedata.normalize("NFKC")。NFKC 對 CJK 太激進 —— 它會把
+# 全角中文標點「，。（）！？」一併轉成 ASCII，而 evidence 是要呈現給使用者
+# 核對的原文，把中文逗號變成半角逗號是不能接受的。這裡只折疊解析真正需要的字元。
+_FOLD = str.maketrans(
+    {
+        **{chr(0xFF10 + i): str(i) for i in range(10)},  # ０-９
+        **{chr(0xFF21 + i): chr(0x41 + i) for i in range(26)},  # Ａ-Ｚ
+        **{chr(0xFF41 + i): chr(0x61 + i) for i in range(26)},  # ａ-ｚ
+        "：": ":",
+        "／": "/",
+        "　": " ",  # U+3000 ideographic space
+        "～": "~",
+        "〜": "~",
+        "⁓": "~",
+        "－": "-",  # U+FF0D fullwidth hyphen-minus
+        "‐": "-",
+        "‑": "-",
+        "‒": "-",
+        "％": "%",
+        "＄": "$",
+        "＋": "+",
+        "＝": "=",
+        # em dash 與 en dash 保留原樣，由 tokenizer 視為範圍分隔
+    }
+)
 
 
 def normalize(text: str) -> str:
@@ -42,9 +57,7 @@ def normalize(text: str) -> str:
     偏移量會因替換而改變，因此 evidence 一律取自正規化後的文字切片
     —— evidence 的用途是讓人核對，不是位元組級的來源追溯。
     """
-    value = unicodedata.normalize("NFKC", text)
-    for src, dst in _DASHES.items():
-        value = value.replace(src, dst)
+    value = text.translate(_FOLD)
     value = _ROC_YEAR.sub(lambda m: str(int(m.group(1)) + 1911), value)
     # 秒級收斂需重複套用：`17:00:00~23:59:00` 兩處都要處理
     while True:

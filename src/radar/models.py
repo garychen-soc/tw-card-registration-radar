@@ -173,6 +173,13 @@ class TimingContract(BaseModel):
     spend_counts_from: datetime | None = None
     last_chance_to_register: datetime | None = None
     spend_days_left_after_registering: int | None = None
+    """登錄截止後還剩幾天可以消費。只在登錄先於活動結束時才有意義。"""
+    grace_days_after_period_end: int | None = None
+    """活動結束後還能補登錄幾天。只在登錄可延續到活動結束之後時才有意義。
+
+    兩個欄位刻意分開：使用者問的是兩個不同問題（「我登錄完還有多久可以刷」
+    vs「我刷完了還來得及補登錄嗎」），用同一個欄位表達會產生負數，讀不通。
+    """
     confidence: Confidence = 0.0
     consistency: list[str] = Field(default_factory=list)
 

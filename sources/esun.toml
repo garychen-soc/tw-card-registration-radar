@@ -1,0 +1,30 @@
+# 玉山銀行。首版納入的理由：明細頁同時具備秒級時間（實測 21 處）與
+# 單頁多子活動（活動一/二/三各有登錄時間），是前身兩個最嚴重缺陷的來源。
+id = "esun"
+bank_name = "玉山銀行"
+domains = ["esunbank.com.tw", "esunbank.com"]
+
+[listing]
+kind = "json_api"
+entry_url = "https://www.esunbank.com/zh-tw/personal/credit-card/discount/shops"
+data_url = "https://www.esunbank.com/api/client/CreditCardDiscount/DiscountSearchResult?sc_lang=zh-TW"
+items_path = []
+
+[listing.fields]
+title = "Title"
+summary = "Description"
+url = "Url"
+
+[detail]
+source = "html"
+cardinality = "many"
+boundary = '【活動[一二三四五六七八九十\d]+[^】]{0,20}】'
+
+[registration]
+portal_url = "https://www.esunbank.com/zh-tw/personal/credit-card/discount/shops"
+portal_kind = "bank_portal"
+portal_hint = "於玉山銀行官網活動登錄頁或玉山 Wallet App 登錄"
+
+[conditions]
+# 僅列實際在官方頁觀察到的名稱
+known_cards = ["玉山Unicard", "玉山Pi拍錢包信用卡"]
