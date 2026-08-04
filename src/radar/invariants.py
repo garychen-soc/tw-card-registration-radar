@@ -99,6 +99,7 @@ def apply(offer: Offer, *, extra_codes: tuple[str, ...] = ()) -> Offer:
     讓「是否需要人工確認」的判斷只有這一處，不會被覆寫。
     """
     codes = [*check(offer), *extra_codes]
+    offer.review_codes = codes
     offer.review_reasons = [VIOLATION_MESSAGES.get(code, code) for code in codes]
     offer.needs_review = any(code not in _INFORMATIONAL for code in codes)
     if codes:

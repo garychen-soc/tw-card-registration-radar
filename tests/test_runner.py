@@ -265,3 +265,45 @@ def test_api_detail_source_uses_listing_props() -> None:
     assert offer.registration.windows[0].end == datetime.fromisoformat(
         "2026-08-25T23:59:00+08:00"
     )
+
+
+def test_not_modified_response_reuses_cache_instead_of_emptying_content() -> None:
+    """條件式 GET 回 304 時沒有內容。若把空字串當成頁面文字，第二次執行起
+    所有活動的條件與登錄時點都會消失 —— 實跑時筆數從 223 掉到 92 才發現。
+    """
+    from radar.transport import Response
+
+    detail_url = "https://www.example.com/promo/1"
+    fetcher = FakeFetcher(
+        pages={LIST_URL: _listing("/promo/1"), detail_url: DETAIL_ONE}
+    )
+    spec = _spec()
+    first = run_source(spec, fetcher, today=TODAY, now=NOW)
+    previous = {campaign.source_url: campaign for campaign in first.campaigns}
+    baseline_offers = len(first.campaigns[0].offers)
+    assert baseline_offers >= 1
+
+    original = fetcher.get
+
+    def get(url: str, **kwargs: object) -> Response:
+        if url == detail_url:
+            return Response(
+                requested_url=url,
+                final_url=url,
+                status_code=304,
+                text="",
+                content_type="text/html",
+                content_hash="unchanged",
+                not_modified=True,
+            )
+        return original(url, **kwargs)  # type: ignore[arg-type]
+
+    fetcher.get = get  # type: ignore[method-assign]
+    # 8/30 在活動結束日 8/31 的邊界內，會強制重讀明細 → 觸發條件式 GET
+    later = run_source(spec, fetcher, today=date(2026, 8, 30), now=NOW, previous=previous)
+
+    assert later.stats.detail_reused == 1
+    assert later.stats.detail_fetched == 0
+    offers = later.campaigns[0].offers
+    assert len(offers) == baseline_offers
+    assert offers[0].registration.windows, "登錄時點不得因 304 而消失"

@@ -208,6 +208,9 @@ class Offer(BaseModel):
     registration: Registration = Field(default_factory=Registration)
     conditions: Conditions = Field(default_factory=Conditions)
     needs_review: bool = False
+    review_codes: list[str] = Field(default_factory=list)
+    """穩定的 invariant 代碼。輸出到資料檔的是這個，不是中文句子
+    —— 代碼是契約，文案是呈現。"""
     review_reasons: list[str] = Field(default_factory=list)
 
 

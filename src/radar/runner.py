@@ -242,8 +242,17 @@ def _run_item(
     html = ""
     text = f"{item.title}\n{item.summary}"
     if spec.detail.source == "html":
+        # 條件式 GET 只在「有上一版可沿用」且「清單指紋未變」時才用得上：
+        # 304 不會帶回內容，唯一能做的就是沿用上一版。若清單指紋變了（標題或
+        # 期間改了），即使頁面本身沒變也要拿到完整內容重新推導。
+        conditional = cached is not None and cached.content_hash == fingerprint
         try:
-            response = fetcher.get(item.url)
+            response = fetcher.get(item.url, conditional=conditional)
+            if response.not_modified:
+                # 走到這裡表示快取因效期或活動邊界而過期，但頁面內容未變
+                assert cached is not None
+                result.stats.detail_reused += 1
+                return cached.model_copy(update={"observed_at": moment})
             result.stats.detail_fetched += 1
             html = response.text
             text = to_text(html) or text

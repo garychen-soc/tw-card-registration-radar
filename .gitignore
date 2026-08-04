@@ -14,3 +14,7 @@ reports/*.json
 !reports/.gitkeep
 # 完整原始頁面只留在本機供分析；版控只收 tests/golden 下的節錄
 tests/golden/raw/
+
+# 產出的網站資料。目前只有單一來源的部分結果，等 scrape.yml 上線、
+# 六家都跑通之後才改為納入版控（GitHub Pages 需要它）。
+web/public/
