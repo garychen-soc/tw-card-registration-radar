@@ -18,3 +18,6 @@ tests/golden/raw/
 # 產出的網站資料。目前只有單一來源的部分結果，等 scrape.yml 上線、
 # 六家都跑通之後才改為納入版控（GitHub Pages 需要它）。
 web/public/
+# 頁面 HTML 快取（僅為省下重新下載，非正確性依賴；CI 用 actions/cache）
+var/pages/
+var/http/

@@ -16,6 +16,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+from concurrent.futures import ThreadPoolExecutor
 from datetime import UTC, date, datetime
 from pathlib import Path
 
@@ -25,9 +26,10 @@ sys.path.insert(0, str(ROOT / "src"))
 from radar.emit import build_index, portals_of, write_site  # noqa: E402
 from radar.guard import assess, describe  # noqa: E402
 from radar.models import Alert, Campaign, SourceHealth  # noqa: E402
+from radar.pagestore import PageStore  # noqa: E402
 from radar.report import describe_source  # noqa: E402
-from radar.runner import run_source  # noqa: E402
-from radar.spec import load_specs  # noqa: E402
+from radar.runner import SourceResult, run_source  # noqa: E402
+from radar.spec import SourceSpec, load_specs  # noqa: E402
 from radar.transport import Fetcher, HttpCache  # noqa: E402
 
 SITE = ROOT / "web" / "public"
@@ -63,17 +65,26 @@ def main() -> int:
         print("沒有符合條件的來源", file=sys.stderr)
         return 1
 
-    http_cache = HttpCache.load(ROOT / "var" / "http_cache.json")
     previous_index = _load_previous()
+    pages = PageStore(ROOT / "var" / "pages")
+
+    def run_one(spec: SourceSpec) -> tuple[SourceSpec, SourceResult, HttpCache]:
+        # 每家銀行各自的 HttpCache，避免平行執行時共寫同一個檔案。
+        cache = HttpCache.load(ROOT / "var" / "http" / f"{spec.id}.json")
+        with Fetcher(spec.domains, cache=cache) as fetcher:
+            return spec, run_source(spec, fetcher, today=today, now=now, pages=pages), cache
+
+    # 按銀行平行執行。不同銀行是不同主機，per-host 節流仍然成立，
+    # wall clock 從「所有銀行相加」變成「最慢的單一銀行」。
+    with ThreadPoolExecutor(max_workers=min(6, len(specs))) as pool:
+        results = list(pool.map(run_one, specs))
 
     campaigns: list[Campaign] = []
     health: list[SourceHealth] = []
     alerts: list[Alert] = []
     stats: dict[str, dict[str, int]] = {}
 
-    for spec in specs:
-        with Fetcher(spec.domains, cache=http_cache) as fetcher:
-            result = run_source(spec, fetcher, today=today, now=now)
+    for spec, result, cache in results:
         assert result.health is not None
         campaigns.extend(result.campaigns)
         health.append(result.health)
@@ -81,9 +92,9 @@ def main() -> int:
         stats[spec.id] = result.stats.as_dict()
         for line in describe_source(result.health, result.campaigns):
             print(line)
-
-    if not args.dry_run:
-        http_cache.save()
+        print(f"  統計 {result.stats.as_dict()}")
+        if not args.dry_run:
+            cache.save()
 
     index = build_index(
         campaigns,

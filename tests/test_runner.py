@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 import json
+import tempfile
 from datetime import UTC, date, datetime
+from pathlib import Path
 
 from conftest import FakeFetcher
 
@@ -177,63 +179,6 @@ def test_cardinality_many_without_boundary_is_flagged() -> None:
     assert any("未能切出邊界" in reason for reason in offer.review_reasons)
 
 
-def test_cache_reuse_skips_the_detail_request() -> None:
-    fetcher = FakeFetcher(
-        pages={
-            LIST_URL: _listing("/promo/1"),
-            "https://www.example.com/promo/1": DETAIL_ONE,
-        }
-    )
-    spec = _spec()
-    first = run_source(spec, fetcher, today=TODAY, now=NOW)
-    assert first.stats.detail_fetched == 1
-
-    previous = {campaign.source_url: campaign for campaign in first.campaigns}
-    fetcher.requested.clear()
-    # 活動起訖日離「今天」都超過 3 天，才會真的命中快取
-    later = run_source(spec, fetcher, today=date(2026, 8, 20), now=NOW, previous=previous)
-
-    assert later.stats.detail_reused == 1
-    assert later.stats.detail_fetched == 0
-    assert "https://www.example.com/promo/1" not in fetcher.requested
-
-
-def test_cache_is_bypassed_near_activity_boundary() -> None:
-    """活動起訖日前後 3 天內強制重讀 —— 這時的資料最容易變動。"""
-    fetcher = FakeFetcher(
-        pages={
-            LIST_URL: _listing("/promo/1"),
-            "https://www.example.com/promo/1": DETAIL_ONE,
-        }
-    )
-    spec = _spec()
-    first = run_source(spec, fetcher, today=TODAY, now=NOW)
-    previous = {campaign.source_url: campaign for campaign in first.campaigns}
-
-    # 8/30 距活動結束日 8/31 只有一天
-    later = run_source(spec, fetcher, today=date(2026, 8, 30), now=NOW, previous=previous)
-    assert later.stats.detail_reused == 0
-    assert later.stats.detail_fetched == 1
-
-
-def test_cache_is_bypassed_when_listing_changed() -> None:
-    spec = _spec()
-    fetcher = FakeFetcher(
-        pages={
-            LIST_URL: _listing("/promo/1"),
-            "https://www.example.com/promo/1": DETAIL_ONE,
-        }
-    )
-    first = run_source(spec, fetcher, today=TODAY, now=NOW)
-    previous = {campaign.source_url: campaign for campaign in first.campaigns}
-
-    fetcher.pages[LIST_URL] = json.dumps(
-        [{"title": "活動 0 已改標題", "url": "/promo/1"}]
-    )
-    later = run_source(spec, fetcher, today=date(2026, 8, 20), now=NOW, previous=previous)
-    assert later.stats.detail_reused == 0
-
-
 def test_api_detail_source_uses_listing_props() -> None:
     """國泰世華式：明細頁是 SPA，內容只在清單 API 的附加欄位裡。"""
     payload = [
@@ -267,43 +212,66 @@ def test_api_detail_source_uses_listing_props() -> None:
     )
 
 
-def test_not_modified_response_reuses_cache_instead_of_emptying_content() -> None:
-    """條件式 GET 回 304 時沒有內容。若把空字串當成頁面文字，第二次執行起
-    所有活動的條件與登錄時點都會消失 —— 實跑時筆數從 223 掉到 92 才發現。
+def test_page_store_serves_content_when_server_reports_not_modified() -> None:
+    """304 不帶 body。若沒有本機存檔就無事可做 —— 本專案第一版因此在第二次
+    執行時把 223 筆掉成 92 筆、行事曆變空。存了 HTML，304 就變成
+    「用存檔重新推導」，而且用的是當下的解析器。
     """
+    from radar.pagestore import PageStore
     from radar.transport import Response
 
     detail_url = "https://www.example.com/promo/1"
-    fetcher = FakeFetcher(
-        pages={LIST_URL: _listing("/promo/1"), detail_url: DETAIL_ONE}
+    with tempfile.TemporaryDirectory() as directory:
+        pages = PageStore(Path(directory))
+        pages.put(detail_url, DETAIL_ONE)
+
+        fetcher = FakeFetcher(pages={LIST_URL: _listing("/promo/1")})
+        original = fetcher.get
+
+        def get(url: str, **kwargs: object) -> Response:
+            if url == detail_url:
+                return Response(
+                    requested_url=url,
+                    final_url=url,
+                    status_code=304,
+                    text="",
+                    content_type="text/html",
+                    content_hash="unchanged",
+                    not_modified=True,
+                )
+            return original(url, **kwargs)  # type: ignore[arg-type]
+
+        fetcher.get = get  # type: ignore[method-assign]
+        result = run_source(_spec(), fetcher, today=TODAY, now=NOW, pages=pages)
+
+    assert result.stats.detail_not_modified == 1
+    assert result.stats.detail_fetched == 0
+    offer = result.campaigns[0].offers[0]
+    assert offer.registration.windows, "登錄時點不得因 304 而消失"
+    assert offer.conditions.quota.seats == 1000
+
+
+def test_parser_changes_always_apply_because_output_is_never_cached() -> None:
+    """同一份 HTML 跑兩次必須得到同樣的結果，且第二次仍是重新推導而非沿用。
+
+    這是「快取輸入不快取輸出」的核心保證：解析器改了，全部頁面立即受益。
+    """
+    from radar.pagestore import PageStore
+
+    with tempfile.TemporaryDirectory() as directory:
+        pages = PageStore(Path(directory))
+        fetcher = FakeFetcher(
+            pages={LIST_URL: _listing("/promo/1"), "https://www.example.com/promo/1": DETAIL_ONE}
+        )
+        spec = _spec()
+        first = run_source(spec, fetcher, today=TODAY, now=NOW, pages=pages)
+        second = run_source(spec, fetcher, today=TODAY, now=NOW, pages=pages)
+
+    assert second.stats.detail_fetched == 1, "沒有驗證標頭時不快取，每次都重抓"
+    assert [offer.id for offer in first.campaigns[0].offers] == [
+        offer.id for offer in second.campaigns[0].offers
+    ]
+    assert (
+        first.campaigns[0].offers[0].registration.windows[0].end
+        == second.campaigns[0].offers[0].registration.windows[0].end
     )
-    spec = _spec()
-    first = run_source(spec, fetcher, today=TODAY, now=NOW)
-    previous = {campaign.source_url: campaign for campaign in first.campaigns}
-    baseline_offers = len(first.campaigns[0].offers)
-    assert baseline_offers >= 1
-
-    original = fetcher.get
-
-    def get(url: str, **kwargs: object) -> Response:
-        if url == detail_url:
-            return Response(
-                requested_url=url,
-                final_url=url,
-                status_code=304,
-                text="",
-                content_type="text/html",
-                content_hash="unchanged",
-                not_modified=True,
-            )
-        return original(url, **kwargs)  # type: ignore[arg-type]
-
-    fetcher.get = get  # type: ignore[method-assign]
-    # 8/30 在活動結束日 8/31 的邊界內，會強制重讀明細 → 觸發條件式 GET
-    later = run_source(spec, fetcher, today=date(2026, 8, 30), now=NOW, previous=previous)
-
-    assert later.stats.detail_reused == 1
-    assert later.stats.detail_fetched == 0
-    offers = later.campaigns[0].offers
-    assert len(offers) == baseline_offers
-    assert offers[0].registration.windows, "登錄時點不得因 304 而消失"

@@ -73,6 +73,7 @@ class Response:
     text: str
     content_type: str
     content_hash: str
+    cache_control: str = ""
     not_modified: bool = False
 
     def json(self) -> Any:
@@ -144,6 +145,15 @@ class HttpCache:
 
     def content_hash(self, url: str) -> str:
         return self.entries.get(url, {}).get("content_hash", "")
+
+    def has_validators(self, url: str) -> bool:
+        """該 URL 上次是否回傳了 ETag／Last-Modified。
+
+        沒有驗證標頭就永遠不可能收到 304，快取頁面內容純屬浪費 ——
+        實測六家來源只有兩家提供，其餘送 no-store／private。
+        """
+        entry = self.entries.get(url, {})
+        return bool(entry.get("etag") or entry.get("last_modified"))
 
 
 class Fetcher:
@@ -238,6 +248,7 @@ class Fetcher:
                     text="",
                     content_type=response.headers.get("content-type", "").split(";")[0],
                     content_hash=self.cache.content_hash(url),
+                    cache_control=response.headers.get("cache-control", ""),
                     not_modified=True,
                 )
 
@@ -269,6 +280,7 @@ class Fetcher:
                 text=response.text,
                 content_type=response.headers.get("content-type", "").split(";")[0],
                 content_hash=content_hash,
+                cache_control=response.headers.get("cache-control", ""),
             )
 
         raise FetchFailed(f"redirect 次數過多：{url}")
