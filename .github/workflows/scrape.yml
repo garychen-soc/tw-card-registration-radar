@@ -108,4 +108,14 @@ jobs:
           print(payload['counts']['offers'])
           ")
           git commit -m "chore: refresh promotion data (${COUNT} offers)"
-          git push
+          # 抓取要跑好幾分鐘，期間可能有人推了新的 commit。直接 push 會被
+          # 拒絕而丟掉這次的資料（實測發生過）。rebase 後重試。
+          for attempt in 1 2 3; do
+            if git push; then
+              exit 0
+            fi
+            echo "push 被拒（第 ${attempt} 次），rebase 後重試"
+            git pull --rebase --autostash origin main || exit 1
+          done
+          echo "::error::連續三次推送失敗，本次資料未提交。"
+          exit 1
