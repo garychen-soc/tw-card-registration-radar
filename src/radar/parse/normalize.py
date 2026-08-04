@@ -22,6 +22,9 @@ import re
 _ROC_YEAR = re.compile(r"(?<!\d)(1[0-5]\d)(?=\s*[年/\-－]\s*\d{1,2}\s*[月/\-－])")
 _HMS = re.compile(r"(?<!\d)(\d{1,2}:\d{2}):\d{2}(?!\d)")
 _WHITESPACE = re.compile(r"[ \t　\xa0]+")
+# BOM 與零寬字元。實測聯邦頁面的活動標題就是單一個 U+FEFF，
+# 不清掉會產出空標題的子活動。
+_INVISIBLE = re.compile(r"[﻿​‌‍⁠]")
 _BLANK_LINES = re.compile(r"\n{2,}")
 
 # 刻意不使用 unicodedata.normalize("NFKC")。NFKC 對 CJK 太激進 —— 它會把
@@ -57,7 +60,7 @@ def normalize(text: str) -> str:
     偏移量會因替換而改變，因此 evidence 一律取自正規化後的文字切片
     —— evidence 的用途是讓人核對，不是位元組級的來源追溯。
     """
-    value = text.translate(_FOLD)
+    value = _INVISIBLE.sub("", text.translate(_FOLD))
     value = _ROC_YEAR.sub(lambda m: str(int(m.group(1)) + 1911), value)
     # 秒級收斂需重複套用：`17:00:00~23:59:00` 兩處都要處理
     while True:

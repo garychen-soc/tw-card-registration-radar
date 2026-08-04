@@ -177,3 +177,53 @@ def test_unknown_contract_on_required_registration_is_flagged() -> None:
         )
     )
     assert "contract_unknown" in invariants.check(offer)
+
+
+def test_inconsistent_window_downgrades_contract_confidence() -> None:
+    """契約是由視窗與期間的幾何關係推導的。視窗本身矛盾時，推導結果不得掛高信心。
+
+    實測案例：聯邦某頁留著去年的登錄期間（2025-07-01~2026-06-30），與清單期間
+    （2026-07-01~2026-12-31）不符，卻推導出「登錄先截止，還有 184 天可消費」。
+    """
+    offer = _offer(
+        registration=Registration(
+            required=True,
+            windows=[
+                RegistrationWindow(
+                    kind="range",
+                    start=_dt("2025-07-01T00:00:00+08:00"),
+                    end=_dt("2026-06-30T23:59:00+08:00"),
+                    confidence=0.8,
+                )
+            ],
+            timing_contract=TimingContract(
+                kind="registration_closes_early", confidence=0.7
+            ),
+        )
+    )
+    invariants.apply(offer)
+    assert offer.needs_review is True
+    assert offer.registration.timing_contract.confidence <= 0.3
+    assert "window_outside_period" in offer.registration.timing_contract.consistency
+
+
+def test_consistent_offer_keeps_contract_confidence() -> None:
+    offer = _offer(
+        registration=Registration(
+            required=True,
+            windows=[
+                RegistrationWindow(
+                    kind="range",
+                    start=_dt("2026-08-01T00:00:00+08:00"),
+                    end=_dt("2026-08-10T23:59:00+08:00"),
+                    confidence=0.95,
+                )
+            ],
+            timing_contract=TimingContract(
+                kind="registration_closes_early", confidence=0.7
+            ),
+        )
+    )
+    invariants.apply(offer)
+    assert offer.needs_review is False
+    assert offer.registration.timing_contract.confidence == 0.7

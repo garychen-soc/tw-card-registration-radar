@@ -97,8 +97,15 @@ def split_offers(
 
 
 def _chunk_title(body: str) -> str:
-    first = body.split("\n", 1)[0].strip()
-    return first[:120] if first else body[:120]
+    """取第一個有實質內容的行當標題。
+
+    實測聯邦的頁面上有子活動的首行只是不可見字元，直接取第一行會產出空標題。
+    """
+    for line in body.splitlines():
+        candidate = line.strip()
+        if len(candidate) >= 2:
+            return candidate[:120]
+    return body.strip()[:120] or "（無標題）"
 
 
 def sections(raw_text: str) -> dict[str, str]:

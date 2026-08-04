@@ -28,6 +28,7 @@ VIOLATION_MESSAGES = {
     "threshold_not_monotonic": "階梯門檻的消費金額未遞增，可能解析錯位",
     "period_missing": "抓不到活動期間",
     "low_confidence_window": "登錄時點的解析信心不足",
+    "offer_boundary_missing": "本頁應含多個活動但未能切出邊界，請至官方頁確認對應的登錄時間",
 }
 
 MIN_WINDOW_CONFIDENCE = 0.6
@@ -83,12 +84,26 @@ def check(offer: Offer) -> list[str]:
 # 不需要整筆退到「需人工確認」分頁。
 _INFORMATIONAL = frozenset({"registration_end_unknown"})
 
+# 這幾類直接動搖時序契約的可信度：契約是由登錄視窗與活動期間的幾何關係推導出來的，
+# 若視窗本身落在期間之外或互相重疊，推導結果不該再掛著高信心。
+# 實測案例：聯邦某頁留著去年的登錄期間（2025-07-01~2026-06-30），與清單期間
+# （2026-07-01~2026-12-31）不符，卻推導出「登錄先截止，還有 184 天可消費」。
+_TIMING_UNDERMINING = frozenset({"window_outside_period", "windows_overlap", "period_missing"})
+MAX_CONFIDENCE_WHEN_INCONSISTENT = 0.3
 
-def apply(offer: Offer) -> Offer:
-    """把檢查結果寫回 offer 的 needs_review / review_reasons。"""
-    codes = check(offer)
+
+def apply(offer: Offer, *, extra_codes: tuple[str, ...] = ()) -> Offer:
+    """把檢查結果寫回 offer 的 needs_review / review_reasons。
+
+    ``extra_codes`` 供呼叫端把自己偵測到的問題（例如切不出活動邊界）併入，
+    讓「是否需要人工確認」的判斷只有這一處，不會被覆寫。
+    """
+    codes = [*check(offer), *extra_codes]
     offer.review_reasons = [VIOLATION_MESSAGES.get(code, code) for code in codes]
     offer.needs_review = any(code not in _INFORMATIONAL for code in codes)
     if codes:
-        offer.registration.timing_contract.consistency = codes
+        contract = offer.registration.timing_contract
+        contract.consistency = codes
+        if any(code in _TIMING_UNDERMINING for code in codes):
+            contract.confidence = min(contract.confidence, MAX_CONFIDENCE_WHEN_INCONSISTENT)
     return offer

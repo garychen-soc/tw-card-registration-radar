@@ -47,3 +47,8 @@ def test_amount_range_is_not_corrupted() -> None:
 
 def test_normalize_inline_flattens_newlines() -> None:
     assert "\n" not in normalize_inline("活動期間\n2026/8/1~2026/8/31")
+
+
+def test_invisible_characters_are_stripped() -> None:
+    """實測聯邦頁面有子活動的首行只是一個 BOM，不清掉會產出空標題。"""
+    assert normalize("﻿夏日回饋​活動") == "夏日回饋活動"

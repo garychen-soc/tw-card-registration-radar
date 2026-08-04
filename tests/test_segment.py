@@ -96,3 +96,16 @@ def test_table_rows_handles_merged_last_column() -> None:
 
 def test_table_rows_returns_empty_when_no_headers() -> None:
     assert table_rows("<p>沒有表格</p>") == ([], [])
+
+
+def test_chunk_title_skips_invisible_first_line() -> None:
+    from radar.segment import split_offers as split
+
+    body = (
+        "活動一、﻿\n實際標題在第二行" + "甲" * 60 + "\n"
+        "活動二、正常標題" + "乙" * 60
+    )
+    chunks = split(body)
+    assert len(chunks) == 2
+    assert chunks[0].title.startswith("活動一")
+    assert "（無標題）" not in chunks[0].title

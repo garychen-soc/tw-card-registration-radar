@@ -38,3 +38,7 @@ packages = ["radar"]
 [tool.pytest.ini_options]
 pythonpath = ["src"]
 testpaths = ["tests"]
+
+[[tool.mypy.overrides]]
+module = "selectolax.*"
+ignore_missing_imports = true

@@ -225,6 +225,30 @@ class Campaign(BaseModel):
     content_hash: str = ""
 
 
+AlertType = Literal[
+    "source_failed",
+    "source_access_blocked",
+    "source_emitted_invalid_url",
+    "detail_unreadable",
+    "listing_page_unreadable",
+]
+
+
+class Alert(BaseModel):
+    """需要人看一眼的異常。
+
+    ``source_emitted_invalid_url`` 刻意與 ``source_failed`` 分開：前者是
+    官方頁自己給了不該跟隨的連結（實測彰銀吐出內網 IP），來源本身是好的；
+    後者才是來源真的讀不到。混在一起會讓「官方頁有瑕疵」被誤判為「來源失效」。
+    """
+
+    type: AlertType
+    bank_id: str
+    bank_name: str
+    message: str
+    url: str = ""
+
+
 class SourceHealth(BaseModel):
     bank_id: str
     bank_name: str
