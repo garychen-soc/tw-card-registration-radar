@@ -1,0 +1,105 @@
+{
+  "_note": "取自銀行官方公開活動頁的短節錄，僅供解析回歸測試。每筆標註來源網域與擷取日。改動解析器時跑這份 corpus 做 diff，是安全重構時間解析的唯一辦法。",
+  "_captured_at": "2026-08-04",
+  "cases": [
+    {
+      "id": "esun-range-with-seconds",
+      "bank": "esun",
+      "source_url": "https://www.esunbank.com/",
+      "why": "秒級時間的完整登錄區間。舊實作的 range pattern 在此失配，退化成『起點+固定分鐘數』，8/31 這個真正的截止時間被丟棄 —— 全站 348/388 個視窗因此帶著編造的結束時間。",
+      "default_year": 2026,
+      "text": "※ 登錄辦法：2026/8/7 17:00:00~2026/8/31 23:59:00統一開放正卡人於玉山銀行官網活動登錄頁、玉山Wallet App登錄。",
+      "expect_windows": [
+        {
+          "kind": "range",
+          "start": "2026-08-07T17:00:00+08:00",
+          "end": "2026-08-31T23:59:00+08:00",
+          "min_confidence": 0.85
+        }
+      ]
+    },
+    {
+      "id": "esun-opens-at-only",
+      "bank": "esun",
+      "source_url": "https://www.esunbank.com/",
+      "why": "只有開放時點、官方未公告截止。end 必須留 None，不得填補固定分鐘數。",
+      "default_year": 2026,
+      "text": "※ 於2026/8/17 10:00 於momo活動登記頁開放登錄，限量600名，額滿為止。",
+      "expect_windows": [
+        {
+          "kind": "opens_at",
+          "start": "2026-08-17T10:00:00+08:00",
+          "end": null,
+          "min_confidence": 0.7
+        }
+      ]
+    },
+    {
+      "id": "ubot-wave-ranges",
+      "bank": "ubot",
+      "source_url": "https://card.ubot.com.tw/",
+      "why": "波次登錄，中文時段標記（下午3點）加上只有結束日期沒有結束時間。同時是階梯門檻表的原文。",
+      "default_year": 2026,
+      "text": "單筆分期門檻 回饋刷卡金 分12期以上 回饋升級 每波限量 登錄名額 登錄時間 35,000元 700元 800元 100名 第一波 8/15下午3點開放登錄至8/20 第二波 9/15下午3點開放登錄至10/20",
+      "expect_windows": [
+        {
+          "kind": "range",
+          "start": "2026-08-15T15:00:00+08:00",
+          "end": "2026-08-20T23:59:00+08:00",
+          "min_confidence": 0.8
+        },
+        {
+          "kind": "range",
+          "start": "2026-09-15T15:00:00+08:00",
+          "end": "2026-10-20T23:59:00+08:00",
+          "min_confidence": 0.8
+        }
+      ]
+    },
+    {
+      "id": "tcbbank-spend-period-not-registration",
+      "bank": "tcbbank",
+      "source_url": "https://www.tcbbank.com.tw/",
+      "why": "民國年 + 全角波浪號，且附近有「登錄」二字，但這是優惠期間不是登錄期間。舊實作只看附近有沒有『登錄』就收，會把可消費期間誤判成登錄時點。",
+      "default_year": 2026,
+      "text": "優惠期間：115年1月1日～115年12月31日止 免費道路救援 持卡期間免費登錄享不限次數/每天一次道路救援服務(免費急修/免費拖吊)",
+      "expect_windows": []
+    },
+    {
+      "id": "ctbc-period-echo",
+      "bank": "ctbc",
+      "source_url": "https://www.ctbcbank.com/",
+      "why": "區間是活動期間、真正的登錄時點是「每週二」。tokenizer 無法自行分辨，須靠 drop_period_echoes 與 adapter 已知的活動期間交叉比對剔除。",
+      "default_year": 2026,
+      "text": "LINE POINTS 5% 2026/7/1~2026/9/30 限信用卡且限量需登錄(每週二開放3,000名) 本活動排除不回饋項目",
+      "period": ["2026-07-01", "2026-09-30"],
+      "expect_windows_after_echo_filter": []
+    },
+    {
+      "id": "esun-register-before-spend",
+      "bank": "esun",
+      "source_url": "https://www.esunbank.com/",
+      "why": "明確的「先登錄後消費」時序訊號。這是最危險的一型 —— 先刷了才登錄等於白刷，舊 schema 完全無法表達。",
+      "default_year": 2026,
+      "text": "單筆滿10,000元，享17.5%回饋：成功登錄活動一，於2026/8/2刷玉山Unicard可獲得，活動一回饋1,000點",
+      "expect_contract": "register_before_spend"
+    },
+    {
+      "id": "esun-offer-boundary",
+      "bank": "esun",
+      "source_url": "https://www.esunbank.com/",
+      "why": "證實單頁多活動：【活動三】是可靠的子活動邊界錨點。舊實作以 URL 雜湊當活動 ID，把整頁多個子活動的登錄時點合併成一筆，才會產生『活動至 8/15 卻有 8/17 登錄時點』的矛盾資料。",
+      "default_year": 2026,
+      "text": "、玉山Wallet App登錄。 ※ 簽帳金融卡、公司卡及採購卡等，恕不適用。 8/20 17:00開放登錄(限量1,300名) 【活動三】玉山Unicard專屬優惠，最高享5,025元回饋 活動期間：2026/8/1~2026/8/31",
+      "expect_offer_boundary_marker": "【活動三】",
+      "expect_windows": [
+        {
+          "kind": "opens_at",
+          "start": "2026-08-20T17:00:00+08:00",
+          "end": null,
+          "min_confidence": 0.7
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+name: Verify
+
+# 這個 workflow 只做驗證：不抓取、不部署。名字說的事就是它做的事。
+# 理由見 docs/adr/0002-scrape-runner.md
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: verify-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      # actions 一律 SHA pin，不用浮動 tag。SHA 由 GitHub API 查證，非憑記憶填寫。
+      - name: Check out repository
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: "3.11"
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e '.[dev]'
+
+      - name: Lint
+        run: ruff check src tests
+
+      - name: Type check
+        run: mypy
+
+      - name: Tests and golden corpus
+        run: pytest -q
+
+      - name: Validate declarative source specs
+        run: |
+          python - <<'PY'
+          import pathlib, tomllib
+          specs = sorted(pathlib.Path("sources").glob("*.toml"))
+          for path in specs:
+              tomllib.loads(path.read_text(encoding="utf-8"))
+          print(f"{len(specs)} 份 adapter spec 語法正確")
+          PY

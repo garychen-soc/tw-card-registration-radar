@@ -1,0 +1,40 @@
+[project]
+name = "tw-card-registration-radar"
+version = "0.1.0"
+description = "台灣信用卡活動登錄雷達 — 以「登錄時點」與「活動條件」為核心的官方資料監控"
+requires-python = ">=3.11"
+dependencies = [
+    "httpx>=0.27",
+    "selectolax>=0.3.21",
+    "pydantic>=2.7",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.6", "mypy>=1.11"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
+# 這個專案的內容本身就是中文與全角字元（銀行活動文案、全角波浪號、全角冒號），
+# 正規化邏輯必須直接寫出這些字元。RUF001-003 的「歧義字元」警告在此全是誤報。
+ignore = ["RUF001", "RUF002", "RUF003"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+mypy_path = "src"
+packages = ["radar"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

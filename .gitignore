@@ -1,0 +1,16 @@
+.venv/
+__pycache__/
+*.py[cod]
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.DS_Store
+node_modules/
+web/dist/
+web/.astro/
+# 抓取快取與執行報告不進版控
+var/
+reports/*.json
+!reports/.gitkeep
+# 完整原始頁面只留在本機供分析；版控只收 tests/golden 下的節錄
+tests/golden/raw/
