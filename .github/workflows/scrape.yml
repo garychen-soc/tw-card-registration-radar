@@ -52,9 +52,19 @@ jobs:
 
       - name: Scrape and build data
         id: scrape
+        env:
+          ONLY: ${{ inputs.only }}
         run: |
           set +e
-          python scripts/build_site.py --today "$(TZ=Asia/Taipei date +%F)" | tee /tmp/scrape.log
+          # --only 只跑部分來源，產出的 index.json 只含那些來源 ——
+          # 提交它會把其餘來源的資料從網站上抹掉。因此 only 模式強制 --dry-run。
+          ARGS=(--today "$(TZ=Asia/Taipei date +%F)")
+          if [ -n "$ONLY" ]; then
+            # shellcheck disable=SC2206
+            ARGS+=(--only $ONLY --dry-run)
+            echo "只跑指定來源（$ONLY），強制 dry-run，不會提交。"
+          fi
+          python scripts/build_site.py "${ARGS[@]}" | tee /tmp/scrape.log
           echo "exit_code=${PIPESTATUS[0]}" >> "$GITHUB_OUTPUT"
 
       - name: Write run summary
@@ -83,6 +93,7 @@ jobs:
           exit 1
 
       - name: Commit the refreshed data
+        if: inputs.only == ''
         run: |
           if git diff --quiet -- web/public; then
             echo "資料無變化，不提交。"

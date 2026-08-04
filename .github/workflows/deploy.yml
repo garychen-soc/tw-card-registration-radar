@@ -13,6 +13,12 @@ on:
       # 資料在 web/public/ 之下，已被上面涵蓋；列出來是為了讓意圖明確
       - "web/public/data/**"
       - "web/public/calendar/**"
+  # GitHub 刻意不讓 GITHUB_TOKEN 的推送觸發 workflow，所以 Scrape 提交資料
+  # 之後不會自動觸發本 workflow 的 push 事件。用 workflow_run 接續 ——
+  # 它是以「另一個 workflow 完成」為條件，不受該限制。
+  workflow_run:
+    workflows: ["Scrape"]
+    types: [completed]
   workflow_dispatch:
 
 permissions:
@@ -24,11 +30,18 @@ concurrency:
 
 jobs:
   build:
+    # workflow_run 會在 Scrape 失敗時也觸發，只在成功時才部署
+    if: >-
+      github.event_name != 'workflow_run' ||
+      github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
       # actions 一律 SHA pin，SHA 由 GitHub API 查證而非憑記憶填寫
       - name: Check out repository
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          # workflow_run 預設 checkout 觸發時的 SHA，那會漏掉 Scrape 剛提交的資料
+          ref: main
 
       - name: Set up Node
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
