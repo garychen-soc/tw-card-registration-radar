@@ -1,0 +1,17 @@
+id = "hncb"
+bank_name = "華南銀行"
+domains = ["hncb.com.tw"]
+note = "入口為 portal URL，活動內容內嵌於信用卡分頁容器內，用 single_page。"
+
+[listing]
+kind = "single_page"
+entry_url = "https://www.hncb.com.tw/wps/portal/HNCB/card"
+
+[detail]
+source = "html"
+cardinality = "many"
+
+[registration]
+portal_url = "https://netbank.hncb.com.tw/netbank/servlet/TrxDispatcher"
+portal_kind = "bank_portal"
+portal_hint = "於華南銀行網路銀行的卡片活動登錄頁登錄"

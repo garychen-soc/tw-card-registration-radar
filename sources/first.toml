@@ -1,0 +1,19 @@
+id = "first"
+bank_name = "第一銀行"
+domains = ["firstbank.com.tw"]
+note = """第一銀行的存取防護對自動化請求回傳 403（實測仍然如此）。
+刻意保留這份 spec —— 讓它在來源健康上誠實顯示為失敗，而不是靜默消失。
+不改用非官方來源。"""
+
+[listing]
+kind = "single_page"
+entry_url = "https://card.firstbank.com.tw/sites/card/touch/1565690686288"
+
+[detail]
+source = "html"
+cardinality = "many"
+
+[registration]
+portal_url = "https://card.firstbank.com.tw/sites/card/touch/1565690686288"
+portal_kind = "bank_portal"
+portal_hint = "於第一銀行信用卡活動頁查看登錄方式"

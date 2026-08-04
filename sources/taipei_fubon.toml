@@ -1,0 +1,20 @@
+id = "taipei_fubon"
+bank_name = "台北富邦銀行"
+domains = ["taipeifubon.com.tw", "fubon.com"]
+note = """清單為 Wicket 分頁，目前只讀第一頁（約 9 筆）。完整分頁需要
+Wicket 的 pageLink 狀態，尚未實作 —— 覆蓋率不足會反映在來源健康上。"""
+user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36"
+
+[listing]
+kind = "html_list"
+entry_url = "https://cardpromote.taipeifubon.com.tw/promotion/Result"
+link_pattern = 'href="(Detail\?sn=[A-Za-z0-9]+)"'
+
+[detail]
+source = "html"
+cardinality = "one"
+
+[registration]
+portal_url = "https://www.fubon.com/banking/event/credit_card/20170718A/index.html"
+portal_kind = "bank_portal"
+portal_hint = "於台北富邦卡友優惠登錄頁找到對應活動"

@@ -1,0 +1,17 @@
+id = "sinopac"
+bank_name = "永豐銀行"
+domains = ["sinopac.com"]
+
+[listing]
+kind = "html_list"
+entry_url = "https://bank.sinopac.com/sinopacBT/personal/credit-card/discount/list.html"
+link_pattern = 'href="(\.?/?\d{6,}(?:_H)?\.html)"'
+
+[detail]
+source = "html"
+cardinality = "one"
+
+[registration]
+portal_url = "https://bank.sinopac.com/sinopacBT/personal/credit-card/discount/list.html"
+portal_kind = "bank_portal"
+portal_hint = "於永豐銀行刷卡享優惠頁找到對應活動"

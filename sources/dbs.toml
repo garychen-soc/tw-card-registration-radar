@@ -1,0 +1,17 @@
+id = "dbs"
+bank_name = "星展銀行"
+domains = ["dbs.com.tw"]
+
+[listing]
+kind = "html_list"
+entry_url = "https://www.dbs.com.tw/personal-zh/cards/offers/ce/default.html"
+link_pattern = 'href="([^"]*mall_\d+(?:_\d+)?\.html)"'
+
+[detail]
+source = "html"
+cardinality = "many"
+
+[registration]
+portal_url = "https://www.dbs.com.tw/personal-zh/digital-service/cardplus/announcement"
+portal_kind = "bank_portal"
+portal_hint = "於星展 Card+ 活動公告頁查看登錄方式"

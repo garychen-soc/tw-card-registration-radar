@@ -1,0 +1,18 @@
+id = "obank"
+bank_name = "王道銀行"
+domains = ["o-bank.com"]
+note = "只讀簽帳金融卡活動（event-announce/debit_*），排除存錢、貸款、投資理財。"
+
+[listing]
+kind = "html_list"
+entry_url = "https://www.o-bank.com/retail/event/event-compaign"
+link_pattern = 'href="([^"]*event-announce/debit_\d+[^"]*)"'
+
+[detail]
+source = "html"
+cardinality = "one"
+
+[registration]
+portal_url = "https://www.o-bank.com/retail/event/event-compaign"
+portal_kind = "bank_portal"
+portal_hint = "於王道銀行活動頁查看登錄方式"

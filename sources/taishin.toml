@@ -1,0 +1,19 @@
+id = "taishin"
+bank_name = "台新銀行"
+domains = ["taishinbank.com.tw"]
+note = """官方分 A–I 九個分類，目前只讀 A 類（約 12 筆）。多分類需要
+逐一請求 offerList/{category}，尚未支援多入口 —— 覆蓋率不足會反映在來源健康上。"""
+
+[listing]
+kind = "html_list"
+entry_url = "https://mkpcard.taishinbank.com.tw/tscccms/promotion/offerList/A"
+link_pattern = 'href="([^"]*/tscccms/promotion/detail/WM_\d+)"'
+
+[detail]
+source = "html"
+cardinality = "one"
+
+[registration]
+portal_url = "https://mkpcard.taishinbank.com.tw/tscccms/signin"
+portal_kind = "bank_portal"
+portal_hint = "登入台新信用卡活動網站後找到對應活動"

@@ -1,0 +1,17 @@
+id = "kgi"
+bank_name = "凱基銀行"
+domains = ["kgibank.com.tw", "kgibank.com"]
+note = "清單頁上的連結是分類篩選而非逐活動網址，活動內容內嵌於頁面，用 single_page。"
+
+[listing]
+kind = "single_page"
+entry_url = "https://www.kgibank.com.tw/zh-tw/personal/promotion/card-campaign"
+
+[detail]
+source = "html"
+cardinality = "many"
+
+[registration]
+portal_url = "https://www.kgibank.com/creditcard/campaign/registrationlist"
+portal_kind = "bank_portal"
+portal_hint = "於凱基銀行活動登錄清單找到對應活動"

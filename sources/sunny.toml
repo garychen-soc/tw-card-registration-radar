@@ -1,0 +1,17 @@
+id = "sunny"
+bank_name = "陽信銀行"
+domains = ["sunnybank.com.tw"]
+note = "頁上沒有逐活動網址（只有選單連結），活動內容全在索引頁上，用 single_page。"
+
+[listing]
+kind = "single_page"
+entry_url = "https://www.sunnybank.com.tw/net/Main/Page/6?onews=1"
+
+[detail]
+source = "html"
+cardinality = "many"
+
+[registration]
+portal_url = "https://www.sunnybank.com.tw/portal/pt/pt01002/PT01002Index.xhtml"
+portal_kind = "bank_portal"
+portal_hint = "於陽信銀行網路銀行的活動登錄頁登錄"

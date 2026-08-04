@@ -1,0 +1,17 @@
+id = "chb"
+bank_name = "彰化銀行"
+domains = ["bankchb.com"]
+
+[listing]
+kind = "html_list"
+entry_url = "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3657"
+link_pattern = 'href="([^"]*bonusDetail\.jsp\?id=\d+)"'
+
+[detail]
+source = "html"
+cardinality = "one"
+
+[registration]
+portal_url = "https://www.bankchb.com/frontend/CampaignLog.html"
+portal_kind = "bank_portal"
+portal_hint = "於彰化銀行活動登錄頁找到對應活動"

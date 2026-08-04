@@ -1,0 +1,17 @@
+id = "scsb"
+bank_name = "上海商銀"
+domains = ["scsb.com.tw"]
+
+[listing]
+kind = "html_list"
+entry_url = "https://www.scsb.com.tw/content/card/hotList"
+link_pattern = 'href="([^"]*/content/card/hotPage/\d+)"'
+
+[detail]
+source = "html"
+cardinality = "one"
+
+[registration]
+portal_url = "https://ebank.scsb.com.tw/ternal/ofwbcv05/page"
+portal_kind = "bank_portal"
+portal_hint = "於上海商銀網路銀行的活動登錄頁登錄"
