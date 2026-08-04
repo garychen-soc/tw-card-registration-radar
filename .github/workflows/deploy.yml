@@ -1,0 +1,82 @@
+name: Deploy
+
+# 只建置與部署。不抓取任何資料 —— 名字說的事就是它做的事。
+# 資料由本機／排程執行 scripts/build_site.py 產生後提交，這裡只把它發布出去。
+# 理由見 docs/adr/0002-scrape-runner.md
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "web/**"
+      - ".github/workflows/deploy.yml"
+      # 資料在 web/public/ 之下，已被上面涵蓋；列出來是為了讓意圖明確
+      - "web/public/data/**"
+      - "web/public/calendar/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # actions 一律 SHA pin，SHA 由 GitHub API 查證而非憑記憶填寫
+      - name: Check out repository
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+
+      - name: Set up Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      - name: Install
+        run: npm ci --prefix web
+
+      - name: Type check
+        run: npm run check --prefix web
+
+      - name: Build
+        run: npm run build --prefix web
+
+      - name: Fail if the published data is missing
+        # 部署一個沒有資料的網站比不部署更糟 —— 使用者會看到永久的載入失敗
+        run: |
+          test -s web/dist/data/index.json
+          test -s web/dist/calendar/registration.ics
+          python3 -c "
+          import json, pathlib
+          payload = json.loads(pathlib.Path('web/dist/data/index.json').read_text(encoding='utf-8'))
+          offers = payload['counts']['offers']
+          print(f\"index.json 收錄 {offers} 筆子活動，產生於 {payload['generated_at']}\")
+          assert offers > 0, 'index.json 沒有任何活動'
+          "
+
+      - name: Configure Pages
+        uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
+        with:
+          path: web/dist
+
+  deploy:
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
