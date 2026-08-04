@@ -1,14 +1,16 @@
 id = "taipei_fubon"
 bank_name = "台北富邦銀行"
 domains = ["taipeifubon.com.tw", "fubon.com"]
-note = """清單為 Wicket 分頁，目前只讀第一頁（約 9 筆）。完整分頁需要
-Wicket 的 pageLink 狀態，尚未實作 —— 覆蓋率不足會反映在來源健康上。"""
+note = "清單為 Apache Wicket 的 Ajax 分頁，由 pagination_kind = wicket_ajax 處理。"
 user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36"
 
 [listing]
 kind = "html_list"
 entry_url = "https://cardpromote.taipeifubon.com.tw/promotion/Result"
 link_pattern = 'href="(Detail\?sn=[A-Za-z0-9]+)"'
+pagination_kind = "wicket_ajax"
+pagination_base = "promotion/Result"
+max_pages = 40
 
 [detail]
 source = "html"

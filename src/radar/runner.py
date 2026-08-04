@@ -102,6 +102,14 @@ def build_offers(
     known_cards = tuple(spec.conditions.known_cards)
     offers: list[Offer] = []
 
+    # 頁面層級的活動期間。單頁多活動時它常寫在第一個子活動之前的前言裡，
+    # 而 split_offers 只保留各邊界之後的內容 —— 星展的頁面就是這樣：
+    # 「活動期間：2026/8/1~2026/8/31」在「活動一」之前，導致 68 筆全都
+    # 抓不到期間。子活動沒寫自己的期間時，繼承頁面層級的。
+    page_start, page_end, page_confidence, page_evidence = find_period(
+        text, default_year=today.year, reference=today
+    )
+
     # 遵守 spec 宣告的 cardinality。宣告 one 就不切 —— 否則樣板文字裡的
     # 【】之類符號會把單一活動頁切成好幾塊。
     chunks = (
@@ -115,10 +123,17 @@ def build_offers(
         start, end, confidence, evidence = find_period(
             chunk.text, default_year=today.year, reference=today
         )
+        # 後備順序：子活動自己寫的 → 頁面層級 → 清單層級。
+        # 每退一層信心就降低，因為粒度越粗、越可能不是這個子活動的真實期間。
+        if start is None and page_start is not None:
+            start, end = page_start, end or page_end
+            confidence = min(page_confidence, 0.6)
+            evidence = evidence or page_evidence
         if start is None and listing_start is not None:
-            # 清單層級的期間是可靠但較粗的來源（不區分子活動），
-            # 給固定的中等信心，不要沿用「明細頁抓不到」的 0.0
             start, confidence = listing_start, 0.5
+        if end is None and page_end is not None:
+            end = page_end
+            confidence = min(confidence or 0.6, 0.6)
         if end is None and listing_end is not None:
             end = listing_end
             confidence = min(confidence, 0.5) if confidence else 0.5

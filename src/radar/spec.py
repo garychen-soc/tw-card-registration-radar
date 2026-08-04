@@ -60,6 +60,24 @@ class ListingSpec(Strict):
         description="從回應中取出總筆數的正則（group 1）。用於總頁數 = "
         "總筆數 ÷ 首頁筆數，適用於只公告總筆數而非總頁數的端點。",
     )
+    pagination_kind: Literal["none", "wicket_ajax"] = Field(
+        default="none",
+        description="具名的分頁策略。wicket_ajax 用於 Apache Wicket 的 Ajax 分頁"
+        "（台北富邦），它的分頁連結帶頁面版本狀態，必須改寫 URL 並附 Wicket 標頭。",
+    )
+    pagination_base: str = Field(
+        default="",
+        description="wicket_ajax 的 Wicket-Ajax-BaseURL 標頭值，例如 promotion/Result。",
+    )
+    category_codes: list[str] = Field(
+        default_factory=list,
+        description="要逐一請求的分類代碼，搭配 url_template 使用（台新分 A–I 九類）。"
+        "與 categories 不同 —— 後者是 json_api 的分類白名單過濾。",
+    )
+    url_template: str = Field(
+        default="",
+        description="分類清單的網址樣板，用 {category} 佔位（搭配 category_codes）。",
+    )
     items_path: list[str] = Field(default_factory=list)
     fields: dict[str, str] = Field(
         default_factory=dict,

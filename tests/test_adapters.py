@@ -203,3 +203,133 @@ def test_fingerprint_changes_with_content() -> None:
         }
     )
     assert read_listing(spec, first)[0].fingerprint != read_listing(spec, second)[0].fingerprint
+
+
+def test_listing_never_uses_conditional_get() -> None:
+    """清單請求不得用條件式 GET。
+
+    304 不帶 body，而清單沒有本機存檔可退回 —— 收到 304 就會把空字串當成
+    清單內容，產出 0 筆。實測星展在第二次執行時整個來源因此歸零。
+    """
+    seen: list[bool] = []
+    spec = _spec(
+        {
+            "kind": "json_api",
+            "entry_url": "https://www.example.com/list",
+            "data_url": "https://www.example.com/api/list.json",
+            "fields": {"title": "title", "url": "url"},
+        }
+    )
+    fetcher = FakeFetcher(
+        pages={"https://www.example.com/api/list.json": json.dumps([{"title": "A", "url": "/a"}])}
+    )
+    original = fetcher.get
+
+    def get(url: str, *, conditional: bool = True, **kwargs: object):  # type: ignore[no-untyped-def]
+        seen.append(conditional)
+        return original(url, conditional=conditional, **kwargs)  # type: ignore[arg-type]
+
+    fetcher.get = get  # type: ignore[method-assign]
+    read_listing(spec, fetcher)
+    assert seen == [False]
+
+
+def test_html_listing_also_avoids_conditional_get() -> None:
+    seen: list[bool] = []
+    spec = _spec(
+        {
+            "kind": "html_list",
+            "entry_url": "https://www.example.com/list",
+            "link_pattern": r'href="([^"]*/promo/[^"]+)"',
+        }
+    )
+    fetcher = FakeFetcher(pages={"https://www.example.com/list": '<a href="/promo/1"></a>'})
+    original = fetcher.get
+
+    def get(url: str, *, conditional: bool = True, **kwargs: object):  # type: ignore[no-untyped-def]
+        seen.append(conditional)
+        return original(url, conditional=conditional, **kwargs)  # type: ignore[arg-type]
+
+    fetcher.get = get  # type: ignore[method-assign]
+    read_listing(spec, fetcher)
+    assert seen == [False]
+
+
+WICKET_PAGE_1 = """
+<div class="list">
+  <a href="Detail?sn=D000001">A</a><a href="Detail?sn=D000002">B</a>
+</div>
+<div class="nav">
+  <a href="./Result?0-1.-fmList-divSearchResult-nav-navigation-1-pageLink">2</a>
+  <a href="./Result?0-1.-fmList-divSearchResult-nav-navigation-2-pageLink">3</a>
+  <a href="./Result?0-1.-fmList-divSearchResult-nav-next">下一頁</a>
+</div>
+"""
+
+
+def test_wicket_page_links_rewrites_url_and_skips_arrows() -> None:
+    """兩個實測必要條件：`-1.-` 要改寫成 `-1.0-`（否則 500）；
+    上一頁／下一頁的箭頭不是頁碼，不能當成分頁連結。"""
+    from radar.adapters.listing import _wicket_page_links
+
+    links = _wicket_page_links(WICKET_PAGE_1, "https://www.example.com/promotion/Result")
+    assert sorted(links) == [2, 3]
+    assert "-1.0-fmList" in links[2], "未改寫 behavior id 會讓 Wicket 回 500"
+    assert "next" not in links[2]
+
+
+def test_wicket_pagination_follows_pages_and_tolerates_state_reset() -> None:
+    """Wicket 的頁面狀態會失步，Ajax 回應變成彈回第 1 頁的 redirect。
+    實測第 3 次翻頁起就會發生 —— 不能直接放棄。"""
+    from radar.adapters.listing import _unwrap_cdata
+
+    page2 = '<a href="Detail?sn=D000003">C</a>' + WICKET_PAGE_1.split('<div class="nav">')[1]
+    reset = "<ajax-response><redirect><![CDATA[./Result?1]]></redirect></ajax-response>"
+    assert "<![CDATA[" not in _unwrap_cdata(reset)
+
+    spec = _spec(
+        {
+            "kind": "html_list",
+            "entry_url": "https://www.example.com/promotion/Result",
+            "link_pattern": r'href="(Detail\?sn=[A-Za-z0-9]+)"',
+            "pagination_kind": "wicket_ajax",
+            "pagination_base": "promotion/Result",
+            "max_pages": 4,
+        }
+    )
+    pages = {"https://www.example.com/promotion/Result": WICKET_PAGE_1}
+    fetcher = FakeFetcher(pages=pages)
+    original = fetcher.get
+
+    def get(url: str, **kwargs: object):  # type: ignore[no-untyped-def]
+        if "pageLink" in url:
+            fetcher.pages[url] = page2
+        return original(url, **kwargs)  # type: ignore[arg-type]
+
+    fetcher.get = get  # type: ignore[method-assign]
+    items = read_listing(spec, fetcher)
+    assert {item.url.rsplit("=", 1)[1] for item in items} == {"D000001", "D000002", "D000003"}
+
+
+def test_category_codes_fetch_every_category_url() -> None:
+    """台新分 A–I 九類，每類一個網址。單一分類失敗不讓整個來源歸零。"""
+    from radar.transport import FetchFailed
+
+    spec = _spec(
+        {
+            "kind": "html_list",
+            "entry_url": "https://www.example.com/offerList/A",
+            "url_template": "https://www.example.com/offerList/{category}",
+            "category_codes": ["A", "B", "C"],
+            "link_pattern": r'href="([^"]*/detail/WM_\d+)"',
+        }
+    )
+    fetcher = FakeFetcher(
+        pages={
+            "https://www.example.com/offerList/A": '<a href="/detail/WM_1"></a>',
+            "https://www.example.com/offerList/C": '<a href="/detail/WM_3"></a>',
+        },
+        failures={"https://www.example.com/offerList/B": FetchFailed("HTTP 503")},
+    )
+    items = read_listing(spec, fetcher)
+    assert {item.url.rsplit("_", 1)[1] for item in items} == {"1", "3"}

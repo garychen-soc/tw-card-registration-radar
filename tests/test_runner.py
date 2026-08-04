@@ -336,3 +336,33 @@ def test_parser_changes_always_apply_because_output_is_never_cached() -> None:
         first.campaigns[0].offers[0].registration.windows[0].end
         == second.campaigns[0].offers[0].registration.windows[0].end
     )
+
+
+def test_page_level_period_is_inherited_by_sub_offers() -> None:
+    """單頁多活動時，活動期間常寫在第一個子活動之前的前言裡。
+
+    split_offers 只保留各邊界之後的內容，所以子活動看不到它 —— 星展的頁面
+    正是如此，68 筆全都抓不到期間。子活動沒寫自己的期間時要繼承頁面層級的。
+    """
+    body = """
+    <html><body>
+    <p>活動期間：2026/8/1~2026/8/31</p>
+    <p>於指定通路刷卡並完成登錄即可享回饋。</p>
+    <p>活動一、單筆滿5,000元享500點，限量400名，登錄期間：2026/8/1 15:00~2026/8/31 23:59</p>
+    <p>活動二、單筆滿20,000元享5,000點，限量250名，登錄期間：2026/8/1 15:00~2026/8/31 23:59</p>
+    </body></html>
+    """
+    fetcher = FakeFetcher(
+        pages={LIST_URL: _listing("/promo/1"), "https://www.example.com/promo/1": body}
+    )
+    spec = _spec(detail={"source": "html", "cardinality": "many"})
+    result = run_source(spec, fetcher, today=TODAY, now=NOW)
+
+    offers = result.campaigns[0].offers
+    assert len(offers) == 2
+    for offer in offers:
+        assert offer.period.start == date(2026, 8, 1), offer.title
+        assert offer.period.end == date(2026, 8, 31), offer.title
+        assert "period_missing" not in offer.review_codes
+        # 繼承來的期間信心要低於子活動自己寫的
+        assert offer.period.confidence <= 0.6

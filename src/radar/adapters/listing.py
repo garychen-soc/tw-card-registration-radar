@@ -12,6 +12,7 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+import time
 from collections.abc import Iterator
 from dataclasses import dataclass, field
 from datetime import date
@@ -22,7 +23,12 @@ from selectolax.parser import HTMLParser
 
 from ..parse.normalize import normalize_inline
 from ..spec import ListingSpec, SourceSpec
-from ..transport import Response
+from ..transport import Response, TransportError
+
+# 清單請求一律不用條件式 GET。304 不帶 body，而清單沒有本機存檔可退回 ——
+# 收到 304 就會把空字串當成清單內容，產出 0 筆。這個 bug 曾讓星展在第二次
+# 執行時整個來源歸零（明細那條路徑已處理，當時漏了清單）。
+LISTING_CONDITIONAL = False
 
 
 class Fetch(Protocol):
@@ -139,7 +145,7 @@ def _as_date(value: Any) -> date | None:
 
 def read_json_api(spec: SourceSpec, fetcher: Fetch) -> list[ListingItem]:
     listing = spec.listing
-    response = fetcher.get(listing.data_url)
+    response = fetcher.get(listing.data_url, conditional=LISTING_CONDITIONAL)
     payload = response.json()
     rows = _navigate(payload, listing.items_path) if listing.items_path else payload
 
@@ -234,9 +240,140 @@ def _block_title(block_html: str, block_text: str) -> str:
     return block_text[:120]
 
 
+# Wicket 的分頁連結長成 `?0-1.-fmList-...-navigation-2-pageLink`，直接 GET 會 500。
+# 必須把 `<版本>-1.-` 改寫成 `<版本>-1.0-`（補上 behavior id），並附 Wicket 標頭。
+_WICKET_PAGE_LINK = re.compile(
+    r'<a[^>]+href="([^"]*-nav-navigation-\d+-pageLink)"[^>]*>(.*?)</a>', re.I | re.S
+)
+_WICKET_VERSION = re.compile(r"(\d+-1)\.-")
+_WICKET_REDIRECT = re.compile(r"<redirect>\s*<!\[CDATA\[(.*?)\]\]>\s*</redirect>", re.I | re.S)
+
+
+def _wicket_page_links(html: str, base_url: str) -> dict[int, str]:
+    """回傳 {可見頁碼: 連結}。只收標籤是數字的 —— 上一頁／下一頁的箭頭不是頁碼。"""
+    links: dict[int, str] = {}
+    for match in _WICKET_PAGE_LINK.finditer(html):
+        label = re.sub(r"<[^>]+>", "", match.group(2)).strip()
+        if not label.isdigit():
+            continue
+        href = _WICKET_VERSION.sub(r"\1.0-", match.group(1))
+        links[int(label)] = urljoin(base_url, href)
+    return links
+
+
+def _unwrap_cdata(body: str) -> str:
+    """Wicket 的 Ajax 回應把更新後的 HTML 片段包在 CDATA 裡。
+    去掉包裝才能用同一套 selector 與正則解析。"""
+    return body.replace("<![CDATA[", "").replace("]]>", "")
+
+
+def _read_wicket_pages(
+    listing: ListingSpec, fetcher: Fetch, first_html: str, first_url: str
+) -> list[ListingItem]:
+    """跟隨 Apache Wicket 的 Ajax 分頁。
+
+    兩個非顯而易見的必要條件（都是實測出來的）：
+
+    * 分頁連結要把 ``<版本>-1.-`` 改寫成 ``<版本>-1.0-``，否則回 500。
+    * 要帶 ``Accept``、``Referer``、``Wicket-Ajax`` 等標頭，否則回 403。
+
+    還有兩個結構問題：
+
+    * 頁碼列只顯示一個視窗（例如 1–10），想到第 15 頁必須先點視窗內最大的
+      頁碼讓視窗往前移，再繼續 —— 找不到目標頁碼時退而點擊可見的最大頁碼。
+    * 伺服器的頁面狀態會失步，這時 Ajax 回應變成一個彈回第 1 頁的 redirect
+      （實測第 3 次翻頁起就會發生）。此時不能直接放棄 —— 跟隨 redirect 取得
+      新的完整頁面後從那裡重走，容忍連續數輪沒有新資料才收手。
+    """
+    items = _items_from_html(listing, first_html, first_url)
+    seen = {item.url for item in items}
+    html, url, referer = first_html, first_url, first_url
+    target = 2
+    attempts = 0
+    stale_rounds = 0
+    max_attempts = listing.max_pages * 3
+    max_stale_rounds = 4
+
+    while target <= listing.max_pages and attempts < max_attempts:
+        attempts += 1
+        links = _wicket_page_links(html, url)
+        requested = target
+        chosen = links.get(target)
+        if chosen is None:
+            lower = [page for page in links if page < target]
+            if not lower:
+                break
+            requested = max(lower)
+            chosen = links[requested]
+            if requested < 2:
+                break
+
+        headers = {
+            "Accept": "application/xml, text/xml, */*; q=0.01",
+            "Cache-Control": "no-cache",
+            "Referer": referer,
+            "Wicket-Ajax": "true",
+            "Wicket-Ajax-BaseURL": listing.pagination_base or "",
+            "X-Requested-With": "XMLHttpRequest",
+        }
+        buster = f"{'&' if '?' in chosen else '?'}_={int(time.time() * 1000) + attempts}"
+        try:
+            response = fetcher.get(f"{chosen}{buster}", headers=headers, conditional=False)
+        except TransportError:
+            break  # 少幾頁的資料比整個來源歸零好
+        body, final = _unwrap_cdata(response.text), response.final_url
+
+        redirect = _WICKET_REDIRECT.search(response.text)
+        if redirect:
+            try:
+                followed = fetcher.get(urljoin(final, redirect.group(1).strip()), conditional=False)
+            except TransportError:
+                break
+            body, final = followed.text, followed.final_url
+
+        fresh = [item for item in _items_from_html(listing, body, final) if item.url not in seen]
+        for item in fresh:
+            seen.add(item.url)
+        items.extend(fresh)
+        html, url, referer = body, final, final
+        if fresh:
+            stale_rounds = 0
+        else:
+            stale_rounds += 1
+            if stale_rounds >= max_stale_rounds:
+                break
+        if requested == target and fresh:
+            target += 1
+    return items
+
+
 def read_html_list(spec: SourceSpec, fetcher: Fetch) -> list[ListingItem]:
-    response = fetcher.get(spec.listing.entry_url)
-    return _items_from_html(spec.listing, response.text, response.final_url)
+    listing = spec.listing
+    # 分類清單：逐一請求每個分類的網址（台新分 A–I 九類）
+    urls = (
+        [listing.url_template.format(category=code) for code in listing.category_codes]
+        if listing.url_template and listing.category_codes
+        else [listing.entry_url]
+    )
+    items: list[ListingItem] = []
+    seen: set[str] = set()
+    for index, url in enumerate(urls):
+        try:
+            response = fetcher.get(url, conditional=LISTING_CONDITIONAL)
+        except TransportError:
+            if index == 0 and len(urls) == 1:
+                raise
+            continue  # 單一分類失敗不讓整個來源歸零
+        found = (
+            _read_wicket_pages(listing, fetcher, response.text, response.final_url)
+            if listing.pagination_kind == "wicket_ajax"
+            else _items_from_html(listing, response.text, response.final_url)
+        )
+        for item in found:
+            if item.url not in seen:
+                seen.add(item.url)
+                items.append(item)
+    return items
 
 
 _HIDDEN_INPUT = r'name="{name}"[^>]*value="(\d+)"'
@@ -271,7 +408,7 @@ def read_form_paged(spec: SourceSpec, fetcher: Fetch) -> list[ListingItem]:
     if listing.post_url:
         first = fetcher.get(post_url, data=payload(1), conditional=False)
     else:
-        first = fetcher.get(listing.entry_url)
+        first = fetcher.get(listing.entry_url, conditional=LISTING_CONDITIONAL)
     items = _items_from_html(listing, first.text, first.final_url)
     if not page_field:
         return items

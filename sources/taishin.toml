@@ -8,6 +8,8 @@ note = """官方分 A–I 九個分類，目前只讀 A 類（約 12 筆）。�
 kind = "html_list"
 entry_url = "https://mkpcard.taishinbank.com.tw/tscccms/promotion/offerList/A"
 link_pattern = 'href="([^"]*/tscccms/promotion/detail/WM_\d+)"'
+url_template = "https://mkpcard.taishinbank.com.tw/tscccms/promotion/offerList/{category}"
+category_codes = ["A", "B", "C", "D", "E", "F", "G", "H", "I"]
 
 [detail]
 source = "html"
