@@ -13,15 +13,16 @@ SOURCES = Path(__file__).resolve().parents[1] / "sources"
 
 
 def test_all_shipped_specs_load() -> None:
+    """每份 TOML 都能載入，且 id 與檔名一致。
+
+    刻意不硬編銀行清單 —— 那會讓每次新增一家銀行都誤觸發失敗（實際發生過）。
+    比對檔名同樣能抓到打錯 id、重複 id 與漏檔。
+    """
     specs = load_specs(SOURCES)
-    assert {spec.id for spec in specs} == {
-        "cathay",
-        "ctbc",
-        "esun",
-        "tcbbank",
-        "ubot",
-        "yuanta",
-    }
+    filenames = {path.stem for path in SOURCES.glob("*.toml")}
+    assert {spec.id for spec in specs} == filenames
+    assert len(specs) == len(filenames)
+    assert len(specs) >= 17, f"預期至少 17 家來源，只載入 {len(specs)} 家"
 
 
 def test_every_spec_url_is_inside_its_own_allowlist() -> None:
@@ -31,8 +32,14 @@ def test_every_spec_url_is_inside_its_own_allowlist() -> None:
         assert spec.listing.entry_url.startswith("https://"), spec.id
 
 
+def test_every_listing_kind_is_exercised() -> None:
+    """四種清單型態都要有來源實際在用 —— 沒人用的型態等於沒被驗證。"""
+    kinds = {spec.listing.kind for spec in load_specs(SOURCES)}
+    assert kinds == {"json_api", "html_list", "form_paged", "single_page"}
+
+
 def test_first_batch_covers_every_hard_case() -> None:
-    """首版 6 家是刻意挑的 —— 覆蓋實測到的全部五種難題型態。"""
+    """首批 6 家是刻意挑的 —— 覆蓋實測到的全部五種難題型態。"""
     specs = {spec.id: spec for spec in load_specs(SOURCES)}
     assert specs["ubot"].detail.table_tiers is True, "階梯門檻表"
     assert specs["esun"].detail.cardinality == "many", "單頁多子活動 + 秒級時間"
