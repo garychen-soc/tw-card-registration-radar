@@ -249,7 +249,12 @@ def test_bare_date_range_without_label() -> None:
     108 筆中有 83 筆因此抓不到期間。"""
     from radar.parse.datetimes import find_date_range
 
-    text = "Costco聯名卡分期優惠\nCostco店內消費分期享前3期免息\n2026/01/01~2026/12/31\n活動期間內，於Costco店內消費"
+    text = (
+        "Costco聯名卡分期優惠\n"
+        "Costco店內消費分期享前3期免息\n"
+        "2026/01/01~2026/12/31\n"
+        "活動期間內，於Costco店內消費"
+    )
     start, end, confidence, evidence = find_date_range(
         text, default_year=2026, reference=date(2026, 8, 4)
     )
