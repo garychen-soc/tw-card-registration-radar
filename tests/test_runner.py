@@ -163,8 +163,10 @@ def test_multi_offer_page_splits_into_independent_offers() -> None:
         assert not offer.needs_review, offer.review_reasons
 
 
-def test_cardinality_many_without_boundary_is_flagged() -> None:
-    """spec 說這家是單頁多活動卻切不出邊界時，必須標記而非假裝切好了。"""
+def test_single_offer_page_is_not_flagged_even_when_declared_many() -> None:
+    """宣告 many 的來源裡有很多頁其實只有一個活動（實測玉山 182 頁中 170 頁如此）。
+    一律標記會把需人工確認的量灌到失去意義 —— 只有在有多活動證據時才標記。
+    """
     fetcher = FakeFetcher(
         pages={
             LIST_URL: _listing("/promo/1"),
@@ -175,8 +177,67 @@ def test_cardinality_many_without_boundary_is_flagged() -> None:
     result = run_source(spec, fetcher, today=TODAY, now=NOW)
 
     offer = result.campaigns[0].offers[0]
+    assert "offer_boundary_missing" not in offer.review_codes
+
+
+def test_multi_offer_evidence_without_boundary_is_flagged() -> None:
+    """兩組活動期間卻切不出邊界 —— 這才是真的切分失敗，必須標記。"""
+    body = """
+    <html><body>
+    <p>活動期間：2026/8/1~2026/8/10 完成登錄享 5% 回饋</p>
+    <p>活動期間：2026/8/11~2026/8/31 完成登錄享 8% 回饋</p>
+    </body></html>
+    """
+    fetcher = FakeFetcher(
+        pages={LIST_URL: _listing("/promo/1"), "https://www.example.com/promo/1": body}
+    )
+    spec = _spec(detail={"source": "html", "cardinality": "many"})
+    result = run_source(spec, fetcher, today=TODAY, now=NOW)
+
+    offer = result.campaigns[0].offers[0]
+    assert "offer_boundary_missing" in offer.review_codes
     assert offer.needs_review is True
-    assert any("未能切出邊界" in reason for reason in offer.review_reasons)
+
+
+def test_cardinality_one_is_never_split() -> None:
+    """宣告 one 就不切。實測教訓：一律套用通用邊界會讓元大的頁面被樣板文字裡的
+    【】切成 4 塊（57 頁產出 227 筆），多數塊不含活動期間而被誤標。
+    """
+    body = """
+    <html><body>
+    <p>【專區】信用卡優惠</p><p>活動期間：2026/8/1~2026/8/31</p>
+    <p>登錄期間：2026/8/5 10:00~2026/8/25 23:59 開放登錄</p>
+    <p>【注意事項】本行保留變更權利</p>
+    </body></html>
+    """
+    fetcher = FakeFetcher(
+        pages={LIST_URL: _listing("/promo/1"), "https://www.example.com/promo/1": body}
+    )
+    result = run_source(_spec(), fetcher, today=TODAY, now=NOW)
+
+    offers = result.campaigns[0].offers
+    assert len(offers) == 1, "cardinality=one 不得被【】切開"
+    assert offers[0].period.end == date(2026, 8, 31)
+
+
+def test_registration_required_needs_positive_evidence() -> None:
+    """「文字裡有登錄二字」不足以判定需要登錄 —— 頁尾的「活動登錄查詢」連結
+    會讓大量不需登錄的活動被標成「需登錄但抓不到時點」（實測 274 筆）。
+    """
+    body = """
+    <html><body>
+    <p>活動期間：2026/8/1~2026/8/31 單筆滿1,000元享 5% 回饋，自動享有無需登錄。</p>
+    <p>相關連結：信用卡帳單查詢</p>
+    </body></html>
+    """
+    fetcher = FakeFetcher(
+        pages={LIST_URL: _listing("/promo/1"), "https://www.example.com/promo/1": body}
+    )
+    result = run_source(_spec(), fetcher, today=TODAY, now=NOW)
+
+    offer = result.campaigns[0].offers[0]
+    assert offer.registration.required is False
+    assert "registration_without_window" not in offer.review_codes
 
 
 def test_api_detail_source_uses_listing_props() -> None:

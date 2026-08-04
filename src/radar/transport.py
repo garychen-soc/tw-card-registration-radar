@@ -25,6 +25,7 @@ from __future__ import annotations
 import hashlib
 import ipaddress
 import json
+import ssl
 import time
 import urllib.parse
 from dataclasses import dataclass, field
@@ -44,6 +45,23 @@ DEFAULT_HEADERS = {
     "Accept": "text/html,application/xhtml+xml,application/json;q=0.9,*/*;q=0.7",
     "Accept-Language": "zh-TW,zh;q=0.9,en;q=0.5",
 }
+def tls_context() -> ssl.SSLContext:
+    """完整驗證憑證鏈，但關閉 VERIFY_X509_STRICT。
+
+    Python 3.13 起 ``create_default_context()`` 預設開啟 X509 嚴格檢查，
+    會拒絕缺少 Subject Key Identifier 擴充的憑證。實測國泰世華的
+    ``cathay-cube.com.tw`` 正是如此 —— 憑證由可信 CA 簽發、鏈完整，
+    只是缺一個 RFC 5280 建議（非必要）的擴充欄位。
+
+    **這不是關閉憑證驗證。** 主機名稱比對與信任鏈驗證都照做，
+    只放寬一項對舊憑證過嚴的格式檢查。前身為同一個問題準備了
+    「失敗後改用系統 curl」的後路，那反而繞過了 Python 的驗證邏輯。
+    """
+    context = ssl.create_default_context()
+    context.verify_flags &= ~ssl.VERIFY_X509_STRICT
+    return context
+
+
 MAX_REDIRECTS = 10
 MAX_BYTES = 8_000_000
 MIN_HOST_INTERVAL = 0.7
@@ -178,6 +196,7 @@ class Fetcher:
             follow_redirects=False,
             timeout=timeout,
             headers=headers,
+            verify=tls_context(),
         )
         self._last_request: dict[str, float] = {}
 

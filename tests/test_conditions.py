@@ -162,3 +162,33 @@ def test_extract_on_plain_text_is_all_unknown() -> None:
     assert conditions.threshold_tiers == []
     assert conditions.quota.limited is False
     assert conditions.eligibility.confidence == 0.0
+
+
+def test_menu_label_is_not_registration_evidence() -> None:
+    """「活動登錄」是選單與按鈕的標籤，不是活動條件。
+
+    實測玉山每一頁的側邊選單都有它，收進正面證據會讓 243 筆中 150 筆
+    被誤判為「需登錄但抓不到時點」。
+    """
+    from radar.parse.conditions import requires_registration
+
+    menu = "活動登錄\n中獎名單\n卡友權益\n常見問題"
+    assert requires_registration(menu) is False
+
+
+def test_real_registration_wording_is_detected() -> None:
+    from radar.parse.conditions import requires_registration
+
+    for text in (
+        "須先完成活動登錄才享回饋",
+        "登錄期間：2026/8/7 17:00~2026/8/31 23:59",
+        "8/17 10:00 開放登錄，限量600名",
+        "需登錄後消費始計入",
+    ):
+        assert requires_registration(text) is True, text
+
+
+def test_negative_wording_overrides() -> None:
+    from radar.parse.conditions import requires_registration
+
+    assert requires_registration("本活動無需登錄，開放登錄期間不適用") is False

@@ -1,18 +1,24 @@
 # 中國信託。首版納入的理由：單頁 14 個活動（實測 31,220 字、14 次
 # 「活動・注意事項」），是驗證活動邊界切分最極端的案例。
+#
+# 用 single_page 而非 html_list：頁上的連結全指向 web-tw-pay.line.me
+# （LINE Pay 的 CMS），不是活動明細 —— 沒有逐活動的官方網址可抓。
+# 活動內容全在入口頁上，由 detail.cardinality = "many" 切開。
 id = "ctbc"
 bank_name = "中國信託"
 domains = ["ctbcbank.com"]
 
 [listing]
-kind = "html_list"
+kind = "single_page"
 entry_url = "https://www.ctbcbank.com/content/dam/minisite/long/creditcard/LINEPay/store.html"
-link_pattern = 'href="([^"]*(?:activity|event|promotion)[^"]*)"'
 
 [detail]
 source = "html"
 cardinality = "many"
-boundary = '活動・注意事項'
+# 入口頁上每個活動以「優惠內容」起頭（實測 6 次，對應 6 個活動）。
+# 註：先前誤用「活動・注意事項」—— 那個錨點出現在**明細頁**上（14 次），
+# 不在這個入口頁上，是我把兩份樣本搞混了。
+boundary = '優惠內容'
 
 [registration]
 portal_url = "https://www.ctbcbank.com/twrbo/zh_tw/onlinecounter_index/cc_service/cc_service_register.html"

@@ -8,11 +8,18 @@ domains = ["cathay-cube.com.tw", "cathaybk.com.tw"]
 kind = "json_api"
 entry_url = "https://www.cathay-cube.com.tw/cathaybk/personal/event/overview"
 data_url = "https://www.cathay-cube.com.tw/cathaybk/personal/event/overview/credit-card.model.list.json"
-items_path = []
+items_path = ["campaigns"]
+
+url_strip_prefix = "/content/cub-aem-cs/zh-tw"
+url_base = "https://www.cathaybk.com.tw/"
 
 [listing.fields]
 url = "campaignPath"
-props = "campaignProps"
+title = "campaignProps.jcr:title"
+summary = "campaignProps.subtitle"
+start = "campaignProps.startDate"
+end = "campaignProps.offTime"
+props = "campaignProps.campaignContent"
 
 [detail]
 source = "api"

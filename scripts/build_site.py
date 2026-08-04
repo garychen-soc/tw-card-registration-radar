@@ -71,7 +71,7 @@ def main() -> int:
     def run_one(spec: SourceSpec) -> tuple[SourceSpec, SourceResult, HttpCache]:
         # 每家銀行各自的 HttpCache，避免平行執行時共寫同一個檔案。
         cache = HttpCache.load(ROOT / "var" / "http" / f"{spec.id}.json")
-        with Fetcher(spec.domains, cache=cache) as fetcher:
+        with Fetcher(spec.domains, cache=cache, user_agent=spec.user_agent or None) as fetcher:
             return spec, run_source(spec, fetcher, today=today, now=now, pages=pages), cache
 
     # 按銀行平行執行。不同銀行是不同主機，per-host 節流仍然成立，

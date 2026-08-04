@@ -13,12 +13,45 @@
 
 from __future__ import annotations
 
+import re
 from collections.abc import Iterator
 from typing import Any
 
 from selectolax.parser import HTMLParser
 
-_DROP = ("script", "style", "noscript", "template", "svg")
+# 整段移除的元素。除了不可見內容，也移除頁面樣板 —— 實測元大的活動頁
+# 若不移除導覽與 Cookie 告知，活動標題會變成「為提供您更好、更個人化的服務…」，
+# 而導覽列的「活動登錄」選單會讓每一筆活動都被判定為需要登錄
+# （57 筆中 49 筆因此誤標）。
+_DROP = (
+    "script",
+    "style",
+    "noscript",
+    "template",
+    "svg",
+    "iframe",
+    "nav",
+    "footer",
+    "aside",
+)
+# class / id 看得出是樣板的元素。刻意保守 —— 只列明確的導覽與提示元件，
+# 不碰 banner、promo 這類可能就是活動內容的字樣。
+_BOILERPLATE = re.compile(
+    r"(?:^|[-_\s])(?:nav|navbar|navigation|menu|submenu|breadcrumb|cookie|"
+    r"gotop|go-top|to-top|backtop|sitemap|langu|language|skip|accessibility)"
+    r"(?:$|[-_\s])",
+    re.I,
+)
+# 內容根節點的候選，依優先序。找到就只分析它，找不到才退回 body。
+_CONTENT_ROOTS = ("main", "[role=main]", "article", "#content", ".content", "#main")
+
+# 連結密度：整塊幾乎都是連結文字的區塊是選單，不是內容。
+# class 名稱比對治不了這類 —— 實測玉山的「活動登錄／中獎名單／卡友權益／
+# 常見問題」側邊選單既不在 <nav> 裡、class 也不像導覽，卻污染了 150 筆活動的
+# 登錄原文，讓它們全被判定為「需登錄但抓不到時點」。
+LINK_DENSITY_LIMIT = 0.8
+LINK_COUNT_LIMIT = 5
+_LINKY = ("ul", "ol", "div", "section", "dl")
 _BLOCK = (
     "p",
     "div",
@@ -45,11 +78,50 @@ def to_text(html: str) -> str:
     for selector in _DROP:
         for node in tree.css(selector):
             node.decompose()
-    root = tree.body or tree.root
+    for node in tree.css("[class], [id]"):
+        marker = f"{node.attributes.get('class') or ''} {node.attributes.get('id') or ''}"
+        if _BOILERPLATE.search(marker):
+            node.decompose()
+
+    _drop_link_lists(tree)
+
+    root = None
+    for selector in _CONTENT_ROOTS:
+        root = tree.css_first(selector)
+        if root is not None and len((root.text() or "").strip()) >= 200:
+            break
+        root = None
+    root = root or tree.body or tree.root
     if root is None:
         return ""
     text = root.text(separator="\n", strip=True)
     return "\n".join(line.strip() for line in text.splitlines() if line.strip())
+
+
+def _drop_link_lists(tree: HTMLParser) -> None:
+    """移除連結密度過高的區塊（選單、側邊欄、頁尾連結列）。
+
+    代價是會連帶移除「參與門市清單」這類本身就是連結列表的內容。對本專案的
+    用途（期間、登錄時點、條件解析）而言那是可接受的取捨 —— 讓選單文字混進
+    活動內文的傷害大得多。
+    """
+    for tag in _LINKY:
+        for node in tree.css(tag):
+            # 只數非空白字元。HTML 的縮排會稀釋密度 —— 排版整齊的頁面
+            # 會因此漏掉明顯是選單的區塊。
+            length = _dense_len(node.text())
+            if not length:
+                continue
+            anchors = node.css("a")
+            if len(anchors) < LINK_COUNT_LIMIT:
+                continue
+            link_length = sum(_dense_len(a.text()) for a in anchors)
+            if link_length / length >= LINK_DENSITY_LIMIT:
+                node.decompose()
+
+
+def _dense_len(text: str | None) -> int:
+    return len(re.sub(r"\s+", "", text or ""))
 
 
 def strings_of(payload: Any) -> Iterator[str]:

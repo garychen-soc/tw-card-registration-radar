@@ -23,7 +23,9 @@ featured_rank = "hotOrder"
 
 [detail]
 source = "html"
-cardinality = "one"
+# 實測一頁常有「活動一、／活動二、」多個子活動（92 頁產出 223 筆），
+# 由通用邊界錨點切分。
+cardinality = "many"
 table_tiers = true
 
 [registration]

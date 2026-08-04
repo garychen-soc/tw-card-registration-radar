@@ -33,11 +33,18 @@ GENERIC_BOUNDARIES: tuple[str, ...] = (
 
 SECTION_ANCHORS: tuple[tuple[str, str], ...] = (
     ("period", r"(?:活動|優惠|消費)(?:期間|日期|時間)"),
-    ("registration", r"登錄(?:辦法|時間|期間|方式|日期)|活動登錄|開放登錄"),
+    # 不含「活動登錄」—— 那是選單標籤，會讓段落錨定到側邊欄而非活動內文
+    ("registration", r"登錄(?:辦法|時間|期間|方式|日期)|開放登錄|完成登錄"),
     ("eligibility", r"參加資格|活動對象|參加對象|適用對象|適用卡|適用卡別|限定卡"),
     ("terms", r"活動辦法|活動內容|優惠內容|活動方式|回饋辦法|優惠說明|活動說明"),
     ("quota", r"名額|限量"),
     ("notes", r"注意事項|備註|其他事項|重要說明"),
+)
+
+# 「期間標籤 + 日期區間」的完整樣式，用於判斷一頁是否真有多組活動期間。
+_PERIOD_RANGE = re.compile(
+    r"(?:活動|優惠|消費)(?:期間|日期|時間)\s*[:：]?\s*"
+    r"((?:20\d{2}[/\-])?\d{1,2}[/\-]\d{1,2}\s*[~至到]\s*(?:20\d{2}[/\-])?\d{1,2}[/\-]\d{1,2})"
 )
 
 _ANCHOR_SCANNER = re.compile(
@@ -94,6 +101,33 @@ def split_offers(
 
     stripped = text.strip()
     return [OfferChunk(title=_chunk_title(stripped), text=stripped)]
+
+
+def single_chunk(raw_text: str) -> list[OfferChunk]:
+    """整頁當成一個活動，不做邊界切分。
+
+    ``cardinality = "one"`` 的來源必須走這條路。實測教訓：原本無論如何都套用
+    通用邊界候選，結果元大的頁面被樣板文字裡的【】切成 4 塊（57 頁產出 227 筆），
+    其中多數塊不含活動期間，全部被標成需人工確認。宣告了 cardinality
+    就要遵守它。
+    """
+    text = normalize(raw_text).strip()
+    return [OfferChunk(title=_chunk_title(text), text=text)]
+
+
+def looks_multi_offer(raw_text: str) -> bool:
+    """是否有「這頁不只一個活動」的正面證據。
+
+    用於判斷 ``cardinality = "many"`` 但切不出邊界時，究竟是切分失敗
+    還是這頁本來就只有一個活動。實測玉山 182 頁中有 170 頁是單一商店優惠頁
+    —— 那些不該被標成需人工確認。
+
+    證據取「兩組**不同**的活動期間」。只數期間標籤出現次數太寬鬆 ——
+    一頁可以在注意事項裡重複提到同一個活動期間（實測玉山有 116 頁如此被誤標）。
+    """
+    text = normalize(raw_text)
+    ranges = set(_PERIOD_RANGE.findall(text))
+    return len(ranges) >= 2
 
 
 def _chunk_title(body: str) -> str:

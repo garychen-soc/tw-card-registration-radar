@@ -109,3 +109,84 @@ def test_chunk_title_skips_invisible_first_line() -> None:
     assert len(chunks) == 2
     assert chunks[0].title.startswith("活動一")
     assert "（無標題）" not in chunks[0].title
+
+
+def test_boilerplate_is_stripped_before_analysis() -> None:
+    """導覽與 Cookie 告知必須先移除。
+
+    實測元大的活動頁若不移除，活動標題會變成 Cookie 公告，而導覽列的
+    「活動登錄」選單會讓 57 筆中 49 筆被誤判為需要登錄。
+    """
+    from radar.htmltext import to_text
+
+    html = """
+    <html><body>
+      <div class="cookie-notice">為提供您更好、更個人化的服務，本網站採用網路追蹤工具</div>
+      <nav><a href="/login">活動登錄</a><a href="/cards">信用卡產品</a></nav>
+      <main>
+        <h1>元大悠遊聯名卡首筆20%回饋</h1>
+        <p>活動時間： 2026/06/01~2026/08/31</p>
+        <p>指定卡別： 鑽金智富悠遊聯名卡</p>
+      </main>
+      <footer>本行保留變更權利</footer>
+    </body></html>
+    """
+    text = to_text(html)
+    assert "元大悠遊聯名卡" in text
+    assert "活動時間" in text
+    assert "Cookie" not in text and "網路追蹤工具" not in text
+    assert "活動登錄" not in text, "導覽列的登錄選單不得混入內文"
+    assert "本行保留變更權利" not in text
+
+
+def test_looks_multi_offer_needs_two_distinct_periods() -> None:
+    """同一個活動期間在注意事項裡重複提到，不算多活動證據
+    （實測玉山有 116 頁因為只數標籤次數而被誤標）。"""
+    from radar.segment import looks_multi_offer
+
+    repeated = "活動期間：2026/8/1~2026/8/31 … 注意事項：活動期間：2026/8/1~2026/8/31 恕不適用"
+    genuine = "活動期間：2026/8/1~2026/8/10 享5% … 活動期間：2026/8/11~2026/8/31 享8%"
+    assert looks_multi_offer(repeated) is False
+    assert looks_multi_offer(genuine) is True
+
+
+def test_link_dense_menu_is_dropped_even_without_nav_markers() -> None:
+    """玉山的側邊選單既不在 <nav> 裡、class 也不像導覽，但整塊都是連結。
+
+    實測它污染了 150 筆活動的登錄原文，讓它們全被判定為「需登錄但抓不到時點」。
+    """
+    from radar.htmltext import to_text
+
+    html = """
+    <html><body>
+      <div class="box-a">
+        <a href="/1">活動登錄</a><a href="/2">中獎名單</a><a href="/3">卡友權益</a>
+        <a href="/4">常見問題</a><a href="/5">辦卡進度</a><a href="/6">補件說明</a>
+      </div>
+      <div class="box-b">
+        <p>寶雅今夏你最美 美力加倍最高10%回饋</p>
+        <p>活動期間：2026/8/1~2026/8/31，至寶雅實體門市消費滿799元立折80元。</p>
+      </div>
+    </body></html>
+    """
+    text = to_text(html)
+    assert "寶雅" in text
+    assert "活動期間" in text
+    assert "活動登錄" not in text
+    assert "中獎名單" not in text
+
+
+def test_prose_with_a_few_links_is_kept() -> None:
+    """內文裡有幾個連結不算選單 —— 連結密度門檻不能誤刪內容。"""
+    from radar.htmltext import to_text
+
+    html = """
+    <html><body><div>
+      <p>活動期間：2026/8/1~2026/8/31，單筆滿10,000元享5%回饋，
+      詳情請見<a href="/terms">活動辦法</a>，或參考<a href="/faq">常見問題</a>。
+      本活動限正卡人參加，限量1,000名，額滿為止。</p>
+    </div></body></html>
+    """
+    text = to_text(html)
+    assert "單筆滿10,000元" in text
+    assert "限量1,000名" in text

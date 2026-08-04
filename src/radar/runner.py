@@ -38,7 +38,13 @@ from .pagestore import PageStore
 from .parse import conditions as cond
 from .parse.contract import derive
 from .parse.datetimes import detect_recurrence, drop_period_echoes, find_period, find_windows
-from .segment import registration_text, split_offers, table_rows
+from .segment import (
+    looks_multi_offer,
+    registration_text,
+    single_chunk,
+    split_offers,
+    table_rows,
+)
 from .spec import SourceSpec
 from .transport import BlockedURL, FetchFailed, TransportError
 
@@ -79,6 +85,7 @@ def build_offers(
     html: str,
     text: str,
     today: date,
+    listing_title: str = "",
     listing_start: date | None = None,
     listing_end: date | None = None,
 ) -> list[Offer]:
@@ -86,12 +93,25 @@ def build_offers(
 
     ``listing_start``/``listing_end`` 是清單層級已知的期間，用來在明細頁
     抓不到期間時補位 —— 但只補位，不覆蓋明細頁自己寫的期間。
+
+    ``listing_title`` 是清單卡片上的標題。未切分時優先採用它 —— 明細頁的
+    第一行常是頁面樣板（實測元大是「元大行動銀行」App 推廣區塊），
+    清單標題才是這個活動真正的名字。
     """
     headers, rows = table_rows(html) if spec.detail.table_tiers else ([], [])
     known_cards = tuple(spec.conditions.known_cards)
     offers: list[Offer] = []
 
-    for index, chunk in enumerate(split_offers(text, pattern=spec.detail.boundary or None)):
+    # 遵守 spec 宣告的 cardinality。宣告 one 就不切 —— 否則樣板文字裡的
+    # 【】之類符號會把單一活動頁切成好幾塊。
+    chunks = (
+        split_offers(text, pattern=spec.detail.boundary or None)
+        if spec.detail.cardinality == "many"
+        else single_chunk(text)
+    )
+    multi_evidence = spec.detail.cardinality == "many" and looks_multi_offer(text)
+
+    for index, chunk in enumerate(chunks):
         start, end, confidence, evidence = find_period(
             chunk.text, default_year=today.year, reference=today
         )
@@ -114,12 +134,13 @@ def build_offers(
             end,
         )
         recurrence = detect_recurrence(chunk.text)
+        title = listing_title if (listing_title and not chunk.split) else chunk.title
         offer = Offer(
             id=f"{spec.id}-{_slug(url)}-{index}",
-            title=chunk.title,
+            title=title,
             period=period,
             registration=Registration(
-                required=bool(windows) or "登錄" in chunk.text,
+                required=bool(windows) or cond.requires_registration(chunk.text),
                 windows=windows,
                 recurrence=recurrence,
                 portal=_portal(spec),
@@ -138,12 +159,10 @@ def build_offers(
                 table_rows=rows or None,
             ),
         )
-        # spec 明說這家是單頁多活動，卻切不出邊界 —— 不能假裝切好了
-        extra = (
-            ("offer_boundary_missing",)
-            if not chunk.split and spec.detail.cardinality == "many"
-            else ()
-        )
+        # 只在「有多活動的正面證據卻切不出邊界」時才標記。宣告 many 的來源
+        # 裡有很多頁其實只有一個活動（實測玉山 182 頁中 170 頁如此），
+        # 一律標記會把需人工確認的量灌到失去意義。
+        extra = ("offer_boundary_missing",) if not chunk.split and multi_evidence else ()
         offers.append(apply_invariants(offer, extra_codes=extra))
     return offers
 
@@ -273,6 +292,7 @@ def _run_item(
         html=html,
         text=text,
         today=today,
+        listing_title=item.title,
         listing_start=item.start,
         listing_end=item.end,
     )

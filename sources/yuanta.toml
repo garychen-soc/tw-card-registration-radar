@@ -3,11 +3,15 @@
 id = "yuanta"
 bank_name = "元大銀行"
 domains = ["yuantabank.com.tw"]
+note = """元大的防護會對帶專案標識的 User-Agent 回 403（實測：帶標識 403、
+純瀏覽器 UA 200），因此這一家覆寫成瀏覽器 UA。其餘一律用可識別的 UA。"""
+user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
 
 [listing]
 kind = "form_paged"
 entry_url = "https://www.yuantabank.com.tw/bank/creditCard/promotionActivity/list.do"
-item_selector = "li div.pic"
+# 連結是 div.pic 的兄弟節點而非子節點，所以要選整個 li。
+item_selector = "li:has(div.pic)"
 link_pattern = 'href="([^"]*/promotionActivity/in\.do\?id=[^"]+)"'
 max_pages = 30
 

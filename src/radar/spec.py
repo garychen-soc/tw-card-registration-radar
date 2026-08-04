@@ -13,7 +13,10 @@
 ``html_list``
     清單在 HTML 裡，用正則或 selector 取出（元大、中信）。
 ``form_paged``
-    需要 POST 表單狀態才能翻頁（台北富邦、元大的分頁）。
+    需要 POST 表單狀態才能翻頁（元大、玉山）。
+``single_page``
+    入口頁本身就是全部內容，沒有逐活動的網址（中信的 LINE Pay 頁一頁 14 個
+    活動，頁上的連結全指向 LINE 的網域，不是活動明細）。
 
 ``extra="forbid"`` 是刻意的：TOML 打錯欄位名必須立刻失敗，而不是靜默忽略
 然後在抓取階段產出空清單。
@@ -27,7 +30,7 @@ from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
-ListingKind = Literal["json_api", "html_list", "form_paged"]
+ListingKind = Literal["json_api", "html_list", "form_paged", "single_page"]
 DetailSource = Literal["html", "api", "none"]
 Cardinality = Literal["one", "many"]
 
@@ -41,9 +44,34 @@ class ListingSpec(Strict):
     entry_url: str = Field(description="人可讀的官方入口，UI 顯示與來源健康用")
     data_url: str = ""
     item_selector: str = ""
+    title_selector: str = ""
+    summary_selector: str = ""
     link_pattern: str = ""
+    post_url: str = Field(
+        default="",
+        description="form_paged 的 POST 目標。留空則 POST 回 entry_url（元大式）；"
+        "指定另一個端點則第一頁也用 POST（玉山式）。",
+    )
+    form_data: dict[str, str] = Field(
+        default_factory=dict, description="每次請求都要附帶的固定表單參數"
+    )
+    total_pattern: str = Field(
+        default="",
+        description="從回應中取出總筆數的正則（group 1）。用於總頁數 = "
+        "總筆數 ÷ 首頁筆數，適用於只公告總筆數而非總頁數的端點。",
+    )
     items_path: list[str] = Field(default_factory=list)
-    fields: dict[str, str] = Field(default_factory=dict)
+    fields: dict[str, str] = Field(
+        default_factory=dict,
+        description="欄位映射。值可用點號指向巢狀路徑，例如 "
+        "`start = \"campaignProps.startDate\"`。",
+    )
+    url_strip_prefix: str = Field(
+        default="",
+        description="從清單取得的路徑要去掉的前綴。國泰世華給的是 AEM 內部路徑 "
+        "`/content/cub-aem-cs/zh-tw/...`，公開網址要去掉它。",
+    )
+    url_base: str = Field(default="", description="去掉前綴後要接上的公開網址前綴")
     categories: list[str] = Field(default_factory=list)
     form_fields: dict[str, str] = Field(default_factory=dict)
     max_pages: int = 1
@@ -94,6 +122,11 @@ class SourceSpec(Strict):
     bank_name: str
     domains: list[str] = Field(min_length=1)
     note: str = ""
+    user_agent: str = Field(
+        default="",
+        description="覆寫 User-Agent。只在銀行的防護會擋掉帶專案標識的 UA 時使用，"
+        "並須在 note 說明原因 —— 預設一律用可識別的 UA。",
+    )
     listing: ListingSpec
     detail: DetailSpec = Field(default_factory=DetailSpec)
     registration: RegistrationSpec = Field(default_factory=RegistrationSpec)
@@ -107,7 +140,11 @@ class SourceSpec(Strict):
             raise ValueError(
                 f"{self.id}: entry_url 不在 domains 白名單內或非 https：{self.listing.entry_url}"
             )
-        for url in (self.listing.data_url, self.registration.portal_url):
+        for url in (
+            self.listing.data_url,
+            self.listing.post_url,
+            self.registration.portal_url,
+        ):
             if url and not is_allowed(url, self.domains):
                 raise ValueError(f"{self.id}: URL 不在 domains 白名單內或非 https：{url}")
         return self

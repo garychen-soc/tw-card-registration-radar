@@ -34,6 +34,29 @@ from ..models import (
 )
 from .normalize import normalize
 
+# 刻意**不**收「活動登錄」「立即登錄」「前往登錄」—— 那些是選單與按鈕的
+# 標籤，不是活動條件。實測玉山每一頁的側邊選單都有「活動登錄」，
+# 收了它會讓 243 筆中 150 筆被誤判為「需登錄但抓不到時點」。
+_REQUIRES_REGISTRATION = re.compile(
+    r"需(?:先)?登錄|須(?:先)?登錄|要登錄|請(?:先)?登錄|完成(?:活動)?登錄|"
+    r"登錄後|開放登錄|開始登錄|登錄期間|登錄辦法|登錄時間|逾期(?:未)?登錄|登錄成功"
+)
+_NO_REGISTRATION = re.compile(r"無需登錄|免登錄|不需登錄|毋需登錄|無須登錄|不用登錄")
+
+
+def requires_registration(raw_text: str) -> bool:
+    """是否真的需要登錄。
+
+    刻意不用「文字裡有『登錄』二字」這種判斷 —— 那會把頁尾的「活動登錄查詢」
+    連結、或提到別人活動的注意事項都算進來。實測那樣會讓 274 筆活動被標成
+    「需登錄但抓不到時點」，其中大部分根本不需要登錄。
+    """
+    text = normalize(raw_text)
+    if _NO_REGISTRATION.search(text):
+        return False
+    return bool(_REQUIRES_REGISTRATION.search(text))
+
+
 _NEW_CUSTOMER = re.compile(r"新戶|新卡友|新申辦|首次申辦|新開卡|首辦")
 _FIRST_SWIPE = re.compile(r"首刷")
 _PRIMARY_ONLY = re.compile(r"限正卡人|僅限正卡人|正卡人(?:方可|始可|限定)?登錄|限正卡")
