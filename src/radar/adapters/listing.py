@@ -347,6 +347,32 @@ def _read_wicket_pages(
     return items
 
 
+WICKET_ATTEMPTS = 3
+
+
+def _best_wicket_run(
+    listing: ListingSpec, fetcher: Fetch, entry_url: str, first: Response
+) -> list[ListingItem]:
+    """重跑 Wicket 分頁數次並取最多的一次。
+
+    伺服器的頁面狀態不穩定，同一份 spec 在不同執行中拿到的筆數差很多
+    （實測 9／54／90／117／45）。這種變異會讓逐來源覆蓋率回歸的防護不停誤擋 ——
+    正確的處理是降低來源端的變異，而不是放寬防護門檻。
+
+    代價是最多 3 倍的分頁請求。只對宣告 wicket_ajax 的來源生效。
+    """
+    best = _read_wicket_pages(listing, fetcher, first.text, first.final_url)
+    for _ in range(WICKET_ATTEMPTS - 1):
+        try:
+            retry = fetcher.get(entry_url, conditional=False)
+        except TransportError:
+            break
+        found = _read_wicket_pages(listing, fetcher, retry.text, retry.final_url)
+        if len(found) > len(best):
+            best = found
+    return best
+
+
 def read_html_list(spec: SourceSpec, fetcher: Fetch) -> list[ListingItem]:
     listing = spec.listing
     # 分類清單：逐一請求每個分類的網址（台新分 A–I 九類）
@@ -364,11 +390,10 @@ def read_html_list(spec: SourceSpec, fetcher: Fetch) -> list[ListingItem]:
             if index == 0 and len(urls) == 1:
                 raise
             continue  # 單一分類失敗不讓整個來源歸零
-        found = (
-            _read_wicket_pages(listing, fetcher, response.text, response.final_url)
-            if listing.pagination_kind == "wicket_ajax"
-            else _items_from_html(listing, response.text, response.final_url)
-        )
+        if listing.pagination_kind == "wicket_ajax":
+            found = _best_wicket_run(listing, fetcher, url, response)
+        else:
+            found = _items_from_html(listing, response.text, response.final_url)
         for item in found:
             if item.url not in seen:
                 seen.add(item.url)
