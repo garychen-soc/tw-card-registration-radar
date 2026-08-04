@@ -37,7 +37,13 @@ from .models import (
 from .pagestore import PageStore
 from .parse import conditions as cond
 from .parse.contract import derive
-from .parse.datetimes import detect_recurrence, drop_period_echoes, find_period, find_windows
+from .parse.datetimes import (
+    detect_recurrence,
+    drop_period_echoes,
+    find_date_range,
+    find_period,
+    find_windows,
+)
 from .segment import (
     looks_multi_offer,
     registration_text,
@@ -123,6 +129,13 @@ def build_offers(
         start, end, confidence, evidence = find_period(
             chunk.text, default_year=today.year, reference=today
         )
+        # 有標籤的期間抓不到時，退而找裸日期區間（例如富邦明細頁直接印
+        # 一行 2026/01/01~2026/12/31）。信心較低，且只看文字開頭。
+        if start is None:
+            start, end, confidence, evidence = find_date_range(
+                chunk.text, default_year=today.year, reference=today
+            )
+
         # 後備順序：子活動自己寫的 → 頁面層級 → 清單層級。
         # 每退一層信心就降低，因為粒度越粗、越可能不是這個子活動的真實期間。
         if start is None and page_start is not None:

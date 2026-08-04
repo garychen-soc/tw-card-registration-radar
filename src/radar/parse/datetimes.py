@@ -475,6 +475,47 @@ def detect_recurrence(raw_text: str) -> Recurrence:
     return Recurrence()
 
 
+def find_date_range(
+    raw_text: str,
+    *,
+    default_year: int,
+    reference: date | None = None,
+    limit_chars: int = 400,
+) -> tuple[date | None, date | None, float, str]:
+    """沒有標籤的裸日期區間，例如 ``2026/01/01~2026/12/31``。
+
+    只作為 find_period 失敗後的最後手段，且僅看文字開頭一段 —— 活動頁的期間
+    幾乎總在標題附近，往後找容易撈到注意事項裡的其他日期。信心刻意壓低。
+
+    實測需求：台北富邦的明細頁直接印一行日期區間，沒有「活動期間：」字樣，
+    108 筆中有 83 筆因此抓不到期間。
+    """
+    text = normalize(raw_text)[:limit_chars]
+    tokens = [t for t in tokenize(text) if t.kind in {"DATE", "SEP"}]
+    for index in range(len(tokens) - 2):
+        window = tokens[index : index + 3]
+        if [t.kind for t in window] != ["DATE", "SEP", "DATE"]:
+            continue
+        first, second = window[0], window[2]
+        try:
+            start = date(
+                _resolve_year(first, default_year, reference), first.month or 1, first.day or 1
+            )
+            end = date(
+                _resolve_year(second, default_year, reference), second.month or 1, second.day or 1
+            )
+        except ValueError:
+            continue
+        if end < start:
+            try:
+                end = end.replace(year=end.year + 1)
+            except ValueError:
+                continue
+        evidence = text[max(0, first.start - 20) : second.end + 20].strip()
+        return start, end, 0.55, evidence
+    return None, None, 0.0, ""
+
+
 def find_period(
     raw_text: str, *, default_year: int, reference: date | None = None
 ) -> tuple[date | None, date | None, float, str]:

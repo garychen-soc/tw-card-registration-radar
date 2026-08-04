@@ -7,6 +7,7 @@ user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36
 [listing]
 kind = "html_list"
 entry_url = "https://cardpromote.taipeifubon.com.tw/promotion/Result"
+item_selector = "div.discount-card"
 link_pattern = 'href="(Detail\?sn=[A-Za-z0-9]+)"'
 pagination_kind = "wicket_ajax"
 pagination_base = "promotion/Result"

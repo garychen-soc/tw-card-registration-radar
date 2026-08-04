@@ -242,3 +242,38 @@ def test_find_period_single_date_does_not_infer_end() -> None:
     start, end, _, _ = find_period("活動期間：2026/8/1 起", default_year=2026)
     assert start == date(2026, 8, 1)
     assert end is None
+
+
+def test_bare_date_range_without_label() -> None:
+    """台北富邦的明細頁直接印一行日期區間，沒有「活動期間：」字樣。
+    108 筆中有 83 筆因此抓不到期間。"""
+    from radar.parse.datetimes import find_date_range
+
+    text = "Costco聯名卡分期優惠\nCostco店內消費分期享前3期免息\n2026/01/01~2026/12/31\n活動期間內，於Costco店內消費"
+    start, end, confidence, evidence = find_date_range(
+        text, default_year=2026, reference=date(2026, 8, 4)
+    )
+    assert start == date(2026, 1, 1)
+    assert end == date(2026, 12, 31)
+    assert 0.4 < confidence < 0.7, "裸區間的信心要明顯低於有標籤的"
+    assert "2026/01/01" in evidence
+
+
+def test_bare_date_range_only_looks_near_the_top() -> None:
+    """只看文字開頭 —— 往後找會撈到注意事項裡的其他日期。"""
+    from radar.parse.datetimes import find_date_range
+
+    text = "活動辦法說明" + "說" * 500 + "本活動限2027/01/01~2027/12/31之消費"
+    start, _, _, _ = find_date_range(text, default_year=2026, limit_chars=400)
+    assert start is None
+
+
+def test_labelled_period_still_wins() -> None:
+    """有標籤時仍走 find_period，信心較高。"""
+    from radar.parse.datetimes import find_date_range, find_period
+
+    text = "活動期間：2026/8/1~2026/8/31"
+    labelled = find_period(text, default_year=2026)
+    bare = find_date_range(text, default_year=2026)
+    assert labelled[0] == bare[0]
+    assert labelled[2] > bare[2]

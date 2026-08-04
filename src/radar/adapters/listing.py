@@ -21,6 +21,7 @@ from urllib.parse import urljoin
 
 from selectolax.parser import HTMLParser
 
+from ..parse.datetimes import find_date_range
 from ..parse.normalize import normalize_inline
 from ..spec import ListingSpec, SourceSpec
 from ..transport import Response, TransportError
@@ -195,7 +196,11 @@ def _items_from_html(listing: ListingSpec, html: str, base_url: str) -> list[Lis
     blocks: list[tuple[str, str]]
     if listing.item_selector:
         tree = HTMLParser(html)
-        blocks = [(node.html or "", node.text() or "") for node in tree.css(listing.item_selector)]
+        # 用換行分隔，這樣區塊文字的第一行就是卡片標題
+        blocks = [
+            (node.html or "", node.text(separator="\n") or "")
+            for node in tree.css(listing.item_selector)
+        ]
     else:
         blocks = [(html, "")]
 
@@ -211,6 +216,11 @@ def _items_from_html(listing: ListingSpec, html: str, base_url: str) -> list[Lis
             if url in seen:
                 continue
             seen.add(url)
+            # 卡片上常直接印期間（富邦是 2026.01.01~2026.12.31）。
+            # 抓到就帶進 ListingItem，明細頁抓不到時可以補位。
+            card_start, card_end, _, _ = find_date_range(
+                block_text, default_year=date.today().year, limit_chars=200
+            )
             items.append(
                 ListingItem(
                     url=url,
@@ -219,6 +229,8 @@ def _items_from_html(listing: ListingSpec, html: str, base_url: str) -> list[Lis
                         or _block_title(block_html, block_text)
                     ),
                     summary=normalize_inline(_pick(block_html, listing.summary_selector)),
+                    start=card_start,
+                    end=card_end,
                 )
             )
     return items
@@ -237,6 +249,11 @@ def _block_title(block_html: str, block_text: str) -> str:
         match = re.search(rf"<{tag}[^>]*>(.*?)</{tag}>", block_html, re.S | re.I)
         if match:
             return re.sub(r"<[^>]+>", "", match.group(1))
+    # 沒有標題標籤時取區塊文字的第一行 —— 卡片的第一行就是活動名稱
+    for line in block_text.splitlines():
+        candidate = line.strip()
+        if len(candidate) >= 2:
+            return candidate[:120]
     return block_text[:120]
 
 
