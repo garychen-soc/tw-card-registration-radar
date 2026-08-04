@@ -1,0 +1,100 @@
+name: Scrape
+
+# 只抓取並提交資料。不部署 —— 提交會觸發 Deploy。
+# 名字說的事就是它做的事。理由見 docs/adr/0002-scrape-runner.md
+
+on:
+  schedule:
+    # 台北 06:00 / 12:00 / 18:00
+    - cron: "0 22,4,10 * * *"
+  workflow_dispatch:
+    inputs:
+      only:
+        description: "只跑指定來源（空白＝全部），以空白分隔"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: scrape
+  cancel-in-progress: false
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: "3.11"
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e '.[dev]'
+
+      # 頁面 HTML 快取只是省下重新下載，命中與否對正確性零影響。
+      # 只有國泰世華與聯邦提供 ETag／Last-Modified，其餘來源每次都會重抓。
+      - name: Restore page cache
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: |
+            var/pages
+            var/http
+          key: pages-${{ github.run_id }}
+          restore-keys: pages-
+
+      - name: Scrape and build data
+        id: scrape
+        run: |
+          set +e
+          python scripts/build_site.py --today "$(TZ=Asia/Taipei date +%F)" | tee /tmp/scrape.log
+          echo "exit_code=${PIPESTATUS[0]}" >> "$GITHUB_OUTPUT"
+
+      - name: Write run summary
+        if: always()
+        run: |
+          {
+            echo "### 抓取結果（退出碼 ${{ steps.scrape.outputs.exit_code }}）"
+            echo
+            echo '```'
+            cat /tmp/scrape.log || echo "（沒有輸出）"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      # 退出碼語意（與 scripts/build_site.py 一致）：
+      #   0 全部來源正常  2 部分來源不完整但已通過發布防護  4 發布防護阻擋
+      - name: Stop if the publish guard blocked this run
+        if: steps.scrape.outputs.exit_code == '4'
+        run: |
+          echo "::error::發布防護阻擋，未覆寫網站資料。詳見上方摘要。"
+          exit 1
+
+      - name: Fail on unexpected exit code
+        if: steps.scrape.outputs.exit_code != '0' && steps.scrape.outputs.exit_code != '2' && steps.scrape.outputs.exit_code != '4'
+        run: |
+          echo "::error::抓取以非預期的退出碼結束：${{ steps.scrape.outputs.exit_code }}"
+          exit 1
+
+      - name: Commit the refreshed data
+        run: |
+          if git diff --quiet -- web/public; then
+            echo "資料無變化，不提交。"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add web/public
+          COUNT=$(python -c "
+          import json, pathlib
+          payload = json.loads(pathlib.Path('web/public/data/index.json').read_text(encoding='utf-8'))
+          print(payload['counts']['offers'])
+          ")
+          git commit -m "chore: refresh promotion data (${COUNT} offers)"
+          git push
