@@ -190,3 +190,34 @@ def test_prose_with_a_few_links_is_kept() -> None:
     text = to_text(html)
     assert "單筆滿10,000元" in text
     assert "限量1,000名" in text
+
+
+def test_index_page_splits_on_title_then_period_lines() -> None:
+    """索引頁的通用形態：一行標題，下一行就是「活動期間」，如此重複。
+
+    實測凱基與陽信的活動索引頁都是這樣，整頁被當成一個活動時兩家各只產出 1 筆。
+    """
+    text = (
+        "信用卡\n最新優惠活動\n"
+        "新辦萬事達卡 7-11/全家/全聯最高10%回饋\n"
+        "活動期間：115/7/17~115/12/31\n"
+        "新申辦指定萬事達卡，核卡後30天內於便利商店消費享回饋，需完成活動登錄。\n"
+        "凱基悠遊聯名卡 加碼回饋\n"
+        "活動期間：115/8/1~115/9/30\n"
+        "指定通路消費滿額享回饋，登錄期間：115/8/1 10:00~115/9/30 23:59 開放登錄。\n"
+    )
+    chunks = split_offers(text)
+    assert len(chunks) == 2
+    assert chunks[0].title.startswith("新辦萬事達卡")
+    assert chunks[1].title.startswith("凱基悠遊聯名卡")
+    # 每塊只帶自己的期間
+    assert "115/7/17" in chunks[0].text or "2026/7/17" in chunks[0].text
+    assert "7/17" not in chunks[1].text
+
+
+def test_single_activity_page_is_not_split_by_period_anchor() -> None:
+    """只有一個活動期間時不得切開 —— 這個錨點是最後手段，需要重複出現。"""
+    text = "夏日回饋活動\n活動期間：2026/8/1~2026/8/31\n單筆滿1,000元享5%回饋，完成登錄後計入。\n"
+    chunks = split_offers(text)
+    assert len(chunks) == 1
+    assert chunks[0].split is False
