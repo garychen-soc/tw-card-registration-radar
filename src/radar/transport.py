@@ -83,6 +83,17 @@ class FetchFailed(TransportError):
     """網路或 HTTP 層失敗（逾時、5xx、連線中斷）。"""
 
 
+class AccessDenied(FetchFailed):
+    """來源明確拒絕自動化存取（403／429）。
+
+    刻意與一般 FetchFailed 分開：這不是暫時性故障，重試不會好，而是需要
+    換執行環境（住宅 IP 的 self-hosted runner）或等官方解除限制。混在
+    「暫時無法讀取」裡會讓人誤判為短暫問題而一直重試。
+
+    實測：陽信與第一銀行從 GitHub Actions 的 datacenter IP 存取會被拒，
+    但從住宅 IP 正常。"""
+
+
 @dataclass(frozen=True)
 class Response:
     requested_url: str
@@ -283,6 +294,11 @@ class Fetcher:
                     body = None
                 continue
 
+            if response.status_code in {401, 403, 429}:
+                raise AccessDenied(
+                    f"來源拒絕自動化存取 {current}：HTTP {response.status_code}"
+                    "（此類拒絕重試無效，需改用住宅 IP 或等官方解除限制）"
+                )
             if response.status_code >= 400:
                 raise FetchFailed(f"抓取失敗 {current}：HTTP {response.status_code}")
 

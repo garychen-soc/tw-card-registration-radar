@@ -374,3 +374,36 @@ def test_page_level_period_is_inherited_by_sub_offers() -> None:
         assert "period_missing" not in offer.review_codes
         # 繼承來的期間信心要低於子活動自己寫的
         assert offer.period.confidence <= 0.6
+
+
+def test_access_denied_is_reported_as_blocked_not_a_transient_failure() -> None:
+    """403 不是暫時性故障，重試不會好 —— 它需要換執行環境或等官方解除限制。
+
+    實測陽信與第一銀行從 GitHub Actions 的 datacenter IP 存取會被拒，
+    但從住宅 IP 正常。混在「暫時無法讀取」裡會讓人誤判為短暫問題。
+    """
+    from radar.transport import AccessDenied
+
+    fetcher = FakeFetcher(failures={LIST_URL: AccessDenied("HTTP 403")})
+    result = run_source(_spec(), fetcher, today=TODAY, now=NOW)
+
+    assert result.health is not None
+    assert result.health.status == "blocked"
+    assert [alert.type for alert in result.alerts] == ["source_access_blocked"]
+
+
+def test_access_denied_on_a_detail_page_skips_only_that_item() -> None:
+    from radar.transport import AccessDenied
+
+    fetcher = FakeFetcher(
+        pages={
+            LIST_URL: _listing("/promo/blocked", "/promo/1"),
+            "https://www.example.com/promo/1": DETAIL_ONE,
+        },
+        failures={"https://www.example.com/promo/blocked": AccessDenied("HTTP 403")},
+    )
+    result = run_source(_spec(), fetcher, today=TODAY, now=NOW)
+
+    assert len(result.campaigns) == 1, "沒被拒的那一筆必須存活"
+    assert result.stats.detail_blocked == 1
+    assert [alert.type for alert in result.alerts] == ["source_access_blocked"]

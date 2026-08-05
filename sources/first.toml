@@ -4,7 +4,8 @@ domains = ["firstbank.com.tw"]
 note = """第一銀行的活動清單由 JavaScript 渲染 —— 整頁 372KB HTML 只有約 950 字
 純文字，活動內容不在初始回應裡。目前只能產出 1 筆。要完整收錄需要無頭瀏覽器，
 那會讓 CI 依賴瀏覽器執行環境，暫不採用。刻意保留這份 spec 讓覆蓋率不足
-在來源健康上可見，而不是靜默消失。不改用非官方來源。"""
+在來源健康上可見，而不是靜默消失。不改用非官方來源。
+從 GitHub Actions 的 datacenter IP 也會被拒。"""
 
 [listing]
 kind = "single_page"

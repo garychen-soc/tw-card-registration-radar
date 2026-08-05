@@ -52,7 +52,7 @@ from .segment import (
     table_rows,
 )
 from .spec import SourceSpec
-from .transport import BlockedURL, FetchFailed, TransportError
+from .transport import AccessDenied, BlockedURL, FetchFailed, TransportError
 
 
 @dataclass
@@ -235,6 +235,18 @@ def run_source(
         )
         result.health = _health(spec, "blocked", result, str(exc))
         return result
+    except AccessDenied as exc:
+        result.alerts.append(
+            Alert(
+                type="source_access_blocked",
+                bank_id=spec.id,
+                bank_name=spec.bank_name,
+                message=f"來源拒絕自動化存取，本次未取得資料：{exc}",
+                url=spec.listing.entry_url,
+            )
+        )
+        result.health = _health(spec, "blocked", result, str(exc))
+        return result
     except TransportError as exc:
         result.alerts.append(
             Alert(
@@ -298,6 +310,18 @@ def _run_item(
                 )
             )
             return None
+        except AccessDenied as exc:
+            result.stats.detail_blocked += 1
+            result.alerts.append(
+                Alert(
+                    type="source_access_blocked",
+                    bank_id=spec.id,
+                    bank_name=spec.bank_name,
+                    message=f"來源拒絕自動化存取，已略過該筆：{exc}",
+                    url=item.url,
+                )
+            )
+            return None
         except FetchFailed as exc:
             result.stats.detail_failed += 1
             result.alerts.append(
@@ -356,7 +380,7 @@ def _message(result: SourceResult) -> str:
     if stats.detail_failed:
         parts.append(f"{stats.detail_failed} 筆明細暫時無法讀取")
     if stats.detail_blocked:
-        parts.append(f"{stats.detail_blocked} 筆連結未通過安全檢查已略過")
+        parts.append(f"{stats.detail_blocked} 筆被拒絕存取或未通過安全檢查已略過")
     if stats.detail_not_modified:
         parts.append(f"{stats.detail_not_modified} 筆官方回報未變更，改用本機存檔")
     return "；".join(parts)
