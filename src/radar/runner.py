@@ -367,6 +367,11 @@ def _props_text(item: ListingItem) -> str:
 
 def _status(result: SourceResult, item_count: int) -> str:
     if not result.campaigns:
+        # 全被拒絕存取時要說「被拒」而不是「失敗」—— 前者是換執行環境能解的，
+        # 後者是來源本身有問題。混在一起就失去了「該不該改走 self-hosted
+        # runner」的判斷依據（實測陽信在 CI 上就是這種情形）。
+        if result.stats.detail_blocked and not result.stats.detail_failed:
+            return "blocked"
         return "failed"
     stats = result.stats
     if stats.detail_failed or stats.detail_blocked or len(result.campaigns) < item_count:

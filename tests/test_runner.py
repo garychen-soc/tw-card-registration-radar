@@ -407,3 +407,33 @@ def test_access_denied_on_a_detail_page_skips_only_that_item() -> None:
     assert len(result.campaigns) == 1, "沒被拒的那一筆必須存活"
     assert result.stats.detail_blocked == 1
     assert [alert.type for alert in result.alerts] == ["source_access_blocked"]
+
+
+def test_source_with_every_item_denied_is_blocked_not_failed() -> None:
+    """全被拒絕存取時要說「被拒」而不是「失敗」。
+
+    前者換執行環境能解，後者是來源本身有問題 —— 混在一起就失去了
+    「該不該改走 self-hosted runner」的判斷依據（實測陽信在 CI 上如此）。
+    """
+    from radar.transport import AccessDenied
+
+    fetcher = FakeFetcher(
+        pages={LIST_URL: _listing("/promo/1")},
+        failures={"https://www.example.com/promo/1": AccessDenied("HTTP 403")},
+    )
+    result = run_source(_spec(), fetcher, today=TODAY, now=NOW)
+
+    assert result.campaigns == []
+    assert result.health is not None
+    assert result.health.status == "blocked"
+
+
+def test_source_with_unreadable_items_is_still_failed() -> None:
+    """讀取失敗（5xx／逾時）仍是 failed —— 那不是換 IP 能解的。"""
+    fetcher = FakeFetcher(
+        pages={LIST_URL: _listing("/promo/1")},
+        failures={"https://www.example.com/promo/1": FetchFailed("HTTP 503")},
+    )
+    result = run_source(_spec(), fetcher, today=TODAY, now=NOW)
+    assert result.health is not None
+    assert result.health.status in {"partial", "failed"}
