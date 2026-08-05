@@ -180,12 +180,19 @@ def test_single_offer_page_is_not_flagged_even_when_declared_many() -> None:
     assert "offer_boundary_missing" not in offer.review_codes
 
 
-def test_multi_offer_evidence_without_boundary_is_flagged() -> None:
-    """兩組活動期間卻切不出邊界 —— 這才是真的切分失敗，必須標記。"""
+def test_multi_offer_evidence_without_boundary_is_informational() -> None:
+    """兩組活動期間卻切不出邊界 —— 要標註，但不該把整筆藏進「需人工確認」。
+
+    這一筆的期間、登錄時點與條件都解析成功了，藏起來反而讓使用者看不到
+    本來有效的活動。實測玉山有 65 頁如此，而兩次「硬切開」的嘗試都讓
+    活動數從 243 膨脹到 606／610，結果更糟 —— 所以接受切不開，誠實標註。
+    """
     body = """
     <html><body>
-    <p>活動期間：2026/8/1~2026/8/10 完成登錄享 5% 回饋</p>
-    <p>活動期間：2026/8/11~2026/8/31 完成登錄享 8% 回饋</p>
+    <p>活動期間：2026/8/1~2026/8/10</p>
+    <p>登錄期間：2026/8/1 10:00~2026/8/10 23:59 開放登錄</p>
+    <p>單筆滿1,000元享5%回饋。</p>
+    <p>活動期間：2026/8/11~2026/8/31 加碼享8%回饋。</p>
     </body></html>
     """
     fetcher = FakeFetcher(
@@ -196,7 +203,8 @@ def test_multi_offer_evidence_without_boundary_is_flagged() -> None:
 
     offer = result.campaigns[0].offers[0]
     assert "offer_boundary_missing" in offer.review_codes
-    assert offer.needs_review is True
+    assert offer.needs_review is False, offer.review_reasons
+    assert any("未能完全分開" in reason for reason in offer.review_reasons)
 
 
 def test_cardinality_one_is_never_split() -> None:

@@ -28,7 +28,7 @@ VIOLATION_MESSAGES = {
     "threshold_not_monotonic": "階梯門檻的消費金額未遞增，可能解析錯位",
     "period_missing": "抓不到活動期間",
     "low_confidence_window": "登錄時點的解析信心不足",
-    "offer_boundary_missing": "本頁應含多個活動但未能切出邊界，請至官方頁確認對應的登錄時間",
+    "offer_boundary_missing": "本頁含多個活動且未能完全分開，請至官方頁確認對應的條件",
 }
 
 MIN_WINDOW_CONFIDENCE = 0.6
@@ -80,9 +80,13 @@ def check(offer: Offer) -> list[str]:
     return codes
 
 
-# 這幾類只是資訊不完整，仍可讓使用者行動（顯示「截止時間未確認」即可），
-# 不需要整筆退到「需人工確認」分頁。
-_INFORMATIONAL = frozenset({"registration_end_unknown"})
+# 這幾類是「資訊不完整」而非「資料可能錯」。活動仍可行動，只要在 UI 上
+# 明說保留就好 —— 藏進「需人工確認」反而讓使用者看不到本來有效的活動。
+#
+# offer_boundary_missing 屬於此類：頁面確實含多個子活動而我們切不開，但這一筆的
+# 期間、登錄時點與條件都解析成功了。實測玉山有 65 頁如此 —— 試圖硬切的兩次嘗試
+# 都造成更糟的結果（活動數從 243 膨脹到 606／610），所以接受切不開，改為誠實標註。
+_INFORMATIONAL = frozenset({"registration_end_unknown", "offer_boundary_missing"})
 
 # 這幾類直接動搖時序契約的可信度：契約是由登錄視窗與活動期間的幾何關係推導出來的，
 # 若視窗本身落在期間之外或互相重疊，推導結果不該再掛著高信心。

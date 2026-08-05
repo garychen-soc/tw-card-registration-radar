@@ -121,7 +121,7 @@ export const REVIEW_LABEL: Record<string, string> = {
   threshold_not_monotonic: "階梯門檻的消費金額未遞增，可能解析錯位",
   period_missing: "抓不到活動期間",
   low_confidence_window: "登錄時點的解析信心不足",
-  offer_boundary_missing: "本頁應含多個活動但未能切出邊界",
+  offer_boundary_missing: "本頁含多個活動且未能完全分開，請至官方頁確認對應的條件",
 };
 
 /** 資料新鮮度。超過 36 小時就在頁面上明說 —— 靜默過期是前身最大的信任問題。 */
