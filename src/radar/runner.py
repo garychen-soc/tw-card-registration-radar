@@ -123,6 +123,15 @@ def build_offers(
         if spec.detail.cardinality == "many"
         else single_chunk(text)
     )
+    # 頁面層級的循環規則。「每期需重新登錄」這類敘述整頁通常只寫一次，且常寫在
+    # 末尾的共用注意事項裡，切分後只會留在最後一個子活動上。它不帶具體時點，
+    # 誤植的代價遠低於登錄視窗，所以取全頁而非只取前言。
+    #
+    # 刻意**不**對登錄視窗做同樣的繼承：實測聯邦 MWorldcard 的共用區塊裡有
+    # 別的子活動的期間（2026/6/17-2026/12/31），繼承後 56 筆掛上錯的登錄時間，
+    # 而真正需要繼承的星展頁面其實把排程寫在子活動自己的區塊裡。
+    # 留白比錯的登錄時間好。
+    page_recurrence = detect_recurrence(text)
     multi_evidence = spec.detail.cardinality == "many" and looks_multi_offer(text)
 
     for index, chunk in enumerate(chunks):
@@ -162,6 +171,16 @@ def build_offers(
             end,
         )
         recurrence = detect_recurrence(chunk.text)
+        if recurrence.kind == "once" and page_recurrence.kind != "once":
+            # 信心降一級並在 note 上註明來源 —— 這條規則來自頁面共用敘述，
+            # 不是這個子活動自己寫的。時序契約的信心直接取自 recurrence，
+            # 所以 UI 會跟著把它顯示成較低信心。
+            recurrence = page_recurrence.model_copy(
+                update={
+                    "note": f"{page_recurrence.note}（頁面共用敘述）",
+                    "confidence": round(max(0.0, page_recurrence.confidence - 0.1), 2),
+                }
+            )
         title = listing_title if (listing_title and not chunk.split) else chunk.title
         offer = Offer(
             id=f"{spec.id}-{_slug(url)}-{index}",

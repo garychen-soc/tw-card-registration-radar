@@ -437,3 +437,71 @@ def test_source_with_unreadable_items_is_still_failed() -> None:
     result = run_source(_spec(), fetcher, today=TODAY, now=NOW)
     assert result.health is not None
     assert result.health.status in {"partial", "failed"}
+
+
+def test_sibling_offers_do_not_inherit_registration_windows() -> None:
+    """一個子活動寫了登錄時點，不得擴散到同頁其他子活動。
+
+    實測聯邦 MWorldcard：頁面共用區塊裡有別的子活動的期間
+    （2026/6/17-2026/12/31），一度讓 56 筆掛上錯的登錄時間。使用者會照著錯的
+    時間去登錄，那比「抓不到時點」更糟 —— 留白由 needs_review 誠實標示出來。
+    """
+    body = """
+    <html><body>
+    <p>活動期間：2026/8/1~2026/8/31</p>
+    <p>活動一、登錄期間：2026/8/5 10:00~2026/8/10 23:59，於登錄後以本行信用卡
+    單筆消費滿5,000元，享500點紅利回饋。</p>
+    <p>活動二、於活動期間內以本行信用卡單筆消費滿20,000元，完成登錄後
+    享5,000點紅利回饋，每月限量250名，額滿為止。</p>
+    </body></html>
+    """
+    fetcher = FakeFetcher(
+        pages={LIST_URL: _listing("/promo/1"), "https://www.example.com/promo/1": body}
+    )
+    spec = _spec(detail={"source": "html", "cardinality": "many"})
+    result = run_source(spec, fetcher, today=TODAY, now=NOW)
+
+    offers = result.campaigns[0].offers
+    assert len(offers) == 2
+    own = offers[0].registration.windows
+    assert len(own) == 1
+    assert own[0].start == datetime.fromisoformat("2026-08-05T10:00:00+08:00")
+    assert own[0].end == datetime.fromisoformat("2026-08-10T23:59:00+08:00")
+    # 活動二自己沒寫時點：留白，並誠實標記
+    assert offers[1].registration.windows == []
+    assert offers[1].registration.required
+    assert "registration_without_window" in offers[1].review_codes
+
+
+def test_page_level_recurrence_is_inherited() -> None:
+    """「每期需重新登錄」整頁只寫一次，切分後只會留在最後一個子活動上。
+
+    循環規則不帶具體時點，誤植的代價遠低於登錄視窗，所以這一項取全頁。
+    """
+    body = """
+    <html><body>
+    <p>活動期間：2026/8/1~2026/8/31</p>
+    <p>活動一、於活動期間內以本行信用卡單筆消費滿5,000元，享500點紅利回饋，
+    每月限量400名，額滿為止。</p>
+    <p>活動二、於活動期間內以本行信用卡單筆消費滿20,000元，享5,000點紅利回饋，
+    每月限量250名，額滿為止。</p>
+    <p>注意事項：本活動每期需重新登錄，未登錄者不予補登。</p>
+    </body></html>
+    """
+    fetcher = FakeFetcher(
+        pages={LIST_URL: _listing("/promo/1"), "https://www.example.com/promo/1": body}
+    )
+    spec = _spec(detail={"source": "html", "cardinality": "many"})
+    result = run_source(spec, fetcher, today=TODAY, now=NOW)
+
+    offers = result.campaigns[0].offers
+    assert len(offers) == 2
+    for offer in offers:
+        assert offer.registration.recurrence.kind == "per_campaign_period", offer.title
+        assert offer.registration.timing_contract.kind == "per_period_reregister"
+    # 注意事項落在最後一個區塊裡，所以活動二是自己抓到的、活動一是繼承的。
+    # 繼承的那筆信心降一級並在 note 上註明來源。
+    assert "頁面共用敘述" in offers[0].registration.recurrence.note
+    assert offers[0].registration.recurrence.confidence == 0.6
+    assert offers[1].registration.recurrence.note == "每期需重新登錄"
+    assert offers[1].registration.recurrence.confidence == 0.7

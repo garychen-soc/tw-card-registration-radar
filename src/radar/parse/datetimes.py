@@ -82,8 +82,10 @@ _TOKEN = re.compile(
     r"|(?P<frm>起)"
 )
 
+# 「當月」「該月」與「每月」同義 —— 實測聯邦寫「當月活動於當月20號10:00開放登錄」，
+# 只認「每月」會整段漏掉。
 _RECUR_MONTH_DAY = re.compile(
-    r"每月\s*(?P<day>\d{1,2})\s*[日號](?P<between>.{0,14}?)"
+    r"(?:每|當|該)月\s*(?P<day>\d{1,2})\s*[日號](?P<between>.{0,14}?)"
     r"(?P<mk>上午|下午|中午)?\s*(?P<h>\d{1,2})\s*(?::\s*(?P<mi>\d{2})|[點時](?:整)?)"
     r".{0,12}?(?:開放|開始)?登錄"
 )
@@ -93,7 +95,8 @@ _RECUR_NTH_WEEKDAY = re.compile(
     r".{0,12}?(?:開放|開始)?登錄"
 )
 _RECUR_PER_PERIOD = re.compile(
-    r"(?:每月|每期|每檔|逐月|每一期)\s*(?:均|都)?\s*需?\s*(?:重新)?\s*登錄"
+    r"(?:每月|當月|該月|每期|每檔|逐月|每一期)\s*(?:均|都)?\s*需?\s*(?:重新)?\s*登錄"
+    r"|於消費當月完成登錄"
 )
 
 _PERIOD_LABEL = re.compile(r"(?:活動|優惠|消費)(?:期間|日期|時間)\s*[:：]?\s*")
@@ -176,16 +179,27 @@ def _cluster(tokens: list[Token], text: str) -> list[list[Token]]:
     return clusters
 
 
-def _nearest(text: str, position: int, needles: tuple[str, ...]) -> int | None:
-    """回傳 position 之前最靠近的 needle 起點，找不到回 None。"""
-    window_start = max(0, position - CONTEXT_BEFORE)
-    window = text[window_start:position]
+def _before_distance(text: str, start: int, needles: tuple[str, ...]) -> int | None:
+    """叢集之前最近的 needle 與叢集相隔幾個字元。找不到回 None。"""
+    window = text[max(0, start - CONTEXT_BEFORE) : start]
     best: int | None = None
     for needle in needles:
         index = window.rfind(needle)
-        if index != -1 and (best is None or index > best):
-            best = index
-    return None if best is None else window_start + best
+        if index != -1:
+            gap = len(window) - (index + len(needle))
+            best = gap if best is None else min(best, gap)
+    return best
+
+
+def _after_distance(text: str, end: int, needles: tuple[str, ...]) -> int | None:
+    """叢集之後最近的 needle 與叢集相隔幾個字元。找不到回 None。"""
+    window = text[end : min(len(text), end + CONTEXT_AFTER)]
+    best: int | None = None
+    for needle in needles:
+        index = window.find(needle)
+        if index != -1:
+            best = index if best is None else min(best, index)
+    return best
 
 
 def _is_registration_context(text: str, cluster: list[Token]) -> tuple[bool, bool]:
@@ -196,10 +210,23 @@ def _is_registration_context(text: str, cluster: list[Token]) -> tuple[bool, boo
         return False, False
     if not any(hint in context for hint in _REGISTRATION_HINTS):
         return False, False
-    # 「活動期間」若比任何登錄字樣更靠近，這是可消費期間而非登錄期間
-    spend_at = _nearest(text, start, _SPEND_PERIOD_HINTS)
-    register_at = _nearest(text, start, _REGISTRATION_HINTS)
-    if spend_at is not None and (register_at is None or spend_at > register_at):
+    # 「活動期間」若比任何登錄字樣更靠近，這是可消費期間而非登錄期間。
+    # 標籤在中文裡一律寫在值之前，所以兩邊都只往前找。
+    spend_gap = _before_distance(text, start, _SPEND_PERIOD_HINTS)
+    register_gap = _before_distance(text, start, _REGISTRATION_HINTS)
+    # 但「登錄」也會是句尾的動詞：「8月活動於8/24下午2點整開始登錄」的登錄在
+    # 時間之後，只比前方會讓上一行的「活動期間」搶走判定，整段共用的登錄排程
+    # 因此消失（實測星展、聯邦都是這個寫法）。
+    #
+    # 後方只認「開放登錄／登錄期間」這類**明確**用語，泛稱的「登錄」二字不算 ——
+    # 實測聯邦 MWorldcard 是一堆無標籤的行銷片段，「需消費當月登錄」與
+    # 「2026/5/1-2026/8/31」相隔數十字，放寬到泛稱會把三個活動期間當成登錄視窗。
+    trailing_gap = _after_distance(text, end, _SPECIFIC_MARKERS)
+    if trailing_gap is not None and (register_gap is None or trailing_gap < register_gap):
+        register_gap = trailing_gap
+    # 平手時判給可消費期間 —— 「活動期間：8/1~8/31\n登錄期間：…」的兩個標籤
+    # 與各自的日期距離都是 1，此時第一個叢集的標籤是「活動期間」。
+    if spend_gap is not None and (register_gap is None or spend_gap <= register_gap):
         return False, False
     specific = any(marker in context for marker in _SPECIFIC_MARKERS)
     return True, specific

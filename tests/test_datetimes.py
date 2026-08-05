@@ -282,3 +282,21 @@ def test_labelled_period_still_wins() -> None:
     bare = find_date_range(text, default_year=2026)
     assert labelled[0] == bare[0]
     assert labelled[2] > bare[2]
+
+
+def test_relative_month_recurrence() -> None:
+    """「當月20號」與「每月20日」同義。實測聯邦寫「當月活動於當月20號10:00開放登錄」，
+    只認「每月」會整段漏掉，該筆因此被判定為「需登錄但抓不到時點」。"""
+    recurrence = detect_recurrence(
+        "活動限量登錄3,500名/月，當月活動於當月20號10:00開放登錄至當月月底，額滿為止"
+    )
+    assert recurrence.kind == "monthly"
+    assert "20 日" in recurrence.note
+    assert "10:00" in recurrence.note
+
+
+def test_spend_month_registration_is_per_period() -> None:
+    assert (
+        detect_recurrence("於消費當月完成登錄，始符合當月活動參與資格").kind
+        == "per_campaign_period"
+    )
