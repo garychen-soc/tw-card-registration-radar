@@ -221,3 +221,30 @@ def test_single_activity_page_is_not_split_by_period_anchor() -> None:
     chunks = split_offers(text)
     assert len(chunks) == 1
     assert chunks[0].split is False
+
+
+def test_link_filter_never_empties_the_page() -> None:
+    """連結密度濾網不得把整頁清空。
+
+    實測華南「信用卡」分頁面板有 44 個連結，整塊被刪後 to_text 產出 0 字，
+    來源掉到 1 筆。選單只會是頁面的一小部分，內容不會。
+    """
+    from radar.htmltext import to_text
+
+    panel = "<div>" + "".join(
+        f'<a href="/n{i}">華南活動標題 {i}</a>' for i in range(20)
+    ) + "<p>活動期間：2026/8/1~2026/8/31</p></div>"
+    text = to_text(f"<html><body>{panel}</body></html>")
+    assert text, "整頁不得被清空"
+    assert "活動期間" in text
+
+
+def test_small_menu_is_still_dropped_when_content_dominates() -> None:
+    """內容佔多數時，小型選單仍要被移除。"""
+    from radar.htmltext import to_text
+
+    menu = "".join(f'<a href="/m{i}">選單項目{i}</a>' for i in range(8))
+    body = "活動期間：2026/8/1~2026/8/31，單筆滿1,000元享5%回饋。" * 12
+    text = to_text(f"<html><body><div>{menu}</div><section><p>{body}</p></section></body></html>")
+    assert "選單項目" not in text
+    assert "單筆滿1,000元" in text

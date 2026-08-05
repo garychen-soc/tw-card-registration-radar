@@ -1,13 +1,14 @@
 id = "taishin"
 bank_name = "台新銀行"
 domains = ["taishinbank.com.tw"]
-note = """官方分 A–I 九個分類，目前只讀 A 類（約 12 筆）。多分類需要
-逐一請求 offerList/{category}，尚未支援多入口 —— 覆蓋率不足會反映在來源健康上。"""
+note = """官方分 A–I 九個分類，已逐一請求（url_template + category_codes），
+實測聯集 98 筆。活動名稱在錨點的 title 屬性裡，錨點文字只是「瞭解詳情」——
+所以 link_pattern 用第二個擷取群組取標題。"""
 
 [listing]
 kind = "html_list"
 entry_url = "https://mkpcard.taishinbank.com.tw/tscccms/promotion/offerList/A"
-link_pattern = 'href="([^"]*/tscccms/promotion/detail/WM_\d+)"'
+link_pattern = 'href="([^"]*/tscccms/promotion/detail/WM_\d+)"[^>]*title="([^"]*)"'
 url_template = "https://mkpcard.taishinbank.com.tw/tscccms/promotion/offerList/{category}"
 category_codes = ["A", "B", "C", "D", "E", "F", "G", "H", "I"]
 

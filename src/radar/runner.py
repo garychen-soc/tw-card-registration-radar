@@ -22,7 +22,7 @@ from dataclasses import dataclass, field
 from datetime import UTC, date, datetime
 
 from .adapters.listing import Fetch, ListingItem, read_listing
-from .htmltext import strings_of, to_text
+from .htmltext import scope_html, strings_of, to_text
 from .invariants import apply as apply_invariants
 from .models import (
     Alert,
@@ -297,6 +297,11 @@ def _run_item(
                 # 就永遠不會收到 304，存了也用不到。
                 if pages is not None and _has_validators(fetcher, item.url):
                     pages.put(item.url, html, cache_control=response.cache_control)
+            html = scope_html(
+                html,
+                selector=spec.detail.scope_selector,
+                tab_label=spec.detail.scope_tab_label,
+            )
             text = to_text(html) or text
         except BlockedURL as exc:
             result.stats.detail_blocked += 1

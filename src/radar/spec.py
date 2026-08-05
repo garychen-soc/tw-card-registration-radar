@@ -116,6 +116,15 @@ class DetailSpec(Strict):
         default=False,
         description="明細頁是否有 dt/th 階梯門檻表（實測僅聯邦如此）。",
     )
+    scope_selector: str = Field(
+        default="",
+        description="把分析範圍限縮到這個 CSS 容器。找不到就用整頁（降級而非失敗）。",
+    )
+    scope_tab_label: str = Field(
+        default="",
+        description="分頁面板的間接指向：找 aria-label 等於此值的 tab，"
+        "再取它 aria-controls 指到的容器。實測華南的活動全在「信用卡」分頁裡。",
+    )
 
 
 class RegistrationSpec(Strict):

@@ -212,6 +212,9 @@ def _items_from_html(listing: ListingSpec, html: str, base_url: str) -> list[Lis
             continue
         for match in pattern.finditer(block_html):
             href = match.group(1) if match.groups() else match.group(0)
+            # 第二個擷取群組（有的話）當標題。實測台新把活動名稱放在錨點的
+            # title 屬性裡，錨點文字只是「瞭解詳情」。
+            link_title = match.group(2) if len(match.groups()) >= 2 else ""
             url = urljoin(base_url, href.strip())
             if url in seen:
                 continue
@@ -225,7 +228,8 @@ def _items_from_html(listing: ListingSpec, html: str, base_url: str) -> list[Lis
                 ListingItem(
                     url=url,
                     title=normalize_inline(
-                        _pick(block_html, listing.title_selector)
+                        link_title
+                        or _pick(block_html, listing.title_selector)
                         or _block_title(block_html, block_text)
                     ),
                     summary=normalize_inline(_pick(block_html, listing.summary_selector)),

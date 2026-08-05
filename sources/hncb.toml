@@ -1,15 +1,27 @@
+# 華南銀行。
 id = "hncb"
 bank_name = "華南銀行"
 domains = ["hncb.com.tw"]
-note = "入口為 portal URL，活動內容內嵌於信用卡分頁容器內，用 single_page。"
+note = """entry_url 必須保留完整的 portal 狀態（!ut/p/z1/...）。我曾把它簡化成
+/wps/portal/HNCB/card，結果拿到的是不同的頁面 —— 完整 URL 回 199,650 bytes
+且含「信用卡」分頁，簡化後只有 138,266 bytes 且分頁不存在。portal／CMS 的
+這串編碼是選內容的狀態，不是追蹤雜訊。
+
+即使拿對頁面，「信用卡」分頁面板（5,899 字）也只有活動標題 —— 沒有期間、
+沒有條件，連結多為 JS 驅動的空 href。前身在此取得 42 筆，但其中 34 筆沒有
+結束日、0 筆有登錄時點，且多筆共用同一組期間，是覆蓋率的假象。這裡不追那個
+數字，只誠實產出能解析的部分。"""
 
 [listing]
 kind = "single_page"
-entry_url = "https://www.hncb.com.tw/wps/portal/HNCB/card"
+entry_url = "https://www.hncb.com.tw/wps/portal/HNCB/card/!ut/p/z1/04_Sj9CPykssy0xPLMnMz0vMAfIjo8ziDQw93T3cnQ18DQIsDAzMAk3M_UMtwoxCPY30w_EpMDI0148iSj8O4GhApH7cCqLwGx-uH4XPCrAPCJlRkBsaGmGQ6QgAkO1qlw!!/?1dmy&urile=wcm%3apath%3a/wps/wcm/connect/hncb_v2/site_map/hncb/per_finance/service/public_item/best_offer"
 
 [detail]
 source = "html"
 cardinality = "many"
+# 活動全在「信用卡」分頁的面板裡（實測 5,899 字）。不限縮會混進存款、貸款、
+# 保險等其他分頁，而通用的連結密度濾網也會把整塊面板刪掉。
+scope_tab_label = "信用卡"
 
 [registration]
 portal_url = "https://netbank.hncb.com.tw/netbank/servlet/TrxDispatcher"

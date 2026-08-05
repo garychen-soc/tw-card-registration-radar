@@ -51,6 +51,10 @@ _CONTENT_ROOTS = ("main", "[role=main]", "article", "#content", ".content", "#ma
 # 登錄原文，讓它們全被判定為「需登錄但抓不到時點」。
 LINK_DENSITY_LIMIT = 0.8
 LINK_COUNT_LIMIT = 5
+# 佔全文這個比例以上的區塊一律不刪。連結密度是「這塊是選單」的訊號，但主內容
+# 區塊本身也可能連結很密 —— 實測華南「信用卡」分頁面板有 44 個連結，
+# 整塊被刪後 to_text 產出 0 字。選單只會是頁面的一小部分，內容不會。
+LINK_DROP_MAX_SHARE = 0.5
 _LINKY = ("ul", "ol", "div", "section", "dl")
 _BLOCK = (
     "p",
@@ -73,6 +77,36 @@ _BLOCK = (
 )
 
 
+def scope_html(html: str, *, selector: str = "", tab_label: str = "") -> str:
+    """把 HTML 限縮到指定容器。找不到就回原本的 HTML（降級而非失敗）。
+
+    ``tab_label`` 走分頁面板的間接指向：找 ``aria-label`` 等於它的 tab，
+    再取 ``aria-controls`` 指到的容器。分頁式 CMS 頁面很常見 —— 實測華南的
+    活動全在「信用卡」分頁的面板裡（5,899 字），不限縮就會混進存款、貸款、
+    保險等其他分頁的內容，而通用的樣板／連結密度濾網也會把它整塊刪掉。
+    """
+    if not selector and not tab_label:
+        return html
+    tree = HTMLParser(html)
+    if tab_label:
+        pattern = re.compile(
+            rf'<a[^>]+aria-controls="([^"]+)"[^>]*aria-label="{re.escape(tab_label)}"'
+            rf'|<a[^>]+aria-label="{re.escape(tab_label)}"[^>]*aria-controls="([^"]+)"',
+            re.I,
+        )
+        match = pattern.search(html)
+        if match:
+            panel_id = match.group(1) or match.group(2)
+            node = tree.css_first(f"#{panel_id}")
+            if node is not None and node.html:
+                return node.html
+    if selector:
+        node = tree.css_first(selector)
+        if node is not None and node.html:
+            return node.html
+    return html
+
+
 def to_text(html: str) -> str:
     tree = HTMLParser(html)
     for selector in _DROP:
@@ -83,8 +117,16 @@ def to_text(html: str) -> str:
         if _BOILERPLATE.search(marker):
             node.decompose()
 
+    unfiltered = _extract(tree)
     _drop_link_lists(tree)
+    filtered = _extract(tree)
+    # 過濾後一無所剩時退回未過濾的文字 —— 寧可帶點選單雜訊，
+    # 也不要讓整個來源變成空的（實測華南就是這樣掉到 0 筆）。
+    return filtered or unfiltered
 
+
+def _extract(tree: HTMLParser) -> str:
+    """從（可能已被過濾的）樹取出純文字。"""
     root = None
     for selector in _CONTENT_ROOTS:
         root = tree.css_first(selector)
@@ -105,12 +147,16 @@ def _drop_link_lists(tree: HTMLParser) -> None:
     用途（期間、登錄時點、條件解析）而言那是可接受的取捨 —— 讓選單文字混進
     活動內文的傷害大得多。
     """
+    body = tree.body or tree.root
+    total = _dense_len(body.text()) if body is not None else 0
     for tag in _LINKY:
         for node in tree.css(tag):
             # 只數非空白字元。HTML 的縮排會稀釋密度 —— 排版整齊的頁面
             # 會因此漏掉明顯是選單的區塊。
             length = _dense_len(node.text())
             if not length:
+                continue
+            if total and length / total >= LINK_DROP_MAX_SHARE:
                 continue
             anchors = node.css("a")
             if len(anchors) < LINK_COUNT_LIMIT:
