@@ -31,7 +31,9 @@ from .models import (
     Offer,
     Period,
     Portal,
+    Recurrence,
     Registration,
+    RegistrationWindow,
     SourceHealth,
 )
 from .pagestore import PageStore
@@ -94,6 +96,7 @@ def build_offers(
     listing_title: str = "",
     listing_start: date | None = None,
     listing_end: date | None = None,
+    listing_registration: str = "",
 ) -> list[Offer]:
     """把單一明細頁的文字切成多個子活動並解析。
 
@@ -132,6 +135,23 @@ def build_offers(
     # 而真正需要繼承的星展頁面其實把排程寫在子活動自己的區塊裡。
     # 留白比錯的登錄時間好。
     page_recurrence = detect_recurrence(text)
+
+    # 清單層級公告的登錄期間。銀行自己把它標記成登錄期間欄位，所以加上標籤前綴
+    # 再交給同一套解析器 —— 不另寫規則。實測第一銀行有 8 筆的登錄期間只存在
+    # 這個欄位裡，明細頁的內文完全沒寫（「每月22日上午10點起(逐月登錄)」）。
+    #
+    # 這與我刻意不做的「共用前言繼承」不同：那是從**別的子活動**的散文裡撈到的
+    # 日期，這是官方對**這個活動頁**的結構化宣告，套用到沒有自己時點的子活動上
+    # 是有依據的。信心仍降一級，因為它是頁面層級而非子活動層級。
+    listing_windows: list[RegistrationWindow] = []
+    listing_recurrence = Recurrence()
+    if listing_registration:
+        labelled = f"登錄期間：{listing_registration}"
+        listing_windows = find_windows(
+            labelled, default_year=today.year, reference=today, source_url=url
+        )
+        listing_recurrence = detect_recurrence(labelled)
+
     multi_evidence = spec.detail.cardinality == "many" and looks_multi_offer(text)
 
     for index, chunk in enumerate(chunks):
@@ -171,6 +191,15 @@ def build_offers(
             end,
         )
         recurrence = detect_recurrence(chunk.text)
+        if not windows and listing_windows:
+            windows = [
+                window.model_copy(
+                    update={"confidence": round(max(0.0, window.confidence - 0.1), 2)}
+                )
+                for window in drop_period_echoes(listing_windows, start, end)
+            ]
+        if recurrence.kind == "once" and listing_recurrence.kind != "once":
+            recurrence = listing_recurrence
         if recurrence.kind == "once" and page_recurrence.kind != "once":
             # 信心降一級並在 note 上註明來源 —— 這條規則來自頁面共用敘述，
             # 不是這個子活動自己寫的。時序契約的信心直接取自 recurrence，
@@ -371,6 +400,7 @@ def _run_item(
         listing_title=item.title,
         listing_start=item.start,
         listing_end=item.end,
+        listing_registration=item.registration_text,
     )
     return Campaign(
         id=f"{spec.id}-{_slug(item.url)}",

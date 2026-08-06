@@ -56,6 +56,10 @@ title = "activityTitle"
 # activityDate 是「2026.8.1-2026.9.6」這種區間字串，只取得起始日；
 # 結束日交給明細頁的期間解析（那裡有完整的「活動期間」標籤）。
 start = "activityDate"
+# loginDate 是銀行自己標記的登錄期間。實測 16 筆有值，其中 8 筆的登錄資訊
+# 只存在這裡 —— 明細頁內文完全沒寫（例如「每月22日上午10點起(逐月登錄，
+# 額滿即關閉)」）。
+registration = "loginDate"
 
 [detail]
 source = "html"

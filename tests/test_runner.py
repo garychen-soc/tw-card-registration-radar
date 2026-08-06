@@ -9,7 +9,7 @@ from pathlib import Path
 
 from conftest import FakeFetcher
 
-from radar.runner import run_source
+from radar.runner import build_offers, run_source
 from radar.spec import SourceSpec
 from radar.transport import BlockedURL, FetchFailed
 
@@ -505,3 +505,66 @@ def test_page_level_recurrence_is_inherited() -> None:
     assert offers[0].registration.recurrence.confidence == 0.6
     assert offers[1].registration.recurrence.note == "每期需重新登錄"
     assert offers[1].registration.recurrence.confidence == 0.7
+
+
+def test_listing_registration_field_feeds_the_window_parser() -> None:
+    """銀行在清單層直接公告的登錄期間要用得上。
+
+    實測第一銀行的端點有 loginDate 欄位，16 筆有值、其中 8 筆的登錄資訊只存在
+    那裡（明細頁內文完全沒寫）。做法是加上「登錄期間：」標籤前綴再交給同一套
+    解析器，不另寫規則。
+    """
+    body = "<html><body><p>活動期間：2026/8/1~2026/8/31</p><p>單筆滿千享3%</p></body></html>"
+    fetcher = FakeFetcher(
+        pages={LIST_URL: _listing("/promo/1"), "https://www.example.com/promo/1": body}
+    )
+    offers = build_offers(
+        _spec(),
+        url="https://www.example.com/promo/1",
+        html=body,
+        text="活動期間：2026/8/1~2026/8/31\n單筆滿千享3%",
+        today=TODAY,
+        listing_registration="2026.8.5~2026.8.20",
+    )
+    assert len(offers) == 1
+    windows = offers[0].registration.windows
+    assert len(windows) == 1
+    assert windows[0].start == datetime.fromisoformat("2026-08-05T00:00:00+08:00")
+    assert windows[0].end == datetime.fromisoformat("2026-08-20T23:59:00+08:00")
+    # 頁面層級的來源 —— 信心要低於子活動自己寫的
+    assert windows[0].confidence <= 0.8
+    assert fetcher.requested == []
+
+
+def test_listing_registration_recurrence_without_dates() -> None:
+    """「每月22日上午10點起(逐月登錄，額滿即關閉)」沒有具體日期，
+    但循環規則本身就是使用者最需要知道的事。"""
+    text = "活動期間：2026/1/1~2026/12/31\n單筆滿千享3%"
+    offers = build_offers(
+        _spec(),
+        url="https://www.example.com/promo/1",
+        html=f"<html><body>{text}</body></html>",
+        text=text,
+        today=TODAY,
+        listing_registration="每月22日上午10點起(逐月登錄，額滿即關閉)",
+    )
+    recurrence = offers[0].registration.recurrence
+    assert recurrence.kind == "monthly"
+    assert "22 日" in recurrence.note and "10:00" in recurrence.note
+    assert offers[0].registration.timing_contract.kind == "per_period_reregister"
+
+
+def test_offer_windows_win_over_listing_registration() -> None:
+    """子活動自己寫了登錄時點時，清單層的欄位不得覆蓋它。"""
+    text = "活動期間：2026/8/1~2026/8/31\n登錄期間：2026/8/7 17:00~2026/8/10 23:59 開放登錄"
+    offers = build_offers(
+        _spec(),
+        url="https://www.example.com/promo/1",
+        html=f"<html><body>{text}</body></html>",
+        text=text,
+        today=TODAY,
+        listing_registration="2026.8.20~2026.8.25",
+    )
+    windows = offers[0].registration.windows
+    assert len(windows) == 1
+    assert windows[0].start == datetime.fromisoformat("2026-08-07T17:00:00+08:00")

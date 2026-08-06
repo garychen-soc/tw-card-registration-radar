@@ -56,6 +56,14 @@ class ListingItem:
     start: date | None = None
     end: date | None = None
     category: str = ""
+    registration_text: str = ""
+    """官方在清單層直接公告的登錄期間原文。
+
+    實測第一銀行的端點有 ``loginDate`` 欄位（「2026.1.1~2026.12.31(每月登錄，
+    額滿即關閉登錄功能)」、「每月22日上午10點起(逐月登錄，額滿即關閉)」），
+    其中 8 筆是明細頁的內文解析不到的。這是銀行**自己標記為登錄期間**的欄位，
+    比在頁面散文裡找證據可靠得多。
+    """
     featured: bool = False
     props: Any = None
     raw: dict[str, Any] = field(default_factory=dict)
@@ -233,6 +241,9 @@ def _collect_json_items(
                 start=_as_date(_get(row, fields.get("start", ""))),
                 end=_as_date(_get(row, fields.get("end", ""))),
                 category=category,
+                registration_text=normalize_inline(
+                    str(_get(row, fields.get("registration", "")) or "")
+                ),
                 featured=bool(featured_value) and str(featured_value) not in {"0", "False"},
                 props=_get(row, fields.get("props", "")) if fields.get("props") else None,
                 raw=row,
