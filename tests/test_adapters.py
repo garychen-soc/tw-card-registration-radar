@@ -2,13 +2,19 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
+import random
+import re
+from dataclasses import dataclass, field
 from datetime import date
 
+import pytest
 from conftest import FakeFetcher
 
-from radar.adapters.listing import read_listing
+from radar.adapters.listing import _wicket_window, read_listing
 from radar.spec import SourceSpec
+from radar.transport import Response
 
 BASE = {
     "id": "demo",
@@ -309,6 +315,194 @@ def test_wicket_pagination_follows_pages_and_tolerates_state_reset() -> None:
     fetcher.get = get  # type: ignore[method-assign]
     items = read_listing(spec, fetcher)
     assert {item.url.rsplit("=", 1)[1] for item in items} == {"D000001", "D000002", "D000003"}
+
+
+WICKET_ENTRY = "https://cardpromote.example.com/promotion/Result"
+WICKET_PAGE_SIZE = 9
+
+
+def _wicket_spec(**overrides: object) -> SourceSpec:
+    return _spec(
+        {
+            "kind": "html_list",
+            "entry_url": WICKET_ENTRY,
+            "link_pattern": r'href="(Detail\?sn=[A-Za-z0-9]+)"',
+            "pagination_kind": "wicket_ajax",
+            "pagination_base": "promotion/Result",
+            "total_pattern": r"共\s*(\d+)\s*筆",
+            "max_pages": 40,
+            **overrides,
+        }
+    )
+
+
+@dataclass
+class WicketSite:
+    """模擬富邦的清單頁：**每次翻頁都有機會被判成狀態過期並把你送回第 1 頁**。
+
+    這是實測出來的行為，不是假想的：清單頁在 Envoy 後面有多個節點，Wicket 的
+    頁面狀態只存在處理該次 render 的那一個節點上、且沒有 session 黏著，所以
+    單跳 40 次只成功 20 次，加延遲也沒有用（0／0.5／1／2／4 秒各 8 次，
+    成功 6／3／4／5／2）。用固定種子的亂數重現這個「一半機會」。
+
+    頁碼列只顯示一個寬度 10 的視窗，所以第 11 頁以後不能一跳直達 —— 這是舊版
+    走到一半就迷路的另一半原因。
+    """
+
+    total: int = 24
+    items_total: int = 215
+    announced: int = 215
+    """頁面上印出來的總筆數。刻意與 ``items_total`` 分開 —— 官方的數字可能過期。"""
+    stale_probability: float = 0.5
+    seed: int = 0
+    _rng: random.Random = field(init=False)
+    page_id: int = 0
+    hops: int = 0
+    stale: int = 0
+    requested: list[str] = field(default_factory=list)
+
+    def __post_init__(self) -> None:
+        self._rng = random.Random(self.seed)
+
+    def _page_html(self, page: int) -> str:
+        first = (page - 1) * WICKET_PAGE_SIZE
+        count = max(0, min(WICKET_PAGE_SIZE, self.items_total - first))
+        cards = "".join(
+            f'<a href="Detail?sn=X{first + index:04d}">活動 {first + index}</a>'
+            for index in range(1, count + 1)
+        )
+        nav: list[str] = []
+        for candidate in _wicket_window(page, self.total, 10):
+            if candidate == page:
+                # 當前頁的頁碼連結被停用（沒有 href）—— 走訪端就是靠這個認出
+                # 「我實際落在第幾頁」，而不是相信自己要求的頁碼。
+                nav.append(f'<a class="page-link" disabled="disabled"><span>{candidate}</span></a>')
+                continue
+            nav.append(
+                f'<a class="page-link" href="./Result?{self.page_id}-1.'
+                f'-fmList-divSearchResult-nav-navigation-{candidate}-pageLink">'
+                f"<span>{candidate}</span></a>"
+            )
+        for arrow in ("next", "last"):
+            nav.append(
+                f'<a href="./Result?{self.page_id}-1.'
+                f'-fmList-divSearchResult-nav-{arrow}"><img/></a>'
+            )
+        return (
+            f"<p>共{self.announced}筆相關結果</p>"
+            f'<div class="list">{cards}</div><ul>{"".join(nav)}</ul>'
+        )
+
+    def _response(self, url: str, text: str) -> Response:
+        return Response(
+            requested_url=url,
+            final_url=url.split("&_=")[0],
+            status_code=200,
+            text=text,
+            content_type="text/html",
+            content_hash=hashlib.sha256(text.encode("utf-8")).hexdigest(),
+        )
+
+    def get(
+        self,
+        url: str,
+        *,
+        data: dict[str, str] | None = None,
+        headers: dict[str, str] | None = None,
+        conditional: bool = True,
+    ) -> Response:
+        self.requested.append(url)
+        target = re.search(r"navigation-(\d+)-pageLink", url)
+        if target or "-nav-last" in url:
+            assert headers is not None, "缺 Wicket 標頭會 403"
+            assert headers.get("Wicket-Ajax") == "true", "缺 Wicket 標頭會 403"
+            assert "-1.0-" in url, "未改寫 behavior id 會讓 Wicket 回 500"
+            self.hops += 1
+            if self._rng.random() < self.stale_probability:
+                self.stale += 1
+                self.page_id += 1
+                return self._response(
+                    url,
+                    "<ajax-response><redirect>"
+                    f"<![CDATA[./Result?{self.page_id}]]></redirect></ajax-response>",
+                )
+            page = self.total if target is None else int(target.group(1))
+            return self._response(url, f"<![CDATA[{self._page_html(page)}]]>")
+        # 入口頁，以及狀態過期後被彈去的新頁面實例 —— 一律是第 1 頁
+        self.page_id += 1
+        return self._response(url, self._page_html(1))
+
+
+@pytest.mark.parametrize("seed", [0, 1, 2, 7, 99])
+def test_wicket_pagination_collects_every_page_despite_state_resets(seed: int) -> None:
+    """核心回歸：一半的翻頁請求被判成狀態過期，收到的筆數仍必須是全部。
+
+    舊版把狀態過期當成「偶發失步」，用「連續幾輪沒有新資料就收手」收尾，於是
+    「走到第幾頁」變成隨機變數 —— 同一份程式碼連跑三次得到 108／117／135 筆，
+    更早還出現過 90／99／153／198。換成不同種子就是換一組失手位置，筆數不該跟著變。
+    """
+    site = WicketSite(seed=seed)
+    warnings: list[str] = []
+    items = read_listing(_wicket_spec(), site, warnings)
+    assert len(items) == 215, f"seed={seed} 少收了分頁"
+    assert len({item.url for item in items}) == 215
+    assert warnings == [], "全部收齊時不該留下警示"
+    assert site.stale > 0, "測試本身沒有重現狀態過期就沒有意義"
+
+
+def test_wicket_pagination_reports_pages_it_could_not_reach() -> None:
+    """走不完必須留下警示。少幾頁的資料比整個來源歸零好，但不可以看起來像全部收完。"""
+    site = WicketSite(stale_probability=1.0)
+    warnings: list[str] = []
+    items = read_listing(_wicket_spec(), site, warnings)
+    assert len(items) == 9, "第 1 頁是完整 GET 拿到的，仍然要留著"
+    assert any("未走訪完整" in message for message in warnings)
+    assert any("215" in message for message in warnings), "要說出官方宣告的總筆數"
+
+
+def test_wicket_bounce_back_is_not_counted_as_the_requested_page() -> None:
+    """狀態過期時伺服器悄悄回第 1 頁 —— 不能把它當成要求的那一頁。
+
+    舊版沒有讀「實際落在第幾頁」，於是把彈回的第 1 頁內容當成目標頁收下並把
+    目標往前推，看起來一路走到底、實際只有前幾頁。
+    """
+    site = WicketSite(total=3, items_total=25, announced=25, stale_probability=1.0)
+    items = read_listing(_wicket_spec(), site, [])
+    detail = "https://cardpromote.example.com/promotion/Detail?sn=X"
+    assert {item.url for item in items} == {f"{detail}{index:04d}" for index in range(1, 10)}
+
+
+def test_wicket_total_pages_follow_the_announced_count() -> None:
+    """總頁數由官方宣告的總筆數推算，不是等分頁連結探索自己停下來。
+
+    頁碼列一次只顯示 10 個頁碼，靠探索永遠看不到第 11 頁以後存在 —— 也順便
+    確認沒有繞遠路：24 頁在「每頁最多兩跳」下不該用掉幾十跳。
+    """
+    site = WicketSite(stale_probability=0.0)
+    items = read_listing(_wicket_spec(), site, [])
+    assert len(items) == 215
+    assert site.hops <= 30, f"用了 {site.hops} 跳，超出『每頁最多兩跳』的預期"
+
+
+def test_wicket_extends_beyond_a_stale_announced_count() -> None:
+    """官方宣告的總筆數過期（活動變多）時，看到更大的頁碼要把目標往上補。
+
+    宣告 125 筆會推算成 14 頁，實際卻有 24 頁。停在推算值會少收 10 頁，而且
+    對帳的分母也是那個過期的數字，於是看起來像「收齊了」—— 這是最難發現的一種漏收。
+    """
+    site = WicketSite(announced=125, stale_probability=0.0)
+    warnings: list[str] = []
+    items = read_listing(_wicket_spec(), site, warnings)
+    assert len(items) == 215, "只走宣告的 14 頁會停在 126 筆"
+    assert warnings == []
+
+
+def test_wicket_window_matches_the_observed_layout() -> None:
+    """實測：第 1 頁看到 1–10、第 10 頁看到 6–15、最後一頁（24）看到 15–24。"""
+    assert list(_wicket_window(1, 24, 10)) == list(range(1, 11))
+    assert list(_wicket_window(6, 24, 10)) == list(range(2, 12))
+    assert list(_wicket_window(10, 24, 10)) == list(range(6, 16))
+    assert list(_wicket_window(24, 24, 10)) == list(range(15, 25))
 
 
 def test_category_codes_fetch_every_category_url() -> None:

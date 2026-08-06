@@ -122,6 +122,43 @@ def test_unreadable_detail_falls_back_to_listing_text() -> None:
     assert len(result.campaigns) == 1
 
 
+def test_incomplete_listing_is_reported_instead_of_looking_complete() -> None:
+    """清單少收了分頁時，不可以長得跟全部收完一樣。
+
+    這一路沒有任何一筆明細會失敗 —— 那些活動根本沒進到清單裡。所以如果清單
+    層級不出聲，輸出上完全看不出來，逐來源覆蓋率退步防護也只會看到筆數變少、
+    判成內容真的減少（實測富邦一次執行只收到 16 頁中的資料）。
+    """
+    from radar.adapters import listing as listing_module
+
+    fetcher = FakeFetcher(
+        pages={
+            LIST_URL: _listing("/promo/1"),
+            "https://www.example.com/promo/1": DETAIL_ONE,
+        }
+    )
+    original = listing_module.READERS["json_api"]
+
+    def truncated(spec, fetch, warnings=None):  # type: ignore[no-untyped-def]
+        if warnings is not None:
+            warnings.append("清單分頁未走訪完整：第 11, 12 頁在 348 次請求內都拿不到")
+        return original(spec, fetch, warnings)
+
+    listing_module.READERS["json_api"] = truncated  # type: ignore[assignment]
+    try:
+        result = run_source(_spec(), fetcher, today=TODAY, now=NOW)
+    finally:
+        listing_module.READERS["json_api"] = original
+
+    assert len(result.campaigns) == 1, "拿到的那一筆仍然要留著"
+    assert result.stats.listing_incomplete == 1
+    assert [alert.type for alert in result.alerts] == ["listing_page_unreadable"]
+    assert "第 11, 12 頁" in result.alerts[0].message
+    assert result.health is not None
+    assert result.health.status == "partial", "少收分頁不可以回報 complete"
+    assert "清單層級缺漏" in result.health.message
+
+
 def test_listing_failure_reports_failed_without_campaigns() -> None:
     fetcher = FakeFetcher(failures={LIST_URL: FetchFailed("連線逾時")})
     result = run_source(_spec(), fetcher, today=TODAY, now=NOW)

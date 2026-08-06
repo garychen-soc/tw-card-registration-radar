@@ -1,7 +1,11 @@
 id = "taipei_fubon"
 bank_name = "台北富邦銀行"
 domains = ["taipeifubon.com.tw", "fubon.com"]
-note = "清單為 Apache Wicket 的 Ajax 分頁，由 pagination_kind = wicket_ajax 處理。"
+note = """清單為 Apache Wicket 的 Ajax 分頁，由 pagination_kind = wicket_ajax 處理。
+清單頁在 Envoy 後面有多個節點、Wicket 的頁面狀態只存在其中一個節點上且沒有 session
+黏著，所以每次翻頁約有一半機會被判成狀態過期（實測單跳 40 次成功 20 次，加延遲無效）。
+必須靠 total_pattern 宣告的總筆數逐頁對帳，否則抓到的筆數每次都不一樣
+（實測同一份程式碼連跑三次得到 108／117／135 筆）。"""
 user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36"
 
 [listing]
@@ -11,6 +15,9 @@ item_selector = "div.discount-card"
 link_pattern = 'href="(Detail\?sn=[A-Za-z0-9]+)"'
 pagination_kind = "wicket_ajax"
 pagination_base = "promotion/Result"
+# 官方在清單頁印「共215筆相關結果」。這是唯一能證明「分頁走完了」的外部依據 ——
+# 沒有它就只能等分頁連結探索自己停下來，而那個停點是隨機的。
+total_pattern = '共\s*(\d+)\s*筆'
 max_pages = 40
 
 [detail]

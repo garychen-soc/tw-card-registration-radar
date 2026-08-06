@@ -64,6 +64,13 @@ class RunStats:
     """伺服器回 304、改用本機存的 HTML 重新推導的次數。"""
     detail_failed: int = 0
     detail_blocked: int = 0
+    listing_incomplete: int = 0
+    """清單層級「已知沒收齊」的次數（例如分頁走不完）。
+
+    刻意與 ``detail_failed`` 分開：明細讀不到只影響那一筆，清單沒收齊是整批
+    活動根本沒進來 —— 使用者看到的收錄範圍會無故縮水，而且沒有任何一筆會失敗，
+    所以不記在這裡就完全看不出來。
+    """
 
     def as_dict(self) -> dict[str, int]:
         return {
@@ -71,6 +78,7 @@ class RunStats:
             "detail_not_modified": self.detail_not_modified,
             "detail_failed": self.detail_failed,
             "detail_blocked": self.detail_blocked,
+            "listing_incomplete": self.listing_incomplete,
         }
 
 
@@ -269,8 +277,9 @@ def run_source(
     moment = now or datetime.now(UTC)
     result = SourceResult()
 
+    listing_warnings: list[str] = []
     try:
-        items = read_listing(spec, fetcher)
+        items = read_listing(spec, fetcher, listing_warnings)
     except BlockedURL as exc:
         result.alerts.append(
             Alert(
@@ -307,6 +316,21 @@ def run_source(
         )
         result.health = _health(spec, "failed", result, str(exc))
         return result
+
+    # 清單層級的缺漏要在這裡就記下來。它不會讓任何一筆明細失敗，所以如果不記，
+    # 「只收到一半的分頁」和「全部收完」在輸出上長得完全一樣，覆蓋率退步防護
+    # 也只會看到筆數變少、判成內容真的減少。
+    for message in listing_warnings:
+        result.stats.listing_incomplete += 1
+        result.alerts.append(
+            Alert(
+                type="listing_page_unreadable",
+                bank_id=spec.id,
+                bank_name=spec.bank_name,
+                message=message,
+                url=spec.listing.entry_url,
+            )
+        )
 
     for item in items:
         campaign = _run_item(spec, fetcher, item, today, moment, pages, result)
@@ -428,7 +452,12 @@ def _status(result: SourceResult, item_count: int) -> str:
             return "blocked"
         return "failed"
     stats = result.stats
-    if stats.detail_failed or stats.detail_blocked or len(result.campaigns) < item_count:
+    if (
+        stats.detail_failed
+        or stats.detail_blocked
+        or stats.listing_incomplete
+        or len(result.campaigns) < item_count
+    ):
         return "partial"
     return "complete"
 
@@ -436,6 +465,8 @@ def _status(result: SourceResult, item_count: int) -> str:
 def _message(result: SourceResult) -> str:
     stats = result.stats
     parts: list[str] = []
+    if stats.listing_incomplete:
+        parts.append(f"{stats.listing_incomplete} 項清單層級缺漏（分頁未走訪完整）")
     if stats.detail_failed:
         parts.append(f"{stats.detail_failed} 筆明細暫時無法讀取")
     if stats.detail_blocked:
