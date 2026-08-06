@@ -164,6 +164,13 @@ class SourceSpec(Strict):
         description="覆寫 User-Agent。只在銀行的防護會擋掉帶專案標識的 UA 時使用，"
         "並須在 note 說明原因 —— 預設一律用可識別的 UA。",
     )
+    runner: Literal["cloud", "self-hosted"] = Field(
+        default="cloud",
+        description="這個來源要在哪個網路位置抓。cloud = GitHub Actions 的 datacenter "
+        "IP；self-hosted = 住宅 IP 的自架 runner。**兩者都有來源只在其中一邊通得過**"
+        "—— 陽信在 datacenter IP 12 種 UA／標頭組合全部 403，元大剛好相反（在 CI 通、"
+        "在住宅 IP 被 403）。所以這不是「自架比較好」，是分流。",
+    )
     timeout_seconds: float = Field(
         default=0.0,
         ge=0.0,

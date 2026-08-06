@@ -111,3 +111,52 @@ IP 封鎖（24 → 0 筆），兩家合計佔全站 1,538 筆的 **3.5%**，卻�
 **transport 加上暫時性故障重試。** 原本完全沒有重試，一次逾時就讓整個來源歸零。
 現在逾時、連線失敗與 5xx 重試 3 次（退避 1s／3s）；403／401／429 明確不重試 ——
 那是「拒絕自動化存取」，重試只會更像攻擊。
+
+## 決定（2026-08-06）：自架 runner 只跑「住宅 IP 才讀得到」的來源
+
+前面的探測把可達性問清楚了，因此 self-hosted 的角色不是「更好的抓取位置」，
+而是**兩個網路位置各有對方讀不到的來源**：
+
+| 來源 | datacenter IP | 住宅 IP |
+|---|---|---|
+| 陽信 | 12 種 UA／標頭組合全部 **403** | 全部 200 |
+| 元大 | 200（57 筆） | **403** |
+| 其餘 15 家 | 200 | 200 |
+
+所以整份搬到自架 runner 會賠掉元大，整份留在雲端會賠掉陽信。**按來源分流。**
+
+### 設計：抓取分流，組裝集中
+
+`spec.runner`（`cloud` / `self-hosted`）宣告每個來源要在哪裡抓。
+`build_site.py` 多兩個旗標：
+
+* `--runner self-hosted --snapshot-out PATH` —— 只抓那批來源，把**原始 Campaign**
+  寫成快照後結束，不產生任何網站檔案。
+* `--runner cloud --snapshot-in PATH` —— 抓其餘來源，合併快照，然後才組裝發布。
+
+刻意存 Campaign 而不是組好的網站檔案：去重要比較整頁的子活動清單、涵蓋率防護要
+看全站筆數，兩者都必須看到**全部**來源才做得對。只有「抓取」需要分流，「組裝」
+一定要集中。
+
+### 自架 runner 離線是預期情況，不是錯誤
+
+那是使用者的機器：關機、睡眠、網路斷線都會讓它沒回報。因此：
+
+* `residential` job 設 `continue-on-error: true`，`scrape` job 設 `if: always()`。
+* 快照缺席時，那批來源以 `failed` 進入來源清單並發出警示 —— **不會從「來源狀態」
+  面板靜默消失**。這是本 ADR 的核心教訓。
+* 陽信佔全站 1.6%，低於 `UNUSABLE_SHARE_LIMIT` 15%，所以它缺席不會擋下其餘來源。
+
+### 安全：公開 repo 上的自架 runner
+
+GitHub 明確警告不要在公開 repo 用自架 runner —— fork 的 PR 可以在使用者的機器上
+執行任意程式。兩道防線：
+
+1. `residential` job 限定 `github.event_name == 'schedule' || 'workflow_dispatch'`。
+   fork 的 PR 觸發的是 `pull_request`，永遠不會排到自架 runner。
+2. 倉庫設定要求「fork PR 需核准才能執行」。公開 repo 沒有 API 可設，必須在
+   Settings → Actions → General → Fork pull request workflows from outside
+   collaborators 手動選 **Require approval for all external contributors**。
+
+runner 本身也應該用專用的 macOS 使用者帳號跑，不要用日常帳號 —— 它會執行
+repo 裡的程式碼。標籤 `tw-card-radar` 讓 job 只排到這台機器。

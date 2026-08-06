@@ -19,6 +19,7 @@ import sys
 from concurrent.futures import ThreadPoolExecutor
 from datetime import UTC, date, datetime
 from pathlib import Path
+from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
@@ -53,20 +54,122 @@ def _load_previous() -> dict[str, object] | None:
     return payload if isinstance(payload, dict) else None
 
 
+
+def _write_snapshot(
+    path: Path,
+    results: list[tuple[SourceSpec, SourceResult, HttpCache]],
+    now: datetime,
+) -> None:
+    """把原始抓取結果寫成快照，供另一個 runner 合併。
+
+    刻意存 Campaign 而不是已組好的網站檔案：解析與去重都要看**全部**來源
+    才能做對（鏡射頁去重要比較整頁清單，涵蓋率防護要看全站筆數），所以
+    「抓取」與「組裝」必須分開，只有抓取需要分流到不同網路位置。
+    """
+    payload = {
+        "generated_at": now.isoformat(),
+        "campaigns": [campaign.model_dump(mode="json") for _, r, _ in results
+                      for campaign in r.campaigns],
+        "health": [r.health.model_dump(mode="json") for _, r, _ in results if r.health],
+        "alerts": [alert.model_dump(mode="json") for _, r, _ in results for alert in r.alerts],
+    }
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
+    for _, result, cache in results:
+        assert result.health is not None
+        for line in describe_source(result.health, result.campaigns):
+            print(line)
+        cache.save()
+    print(f"\n快照寫出 {path}（{len(payload['campaigns'])} 個活動頁）")
+
+
+def _read_snapshot(
+    path: Path | None, delegated: list[SourceSpec], now: datetime
+) -> tuple[list[Campaign], list[SourceHealth], list[Alert]]:
+    """讀入另一個 runner 的快照。缺席時把那批來源記成 failed。
+
+    「缺席」是預期會發生的：自架 runner 是使用者的機器，關機、睡眠、網路斷線
+    都會讓它沒回報。那時其餘來源必須照樣發布（見 guard 的 UNUSABLE_SHARE_LIMIT），
+    但這幾家要在網站的「來源狀態」面板上看得見。
+    """
+    raw: dict[str, Any] | None = None
+    if path is not None and path.exists():
+        try:
+            loaded = json.loads(path.read_text(encoding="utf-8"))
+            raw = loaded if isinstance(loaded, dict) else None
+        except (json.JSONDecodeError, OSError):
+            raw = None
+
+    if raw is None:
+        missing = "、".join(spec.bank_name for spec in delegated)
+        print(f"\n自架 runner 沒有回報，以 failed 記錄：{missing}")
+        return (
+            [],
+            [
+                SourceHealth(
+                    bank_id=spec.id,
+                    bank_name=spec.bank_name,
+                    requested_url=spec.listing.entry_url,
+                    status="failed",
+                    message="自架 runner 未回報（機器離線或該次執行失敗）",
+                )
+                for spec in delegated
+            ],
+            [
+                Alert(
+                    type="source_failed",
+                    bank_id=spec.id,
+                    bank_name=spec.bank_name,
+                    message="自架 runner 未回報，本次沒有這家銀行的資料",
+                )
+                for spec in delegated
+            ],
+        )
+
+    campaigns = [Campaign.model_validate(item) for item in raw.get("campaigns", [])]
+    health = [SourceHealth.model_validate(item) for item in raw.get("health", [])]
+    alerts = [Alert.model_validate(item) for item in raw.get("alerts", [])]
+    return campaigns, health, alerts
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--only", nargs="*", default=None, help="只跑指定的來源 id")
     parser.add_argument("--today", default=date.today().isoformat())
     parser.add_argument("--dry-run", action="store_true", help="不寫任何檔案")
+    parser.add_argument(
+        "--runner",
+        choices=("cloud", "self-hosted", "all"),
+        default="all",
+        help="只跑指定網路位置的來源（見 spec 的 runner 欄位）",
+    )
+    parser.add_argument(
+        "--snapshot-out",
+        default="",
+        help="把本次抓到的原始結果寫成快照後結束，不寫網站檔案。"
+        "用於自架 runner 先抓、雲端 runner 再合併發布。",
+    )
+    parser.add_argument(
+        "--snapshot-in",
+        default="",
+        help="合併另一個網路位置產生的快照。檔案不存在時，那一批來源會以 "
+        "failed 誠實回報（不會從來源清單裡消失）。",
+    )
     args = parser.parse_args()
 
     today = date.fromisoformat(args.today)
     now = datetime.now(UTC)
-    specs = [
+    all_specs = [
         spec
         for spec in load_specs(ROOT / "sources")
         if args.only is None or spec.id in set(args.only)
     ]
+    specs = [
+        spec for spec in all_specs if args.runner == "all" or spec.runner == args.runner
+    ]
+    # 這一批沒跑到、但要合併進來的來源。快照缺席時它們要以 failed 出現在來源清單裡
+    # —— 從清單裡靜默消失比顯示失敗更糟（ADR 0002 的核心教訓）。
+    delegated = [spec for spec in all_specs if spec not in specs]
     if not specs:
         print("沒有符合條件的來源", file=sys.stderr)
         return 1
@@ -95,6 +198,10 @@ def main() -> int:
     alerts: list[Alert] = []
     stats: dict[str, dict[str, int]] = {}
 
+    if args.snapshot_out:
+        _write_snapshot(Path(args.snapshot_out), results, now)
+        return 0
+
     for spec, result, cache in results:
         assert result.health is not None
         campaigns.extend(result.campaigns)
@@ -106,6 +213,16 @@ def main() -> int:
         print(f"  統計 {result.stats.as_dict()}")
         if not args.dry_run:
             cache.save()
+
+    if delegated:
+        merged, merged_health, merged_alerts = _read_snapshot(
+            Path(args.snapshot_in) if args.snapshot_in else None, delegated, now
+        )
+        campaigns.extend(merged)
+        health.extend(merged_health)
+        alerts.extend(merged_alerts)
+        for item in merged_health:
+            print(f"{item.bank_name}（{item.bank_id}）  {item.status}（來自另一個 runner）")
 
     # 去重在 build_index 之前，但 health 保持未去重 —— 涵蓋率防護的比較基準
     # 必須是「這次真的從官方頁讀到幾筆」，否則去重造成的一次性下降會被記成

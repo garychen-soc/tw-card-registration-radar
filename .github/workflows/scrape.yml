@@ -22,7 +22,63 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # 住宅 IP 才讀得到的來源（見各 spec 的 runner 欄位）。目前只有陽信 ——
+  # datacenter IP 對它 12 種 UA／標頭組合全部 403，而元大剛好相反（CI 通、
+  # 住宅 IP 被 403），所以這是分流而不是「自架比較好」。
+  #
+  # **只有 schedule 與 workflow_dispatch 會跑這個 job。** 這是公開 repo，
+  # 自架 runner 是 GitHub 明確警告的風險 —— fork 的 PR 能在使用者的機器上跑
+  # 任意程式。這個 if 是第一道防線，倉庫層的「需要核准才能執行 fork PR」
+  # 設定是第二道（見 docs/adr/0002-scrape-runner.md）。
+  residential:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: [self-hosted, tw-card-radar]
+    timeout-minutes: 20
+    # 機器離線、睡眠或該次失敗都不該擋下其餘 16 家的更新。
+    continue-on-error: true
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: "3.11"
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e '.[dev]'
+
+      - name: Scrape the residential-only sources
+        run: |
+          python scripts/build_site.py \
+            --runner self-hosted \
+            --today "$(TZ=Asia/Taipei date +%F)" \
+            --snapshot-out snapshot/residential.json | tee /tmp/residential.log
+
+      - name: Write run summary
+        if: always()
+        run: |
+          {
+            echo "### 自架 runner（住宅 IP）"
+            echo '```'
+            cat /tmp/residential.log || echo "（沒有輸出）"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload the snapshot
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: residential-snapshot
+          path: snapshot/residential.json
+          retention-days: 1
+          if-no-files-found: error
+
   scrape:
+    needs: residential
+    # 自架 runner 沒回報時照樣發布 —— 那幾家會以 failed 出現在來源狀態面板。
+    if: always()
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
@@ -50,6 +106,15 @@ jobs:
           key: pages-${{ github.run_id }}
           restore-keys: pages-
 
+      # 自架 runner 的快照。下載失敗（機器離線、job 沒跑）不視為錯誤 ——
+      # build_site.py 會把那批來源記成 failed 並繼續。
+      - name: Download the residential snapshot
+        continue-on-error: true
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: residential-snapshot
+          path: snapshot
+
       - name: Scrape and build data
         id: scrape
         env:
@@ -58,7 +123,11 @@ jobs:
           set +e
           # --only 只跑部分來源，產出的 index.json 只含那些來源 ——
           # 提交它會把其餘來源的資料從網站上抹掉。因此 only 模式強制 --dry-run。
-          ARGS=(--today "$(TZ=Asia/Taipei date +%F)")
+          ARGS=(
+            --today "$(TZ=Asia/Taipei date +%F)"
+            --runner cloud
+            --snapshot-in snapshot/residential.json
+          )
           if [ -n "$ONLY" ]; then
             # shellcheck disable=SC2206
             ARGS+=(--only $ONLY --dry-run)

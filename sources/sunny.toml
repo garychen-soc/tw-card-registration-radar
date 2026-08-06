@@ -1,6 +1,8 @@
 id = "sunny"
 bank_name = "陽信銀行"
 domains = ["sunnybank.com.tw"]
+# 只在住宅 IP 讀得到 —— datacenter IP 的 12 種 UA／標頭組合全部 403。
+runner = "self-hosted"
 note = """頁上沒有逐活動網址（只有選單連結），活動內容全在索引頁上，用 single_page。
 
 **封鎖看的是 IP，不是 User-Agent —— 已用 12 種組合的矩陣證偽。**
