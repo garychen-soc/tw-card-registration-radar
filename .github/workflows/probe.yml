@@ -1,0 +1,42 @@
+# 診斷用：在 Actions runner 的 IP 上試一組 User-Agent 與標頭組合。
+#
+# 為什麼要有這個 workflow：本專案有三次「本機通、CI 被擋」或反過來的情形，
+# 這類問題本機重現不了，而每個假設各開一次 Scrape 執行太貴（一次只驗一個假設）。
+# 這支把整個矩陣壓進一次執行。
+#
+# 只能手動觸發，不排程、不寫檔、不提交、不部署。
+name: Probe
+
+on:
+  workflow_dispatch:
+    inputs:
+      source:
+        description: 要探測的來源 id（例如 sunny）
+        required: true
+        default: sunny
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: "3.11"
+
+      - run: pip install --disable-pip-version-check httpx selectolax pydantic
+
+      - name: Probe from the runner's IP
+        run: |
+          python scripts/probe_source.py "${{ inputs.source }}" | tee probe.txt
+          {
+            echo "## UA／標頭探測：${{ inputs.source }}"
+            echo '```'
+            cat probe.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
