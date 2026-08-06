@@ -36,7 +36,7 @@ from radar.pagestore import PageStore  # noqa: E402
 from radar.report import describe_source  # noqa: E402
 from radar.runner import SourceResult, run_source  # noqa: E402
 from radar.spec import SourceSpec, load_specs  # noqa: E402
-from radar.transport import Fetcher, HttpCache  # noqa: E402
+from radar.transport import DEFAULT_TIMEOUT, Fetcher, HttpCache  # noqa: E402
 
 SITE = ROOT / "web" / "public"
 INDEX_PATH = SITE / "data" / "index.json"
@@ -77,7 +77,12 @@ def main() -> int:
     def run_one(spec: SourceSpec) -> tuple[SourceSpec, SourceResult, HttpCache]:
         # 每家銀行各自的 HttpCache，避免平行執行時共寫同一個檔案。
         cache = HttpCache.load(ROOT / "var" / "http" / f"{spec.id}.json")
-        with Fetcher(spec.domains, cache=cache, user_agent=spec.user_agent or None) as fetcher:
+        with Fetcher(
+            spec.domains,
+            cache=cache,
+            user_agent=spec.user_agent or None,
+            timeout=spec.timeout_seconds or DEFAULT_TIMEOUT,
+        ) as fetcher:
             return spec, run_source(spec, fetcher, today=today, now=now, pages=pages), cache
 
     # 按銀行平行執行。不同銀行是不同主機，per-host 節流仍然成立，

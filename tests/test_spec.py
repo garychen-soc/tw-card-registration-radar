@@ -7,7 +7,10 @@ from pathlib import Path
 import pytest
 from pydantic import ValidationError
 
-from radar.spec import load_spec, load_specs
+from radar.spec import SourceSpec, load_spec, load_specs
+
+BASE = {"id": "demo", "bank_name": "示範銀行", "domains": ["example.com"]}
+URL = "https://www.example.com/list"
 
 SOURCES = Path(__file__).resolve().parents[1] / "sources"
 
@@ -136,3 +139,35 @@ data_url = "https://www.example.com/list.json"
     (tmp_path / "b.toml").write_text(body, encoding="utf-8")
     with pytest.raises(ValueError, match="重複的來源 id"):
         load_specs(tmp_path)
+
+
+def test_timeout_override_is_bounded() -> None:
+    """逐來源逾時可覆寫，但有上限 —— 逾時不是用來遮蓋封鎖的。
+
+    實測華南從 Actions runner 讀入口頁平均 15 秒（本機 0.8–1.9 秒），預設 25 秒
+    的餘裕太小；被拒絕存取則會是 403（陽信 12/12 組合皆 403），是另一回事。
+    """
+    spec = SourceSpec.model_validate(
+        {
+            **BASE,
+            "timeout_seconds": 90.0,
+            "listing": {"kind": "single_page", "entry_url": URL},
+        }
+    )
+    assert spec.timeout_seconds == 90.0
+
+    with pytest.raises(ValidationError):
+        SourceSpec.model_validate(
+            {
+                **BASE,
+                "timeout_seconds": 600.0,
+                "listing": {"kind": "single_page", "entry_url": URL},
+            }
+        )
+
+
+def test_timeout_defaults_to_zero_meaning_project_default() -> None:
+    spec = SourceSpec.model_validate(
+        {**BASE, "listing": {"kind": "single_page", "entry_url": URL}}
+    )
+    assert spec.timeout_seconds == 0.0

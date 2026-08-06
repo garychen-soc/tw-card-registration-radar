@@ -164,6 +164,14 @@ class SourceSpec(Strict):
         description="覆寫 User-Agent。只在銀行的防護會擋掉帶專案標識的 UA 時使用，"
         "並須在 note 說明原因 —— 預設一律用可識別的 UA。",
     )
+    timeout_seconds: float = Field(
+        default=0.0,
+        ge=0.0,
+        le=180.0,
+        description="覆寫單次請求的逾時秒數（0 = 用預設 25 秒）。只在來源本身"
+        "真的很慢時使用，並須在 note 寫出實測秒數 —— 這不是用來遮蓋封鎖的，"
+        "被拒絕存取會是 403 而不是逾時。",
+    )
     listing: ListingSpec
     detail: DetailSpec = Field(default_factory=DetailSpec)
     registration: RegistrationSpec = Field(default_factory=RegistrationSpec)

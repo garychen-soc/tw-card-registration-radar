@@ -192,6 +192,7 @@ class HttpCache:
 #
 # 只重試逾時、連線失敗與 5xx。403／401／429 明確不重試 —— 那是「拒絕自動化
 # 存取」，重試只會更像攻擊（見 AccessDenied 的註解）。
+DEFAULT_TIMEOUT = 25.0
 RETRY_ATTEMPTS = 3
 RETRY_BACKOFF_SECONDS = (1.0, 3.0)
 RETRY_STATUS = frozenset({500, 502, 503, 504})
@@ -205,7 +206,7 @@ class Fetcher:
         allowed_domains: list[str],
         *,
         cache: HttpCache | None = None,
-        timeout: float = 25.0,
+        timeout: float = DEFAULT_TIMEOUT,
         min_host_interval: float = MIN_HOST_INTERVAL,
         user_agent: str | None = None,
     ) -> None:
