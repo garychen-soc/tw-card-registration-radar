@@ -30,8 +30,14 @@ jobs:
   # 自架 runner 是 GitHub 明確警告的風險 —— fork 的 PR 能在使用者的機器上跑
   # 任意程式。這個 if 是第一道防線，倉庫層的「需要核准才能執行 fork PR」
   # 設定是第二道（見 docs/adr/0002-scrape-runner.md）。
+  # **預設關閉。** 要啟用就到 Settings → Secrets and variables → Actions →
+  # Variables 新增 SELF_HOSTED_RUNNER=true。沒有這個變數時整個 job 被跳過，
+  # scrape 不會等一個沒在跑的 runner —— self-hosted job 一旦排隊就會一直等到
+  # 有機器接手，而 timeout-minutes 只從「開始執行」才算，卡住的是後面的 scrape。
   residential:
-    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    if: >-
+      vars.SELF_HOSTED_RUNNER == 'true' &&
+      (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')
     runs-on: [self-hosted, tw-card-radar]
     timeout-minutes: 20
     # 機器離線、睡眠或該次失敗都不該擋下其餘 16 家的更新。

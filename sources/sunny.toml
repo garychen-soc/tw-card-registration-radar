@@ -2,7 +2,14 @@ id = "sunny"
 bank_name = "陽信銀行"
 domains = ["sunnybank.com.tw"]
 # 只在住宅 IP 讀得到 —— datacenter IP 的 12 種 UA／標頭組合全部 403。
-runner = "self-hosted"
+#
+# 目前仍設 cloud，因為自架 runner 還沒常駐。維持 cloud 時它會誠實顯示為
+# blocked（那是真實狀態）；改成 self-hosted 而 runner 沒跑，訊息會變成
+# 「自架 runner 未回報」—— 那是錯的描述。
+#
+# 啟用自架 runner 的兩個動作：這行改成 "self-hosted"，並在倉庫
+# Variables 設 SELF_HOSTED_RUNNER=true。分流機制與離線降級都已實作並測過。
+runner = "cloud"
 note = """頁上沒有逐活動網址（只有選單連結），活動內容全在索引頁上，用 single_page。
 
 **封鎖看的是 IP，不是 User-Agent —— 已用 12 種組合的矩陣證偽。**
