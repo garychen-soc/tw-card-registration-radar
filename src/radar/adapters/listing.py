@@ -13,7 +13,7 @@ import hashlib
 import json
 import re
 import time
-from collections.abc import Iterator
+from collections.abc import Callable, Iterator
 from dataclasses import dataclass, field
 from datetime import date
 from typing import Any, Protocol
@@ -144,7 +144,9 @@ def _as_date(value: Any) -> date | None:
     return None
 
 
-def read_json_api(spec: SourceSpec, fetcher: Fetch) -> list[ListingItem]:
+def read_json_api(
+    spec: SourceSpec, fetcher: Fetch, warnings: list[str] | None = None
+) -> list[ListingItem]:
     listing = spec.listing
     response = fetcher.get(listing.data_url, conditional=LISTING_CONDITIONAL)
     payload = response.json()
@@ -261,25 +263,102 @@ def _block_title(block_html: str, block_text: str) -> str:
     return block_text[:120]
 
 
-# Wicket 的分頁連結長成 `?0-1.-fmList-...-navigation-2-pageLink`，直接 GET 會 500。
-# 必須把 `<版本>-1.-` 改寫成 `<版本>-1.0-`（補上 behavior id），並附 Wicket 標頭。
+# Wicket 的分頁連結長成 `?<pageId>-<renderCount>.-fmList-...-navigation-2-pageLink`，
+# 直接 GET 會 500。必須把 `<版本>.-` 改寫成 `<版本>.0-`（補上 behavior id），並附 Wicket 標頭。
 _WICKET_PAGE_LINK = re.compile(
     r'<a[^>]+href="([^"]*-nav-navigation-\d+-pageLink)"[^>]*>(.*?)</a>', re.I | re.S
 )
-_WICKET_VERSION = re.compile(r"(\d+-1)\.-")
+# 「跳到最後一頁」。它是唯一能一跳抵達尾端的連結，因此也是問伺服器「究竟有幾頁」
+# 最省請求的方式 —— 落地後看停用的頁碼就知道總頁數。
+_WICKET_TAIL_LINK = re.compile(r'<a[^>]+href="([^"]*-nav-last)"', re.I)
+_WICKET_ANCHOR = re.compile(r"<a\b([^>]*)>(.*?)</a>", re.I | re.S)
+# 版本號寫成 `(\d+-\d+)` 而不是 `(\d+-1)`：renderCount 不保證永遠是 1，寫死 1 時
+# 只要伺服器換了 renderCount，改寫就整批失效、每一頁都回 500 而且看起來像「沒有分頁」。
+_WICKET_VERSION = re.compile(r"(\d+-\d+)\.-")
 _WICKET_REDIRECT = re.compile(r"<redirect>\s*<!\[CDATA\[(.*?)\]\]>\s*</redirect>", re.I | re.S)
+_WICKET_HEADERS = {
+    "Accept": "application/xml, text/xml, */*; q=0.01",
+    "Cache-Control": "no-cache",
+    "Wicket-Ajax": "true",
+    "X-Requested-With": "XMLHttpRequest",
+}
+
+
+def _strip_tags(html: str) -> str:
+    return re.sub(r"<[^>]+>", "", html).strip()
 
 
 def _wicket_page_links(html: str, base_url: str) -> dict[int, str]:
     """回傳 {可見頁碼: 連結}。只收標籤是數字的 —— 上一頁／下一頁的箭頭不是頁碼。"""
     links: dict[int, str] = {}
     for match in _WICKET_PAGE_LINK.finditer(html):
-        label = re.sub(r"<[^>]+>", "", match.group(2)).strip()
+        label = _strip_tags(match.group(2))
         if not label.isdigit():
             continue
         href = _WICKET_VERSION.sub(r"\1.0-", match.group(1))
         links[int(label)] = urljoin(base_url, href)
     return links
+
+
+def _wicket_tail_link(html: str, base_url: str) -> str | None:
+    match = _WICKET_TAIL_LINK.search(html)
+    if not match:
+        return None
+    return urljoin(base_url, _WICKET_VERSION.sub(r"\1.0-", match.group(1)))
+
+
+def _wicket_current_page(html: str, links: dict[int, str]) -> int | None:
+    """目前實際所在的頁碼 —— Wicket 把當前頁的頁碼連結停用（沒有 href）。
+
+    非得看實際落地頁碼不可：伺服器把頁面狀態判為過期時會悄悄把你送回第 1 頁，
+    若拿「我要求的頁碼」當落地頁碼，就會把第 1 頁的九筆當成第 7 頁收下，
+    然後以為已經收完。這正是舊版每次跑出不同筆數的其中一個環節。
+
+    用可見頁碼區間當守門員，避免頁面別處的無連結數字（頁尾電話、樓層）被誤認。
+    """
+    low = min(links) - 1 if links else 1
+    high = max(links) + 1 if links else 1
+    for match in _WICKET_ANCHOR.finditer(html):
+        attrs, inner = match.group(1), match.group(2)
+        if "href=" in attrs.lower():
+            continue
+        label = _strip_tags(inner)
+        if not label.isdigit():
+            continue
+        page = int(label)
+        if page not in links and low <= page <= high:
+            return page
+    return None
+
+
+def _wicket_window(page: int, total: int, view: int) -> range:
+    """站在 ``page`` 時頁碼列會顯示哪些頁碼。
+
+    Wicket 的頁碼列寬度固定（實測 view=10）、位置隨當前頁移動，兩端夾住：
+    第 1 頁看到 1–10、第 10 頁看到 6–15、最後一頁（24）看到 15–24，也就是
+    ``[page-4, page+5]`` 夾在 ``[1, total]`` 內。知道這條規則才能算出
+    「該點哪一頁，下一跳就能直接點到目標頁」。
+    """
+    offset = max(0, view // 2 - 1)
+    start = min(max(page - offset, 1), max(1, total - view + 1))
+    return range(start, min(total, start + view - 1) + 1)
+
+
+def _wicket_next_hop(
+    links: dict[int, str], remaining: set[int], current: int, total: int, view: int
+) -> int:
+    """挑下一個要點的頁碼。
+
+    能直接點到還沒收的頁就直接點；否則點一個「點下去之後頁碼列會涵蓋目標頁」的
+    頁碼。有了「跳到最後一頁」當墊腳石，實測 24 頁的清單裡任何一頁都在兩跳內可達
+    （2–10 從第 1 頁一跳、24 用 last 一跳、11–15 經第 10 頁、15–23 經第 24 頁）。
+    """
+    direct = remaining & links.keys()
+    if direct:
+        return min(direct, key=lambda page: (abs(page - current), page))
+    want = min(remaining, key=lambda page: (abs(page - current), page))
+    covering = [page for page in links if want in _wicket_window(page, total, view)]
+    return min(covering or list(links), key=lambda page: (abs(page - want), page))
 
 
 def _unwrap_cdata(body: str) -> str:
@@ -288,114 +367,142 @@ def _unwrap_cdata(body: str) -> str:
     return body.replace("<![CDATA[", "").replace("]]>", "")
 
 
+# 一次完整走訪（24 頁）實測用掉 62／105／121／166 次請求。預算給到每頁 12 次
+# 再加 60，是把「連續失手」的長尾也蓋進去 —— 觸到上限代表真的走不完，會留警示。
+WICKET_REQUEST_BUDGET_PER_PAGE = 12
+WICKET_REQUEST_BUDGET_BASE = 60
+
+
 def _read_wicket_pages(
-    listing: ListingSpec, fetcher: Fetch, first_html: str, first_url: str
+    listing: ListingSpec,
+    fetcher: Fetch,
+    first_html: str,
+    first_url: str,
+    warnings: list[str],
 ) -> list[ListingItem]:
-    """跟隨 Apache Wicket 的 Ajax 分頁。
+    """跟隨 Apache Wicket 的 Ajax 分頁，並且對帳到官方宣告的總筆數。
 
     兩個非顯而易見的必要條件（都是實測出來的）：
 
-    * 分頁連結要把 ``<版本>-1.-`` 改寫成 ``<版本>-1.0-``，否則回 500。
+    * 分頁連結要把 ``<版本>.-`` 改寫成 ``<版本>.0-``，否則回 500。
     * 要帶 ``Accept``、``Referer``、``Wicket-Ajax`` 等標頭，否則回 403。
 
-    還有兩個結構問題：
+    **為什麼不能照著頁碼一路往下走。** 富邦的清單頁在 Envoy 後面有多個節點
+    （失敗回應帶 ``x-envoy-upstream-service-time``），而 Wicket 的頁面狀態存在
+    處理該次 render 的那一個節點上，且沒有 session 黏著。於是每一次 Ajax 翻頁
+    都是獨立的擲硬幣：實測固定條件下單跳 40 次只成功 20 次，而且**加延遲沒有用**
+    （延遲 0／0.5／1／2／4 秒各試 8 次，成功 6／3／4／5／2）。沒中的那一半，
+    伺服器回一個 redirect 把你送回第 1 頁的新頁面實例。
 
-    * 頁碼列只顯示一個視窗（例如 1–10），想到第 15 頁必須先點視窗內最大的
-      頁碼讓視窗往前移，再繼續 —— 找不到目標頁碼時退而點擊可見的最大頁碼。
-    * 伺服器的頁面狀態會失步，這時 Ajax 回應變成一個彈回第 1 頁的 redirect
-      （實測第 3 次翻頁起就會發生）。此時不能直接放棄 —— 跟隨 redirect 取得
-      新的完整頁面後從那裡重走，容忍連續數輪沒有新資料才收手。
+    舊版把這件事當成「偶發失步」，用「連續 N 輪沒有新資料就收手」收尾，於是
+    「走到第幾頁」變成一個隨機變數 —— 同一份程式碼連跑三次得到 108／117／135 筆，
+    更早還出現過 90／99／153／198。取三次的最大值只是把平均值拉高，變異還在，
+    逐來源覆蓋率退步防護照樣誤擋。
+
+    **改成以「頁碼集合」為目標，逐頁對帳。** 總頁數由官方宣告的總筆數推算
+    （``total_pattern``，富邦頁面印「共215筆相關結果」，9 筆／頁 → 24 頁），
+    每一頁都留在 ``remaining`` 裡直到真的收到。失手就跟隨 redirect 回到第 1 頁
+    重新起跳，不放棄任何一頁。實測連跑四次都拿到 215 筆、0 頁未走訪。
+
+    走不完時（預算用盡）在 ``warnings`` 留下訊息，由 runner 轉成
+    ``listing_page_unreadable`` 警示並讓來源健康度變成 partial —— 不可以看起來
+    像全部收錄成功。
     """
     items = _items_from_html(listing, first_html, first_url)
     seen = {item.url for item in items}
-    html, url, referer = first_html, first_url, first_url
-    target = 2
-    attempts = 0
-    stale_rounds = 0
-    max_attempts = listing.max_pages * 3
-    max_stale_rounds = 4
+    page_size = len(items)
+    announced = _wicket_announced_total(listing, first_html)
+    total = _page_count(listing, first_html, page_size)
+    view = max(_wicket_page_links(first_html, first_url), default=1)
+    total = max(total, view)
 
-    while target <= listing.max_pages and attempts < max_attempts:
-        attempts += 1
+    remaining = set(range(2, total + 1))
+    html, url, current = first_html, first_url, 1
+    used = 0
+    budget = WICKET_REQUEST_BUDGET_PER_PAGE * total + WICKET_REQUEST_BUDGET_BASE
+
+    while remaining and used < budget:
         links = _wicket_page_links(html, url)
-        requested = target
-        chosen = links.get(target)
-        if chosen is None:
-            lower = [page for page in links if page < target]
-            if not lower:
-                break
-            requested = max(lower)
-            chosen = links[requested]
-            if requested < 2:
-                break
-
-        headers = {
-            "Accept": "application/xml, text/xml, */*; q=0.01",
-            "Cache-Control": "no-cache",
-            "Referer": referer,
-            "Wicket-Ajax": "true",
-            "Wicket-Ajax-BaseURL": listing.pagination_base or "",
-            "X-Requested-With": "XMLHttpRequest",
-        }
-        buster = f"{'&' if '?' in chosen else '?'}_={int(time.time() * 1000) + attempts}"
+        tail = _wicket_tail_link(html, url)
+        if tail is not None and total not in links:
+            # 把「跳到最後一頁」當成通往 total 的連結。它同時是總頁數的權威來源：
+            # 落地後讀到的頁碼若超出推算值，下面會把 total 往上補。
+            links[total] = tail
+        if not links:
+            break
+        target = _wicket_next_hop(links, remaining, current, total, view)
+        used += 1
         try:
-            response = fetcher.get(f"{chosen}{buster}", headers=headers, conditional=False)
+            response = fetcher.get(
+                _cache_busted(links[target]),
+                headers={
+                    **_WICKET_HEADERS,
+                    "Referer": url,
+                    "Wicket-Ajax-BaseURL": listing.pagination_base or "",
+                },
+                conditional=False,
+            )
         except TransportError:
-            break  # 少幾頁的資料比整個來源歸零好
-        body, final = _unwrap_cdata(response.text), response.final_url
-
+            break  # 少幾頁的資料比整個來源歸零好；下面會留下警示
         redirect = _WICKET_REDIRECT.search(response.text)
-        if redirect:
+        if redirect is None:
+            html, url = _unwrap_cdata(response.text), response.final_url
+        else:
+            used += 1
             try:
-                followed = fetcher.get(urljoin(final, redirect.group(1).strip()), conditional=False)
+                followed = fetcher.get(
+                    urljoin(response.final_url, redirect.group(1).strip()), conditional=False
+                )
             except TransportError:
                 break
-            body, final = followed.text, followed.final_url
+            html, url = followed.text, followed.final_url
 
-        fresh = [item for item in _items_from_html(listing, body, final) if item.url not in seen]
-        for item in fresh:
-            seen.add(item.url)
-        items.extend(fresh)
-        html, url, referer = body, final, final
-        if fresh:
-            stale_rounds = 0
-        else:
-            stale_rounds += 1
-            if stale_rounds >= max_stale_rounds:
-                break
-        if requested == target and fresh:
-            target += 1
+        links = _wicket_page_links(html, url)
+        current = _wicket_current_page(html, links) or (1 if redirect else target)
+        for item in _items_from_html(listing, html, url):
+            if item.url not in seen:
+                seen.add(item.url)
+                items.append(item)
+        # 官方新增活動、或宣告的總筆數過期時，實際頁數會比推算的多。看到更大的
+        # 頁碼就把目標往上補 —— 否則會停在推算值，看起來像「收完了」。
+        # 先補再把落地頁移出待辦，否則剛收到的那一頁會被補回待辦、白跑一趟。
+        highest = min(max(links, default=0), listing.max_pages)
+        if highest > total:
+            remaining.update(range(total + 1, highest + 1))
+            total = highest
+            budget = WICKET_REQUEST_BUDGET_PER_PAGE * total + WICKET_REQUEST_BUDGET_BASE
+        remaining.discard(current)
+
+    if remaining:
+        pages = ", ".join(str(page) for page in sorted(remaining)[:12])
+        warnings.append(
+            f"清單分頁未走訪完整：第 {pages} 頁在 {used} 次請求內都拿不到"
+            "（Wicket 頁面狀態不在同一個後端節點上，每次翻頁約一半機會失手）"
+        )
+    if announced and len(items) < announced:
+        warnings.append(f"官方清單宣告共 {announced} 筆，實際只取得 {len(items)} 筆")
+    if total >= listing.max_pages:
+        warnings.append(f"清單頁數已達 max_pages={listing.max_pages} 上限，可能還有後續分頁")
     return items
 
 
-WICKET_ATTEMPTS = 3
+def _wicket_announced_total(listing: ListingSpec, html: str) -> int:
+    """官方自己印在頁面上的總筆數。唯一能證明「收完了」的外部依據。"""
+    if not listing.total_pattern:
+        return 0
+    match = re.search(listing.total_pattern, html, re.I)
+    return int(match.group(1)) if match else 0
 
 
-def _best_wicket_run(
-    listing: ListingSpec, fetcher: Fetch, entry_url: str, first: Response
+def _cache_busted(url: str) -> str:
+    return f"{url}{'&' if '?' in url else '?'}_={int(time.time() * 1000)}"
+
+
+def read_html_list(
+    spec: SourceSpec, fetcher: Fetch, warnings: list[str] | None = None
 ) -> list[ListingItem]:
-    """重跑 Wicket 分頁數次並取最多的一次。
-
-    伺服器的頁面狀態不穩定，同一份 spec 在不同執行中拿到的筆數差很多
-    （實測 9／54／90／117／45）。這種變異會讓逐來源覆蓋率回歸的防護不停誤擋 ——
-    正確的處理是降低來源端的變異，而不是放寬防護門檻。
-
-    代價是最多 3 倍的分頁請求。只對宣告 wicket_ajax 的來源生效。
-    """
-    best = _read_wicket_pages(listing, fetcher, first.text, first.final_url)
-    for _ in range(WICKET_ATTEMPTS - 1):
-        try:
-            retry = fetcher.get(entry_url, conditional=False)
-        except TransportError:
-            break
-        found = _read_wicket_pages(listing, fetcher, retry.text, retry.final_url)
-        if len(found) > len(best):
-            best = found
-    return best
-
-
-def read_html_list(spec: SourceSpec, fetcher: Fetch) -> list[ListingItem]:
     listing = spec.listing
+    notes = warnings if warnings is not None else []
     # 分類清單：逐一請求每個分類的網址（台新分 A–I 九類）
     urls = (
         [listing.url_template.format(category=code) for code in listing.category_codes]
@@ -412,7 +519,7 @@ def read_html_list(spec: SourceSpec, fetcher: Fetch) -> list[ListingItem]:
                 raise
             continue  # 單一分類失敗不讓整個來源歸零
         if listing.pagination_kind == "wicket_ajax":
-            found = _best_wicket_run(listing, fetcher, url, response)
+            found = _read_wicket_pages(listing, fetcher, response.text, response.final_url, notes)
         else:
             found = _items_from_html(listing, response.text, response.final_url)
         for item in found:
@@ -425,7 +532,9 @@ def read_html_list(spec: SourceSpec, fetcher: Fetch) -> list[ListingItem]:
 _HIDDEN_INPUT = r'name="{name}"[^>]*value="(\d+)"'
 
 
-def read_form_paged(spec: SourceSpec, fetcher: Fetch) -> list[ListingItem]:
+def read_form_paged(
+    spec: SourceSpec, fetcher: Fetch, warnings: list[str] | None = None
+) -> list[ListingItem]:
     """需要表單狀態才能翻頁的清單。
 
     涵蓋兩種實測到的形態：
@@ -498,7 +607,9 @@ def _page_count(listing: ListingSpec, html: str, items_on_first_page: int) -> in
     return 1
 
 
-def read_single_page(spec: SourceSpec, fetcher: Fetch) -> list[ListingItem]:
+def read_single_page(
+    spec: SourceSpec, fetcher: Fetch, warnings: list[str] | None = None
+) -> list[ListingItem]:
     """入口頁本身就是唯一的活動頁。
 
     中信的 LINE Pay 優惠頁一頁 14 個活動，頁上的連結全指向 ``line.me``
@@ -510,7 +621,11 @@ def read_single_page(spec: SourceSpec, fetcher: Fetch) -> list[ListingItem]:
     return [ListingItem(url=spec.listing.entry_url, title=spec.bank_name)]
 
 
-READERS = {
+# 第三個參數是「清單層級的問題」的出口。清單讀取只回 items 時，「有幾頁根本沒讀到」
+# 這件事沒有地方可以說，於是少收一半的資料看起來和全部收完一模一樣。
+Reader = Callable[[SourceSpec, Fetch, list[str] | None], list[ListingItem]]
+
+READERS: dict[str, Reader] = {
     "json_api": read_json_api,
     "html_list": read_html_list,
     "form_paged": read_form_paged,
@@ -518,5 +633,7 @@ READERS = {
 }
 
 
-def read_listing(spec: SourceSpec, fetcher: Fetch) -> list[ListingItem]:
-    return READERS[spec.listing.kind](spec, fetcher)
+def read_listing(
+    spec: SourceSpec, fetcher: Fetch, warnings: list[str] | None = None
+) -> list[ListingItem]:
+    return READERS[spec.listing.kind](spec, fetcher, warnings)
