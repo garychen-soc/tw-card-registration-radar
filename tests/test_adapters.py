@@ -333,3 +333,100 @@ def test_category_codes_fetch_every_category_url() -> None:
     )
     items = read_listing(spec, fetcher)
     assert {item.url.rsplit("_", 1)[1] for item in items} == {"1", "3"}
+
+
+def test_json_api_walks_categories_and_pages() -> None:
+    """逐分類 POST + 逐頁。第一銀行的活動只存在於 JS 打的 REST 端點上 ——
+    入口頁 372KB HTML 只有約 950 字純文字、0 個日期。"""
+
+    class ApiFetcher(FakeFetcher):
+        def get(self, url, *, data=None, headers=None, conditional=True):  # type: ignore[no-untyped-def]
+            assert data is not None
+            self.posted.append((url, dict(data)))
+            key = (data["categoryIdList"], int(data["pageNumberSel"]))
+            rows = {("A", 1): ["a1", "a2"], ("A", 2): ["a3"], ("B", 1): ["b1"]}.get(key, [])
+            body = json.dumps({"activityListData": [{"u": f"/p/{r}", "t": r} for r in rows]})
+            self.pages[url] = body
+            return super().get(url, conditional=False)
+
+    spec = _spec(
+        {
+            "kind": "json_api",
+            "entry_url": "https://www.example.com/list",
+            "data_url": "https://www.example.com/api",
+            "items_path": ["activityListData"],
+            "category_codes": ["A", "B"],
+            "max_pages": 5,
+            "form_data": {"categoryIdList": "{category}"},
+            "form_fields": {"page": "pageNumberSel"},
+            "fields": {"url": "u", "title": "t"},
+        }
+    )
+    fetcher = ApiFetcher()
+    items = read_listing(spec, fetcher)
+
+    assert [item.title for item in items] == ["a1", "a2", "a3", "b1"]
+    assert items[0].url == "https://www.example.com/p/a1"
+    # A 類第 3 頁回空就停，不會一路打到 max_pages
+    assert [
+        (payload["categoryIdList"], payload["pageNumberSel"]) for _, payload in fetcher.posted
+    ] == [("A", "1"), ("A", "2"), ("A", "3"), ("B", "1"), ("B", "2")]
+
+
+def test_json_api_stops_when_a_page_repeats_itself() -> None:
+    """端點忽略頁碼、每頁回同一批時必須停。
+
+    實測第一銀行若把所有分類代碼併成一次請求就是這個行為 —— 照分頁器公告的
+    總頁數走會無限拿到重複資料。
+    """
+
+    class StuckFetcher(FakeFetcher):
+        def get(self, url, *, data=None, headers=None, conditional=True):  # type: ignore[no-untyped-def]
+            assert data is not None
+            self.posted.append((url, dict(data)))
+            self.pages[url] = json.dumps(
+                {"activityListData": [{"u": "/p/same", "t": "same"}]}
+            )
+            return super().get(url, conditional=False)
+
+    spec = _spec(
+        {
+            "kind": "json_api",
+            "entry_url": "https://www.example.com/list",
+            "data_url": "https://www.example.com/api",
+            "items_path": ["activityListData"],
+            "max_pages": 99,
+            "form_data": {"q": "x"},
+            "form_fields": {"page": "pageNumberSel"},
+            "fields": {"url": "u", "title": "t"},
+        }
+    )
+    fetcher = StuckFetcher()
+    items = read_listing(spec, fetcher)
+
+    assert len(items) == 1
+    assert [payload["pageNumberSel"] for _, payload in fetcher.posted] == ["1", "2"]
+
+
+def test_listing_scope_restricts_links_to_one_tab_panel() -> None:
+    """華南一頁裡有存款、貸款、保險等多個分頁，不限縮會收到別業務的連結。"""
+    html = """
+    <a aria-label="信用卡" aria-controls="panel-card" href="#">信用卡</a>
+    <a aria-label="貸款" aria-controls="panel-loan" href="#">貸款</a>
+    <div id="panel-card">
+      <a href="/wps/card/a" title="連結至卡片活動A">x</a>
+      <a href="/wps/card/b" title="另開視窗連結至卡片活動B">x</a>
+    </div>
+    <div id="panel-loan"><a href="/wps/loan/c" title="連結至貸款活動C">x</a></div>
+    """
+    spec = _spec(
+        {
+            "kind": "html_list",
+            "entry_url": "https://www.example.com/list",
+            "scope_tab_label": "信用卡",
+            "link_pattern": r'<a\s+href="(/wps/[^"]+)"[^>]*?title="(?:另開視窗)?連結至([^"]+)"',
+        }
+    )
+    items = read_listing(spec, FakeFetcher(pages={"https://www.example.com/list": html}))
+
+    assert [item.title for item in items] == ["卡片活動A", "卡片活動B"]

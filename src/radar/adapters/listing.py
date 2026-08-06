@@ -21,6 +21,7 @@ from urllib.parse import urljoin
 
 from selectolax.parser import HTMLParser
 
+from ..htmltext import scope_html
 from ..parse.datetimes import find_date_range
 from ..parse.normalize import normalize_inline
 from ..spec import ListingSpec, SourceSpec
@@ -135,7 +136,8 @@ def _as_date(value: Any) -> date | None:
             return date.fromisoformat(candidate)
         except ValueError:
             continue
-    match = re.search(r"(\d{4})[/-](\d{1,2})[/-](\d{1,2})", text)
+    # 允許 `.` 分隔 —— 第一銀行的 activityDate 寫成 "2026.8.1-2026.9.6"
+    match = re.search(r"(\d{4})[/\-.](\d{1,2})[/\-.](\d{1,2})", text)
     if match:
         try:
             return date(int(match.group(1)), int(match.group(2)), int(match.group(3)))
@@ -145,9 +147,56 @@ def _as_date(value: Any) -> date | None:
 
 
 def read_json_api(spec: SourceSpec, fetcher: Fetch) -> list[ListingItem]:
+    """JSON 端點的清單。
+
+    三種形態都走這裡，差別只在 spec：
+
+    單一 GET
+        國泰世華、聯邦 —— 一次拿到全部。
+
+    逐分類 POST（第一銀行）
+        ``category_codes`` 列出分類代碼，``form_data`` 的值裡用 ``{category}``
+        佔位。實測第一銀行的活動全部只存在於這個端點：整頁 372KB HTML 只有
+        約 950 字純文字、0 個日期，活動是 JS 打
+        ``queryActivityListByCategory2`` 拿回來的。改打端點後從 1 筆變成 75 筆，
+        而且回應直接帶 ``activityDate``（活動期間）與 ``loginDate``（登錄期間）。
+
+    逐頁
+        ``form_fields.page`` 指定頁碼參數名，``max_pages`` 設上限。**當一頁沒有
+        帶回任何新項目就停** —— 不能只靠分頁器的總頁數：實測第一銀行若把所有
+        分類代碼併成一次請求，它會忽略 ``pageNumberSel``，每頁都回同一批 9 筆，
+        照分頁器走會無限拿到重複資料。
+    """
     listing = spec.listing
-    response = fetcher.get(listing.data_url, conditional=LISTING_CONDITIONAL)
-    payload = response.json()
+    items: list[ListingItem] = []
+    seen: set[str] = set()
+    page_field = listing.form_fields.get("page", "")
+
+    for category in listing.category_codes or [""]:
+        url = listing.data_url.replace("{category}", category)
+        base_body = {
+            key: value.replace("{category}", category)
+            for key, value in listing.form_data.items()
+        }
+        pages = listing.max_pages if (page_field and base_body) else 1
+        for page in range(1, pages + 1):
+            body = dict(base_body) if base_body else None
+            if body is not None and page_field:
+                body[page_field] = str(page)
+            response = fetcher.get(url, data=body, conditional=LISTING_CONDITIONAL)
+            added = _collect_json_items(listing, response.json(), items, seen)
+            if not added:
+                break
+    return items
+
+
+def _collect_json_items(
+    listing: ListingSpec,
+    payload: Any,
+    items: list[ListingItem],
+    seen: set[str],
+) -> int:
+    """把一次回應的資料列併進 items，回傳新增筆數。"""
     rows = _navigate(payload, listing.items_path) if listing.items_path else payload
 
     fields = listing.fields
@@ -161,8 +210,7 @@ def read_json_api(spec: SourceSpec, fetcher: Fetch) -> list[ListingItem]:
         candidates = [row for row in _walk(rows) if root_key in row]
 
     allowed_categories = set(listing.categories)
-    items: list[ListingItem] = []
-    seen: set[str] = set()
+    added = 0
     for row in candidates:
         raw_url = _get(row, url_key)
         if not isinstance(raw_url, str) or not raw_url.strip():
@@ -174,6 +222,7 @@ def read_json_api(spec: SourceSpec, fetcher: Fetch) -> list[ListingItem]:
         if url in seen:
             continue
         seen.add(url)
+        added += 1
         featured_key = fields.get("featured_rank", "")
         featured_value = _get(row, featured_key) if featured_key else None
         items.append(
@@ -189,7 +238,7 @@ def read_json_api(spec: SourceSpec, fetcher: Fetch) -> list[ListingItem]:
                 raw=row,
             )
         )
-    return items
+    return added
 
 
 def _items_from_html(listing: ListingSpec, html: str, base_url: str) -> list[ListingItem]:
@@ -414,7 +463,14 @@ def read_html_list(spec: SourceSpec, fetcher: Fetch) -> list[ListingItem]:
         if listing.pagination_kind == "wicket_ajax":
             found = _best_wicket_run(listing, fetcher, url, response)
         else:
-            found = _items_from_html(listing, response.text, response.final_url)
+            # 限縮到指定面板再找連結。華南一頁裡有存款、貸款、保險等多個分頁，
+            # 不限縮會把其他業務的連結一起收進來。
+            scoped = scope_html(
+                response.text,
+                selector=listing.scope_selector,
+                tab_label=listing.scope_tab_label,
+            )
+            found = _items_from_html(listing, scoped, response.final_url)
         for item in found:
             if item.url not in seen:
                 seen.add(item.url)

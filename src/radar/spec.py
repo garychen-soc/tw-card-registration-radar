@@ -78,6 +78,16 @@ class ListingSpec(Strict):
         default="",
         description="分類清單的網址樣板，用 {category} 佔位（搭配 category_codes）。",
     )
+    scope_selector: str = Field(
+        default="",
+        description="把清單 HTML 限縮到這個容器再找連結。與 detail 的同名欄位同義。",
+    )
+    scope_tab_label: str = Field(
+        default="",
+        description="分頁面板的標籤文字（例如「信用卡」）。找 aria-label 等於它的 "
+        "tab，再取 aria-controls 指到的面板。華南把全行各業務的活動放在同一頁的"
+        "不同分頁裡，不限縮會混進存款、貸款、保險的連結。",
+    )
     items_path: list[str] = Field(default_factory=list)
     fields: dict[str, str] = Field(
         default_factory=dict,

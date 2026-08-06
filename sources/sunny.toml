@@ -1,7 +1,14 @@
 id = "sunny"
 bank_name = "陽信銀行"
 domains = ["sunnybank.com.tw"]
-note = "頁上沒有逐活動網址（只有選單連結），活動內容全在索引頁上，用 single_page。"
+note = """頁上沒有逐活動網址（只有選單連結），活動內容全在索引頁上，用 single_page。
+
+user_agent 去掉專案的識別後綴：本機兩種 UA 都通（各 161,393 bytes），但 CI 的
+GitHub Actions IP 會被回 403，而元大的 403 正是換成不帶識別後綴的 Chrome UA
+就解決的。本機無法重現 CI 的封鎖，所以這是一個只能靠 CI 執行驗證的假設 ——
+若下一次 CI 仍是 blocked，就代表封鎖看的是 IP 而不是 UA，該把這行改回去
+並改用自架 runner（見 ADR 0002）。"""
+user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
 
 [listing]
 kind = "single_page"

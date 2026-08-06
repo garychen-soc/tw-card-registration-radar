@@ -1,15 +1,61 @@
 id = "first"
 bank_name = "第一銀行"
 domains = ["firstbank.com.tw"]
-note = """第一銀行的活動清單由 JavaScript 渲染 —— 整頁 372KB HTML 只有約 950 字
-純文字，活動內容不在初始回應裡。目前只能產出 1 筆。要完整收錄需要無頭瀏覽器，
-那會讓 CI 依賴瀏覽器執行環境，暫不採用。刻意保留這份 spec 讓覆蓋率不足
-在來源健康上可見，而不是靜默消失。不改用非官方來源。
-從 GitHub Actions 的 datacenter IP 也會被拒。"""
+note = """活動清單完全由 JavaScript 產生 —— 入口頁 372KB HTML 只有約 950 字純文字、
+0 個日期、0 個「登錄」字樣，原本只能產出 1 筆。
+
+真正的資料在 JS 打的 REST 端點 queryActivityListByCategory2 上，且回應本身就帶
+activityDate（活動期間）與 loginDate（登錄期間），比明細頁還完整。實測改打端點後
+75 筆，其中 14 筆有官方公告的登錄期間。不需要無頭瀏覽器。
+
+兩個實測到的陷阱：
+
+* 端點必須逐分類請求。把 11 個分類代碼併成一次（categoryIdList 用
+  「id _id _id」語法）會讓它忽略 pageNumberSel，每頁都回同一批 9 筆。
+* 入口頁若把 User-Agent 換成 Chrome 會被 Akamai 回 403（httpx 的 TLS 指紋
+  與宣稱的瀏覽器不符）。維持專案預設 UA 反而暢通 —— 與元大剛好相反。
+  REST 端點本身不需要 Referer、X-Requested-With 或先取 cookie。
+
+明細頁是完整的靜態 HTML（實測 2,830 字，含「活動期間 2026.7.1~2026.12.31」、
+活動對象、活動一／活動二），所以 detail 走 html 而不是吃清單的 JSON —— 明細頁的
+段落結構才能正確切出子活動。第一銀行整站的日期用「.」分隔，解析器已支援。"""
 
 [listing]
-kind = "single_page"
+kind = "json_api"
 entry_url = "https://card.firstbank.com.tw/sites/card/touch/1565690686288"
+data_url = "https://card.firstbank.com.tw/sites/REST/controller/CardActivityListCTL/zh/queryActivityListByCategory2"
+items_path = ["activityListData"]
+# 九個分類分頁的代碼。「百貨購物」那一組在頁面上就是這個「主 id + _子 id」的寫法。
+category_codes = [
+  "0 _1565690671711 _1565691173053 _1565691173302",
+  "1565690671943",
+  "1565690671505",
+  "1565690672207",
+  "1565690672606",
+  "1565690671800",
+  "1565691359607",
+  "1565698989757",
+  "1565691112641",
+]
+max_pages = 8
+
+[listing.form_data]
+categoryIdList = "{category}"
+allCategoryAssetId = "1565690672041"
+# 端點不檢查這個值（實測留空或亂填都照樣回資料），它只是給前端挑容器用的。
+categoryEnName = ""
+pageCategoryType = ""
+searchKeyWord = ""
+
+[listing.form_fields]
+page = "pageNumberSel"
+
+[listing.fields]
+url = "activityUrl"
+title = "activityTitle"
+# activityDate 是「2026.8.1-2026.9.6」這種區間字串，只取得起始日；
+# 結束日交給明細頁的期間解析（那裡有完整的「活動期間」標籤）。
+start = "activityDate"
 
 [detail]
 source = "html"

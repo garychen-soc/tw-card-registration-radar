@@ -18,6 +18,7 @@ from radar.parse.contract import derive
 from radar.parse.datetimes import (
     detect_recurrence,
     drop_period_echoes,
+    find_date_range,
     find_period,
     find_windows,
 )
@@ -300,3 +301,48 @@ def test_spend_month_registration_is_per_period() -> None:
         detect_recurrence("於消費當月完成登錄，始符合當月活動參與資格").kind
         == "per_campaign_period"
     )
+
+
+def test_dot_separated_full_date() -> None:
+    """第一銀行整站把日期寫成「2026.7.1~2026.12.31」，台北富邦的明細頁有 692 處。
+    原本解析器完全不認 `.`，第一銀行 313 筆子活動會全部沒有期間。"""
+    start, end, confidence, _ = find_period(
+        "活動期間 2026.7.1~2026.12.31", default_year=2026, reference=date(2026, 8, 5)
+    )
+    assert start == date(2026, 7, 1)
+    assert end == date(2026, 12, 31)
+    assert confidence >= 0.85
+
+
+def test_dot_separated_registration_window() -> None:
+    windows = find_windows(
+        "登錄期間 2026.8.1-2026.9.6 開放登錄", default_year=2026, reference=date(2026, 8, 5)
+    )
+    assert len(windows) == 1
+    assert windows[0].start == datetime.fromisoformat("2026-08-01T00:00:00+08:00")
+    assert windows[0].end == datetime.fromisoformat("2026-09-06T23:59:00+08:00")
+
+
+def test_dot_separated_roc_year() -> None:
+    start, end, _, _ = find_period(
+        "活動期間 115.8.7~115.9.6", default_year=2026, reference=date(2026, 8, 5)
+    )
+    assert start == date(2026, 8, 7)
+    assert end == date(2026, 9, 6)
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "單筆滿萬享2.5%回饋",
+        "回饋上限1.5萬元",
+        "回饋上限NT$20,000.50元",
+        "分期3.6期0利率",
+    ],
+)
+def test_dots_in_amounts_are_not_dates(text: str) -> None:
+    """`.` 只在四位年份的形態下算日期分隔符。短式 `2.5` 一律不是日期 ——
+    否則「享2.5%回饋」「上限1.5萬」會被當成 2 月 5 日、1 月 5 日。"""
+    assert find_period(text, default_year=2026)[0] is None
+    assert find_date_range(text, default_year=2026)[0] is None
+    assert find_windows(f"{text}，完成登錄後回饋", default_year=2026) == []
