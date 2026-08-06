@@ -5,7 +5,12 @@
 # id="total" 裡，總頁數得用「總筆數 ÷ 首頁筆數」推算。
 id = "esun"
 bank_name = "玉山銀行"
-domains = ["esunbank.com.tw", "esunbank.com"]
+# esun.co 是玉山自己的短網址網域，不是第三方縮網址服務 —— 憑證是 DigiCert EV，
+# 主體 O=E.SUN COMMERCIAL BANK, LTD.、統編 86517510。官方活動頁會用它連到
+# event.esunbank.com.tw（實測 esun.co/cSgYy → event.esunbank.com.tw/credit/
+# concert-presale/index.html），不放進白名單那幾筆會被逐筆略過。
+# .co 結尾的短網址是典型釣魚樣式，所以這一筆是查過憑證才加的。
+domains = ["esunbank.com.tw", "esunbank.com", "esun.co"]
 
 [listing]
 kind = "form_paged"

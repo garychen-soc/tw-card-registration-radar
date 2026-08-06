@@ -2,7 +2,10 @@
 # threshold_tiers 的來源（實測四階 35,000/50,000/65,000/75,000 元）。
 id = "ubot"
 bank_name = "聯邦銀行"
-domains = ["ubot.com.tw"]
+# newnewbank.com.tw 是聯邦的數位帳戶品牌 New New Bank，憑證主體
+# O=UNION BANK OF TAIWAN（TWCA 簽發）。官方活動頁會連到它，不放進白名單
+# 那些筆會被逐筆略過。
+domains = ["ubot.com.tw", "newnewbank.com.tw"]
 note = "Rewards API 提供七個 catalog；hotOrder 為強打標記，不重複建立活動"
 
 [listing]
