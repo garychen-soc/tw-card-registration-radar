@@ -15,6 +15,8 @@ activityDate（活動期間）與 loginDate（登錄期間），比明細頁還�
 * 入口頁若把 User-Agent 換成 Chrome 會被 Akamai 回 403（httpx 的 TLS 指紋
   與宣稱的瀏覽器不符）。維持專案預設 UA 反而暢通 —— 與元大剛好相反。
   REST 端點本身不需要 Referer、X-Requested-With 或先取 cookie。
+* 舊註記寫「從 GitHub Actions 的 datacenter IP 也會被拒」，那也是錯的：
+  2026-08-06 的 CI 執行讀到 178 個活動頁、0 筆被阻擋。
 
 明細頁是完整的靜態 HTML（實測 2,830 字，含「活動期間 2026.7.1~2026.12.31」、
 活動對象、活動一／活動二），所以 detail 走 html 而不是吃清單的 JSON —— 明細頁的

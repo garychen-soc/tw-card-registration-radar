@@ -185,6 +185,18 @@ class HttpCache:
         return bool(entry.get("etag") or entry.get("last_modified"))
 
 
+# 暫時性故障的重試。實測 2026-08-06 的 CI 執行：華南的入口頁逾時，整個來源
+# 因此歸零（30 → 0 筆）並觸發覆蓋率退步防護，把其餘 16 家的更新一起擋掉；
+# 同一個網址在本機是 0.8–1.9 秒回 199KB。清單頁失敗的代價是整個來源消失，
+# 值得重試。
+#
+# 只重試逾時、連線失敗與 5xx。403／401／429 明確不重試 —— 那是「拒絕自動化
+# 存取」，重試只會更像攻擊（見 AccessDenied 的註解）。
+RETRY_ATTEMPTS = 3
+RETRY_BACKOFF_SECONDS = (1.0, 3.0)
+RETRY_STATUS = frozenset({500, 502, 503, 504})
+
+
 class Fetcher:
     """對單一來源（銀行）的抓取器。網域白名單綁在實例上。"""
 
@@ -225,6 +237,36 @@ class Fetcher:
     def close(self) -> None:
         self._client.close()
 
+    def _request_with_retry(
+        self,
+        method: str,
+        url: str,
+        body: dict[str, str] | None,
+        headers: dict[str, str],
+        host: str,
+    ) -> httpx.Response:
+        """發出請求，暫時性故障時重試。
+
+        重試前一律走節流，不會因為重試而加快對單一主機的請求速率。
+        """
+        last_error: Exception | None = None
+        for attempt in range(RETRY_ATTEMPTS):
+            if attempt:
+                time.sleep(RETRY_BACKOFF_SECONDS[min(attempt - 1, len(RETRY_BACKOFF_SECONDS) - 1)])
+            self._throttle(host)
+            try:
+                response = self._client.request(method, url, data=body, headers=headers)
+            except httpx.HTTPError as exc:
+                last_error = exc
+                continue
+            if response.status_code in RETRY_STATUS and attempt < RETRY_ATTEMPTS - 1:
+                last_error = None
+                continue
+            return response
+        if last_error is not None:
+            raise FetchFailed(f"抓取失敗 {url}：{last_error}（已重試 {RETRY_ATTEMPTS} 次）")
+        raise FetchFailed(f"抓取失敗 {url}：連續 {RETRY_ATTEMPTS} 次回傳 5xx")
+
     def _throttle(self, host: str) -> None:
         previous = self._last_request.get(host)
         now = time.monotonic()
@@ -262,13 +304,8 @@ class Fetcher:
 
         for _ in range(MAX_REDIRECTS + 1):
             host = urllib.parse.urlsplit(current).hostname or ""
-            self._throttle(host)
-            try:
-                response = self._client.request(
-                    method, current, data=body, headers=request_headers
-                )
-            except httpx.HTTPError as exc:
-                raise FetchFailed(f"抓取失敗 {current}：{exc}") from exc
+            # 本專案的 POST 全部是唯讀查詢（清單端點），重試沒有副作用。
+            response = self._request_with_retry(method, current, body, request_headers, host)
 
             if response.status_code == 304:
                 return Response(

@@ -25,6 +25,21 @@ from .models import SourceHealth
 # 逐來源跌幅門檻。低於這個規模的來源不做回歸判斷，避免小數字的雜訊。
 PER_SOURCE_MIN_BASELINE = 5
 PER_SOURCE_DROP_LIMIT = 0.4
+# failed／blocked 的來源合計掉了全站多少比例才擋下發布。
+#
+# 這條門檻是在兩個實測案例之間取的：
+#
+# * 前身 2026-08-01：台北富邦 212 筆（全站最大來源，1,071 筆的 19.8%）整個歸零。
+#   那必須擋 —— 使用者會少掉五分之一的活動，而網站看起來完全正常。
+# * 本專案 2026-08-06 的 CI 執行：華南逾時（30 筆）、陽信被 datacenter IP 封鎖
+#   （24 筆），合計 54 筆、佔 1,538 筆的 3.5%。那不該擋 —— 擋下的代價是其餘
+#   15 家正常來源的資料一起停止更新，而陽信的封鎖是持續性的，等於永久停更。
+#   那正是 ADR 0002 記錄的前身病灶：防護正確擋下、警示有發，但使用者看到的是
+#   一個看起來正常的過期網站。
+#
+# 對「回報 complete 卻筆數崩掉」的來源不套用這條門檻 —— 那種流失是靜默的、
+# 沒有別的訊號，一律照 PER_SOURCE_DROP_LIMIT 擋。
+UNUSABLE_SHARE_LIMIT = 0.15
 TOTAL_DROP_LIMIT = 0.5
 SYSTEMIC_FAILURE_RATIO = 0.5
 CATASTROPHIC_FAILURE_RATIO = 0.8
@@ -94,6 +109,13 @@ def assess(
         baseline = _offers_by_source(previous_index)
         current = {item.bank_id: item.offer_count for item in health}
         names = {item.bank_id: item.bank_name for item in health}
+        # 兩類退步分開處理，因為它們的訊號強度不同（見 UNUSABLE_SHARE_LIMIT）。
+        unusable_ids = {
+            item.bank_id for item in health if item.status in {"failed", "blocked"}
+        }
+        silent: list[SourceRegression] = []
+        loud: list[SourceRegression] = []
+        unusable_lost = 0
         for bank_id, before in baseline.items():
             if before < PER_SOURCE_MIN_BASELINE:
                 continue
@@ -101,16 +123,27 @@ def assess(
             if after >= before:
                 continue
             drop = 1 - (after / before)
-            if drop > PER_SOURCE_DROP_LIMIT:
-                regressions.append(
-                    SourceRegression(
-                        bank_id=bank_id,
-                        bank_name=names.get(bank_id, bank_id),
-                        previous_offers=before,
-                        current_offers=after,
-                        drop_percent=round(drop * 100, 1),
-                    )
-                )
+            if drop <= PER_SOURCE_DROP_LIMIT:
+                continue
+            item = SourceRegression(
+                bank_id=bank_id,
+                bank_name=names.get(bank_id, bank_id),
+                previous_offers=before,
+                current_offers=after,
+                drop_percent=round(drop * 100, 1),
+            )
+            if bank_id in unusable_ids:
+                loud.append(item)
+                unusable_lost += before - after
+            else:
+                silent.append(item)
+
+        # 回報 complete 卻筆數崩掉 —— 靜默流失，一律擋。
+        regressions.extend(silent)
+        # 已經以 failed／blocked 大聲回報的來源：只有合計流失達到全站一定比例
+        # 才擋。它們已經有來源健康度、警示與網站「來源狀態」面板三個出口。
+        if previous_offers and unusable_lost / previous_offers >= UNUSABLE_SHARE_LIMIT:
+            regressions.extend(loud)
     if regressions:
         reasons.append("per_source_coverage_regression")
 

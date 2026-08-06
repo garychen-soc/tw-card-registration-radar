@@ -3,12 +3,16 @@ bank_name = "陽信銀行"
 domains = ["sunnybank.com.tw"]
 note = """頁上沒有逐活動網址（只有選單連結），活動內容全在索引頁上，用 single_page。
 
-user_agent 去掉專案的識別後綴：本機兩種 UA 都通（各 161,393 bytes），但 CI 的
-GitHub Actions IP 會被回 403，而元大的 403 正是換成不帶識別後綴的 Chrome UA
-就解決的。本機無法重現 CI 的封鎖，所以這是一個只能靠 CI 執行驗證的假設 ——
-若下一次 CI 仍是 blocked，就代表封鎖看的是 IP 而不是 UA，該把這行改回去
-並改用自架 runner（見 ADR 0002）。"""
-user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
+**封鎖看的是 IP，不是 User-Agent —— 已用 CI 執行證偽。** 本機兩種 UA 都通
+（各 161,393 bytes），2026-08-06 的 CI 執行改用不帶識別後綴的純 Chrome UA
+（元大的 403 正是這樣解決的），陽信在 GitHub Actions 上仍然是 blocked。
+因此換 UA 沒有用，已改回專案預設 —— 對能讀到的來源保持可識別是對的做法，
+沒有理由為了一個無效的假設放棄它。
+
+真正的解法是住宅 IP 的自架 runner（ADR 0002 已寫好備案），那需要使用者提供
+常開的機器。在那之前這家會誠實地顯示為 blocked：來源狀態面板看得到，
+且合計流失僅佔全站 1.6%，不會擋下其餘來源的更新（見 guard 的
+UNUSABLE_SHARE_LIMIT）。"""
 
 [listing]
 kind = "single_page"
