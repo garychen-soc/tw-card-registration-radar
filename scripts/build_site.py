@@ -23,7 +23,13 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from radar.emit import build_index, portals_of, write_site  # noqa: E402
+from radar.emit import (  # noqa: E402
+    build_index,
+    dedupe_campaigns,
+    describe_dedupe,
+    portals_of,
+    write_site,
+)
 from radar.guard import assess, describe  # noqa: E402
 from radar.models import Alert, Campaign, SourceHealth  # noqa: E402
 from radar.pagestore import PageStore  # noqa: E402
@@ -96,18 +102,29 @@ def main() -> int:
         if not args.dry_run:
             cache.save()
 
+    # 去重在 build_index 之前，但 health 保持未去重 —— 涵蓋率防護的比較基準
+    # 必須是「這次真的從官方頁讀到幾筆」，否則去重造成的一次性下降會被記成
+    # 抓取退步（實測星展 68→43，掉 36.8%，逐來源門檻是 40%）。
+    campaigns, dedupe = dedupe_campaigns(campaigns)
+
     index = build_index(
         campaigns,
         health=health,
         alerts=alerts,
         generated_at=now,
         portals=portals_of(campaigns),
+        dedupe=dedupe,
     )
     guard = assess(
         health=health,
+        # counts.offers 是去重前的筆數，與上一版 index.json 的同名欄位同語意
         current_offers=index["counts"]["offers"],
         previous_index=previous_index if args.only is None else None,
     )
+
+    print()
+    for line in describe_dedupe(dedupe):
+        print(line)
 
     print()
     for line in describe(guard):
@@ -120,6 +137,7 @@ def main() -> int:
                 {
                     "generated_at": now.isoformat(),
                     "guard": guard.model_dump(),
+                    "dedupe": dedupe.model_dump(),
                     "counts": index["counts"],
                     "sources": index["sources"],
                     "alerts": index["alerts"],

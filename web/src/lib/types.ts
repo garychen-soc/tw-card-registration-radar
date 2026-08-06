@@ -33,6 +33,9 @@ export interface AgendaEntry {
   bank_id: string;
   title: string;
   url: string;
+  /** 同一份活動還公告在哪些網址。銀行會把同個活動區塊掛在多個子頁上
+   *  （實測星展一檔活動掛 6 頁），後端合併成一筆並把其餘網址留在這裡。 */
+  also_at?: string[];
   period?: Period;
   windows?: RegWindow[];
   recurrence?: "monthly" | "per_campaign_period";
@@ -55,7 +58,11 @@ export interface SourceInfo {
   status: "complete" | "partial" | "failed" | "blocked";
   entry_url?: string;
   campaign_count?: number;
+  /** 去重前抓到的筆數。這是涵蓋率健康度的數字，後端的發布防護拿它比對上一版，
+   *  語意不可改 —— 要顯示給使用者的筆數請用 unique_offer_count。 */
   offer_count?: number;
+  /** 去重後實際發布的筆數，與 catalog/<bank>.json 的筆數一致。 */
+  unique_offer_count?: number;
   message?: string;
   portal?: Portal;
 }
@@ -74,7 +81,11 @@ export interface IndexPayload {
   timezone: string;
   counts: {
     campaigns: number;
+    /** 去重前的筆數（涵蓋率基準）。顯示給使用者請用 unique_offers。 */
     offers: number;
+    /** 去重後實際發布的筆數。其餘計數（with_window、needs_review…）都以此為母數。 */
+    unique_offers?: number;
+    duplicate_offers?: number;
     with_window: number;
     actionable_with_window: number;
     needs_review: number;
@@ -100,6 +111,7 @@ export interface CatalogOffer {
   campaign_id: string;
   title: string;
   url: string;
+  also_at?: string[];
   period?: Period;
   registration?: {
     required?: boolean;

@@ -207,6 +207,14 @@ class Offer(BaseModel):
     period: Period = Field(default_factory=Period)
     registration: Registration = Field(default_factory=Registration)
     conditions: Conditions = Field(default_factory=Conditions)
+    also_at: list[str] = Field(default_factory=list)
+    """同一份活動還出現在哪些網址上。
+
+    由輸出層的 ``emit.dedupe_campaigns`` 填入，解析器一律留空 —— 它是「這筆和
+    別頁的哪些筆是同一個活動」的判斷結果，一頁一 Campaign 的解析器看不到別頁。
+    放在資料契約裡而不是丟掉，是因為去重不該讓使用者失去「這個活動也公告在
+    某幾頁」這個事實（實測星展同一檔活動掛在 6 個子頁）。
+    """
     needs_review: bool = False
     review_codes: list[str] = Field(default_factory=list)
     """穩定的 invariant 代碼。輸出到資料檔的是這個，不是中文句子

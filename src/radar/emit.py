@@ -17,6 +17,12 @@
 ``calendar/registration.ics``
     可訂閱的登錄提醒，循環活動用 RRULE。
 
+**去重也在這一層。** 銀行會把同一份活動內容掛在多個網址上（見 ``dedupe_campaigns``），
+一頁一 Campaign 的抓取模型必然把它切成多筆。修在輸出層而不是 runner 層，是因為
+``SourceHealth.offer_count`` 是涵蓋率防護（``guard.assess``）的比較基準：那個數字
+必須一直代表「這次真的從官方頁讀到幾筆」，才能偵測抓取退步。若在 runner 去重，
+它會混入「重複被合併掉幾筆」，防護就再也分不清筆數下降是抓取壞了還是去重生效。
+
 **兩條輸出規則。**
 
 1. 不含任何時間衍生狀態。「是否進行中」「今日待登錄」全由讀取端算。
@@ -29,10 +35,14 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
+from collections import Counter
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from typing import Any
+
+from pydantic import BaseModel, Field
 
 from .models import Alert, Campaign, Offer, RegistrationWindow, SourceHealth
 
@@ -123,6 +133,7 @@ def agenda_entry(campaign: Campaign, offer: Offer) -> dict[str, Any]:
         "bank_id": campaign.bank_id,
         "title": offer.title,
         "url": campaign.source_url,
+        "also_at": offer.also_at,
         "period": _period_payload(offer),
         "windows": [_window_payload(window) for window in registration.windows],
         "recurrence": registration.recurrence.kind
@@ -145,6 +156,7 @@ def catalog_entry(campaign: Campaign, offer: Offer) -> dict[str, Any]:
         "campaign_id": campaign.id,
         "title": offer.title,
         "url": campaign.source_url,
+        "also_at": offer.also_at,
         "period": _period_payload(offer),
         "registration": {
             "required": offer.registration.required,
@@ -182,6 +194,210 @@ def catalog_entry(campaign: Campaign, offer: Offer) -> dict[str, Any]:
     }
 
 
+# ── 去重 ────────────────────────────────────────────────
+
+# 去重鍵刻意排除的欄位。id 內含網址 slug、campaign_id 與 url 就是網址本身
+# —— 它們是「這筆從哪一頁切出來」的紀錄，不是「這是哪一個活動」。
+_KEY_EXCLUDED = ("id", "campaign_id", "url", "also_at")
+
+# 跨頁合併的最低子活動數。**這個門檻是整個設計的關鍵，理由是實測出來的。**
+#
+# 全站 17 家 1,077 筆裡，「內容完全相同」的組共 33 組（可移除 63 筆），但它們是
+# 兩個性質完全相反的族群：
+#
+# 真重複（同一份活動掛在多個網址）—— 標題具體、期間具體，整頁的子活動清單一起重複：
+#   星展 mall_08 / _08_2 / _08_3 / _08_5 / mall_09 / mall_11 六頁各切出同樣 5 筆
+#   玉山 shopInfo?sno=pi 與 ?sno=pi2 兩頁各切出同樣 8 筆
+#   聯邦 202607drugstore/index.htm 與 ...index.htm?p=cosmed（同頁的 query 變體）各 8 筆
+#
+# 假重複（不同活動，只是我們什麼都沒解析出來）—— 一頁一筆，標題是導覽字串，
+# 期間是清單層的整年 fallback，沒有登錄時點也沒有條件：
+#   凱基 5 個不同活動頁全叫「信用卡活動」、期間都是 2026-01-01~2026-12-31
+#   台北富邦 5 個不同 promotion sn 全叫「用餐享優惠」、上海商銀「Mobile Phone」3 頁
+#   王道「關於我們」、永豐「刷卡享優惠」、彰銀「請將裝置改以」4 頁
+#
+# 光靠內容雜湊無法分辨這兩者，把假重複合併掉會讓 catalog 直接少掉 4 個真實活動頁，
+# 而使用者永遠不會知道它存在 —— 這比多顯示一筆嚴重得多。兩族群唯一穩定的結構差異
+# 是「重複的是整頁還是單筆」：真重複是同一頁被鏡射到多個網址，所以整份子活動清單
+# 逐筆對得上；假重複清一色是單筆頁面，而單筆頁面無法區分「鏡射」與「解析失敗」。
+#
+# 因此跨頁合併要求「整頁清單相同且該頁有 2 筆以上」。實測這條規則抓到全部 3 組
+# 真重複（移除 41 筆）、拒絕全部假重複（0 筆誤併）。代價是少數殘留（例如富邦
+# D000268/D000269 兩個單筆頁內容相同但仍各自顯示），寧可留著。
+MIRROR_MIN_OFFERS = 2
+
+
+class MirrorGroup(BaseModel):
+    """一組「同內容、多網址」的鏡射頁。留在報告裡供人稽核每次合併了什麼。"""
+
+    bank_id: str
+    kept_url: str
+    also_at: list[str]
+    offers: int
+
+
+class DedupeReport(BaseModel):
+    """去重結果。``per_source`` 讓 index 能同時給出原始筆數與去重後筆數。"""
+
+    merged_offers: int = 0
+    merged_campaigns: int = 0
+    per_source: dict[str, int] = Field(default_factory=dict)
+    mirrors: list[MirrorGroup] = Field(default_factory=list)
+
+
+# catalog_entry 需要一個 Campaign 來取 id/source_url，但那兩個欄位正是鍵要排除的，
+# 所以用一個固定的空殼即可 —— 這也順帶保證鍵只是 Offer 的函數，跨頁比較才成立。
+_KEY_CAMPAIGN = Campaign(
+    id="",
+    bank_id="",
+    bank_name="",
+    title="",
+    source_url="",
+    observed_at=datetime(2000, 1, 1, tzinfo=UTC),
+)
+
+
+def offer_content_key(offer: Offer) -> str:
+    """「這兩筆會不會在網站上長得一模一樣」的雜湊。
+
+    刻意拿 ``catalog_entry`` 的輸出來算，而不是自己挑幾個欄位：鍵的定義因此
+    等於「使用者看得到的全部內容」，兩筆只有在渲染結果完全相同時才會被合併，
+    不可能併掉使用者本來分辨得出來的差異。實測這一點很要緊 —— 若只用
+    標題＋期間＋登錄時點當鍵，全站會誤併 21 組，包括玉山同一頁上
+    ``sno=2008_08`` 的「【活動四】」兩筆（標題期間時點全同、門檻與名額不同）。
+
+    也不能只用標題：全站 57 組同標題共 193 筆，其中包含同一活動的不同檔期
+    （聯邦「【Tomod's 】」2024-01-01~2026-06-30 與另一檔期），期間不同就是
+    不同活動，合併會讓使用者看到錯的期間。
+    """
+    payload = catalog_entry(_KEY_CAMPAIGN, offer)
+    for field in _KEY_EXCLUDED:
+        payload.pop(field, None)
+    canonical = json.dumps(payload, sort_keys=True, ensure_ascii=False)
+    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+
+
+def _canonical_first(url: str) -> tuple[int, str]:
+    """鏡射組裡保留哪個網址：先短再字典序。
+
+    銀行的鏡射網址通常是在基底網址後面加後綴（``mall_08.html`` 之於
+    ``mall_08_2.html``、``index.htm`` 之於 ``index.htm?p=cosmed``），
+    因此「最短」幾乎總是那個基底頁 —— 對使用者也是最合理的代表。
+    用網址而不是抓取順序來決定，是為了讓 offer id 在跨次執行間穩定
+    （id 內含網址 slug，換代表就等於換 id，會讓書籤與已登錄記錄失效）。
+    """
+    return (len(url), url)
+
+
+def dedupe_campaigns(campaigns: list[Campaign]) -> tuple[list[Campaign], DedupeReport]:
+    """把同一份活動在多個網址上的重複收斂成一筆。
+
+    實測動機：星展「【網購星精彩】7/1~9/30」在網站上出現 6 次，期間、3 個登錄
+    時點、限量、時序契約完全相同，只有網址不同 —— 官方把同一個共用活動區塊放在
+    六個子頁上，一頁一 Campaign 的抓取模型必然各切出一份。
+
+    兩條規則，作用範圍不同，因為風險不同：
+
+    1. **同頁內**（同一個 Campaign）內容相同 → 直接留一筆。同一頁上的兩列若
+       渲染結果完全相同，使用者無從分辨，多顯示一列只是雜訊；而且合併的兩筆
+       同屬一頁，不存在「弄丟了另一個活動頁」的風險。實測聯邦 6 筆屬此類
+       （切段把注意事項段落重複切出）。
+    2. **跨頁**（不同 Campaign）→ 另外要求整頁清單相同且該頁 2 筆以上，
+       理由見 ``MIRROR_MIN_OFFERS``。被合併掉的網址記進留存那筆的 ``also_at``，
+       使用者仍看得到「這個活動也出現在這些頁」，不是無聲丟棄。
+
+    回傳新的 campaign 串列（不改動輸入）與一份可稽核的報告。
+    """
+    removed: Counter[str] = Counter()
+
+    # 規則 1：同頁內去重。順帶把每頁的內容雜湊算出來給規則 2 用。
+    staged: list[Campaign] = []
+    keys: list[tuple[str, ...]] = []
+    for campaign in campaigns:
+        unique: dict[str, Offer] = {}
+        for offer in campaign.offers:
+            unique.setdefault(offer_content_key(offer), offer)
+        dropped = len(campaign.offers) - len(unique)
+        if dropped:
+            removed[campaign.bank_id] += dropped
+            campaign = campaign.model_copy(update={"offers": list(unique.values())})
+        staged.append(campaign)
+        keys.append(tuple(unique))
+
+    # 規則 2：整頁清單相同的鏡射頁。bank_id 也進簽章 —— 跨銀行的「同內容」
+    # 只會是兩家都沒解析出東西，那是巧合而不是同一個活動。
+    families: dict[tuple[str, tuple[str, ...]], list[int]] = {}
+    for position, campaign in enumerate(staged):
+        if len(campaign.offers) < MIRROR_MIN_OFFERS:
+            continue
+        families.setdefault((campaign.bank_id, keys[position]), []).append(position)
+
+    dropped_positions: set[int] = set()
+    updates: dict[int, Campaign] = {}
+    mirrors: list[MirrorGroup] = []
+    merged_campaigns = 0
+    for members in families.values():
+        if len(members) < 2:
+            continue
+        keep = min(members, key=lambda position: _canonical_first(staged[position].source_url))
+        also_at = sorted(
+            (staged[position].source_url for position in members if position != keep),
+            key=_canonical_first,
+        )
+        kept = staged[keep]
+        updates[keep] = kept.model_copy(
+            update={
+                "offers": [
+                    offer.model_copy(update={"also_at": also_at}) for offer in kept.offers
+                ]
+            }
+        )
+        for position in members:
+            if position != keep:
+                dropped_positions.add(position)
+                removed[staged[position].bank_id] += len(staged[position].offers)
+        merged_campaigns += len(members) - 1
+        mirrors.append(
+            MirrorGroup(
+                bank_id=kept.bank_id,
+                kept_url=kept.source_url,
+                also_at=also_at,
+                offers=len(kept.offers),
+            )
+        )
+
+    result = [
+        updates.get(position, campaign)
+        for position, campaign in enumerate(staged)
+        if position not in dropped_positions
+    ]
+    report = DedupeReport(
+        merged_offers=sum(removed.values()),
+        merged_campaigns=merged_campaigns,
+        per_source=dict(sorted(removed.items())),
+        mirrors=sorted(mirrors, key=lambda group: (group.bank_id, group.kept_url)),
+    )
+    return result, report
+
+
+def describe_dedupe(report: DedupeReport) -> list[str]:
+    """給 CI job summary 用的說明。合併了什麼必須看得見，不能靜默生效。"""
+    if not report.merged_offers:
+        return ["去重：沒有發現重複的子活動"]
+    lines = [
+        f"去重：合併 {report.merged_offers} 筆重複子活動"
+        f"（其中 {report.merged_campaigns} 個鏡射活動頁）",
+    ]
+    for bank_id, count in report.per_source.items():
+        lines.append(f"  {bank_id} 合併 {count} 筆")
+    for group in report.mirrors:
+        lines.append(
+            f"  鏡射頁 {group.bank_id}：保留 {group.kept_url}"
+            f"（{group.offers} 筆），另見 {len(group.also_at)} 個網址"
+        )
+    return lines
+
+
 def build_index(
     campaigns: list[Campaign],
     *,
@@ -189,11 +405,21 @@ def build_index(
     alerts: list[Alert],
     generated_at: datetime,
     portals: dict[str, dict[str, str]] | None = None,
+    dedupe: DedupeReport | None = None,
 ) -> dict[str, Any]:
     """首屏索引。
 
     ``portals`` 是每家銀行的登錄入口。實測 223 筆活動共用同一個 portal，
     逐筆輸出是純粹的重複 —— 提到來源層級。
+
+    ``dedupe`` 有值時，``campaigns`` 是已去重的。此時計數刻意給出**兩個**數字，
+    而且 ``offers`` 與 ``sources[].offer_count`` 保持「去重前」的舊語意：
+    ``guard.assess`` 拿上一版 index.json 的這兩個欄位當涵蓋率基準，一旦它們
+    改成去重後的數字，去重上線那次就會被記成一次憑空的筆數下降 —— 而逐來源
+    防護的門檻是 40%，實測星展單一家就掉 36.8%（68→43），離誤觸只差一步。
+    改欄位語意還有更糟的後果：下一次執行的基準變小，防護從此少偵測到一截
+    真正的抓取退步。所以新增 ``unique_*``／``duplicate_offers`` 給網站顯示用，
+    舊欄位一個字都不動。
     """
     pairs = [(campaign, offer) for campaign in campaigns for offer in campaign.offers]
     agenda = [
@@ -203,13 +429,18 @@ def build_index(
     ]
     actionable = [entry for entry in agenda if not entry["needs_review"]]
     portal_map = portals or {}
+    merged = dedupe.merged_offers if dedupe else 0
+    merged_by_source = dedupe.per_source if dedupe else {}
     payload = {
         "schema_version": SCHEMA_VERSION,
         "generated_at": generated_at.isoformat(),
         "timezone": "Asia/Taipei",
         "counts": {
-            "campaigns": len(campaigns),
-            "offers": len(pairs),
+            "campaigns": len(campaigns) + (dedupe.merged_campaigns if dedupe else 0),
+            # offers = 去重前，涵蓋率基準；unique_offers = 實際發布、與 catalog 筆數一致
+            "offers": len(pairs) + merged,
+            "unique_offers": len(pairs),
+            "duplicate_offers": merged,
             "with_window": len(agenda),
             "actionable_with_window": len(actionable),
             "needs_review": sum(1 for _, offer in pairs if offer.needs_review),
@@ -225,6 +456,7 @@ def build_index(
                 "entry_url": item.requested_url,
                 "campaign_count": item.campaign_count,
                 "offer_count": item.offer_count,
+                "unique_offer_count": item.offer_count - merged_by_source.get(item.bank_id, 0),
                 "message": item.message,
                 "portal": portal_map.get(item.bank_id, {}),
             })

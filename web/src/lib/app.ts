@@ -23,7 +23,14 @@ import {
   windowsOn,
 } from "./derive";
 import { formatClock, formatDate, formatDay, formatMoment, formatMoney, formatPeriod } from "./format";
-import type { AgendaEntry, CatalogOffer, CatalogPayload, IndexPayload, RegWindow } from "./types";
+import type {
+  AgendaEntry,
+  CatalogOffer,
+  CatalogPayload,
+  IndexPayload,
+  RegWindow,
+  SourceInfo,
+} from "./types";
 
 const PAGE_SIZE = 50;
 const STALE_HOURS = 36;
@@ -238,6 +245,18 @@ function windowLine(w: RegWindow): HTMLElement {
   return line;
 }
 
+/** also_at 連結的短標籤。整段網址塞進卡片會擠掉真正重要的登錄時點，
+ *  而銀行的鏡射網址差異幾乎都在最後一段（mall_08 / mall_08_2 / mall_09）。 */
+function pageLabel(href: string): string {
+  try {
+    const url = new URL(href);
+    const last = url.pathname.split("/").filter(Boolean).pop() ?? url.hostname;
+    return (url.search ? `${last}${url.search}` : last.replace(/\.(html?|jsp|aspx?)$/i, "")) || href;
+  } catch {
+    return href;
+  }
+}
+
 function registeredToggle(entry: AgendaEntry): HTMLElement {
   const done = readSet(DONE_KEY);
   const label = el("label", "done");
@@ -289,6 +308,24 @@ function offerCard(entry: AgendaEntry, options: { compact?: boolean } = {}): HTM
   card.append(title);
 
   card.append(el("p", "period", formatPeriod(entry.period?.start, entry.period?.end)));
+
+  // 同一份活動公告在多個子頁時只顯示一筆，但不能讓使用者失去「它也在那幾頁」
+  // 這個事實 —— 他可能是從其中某一頁找過來的，看不到會以為我們漏抓了。
+  const alsoAt = entry.also_at ?? [];
+  if (alsoAt.length) {
+    const line = el("p", "more");
+    line.append(document.createTextNode(`同一活動也公告於 ${alsoAt.length} 個頁面：`));
+    alsoAt.forEach((href, i) => {
+      if (i) line.append(document.createTextNode("、"));
+      const other = el("a");
+      other.href = href;
+      other.target = "_blank";
+      other.rel = "noopener noreferrer";
+      other.textContent = pageLabel(href);
+      line.append(other);
+    });
+    card.append(line);
+  }
 
   const windows = entry.windows ?? [];
   if (windows.length) {
@@ -465,6 +502,7 @@ function toEntry(bankId: string, offer: CatalogOffer): AgendaEntry {
     bank_id: bankId,
     title: offer.title,
     url: offer.url,
+    also_at: offer.also_at,
     period: offer.period,
     windows: registration?.windows,
     recurrence:
@@ -620,11 +658,17 @@ function renderReview(root: HTMLElement, entries: AgendaEntry[]): void {
   renderCatalog(root, entries);
 }
 
+/** 顯示給使用者的筆數 —— 去重後的數字才和目錄裡真的看得到的筆數一致。
+ *  offer_count 是去重前的涵蓋率基準（發布防護在用），不能拿來顯示。 */
+function shownCount(source: SourceInfo): number {
+  return source.unique_offer_count ?? source.offer_count ?? 0;
+}
+
 function renderSources(root: HTMLElement): void {
   const data = state.data;
   if (!data) return;
   const table = el("div", "sources");
-  for (const source of [...data.sources].sort((a, b) => (b.offer_count ?? 0) - (a.offer_count ?? 0))) {
+  for (const source of [...data.sources].sort((a, b) => shownCount(b) - shownCount(a))) {
     const row = el("div", `source status-${source.status}`);
     row.append(el("span", "dot"));
     const name = el("a", "source-name");
@@ -633,7 +677,12 @@ function renderSources(root: HTMLElement): void {
     name.rel = "noopener noreferrer";
     name.textContent = source.bank_name;
     row.append(name);
-    row.append(el("span", "source-count", `${source.offer_count ?? 0} 筆`));
+    const count = el("span", "source-count", `${shownCount(source)} 筆`);
+    const raw = source.offer_count ?? 0;
+    if (raw > shownCount(source)) {
+      count.title = `官方頁共抓到 ${raw} 筆，其中 ${raw - shownCount(source)} 筆是同一活動重複公告，已合併`;
+    }
+    row.append(count);
     const label = { complete: "正常", partial: "部分可讀", failed: "讀取失敗", blocked: "被阻擋" }[
       source.status
     ];
@@ -685,7 +734,7 @@ function renderControls(): void {
   bankSelect.setAttribute("aria-label", "篩選銀行");
   bankSelect.append(new Option("全部銀行", ""));
   for (const source of data.sources) {
-    bankSelect.append(new Option(`${source.bank_name}（${source.offer_count ?? 0}）`, source.bank_id));
+    bankSelect.append(new Option(`${source.bank_name}（${shownCount(source)}）`, source.bank_id));
   }
   bankSelect.value = state.bank;
   bankSelect.addEventListener("change", () => {
@@ -763,6 +812,12 @@ function togglePicker(): void {
   panel.hidden = false;
 }
 
+/** 實際發布的子活動總數。counts.offers 是去重前的涵蓋率基準，
+ *  拿它顯示會比目錄裡真的列出來的筆數多（實測全站多 47 筆）。 */
+function publishedOffers(data: IndexPayload): number {
+  return data.counts.unique_offers ?? data.counts.offers;
+}
+
 function renderTabs(): void {
   const data = state.data;
   if (!data) return;
@@ -771,7 +826,7 @@ function renderTabs(): void {
   nav.replaceChildren();
   const tabs: Array<[Tab, string, number | null]> = [
     ["timeline", "登錄時間軸", null],
-    ["catalog", "活動目錄", data.counts.offers - data.counts.needs_review],
+    ["catalog", "活動目錄", publishedOffers(data) - data.counts.needs_review],
     ["review", "需人工確認", data.counts.needs_review],
     ["sources", "來源狀態", data.sources.length],
   ];
@@ -814,7 +869,7 @@ function renderMeta(): void {
       ["需登錄活動", data.counts.registration_required],
       ["已確認登錄時點", data.counts.with_window],
       ["可直接行動", data.counts.actionable_with_window],
-      ["收錄活動", data.counts.offers],
+      ["收錄活動", publishedOffers(data)],
     ];
     for (const [label, value] of items) {
       const box = el("div", "stat");
