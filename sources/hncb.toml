@@ -28,8 +28,14 @@ Actions runner 試 12 種 UA／標頭組合，**全部 HTTP 200、199,633 bytes*
 （199KB、URL 帶一長串 portal 狀態）從美歐機房存取的實際延遲，25 秒的預設值
 餘裕太小。
 
-所以覆寫 timeout 而不是換 UA：被拒絕存取會是 403（陽信就是），逾時是另一回事。"""
-timeout_seconds = 90.0
+所以覆寫 timeout 而不是換 UA：被拒絕存取會是 403（陽信就是），逾時是另一回事。
+
+90 秒仍然不夠（2026-08-06 的 Scrape 三次重試全逾時）。probe 單獨跑時每次約 15 秒，
+但 Scrape 是 6 家銀行並行，網路競爭下會慢好幾倍。已拉到上限 180 秒。
+
+若 180 秒仍不夠，這家該改走自架 runner（住宅 IP 只要 0.8–1.9 秒）—— 分流機制已
+實作並測過，改 runner = "self-hosted" 一行即可。"""
+timeout_seconds = 180.0
 
 [listing]
 kind = "html_list"
