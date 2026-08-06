@@ -102,10 +102,13 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add web/public
+          # unique_offers 是實際發布的筆數（去重後），offers 是去重前的抓取量
+          # ——後者是涵蓋率防護的比較基準，不是使用者在網站上看到的數字。
           COUNT=$(python -c "
           import json, pathlib
           payload = json.loads(pathlib.Path('web/public/data/index.json').read_text(encoding='utf-8'))
-          print(payload['counts']['offers'])
+          counts = payload['counts']
+          print(counts.get('unique_offers', counts['offers']))
           ")
           git commit -m "chore: refresh promotion data (${COUNT} offers)"
           # 抓取要跑好幾分鐘，期間可能有人推了新的 commit。直接 push 會被

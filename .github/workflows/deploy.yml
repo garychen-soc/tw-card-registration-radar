@@ -67,7 +67,8 @@ jobs:
           python3 -c "
           import json, pathlib
           payload = json.loads(pathlib.Path('web/dist/data/index.json').read_text(encoding='utf-8'))
-          offers = payload['counts']['offers']
+          counts = payload['counts']
+          offers = counts.get('unique_offers', counts['offers'])
           print(f\"index.json 收錄 {offers} 筆子活動，產生於 {payload['generated_at']}\")
           assert offers > 0, 'index.json 沒有任何活動'
           "
