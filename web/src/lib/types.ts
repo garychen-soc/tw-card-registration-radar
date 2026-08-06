@@ -35,6 +35,7 @@ export interface AgendaEntry {
   url: string;
   /** 同一份活動還公告在哪些網址。銀行會把同個活動區塊掛在多個子頁上
    *  （實測星展一檔活動掛 6 頁），後端合併成一筆並把其餘網址留在這裡。 */
+  page_title?: string;
   also_at?: string[];
   period?: Period;
   windows?: RegWindow[];
@@ -111,6 +112,7 @@ export interface CatalogOffer {
   campaign_id: string;
   title: string;
   url: string;
+  page_title?: string;
   also_at?: string[];
   period?: Period;
   registration?: {

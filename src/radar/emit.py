@@ -133,6 +133,7 @@ def agenda_entry(campaign: Campaign, offer: Offer) -> dict[str, Any]:
         "bank_id": campaign.bank_id,
         "title": offer.title,
         "url": campaign.source_url,
+        "page_title": campaign.title if campaign.title != offer.title else "",
         "also_at": offer.also_at,
         "period": _period_payload(offer),
         "windows": [_window_payload(window) for window in registration.windows],
@@ -156,6 +157,7 @@ def catalog_entry(campaign: Campaign, offer: Offer) -> dict[str, Any]:
         "campaign_id": campaign.id,
         "title": offer.title,
         "url": campaign.source_url,
+        "page_title": campaign.title if campaign.title != offer.title else "",
         "also_at": offer.also_at,
         "period": _period_payload(offer),
         "registration": {
@@ -324,13 +326,28 @@ def dedupe_campaigns(campaigns: list[Campaign]) -> tuple[list[Campaign], DedupeR
         staged.append(campaign)
         keys.append(tuple(unique))
 
-    # 規則 2：整頁清單相同的鏡射頁。bank_id 也進簽章 —— 跨銀行的「同內容」
-    # 只會是兩家都沒解析出東西，那是巧合而不是同一個活動。
-    families: dict[tuple[str, tuple[str, ...]], list[int]] = {}
+    # 規則 2：整頁清單相同的鏡射頁。簽章包含 bank_id 與**活動頁標題**。
+    #
+    # bank_id：跨銀行的「同內容」只會是兩家都沒解析出東西，那是巧合。
+    #
+    # 活動頁標題：這是「真鏡射」與「不同活動但抽取結果相同」唯一可靠的分界。
+    # 實測第一銀行的「家電分期禮─全國電子／大同3C／三井3C」是三個**不同零售商**
+    # 的活動頁，零售商名字只出現在頁面標題裡，切分後的子活動標題一律是
+    # 「【家電分期禮】分期零利率 最高再享2,500元刷卡金」，期間與條件也完全一樣
+    # —— 光看子活動內容無法分辨，合併掉會讓使用者永遠看不到大同與三井。
+    # 聯邦的「屈臣氏」與「康是美」（同一頁不同 query 參數）也是同一回事。
+    # 真鏡射則相反：星展六個子頁的標題全是「分期0%利率」、玉山兩個都是
+    # 「玉山Pi拍錢包信用卡」，因為它們本來就是同一頁被掛在多個網址上。
+    #
+    # 代價是標題不一致的真鏡射不會被合併，那只是多顯示一筆；反過來誤併會刪掉
+    # 一個真實活動頁，兩者不對稱。
+    families: dict[tuple[str, str, tuple[str, ...]], list[int]] = {}
     for position, campaign in enumerate(staged):
         if len(campaign.offers) < MIRROR_MIN_OFFERS:
             continue
-        families.setdefault((campaign.bank_id, keys[position]), []).append(position)
+        families.setdefault(
+            (campaign.bank_id, campaign.title, keys[position]), []
+        ).append(position)
 
     dropped_positions: set[int] = set()
     updates: dict[int, Campaign] = {}

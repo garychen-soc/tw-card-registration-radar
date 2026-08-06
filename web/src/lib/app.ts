@@ -149,7 +149,11 @@ function matches(entry: AgendaEntry, offers: AgendaEntry[]): boolean {
   if (state.need === "before-spend" && entry.contract !== "register_before_spend") return false;
   if (state.query) {
     const needle = state.query.toLocaleLowerCase("zh-Hant");
-    const hay = `${entry.title} ${bankName(entry.bank_id)}`.toLocaleLowerCase("zh-Hant");
+    // 頁面標題也要能搜到 —— 第一銀行的「大同3C」「三井3C」只出現在那裡，
+    // 子活動標題一律是「【家電分期禮】分期零利率…」。
+    const hay = `${entry.title} ${entry.page_title ?? ""} ${bankName(entry.bank_id)}`.toLocaleLowerCase(
+      "zh-Hant",
+    );
     if (!hay.includes(needle)) return false;
   }
   return true;
@@ -281,7 +285,18 @@ function offerCard(entry: AgendaEntry, options: { compact?: boolean } = {}): HTM
   if (entry.needs_review) card.classList.add("is-review");
 
   const head = el("header", "card-head");
-  head.append(el("span", "bank", bankName(entry.bank_id)));
+  // 活動頁標題是很多筆的唯一辨識資訊。實測第一銀行的「家電分期禮─全國電子／
+  // 大同3C／三井3C」是三個不同零售商，零售商名字只在頁面標題裡 —— 切分後的
+  // 子活動標題、期間、條件全部一樣，不顯示頁面標題就是三筆看起來相同的卡片。
+  head.append(
+    el(
+      "span",
+      "bank",
+      entry.page_title
+        ? `${bankName(entry.bank_id)}・${entry.page_title}`
+        : bankName(entry.bank_id),
+    ),
+  );
   const badges = el("div", "badges");
   const risk = riskBadge(entry);
   if (risk) badges.append(risk);
@@ -502,6 +517,7 @@ function toEntry(bankId: string, offer: CatalogOffer): AgendaEntry {
     bank_id: bankId,
     title: offer.title,
     url: offer.url,
+    page_title: offer.page_title,
     also_at: offer.also_at,
     period: offer.period,
     windows: registration?.windows,

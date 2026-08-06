@@ -65,12 +65,14 @@ def _offer(
     )
 
 
-def _campaign(campaign_id: str, url: str, *offers: Offer) -> Campaign:
+def _campaign(
+    campaign_id: str, url: str, *offers: Offer, title: str = "星展購物優惠"
+) -> Campaign:
     return Campaign(
         id=campaign_id,
         bank_id="dbs",
         bank_name="星展銀行",
-        title="星展購物優惠",
+        title=title,
         source_url=url,
         observed_at=NOW,
         offers=list(offers),
@@ -434,3 +436,54 @@ def test_agenda_carries_also_at() -> None:
     }
     for entry in agenda:
         assert entry["also_at"] == [f"{BASE}/mall_09.html"]
+
+
+def test_different_pages_with_the_same_extracted_offers_never_merge() -> None:
+    """抽取結果相同但活動頁標題不同 → 是不同活動，不得合併。
+
+    實測第一銀行「家電分期禮─全國電子／大同3C／三井3C」是三個不同零售商的
+    活動頁，零售商名字只在頁面標題裡，切分後的子活動標題與期間、條件全部相同。
+    合併掉會讓使用者永遠看不到大同與三井。聯邦「屈臣氏」與「康是美」同理。
+    """
+    campaigns = [
+        _campaign(
+            f"c{index}",
+            f"{BASE}/appliance_{index}",
+            _offer(f"a{index}", title="【家電分期禮】分期零利率 最高再享2,500元刷卡金"),
+            _offer(f"b{index}", title="【家電分期禮】特店交易"),
+            title=title,
+        )
+        for index, title in enumerate(
+            ("家電分期禮─全國電子", "家電分期禮─大同3C", "家電分期禮─三井3C")
+        )
+    ]
+    result, report = dedupe_campaigns(campaigns)
+
+    assert len(result) == 3
+    assert report.merged_offers == 0
+    assert all(not offer.also_at for campaign in result for offer in campaign.offers)
+
+
+def test_mirror_pages_still_merge_when_the_title_matches() -> None:
+    """真鏡射的標題本來就一樣 —— 星展六個子頁全叫「分期0%利率」。"""
+    campaigns = [
+        _campaign(
+            "c1",
+            f"{BASE}/mall_08.html",
+            _offer("a1", title="【網購星精彩】"),
+            _offer("b1", title="【博客來】"),
+            title="分期0%利率",
+        ),
+        _campaign(
+            "c2",
+            f"{BASE}/mall_09.html",
+            _offer("a2", title="【網購星精彩】"),
+            _offer("b2", title="【博客來】"),
+            title="分期0%利率",
+        ),
+    ]
+    result, report = dedupe_campaigns(campaigns)
+
+    assert len(result) == 1
+    assert report.merged_offers == 2
+    assert result[0].offers[0].also_at == [f"{BASE}/mall_09.html"]
