@@ -41,8 +41,38 @@ const base = import.meta.env.BASE_URL;
         <div class="stats" id="stats"></div>
 
         <div class="feeds">
-          <a class="action" id="subscribe" href="#">訂閱登錄提醒行事曆</a>
+          <button class="action" id="subscribe" type="button" aria-expanded="false"
+            aria-controls="subscribe-panel">訂閱登錄提醒行事曆</button>
           <a class="action ghost" id="download-ics" href="#" download>下載 .ics</a>
+        </div>
+
+        <!-- 訂閱方式因平台而異，而且差異不是小事：Apple 一鍵就好，Google 日曆
+             必須用瀏覽器加一次（Android 的 App 裡沒有這個功能），其他行事曆
+             一律是「貼上網址」。與其猜使用者的平台，不如三條路都給。 -->
+        <div class="subscribe-panel" id="subscribe-panel" hidden>
+          <div class="sub-row">
+            <span class="sub-label">iPhone／iPad／Mac</span>
+            <a class="action ghost" id="sub-apple" href="#">一鍵訂閱</a>
+            <span class="hint">會加進「行事曆」App 並自動更新</span>
+          </div>
+          <div class="sub-row">
+            <span class="sub-label">Google 日曆（含 Android）</span>
+            <a class="action ghost" id="sub-google" href="#" target="_blank"
+              rel="noopener noreferrer">用瀏覽器加入</a>
+            <span class="hint">
+              手機的 Google 日曆 App 不能自己加訂閱網址，用瀏覽器加一次之後，
+              手機就會自動同步。Google 大約每幾小時才會抓一次更新。
+            </span>
+          </div>
+          <div class="sub-row">
+            <span class="sub-label">Outlook／Thunderbird／三星行事曆等</span>
+            <button class="action ghost" id="sub-copy" type="button">複製訂閱網址</button>
+            <code class="sub-url" id="sub-url"></code>
+          </div>
+          <p class="hint">
+            「下載 .ics」是一次性匯入的備案 —— 匯入之後不會再更新，
+            活動有異動要重新下載。能訂閱就訂閱。
+          </p>
         </div>
       </header>
 

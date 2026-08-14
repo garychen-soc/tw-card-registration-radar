@@ -22,6 +22,12 @@ import {
   windowState,
   windowsOn,
 } from "./derive";
+import {
+  calendarWindow,
+  downloadIcs,
+  googleCalendarUrl,
+  singleEventIcs,
+} from "./calendar";
 import { formatClock, formatDate, formatDay, formatMoment, formatMoney, formatPeriod } from "./format";
 import type {
   AgendaEntry,
@@ -96,6 +102,47 @@ function el<K extends keyof HTMLElementTagNameMap>(
   if (className) node.className = className;
   if (text !== undefined) node.textContent = text;
   return node;
+}
+
+/** 訂閱面板：三種平台各給一條真的走得通的路。 */
+function wireSubscribePanel(): void {
+  const feedUrl = new URL(`${base()}/calendar/registration.ics`, location.href);
+  const https = feedUrl.href;
+  const webcal = `webcal://${feedUrl.host}${feedUrl.pathname}`;
+
+  const apple = document.querySelector<HTMLAnchorElement>("#sub-apple");
+  if (apple) apple.href = webcal;
+
+  const google = document.querySelector<HTMLAnchorElement>("#sub-google");
+  // cid 用 https 而不是 webcal —— Google 兩種都收，但 https 在沒有登入時
+  // 至少會導到看得懂的頁面，webcal 會變成瀏覽器不認識的協定。
+  if (google) {
+    google.href = `https://calendar.google.com/calendar/render?cid=${encodeURIComponent(https)}`;
+  }
+
+  const urlBox = document.querySelector("#sub-url");
+  if (urlBox) urlBox.textContent = https;
+
+  const copy = document.querySelector<HTMLButtonElement>("#sub-copy");
+  copy?.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(https);
+      copy.textContent = "已複製";
+    } catch {
+      // 非 https 或權限被拒時 clipboard 會失敗 —— 退回讓使用者自己選取。
+      copy.textContent = "請手動複製右方網址";
+    }
+    setTimeout(() => (copy.textContent = "複製訂閱網址"), 2500);
+  });
+
+  const toggle = document.querySelector<HTMLButtonElement>("#subscribe");
+  const panel = document.querySelector<HTMLElement>("#subscribe-panel");
+  toggle?.addEventListener("click", () => {
+    if (!panel) return;
+    const open = panel.hidden;
+    panel.hidden = !open;
+    toggle.setAttribute("aria-expanded", String(open));
+  });
 }
 
 function bankName(bankId: string): string {
@@ -261,6 +308,43 @@ function pageLabel(href: string): string {
   }
 }
 
+/**
+ * 逐筆加入行事曆。訂閱整份 feed 對「只想記這一筆」的人太重，而 Google 日曆的
+ * 訂閱必須用瀏覽器加一次（Android 的 App 裡沒有這個功能），所以逐筆這條路對
+ * Android 使用者反而是主要入口。
+ *
+ * 兩個出口涵蓋所有平台：Google 用 TEMPLATE 網址（Android 直接開 App），
+ * .ics 檔給 Apple、Outlook、三星行事曆。
+ */
+function calendarActions(entry: AgendaEntry): HTMLElement {
+  const wrap = el("span", "cal-actions");
+  const window_ = calendarWindow(entry);
+  if (!window_) return wrap;
+  const bank = bankName(entry.bank_id);
+
+  const google = googleCalendarUrl(entry, window_, bank);
+  if (google) {
+    const link = el("a", "action ghost", "加到 Google 日曆");
+    link.href = google;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.title = "Android 會直接開 Google 日曆 App";
+    wrap.append(link);
+  }
+
+  const ics = singleEventIcs(entry, window_, bank);
+  if (ics) {
+    const button = el("button", "action ghost", "加到其他日曆");
+    button.type = "button";
+    button.title = "下載單筆 .ics —— Apple 行事曆、Outlook、三星行事曆都可直接開啟";
+    button.addEventListener("click", () => {
+      downloadIcs(`${entry.id}.ics`, ics);
+    });
+    wrap.append(button);
+  }
+  return wrap;
+}
+
 function registeredToggle(entry: AgendaEntry): HTMLElement {
   const done = readSet(DONE_KEY);
   const label = el("label", "done");
@@ -380,6 +464,7 @@ function offerCard(entry: AgendaEntry, options: { compact?: boolean } = {}): HTM
       foot.append(el("span", "hint", portal.hint || "此為統一登錄頁，到站後請找這筆活動"));
     }
   }
+  foot.append(calendarActions(entry));
   foot.append(registeredToggle(entry));
 
   const details = el("button", "action ghost", "活動條件");
@@ -946,12 +1031,7 @@ async function init(): Promise<void> {
   renderControls();
   render();
 
-  const feed = document.querySelector<HTMLAnchorElement>("#subscribe");
-  if (feed) {
-    const absolute = new URL(`${base()}/calendar/registration.ics`, location.href);
-    feed.href = `webcal://${absolute.host}${absolute.pathname}`;
-    feed.dataset.https = absolute.href;
-  }
+  wireSubscribePanel();
   const download = document.querySelector<HTMLAnchorElement>("#download-ics");
   if (download) download.href = `${base()}/calendar/registration.ics`;
 

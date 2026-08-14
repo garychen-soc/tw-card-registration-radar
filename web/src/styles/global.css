@@ -194,3 +194,28 @@ footer.site p { margin: .3rem 0; }
   .source { grid-template-columns: .6rem 1fr auto; }
   .source-status { grid-column: 2 / -1; }
 }
+
+/* 訂閱面板。三種平台各一列，說明和動作放在一起 —— 使用者只會讀自己那一列。 */
+.subscribe-panel {
+  margin-top: 12px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+  display: grid;
+  gap: 12px;
+}
+.sub-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; }
+.sub-label { font-weight: 600; min-width: 13em; }
+.sub-url {
+  font-size: 0.82rem;
+  color: var(--muted);
+  word-break: break-all;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 3px 7px;
+}
+@media (max-width: 640px) {
+  .sub-label { min-width: 100%; }
+}
