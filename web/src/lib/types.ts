@@ -37,6 +37,8 @@ export interface AgendaEntry {
    *  （實測星展一檔活動掛 6 頁），後端合併成一筆並把其餘網址留在這裡。 */
   page_title?: string;
   also_at?: string[];
+  /** 這一筆是上一版沿用的（本次讀不到該來源）。值是上一版的產生時間。 */
+  stale_since?: string;
   period?: Period;
   windows?: RegWindow[];
   recurrence?: "monthly" | "per_campaign_period";
@@ -64,6 +66,8 @@ export interface SourceInfo {
   offer_count?: number;
   /** 去重後實際發布的筆數，與 catalog/<bank>.json 的筆數一致。 */
   unique_offer_count?: number;
+  carried_offer_count?: number;
+  stale_since?: string;
   message?: string;
   portal?: Portal;
 }

@@ -11,6 +11,7 @@ from radar.emit import (
     build_detail,
     build_ics,
     build_index,
+    carry_forward,
     portals_of,
     prune,
     write_site,
@@ -348,3 +349,135 @@ def test_written_json_is_compact(tmp_path: Path) -> None:
     body = (tmp_path / "data" / "index.json").read_text(encoding="utf-8")
     assert '": ' not in body
     assert body.count("\n") == 1
+
+
+# ── 來源失敗時沿用上一版 ──────────────────────────────────
+
+
+def _previous_site(
+    tmp: Path,
+    bank_id: str,
+    offers: list[dict[str, object]],
+    generated_at: str = "2026-08-15T04:00:00+00:00",
+) -> None:
+    catalog = tmp / "data" / "catalog"
+    catalog.mkdir(parents=True, exist_ok=True)
+    (catalog / f"{bank_id}.json").write_text(
+        json.dumps(
+            {
+                "schema_version": 1,
+                "bank_id": bank_id,
+                "generated_at": generated_at,
+                "offers": offers,
+            },
+            ensure_ascii=False,
+        ),
+        encoding="utf-8",
+    )
+
+
+def _blocked(bank_id: str = "sunny") -> SourceHealth:
+    return SourceHealth(
+        bank_id=bank_id,
+        bank_name="陽信銀行",
+        requested_url="https://www.sunnybank.com.tw/",
+        status="blocked",
+        campaign_count=0,
+        offer_count=0,
+    )
+
+
+def test_blocked_source_carries_forward_marked_as_stale(tmp_path: Path) -> None:
+    """來源被擋時沿用上一版並標記 —— 原本是整家歸零，使用者什麼都看不到。"""
+    _previous_site(tmp_path, "sunny", [{"id": "sunny-1", "title": "刷卡享優惠"}])
+    now = datetime(2026, 8, 16, 4, 0, tzinfo=UTC)
+    carried, report = carry_forward(
+        site_root=tmp_path,
+        health=[_blocked()],
+        previous_index={"generated_at": "2026-08-15T04:00:00+00:00"},
+        now=now,
+    )
+    assert list(carried) == ["sunny"]
+    assert carried["sunny"][0]["stale_since"] == "2026-08-15T04:00:00+00:00"
+    assert report[0].offers == 1
+    assert report[0].stale_hours == 24.0
+
+
+def test_carry_forward_stops_after_the_age_limit(tmp_path: Path) -> None:
+    """放太久就不再沿用 —— 活動清單超過兩週，裡面多半有已結束、已下架的，
+    那時「有資料」比「沒資料」更誤導。"""
+    _previous_site(
+        tmp_path, "sunny", [{"id": "sunny-1"}], generated_at="2026-07-01T04:00:00+00:00"
+    )
+    carried, report = carry_forward(
+        site_root=tmp_path,
+        health=[_blocked()],
+        previous_index={"generated_at": "2026-08-15T04:00:00+00:00"},
+        now=datetime(2026, 8, 16, 4, 0, tzinfo=UTC),
+    )
+    assert carried == {} and report == []
+
+
+def test_partial_sources_are_not_topped_up_from_the_previous_version(tmp_path: Path) -> None:
+    """partial 代表大部分讀到了。混入舊資料會讓新舊兩批並存，
+    使用者無從分辨哪一筆是今天的。"""
+    _previous_site(tmp_path, "esun", [{"id": "esun-old", "title": "舊活動"}])
+    health = SourceHealth(
+        bank_id="esun",
+        bank_name="玉山銀行",
+        requested_url="https://www.esunbank.com/",
+        status="partial",
+        campaign_count=180,
+        offer_count=250,
+    )
+    carried, _ = carry_forward(
+        site_root=tmp_path,
+        health=[health],
+        previous_index={"generated_at": "2026-08-15T04:00:00+00:00"},
+        now=datetime(2026, 8, 16, 4, 0, tzinfo=UTC),
+    )
+    assert carried == {}
+
+
+def test_carried_offers_never_inflate_the_coverage_baseline(tmp_path: Path) -> None:
+    """offer_count 必須一直是「這次真的讀到幾筆」—— 那是涵蓋率防護的基準。
+    沿用的筆數放在獨立欄位，否則防護分不清「來源掛了」與「抓取退步」。"""
+    _previous_site(tmp_path, "sunny", [{"id": "sunny-1"}, {"id": "sunny-2"}])
+    carried, _ = carry_forward(
+        site_root=tmp_path,
+        health=[_blocked()],
+        previous_index={"generated_at": "2026-08-15T04:00:00+00:00"},
+        now=datetime(2026, 8, 16, 4, 0, tzinfo=UTC),
+    )
+    index = build_index(
+        [], health=[_blocked()], alerts=[], generated_at=NOW, carried=carried
+    )
+    source = index["sources"][0]
+    assert isinstance(source, dict)
+    assert source["offer_count"] == 0
+    assert source["carried_offer_count"] == 2
+    counts = index["counts"]
+    assert isinstance(counts, dict)
+    assert counts["offers"] == 0
+
+
+def test_catalog_without_a_recorded_time_is_not_carried_forward(tmp_path: Path) -> None:
+    """不知道多舊的資料不該掛上一個看起來很新的時間。
+
+    這個 bug 我原本寫出來了：``stale_since`` 取整份 index 的時間，而某家的
+    catalog 可能是十天前留下的，會被標成「6 小時前」—— 正是本專案在反對的
+    靜默過期。改成每家 catalog 記自己的時間，沒有記錄的就不沿用。
+    """
+    catalog = tmp_path / "data" / "catalog"
+    catalog.mkdir(parents=True, exist_ok=True)
+    (catalog / "sunny.json").write_text(
+        json.dumps({"schema_version": 1, "bank_id": "sunny", "offers": [{"id": "sunny-1"}]}),
+        encoding="utf-8",
+    )
+    carried, report = carry_forward(
+        site_root=tmp_path,
+        health=[_blocked()],
+        previous_index={"generated_at": "2026-08-15T04:00:00+00:00"},
+        now=datetime(2026, 8, 16, 4, 0, tzinfo=UTC),
+    )
+    assert carried == {} and report == []

@@ -391,6 +391,15 @@ function offerCard(entry: AgendaEntry, options: { compact?: boolean } = {}): HTM
     badges.append(badge);
   }
   if (entry.recurrence) badges.append(el("span", "badge recur", "每期重登"));
+  // 沿用上一版的資料一定要看得出來。沿用本身不是問題，沿用而不標示才是。
+  if (entry.stale_since) {
+    const at = parseAt(entry.stale_since);
+    const badge = el("span", "badge stale", "舊資料");
+    badge.title = at
+      ? `本次讀不到這家銀行，以下是 ${formatMoment(entry.stale_since)} 的資料`
+      : "本次讀不到這家銀行，以下是上一版的資料";
+    badges.append(badge);
+  }
   const life = lifecycleOf(entry);
   if (life === "upcoming") badges.append(el("span", "badge soon", "即將開始"));
   if (life === "ended") badges.append(el("span", "badge ended", "已結束"));
@@ -777,6 +786,14 @@ function renderSources(root: HTMLElement): void {
     name.target = "_blank";
     name.rel = "noopener noreferrer";
     name.textContent = source.bank_name;
+    if (source.carried_offer_count) {
+      const note = el(
+        "span",
+        "hint",
+        `本次讀不到，沿用 ${formatMoment(source.stale_since)} 的 ${source.carried_offer_count} 筆`,
+      );
+      name.append(note);
+    }
     row.append(name);
     const count = el("span", "source-count", `${shownCount(source)} 筆`);
     const raw = source.offer_count ?? 0;

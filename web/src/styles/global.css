@@ -219,3 +219,7 @@ footer.site p { margin: .3rem 0; }
 @media (max-width: 640px) {
   .sub-label { min-width: 100%; }
 }
+
+/* 沿用上一版的資料。用警示色而不是灰階 —— 它不是「次要資訊」，
+   是「這筆可能已經不準了」。 */
+.badge.stale { background: #4a3a12; color: #f0d98a; border-color: #6b5518; }

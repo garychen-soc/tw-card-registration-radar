@@ -26,7 +26,9 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from radar.emit import (  # noqa: E402
     build_index,
+    carry_forward,
     dedupe_campaigns,
+    describe_carry_forward,
     describe_dedupe,
     portals_of,
     write_site,
@@ -229,6 +231,12 @@ def main() -> int:
     # 抓取退步（實測星展 68→43，掉 36.8%，逐來源門檻是 40%）。
     campaigns, dedupe = dedupe_campaigns(campaigns)
 
+    # 本次完全讀不到的來源沿用上一版並標記為舊資料。放在去重之後 —— 沿用的
+    # 是「上一版已經去重完的輸出」，再跑一次去重沒有意義。
+    carried, carried_report = carry_forward(
+        site_root=SITE, health=health, previous_index=previous_index, now=now
+    )
+
     index = build_index(
         campaigns,
         health=health,
@@ -236,6 +244,7 @@ def main() -> int:
         generated_at=now,
         portals=portals_of(campaigns),
         dedupe=dedupe,
+        carried=carried,
     )
     guard = assess(
         health=health,
@@ -246,6 +255,8 @@ def main() -> int:
 
     print()
     for line in describe_dedupe(dedupe):
+        print(line)
+    for line in describe_carry_forward(carried_report):
         print(line)
 
     print()
@@ -276,7 +287,7 @@ def main() -> int:
         return 4
 
     if not args.dry_run:
-        written = write_site(SITE, index, campaigns, now=now)
+        written = write_site(SITE, index, campaigns, now=now, carried=carried)
         print()
         for path in written:
             size = path.stat().st_size

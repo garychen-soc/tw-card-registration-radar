@@ -423,6 +423,7 @@ def build_index(
     generated_at: datetime,
     portals: dict[str, dict[str, str]] | None = None,
     dedupe: DedupeReport | None = None,
+    carried: dict[str, list[dict[str, Any]]] | None = None,
 ) -> dict[str, Any]:
     """首屏索引。
 
@@ -444,6 +445,33 @@ def build_index(
         for campaign, offer in pairs
         if offer.registration.windows
     ]
+    # 沿用的來源也要進 agenda，否則它們在時間軸上等於不存在 —— 那就回到
+    # 「整家消失」的原狀了。每一筆都帶 stale_since，UI 會標示成舊資料。
+    for bank_id, entries in sorted((carried or {}).items()):
+        for entry in entries:
+            windows = (entry.get("registration") or {}).get("windows") or []
+            if not windows:
+                continue
+            agenda.append(
+                prune({
+                    "id": entry.get("id"),
+                    "bank_id": bank_id,
+                    "title": entry.get("title"),
+                    "url": entry.get("url"),
+                    "page_title": entry.get("page_title", ""),
+                    "period": entry.get("period"),
+                    "windows": windows,
+                    "recurrence": (entry.get("registration") or {})
+                    .get("recurrence", {})
+                    .get("kind"),
+                    "contract": ((entry.get("registration") or {}).get("contract") or {}).get(
+                        "kind"
+                    ),
+                    "needs_review": entry.get("needs_review", False),
+                    "review_codes": entry.get("review_codes", []),
+                    "stale_since": entry.get("stale_since"),
+                })
+            )
     actionable = [entry for entry in agenda if not entry["needs_review"]]
     portal_map = portals or {}
     merged = dedupe.merged_offers if dedupe else 0
@@ -474,6 +502,17 @@ def build_index(
                 "campaign_count": item.campaign_count,
                 "offer_count": item.offer_count,
                 "unique_offer_count": item.offer_count - merged_by_source.get(item.bank_id, 0),
+                # 沿用的筆數刻意獨立成一個欄位 —— offer_count 必須一直代表
+                # 「這次真的從官方頁讀到幾筆」，那是涵蓋率防護的比較基準。
+                "carried_offer_count": len((carried or {}).get(item.bank_id, [])),
+                "stale_since": next(
+                    (
+                        entry.get("stale_since")
+                        for entry in (carried or {}).get(item.bank_id, [])
+                        if entry.get("stale_since")
+                    ),
+                    "",
+                ),
                 "message": item.message,
                 "portal": portal_map.get(item.bank_id, {}),
             })
@@ -485,10 +524,20 @@ def build_index(
     return payload
 
 
-def build_catalog(bank_id: str, campaigns: list[Campaign]) -> dict[str, Any]:
+def build_catalog(
+    bank_id: str, campaigns: list[Campaign], *, generated_at: datetime | None = None
+) -> dict[str, Any]:
+    """單一銀行的完整活動條件。
+
+    ``generated_at`` 是**這一家**的資料時間，不是整份網站的。來源失敗時要沿用
+    上一版（見 ``carry_forward``），而判斷「這份資料多舊」只能靠它 —— 用整份
+    index 的時間會把十天前留下的 catalog 標成「6 小時前」，那正是本專案在
+    反對的靜默過期。
+    """
     payload = {
         "schema_version": SCHEMA_VERSION,
         "bank_id": bank_id,
+        "generated_at": generated_at.isoformat() if generated_at else "",
         "offers": [
             prune(catalog_entry(campaign, offer))
             for campaign in campaigns
@@ -695,6 +744,7 @@ def write_site(
     campaigns: list[Campaign],
     *,
     now: datetime,
+    carried: dict[str, list[dict[str, Any]]] | None = None,
 ) -> list[Path]:
     written: list[Path] = []
     data_dir = root / "data"
@@ -710,7 +760,26 @@ def write_site(
 
     for bank_id in sorted({campaign.bank_id for campaign in campaigns}):
         catalog_path = catalog_dir / f"{bank_id}.json"
-        _write_json(catalog_path, build_catalog(bank_id, campaigns))
+        _write_json(catalog_path, build_catalog(bank_id, campaigns, generated_at=now))
+        written.append(catalog_path)
+
+    # 沿用的來源：catalog 原樣寫回（已帶 stale_since），detail 檔留在原地不動 ——
+    # 它們是上一版的產出，本來就還在，重寫只會製造沒有意義的 diff。
+    for bank_id, entries in sorted((carried or {}).items()):
+        catalog_path = catalog_dir / f"{bank_id}.json"
+        # generated_at 保留**原本的**時間，不是這次執行的時間 —— 覆蓋它會讓
+        # 這份資料每天都看起來是新的，永遠不會觸及沿用的天數上限。
+        _write_json(
+            catalog_path,
+            {
+                "schema_version": SCHEMA_VERSION,
+                "bank_id": bank_id,
+                "generated_at": next(
+                    (e["stale_since"] for e in entries if e.get("stale_since")), ""
+                ),
+                "offers": entries,
+            },
+        )
         written.append(catalog_path)
 
     for campaign in campaigns:
@@ -732,3 +801,123 @@ def _write_json(path: Path, payload: dict[str, Any]) -> None:
         json.dumps(payload, ensure_ascii=False, separators=(",", ":")) + "\n",
         encoding="utf-8",
     )
+
+
+# ── 來源失敗時沿用上一版 ──────────────────────────────────
+
+# 沿用的上限。超過這個天數就寧可不顯示 —— 活動清單放了兩週以上，裡面多半已經
+# 有結束的、下架的、條件改過的，那時「有資料」比「沒資料」更誤導。
+CARRY_FORWARD_MAX_DAYS = 14
+
+
+class CarriedSource(BaseModel):
+    """一家沿用上一版資料的來源。留在報告與 index 裡供稽核。"""
+
+    bank_id: str
+    bank_name: str
+    offers: int
+    stale_since: datetime
+    stale_hours: float
+
+
+def carry_forward(
+    *,
+    site_root: Path,
+    health: list[SourceHealth],
+    previous_index: dict[str, Any] | None,
+    now: datetime,
+    max_days: int = CARRY_FORWARD_MAX_DAYS,
+) -> tuple[dict[str, list[dict[str, Any]]], list[CarriedSource]]:
+    """本次讀不到的來源，沿用上一版已發布的活動並標記為舊資料。
+
+    **為什麼要做。** 原本來源一被擋就整家歸零，使用者什麼都看不到 —— 陽信被
+    datacenter IP 擋掉時就是 0 筆。對照組（Codex 的同性質網站）在同一家遇到
+    Cloudflare 403 時保留 27 筆並標成 partial，那個產品決策比我原本的好：
+    昨天的活動清單多半今天仍然有效，直接消失對使用者沒有任何好處。
+
+    **兩條讓它不會變成謊言的規則。**
+
+    1. 逐筆帶 ``stale_since``，網站上明講「這家今天讀不到，以下是 N 小時前的
+       資料」。沿用而不標示才是問題，沿用本身不是。
+    2. 超過 ``max_days`` 就不再沿用。活動清單放兩週以上，裡面多半有已結束、
+       已下架、條件改過的，那時「有資料」比「沒資料」更誤導。
+
+    **不動 ``SourceHealth.offer_count``。** 那是「這次真的從官方頁讀到幾筆」，
+    是涵蓋率防護的比較基準；把沿用的筆數算進去，防護就再也分不清「來源掛了」
+    與「抓取退步」。與去重的處理原則相同。
+
+    回傳 ``{bank_id: [catalog entries]}`` 與一份可稽核的清單。
+    """
+    if previous_index is None:
+        return {}, []
+
+    names = {item.bank_id: item.bank_name for item in health}
+    carried: dict[str, list[dict[str, Any]]] = {}
+    report: list[CarriedSource] = []
+    for item in health:
+        # 只補「完全讀不到」的來源。partial 代表大部分讀到了，混入舊資料會讓
+        # 新舊兩批並存，使用者無從分辨哪一筆是今天的。
+        if item.status not in {"failed", "blocked"} or item.offer_count:
+            continue
+        entries, source_at = _previous_catalog(site_root, item.bank_id)
+        # 沒有記錄資料時間的 catalog 不沿用。舊版的檔案沒有這個欄位，而
+        # 「不知道多舊」的資料不該掛上一個看起來很新的時間 —— 那一家會在下次
+        # 成功讀取之後才開始享有沿用，這是可接受的啟動成本。
+        if not entries or source_at is None:
+            continue
+        stale_hours = (now - source_at).total_seconds() / 3600
+        if stale_hours > max_days * 24:
+            continue
+        for entry in entries:
+            entry["stale_since"] = source_at.isoformat()
+        carried[item.bank_id] = entries
+        report.append(
+            CarriedSource(
+                bank_id=item.bank_id,
+                bank_name=names.get(item.bank_id, item.bank_id),
+                offers=len(entries),
+                stale_since=source_at,
+                stale_hours=round(stale_hours, 1),
+            )
+        )
+    return carried, report
+
+
+def _previous_catalog(
+    site_root: Path, bank_id: str
+) -> tuple[list[dict[str, Any]], datetime | None]:
+    """上一版該銀行的活動與**它自己的**資料時間。"""
+    path = site_root / "data" / "catalog" / f"{bank_id}.json"
+    if not path.exists():
+        return [], None
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        return [], None
+    if not isinstance(payload, dict):
+        return [], None
+    offers = payload.get("offers")
+    entries = [entry for entry in offers if isinstance(entry, dict)] if offers else []
+    return entries, _parse_moment(payload.get("generated_at"))
+
+
+def _parse_moment(value: Any) -> datetime | None:
+    if not isinstance(value, str):
+        return None
+    try:
+        parsed = datetime.fromisoformat(value)
+    except ValueError:
+        return None
+    return parsed if parsed.tzinfo else parsed.replace(tzinfo=UTC)
+
+
+def describe_carry_forward(report: list[CarriedSource]) -> list[str]:
+    if not report:
+        return []
+    lines = ["沿用上一版資料（本次讀不到，已標記為舊資料）："]
+    for item in report:
+        lines.append(
+            f"  {item.bank_name} {item.offers} 筆，資料時間 "
+            f"{item.stale_since:%Y-%m-%d %H:%M}（{item.stale_hours:.0f} 小時前）"
+        )
+    return lines

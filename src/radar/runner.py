@@ -462,7 +462,18 @@ def _status(result: SourceResult, item_count: int) -> str:
     return "complete"
 
 
+# 訊息裡最多列幾個被拒的網址。全部列出會讓來源面板變成一面牆（實測彰銀
+# 一次就有 8 個內網 IP 的連結），但只給數字又無法排查。
+MESSAGE_URL_SAMPLE = 5
+
+
 def _message(result: SourceResult) -> str:
+    """來源健康訊息。**被拒的網址要寫出來，不能只給數字。**
+
+    「8 筆被拒絕存取」看不出該做什麼；「官方頁輸出 http://10.100.6.38/...」
+    一眼就知道是官方頁吐出內網位址，不是我們的白名單太嚴。這一條是看了 Codex
+    的來源訊息之後補的 —— 它那則彰銀的訊息直接列出全部 8 個網址，可以直接動作。
+    """
     stats = result.stats
     parts: list[str] = []
     if stats.listing_incomplete:
@@ -470,10 +481,32 @@ def _message(result: SourceResult) -> str:
     if stats.detail_failed:
         parts.append(f"{stats.detail_failed} 筆明細暫時無法讀取")
     if stats.detail_blocked:
-        parts.append(f"{stats.detail_blocked} 筆被拒絕存取或未通過安全檢查已略過")
+        blocked = _blocked_urls(result)
+        detail = f"：{'、'.join(blocked)}" if blocked else ""
+        more = (
+            f"（另有 {stats.detail_blocked - len(blocked)} 筆）"
+            if blocked and stats.detail_blocked > len(blocked)
+            else ""
+        )
+        parts.append(
+            f"{stats.detail_blocked} 筆被拒絕存取或未通過安全檢查已略過{detail}{more}"
+        )
     if stats.detail_not_modified:
         parts.append(f"{stats.detail_not_modified} 筆官方回報未變更，改用本機存檔")
     return "；".join(parts)
+
+
+def _blocked_urls(result: SourceResult) -> list[str]:
+    """被拒的活動連結。逐筆的警示裡已經有了，只是沒浮上來源訊息。"""
+    seen: list[str] = []
+    for alert in result.alerts:
+        if alert.type != "source_emitted_invalid_url" or not alert.url:
+            continue
+        if alert.url not in seen:
+            seen.append(alert.url)
+        if len(seen) >= MESSAGE_URL_SAMPLE:
+            break
+    return seen
 
 
 def _health(spec: SourceSpec, status: str, result: SourceResult, message: str) -> SourceHealth:
