@@ -624,3 +624,46 @@ def test_listing_scope_restricts_links_to_one_tab_panel() -> None:
     items = read_listing(spec, FakeFetcher(pages={"https://www.example.com/list": html}))
 
     assert [item.title for item in items] == ["卡片活動A", "卡片活動B"]
+
+
+def test_json_api_extracts_url_from_html_and_skips_disabled_rows() -> None:
+    """端點沒有純網址欄位、且會標記已下架的資料列 —— 兆豐兩者都有。
+
+    連結包在 DetailPageLinkHtml 這個完整的 <a> 標籤裡；Removal=c-card--disabled
+    是官方標記「活動已結束」，實測 29 筆中有 8 筆仍留著明細連結，不排除就會把
+    114/2/20~115/2/19 那種早就結束的活動發布出去。
+    """
+    payload = [
+        {
+            "Title": "現行活動",
+            "Removal": "",
+            "Link": '<a href="/event/alive" class="c-card__action">了解更多</a>',
+        },
+        {
+            "Title": "已下架活動",
+            "Removal": "c-card--disabled",
+            "Link": '<a href="/event/ended" class="c-card__action">了解更多</a>',
+        },
+        {
+            # 官方把連結拿掉的（多數是已結束）—— 抽不出網址就跳過，不是錯誤
+            "Title": "沒有明細頁",
+            "Removal": "",
+            "Link": '<a class="c-card__action">了解更多</a>',
+        },
+    ]
+    spec = _spec(
+        {
+            "kind": "json_api",
+            "entry_url": "https://www.example.com/list",
+            "data_url": "https://www.example.com/api",
+            "url_pattern": r'href="([^"]+)"',
+            "skip_field": "Removal",
+            "fields": {"url": "Link", "title": "Title"},
+        }
+    )
+    items = read_listing(
+        spec, FakeFetcher(pages={"https://www.example.com/api": json.dumps(payload)})
+    )
+
+    assert [item.title for item in items] == ["現行活動"]
+    assert items[0].url == "https://www.example.com/event/alive"

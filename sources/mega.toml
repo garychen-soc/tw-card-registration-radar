@@ -1,0 +1,55 @@
+id = "mega"
+bank_name = "兆豐銀行"
+domains = ["megabank.com.tw"]
+note = """優惠總覽頁是 JS 渲染的：399KB HTML 只有 1,329 字純文字、0 個期間標籤，
+頁面上看得到的只有篩選 UI。活動由 jQuery 打 DiscountOverview/GetDiscount 拿回來，
+一次回傳全部 282 筆 —— 篩選（需登錄／強檔／最新、卡別、通路、地區）**全部在前端做**，
+所以不需要逐條件請求。
+
+POST 的參數是 Sitecore 的元件 GUID（itemID 與 settingID），寫在總覽頁的內嵌
+script 裡。這是這份 spec 最脆弱的地方：官方改版重建那個元件就會換 GUID，屆時
+端點會回 HTTP 200 但**內容 0 bytes**（實測參數不對就是這個表現，不是 4xx）。
+清單讀不到時 runner 會讓來源變成 failed 並留警示，不會靜默歸零。
+
+三個實測到的細節：
+
+* 端點沒有純網址欄位，連結包在 DetailPageLinkHtml 這個完整的 <a> 標籤裡，
+  所以用 url_pattern 抽出 href。
+* Tags 帶「需登錄」的有 57 筆 —— 這是銀行自己標記的，比從內文推斷可靠。
+  不過明細頁的內文本來就寫滿「登錄」（實測 14–22 處），所以沒有為它另外加欄位；
+  先看解析結果是否已經對得上。
+* 明細頁是完整靜態 HTML（實測 1,668–3,140 字），期間寫成民國年
+  「活動期間：115/7/1~12/31」，解析器已支援。
+
+查詢字串裡的 sc_lang／sc_site／dic_lang 照抄官方 —— 官方自己的 JS 把它們寫成
+`&amp;`（CMS 把 script 內容 HTML 逃脫了），所以實際送出的參數名是 `amp;sc_site`。
+端點不檢查這些值，這裡用正確的 `&` 一樣可以。"""
+
+[listing]
+kind = "json_api"
+entry_url = "https://www.megabank.com.tw/personal/credit-card/event/overview"
+data_url = "https://www.megabank.com.tw/api/client/DiscountOverview/GetDiscount?sc_lang=zh-TW&sc_site=bank-zh-tw&dic_lang=zh-TW"
+# 端點回傳的就是最上層的陣列，不需要 items_path。
+url_pattern = 'href="([^"]+)"'
+# Removal=c-card--disabled 是官方標記「已下架」。29 筆中有 8 筆仍留著明細連結，
+# 不排除就會發布早就結束的活動（最舊一筆的期間是 114/2/20~115/2/19）。
+skip_field = "Removal"
+
+[listing.form_data]
+itemID = "{F9A985A0-EA67-4BF8-A865-9E1522CBC298}"
+settingID = "{2C3011E0-9805-415A-87BA-9E4B02EE09BA}"
+
+[listing.fields]
+url = "DetailPageLinkHtml"
+title = "Title"
+# Description 就是「活動期間：115/7/9-8/13」，明細頁抓不到期間時可以補位。
+summary = "Description"
+
+[detail]
+source = "html"
+cardinality = "many"
+
+[registration]
+portal_url = "https://www.megabank.com.tw/personal/credit-card/event/overview"
+portal_kind = "bank_portal"
+portal_hint = "於兆豐信用卡優惠總覽找到對應活動後登錄"

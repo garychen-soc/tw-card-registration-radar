@@ -220,11 +220,24 @@ def _collect_json_items(
         candidates = [row for row in _walk(rows) if root_key in row]
 
     allowed_categories = set(listing.categories)
+    url_pattern = re.compile(listing.url_pattern) if listing.url_pattern else None
+    skip_field = fields.get("skip", "") or listing.skip_field
     added = 0
     for row in candidates:
+        # 官方自己標記已下架的就不收。兆豐的 Removal=c-card--disabled 有 29 筆，
+        # 其中 8 筆仍留著明細連結（最舊的期間是 114/2/20~115/2/19），照收會把
+        # 早就結束的活動發布出去。
+        if skip_field and _get(row, skip_field):
+            continue
         raw_url = _get(row, url_key)
         if not isinstance(raw_url, str) or not raw_url.strip():
             continue
+        if url_pattern is not None:
+            # 端點把連結包在 HTML 片段裡（兆豐的 DetailPageLinkHtml 是整個 <a> 標籤）。
+            found = url_pattern.search(raw_url)
+            if not found:
+                continue
+            raw_url = found.group(1)
         url = _public_url(listing, raw_url)
         category = normalize_inline(str(_get(row, fields.get("category", "")) or ""))
         if allowed_categories and category and category not in allowed_categories:

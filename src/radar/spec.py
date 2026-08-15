@@ -94,6 +94,18 @@ class ListingSpec(Strict):
         description="欄位映射。值可用點號指向巢狀路徑，例如 "
         "`start = \"campaignProps.startDate\"`。",
     )
+    skip_field: str = Field(
+        default="",
+        description="這個欄位有值就跳過該筆。用於官方自己標記「已下架」的資料列 ——"
+        "兆豐的 Removal 欄位是 c-card--disabled 時，代表活動已結束、連明細頁的"
+        "連結都拿掉了，發布它只會製造雜訊。",
+    )
+    url_pattern: str = Field(
+        default="",
+        description="從 fields.url 取到的值裡再用正則抽出網址（group 1）。"
+        "端點把連結包在 HTML 片段裡時使用 —— 兆豐的 DetailPageLinkHtml 是一整個 "
+        "<a> 標籤，沒有純網址欄位。",
+    )
     url_strip_prefix: str = Field(
         default="",
         description="從清單取得的路徑要去掉的前綴。國泰世華給的是 AEM 內部路徑 "
