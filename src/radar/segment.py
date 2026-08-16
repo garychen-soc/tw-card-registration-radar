@@ -101,10 +101,48 @@ def split_offers(
                 )
             )
         if len(chunks) >= 2:
-            return chunks
+            return _merge_repeated(chunks)
 
     stripped = text.strip()
     return [OfferChunk(title=_chunk_title(stripped), text=stripped)]
+
+
+def _merge_repeated(chunks: list[OfferChunk]) -> list[OfferChunk]:
+    """同一頁裡邊界標記相同的區塊併成一個活動。
+
+    銀行很常把同一批活動寫兩次：前段是摘要、後段是詳細辦法。實測玉山的 momo
+    活動頁六個活動各出現兩次（切成 12 塊），而**兩半抓到的條件不一樣** ——
+    前半有「單筆滿50,000元、限量600名」，後半有「2026/8/17 10:00 開放登錄、
+    適用玉山Unicard、分期、回饋上限1,000元」。分成兩筆的後果有兩個：時間軸上
+    出現兩張看起來一樣的卡片，而且**每一張的條件都是殘缺的**。
+
+    **但只有在標記本身帶活動身分時才成立。** 中信的邊界是固定的段落標籤
+    「優惠內容」，一頁重複 6 次代表 6 個不同的活動 —— 照標記合併會把 6 筆併成
+    1 筆（實測就是這樣崩掉的）。分辨方式是看這一頁有沒有多種標記：
+    【活動一】…【活動六】各出現兩次是「活動識別字重複」，而清一色都是
+    「優惠內容」則是「段落標籤重複」。標記只有一種時一律不合併。
+
+    合併保留第一次出現的標題與順序 —— 摘要段通常寫得比較完整。
+    """
+    # 標記只有一種 → 它是段落標籤而非活動識別字，不能當成同一個活動。
+    if len({chunk.boundary_marker for chunk in chunks}) < 2:
+        return chunks
+
+    merged: dict[str, OfferChunk] = {}
+    order: list[str] = []
+    for chunk in chunks:
+        key = chunk.boundary_marker
+        if key not in merged:
+            merged[key] = chunk
+            order.append(key)
+            continue
+        first = merged[key]
+        merged[key] = OfferChunk(
+            title=first.title,
+            text=f"{first.text}\n{chunk.text}",
+            boundary_marker=key,
+        )
+    return [merged[key] for key in order]
 
 
 def single_chunk(raw_text: str) -> list[OfferChunk]:

@@ -248,3 +248,41 @@ def test_small_menu_is_still_dropped_when_content_dominates() -> None:
     text = to_text(f"<html><body><div>{menu}</div><section><p>{body}</p></section></body></html>")
     assert "選單項目" not in text
     assert "單筆滿1,000元" in text
+
+
+def test_same_activity_written_twice_on_a_page_merges() -> None:
+    """銀行常把同一批活動寫兩次：前段摘要、後段詳細辦法。
+
+    實測玉山 momo 活動頁六個活動各出現兩次（切成 12 塊），而兩半抓到的條件
+    不一樣 —— 前半有「單筆滿50,000元、限量600名」，後半有「8/17 10:00 開放登錄、
+    適用玉山Unicard」。分成兩筆的後果是時間軸出現兩張看起來一樣的卡片，
+    而且每一張的條件都是殘缺的。
+    """
+    text = (
+        "【活動一】玉山銀行日\n活動期間：2026/8/2~2026/8/31\n單筆滿1,000元享5%回饋\n"
+        "【活動二】滿額加碼\n活動期間：2026/8/3~2026/8/15\n單筆滿50,000元享1,000點\n"
+        "【活動一】玉山銀行日\n本活動於2026/8/7 17:00開放登錄，限量1,000名\n"
+        "【活動二】滿額加碼\n本活動於2026/8/17 10:00開放登錄，限量600名\n"
+    )
+    chunks = split_offers(text)
+
+    assert [c.boundary_marker for c in chunks] == ["【活動一】", "【活動二】"]
+    # 合併後兩半的內容都在同一塊裡
+    assert "5%回饋" in chunks[0].text and "8/7 17:00開放登錄" in chunks[0].text
+    assert "50,000元" in chunks[1].text and "8/17 10:00開放登錄" in chunks[1].text
+
+
+def test_a_repeated_section_label_is_not_an_activity_identifier() -> None:
+    """標記只有一種時，它是段落標籤而不是活動識別字。
+
+    實測中信的邊界設定就是固定字串「優惠內容」，一頁重複 6 次代表 6 個**不同**的
+    活動。照標記合併會把 6 筆併成 1 筆 —— 這個 bug 我實作時真的寫出來了。
+    """
+    text = (
+        "優惠內容\n國泰置地廣場 滿3,000送300\n"
+        "優惠內容\n新光三越 滿5,000送500\n"
+        "優惠內容\n遠東百貨 滿2,000送200\n"
+    )
+    chunks = split_offers(text, pattern="優惠內容", min_chunk_chars=10)
+
+    assert len(chunks) == 3, "同一種標記重複 = 多個活動，不得合併"
