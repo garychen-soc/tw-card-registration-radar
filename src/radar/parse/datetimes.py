@@ -489,6 +489,9 @@ def detect_recurrence(raw_text: str) -> Recurrence:
             kind="monthly",
             note=f"每月 {int(match.group('day'))} 日 {hour:02d}:{minute:02d} 開放登錄",
             confidence=0.85,
+            day_of_month=int(match.group("day")),
+            hour=hour,
+            minute=minute,
         )
     match = _RECUR_NTH_WEEKDAY.search(text)
     if match:
@@ -500,6 +503,10 @@ def detect_recurrence(raw_text: str) -> Recurrence:
                 f"{hour:02d}:{minute:02d} 開放登錄"
             ),
             confidence=0.80,
+            # 第 N 個星期幾沒有固定的日期，只帶時刻 —— 讀取端算不出日期就
+            # 只顯示 note，不會誤放到時間軸上。
+            hour=hour,
+            minute=minute,
         )
     if _RECUR_PER_PERIOD.search(text):
         return Recurrence(kind="per_campaign_period", note="每期需重新登錄", confidence=0.70)

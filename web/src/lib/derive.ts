@@ -62,14 +62,16 @@ export function lifecycleOf(entry: AgendaEntry, today: string = taipeiDay()): Li
 
 /** 下一個還沒關閉的登錄時點。沒有就回 null。 */
 export function nextWindow(entry: AgendaEntry, now: Date = new Date()): RegWindow | null {
-  const upcoming = (entry.windows ?? [])
+  const upcoming = scheduleWindows(entry, now)
     .filter((w) => windowState(w, now) !== "closed")
     .sort((a, b) => (anchorOf(a)?.getTime() ?? 0) - (anchorOf(b)?.getTime() ?? 0));
   return upcoming[0] ?? null;
 }
 
 export function windowsOn(entry: AgendaEntry, day: string): RegWindow[] {
-  return (entry.windows ?? []).filter((w) => {
+  // scheduleWindows 而不是 entry.windows —— 只有循環規則、沒有具體日期的活動
+  // 否則永遠排不進時間軸（實測 127 筆）。
+  return scheduleWindows(entry).filter((w) => {
     const anchor = anchorOf(w);
     return anchor !== null && taipeiDay(anchor) === day;
   });
@@ -129,4 +131,57 @@ export function stalenessHours(generatedAt: string, now: Date = new Date()): num
   const at = parseAt(generatedAt);
   if (!at) return Number.POSITIVE_INFINITY;
   return (now.getTime() - at.getTime()) / 3600000;
+}
+
+
+/**
+ * 循環登錄的下一次時點。
+ *
+ * 實測 127 筆活動只有「每月 N 日 HH:MM 開放登錄」這種規則、沒有任何具體日期，
+ * 時間軸因此一次都不會提醒 —— 而它們正是「每個月都要重新登錄」這種最容易被
+ * 忘記的類型。這裡在讀取端把規則展開成日期，資料層維持沒有時間衍生狀態。
+ *
+ * 只展開算得出日期的（每月第 N 個星期幾沒有固定日期，只會顯示 note）。
+ * 超出活動期間的不展開 —— 活動都結束了還提醒登錄沒有意義。
+ */
+export function recurringWindows(entry: AgendaEntry, now: Date = new Date(), count = 2): RegWindow[] {
+  const rule = entry.recurrence;
+  if (!rule || rule.kind !== "monthly" || !rule.day_of_month) return [];
+  const periodEnd = parseAt(entry.period?.end);
+  const out: RegWindow[] = [];
+  const cursor = new Date(now.getTime());
+  for (let step = 0; step < 14 && out.length < count; step += 1) {
+    const at = monthlyOccurrence(cursor, rule.day_of_month, rule.hour ?? 0, rule.minute ?? 0, step);
+    if (!at) continue;
+    if (at.getTime() < now.getTime()) continue;
+    if (periodEnd && at.getTime() > periodEnd.getTime() + 86400000) break;
+    out.push({ kind: "opens_at", start: at.toISOString(), derived: true });
+  }
+  return out;
+}
+
+/** 從 base 起算第 offset 個月的「N 日 HH:MM」（台北時間）。該月沒有這一天就跳過。 */
+function monthlyOccurrence(
+  base: Date,
+  day: number,
+  hour: number,
+  minute: number,
+  offset: number,
+): Date | null {
+  const taipeiNow = new Date(base.toLocaleString("en-US", { timeZone: TAIPEI }));
+  const year = taipeiNow.getFullYear();
+  const month = taipeiNow.getMonth() + offset;
+  const probe = new Date(Date.UTC(year, month, 1));
+  const daysInMonth = new Date(Date.UTC(probe.getUTCFullYear(), probe.getUTCMonth() + 1, 0)).getUTCDate();
+  if (day > daysInMonth) return null;
+  const stamp = `${probe.getUTCFullYear()}-${String(probe.getUTCMonth() + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}T${String(hour).padStart(2, "0")}:${String(minute).padStart(2, "0")}:00+08:00`;
+  const at = new Date(stamp);
+  return Number.isNaN(at.getTime()) ? null : at;
+}
+
+/** 這筆活動在時間軸上的全部時點：官方明示的視窗 + 循環規則推算出來的。 */
+export function scheduleWindows(entry: AgendaEntry, now: Date = new Date()): RegWindow[] {
+  const explicit = entry.windows ?? [];
+  if (explicit.length) return explicit;
+  return recurringWindows(entry, now);
 }

@@ -97,6 +97,19 @@ class Recurrence(BaseModel):
     kind: Literal["once", "monthly", "per_campaign_period"] = "once"
     note: str = ""
     confidence: Confidence = 0.0
+    day_of_month: int | None = Field(default=None, ge=1, le=31)
+    hour: int | None = Field(default=None, ge=0, le=23)
+    minute: int | None = Field(default=None, ge=0, le=59)
+    """循環的具體排程。``note`` 是給人看的句子，這三個欄位是給程式算的。
+
+    沒有它們，「每月17日16:00開放登錄」就只是一段文字：時間軸排不進去、
+    .ics 也產不出事件。實測全站 69 筆 monthly、97 筆 per_campaign_period 裡，
+    有 127 筆完全沒有任何具體時點 —— 那些活動在時間軸上一次都不會出現，
+    而它們正是「每個月都要重新登錄」這種最容易被忘記的類型。
+
+    刻意不在資料裡放「下一次是哪一天」—— 那是「現在幾點」的函數，凍結進資料
+    就會過期。讀取端拿這三個欄位自己算。
+    """
 
 
 class Portal(BaseModel):

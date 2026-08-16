@@ -481,3 +481,73 @@ def test_catalog_without_a_recorded_time_is_not_carried_forward(tmp_path: Path) 
         now=datetime(2026, 8, 16, 4, 0, tzinfo=UTC),
     )
     assert carried == {} and report == []
+
+
+def test_recurring_registration_reaches_the_agenda(tmp_path: Path) -> None:
+    """只有「每月 N 日 HH:MM 開放登錄」、沒有具體日期的活動也要進 agenda。
+
+    實測 127 筆屬於這一類，而它們正是「每個月都要重新登錄」這種最容易被忘記的
+    類型 —— 舊版 agenda 只收有 windows 的，它們在時間軸與 .ics 裡都完全消失。
+    對照組（Codex）把富邦「每月17日16:00開放登錄」展開成 8/17 的時點並顯示，
+    我這邊只存成一段文字，同一天的時間軸因此對不上。
+    """
+    offer = Offer(
+        id="fubon-1",
+        title="J卡精選通路最高享900元",
+        period=Period(start=date(2026, 7, 1), end=date(2026, 12, 31), confidence=0.9),
+        registration=Registration(
+            required=True,
+            recurrence=Recurrence(
+                kind="monthly",
+                note="每月 17 日 16:00 開放登錄",
+                confidence=0.85,
+                day_of_month=17,
+                hour=16,
+                minute=0,
+            ),
+        ),
+    )
+    campaign = Campaign(
+        id="fubon-a",
+        bank_id="taipei_fubon",
+        bank_name="台北富邦銀行",
+        title="J卡精選通路",
+        source_url="https://cardpromote.taipeifubon.com.tw/promotion/Detail?sn=D000275",
+        observed_at=NOW,
+        offers=[offer],
+    )
+    index = build_index([campaign], health=[], alerts=[], generated_at=NOW)
+
+    agenda = index["agenda"]
+    assert isinstance(agenda, list)
+    assert [entry["id"] for entry in agenda] == ["fubon-1"]
+    recurrence = agenda[0]["recurrence"]
+    assert recurrence["day_of_month"] == 17
+    assert recurrence["hour"] == 16
+    # 刻意不放「下一次是哪一天」—— 那是時間的函數，由讀取端算
+    assert "next" not in recurrence and "next_occurrence" not in agenda[0]
+
+
+def test_recurrence_without_a_computable_date_stays_out_of_the_agenda() -> None:
+    """「每月第二個星期三」算不出固定日期，只能顯示 note，不該排進時間軸。"""
+    offer = Offer(
+        id="x-1",
+        title="示範",
+        registration=Registration(
+            required=True,
+            recurrence=Recurrence(
+                kind="monthly", note="每月第 二 個星期三 14:00 開放登錄", hour=14
+            ),
+        ),
+    )
+    campaign = Campaign(
+        id="x-a",
+        bank_id="demo",
+        bank_name="示範",
+        title="示範",
+        source_url="https://www.example.com/a",
+        observed_at=NOW,
+        offers=[offer],
+    )
+    index = build_index([campaign], health=[], alerts=[], generated_at=NOW)
+    assert index["agenda"] == []

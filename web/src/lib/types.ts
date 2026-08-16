@@ -1,3 +1,14 @@
+export interface Recurrence {
+  kind?: "monthly" | "per_campaign_period";
+  note?: string;
+  /** 循環的具體排程。有這三個欄位才算得出「下一次是哪一天」。
+   *  資料裡刻意不放「下一次」—— 那是「現在幾點」的函數，會過期。 */
+  day_of_month?: number;
+  hour?: number;
+  minute?: number;
+  confidence?: number;
+}
+
 /**
  * 對應 src/radar/emit.py 產出的 index.json。
  *
@@ -22,6 +33,8 @@ export interface Period {
 }
 
 export interface RegWindow {
+  /** 由循環規則推算出來的，不是官方明示的時點。UI 要標示出來。 */
+  derived?: boolean;
   kind: WindowKind;
   start?: string;
   end?: string;
@@ -41,7 +54,7 @@ export interface AgendaEntry {
   stale_since?: string;
   period?: Period;
   windows?: RegWindow[];
-  recurrence?: "monthly" | "per_campaign_period";
+  recurrence?: Recurrence;
   contract?: ContractKind;
   quota_limited?: boolean;
   quota_seats?: number;
@@ -122,7 +135,7 @@ export interface CatalogOffer {
   registration?: {
     required?: boolean;
     windows?: RegWindow[];
-    recurrence?: { kind?: string; note?: string };
+    recurrence?: Recurrence;
     contract?: {
       kind?: ContractKind;
       spend_counts_from?: string;

@@ -20,6 +20,7 @@ import {
   stalenessHours,
   taipeiDay,
   windowState,
+  scheduleWindows,
   windowsOn,
 } from "./derive";
 import {
@@ -293,6 +294,13 @@ function windowLine(w: RegWindow): HTMLElement {
         : `${formatMoment(w.start)} 起（截止未公告）`;
   line.append(el("span", `pill state-${windowState(w)}`, stateLabel));
   line.append(el("span", "when", when));
+  // 推算出來的時點一定要標示。官方只寫了「每月 17 日 16:00 開放登錄」，
+  // 沒有明說這個月的哪一天 —— 把推算當成官方公告是不誠實的。
+  if (w.derived) {
+    const mark = el("span", "pill derived", "依循環規則推算");
+    mark.title = "官方只公告了循環規則，這個日期是依規則推算的";
+    line.append(mark);
+  }
   return line;
 }
 
@@ -435,7 +443,7 @@ function offerCard(entry: AgendaEntry, options: { compact?: boolean } = {}): HTM
     card.append(line);
   }
 
-  const windows = entry.windows ?? [];
+  const windows = scheduleWindows(entry);
   if (windows.length) {
     const box = el("div", "windows");
     for (const w of windows.slice(0, 3)) box.append(windowLine(w));
@@ -605,7 +613,7 @@ function conditionRows(offer: CatalogOffer): HTMLElement[] {
 function toEntry(bankId: string, offer: CatalogOffer): AgendaEntry {
   const registration = offer.registration;
   const quota = offer.conditions?.quota;
-  const recurrence = registration?.recurrence?.kind;
+  const recurrence = registration?.recurrence;
   return {
     id: offer.id,
     bank_id: bankId,
@@ -615,8 +623,7 @@ function toEntry(bankId: string, offer: CatalogOffer): AgendaEntry {
     also_at: offer.also_at,
     period: offer.period,
     windows: registration?.windows,
-    recurrence:
-      recurrence === "monthly" || recurrence === "per_campaign_period" ? recurrence : undefined,
+    recurrence: recurrence?.kind ? recurrence : undefined,
     contract: registration?.contract?.kind,
     quota_limited: quota?.limited,
     quota_seats: quota?.seats,

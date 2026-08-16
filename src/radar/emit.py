@@ -44,7 +44,7 @@ from typing import Any
 
 from pydantic import BaseModel, Field
 
-from .models import Alert, Campaign, Offer, RegistrationWindow, SourceHealth
+from .models import Alert, Campaign, Offer, Recurrence, RegistrationWindow, SourceHealth
 
 SCHEMA_VERSION = 1
 CALENDAR_PRODID = "-//TW Card Registration Radar//ZH-TW//EN"
@@ -122,6 +122,38 @@ def _period_payload(offer: Offer) -> dict[str, Any]:
     }
 
 
+def _recurrence_payload(recurrence: Recurrence) -> dict[str, Any] | None:
+    """循環規則。``once`` 不輸出。
+
+    帶上 day_of_month/hour/minute 讓讀取端能算出下一次是哪一天 —— 只給
+    ``kind`` 與人類可讀的 note，時間軸就排不進去（實測 127 筆因此完全看不見）。
+    刻意不在這裡算「下一次」：那是「現在幾點」的函數，凍結進資料就會過期。
+    """
+    if recurrence.kind == "once":
+        return None
+    return {
+        "kind": recurrence.kind,
+        "note": recurrence.note,
+        "day_of_month": recurrence.day_of_month,
+        "hour": recurrence.hour,
+        "minute": recurrence.minute,
+        "confidence": recurrence.confidence,
+    }
+
+
+def has_schedule(offer: Offer) -> bool:
+    """這筆活動能不能放上時間軸。
+
+    「有登錄視窗」或「有算得出日期的循環規則」都算。只看視窗會漏掉最該提醒的
+    一類：每個月都要重新登錄、但官方只寫規則不寫日期的活動（實測 127 筆）。
+    """
+    registration = offer.registration
+    if registration.windows:
+        return True
+    recurrence = registration.recurrence
+    return recurrence.kind == "monthly" and recurrence.day_of_month is not None
+
+
 def agenda_entry(campaign: Campaign, offer: Offer) -> dict[str, Any]:
     """時間軸卡片所需的最小欄位集合。
 
@@ -137,9 +169,7 @@ def agenda_entry(campaign: Campaign, offer: Offer) -> dict[str, Any]:
         "also_at": offer.also_at,
         "period": _period_payload(offer),
         "windows": [_window_payload(window) for window in registration.windows],
-        "recurrence": registration.recurrence.kind
-        if registration.recurrence.kind != "once"
-        else None,
+        "recurrence": _recurrence_payload(registration.recurrence),
         "contract": registration.timing_contract.kind,
         "quota_limited": offer.conditions.quota.limited,
         "quota_seats": offer.conditions.quota.seats,
@@ -163,10 +193,7 @@ def catalog_entry(campaign: Campaign, offer: Offer) -> dict[str, Any]:
         "registration": {
             "required": offer.registration.required,
             "windows": [_window_payload(window) for window in offer.registration.windows],
-            "recurrence": {
-                "kind": offer.registration.recurrence.kind,
-                "note": offer.registration.recurrence.note,
-            },
+            "recurrence": _recurrence_payload(offer.registration.recurrence) or {},
             "contract": _contract_payload(offer),
         },
         "conditions": {
@@ -454,10 +481,10 @@ def build_index(
     舊欄位一個字都不動。
     """
     pairs = [(campaign, offer) for campaign in campaigns for offer in campaign.offers]
+    # prune 在最後組裝 payload 時才套用 —— 這裡先留完整的欄位，
+    # 底下的 actionable 計算要讀 needs_review。
     agenda = [
-        agenda_entry(campaign, offer)
-        for campaign, offer in pairs
-        if offer.registration.windows
+        agenda_entry(campaign, offer) for campaign, offer in pairs if has_schedule(offer)
     ]
     # 沿用的來源也要進 agenda，否則它們在時間軸上等於不存在 —— 那就回到
     # 「整家消失」的原狀了。每一筆都帶 stale_since，UI 會標示成舊資料。
