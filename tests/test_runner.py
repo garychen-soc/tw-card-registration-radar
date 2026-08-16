@@ -605,3 +605,19 @@ def test_offer_windows_win_over_listing_registration() -> None:
     windows = offers[0].registration.windows
     assert len(windows) == 1
     assert windows[0].start == datetime.fromisoformat("2026-08-07T17:00:00+08:00")
+
+
+def test_empty_listing_says_why_instead_of_a_bare_failure() -> None:
+    """清單回應成功但 0 筆，與連不上在輸出上都是「failed、0 筆」。
+
+    實測 2026-08-15 的 CI 執行：玉山與台北富邦都是這一類，而健康度訊息是空的
+    —— 看 log 只知道 failed，不知道要往哪裡查。
+    """
+    spec = _spec()
+    fetcher = FakeFetcher(pages={spec.listing.data_url or LIST_URL: "[]"})
+    result = run_source(spec, fetcher, today=TODAY, now=NOW)
+
+    assert result.health is not None
+    assert result.health.status == "failed"
+    assert result.health.offer_count == 0
+    assert "沒有任何活動" in result.health.message

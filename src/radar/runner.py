@@ -338,7 +338,15 @@ def run_source(
             result.campaigns.append(campaign)
 
     status = _status(result, len(items))
-    result.health = _health(spec, status, result, _message(result))
+    message = _message(result)
+    if not items:
+        # 清單成功回應但一筆都沒有。這與網路錯誤在輸出上長得一模一樣
+        # （都是 failed、0 筆），但成因完全不同：前者是對方回了一個沒有內容的
+        # 頁面（改版、限流時的擋頁、參數失效），後者是連不上。實測 2026-08-15
+        # 的 CI 執行，玉山與台北富邦都是這一類，而健康度訊息是空的 —— 看 log
+        # 只知道「failed」，不知道要往哪裡查。
+        message = "官方清單回應成功但沒有任何活動（可能是改版、參數失效或被限流擋頁）"
+    result.health = _health(spec, status, result, message)
     return result
 
 
