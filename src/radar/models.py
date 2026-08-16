@@ -234,6 +234,15 @@ class Campaign(BaseModel):
     offers: list[Offer] = Field(default_factory=list)
     terms_raw: str = ""
     content_hash: str = ""
+    text_hash: str = ""
+    """明細頁**純文字**的雜湊。與 ``content_hash``（清單指紋，含網址）不同。
+
+    用途只有一個：判斷兩個網址是不是同一頁的鏡射。抽取結果相同**不足以**證明
+    這件事 —— 實測星展 mall_08/_09/_11 抽出來的活動一模一樣，但 mall_11 的頁面
+    寫的是「91APP刷星展卡 最高回饋 NT$6,500」，其餘五頁是 NT$2,500，而我們的
+    條件抽取沒抓到那個上限，於是六筆看起來完全相同。照抽取結果合併就會刪掉
+    91APP 那筆真實活動。頁面原文相同才是鏡射的直接證據。
+    """
 
 
 AlertType = Literal[

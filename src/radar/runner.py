@@ -259,6 +259,13 @@ def _portal(spec: SourceSpec) -> Portal:
     )
 
 
+def _text_hash(text: str) -> str:
+    """明細頁純文字的雜湊。鏡射判斷用，見 ``Campaign.text_hash``。"""
+    import hashlib
+
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()[:16]
+
+
 def _slug(url: str) -> str:
     import hashlib
 
@@ -444,6 +451,7 @@ def _run_item(
         offers=offers,
         terms_raw=text[:20000],
         content_hash=item.fingerprint,
+        text_hash=_text_hash(text),
     )
 
 

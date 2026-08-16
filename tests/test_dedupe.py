@@ -66,13 +66,18 @@ def _offer(
 
 
 def _campaign(
-    campaign_id: str, url: str, *offers: Offer, title: str = "星展購物優惠"
+    campaign_id: str,
+    url: str,
+    *offers: Offer,
+    title: str = "星展購物優惠",
+    text_hash: str = "page-text-a",
 ) -> Campaign:
     return Campaign(
         id=campaign_id,
         bank_id="dbs",
         bank_name="星展銀行",
         title=title,
+        text_hash=text_hash,
         source_url=url,
         observed_at=NOW,
         offers=list(offers),
@@ -487,3 +492,72 @@ def test_mirror_pages_still_merge_when_the_title_matches() -> None:
     assert len(result) == 1
     assert report.merged_offers == 2
     assert result[0].offers[0].also_at == [f"{BASE}/mall_09.html"]
+
+
+def test_identical_extraction_does_not_merge_when_the_page_text_differs() -> None:
+    """抽取結果相同不足以證明是鏡射 —— 這一則是實際上線過的錯誤。
+
+    星展 mall_08/_09/_11 抽出來的活動一模一樣，但 mall_11 的頁面寫的是
+    「91APP刷星展卡 最高回饋 NT$6,500」、其餘五頁是 NT$2,500，而我們的條件抽取
+    沒抓到那個上限。舊版靠抽取結果合併，把 91APP 那筆真實活動刪掉了，而且
+    「頁面標題相同」那層閘門擋不住 —— 六頁的標題都是「分期0%利率」。
+
+    純文字逐字相同才是鏡射的直接證據（mall_08 與 mall_09 各 2,706 字且相等，
+    mall_11 是 2,712 字）。
+    """
+    same = [
+        _campaign(
+            "c1",
+            f"{BASE}/mall_08.html",
+            _offer("a1", title="【網購星精彩】"),
+            _offer("b1", title="【博客來】"),
+            title="分期0%利率",
+            text_hash="text-2706",
+        ),
+        _campaign(
+            "c2",
+            f"{BASE}/mall_09.html",
+            _offer("a2", title="【網購星精彩】"),
+            _offer("b2", title="【博客來】"),
+            title="分期0%利率",
+            text_hash="text-2706",
+        ),
+    ]
+    different = _campaign(
+        "c3",
+        f"{BASE}/mall_11.html",
+        _offer("a3", title="【網購星精彩】"),
+        _offer("b3", title="【博客來】"),
+        title="分期0%利率",
+        text_hash="text-2712",
+    )
+    result, report = dedupe_campaigns([*same, different])
+
+    kept = sorted(campaign.source_url for campaign in result)
+    assert kept == [f"{BASE}/mall_08.html", f"{BASE}/mall_11.html"]
+    assert report.merged_offers == 2
+    assert result[0].offers[0].also_at == [f"{BASE}/mall_09.html"]
+
+
+def test_pages_without_a_text_hash_are_never_merged_across_urls() -> None:
+    """沒有原文雜湊就無法證明是鏡射（舊資料、api 型明細），一律不合併。"""
+    campaigns = [
+        _campaign(
+            "c1",
+            f"{BASE}/a.html",
+            _offer("a1", title="活動一"),
+            _offer("b1", title="活動二"),
+            text_hash="",
+        ),
+        _campaign(
+            "c2",
+            f"{BASE}/b.html",
+            _offer("a2", title="活動一"),
+            _offer("b2", title="活動二"),
+            text_hash="",
+        ),
+    ]
+    result, report = dedupe_campaigns(campaigns)
+
+    assert len(result) == 2
+    assert report.merged_offers == 0

@@ -341,12 +341,26 @@ def dedupe_campaigns(campaigns: list[Campaign]) -> tuple[list[Campaign], DedupeR
     #
     # 代價是標題不一致的真鏡射不會被合併，那只是多顯示一筆；反過來誤併會刪掉
     # 一個真實活動頁，兩者不對稱。
-    families: dict[tuple[str, str, tuple[str, ...]], list[int]] = {}
+    # 簽章再加上**頁面原文的雜湊**。抽取結果相同不足以證明是鏡射 —— 實測星展
+    # mall_08/_09/_11 抽出來的活動完全一樣，但 mall_11 的頁面寫「91APP刷星展卡
+    # 最高回饋 NT$6,500」、其餘五頁是 NT$2,500，而條件抽取沒抓到那個上限。
+    # 只看抽取結果就會把 91APP 那筆真實活動刪掉（實際發生過，已上線一段時間）。
+    #
+    # 頁面標題那一層擋不住這種情形：六頁的標題都是「分期0%利率」。原文雜湊才是
+    # 鏡射的直接證據 —— mall_08 與 mall_09 的純文字逐字相同（各 2,706 字），
+    # mall_11 是 2,712 字。
+    #
+    # 代價是「同一頁但有微小差異（例如更新時間戳）」不再被合併，那只是多顯示
+    # 一筆；反過來誤併會刪掉一個真實活動，兩者不對稱。
+    families: dict[tuple[str, str, str, tuple[str, ...]], list[int]] = {}
     for position, campaign in enumerate(staged):
         if len(campaign.offers) < MIRROR_MIN_OFFERS:
             continue
+        # 沒有原文雜湊的（舊資料、api 型明細）不做跨頁合併 —— 無法證明是鏡射。
+        if not campaign.text_hash:
+            continue
         families.setdefault(
-            (campaign.bank_id, campaign.title, keys[position]), []
+            (campaign.bank_id, campaign.title, campaign.text_hash, keys[position]), []
         ).append(position)
 
     dropped_positions: set[int] = set()
