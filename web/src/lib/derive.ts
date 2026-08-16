@@ -179,9 +179,24 @@ function monthlyOccurrence(
   return Number.isNaN(at.getTime()) ? null : at;
 }
 
-/** 這筆活動在時間軸上的全部時點：官方明示的視窗 + 循環規則推算出來的。 */
+/**
+ * 這筆活動在時間軸上的全部時點：官方明示的視窗 **加上** 循環規則推算出來的。
+ *
+ * 刻意不是「有明示視窗就不展開循環」。實測台北富邦 D000275：頁面同時寫了
+ * 「每月17日16:00開放登錄」與一段七月的範例期間，我們把七月那段解析成視窗，
+ * 於是循環規則永遠不展開 —— 使用者看到的是一個早就過期的七月時點，而真正
+ * 每個月都會再開放的規則消失了。兩者都是官方寫的，兩者都要顯示。
+ *
+ * 已經有明示視窗覆蓋到的那一天不重複加，避免同一天出現兩列。
+ */
 export function scheduleWindows(entry: AgendaEntry, now: Date = new Date()): RegWindow[] {
   const explicit = entry.windows ?? [];
-  if (explicit.length) return explicit;
-  return recurringWindows(entry, now);
+  const covered = new Set(
+    explicit.map((w) => anchorOf(w)).filter((at): at is Date => at !== null).map(taipeiDay),
+  );
+  const derived = recurringWindows(entry, now).filter((w) => {
+    const at = anchorOf(w);
+    return at !== null && !covered.has(taipeiDay(at));
+  });
+  return [...explicit, ...derived];
 }
