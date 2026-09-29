@@ -827,13 +827,53 @@ def write_site(
         bank_dir = detail_dir / campaign.bank_id
         bank_dir.mkdir(parents=True, exist_ok=True)
         detail_path = bank_dir / f"{campaign.id}.json"
-        _write_json(detail_path, build_detail(campaign))
-        written.append(detail_path)
+        if _write_json_if_changed(detail_path, build_detail(campaign)):
+            written.append(detail_path)
+
+    # 已下架活動的 detail 檔。實測 1,609 個 detail 檔中有 275 個已不在任何 catalog
+    # 裡 —— 它們仍公開在網站上、每次 clone 都要下載，卻永遠不會再被更新。
+    # 只清**這次有新鮮資料**的銀行；沿用中的銀行（carried）其 detail 是唯一副本。
+    live_ids: dict[str, set[str]] = {}
+    for campaign in campaigns:
+        live_ids.setdefault(campaign.bank_id, set()).add(campaign.id)
+    for bank_id, ids in live_ids.items():
+        if bank_id in (carried or {}):
+            continue
+        for orphan in (detail_dir / bank_id).glob("*.json"):
+            if orphan.stem not in ids:
+                orphan.unlink()
 
     calendar_path = calendar_dir / "registration.ics"
     calendar_path.write_text(build_ics(campaigns, now=now), encoding="utf-8")
     written.append(calendar_path)
     return written
+
+
+def _write_json_if_changed(
+    path: Path, payload: dict[str, Any], *, volatile: tuple[str, ...] = ("observed_at",)
+) -> bool:
+    """內容（排除時間戳）沒變就不重寫。回傳是否真的寫了。
+
+    實測每次執行提交約 1,350 個檔案，其中約 1,300 個 detail 檔唯一的差異是
+    ``observed_at``。172 次提交後 .git 已 68 MB，照每天三次的節奏一年約多 400 MB，
+    而且 git diff 完全看不出「這次到底哪些活動變了」。前端不讀 ``observed_at``，
+    新鮮度由 index.json 的 ``generated_at`` 負責。
+    """
+    if path.exists():
+        try:
+            existing = json.loads(path.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, OSError):
+            existing = None
+        if isinstance(existing, dict) and _without(existing, volatile) == _without(
+            payload, volatile
+        ):
+            return False
+    _write_json(path, payload)
+    return True
+
+
+def _without(payload: dict[str, Any], keys: tuple[str, ...]) -> dict[str, Any]:
+    return {key: value for key, value in payload.items() if key not in keys}
 
 
 def _write_json(path: Path, payload: dict[str, Any]) -> None:

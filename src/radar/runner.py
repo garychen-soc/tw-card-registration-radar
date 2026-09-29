@@ -259,6 +259,11 @@ def _portal(spec: SourceSpec) -> Portal:
     )
 
 
+def _listing_has_content(item: ListingItem) -> bool:
+    """清單項目是否帶有可獨立成立一筆活動的資訊（不只是標題）。"""
+    return bool(item.summary or item.start or item.end or item.registration_text)
+
+
 def _text_hash(text: str) -> str:
     """明細頁純文字的雜湊。鏡射判斷用，見 ``Campaign.text_hash``。"""
     import hashlib
@@ -425,6 +430,14 @@ def _run_item(
                     url=item.url,
                 )
             )
+            # 清單項目本身沒有內容時，不能拿它造一筆活動。實測中信（single_page）
+            # 的清單項目是合成的，標題就是銀行名、沒有摘要也沒有日期；明細在 CI
+            # 偶爾抓不到時，舊版照樣產出一筆叫「中國信託」的空活動，來源因此是
+            # partial 而不是 failed，防護把 6→1 判成「回報正常卻筆數崩掉」的靜默退步，
+            # 擋下整站更新（2026-09 的六次失敗裡有四次是這個原因），而本該接手的
+            # 「沿用上一版」也因為不是 failed 而沒有觸發。
+            if not _listing_has_content(item):
+                return None
     elif spec.detail.source == "api" and item.props is not None:
         # 明細頁為 SPA、純文字只有數十字（實測國泰世華 31 字），
         # 唯一可用的內容在清單 API 的附加欄位裡

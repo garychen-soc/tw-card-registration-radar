@@ -110,11 +110,17 @@ def test_blocked_detail_link_skips_one_item_and_keeps_the_rest() -> None:
 
 
 def test_unreadable_detail_falls_back_to_listing_text() -> None:
+    """清單項目本身帶有內容（摘要、日期）時，明細讀不到仍可用清單資訊成立一筆。"""
+    listing = json.dumps(
+        [{"title": "夏日回饋", "url": "/promo/1", "summary": "活動期間：2026/8/1~2026/8/31"}]
+    )
+    spec = _spec()
+    spec.listing.fields["summary"] = "summary"
     fetcher = FakeFetcher(
-        pages={LIST_URL: _listing("/promo/1")},
+        pages={LIST_URL: listing},
         failures={"https://www.example.com/promo/1": FetchFailed("HTTP 503")},
     )
-    result = run_source(_spec(), fetcher, today=TODAY, now=NOW)
+    result = run_source(spec, fetcher, today=TODAY, now=NOW)
 
     assert result.stats.detail_failed == 1
     assert [alert.type for alert in result.alerts] == ["detail_unreadable"]
@@ -621,3 +627,30 @@ def test_empty_listing_says_why_instead_of_a_bare_failure() -> None:
     assert result.health.status == "failed"
     assert result.health.offer_count == 0
     assert "沒有任何活動" in result.health.message
+
+
+def test_failed_detail_with_contentless_listing_fails_the_source_loudly() -> None:
+    """明細抓不到、清單項目又只有標題時，不得造出一筆空活動。
+
+    實測中信是 single_page，清單項目是合成的（標題＝銀行名）。明細偶爾在 CI 抓不到，
+    舊版產出一筆空活動，來源變成 partial、筆數 6→1，防護判成靜默退步擋下整站更新；
+    而 failed 才會走「大聲失敗」與「沿用上一版」的路徑。
+    """
+    spec = SourceSpec.model_validate(
+        {
+            "id": "demo",
+            "bank_name": "示範銀行",
+            "domains": ["example.com"],
+            "listing": {"kind": "single_page", "entry_url": "https://www.example.com/store.html"},
+            "detail": {"source": "html", "cardinality": "many"},
+        }
+    )
+    fetcher = FakeFetcher(
+        failures={"https://www.example.com/store.html": FetchFailed("timed out")}
+    )
+    result = run_source(spec, fetcher, today=TODAY, now=NOW)
+
+    assert result.campaigns == []
+    assert result.health is not None
+    assert result.health.status == "failed"
+    assert result.health.offer_count == 0

@@ -551,3 +551,37 @@ def test_recurrence_without_a_computable_date_stays_out_of_the_agenda() -> None:
     )
     index = build_index([campaign], health=[], alerts=[], generated_at=NOW)
     assert index["agenda"] == []
+
+
+def test_detail_files_are_not_rewritten_when_only_the_timestamp_changed(tmp_path: Path) -> None:
+    """每次執行約 1,300 個 detail 檔唯一的差異是 observed_at —— 那是 repo 膨脹的主因。"""
+    from radar.emit import _write_json_if_changed
+
+    path = tmp_path / "d.json"
+    assert _write_json_if_changed(path, {"observed_at": "2026-09-28T10:00:00", "offers": [1]})
+    before = path.read_text(encoding="utf-8")
+    assert not _write_json_if_changed(path, {"observed_at": "2026-09-29T10:00:00", "offers": [1]})
+    assert path.read_text(encoding="utf-8") == before
+    # 內容真的變了就要寫
+    assert _write_json_if_changed(path, {"observed_at": "2026-09-29T10:00:00", "offers": [2]})
+
+
+def test_orphan_details_are_removed_only_for_banks_with_fresh_data(tmp_path: Path) -> None:
+    from radar.emit import write_site
+
+    campaigns = [_campaign_for_orphan_test("esun", "esun-live")]
+    (tmp_path / "data" / "detail" / "esun").mkdir(parents=True)
+    (tmp_path / "data" / "detail" / "esun" / "esun-gone.json").write_text("{}")
+    (tmp_path / "data" / "detail" / "sunny").mkdir(parents=True)
+    (tmp_path / "data" / "detail" / "sunny" / "sunny-kept.json").write_text("{}")
+
+    write_site(tmp_path, {"sources": []}, campaigns, now=NOW, carried={"sunny": []})
+
+    assert (tmp_path / "data" / "detail" / "esun" / "esun-live.json").exists()
+    assert not (tmp_path / "data" / "detail" / "esun" / "esun-gone.json").exists()
+    # 沒有新鮮資料的銀行，detail 是唯一副本，不能動
+    assert (tmp_path / "data" / "detail" / "sunny" / "sunny-kept.json").exists()
+
+
+def _campaign_for_orphan_test(bank_id: str, campaign_id: str) -> Campaign:
+    return _campaign(_offer("o1")).model_copy(update={"id": campaign_id, "bank_id": bank_id})

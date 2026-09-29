@@ -5,8 +5,9 @@ name: Scrape
 
 on:
   schedule:
-    # 台北 06:00 / 12:00 / 18:00
-    - cron: "0 22,4,10 * * *"
+    # 台北 06:17 / 12:17 / 18:17。刻意避開整點 —— GitHub 在整點排隊最嚴重，
+    # 實測整點排程實際開跑時間漂到 ~00:10 / ~09:00 / ~14:30 UTC，有幾天只跑兩次。
+    - cron: "17 22,4,10 * * *"
   workflow_dispatch:
     inputs:
       only:
@@ -114,7 +115,10 @@ jobs:
 
       # 自架 runner 的快照。下載失敗（機器離線、job 沒跑）不視為錯誤 ——
       # build_site.py 會把那批來源記成 failed 並繼續。
+      # 只在 residential job 真的成功時才下載。沒設 runner 時該 job 是 skipped，
+      # 照樣下載會在每次執行的 log 留一行 ##[error]，讓真正的錯誤被淹沒。
       - name: Download the residential snapshot
+        if: needs.residential.result == 'success'
         continue-on-error: true
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
