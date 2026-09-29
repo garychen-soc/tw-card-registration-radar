@@ -823,6 +823,27 @@ def write_site(
         )
         written.append(catalog_path)
 
+    # 這次讀不到、又不符合沿用條件的來源（沿用逾期、catalog 沒有資料時間、
+    # 或讀取成功但 0 筆）：catalog 必須清空。前端「活動目錄」會載入**所有**來源
+    # 的 catalog，不清空的話上一版的檔案會被原樣顯示成現行活動，而且沒有
+    # 「舊資料」標記 —— 實測陽信 8/6 的 24 筆到 9/30 仍在線上，55 天沒人發現。
+    fresh = {campaign.bank_id for campaign in campaigns} | set(carried or {})
+    for source in index.get("sources", []):
+        bank_id = source.get("bank_id")
+        if not bank_id or bank_id in fresh:
+            continue
+        catalog_path = catalog_dir / f"{bank_id}.json"
+        _write_json(
+            catalog_path,
+            {
+                "schema_version": SCHEMA_VERSION,
+                "bank_id": bank_id,
+                "generated_at": "",
+                "offers": [],
+            },
+        )
+        written.append(catalog_path)
+
     for campaign in campaigns:
         bank_dir = detail_dir / campaign.bank_id
         bank_dir.mkdir(parents=True, exist_ok=True)

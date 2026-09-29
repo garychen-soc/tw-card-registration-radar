@@ -585,3 +585,20 @@ def test_orphan_details_are_removed_only_for_banks_with_fresh_data(tmp_path: Pat
 
 def _campaign_for_orphan_test(bank_id: str, campaign_id: str) -> Campaign:
     return _campaign(_offer("o1")).model_copy(update={"id": campaign_id, "bank_id": bank_id})
+
+
+def test_unreadable_source_that_is_not_carried_gets_an_empty_catalog(tmp_path: Path) -> None:
+    """前端會載入所有來源的 catalog —— 留著舊檔等於把過期活動當現行活動顯示。"""
+    from radar.emit import write_site
+
+    catalog_dir = tmp_path / "data" / "catalog"
+    catalog_dir.mkdir(parents=True)
+    (catalog_dir / "sunny.json").write_text(
+        json.dumps({"bank_id": "sunny", "offers": [{"id": "old"}]}), encoding="utf-8"
+    )
+    index = {"sources": [{"bank_id": "esun"}, {"bank_id": "sunny"}]}
+    write_site(tmp_path, index, [_campaign_for_orphan_test("esun", "esun-live")], now=NOW)
+
+    sunny = json.loads((catalog_dir / "sunny.json").read_text(encoding="utf-8"))
+    assert sunny["offers"] == []
+    assert json.loads((catalog_dir / "esun.json").read_text(encoding="utf-8"))["offers"]
