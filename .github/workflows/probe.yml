@@ -23,13 +23,19 @@ on:
         type: boolean
         required: false
         default: false
+      runner:
+        description: "GitHub 受管 runner（比較不同雲端網路位置）"
+        type: choice
+        options: [ubuntu-latest, macos-latest]
+        required: false
+        default: ubuntu-latest
 
 permissions:
   contents: read
 
 jobs:
   probe:
-    runs-on: ubuntu-latest
+    runs-on: ${{ inputs.runner == 'macos-latest' && 'macos-latest' || 'ubuntu-latest' }}
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6

@@ -103,7 +103,9 @@ def probe_routes(
                     response = page.goto(url, wait_until="domcontentloaded", timeout=timeout * 1000)
                     with suppress(BrowserTimeout):
                         page.wait_for_function(
-                            "!document.title.includes('Just a moment')", timeout=15000,
+                            "!/just a moment|請稍候|请稍候|checking your browser/i"
+                            ".test(document.title)",
+                            timeout=15000,
                         )
                     print(json.dumps({
                         "url": url, "status": response.status if response else None,
