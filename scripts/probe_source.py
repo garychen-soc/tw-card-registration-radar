@@ -81,6 +81,7 @@ CHROME_EXTRA = {
 
 def probe_routes(
     spec: SourceSpec, payload: str, timeout: float, pause: float, *, browser: bool = False,
+    headed: bool = False,
 ) -> int:
     """Compare a small set of official routes without changing production settings."""
     urls = json.loads(payload)
@@ -93,7 +94,7 @@ def probe_routes(
         from playwright.sync_api import sync_playwright
 
         with sync_playwright() as playwright:
-            chromium = playwright.chromium.launch()
+            chromium = playwright.chromium.launch(headless=not headed)
             context = chromium.new_context(locale="zh-TW")
             page = context.new_page()
             for url in urls:
@@ -145,11 +146,13 @@ def main() -> int:
     parser.add_argument("--pause", type=float, default=2.0, help="每次請求之間的間隔秒數")
     parser.add_argument("--urls-json", default="", help="只探測指定官方網址，不跑 UA 矩陣")
     parser.add_argument("--browser", action="store_true", help="以真實 Chromium 唯讀探測")
+    parser.add_argument("--headed", action="store_true", help="使用有視窗的 Chromium")
     args = parser.parse_args()
 
     spec = load_spec(ROOT / "sources" / f"{args.spec_id}.toml")
     if args.urls_json:
-        return probe_routes(spec, args.urls_json, args.timeout, args.pause, browser=args.browser)
+        return probe_routes(spec, args.urls_json, args.timeout, args.pause,
+                            browser=args.browser, headed=args.headed)
     url = spec.listing.data_url or spec.listing.entry_url
     if not is_allowed(url, [d.lower() for d in spec.domains]):
         print(f"入口頁未通過白名單，不探測：{url}")

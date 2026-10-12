@@ -2,48 +2,22 @@
 id = "hncb"
 bank_name = "華南銀行"
 domains = ["hncb.com.tw"]
-note = """entry_url 必須保留完整的 portal 狀態（!ut/p/z1/...）。我曾把它簡化成
-/wps/portal/HNCB/card，結果拿到的是不同的頁面 —— 完整 URL 回 199,650 bytes
-且含「信用卡」分頁，簡化後只有 138,266 bytes 且分頁不存在。portal／CMS 的
-這串編碼是選內容的狀態，不是追蹤雜訊。
+note = """2026-10-13 重新校準官方入口：1dmy 與 urile 選取 WCM 的 best_offer
+內容，必須保留；固定的 !ut/p/z1/... portal 狀態並非必要。只移除狀態 token、
+仍保留內容參數的短網址，與原入口的信用卡面板 43 個連結逐項一致。
+不能把入口改成完全沒有內容參數的 /wps/portal/HNCB/card，那是卡片產品頁。
 
-「信用卡」分頁面板本身只有活動標題（純文字 806 字），沒有期間也沒有條件 ——
-原本用 single_page 讀整塊面板，只產出 1 筆。但面板裡的 44 個連結是**真實 href**
-（不是 JS 驅動），而每一個明細頁都是完整靜態 HTML：實測「台灣Pay信用卡繳牌照稅」
-5,019 字、4 個期間標籤、8 處「登錄」。改成逐連結讀明細。
+只解析「信用卡」分頁面板，並只收本行 /wps/ 活動明細，不把其他業務、外部
+優惠網站與導覽分類頁混進來。活動名稱來自連結的 title 屬性，明細內文才是
+期間、登錄與條件的依據。
 
-三個實測到的取捨：
-
-* 只收 /wps/ 開頭與本行絕對網址的連結。面板裡另有 14 個外部網域（美食網站）
-  會被網域白名單擋下，逐筆產生警示；以及 ?1dmy&urile= 開頭的入口頁連結，
-  它們解析回同一張導覽頁（3,969 字、0 個期間標籤），只會產出雜訊。
-* 期間寫成「自115年4月1日起至115年4月30日止」，民國年與年月日格式解析器都支援。
-* 前身在此取得 42 筆，但其中 34 筆沒有結束日、0 筆有登錄時點，且多筆共用同一組
-  期間 —— 那是覆蓋率的假象。這裡的每一筆都來自它自己的明細頁。
-
-**入口頁真的很慢，不是被封鎖 —— 已用 CI 探測證實。** 2026-08-06 的 Scrape 執行
-在這裡逾時、整個來源歸零（連重試三次都逾時）。用 scripts/probe_source.py 從同一個
-Actions runner 試 12 種 UA／標頭組合，**全部 HTTP 200、199,633 bytes**，但平均
-每次約 15 秒 —— 本機同一個網址是 0.8–1.9 秒。這是 IBM WebSphere portal 頁面
-（199KB、URL 帶一長串 portal 狀態）從美歐機房存取的實際延遲，25 秒的預設值
-餘裕太小。
-
-所以覆寫 timeout 而不是換 UA：被拒絕存取會是 403（陽信就是），逾時是另一回事。
-
-**但加長 timeout 治不了它。** 90 秒與 180 秒各試過一次，三次重試全逾時
-（180 秒那次等了 9 分鐘）。這推翻了「並行競爭導致變慢」的解釋：probe 在 06:52
-每次 15 秒成功，而今天多次 Scrape 各打 11 頁明細之後就變成完全無回應。逾時而非
-403 是節流／黑洞的典型表現 —— 從 GitHub Actions 的 IP 段對它連續存取後就讀不到。
-
-所以 timeout 只設 45 秒，讓它**快速失敗**：留 180 秒的唯一效果是每次執行白等
-9 分鐘。這家的正解是自架 runner（住宅 IP 0.8–1.9 秒且穩定），分流機制已實作並
-測過，改 runner = "self-hosted" 一行即可。在那之前它誠實顯示為 failed，
-30 筆佔全站 2%，不會擋下其餘來源。"""
+保留 45 秒 timeout 與正常重試、防護、缺漏回報；短入口可讀不等於已經完成
+所有明細的驗證。入口及完整來源結果分別核對，不藉由增加 timeout 掩蓋問題。"""
 timeout_seconds = 45.0
 
 [listing]
 kind = "html_list"
-entry_url = "https://www.hncb.com.tw/wps/portal/HNCB/card/!ut/p/z1/04_Sj9CPykssy0xPLMnMz0vMAfIjo8ziDQw93T3cnQ18DQIsDAzMAk3M_UMtwoxCPY30w_EpMDI0148iSj8O4GhApH7cCqLwGx-uH4XPCrAPCJlRkBsaGmGQ6QgAkO1qlw!!/?1dmy&urile=wcm%3apath%3a/wps/wcm/connect/hncb_v2/site_map/hncb/per_finance/service/public_item/best_offer"
+entry_url = "https://www.hncb.com.tw/wps/portal/HNCB/card/?1dmy&urile=wcm%3apath%3a/wps/wcm/connect/hncb_v2/site_map/hncb/per_finance/service/public_item/best_offer"
 # 活動全在「信用卡」分頁的面板裡。不限縮會混進存款、貸款、保險等其他分頁的連結。
 scope_tab_label = "信用卡"
 # 活動名稱在錨點的 title 屬性裡（錨點文字被 CSS 截斷成一行），用第二個擷取

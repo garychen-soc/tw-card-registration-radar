@@ -29,6 +29,11 @@ on:
         options: [ubuntu-latest, macos-latest]
         required: false
         default: ubuntu-latest
+      headed:
+        description: "瀏覽器探測使用標準有視窗模式（Linux 使用 Xvfb）"
+        type: boolean
+        required: false
+        default: false
 
 permissions:
   contents: read
@@ -57,12 +62,22 @@ jobs:
           SOURCE: ${{ inputs.source }}
           URLS: ${{ inputs.urls }}
           BROWSER: ${{ inputs.browser }}
+          HEADED: ${{ inputs.headed }}
         run: |
           ARGS=("$SOURCE" --urls-json "$URLS" --timeout 15)
           if [ "$BROWSER" = true ]; then
             ARGS+=(--browser)
           fi
-          python scripts/probe_source.py "${ARGS[@]}" | tee probe.txt
+          if [ "$BROWSER" = true ] && [ "$HEADED" = true ]; then
+            ARGS+=(--headed)
+            if [ "$RUNNER_OS" = Linux ]; then
+              xvfb-run python scripts/probe_source.py "${ARGS[@]}" | tee probe.txt
+            else
+              python scripts/probe_source.py "${ARGS[@]}" | tee probe.txt
+            fi
+          else
+            python scripts/probe_source.py "${ARGS[@]}" | tee probe.txt
+          fi
           {
             echo "## 官方來源探測：$SOURCE"
             echo '```'
