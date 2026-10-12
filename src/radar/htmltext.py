@@ -17,7 +17,7 @@ import re
 from collections.abc import Iterator
 from typing import Any
 
-from selectolax.parser import HTMLParser
+from selectolax.lexbor import LexborHTMLParser
 
 # 整段移除的元素。除了不可見內容，也移除頁面樣板 —— 實測元大的活動頁
 # 若不移除導覽與 Cookie 告知，活動標題會變成「為提供您更好、更個人化的服務…」，
@@ -87,7 +87,7 @@ def scope_html(html: str, *, selector: str = "", tab_label: str = "") -> str:
     """
     if not selector and not tab_label:
         return html
-    tree = HTMLParser(html)
+    tree = LexborHTMLParser(html)
     if tab_label:
         pattern = re.compile(
             rf'<a[^>]+aria-controls="([^"]+)"[^>]*aria-label="{re.escape(tab_label)}"'
@@ -108,7 +108,7 @@ def scope_html(html: str, *, selector: str = "", tab_label: str = "") -> str:
 
 
 def to_text(html: str) -> str:
-    tree = HTMLParser(html)
+    tree = LexborHTMLParser(html)
     for selector in _DROP:
         for node in tree.css(selector):
             node.decompose()
@@ -125,7 +125,7 @@ def to_text(html: str) -> str:
     return filtered or unfiltered
 
 
-def _extract(tree: HTMLParser) -> str:
+def _extract(tree: LexborHTMLParser) -> str:
     """從（可能已被過濾的）樹取出純文字。"""
     root = None
     for selector in _CONTENT_ROOTS:
@@ -140,7 +140,7 @@ def _extract(tree: HTMLParser) -> str:
     return "\n".join(line.strip() for line in text.splitlines() if line.strip())
 
 
-def _drop_link_lists(tree: HTMLParser) -> None:
+def _drop_link_lists(tree: LexborHTMLParser) -> None:
     """移除連結密度過高的區塊（選單、側邊欄、頁尾連結列）。
 
     代價是會連帶移除「參與門市清單」這類本身就是連結列表的內容。對本專案的
@@ -194,7 +194,7 @@ def links(html: str, base_url: str) -> list[tuple[str, str]]:
     —— 部分銀行把真實目標放在 data 屬性上。"""
     from urllib.parse import urljoin
 
-    tree = HTMLParser(html)
+    tree = LexborHTMLParser(html)
     result: list[tuple[str, str]] = []
     for node in tree.css("a"):
         href = node.attributes.get("data-link") or node.attributes.get("href") or ""
