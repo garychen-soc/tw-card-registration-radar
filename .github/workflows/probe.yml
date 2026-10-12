@@ -29,7 +29,7 @@ jobs:
         with:
           python-version: "3.11"
 
-      - run: pip install --disable-pip-version-check httpx selectolax pydantic
+      - run: pip install --disable-pip-version-check -e .
 
       - name: Probe from the runner's IP
         run: |

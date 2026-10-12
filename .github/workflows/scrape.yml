@@ -57,6 +57,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -e '.[dev]'
 
+      - name: Tests and golden corpus
+        run: python -m pytest -q
+
       - name: Scrape the residential-only sources
         run: |
           python scripts/build_site.py \
@@ -101,6 +104,9 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -e '.[dev]'
+
+      - name: Tests and golden corpus
+        run: python -m pytest -q
 
       # 頁面 HTML 快取只是省下重新下載，命中與否對正確性零影響。
       # 只有國泰世華與聯邦提供 ETag／Last-Modified，其餘來源每次都會重抓。

@@ -19,7 +19,7 @@ from datetime import date
 from typing import Any, Protocol
 from urllib.parse import urljoin
 
-from selectolax.parser import HTMLParser
+from selectolax.lexbor import LexborHTMLParser
 
 from ..htmltext import scope_html
 from ..parse.datetimes import find_date_range
@@ -270,7 +270,7 @@ def _collect_json_items(
 def _items_from_html(listing: ListingSpec, html: str, base_url: str) -> list[ListingItem]:
     blocks: list[tuple[str, str]]
     if listing.item_selector:
-        tree = HTMLParser(html)
+        tree = LexborHTMLParser(html)
         # 用換行分隔，這樣區塊文字的第一行就是卡片標題
         blocks = [
             (node.html or "", node.text(separator="\n") or "")
@@ -319,7 +319,7 @@ def _pick(block_html: str, selector: str) -> str:
     """用 CSS selector 從區塊中取文字。找不到就回空字串。"""
     if not selector:
         return ""
-    node = HTMLParser(block_html).css_first(selector)
+    node = LexborHTMLParser(block_html).css_first(selector)
     return (node.text() or "").strip() if node else ""
 
 
