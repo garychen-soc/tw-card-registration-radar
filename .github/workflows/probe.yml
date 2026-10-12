@@ -14,6 +14,10 @@ on:
         description: 要探測的來源 id（例如 sunny）
         required: true
         default: sunny
+      urls:
+        description: "可選：官方網址的 JSON 清單（空白則跑 UA 矩陣）"
+        required: false
+        default: ""
 
 permissions:
   contents: read
@@ -32,10 +36,13 @@ jobs:
       - run: pip install --disable-pip-version-check -e .
 
       - name: Probe from the runner's IP
+        env:
+          SOURCE: ${{ inputs.source }}
+          URLS: ${{ inputs.urls }}
         run: |
-          python scripts/probe_source.py "${{ inputs.source }}" | tee probe.txt
+          python scripts/probe_source.py "$SOURCE" --urls-json "$URLS" --timeout 15 | tee probe.txt
           {
-            echo "## UA／標頭探測：${{ inputs.source }}"
+            echo "## 官方來源探測：$SOURCE"
             echo '```'
             cat probe.txt
             echo '```'

@@ -15,6 +15,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import sys
 import time
 from pathlib import Path
@@ -24,7 +25,7 @@ import httpx
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from radar.spec import load_spec  # noqa: E402
+from radar.spec import SourceSpec, load_spec  # noqa: E402
 from radar.transport import DEFAULT_HEADERS, USER_AGENT, is_allowed, tls_context  # noqa: E402
 
 # 只列真實瀏覽器與本專案自己的 UA。刻意不冒充搜尋引擎爬蟲 —— 那是欺騙網站
@@ -77,14 +78,45 @@ CHROME_EXTRA = {
 }
 
 
+def probe_routes(spec: SourceSpec, payload: str, timeout: float, pause: float) -> int:
+    """Compare a small set of official routes without changing production settings."""
+    urls = json.loads(payload)
+    if not isinstance(urls, list) or not 1 <= len(urls) <= 10:
+        raise ValueError("urls must be a list of 1-10 official HTTPS URLs")
+    if any(not isinstance(url, str) or not is_allowed(url, spec.domains) for url in urls):
+        raise ValueError("all routes must pass the source domain allowlist")
+    with httpx.Client(headers=DEFAULT_HEADERS, timeout=timeout, verify=tls_context()) as client:
+        for url in urls:
+            time.sleep(pause)
+            started = time.monotonic()
+            try:
+                response = client.get(url)
+                print(json.dumps({
+                    "url": url, "status": response.status_code,
+                    "seconds": round(time.monotonic() - started, 2),
+                    "bytes": len(response.content), "server": response.headers.get("server"),
+                    "location": response.headers.get("location"),
+                    "content_type": response.headers.get("content-type"),
+                    "body_preview": response.text[:160] if response.status_code != 200 else "",
+                }, ensure_ascii=False), flush=True)
+            except httpx.HTTPError as exc:
+                print(json.dumps({"url": url, "error": type(exc).__name__,
+                                  "seconds": round(time.monotonic() - started, 2)},
+                                 ensure_ascii=False), flush=True)
+    return 0
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("spec_id")
     parser.add_argument("--timeout", type=float, default=25.0)
     parser.add_argument("--pause", type=float, default=2.0, help="每次請求之間的間隔秒數")
+    parser.add_argument("--urls-json", default="", help="只探測指定官方網址，不跑 UA 矩陣")
     args = parser.parse_args()
 
     spec = load_spec(ROOT / "sources" / f"{args.spec_id}.toml")
+    if args.urls_json:
+        return probe_routes(spec, args.urls_json, args.timeout, args.pause)
     url = spec.listing.data_url or spec.listing.entry_url
     if not is_allowed(url, [d.lower() for d in spec.domains]):
         print(f"入口頁未通過白名單，不探測：{url}")
