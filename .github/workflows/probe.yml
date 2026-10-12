@@ -18,6 +18,11 @@ on:
         description: "可選：官方網址的 JSON 清單（空白則跑 UA 矩陣）"
         required: false
         default: ""
+      browser:
+        description: "用 Chromium 核對官方網址（只讀取，不處理驗證碼）"
+        type: boolean
+        required: false
+        default: false
 
 permissions:
   contents: read
@@ -35,12 +40,23 @@ jobs:
 
       - run: pip install --disable-pip-version-check -e .
 
+      - name: Install the optional diagnostic browser
+        if: inputs.browser
+        run: |
+          pip install 'playwright>=1,<2'
+          python -m playwright install --with-deps chromium
+
       - name: Probe from the runner's IP
         env:
           SOURCE: ${{ inputs.source }}
           URLS: ${{ inputs.urls }}
+          BROWSER: ${{ inputs.browser }}
         run: |
-          python scripts/probe_source.py "$SOURCE" --urls-json "$URLS" --timeout 15 | tee probe.txt
+          ARGS=("$SOURCE" --urls-json "$URLS" --timeout 15)
+          if [ "$BROWSER" = true ]; then
+            ARGS+=(--browser)
+          fi
+          python scripts/probe_source.py "${ARGS[@]}" | tee probe.txt
           {
             echo "## 官方來源探測：$SOURCE"
             echo '```'

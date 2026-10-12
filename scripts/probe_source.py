@@ -18,6 +18,7 @@ import argparse
 import json
 import sys
 import time
+from contextlib import suppress
 from pathlib import Path
 
 import httpx
@@ -78,13 +79,42 @@ CHROME_EXTRA = {
 }
 
 
-def probe_routes(spec: SourceSpec, payload: str, timeout: float, pause: float) -> int:
+def probe_routes(
+    spec: SourceSpec, payload: str, timeout: float, pause: float, *, browser: bool = False,
+) -> int:
     """Compare a small set of official routes without changing production settings."""
     urls = json.loads(payload)
     if not isinstance(urls, list) or not 1 <= len(urls) <= 10:
         raise ValueError("urls must be a list of 1-10 official HTTPS URLs")
     if any(not isinstance(url, str) or not is_allowed(url, spec.domains) for url in urls):
         raise ValueError("all routes must pass the source domain allowlist")
+    if browser:
+        from playwright.sync_api import TimeoutError as BrowserTimeout
+        from playwright.sync_api import sync_playwright
+
+        with sync_playwright() as playwright:
+            chromium = playwright.chromium.launch()
+            context = chromium.new_context(locale="zh-TW")
+            page = context.new_page()
+            for url in urls:
+                time.sleep(pause)
+                started = time.monotonic()
+                try:
+                    response = page.goto(url, wait_until="domcontentloaded", timeout=timeout * 1000)
+                    with suppress(BrowserTimeout):
+                        page.wait_for_function(
+                            "!document.title.includes('Just a moment')", timeout=15000,
+                        )
+                    print(json.dumps({
+                        "url": url, "status": response.status if response else None,
+                        "final_url": page.url, "title": page.title(),
+                        "seconds": round(time.monotonic() - started, 2),
+                        "bytes": len(page.content()), "cards": page.locator(".card").count(),
+                    }, ensure_ascii=False), flush=True)
+                except BrowserTimeout:
+                    print(json.dumps({"url": url, "error": "BrowserTimeout"}), flush=True)
+            chromium.close()
+        return 0
     with httpx.Client(headers=DEFAULT_HEADERS, timeout=timeout, verify=tls_context()) as client:
         for url in urls:
             time.sleep(pause)
@@ -112,11 +142,12 @@ def main() -> int:
     parser.add_argument("--timeout", type=float, default=25.0)
     parser.add_argument("--pause", type=float, default=2.0, help="每次請求之間的間隔秒數")
     parser.add_argument("--urls-json", default="", help="只探測指定官方網址，不跑 UA 矩陣")
+    parser.add_argument("--browser", action="store_true", help="以真實 Chromium 唯讀探測")
     args = parser.parse_args()
 
     spec = load_spec(ROOT / "sources" / f"{args.spec_id}.toml")
     if args.urls_json:
-        return probe_routes(spec, args.urls_json, args.timeout, args.pause)
+        return probe_routes(spec, args.urls_json, args.timeout, args.pause, browser=args.browser)
     url = spec.listing.data_url or spec.listing.entry_url
     if not is_allowed(url, [d.lower() for d in spec.domains]):
         print(f"入口頁未通過白名單，不探測：{url}")
