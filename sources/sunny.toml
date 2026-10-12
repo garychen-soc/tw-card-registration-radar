@@ -1,22 +1,18 @@
 id = "sunny"
 bank_name = "陽信銀行"
 domains = ["sunnybank.com.tw"]
-# 只在住宅 IP 讀得到 —— datacenter IP 的 12 種 UA／標頭組合全部 403。
-#
-# 目前仍設 cloud，因為自架 runner 還沒常駐。維持 cloud 時它會誠實顯示為
-# blocked（那是真實狀態）；改成 self-hosted 而 runner 沒跑，訊息會變成
-# 「自架 runner 未回報」—— 那是錯的描述。
-#
-# 啟用自架 runner 的兩個動作：這行改成 "self-hosted"，並在倉庫
-# Variables 設 SELF_HOSTED_RUNNER=true。分流機制與離線降級都已實作並測過。
+# 以正常有視窗 Chromium 在 GitHub Actions 讀取，Linux 使用 Xvfb。
+# HTTP User-Agent 矩陣失敗不能證明「所有雲端網路都不可讀」。
 runner = "cloud"
+transport = "browser"
 note = """2026-10-13 的官方頁已有專案活動卡片與逐活動 href，不能再把整個
 索引頁當成唯一活動頁。只在 .txt .ad-link 面板收逐活動的 activityevent、
 ActNewsView 與首刷禮官方連結，使用卡片標題、清單期間與各自明細內文。
 導覽入口（卡組織、紅利兌換、公益、App）不列為活動。
 
-雲端 12 種 UA／標頭組合與官方替代入口均回 Cloudflare 403 驗證頁；本機可讀。
-不得把驗證頁當成活動資料，也不得因換入口而宣稱網路限制已解除。"""
+一般 HTTP 的 12 種 UA／標頭與替代官方路徑均回 Cloudflare 403 驗證頁；
+標準有視窗 Chromium 在同一 GitHub 受管 Linux runner 成功讀到 39 張卡片。
+因此使用 browser transport，不解 CAPTCHA、不登入，也不把驗證頁解析成活動。"""
 
 [listing]
 kind = "html_list"

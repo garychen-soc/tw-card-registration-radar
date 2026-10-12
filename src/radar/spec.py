@@ -178,10 +178,11 @@ class SourceSpec(Strict):
     )
     runner: Literal["cloud", "self-hosted"] = Field(
         default="cloud",
-        description="這個來源要在哪個網路位置抓。cloud = GitHub Actions 的 datacenter "
-        "IP；self-hosted = 住宅 IP 的自架 runner。**兩者都有來源只在其中一邊通得過**"
-        "—— 陽信在 datacenter IP 12 種 UA／標頭組合全部 403，元大剛好相反（在 CI 通、"
-        "在住宅 IP 被 403）。所以這不是「自架比較好」，是分流。",
+        description="抓取位置：cloud 在 GitHub 受管 runner；self-hosted 在自架 runner。"
+        "網路位置與 HTTP／browser transport 分別宣告，以實測可達性為依據。",
+    )
+    transport: Literal["http", "browser"] = Field(
+        default="http", description="http 使用一般 HTTP；browser 使用標準有視窗 Chromium。",
     )
     timeout_seconds: float = Field(
         default=0.0,
@@ -211,6 +212,16 @@ class SourceSpec(Strict):
         ):
             if url and not is_allowed(url, self.domains):
                 raise ValueError(f"{self.id}: URL 不在 domains 白名單內或非 https：{url}")
+        return self
+
+    @model_validator(mode="after")
+    def _browser_supports_public_html_only(self) -> SourceSpec:
+        if self.transport == "browser" and (
+            self.listing.kind not in {"html_list", "single_page"}
+            or self.listing.pagination_kind != "none"
+            or self.user_agent
+        ):
+            raise ValueError("browser 僅支援靜態 HTML 清單，使用瀏覽器原生 User-Agent")
         return self
 
 

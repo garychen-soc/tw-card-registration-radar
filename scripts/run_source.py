@@ -18,10 +18,11 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from radar.adapters.listing import read_listing  # noqa: E402
+from radar.fetch import source_fetcher  # noqa: E402
 from radar.report import describe_offer, describe_source  # noqa: E402
 from radar.runner import run_source  # noqa: E402
 from radar.spec import load_spec  # noqa: E402
-from radar.transport import DEFAULT_TIMEOUT, Fetcher, HttpCache  # noqa: E402
+from radar.transport import HttpCache  # noqa: E402
 
 
 def main() -> int:
@@ -36,12 +37,7 @@ def main() -> int:
     today = date.fromisoformat(args.today)
     cache = HttpCache.load(ROOT / "var" / "http_cache.json")
 
-    with Fetcher(
-        spec.domains,
-        cache=cache,
-        user_agent=spec.user_agent or None,
-        timeout=spec.timeout_seconds or DEFAULT_TIMEOUT,
-    ) as fetcher:
+    with source_fetcher(spec, cache=cache) as fetcher:
         if args.limit:
             # 只取前 N 筆時，用一次性的假清單包裝真實 fetcher，避免整批抓取
             items = read_listing(spec, fetcher)[: args.limit]

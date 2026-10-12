@@ -108,6 +108,9 @@ jobs:
       - name: Tests and golden corpus
         run: python -m pytest -q
 
+      - name: Install the declared browser transport
+        run: python -m playwright install --with-deps chromium
+
       # 頁面 HTML 快取只是省下重新下載，命中與否對正確性零影響。
       # 只有國泰世華與聯邦提供 ETag／Last-Modified，其餘來源每次都會重抓。
       - name: Restore page cache
@@ -149,7 +152,7 @@ jobs:
             ARGS+=(--only $ONLY --dry-run)
             echo "只跑指定來源（$ONLY），強制 dry-run，不會提交。"
           fi
-          python scripts/build_site.py "${ARGS[@]}" | tee /tmp/scrape.log
+          xvfb-run python scripts/build_site.py "${ARGS[@]}" | tee /tmp/scrape.log
           echo "exit_code=${PIPESTATUS[0]}" >> "$GITHUB_OUTPUT"
 
       - name: Write run summary

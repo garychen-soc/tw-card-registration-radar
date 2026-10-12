@@ -4,7 +4,7 @@
 # 這類問題本機重現不了，而每個假設各開一次 Scrape 執行太貴（一次只驗一個假設）。
 # 這支把整個矩陣壓進一次執行。
 #
-# 只能手動觸發，不排程、不寫檔、不提交、不部署。
+# 只能手動觸發，不提交、不部署；可選產出單一來源的驗證快照。
 name: Probe
 
 on:
@@ -34,6 +34,11 @@ on:
         type: boolean
         required: false
         default: false
+      capture:
+        description: "按來源正式設定抓取並上傳驗證快照，不發布網站資料"
+        type: boolean
+        required: false
+        default: false
 
 permissions:
   contents: read
@@ -52,12 +57,12 @@ jobs:
       - run: pip install --disable-pip-version-check -e .
 
       - name: Install the optional diagnostic browser
-        if: inputs.browser
+        if: inputs.browser || inputs.capture
         run: |
-          pip install 'playwright>=1,<2'
           python -m playwright install --with-deps chromium
 
       - name: Probe from the runner's IP
+        if: ${{ !inputs.capture }}
         env:
           SOURCE: ${{ inputs.source }}
           URLS: ${{ inputs.urls }}
@@ -84,3 +89,30 @@ jobs:
             cat probe.txt
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Capture the declared source transport
+        if: inputs.capture
+        env:
+          SOURCE: ${{ inputs.source }}
+        run: |
+          xvfb-run python scripts/build_site.py --only "$SOURCE" --runner all \
+            --today "$(TZ=Asia/Taipei date +%F)" --snapshot-out snapshot/validation.json
+          python - <<'PY'
+          import json, os, pathlib
+          payload = json.loads(pathlib.Path("snapshot/validation.json").read_text())
+          assert len(payload["health"]) == 1
+          assert payload["health"][0]["bank_id"] == os.environ["SOURCE"]
+          assert payload["health"][0]["status"] == "complete", payload["health"]
+          assert payload["campaigns"], "no campaigns"
+          assert all(c["bank_id"] == os.environ["SOURCE"] for c in payload["campaigns"])
+          print("Complete source snapshot verified")
+          PY
+
+      - name: Upload the validation snapshot
+        if: inputs.capture
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: source-validation
+          path: snapshot/validation.json
+          retention-days: 1
+          if-no-files-found: error

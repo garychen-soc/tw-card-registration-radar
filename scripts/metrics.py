@@ -23,10 +23,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
+from radar.fetch import source_fetcher  # noqa: E402
 from radar.pagestore import PageStore  # noqa: E402
 from radar.runner import run_source  # noqa: E402
 from radar.spec import load_spec  # noqa: E402
-from radar.transport import DEFAULT_TIMEOUT, Fetcher, HttpCache  # noqa: E402
+from radar.transport import HttpCache  # noqa: E402
 
 
 def main() -> int:
@@ -46,12 +47,7 @@ def main() -> int:
     report: dict[str, dict[str, object]] = {}
     for path in paths:
         spec = load_spec(path)
-        with Fetcher(
-            spec.domains,
-            cache=cache,
-            user_agent=spec.user_agent or None,
-            timeout=spec.timeout_seconds or DEFAULT_TIMEOUT,
-        ) as fetcher:
+        with source_fetcher(spec, cache=cache) as fetcher:
             result = run_source(spec, fetcher, today=today, pages=pages)
         offers = [offer for campaign in result.campaigns for offer in campaign.offers]
         codes: Counter[str] = Counter()

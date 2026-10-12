@@ -18,12 +18,12 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
+from radar.fetch import source_fetcher  # noqa: E402
 from radar.htmltext import to_text  # noqa: E402
 from radar.report import describe_offer  # noqa: E402
 from radar.runner import build_offers  # noqa: E402
 from radar.segment import sections  # noqa: E402
 from radar.spec import load_spec  # noqa: E402
-from radar.transport import Fetcher  # noqa: E402
 
 
 def main() -> int:
@@ -36,7 +36,7 @@ def main() -> int:
     spec = load_spec(ROOT / "sources" / f"{args.spec_id}.toml")
     today = date.fromisoformat(args.today)
 
-    with Fetcher(spec.domains) as fetcher:
+    with source_fetcher(spec) as fetcher:
         response = fetcher.get(args.url, conditional=False)
 
     text = to_text(response.text)
