@@ -139,7 +139,10 @@ class BrowserFetcher(Fetcher):
             raise AccessDenied(f"來源拒絕存取：{final_url} HTTP {status}")
         if status == 304 or status >= 400:
             raise FetchFailed(f"抓取失敗：{final_url} HTTP {status}")
-        html = self._page.content()
+        # Preserve the server document consumed by the existing HTML parser.
+        # Portal scripts can remove/rewrite content after load; DOM serialization
+        # lost 19 HNCB offers even though all document requests succeeded.
+        html = response.text()
         encoded = html.encode("utf-8")
         if len(encoded) > max_bytes:
             raise FetchFailed(f"回應超過 {max_bytes} bytes：{final_url}")

@@ -20,10 +20,11 @@ def browser() -> BrowserFetcher:
     page = Mock(spec=Page)
     response = Mock()
     response.status = 200
+    response.text.return_value = "<p>活動期間：2026/10/1~2026/12/31</p>"
     page.goto.return_value = response
     page.url = URL
     page.title.return_value = "活動"
-    page.content.return_value = "<p>活動期間：2026/10/1~2026/12/31</p>"
+    page.content.return_value = "<p>頁面 JavaScript 已重寫或移除原始活動內容</p>"
     fetcher._page = page
     fetcher._context = Mock()
     fetcher._session = Mock(spec=CDPSession)
@@ -32,7 +33,7 @@ def browser() -> BrowserFetcher:
     fetcher.close()
 
 
-def test_browser_success_returns_rendered_html_without_claiming_a_cached_response(
+def test_browser_preserves_the_server_document_after_dom_mutation(
     browser: BrowserFetcher,
 ) -> None:
     response = browser.get(URL, conditional=True)
@@ -41,6 +42,7 @@ def test_browser_success_returns_rendered_html_without_claiming_a_cached_respons
     assert response.final_url == URL
     assert not response.not_modified
     assert not browser.cache.has_validators(URL)
+    browser._page.content.assert_not_called()
 
 
 @pytest.mark.parametrize("url", ["http://www.example.com/", "https://127.0.0.1/",
