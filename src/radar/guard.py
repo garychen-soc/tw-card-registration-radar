@@ -77,11 +77,17 @@ class PublishGuard(BaseModel):
         return self.status == "blocked"
 
 
-def _offers_by_source(index: dict[str, Any]) -> dict[str, int]:
+def _offers_by_source(index: dict[str, Any], *, unusable_ids: set[str]) -> dict[str, int]:
     counts: dict[str, int] = {}
     for source in index.get("sources", []):
         if isinstance(source, dict) and isinstance(source.get("bank_id"), str):
-            counts[source["bank_id"]] = int(source.get("offer_count") or 0)
+            bank_id = source["bank_id"]
+            fresh = int(source.get("offer_count") or 0)
+            # A recovered source must not silently replace known carried coverage
+            # with a much smaller "complete" result (HNCB: 31 carried -> 14 DOM offers).
+            # Carried unique offers are a conservative lower bound on raw coverage.
+            carried = int(source.get("carried_offer_count") or 0)
+            counts[bank_id] = fresh or (carried if bank_id not in unusable_ids else 0)
     return counts
 
 
@@ -106,13 +112,13 @@ def assess(
     regressions: list[SourceRegression] = []
     if previous_index is not None:
         previous_offers = int(previous_index.get("counts", {}).get("offers") or 0)
-        baseline = _offers_by_source(previous_index)
         current = {item.bank_id: item.offer_count for item in health}
         names = {item.bank_id: item.bank_name for item in health}
         # 兩類退步分開處理，因為它們的訊號強度不同（見 UNUSABLE_SHARE_LIMIT）。
         unusable_ids = {
             item.bank_id for item in health if item.status in {"failed", "blocked"}
         }
+        baseline = _offers_by_source(previous_index, unusable_ids=unusable_ids)
         silent: list[SourceRegression] = []
         loud: list[SourceRegression] = []
         unusable_lost = 0

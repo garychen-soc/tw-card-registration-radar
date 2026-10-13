@@ -142,13 +142,20 @@ class BrowserFetcher(Fetcher):
         # Preserve the server document consumed by the existing HTML parser.
         # Portal scripts can remove/rewrite content after load; DOM serialization
         # lost 19 HNCB offers even though all document requests succeeded.
-        html = response.text()
-        encoded = html.encode("utf-8")
-        if len(encoded) > max_bytes:
+        content = response.body()
+        if len(content) > max_bytes:
             raise FetchFailed(f"回應超過 {max_bytes} bytes：{final_url}")
+        content_type = response.all_headers().get("content-type", "text/html")
+        charset = re.search(r"charset\s*=\s*[\"']?([^\s;\"']+)", content_type, re.I)
+        encoding = charset.group(1) if charset else "utf-8"
+        try:
+            html = content.decode(encoding, errors="replace")
+        except LookupError:
+            html = content.decode("utf-8", errors="replace")
         return Response(
             requested_url=url, final_url=final_url, status_code=status, text=html,
-            content_type="text/html", content_hash=hashlib.sha256(encoded).hexdigest(),
+            content_type=content_type.split(";")[0],
+            content_hash=hashlib.sha256(content).hexdigest(),
         )
 
     def get(

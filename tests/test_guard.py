@@ -50,6 +50,35 @@ def test_healthy_run_passes() -> None:
     assert guard.reason_codes == []
 
 
+def test_recovered_source_cannot_silently_replace_carried_coverage_with_less() -> None:
+    previous = _index(hncb=0, others=1000)
+    previous["sources"][0]["carried_offer_count"] = 31
+    guard = assess(health=[_one("hncb", 14), _one("others", 1000)],
+                   current_offers=1014, previous_index=previous)
+    assert guard.blocked and guard.published_snapshot_preserved
+    assert guard.reason_codes == ["per_source_coverage_regression"]
+    assert guard.regressions[0].bank_id == "hncb"
+    assert guard.regressions[0].previous_offers == 31
+    assert guard.regressions[0].current_offers == 14
+
+
+def test_still_failed_source_does_not_treat_carried_rows_as_a_new_failure() -> None:
+    previous = _index(hncb=0, others=1000)
+    previous["sources"][0]["carried_offer_count"] = 31
+    guard = assess(health=[_one("hncb", 0, "failed"), _one("others", 1000)],
+                   current_offers=1000, previous_index=previous)
+    assert not guard.blocked
+    assert guard.source_failed == 1
+
+
+def test_full_source_recovery_passes_the_carried_coverage_check() -> None:
+    previous = _index(hncb=0, others=1000)
+    previous["sources"][0]["carried_offer_count"] = 31
+    guard = assess(health=[_one("hncb", 33), _one("others", 1000)],
+                   current_offers=1033, previous_index=previous)
+    assert not guard.blocked
+
+
 def test_largest_source_collapsing_is_caught_by_per_source_check() -> None:
     """前身的破口：台北富邦 212 筆（全站最大來源）整個歸零時，
     全站跌幅僅 19.8% < 50%，會靜默發布。"""

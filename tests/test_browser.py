@@ -20,7 +20,8 @@ def browser() -> BrowserFetcher:
     page = Mock(spec=Page)
     response = Mock()
     response.status = 200
-    response.text.return_value = "<p>活動期間：2026/10/1~2026/12/31</p>"
+    response.body.return_value = "<p>活動期間：2026/10/1~2026/12/31</p>".encode()
+    response.all_headers.return_value = {"content-type": "text/html; charset=utf-8"}
     page.goto.return_value = response
     page.url = URL
     page.title.return_value = "活動"
@@ -113,6 +114,21 @@ def test_browser_retains_the_response_size_limit(browser: BrowserFetcher) -> Non
     with pytest.raises(FetchFailed, match="回應超過"):
         browser.get(URL, max_bytes=4)
     assert browser._page.goto.call_count == 1
+
+
+def test_browser_preserves_declared_character_encoding(browser: BrowserFetcher) -> None:
+    browser._page.goto.return_value.body.return_value = "活動期間".encode("big5")
+    browser._page.goto.return_value.all_headers.return_value = {
+        "content-type": "text/html; charset=big5",
+    }
+    assert browser.get(URL).text == "活動期間"
+
+
+def test_browser_replaces_a_single_invalid_byte_instead_of_crashing(
+    browser: BrowserFetcher,
+) -> None:
+    browser._page.goto.return_value.body.return_value = b"text\xff"
+    assert browser.get(URL).text == "text\ufffd"
 
 
 def test_browser_rejects_an_unsafe_final_url(browser: BrowserFetcher) -> None:
