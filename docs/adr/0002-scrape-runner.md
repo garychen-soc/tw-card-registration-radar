@@ -2,6 +2,9 @@
 
 狀態：已採納（2026-08-04）
 
+2026-10-13 更新：華南與陽信改用受管 runner 的標準瀏覽器讀取；本檔的舊 IP
+封鎖推論已重新實測，現況以 [ADR 0004](0004-native-browser-sources.md) 為準。
+
 ## 背景
 
 前身專案的 workflow 名為 "Refresh and deploy GitHub Pages"，但裡面**沒有任何

@@ -1,35 +1,28 @@
 id = "sunny"
 bank_name = "陽信銀行"
 domains = ["sunnybank.com.tw"]
-# 只在住宅 IP 讀得到 —— datacenter IP 的 12 種 UA／標頭組合全部 403。
-#
-# 目前仍設 cloud，因為自架 runner 還沒常駐。維持 cloud 時它會誠實顯示為
-# blocked（那是真實狀態）；改成 self-hosted 而 runner 沒跑，訊息會變成
-# 「自架 runner 未回報」—— 那是錯的描述。
-#
-# 啟用自架 runner 的兩個動作：這行改成 "self-hosted"，並在倉庫
-# Variables 設 SELF_HOSTED_RUNNER=true。分流機制與離線降級都已實作並測過。
+# 以正常有視窗 Chromium 在 GitHub Actions 讀取，Linux 使用 Xvfb。
+# HTTP User-Agent 矩陣失敗不能證明「所有雲端網路都不可讀」。
 runner = "cloud"
-note = """頁上沒有逐活動網址（只有選單連結），活動內容全在索引頁上，用 single_page。
+transport = "browser"
+note = """2026-10-13 的官方頁已有專案活動卡片與逐活動 href，不能再把整個
+索引頁當成唯一活動頁。只在 .txt .ad-link 面板收逐活動的 activityevent、
+ActNewsView 與首刷禮官方連結，使用卡片標題、清單期間與各自明細內文。
+導覽入口（卡組織、紅利兌換、公益、App）不列為活動。
 
-**封鎖看的是 IP，不是 User-Agent —— 已用 12 種組合的矩陣證偽。**
-scripts/probe_source.py 從 Actions runner 試了 6 種真實瀏覽器 UA
-（Chrome mac／Windows／Android、Safari、Firefox、專案預設）× 有無完整的
-Chrome fetch metadata 與 client hints（sec-fetch-*、sec-ch-ua），
-**12 種組合全部 HTTP 403**；同一份矩陣在本機住宅 IP 全部 HTTP 200、
-161,393 bytes。
-
-所以已改回專案預設 UA —— 對能讀到的來源保持可識別是對的做法，沒有理由為了一個
-量測為假的假設放棄它。
-
-真正的解法是住宅 IP 的自架 runner（ADR 0002 已寫好備案），那需要使用者提供
-常開的機器。在那之前這家會誠實地顯示為 blocked：來源狀態面板看得到，
-且合計流失僅佔全站 1.6%，不會擋下其餘來源的更新（見 guard 的
-UNUSABLE_SHARE_LIMIT）。"""
+一般 HTTP 的 12 種 UA／標頭與替代官方路徑均回 Cloudflare 403 驗證頁；
+標準有視窗 Chromium 在同一 GitHub 受管 Linux runner 成功讀到 39 張卡片。
+因此使用 browser transport，不解 CAPTCHA、不登入，也不把驗證頁解析成活動。"""
 
 [listing]
-kind = "single_page"
+kind = "html_list"
 entry_url = "https://www.sunnybank.com.tw/net/Main/Page/6?onews=1"
+scope_selector = ".txt .ad-link"
+item_selector = "div.card"
+title_selector = ".card-title"
+summary_selector = ".card-text"
+# 只收逐活動官方明細；排除卡組織、紅利兌換、公益與 App 等導覽入口。
+link_pattern = 'href="((?:https://www\.sunnybank\.com\.tw)?/(?:activityevent/(?!202010-sunnybank_app/)[^"]+|net/Prg/ActNewsView/\d+|creditcard/wcardinfo/[^"]*))"'
 
 [detail]
 source = "html"

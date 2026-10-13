@@ -77,6 +77,22 @@ python3 -m venv .venv && .venv/bin/pip install -e '.[dev]'
 .venv/bin/mypy
 ```
 
+### 瀏覽器來源
+
+華南與陽信宣告 `transport = "browser"`，使用標準有視窗 Chromium 取得原始
+官方 HTML；其餘來源維持 HTTP。執行實際抓取前需安裝瀏覽器：
+
+```bash
+.venv/bin/python -m playwright install chromium
+# Linux 需安裝系統相依套件，並提供 Xvfb 顯示環境
+.venv/bin/python -m playwright install --with-deps chromium
+xvfb-run .venv/bin/python scripts/build_site.py --dry-run
+```
+
+單元測試不啟動瀏覽器，也不需要網路。GitHub Scrape 會自行安裝 Chromium；
+華南在受管 macOS 抓取，陽信在受管 Linux 使用 Xvfb。快照驗證後集中去重與
+核對發布防護；詳見 [ADR 0004](docs/adr/0004-native-browser-sources.md)。
+
 ## 安全邊界
 
 只讀取公開官方資訊。不登入銀行帳戶、不代使用者執行活動登錄、不收集卡號或

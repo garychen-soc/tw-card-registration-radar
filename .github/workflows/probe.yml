@@ -4,7 +4,7 @@
 # 這類問題本機重現不了，而每個假設各開一次 Scrape 執行太貴（一次只驗一個假設）。
 # 這支把整個矩陣壓進一次執行。
 #
-# 只能手動觸發，不排程、不寫檔、不提交、不部署。
+# 只能手動觸發，不提交、不部署；可選產出單一來源的驗證快照。
 name: Probe
 
 on:
@@ -14,13 +14,38 @@ on:
         description: 要探測的來源 id（例如 sunny）
         required: true
         default: sunny
+      urls:
+        description: "可選：官方網址的 JSON 清單（空白則跑 UA 矩陣）"
+        required: false
+        default: ""
+      browser:
+        description: "用 Chromium 核對官方網址（只讀取，不處理驗證碼）"
+        type: boolean
+        required: false
+        default: false
+      runner:
+        description: "GitHub 受管 runner（比較不同雲端網路位置）"
+        type: choice
+        options: [ubuntu-latest, macos-latest]
+        required: false
+        default: ubuntu-latest
+      headed:
+        description: "瀏覽器探測使用標準有視窗模式（Linux 使用 Xvfb）"
+        type: boolean
+        required: false
+        default: false
+      capture:
+        description: "按來源正式設定抓取並上傳驗證快照，不發布網站資料"
+        type: boolean
+        required: false
+        default: false
 
 permissions:
   contents: read
 
 jobs:
   probe:
-    runs-on: ubuntu-latest
+    runs-on: ${{ inputs.runner == 'macos-latest' && 'macos-latest' || 'ubuntu-latest' }}
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
@@ -31,12 +56,68 @@ jobs:
 
       - run: pip install --disable-pip-version-check -e .
 
-      - name: Probe from the runner's IP
+      - name: Install the optional diagnostic browser
+        if: inputs.browser || inputs.capture
         run: |
-          python scripts/probe_source.py "${{ inputs.source }}" | tee probe.txt
+          python -m playwright install --with-deps chromium
+
+      - name: Probe from the runner's IP
+        if: ${{ !inputs.capture }}
+        env:
+          SOURCE: ${{ inputs.source }}
+          URLS: ${{ inputs.urls }}
+          BROWSER: ${{ inputs.browser }}
+          HEADED: ${{ inputs.headed }}
+        run: |
+          ARGS=("$SOURCE" --urls-json "$URLS" --timeout 15)
+          if [ "$BROWSER" = true ]; then
+            ARGS+=(--browser)
+          fi
+          if [ "$BROWSER" = true ] && [ "$HEADED" = true ]; then
+            ARGS+=(--headed)
+            if [ "$RUNNER_OS" = Linux ]; then
+              xvfb-run python scripts/probe_source.py "${ARGS[@]}" | tee probe.txt
+            else
+              python scripts/probe_source.py "${ARGS[@]}" | tee probe.txt
+            fi
+          else
+            python scripts/probe_source.py "${ARGS[@]}" | tee probe.txt
+          fi
           {
-            echo "## UA／標頭探測：${{ inputs.source }}"
+            echo "## 官方來源探測：$SOURCE"
             echo '```'
             cat probe.txt
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Capture the declared source transport
+        if: inputs.capture
+        env:
+          SOURCE: ${{ inputs.source }}
+        run: |
+          ARGS=(--only "$SOURCE" --runner all --today "$(TZ=Asia/Taipei date +%F)"
+                --snapshot-out snapshot/validation.json)
+          if [ "$RUNNER_OS" = Linux ]; then
+            xvfb-run python scripts/build_site.py "${ARGS[@]}"
+          else
+            python scripts/build_site.py "${ARGS[@]}"
+          fi
+          python - <<'PY'
+          import json, os, pathlib
+          payload = json.loads(pathlib.Path("snapshot/validation.json").read_text())
+          assert len(payload["health"]) == 1
+          assert payload["health"][0]["bank_id"] == os.environ["SOURCE"]
+          assert payload["health"][0]["status"] == "complete", payload["health"]
+          assert payload["campaigns"], "no campaigns"
+          assert all(c["bank_id"] == os.environ["SOURCE"] for c in payload["campaigns"])
+          print("Complete source snapshot verified")
+          PY
+
+      - name: Upload the validation snapshot
+        if: inputs.capture
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: source-validation
+          path: snapshot/validation.json
+          retention-days: 1
+          if-no-files-found: error
