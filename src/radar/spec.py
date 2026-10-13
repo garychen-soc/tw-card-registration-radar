@@ -176,9 +176,10 @@ class SourceSpec(Strict):
         description="覆寫 User-Agent。只在銀行的防護會擋掉帶專案標識的 UA 時使用，"
         "並須在 note 說明原因 —— 預設一律用可識別的 UA。",
     )
-    runner: Literal["cloud", "self-hosted"] = Field(
+    runner: Literal["cloud", "cloud-macos", "self-hosted"] = Field(
         default="cloud",
-        description="抓取位置：cloud 在 GitHub 受管 runner；self-hosted 在自架 runner。"
+        description="抓取位置：cloud 在受管 Linux；cloud-macos 在受管 macOS；"
+        "self-hosted 在自架 runner。"
         "網路位置與 HTTP／browser transport 分別宣告，以實測可達性為依據。",
     )
     transport: Literal["http", "browser"] = Field(

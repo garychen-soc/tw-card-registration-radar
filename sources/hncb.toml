@@ -2,6 +2,7 @@
 id = "hncb"
 bank_name = "華南銀行"
 domains = ["hncb.com.tw"]
+runner = "cloud-macos"
 transport = "browser"
 note = """2026-10-13 重新校準官方入口：1dmy 與 urile 選取 WCM 的 best_offer
 內容，必須保留；固定的 !ut/p/z1/... portal 狀態並非必要。只移除狀態 token、
@@ -13,7 +14,8 @@ note = """2026-10-13 重新校準官方入口：1dmy 與 urile 選取 WCM 的 be
 期間、登錄與條件的依據。
 
 一般 HTTP 在 GitHub 單獨探測可讀，與其他來源一起執行仍可能整個入口逾時。
-因此使用標準有視窗 Chromium，保留 45 秒 timeout、正常重試、防護與缺漏回報。
+受管 macOS 的標準有視窗 Chromium 完整取得 33 筆且與 HTTP 基準一致，因此
+使用該抓取位置，保留 45 秒 timeout、正常重試、防護與缺漏回報。
 入口及完整來源結果分別核對，不藉由增加 timeout 掩蓋問題。"""
 timeout_seconds = 45.0
 

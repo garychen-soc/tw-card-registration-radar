@@ -177,8 +177,8 @@ def main() -> int:
                 outcome = f"{type(exc).__name__}: {str(exc)[:40]}"
             print(f"{label:26s} {extra_label:10s} {outcome:>28s}")
 
-    print("\n判讀：若所有組合都是同一種失敗 → 封鎖看的是 IP，換 UA 無效。")
-    print("     若某些組合成功 → 把成功的那組寫進 spec 的 user_agent。")
+    print("\n判讀：HTTP 矩陣全部失敗，只能確認該讀取方式失效，不能據此推定 IP 封鎖。")
+    print("     需再以正常瀏覽器及不同網路交叉核對；若部分 UA 成功，仍須驗證完整來源。")
     return 0
 
 

@@ -3,15 +3,145 @@
 import importlib.util
 import json
 import sys
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from unittest.mock import Mock
 
 import pytest
 
-from radar.models import SourceHealth
+from radar.models import Campaign, Offer, SourceHealth
 from radar.runner import SourceResult
 from radar.spec import SourceSpec
+
+
+def _module():
+    module_spec = importlib.util.spec_from_file_location(
+        "build_site", Path(__file__).resolve().parents[1] / "scripts" / "build_site.py",
+    )
+    assert module_spec is not None and module_spec.loader is not None
+    module = importlib.util.module_from_spec(module_spec)
+    module_spec.loader.exec_module(module)
+    return module
+
+
+NOW = datetime(2026, 10, 13, tzinfo=UTC)
+
+
+def _delegated() -> SourceSpec:
+    return SourceSpec.model_validate({
+        "id": "demo", "bank_name": "示範銀行", "domains": ["example.com"],
+        "runner": "cloud-macos",
+        "listing": {"kind": "single_page", "entry_url": "https://example.com/"},
+    })
+
+
+def _snapshot() -> dict:
+    campaign = Campaign(
+        id="demo-one", bank_id="demo", bank_name="示範銀行", title="活動一",
+        source_url="https://example.com/one", observed_at=NOW,
+        offers=[Offer(id="demo-one-1", title="方案一")],
+    )
+    health = SourceHealth(
+        bank_id="demo", bank_name="示範銀行", requested_url="https://example.com/",
+        status="complete", campaign_count=1, offer_count=1, observed_at=NOW,
+    )
+    return {
+        "generated_at": NOW.isoformat(), "runner": "cloud-macos",
+        "campaigns": [campaign.model_dump(mode="json")],
+        "health": [health.model_dump(mode="json")], "alerts": [],
+    }
+
+
+def test_fresh_delegated_snapshot_preserves_campaigns(tmp_path: Path) -> None:
+    payload = _snapshot()
+    path = tmp_path / "macos.json"
+    path.write_text(json.dumps(payload))
+    campaigns, health, alerts = _module()._read_snapshot(path, [_delegated()], NOW)
+    assert [item.model_dump(mode="json") for item in campaigns] == payload["campaigns"]
+    assert [item.model_dump(mode="json") for item in health] == payload["health"]
+    assert not alerts
+
+
+@pytest.mark.parametrize("case", [
+    "missing_file", "bad_json", "missing_time", "naive_time", "stale_time", "future_time",
+    "wrong_runner", "missing_health", "duplicate_health", "foreign_health",
+    "foreign_campaign", "foreign_alert", "duplicate_campaign", "wrong_campaign_count",
+    "wrong_offer_count", "invalid_model",
+])
+def test_untrusted_snapshot_records_failed_source(tmp_path: Path, case: str) -> None:
+    payload = _snapshot()
+    path = tmp_path / "macos.json"
+    if case == "missing_time":
+        del payload["generated_at"]
+    elif case == "naive_time":
+        payload["generated_at"] = NOW.replace(tzinfo=None).isoformat()
+    elif case == "stale_time":
+        payload["generated_at"] = (NOW - timedelta(hours=12, seconds=1)).isoformat()
+    elif case == "future_time":
+        payload["generated_at"] = (NOW + timedelta(minutes=5, seconds=1)).isoformat()
+    elif case == "wrong_runner":
+        payload["runner"] = "self-hosted"
+    elif case == "missing_health":
+        payload["health"] = []
+    elif case == "duplicate_health":
+        payload["health"] *= 2
+    elif case == "foreign_health":
+        payload["health"][0]["bank_id"] = "other"
+    elif case == "foreign_campaign":
+        payload["campaigns"][0]["bank_id"] = "other"
+    elif case == "foreign_alert":
+        payload["alerts"] = [{"type": "source_failed", "bank_id": "other", "message": "x"}]
+    elif case == "duplicate_campaign":
+        payload["campaigns"] *= 2
+    elif case == "wrong_campaign_count":
+        payload["health"][0]["campaign_count"] = 2
+    elif case == "wrong_offer_count":
+        payload["health"][0]["offer_count"] = 2
+    elif case == "invalid_model":
+        payload["health"][0]["status"] = "invented"
+    if case != "missing_file":
+        path.write_text("{" if case == "bad_json" else json.dumps(payload))
+
+    campaigns, health, alerts = _module()._read_snapshot(
+        path, [_delegated()], NOW, runner_label="受管 macOS runner",
+    )
+    assert not campaigns
+    assert [(item.bank_id, item.status) for item in health] == [("demo", "failed")]
+    assert "受管 macOS runner" in health[0].message
+    assert [(item.bank_id, item.type) for item in alerts] == [("demo", "source_failed")]
+
+
+def test_upstream_failed_health_is_not_relabelled_complete(tmp_path: Path) -> None:
+    payload = _snapshot()
+    payload["campaigns"] = []
+    payload["health"][0].update(status="failed", campaign_count=0, offer_count=0)
+    path = tmp_path / "macos.json"
+    path.write_text(json.dumps(payload))
+    campaigns, health, _ = _module()._read_snapshot(path, [_delegated()], NOW)
+    assert not campaigns
+    assert health[0].status == "failed"
+
+
+def test_cloud_can_validate_only_delegated_source(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    build_site = _module()
+    payload = _snapshot()
+    payload["generated_at"] = datetime.now(UTC).isoformat()
+    path = tmp_path / "macos.json"
+    path.write_text(json.dumps(payload))
+    monkeypatch.setattr(build_site, "ROOT", tmp_path)
+    monkeypatch.setattr(build_site, "SITE", tmp_path / "public")
+    monkeypatch.setattr(build_site, "INDEX_PATH", tmp_path / "index.json")
+    monkeypatch.setattr(build_site, "load_specs", lambda _: [_delegated()])
+    fetcher = Mock()
+    monkeypatch.setattr(build_site, "source_fetcher", fetcher)
+    monkeypatch.setattr(sys, "argv", [
+        "build_site.py", "--runner", "cloud", "--only", "demo", "--dry-run",
+        "--macos-snapshot-in", str(path),
+    ])
+    assert build_site.main() == 0
+    fetcher.assert_not_called()
 
 
 def test_blocked_build_preserves_published_files(

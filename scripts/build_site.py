@@ -17,7 +17,7 @@ import argparse
 import json
 import sys
 from concurrent.futures import ThreadPoolExecutor
-from datetime import UTC, date, datetime
+from datetime import UTC, date, datetime, timedelta
 from pathlib import Path
 from typing import Any
 
@@ -45,6 +45,7 @@ from radar.transport import HttpCache  # noqa: E402
 SITE = ROOT / "web" / "public"
 INDEX_PATH = SITE / "data" / "index.json"
 REPORT_PATH = ROOT / "reports" / "latest.json"
+SNAPSHOT_MAX_AGE = timedelta(hours=12)
 
 
 def _load_previous() -> dict[str, object] | None:
@@ -62,6 +63,7 @@ def _write_snapshot(
     path: Path,
     results: list[tuple[SourceSpec, SourceResult, HttpCache]],
     now: datetime,
+    runner: str,
 ) -> None:
     """把原始抓取結果寫成快照，供另一個 runner 合併。
 
@@ -71,6 +73,7 @@ def _write_snapshot(
     """
     payload = {
         "generated_at": now.isoformat(),
+        "runner": runner,
         "campaigns": [campaign.model_dump(mode="json") for _, r, _ in results
                       for campaign in r.campaigns],
         "health": [r.health.model_dump(mode="json") for _, r, _ in results if r.health],
@@ -87,14 +90,10 @@ def _write_snapshot(
 
 
 def _read_snapshot(
-    path: Path | None, delegated: list[SourceSpec], now: datetime
+    path: Path | None, delegated: list[SourceSpec], now: datetime,
+    *, runner_label: str = "自架 runner",
 ) -> tuple[list[Campaign], list[SourceHealth], list[Alert]]:
-    """讀入另一個 runner 的快照。缺席時把那批來源記成 failed。
-
-    「缺席」是預期會發生的：自架 runner 是使用者的機器，關機、睡眠、網路斷線
-    都會讓它沒回報。那時其餘來源必須照樣發布（見 guard 的 UNUSABLE_SHARE_LIMIT），
-    但這幾家要在網站的「來源狀態」面板上看得見。
-    """
+    """只合併指定抓取位置的新快照；缺席或驗證失敗須保留來源失敗紀錄。"""
     raw: dict[str, Any] | None = None
     if path is not None and path.exists():
         try:
@@ -103,36 +102,60 @@ def _read_snapshot(
         except (json.JSONDecodeError, OSError):
             raw = None
 
-    if raw is None:
-        missing = "、".join(spec.bank_name for spec in delegated)
-        print(f"\n自架 runner 沒有回報，以 failed 記錄：{missing}")
-        return (
-            [],
-            [
-                SourceHealth(
-                    bank_id=spec.id,
-                    bank_name=spec.bank_name,
-                    requested_url=spec.listing.entry_url,
-                    status="failed",
-                    message="自架 runner 未回報（機器離線或該次執行失敗）",
-                )
-                for spec in delegated
-            ],
-            [
-                Alert(
-                    type="source_failed",
-                    bank_id=spec.id,
-                    bank_name=spec.bank_name,
-                    message="自架 runner 未回報，本次沒有這家銀行的資料",
-                )
-                for spec in delegated
-            ],
-        )
+    problem = f"{runner_label} 未回報（機器離線或該次執行失敗）"
+    if raw is not None:
+        try:
+            stamp = datetime.fromisoformat(str(raw["generated_at"]))
+            if stamp.tzinfo is None or now - stamp > SNAPSHOT_MAX_AGE:
+                raise ValueError("快照缺少時區或超過 12 小時")
+            if stamp - now > timedelta(minutes=5):
+                raise ValueError("快照時間在未確認的未來")
+            if {raw.get("runner")} != {spec.runner for spec in delegated}:
+                raise ValueError("快照抓取位置與來源設定不符")
+            campaigns = [Campaign.model_validate(item) for item in raw.get("campaigns", [])]
+            health = [SourceHealth.model_validate(item) for item in raw.get("health", [])]
+            alerts = [Alert.model_validate(item) for item in raw.get("alerts", [])]
+            expected = {spec.id for spec in delegated}
+            if len(health) != len(expected) or {item.bank_id for item in health} != expected:
+                raise ValueError("快照來源缺漏、重複或不在預期範圍")
+            if any(item.bank_id not in expected for item in [*campaigns, *alerts]):
+                raise ValueError("快照活動或警示含非預期來源")
+            if len({item.id for item in campaigns}) != len(campaigns):
+                raise ValueError("快照活動 ID 重複")
+            for item in health:
+                own = [c for c in campaigns if c.bank_id == item.bank_id]
+                if item.campaign_count != len(own) or item.offer_count != sum(
+                    len(c.offers) for c in own
+                ):
+                    raise ValueError("快照來源筆數與實際活動不符")
+            return campaigns, health, alerts
+        except (ValueError, TypeError, KeyError) as exc:
+            problem = f"{runner_label} 快照未通過驗證：{exc}"
 
-    campaigns = [Campaign.model_validate(item) for item in raw.get("campaigns", [])]
-    health = [SourceHealth.model_validate(item) for item in raw.get("health", [])]
-    alerts = [Alert.model_validate(item) for item in raw.get("alerts", [])]
-    return campaigns, health, alerts
+    missing = "、".join(spec.bank_name for spec in delegated)
+    print(f"\n{problem}，以 failed 記錄：{missing}")
+    return (
+        [],
+        [
+            SourceHealth(
+                bank_id=spec.id,
+                bank_name=spec.bank_name,
+                requested_url=spec.listing.entry_url,
+                status="failed",
+                message=problem,
+            )
+            for spec in delegated
+        ],
+        [
+            Alert(
+                type="source_failed",
+                bank_id=spec.id,
+                bank_name=spec.bank_name,
+                message=f"{problem}，本次沒有這家銀行的新資料",
+            )
+            for spec in delegated
+        ],
+    )
 
 
 def main() -> int:
@@ -142,7 +165,7 @@ def main() -> int:
     parser.add_argument("--dry-run", action="store_true", help="不寫任何檔案")
     parser.add_argument(
         "--runner",
-        choices=("cloud", "self-hosted", "all"),
+        choices=("cloud", "cloud-macos", "self-hosted", "all"),
         default="all",
         help="只跑指定網路位置的來源（見 spec 的 runner 欄位）",
     )
@@ -150,7 +173,7 @@ def main() -> int:
         "--snapshot-out",
         default="",
         help="把本次抓到的原始結果寫成快照後結束，不寫網站檔案。"
-        "用於自架 runner 先抓、雲端 runner 再合併發布。",
+        "用於其他 runner 先抓、雲端 Linux runner 再合併發布。",
     )
     parser.add_argument(
         "--snapshot-in",
@@ -158,6 +181,7 @@ def main() -> int:
         help="合併另一個網路位置產生的快照。檔案不存在時，那一批來源會以 "
         "failed 誠實回報（不會從來源清單裡消失）。",
     )
+    parser.add_argument("--macos-snapshot-in", default="", help="合併受管 macOS 的來源快照")
     args = parser.parse_args()
 
     today = date.fromisoformat(args.today)
@@ -173,7 +197,7 @@ def main() -> int:
     # 這一批沒跑到、但要合併進來的來源。快照缺席時它們要以 failed 出現在來源清單裡
     # —— 從清單裡靜默消失比顯示失敗更糟（ADR 0002 的核心教訓）。
     delegated = [spec for spec in all_specs if spec not in specs]
-    if not specs:
+    if not all_specs or (not specs and args.snapshot_out):
         print("沒有符合條件的來源", file=sys.stderr)
         return 1
 
@@ -188,8 +212,10 @@ def main() -> int:
 
     # 按銀行平行執行。不同銀行是不同主機，per-host 節流仍然成立，
     # wall clock 從「所有銀行相加」變成「最慢的單一銀行」。
-    with ThreadPoolExecutor(max_workers=min(6, len(specs))) as pool:
-        results = list(pool.map(run_one, specs))
+    results = []
+    if specs:
+        with ThreadPoolExecutor(max_workers=min(6, len(specs))) as pool:
+            results = list(pool.map(run_one, specs))
 
     campaigns: list[Campaign] = []
     health: list[SourceHealth] = []
@@ -197,7 +223,7 @@ def main() -> int:
     stats: dict[str, dict[str, int]] = {}
 
     if args.snapshot_out:
-        _write_snapshot(Path(args.snapshot_out), results, now)
+        _write_snapshot(Path(args.snapshot_out), results, now, args.runner)
         return 0
 
     for spec, result, cache in results:
@@ -213,14 +239,21 @@ def main() -> int:
             cache.save()
 
     if delegated:
-        merged, merged_health, merged_alerts = _read_snapshot(
-            Path(args.snapshot_in) if args.snapshot_in else None, delegated, now
-        )
-        campaigns.extend(merged)
-        health.extend(merged_health)
-        alerts.extend(merged_alerts)
-        for item in merged_health:
-            print(f"{item.bank_name}（{item.bank_id}）  {item.status}（來自另一個 runner）")
+        for runner, filename, label in (
+            ("self-hosted", args.snapshot_in, "自架 runner"),
+            ("cloud-macos", args.macos_snapshot_in, "受管 macOS runner"),
+        ):
+            group = [spec for spec in delegated if spec.runner == runner]
+            if not group:
+                continue
+            merged, merged_health, merged_alerts = _read_snapshot(
+                Path(filename) if filename else None, group, now, runner_label=label
+            )
+            campaigns.extend(merged)
+            health.extend(merged_health)
+            alerts.extend(merged_alerts)
+            for item in merged_health:
+                print(f"{item.bank_name}（{item.bank_id}）  {item.status}（來自{label}）")
 
     # 去重在 build_index 之前，但 health 保持未去重 —— 涵蓋率防護的比較基準
     # 必須是「這次真的從官方頁讀到幾筆」，否則去重造成的一次性下降會被記成
