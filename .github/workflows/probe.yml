@@ -95,8 +95,13 @@ jobs:
         env:
           SOURCE: ${{ inputs.source }}
         run: |
-          xvfb-run python scripts/build_site.py --only "$SOURCE" --runner all \
-            --today "$(TZ=Asia/Taipei date +%F)" --snapshot-out snapshot/validation.json
+          ARGS=(--only "$SOURCE" --runner all --today "$(TZ=Asia/Taipei date +%F)"
+                --snapshot-out snapshot/validation.json)
+          if [ "$RUNNER_OS" = Linux ]; then
+            xvfb-run python scripts/build_site.py "${ARGS[@]}"
+          else
+            python scripts/build_site.py "${ARGS[@]}"
+          fi
           python - <<'PY'
           import json, os, pathlib
           payload = json.loads(pathlib.Path("snapshot/validation.json").read_text())

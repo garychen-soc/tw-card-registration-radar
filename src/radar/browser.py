@@ -181,7 +181,8 @@ class BrowserFetcher(Fetcher):
                 if self._redirect_limit:
                     raise FetchFailed(f"redirect 次數過多：{url}") from exc
                 if attempt == RETRY_ATTEMPTS - 1:
-                    message = f"瀏覽器抓取失敗：{url}（已重試 {RETRY_ATTEMPTS} 次）"
+                    reason = str(exc).splitlines()[0][:200]
+                    message = f"瀏覽器抓取失敗：{url}（已重試 {RETRY_ATTEMPTS} 次；{reason}）"
                     raise FetchFailed(message) from exc
             except FetchFailed as exc:
                 if isinstance(exc, AccessDenied) or not any(
