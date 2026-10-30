@@ -7,7 +7,7 @@ X-WR-CALNAME:刷卡登錄雷達
 X-WR-TIMEZONE:Asia/Taipei
 BEGIN:VEVENT
 UID:ctbc-eba28fbcfd-1-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260630T160000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 中國信託｜優惠內容
@@ -26,7 +26,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:ctbc-eba28fbcfd-4-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260630T160000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 中國信託｜優惠內容
@@ -45,7 +45,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:ctbc-eba28fbcfd-5-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260930T160000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 中國信託｜優惠內容
@@ -64,69 +64,235 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:dbs-e2993e4e11-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
-DTSTART:20261030T070000Z
-DTEND:20261030T071500Z
-SUMMARY:[開放登錄] 星展銀行｜【週日星展日】10/4，10/11，1
- 0/18，10/25
-DESCRIPTION:[開放登錄] 星展銀行｜【週日星展日】10/4，10/11
- ，10/18，10/25\n官方未公告登錄截止時間\n時序：registration
- _closes_early\n於星展 Card+ 活動公告頁查看登錄方式\n官方
- 頁：https://www.dbs.com.tw/personal-zh/cards/offers/ce/mall_01.html
+DTSTAMP:20261030T105159Z
+DTSTART:20261130T070000Z
+DTEND:20261130T071500Z
+SUMMARY:[開放登錄] 星展銀行｜【週日星展日】11/1，11/8，11
+ /15，11/22，11/29
+DESCRIPTION:[開放登錄] 星展銀行｜【週日星展日】11/1，11/8
+ ，11/15，11/22，11/29\n官方未公告登錄截止時間\n時序：retr
+ oactive_ok\n於星展 Card+ 活動公告頁查看登錄方式\n官方頁
+ ：https://www.dbs.com.tw/personal-zh/cards/offers/ce/mall_01.html
 URL:https://www.dbs.com.tw/personal-zh/digital-service/cardplus/announcemen
  t
 BEGIN:VALARM
 TRIGGER:-PT15M
 ACTION:DISPLAY
-DESCRIPTION:開放登錄：【週日星展日】10/4，10/11，10/18，10/2
- 5
+DESCRIPTION:開放登錄：【週日星展日】11/1，11/8，11/15，11/22
+ ，11/29
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:dbs-e2993e4e11-1-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
-DTSTART:20261030T070000Z
-DTEND:20261030T071500Z
-SUMMARY:[開放登錄] 星展銀行｜【全月活動】10/1~10/31
-DESCRIPTION:[開放登錄] 星展銀行｜【全月活動】10/1~10/31\n官
- 方未公告登錄截止時間\n時序：registration_closes_early\n於星
- 展 Card+ 活動公告頁查看登錄方式\n官方頁：https://www.dbs.c
- om.tw/personal-zh/cards/offers/ce/mall_01.html
+DTSTAMP:20261030T105159Z
+DTSTART:20261130T070000Z
+DTEND:20261130T071500Z
+SUMMARY:[開放登錄] 星展銀行｜【全月活動】11/1~11/30
+DESCRIPTION:[開放登錄] 星展銀行｜【全月活動】11/1~11/30\n官
+ 方未公告登錄截止時間\n時序：retroactive_ok\n於星展 Card+ 
+ 活動公告頁查看登錄方式\n官方頁：https://www.dbs.com.tw/pers
+ onal-zh/cards/offers/ce/mall_01.html
 URL:https://www.dbs.com.tw/personal-zh/digital-service/cardplus/announcemen
  t
 BEGIN:VALARM
 TRIGGER:-PT15M
 ACTION:DISPLAY
-DESCRIPTION:開放登錄：【全月活動】10/1~10/31
+DESCRIPTION:開放登錄：【全月活動】11/1~11/30
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:dbs-e2993e4e11-2-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
-DTSTART:20261030T070000Z
-DTEND:20261030T071500Z
-SUMMARY:[開放登錄] 星展銀行｜【機車館活動】10/1~10/31
-DESCRIPTION:[開放登錄] 星展銀行｜【機車館活動】10/1~10/31\n
- 官方未公告登錄截止時間\n時序：registration_closes_early\n於
- 星展 Card+ 活動公告頁查看登錄方式\n官方頁：https://www.db
- s.com.tw/personal-zh/cards/offers/ce/mall_01.html
+DTSTAMP:20261030T105159Z
+DTSTART:20261130T070000Z
+DTEND:20261130T071500Z
+SUMMARY:[開放登錄] 星展銀行｜【雙11活動】11/1~11/12
+DESCRIPTION:[開放登錄] 星展銀行｜【雙11活動】11/1~11/12\n官
+ 方未公告登錄截止時間\n時序：retroactive_ok\n於星展 Card+ 
+ 活動公告頁查看登錄方式\n官方頁：https://www.dbs.com.tw/pers
+ onal-zh/cards/offers/ce/mall_01.html
 URL:https://www.dbs.com.tw/personal-zh/digital-service/cardplus/announcemen
  t
 BEGIN:VALARM
 TRIGGER:-PT15M
 ACTION:DISPLAY
-DESCRIPTION:開放登錄：【機車館活動】10/1~10/31
+DESCRIPTION:開放登錄：【雙11活動】11/1~11/12
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:dbs-e2993e4e11-3-0@tw-card-registration-radar
+DTSTAMP:20261030T105159Z
+DTSTART:20261130T070000Z
+DTEND:20261130T071500Z
+SUMMARY:[開放登錄] 星展銀行｜【全月機車館】11/1~11/30
+DESCRIPTION:[開放登錄] 星展銀行｜【全月機車館】11/1~11/30\n
+ 官方未公告登錄截止時間\n時序：retroactive_ok\n於星展 Card
+ + 活動公告頁查看登錄方式\n官方頁：https://www.dbs.com.tw/pe
+ rsonal-zh/cards/offers/ce/mall_01.html
+URL:https://www.dbs.com.tw/personal-zh/digital-service/cardplus/announcemen
+ t
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:開放登錄：【全月機車館】11/1~11/30
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:dbs-4cb5996d55-0-0@tw-card-registration-radar
+DTSTAMP:20261030T105159Z
+DTSTART:20261124T073000Z
+DTEND:20261124T074500Z
+SUMMARY:[開放登錄] 星展銀行｜【週二星展日】11/3、11/10、1
+ 1/17、11/24
+DESCRIPTION:[開放登錄] 星展銀行｜【週二星展日】11/3、11/10
+ 、11/17、11/24\n官方未公告登錄截止時間\n時序：retroactive_
+ ok\n於星展 Card+ 活動公告頁查看登錄方式\n官方頁：https:/
+ /www.dbs.com.tw/personal-zh/cards/offers/ce/mall_02.html
+URL:https://www.dbs.com.tw/personal-zh/digital-service/cardplus/announcemen
+ t
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:開放登錄：【週二星展日】11/3、11/10、11/17、11/2
+ 4
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:dbs-4cb5996d55-2-0@tw-card-registration-radar
+DTSTAMP:20261030T105159Z
+DTSTART:20261116T073000Z
+DTEND:20261116T074500Z
+SUMMARY:[開放登錄] 星展銀行｜【雙11正檔】11/10~11/13
+DESCRIPTION:[開放登錄] 星展銀行｜【雙11正檔】11/10~11/13\n官
+ 方未公告登錄截止時間\n時序：retroactive_ok\n於星展 Card+ 
+ 活動公告頁查看登錄方式\n官方頁：https://www.dbs.com.tw/pers
+ onal-zh/cards/offers/ce/mall_02.html
+URL:https://www.dbs.com.tw/personal-zh/digital-service/cardplus/announcemen
+ t
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:開放登錄：【雙11正檔】11/10~11/13
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:dbs-4cb5996d55-2-1@tw-card-registration-radar
+DTSTAMP:20261030T105159Z
+DTSTART:20261117T073000Z
+DTEND:20261117T074500Z
+SUMMARY:[開放登錄] 星展銀行｜【雙11正檔】11/10~11/13
+DESCRIPTION:[開放登錄] 星展銀行｜【雙11正檔】11/10~11/13\n官
+ 方未公告登錄截止時間\n時序：retroactive_ok\n於星展 Card+ 
+ 活動公告頁查看登錄方式\n官方頁：https://www.dbs.com.tw/pers
+ onal-zh/cards/offers/ce/mall_02.html
+URL:https://www.dbs.com.tw/personal-zh/digital-service/cardplus/announcemen
+ t
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:開放登錄：【雙11正檔】11/10~11/13
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:dbs-4cb5996d55-2-2@tw-card-registration-radar
+DTSTAMP:20261030T105159Z
+DTSTART:20261130T080000Z
+DTEND:20261130T081500Z
+SUMMARY:[開放登錄] 星展銀行｜【雙11正檔】11/10~11/13
+DESCRIPTION:[開放登錄] 星展銀行｜【雙11正檔】11/10~11/13\n官
+ 方未公告登錄截止時間\n時序：retroactive_ok\n於星展 Card+ 
+ 活動公告頁查看登錄方式\n官方頁：https://www.dbs.com.tw/pers
+ onal-zh/cards/offers/ce/mall_02.html
+URL:https://www.dbs.com.tw/personal-zh/digital-service/cardplus/announcemen
+ t
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:開放登錄：【雙11正檔】11/10~11/13
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:dbs-05b85d7044-0-0@tw-card-registration-radar
+DTSTAMP:20261030T105159Z
+DTSTART:20261031T160000Z
+DTEND:20261130T155900Z
+SUMMARY:[開放登錄] 星展銀行｜【全月活動】2026/11/1~11/30
+DESCRIPTION:[開放登錄] 星展銀行｜【全月活動】2026/11/1~11/30
+ \n登錄至 2026-11-30 23:59\n時序：retroactive_ok\n於星展 Card+ 活
+ 動公告頁查看登錄方式\n官方頁：https://www.dbs.com.tw/persona
+ l-zh/cards/offers/ce/mall_06.html
+URL:https://www.dbs.com.tw/personal-zh/digital-service/cardplus/announcemen
+ t
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:開放登錄：【全月活動】2026/11/1~11/30
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:dbs-05b85d7044-1-0@tw-card-registration-radar
+DTSTAMP:20261030T105159Z
+DTSTART:20261125T030000Z
+DTEND:20261125T031500Z
+SUMMARY:[開放登錄] 星展銀行｜【11.11 最強購物節】2026/11/1~
+ 11/17
+DESCRIPTION:[開放登錄] 星展銀行｜【11.11 最強購物節】2026/1
+ 1/1~11/17\n官方未公告登錄截止時間\n時序：retroactive_ok\n於
+ 星展 Card+ 活動公告頁查看登錄方式\n官方頁：https://www.db
+ s.com.tw/personal-zh/cards/offers/ce/mall_06.html
+URL:https://www.dbs.com.tw/personal-zh/digital-service/cardplus/announcemen
+ t
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:開放登錄：【11.11 最強購物節】2026/11/1~11/17
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:dbs-05b85d7044-1-1@tw-card-registration-radar
+DTSTAMP:20261030T105159Z
+DTSTART:20261125T070000Z
+DTEND:20261125T071500Z
+SUMMARY:[開放登錄] 星展銀行｜【11.11 最強購物節】2026/11/1~
+ 11/17
+DESCRIPTION:[開放登錄] 星展銀行｜【11.11 最強購物節】2026/1
+ 1/1~11/17\n官方未公告登錄截止時間\n時序：retroactive_ok\n於
+ 星展 Card+ 活動公告頁查看登錄方式\n官方頁：https://www.db
+ s.com.tw/personal-zh/cards/offers/ce/mall_06.html
+URL:https://www.dbs.com.tw/personal-zh/digital-service/cardplus/announcemen
+ t
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:開放登錄：【11.11 最強購物節】2026/11/1~11/17
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:dbs-05b85d7044-2-0@tw-card-registration-radar
+DTSTAMP:20261030T105159Z
+DTSTART:20261126T070000Z
+DTEND:20261126T071500Z
+SUMMARY:[開放登錄] 星展銀行｜【商城狂歡日】2026/11/18~11/25
+DESCRIPTION:[開放登錄] 星展銀行｜【商城狂歡日】2026/11/18~1
+ 1/25\n官方未公告登錄截止時間\n時序：retroactive_ok\n於星
+ 展 Card+ 活動公告頁查看登錄方式\n官方頁：https://www.dbs.c
+ om.tw/personal-zh/cards/offers/ce/mall_06.html
+URL:https://www.dbs.com.tw/personal-zh/digital-service/cardplus/announcemen
+ t
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:開放登錄：【商城狂歡日】2026/11/18~11/25
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:dbs-05b85d7044-3-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
-DTSTART:20261027T030000Z
-DTEND:20261027T031500Z
-SUMMARY:[開放登錄] 星展銀行｜【汽機車館活動】2026/10/1~10/
- 31
-DESCRIPTION:[開放登錄] 星展銀行｜【汽機車館活動】2026/10/1
- ~10/31\n官方未公告登錄截止時間\n時序：registration_closes_ea
+DTSTAMP:20261030T105159Z
+DTSTART:20261126T080000Z
+DTEND:20261126T081500Z
+SUMMARY:[開放登錄] 星展銀行｜【汽機車館活動】2026/11/1~11/
+ 30
+DESCRIPTION:[開放登錄] 星展銀行｜【汽機車館活動】2026/11/1
+ ~11/30\n官方未公告登錄截止時間\n時序：registration_closes_ea
  rly\n限量 未公告數量，建議準時登錄\n於星展 Card+ 活動
  公告頁查看登錄方式\n官方頁：https://www.dbs.com.tw/personal-z
  h/cards/offers/ce/mall_06.html
@@ -135,71 +301,91 @@ URL:https://www.dbs.com.tw/personal-zh/digital-service/cardplus/announcemen
 BEGIN:VALARM
 TRIGGER:-PT30M
 ACTION:DISPLAY
-DESCRIPTION:開放登錄：【汽機車館活動】2026/10/1~10/31
+DESCRIPTION:開放登錄：【汽機車館活動】2026/11/1~11/30
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:dbs-28addee5c8-3-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
-DTSTART:20261029T080000Z
-DTEND:20261029T081500Z
-SUMMARY:[開放登錄] 星展銀行｜【手機類品項】10/1~10/31
-DESCRIPTION:[開放登錄] 星展銀行｜【手機類品項】10/1~10/31\n
- 官方未公告登錄截止時間\n時序：registration_closes_early\n限
- 量 未公告數量，建議準時登錄\n於星展 Card+ 活動公告頁
- 查看登錄方式\n官方頁：https://www.dbs.com.tw/personal-zh/cards/o
- ffers/ce/mall_12.html
+DTSTAMP:20261030T105159Z
+DTSTART:20261125T080000Z
+DTEND:20261125T081500Z
+SUMMARY:[開放登錄] 星展銀行｜【3C類品項】11/1~11/30
+DESCRIPTION:[開放登錄] 星展銀行｜【3C類品項】11/1~11/30\n官
+ 方未公告登錄截止時間\n時序：registration_closes_early\n限量
+  未公告數量，建議準時登錄\n於星展 Card+ 活動公告頁查
+ 看登錄方式\n官方頁：https://www.dbs.com.tw/personal-zh/cards/offe
+ rs/ce/mall_12.html
 URL:https://www.dbs.com.tw/personal-zh/digital-service/cardplus/announcemen
  t
 BEGIN:VALARM
 TRIGGER:-PT30M
 ACTION:DISPLAY
-DESCRIPTION:開放登錄：【手機類品項】10/1~10/31
+DESCRIPTION:開放登錄：【3C類品項】11/1~11/30
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:dbs-7cf0280fd8-3-0@tw-card-registration-radar
+DTSTAMP:20261030T105159Z
+DTSTART:20261130T030000Z
+DTEND:20261130T031500Z
+SUMMARY:[開放登錄] 星展銀行｜【行動數位商品專屬】11/1~11
+ /12
+DESCRIPTION:[開放登錄] 星展銀行｜【行動數位商品專屬】11/
+ 1~11/12\n官方未公告登錄截止時間\n時序：retroactive_ok\n限
+ 量 未公告數量，建議準時登錄\n於星展 Card+ 活動公告頁
+ 查看登錄方式\n官方頁：https://www.dbs.com.tw/personal-zh/cards/o
+ ffers/ce/mall_03.html
+URL:https://www.dbs.com.tw/personal-zh/digital-service/cardplus/announcemen
+ t
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:開放登錄：【行動數位商品專屬】11/1~11/12
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:dbs-7c7c23f64d-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
-DTSTART:20261030T030000Z
-DTEND:20261030T031500Z
-SUMMARY:[開放登錄] 星展銀行｜【全月滿額】10/1~10/31
-DESCRIPTION:[開放登錄] 星展銀行｜【全月滿額】10/1~10/31\n官
- 方未公告登錄截止時間\n時序：registration_closes_early\n限量
-  未公告數量，建議準時登錄\n於星展 Card+ 活動公告頁查
- 看登錄方式\n官方頁：https://www.dbs.com.tw/personal-zh/cards/offe
- rs/ce/mall_04.html
+DTSTAMP:20261030T105159Z
+DTSTART:20261130T030000Z
+DTEND:20261130T031500Z
+SUMMARY:[開放登錄] 星展銀行｜【全月滿額】11/1~11/30
+DESCRIPTION:[開放登錄] 星展銀行｜【全月滿額】11/1~11/30\n官
+ 方未公告登錄截止時間\n時序：retroactive_ok\n限量 未公告
+ 數量，建議準時登錄\n於星展 Card+ 活動公告頁查看登錄
+ 方式\n官方頁：https://www.dbs.com.tw/personal-zh/cards/offers/ce/mal
+ l_04.html
 URL:https://www.dbs.com.tw/personal-zh/digital-service/cardplus/announcemen
  t
 BEGIN:VALARM
 TRIGGER:-PT30M
 ACTION:DISPLAY
-DESCRIPTION:開放登錄：【全月滿額】10/1~10/31
+DESCRIPTION:開放登錄：【全月滿額】11/1~11/30
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:dbs-7c7c23f64d-1-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
-DTSTART:20261030T030000Z
-DTEND:20261030T031500Z
-SUMMARY:[開放登錄] 星展銀行｜【週一星展日】10/5、10/12、1
- 0/19、10/26
-DESCRIPTION:[開放登錄] 星展銀行｜【週一星展日】10/5、10/12
- 、10/19、10/26\n官方未公告登錄截止時間\n時序：registration
- _closes_early\n限量 未公告數量，建議準時登錄\n於星展 Card
- + 活動公告頁查看登錄方式\n官方頁：https://www.dbs.com.tw/pe
- rsonal-zh/cards/offers/ce/mall_04.html
+DTSTAMP:20261030T105159Z
+DTSTART:20261130T030000Z
+DTEND:20261130T031500Z
+SUMMARY:[開放登錄] 星展銀行｜【週一星展日】11/2、11/9、11
+ /16、11/23、11/30
+DESCRIPTION:[開放登錄] 星展銀行｜【週一星展日】11/2、11/9
+ 、11/16、11/23、11/30\n官方未公告登錄截止時間\n時序：retr
+ oactive_ok\n限量 未公告數量，建議準時登錄\n於星展 Card+ 
+ 活動公告頁查看登錄方式\n官方頁：https://www.dbs.com.tw/pers
+ onal-zh/cards/offers/ce/mall_04.html
 URL:https://www.dbs.com.tw/personal-zh/digital-service/cardplus/announcemen
  t
 BEGIN:VALARM
 TRIGGER:-PT30M
 ACTION:DISPLAY
-DESCRIPTION:開放登錄：【週一星展日】10/5、10/12、10/19、10/2
- 6
+DESCRIPTION:開放登錄：【週一星展日】11/2、11/9、11/16、11/23
+ 、11/30
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:dbs-253a17663f-1-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261030T070000Z
 DTEND:20261030T071500Z
 SUMMARY:[開放登錄] 星展銀行｜【週三星展日】10/7~12/30
@@ -218,7 +404,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:dbs-253a17663f-1-1@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261130T070000Z
 DTEND:20261130T071500Z
 SUMMARY:[開放登錄] 星展銀行｜【週三星展日】10/7~12/30
@@ -237,7 +423,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:dbs-253a17663f-1-2@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261231T070000Z
 DTEND:20261231T071500Z
 SUMMARY:[開放登錄] 星展銀行｜【週三星展日】10/7~12/30
@@ -256,7 +442,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:dbs-3cf736ea19-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261023T030000Z
 DTEND:20261023T031500Z
 SUMMARY:[開放登錄] 星展銀行｜【網購星精彩】10/1~12/31
@@ -275,7 +461,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:dbs-3cf736ea19-0-1@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261123T030000Z
 DTEND:20261123T031500Z
 SUMMARY:[開放登錄] 星展銀行｜【網購星精彩】10/1~12/31
@@ -294,7 +480,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:dbs-3cf736ea19-0-2@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261223T030000Z
 DTEND:20261223T031500Z
 SUMMARY:[開放登錄] 星展銀行｜【網購星精彩】10/1~12/31
@@ -313,7 +499,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:dbs-8b60e9db04-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261027T070000Z
 DTEND:20261027T071500Z
 SUMMARY:[開放登錄] 星展銀行｜分期0%利率
@@ -331,7 +517,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:dbs-8b60e9db04-0-1@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261127T070000Z
 DTEND:20261127T071500Z
 SUMMARY:[開放登錄] 星展銀行｜分期0%利率
@@ -349,7 +535,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:dbs-8b60e9db04-0-2@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261228T070000Z
 DTEND:20261228T071500Z
 SUMMARY:[開放登錄] 星展銀行｜分期0%利率
@@ -366,8 +552,26 @@ DESCRIPTION:開放登錄：分期0%利率
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
+UID:esun-5d75917245-0-0@tw-card-registration-radar
+DTSTAMP:20261030T105159Z
+DTSTART:20261101T020000Z
+DTEND:20261101T021500Z
+SUMMARY:[開放登錄] 玉山銀行｜華歌爾
+DESCRIPTION:[開放登錄] 玉山銀行｜華歌爾\n官方未公告登錄
+ 截止時間\n時序：registration_closes_early\n限量 500，建議準
+ 時登錄\n於玉山銀行官網活動登錄頁或玉山 Wallet App 登錄
+ \n官方頁：https://www.esunbank.com/zh-tw/personal/credit-card/discount
+ /shopInfo?sno=4005
+URL:https://www.esunbank.com/zh-tw/personal/credit-card/discount/shops
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:開放登錄：華歌爾
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
 UID:esun-1a1f42858d-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261023T040000Z
 DTEND:20261031T155900Z
 SUMMARY:[開放登錄] 玉山銀行｜台灣中油直營站
@@ -385,7 +589,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:esun-1a1f42858d-0-1@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261123T040000Z
 DTEND:20261130T155900Z
 SUMMARY:[開放登錄] 玉山銀行｜台灣中油直營站
@@ -403,7 +607,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:esun-1a1f42858d-0-2@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261223T040000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 玉山銀行｜台灣中油直營站
@@ -421,7 +625,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:esun-756b2637b2-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261005T020000Z
 DTEND:20261011T155900Z
 SUMMARY:[開放登錄] 玉山銀行｜玉山Wallet週週登錄拿點趣
@@ -439,7 +643,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:esun-756b2637b2-0-1@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261012T020000Z
 DTEND:20261018T155900Z
 SUMMARY:[開放登錄] 玉山銀行｜玉山Wallet週週登錄拿點趣
@@ -457,7 +661,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:esun-756b2637b2-0-2@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261019T020000Z
 DTEND:20261025T155900Z
 SUMMARY:[開放登錄] 玉山銀行｜玉山Wallet週週登錄拿點趣
@@ -475,7 +679,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:esun-756b2637b2-0-3@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261026T020000Z
 DTEND:20261101T155900Z
 SUMMARY:[開放登錄] 玉山銀行｜玉山Wallet週週登錄拿點趣
@@ -493,7 +697,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:esun-bae1697ef5-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261025T040000Z
 DTEND:20261031T155900Z
 SUMMARY:[開放登錄] 玉山銀行｜玉山信用卡 綠能充電享優惠
@@ -511,7 +715,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:esun-bae1697ef5-0-1@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261125T040000Z
 DTEND:20261130T155900Z
 SUMMARY:[開放登錄] 玉山銀行｜玉山信用卡 綠能充電享優惠
@@ -529,7 +733,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:esun-bae1697ef5-0-2@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261225T040000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 玉山銀行｜玉山信用卡 綠能充電享優惠
@@ -546,44 +750,8 @@ DESCRIPTION:開放登錄：玉山信用卡 綠能充電享優惠
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:esun-8a3c0bf8d9-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
-DTSTART:20260531T160000Z
-DTEND:20260630T155900Z
-SUMMARY:[開放登錄] 玉山銀行｜Gogoro購車享優惠
-DESCRIPTION:[開放登錄] 玉山銀行｜Gogoro購車享優惠\n登錄至 
- 2026-06-30 23:59\n時序：registration_closes_early\n限量 未公告數
- 量，建議準時登錄\n於玉山銀行官網活動登錄頁或玉山 Wa
- llet App 登錄\n官方頁：https://www.esunbank.com/zh-tw/personal/credi
- t-card/discount/shopInfo?sno=7017
-URL:https://www.esunbank.com/zh-tw/personal/credit-card/discount/shops
-BEGIN:VALARM
-TRIGGER:-PT30M
-ACTION:DISPLAY
-DESCRIPTION:開放登錄：Gogoro購車享優惠
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:esun-8a3c0bf8d9-0-1@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
-DTSTART:20260705T020000Z
-DTEND:20260720T155900Z
-SUMMARY:[開放登錄] 玉山銀行｜Gogoro購車享優惠
-DESCRIPTION:[開放登錄] 玉山銀行｜Gogoro購車享優惠\n登錄至 
- 2026-07-20 23:59\n時序：registration_closes_early\n限量 未公告數
- 量，建議準時登錄\n於玉山銀行官網活動登錄頁或玉山 Wa
- llet App 登錄\n官方頁：https://www.esunbank.com/zh-tw/personal/credi
- t-card/discount/shopInfo?sno=7017
-URL:https://www.esunbank.com/zh-tw/personal/credit-card/discount/shops
-BEGIN:VALARM
-TRIGGER:-PT30M
-ACTION:DISPLAY
-DESCRIPTION:開放登錄：Gogoro購車享優惠
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
 UID:esun-5908090db5-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261001T023000Z
 DTEND:20261001T024500Z
 SUMMARY:[開放登錄] 玉山銀行｜百貨購 旅遊GO
@@ -601,7 +769,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:esun-5908090db5-0-1@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261231T155900Z
 DTEND:20261231T161400Z
 SUMMARY:[開放登錄] 玉山銀行｜百貨購 旅遊GO
@@ -618,8 +786,48 @@ DESCRIPTION:開放登錄：百貨購 旅遊GO
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
+UID:esun-715adb1592-1-0@tw-card-registration-radar
+DTSTAMP:20261030T105159Z
+DTSTART:20261108T160000Z
+DTEND:20261111T155900Z
+SUMMARY:[開放登錄] 玉山銀行｜【活動二】雙11購物節！分
+ 期滿額享1\,000點回饋
+DESCRIPTION:[開放登錄] 玉山銀行｜【活動二】雙11購物節！
+ 分期滿額享1\,000點回饋\n登錄至 2026-11-11 23:59\n時序：retro
+ active_ok\n限量 500，建議準時登錄\n於玉山銀行官網活動登
+ 錄頁或玉山 Wallet App 登錄\n官方頁：https://www.esunbank.com/zh
+ -tw/personal/credit-card/discount/shopInfo?sno=2028_11
+URL:https://www.esunbank.com/zh-tw/personal/credit-card/discount/shops
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:開放登錄：【活動二】雙11購物節！分期滿額享1
+ \,000點回饋
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:esun-715adb1592-1-1@tw-card-registration-radar
+DTSTAMP:20261030T105159Z
+DTSTART:20261125T050000Z
+DTEND:20261130T155900Z
+SUMMARY:[開放登錄] 玉山銀行｜【活動二】雙11購物節！分
+ 期滿額享1\,000點回饋
+DESCRIPTION:[開放登錄] 玉山銀行｜【活動二】雙11購物節！
+ 分期滿額享1\,000點回饋\n登錄至 2026-11-30 23:59\n時序：retro
+ active_ok\n限量 500，建議準時登錄\n於玉山銀行官網活動登
+ 錄頁或玉山 Wallet App 登錄\n官方頁：https://www.esunbank.com/zh
+ -tw/personal/credit-card/discount/shopInfo?sno=2028_11
+URL:https://www.esunbank.com/zh-tw/personal/credit-card/discount/shops
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:開放登錄：【活動二】雙11購物節！分期滿額享1
+ \,000點回饋
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
 UID:esun-223df25ef2-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261029T050000Z
 DTEND:20261031T155900Z
 SUMMARY:[開放登錄] 玉山銀行｜【活動一】全月活動
@@ -637,7 +845,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:esun-223df25ef2-1-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261030T050000Z
 DTEND:20261031T155900Z
 SUMMARY:[開放登錄] 玉山銀行｜【活動二】刷玉山Unicard單筆
@@ -658,7 +866,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:esun-e0d203fda0-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260831T160000Z
 DTEND:20260930T155900Z
 SUMMARY:[開放登錄] 玉山銀行｜Honda秋季回廠保修享回饋
@@ -676,7 +884,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:esun-e0d203fda0-0-1@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261005T020000Z
 DTEND:20261020T155900Z
 SUMMARY:[開放登錄] 玉山銀行｜Honda秋季回廠保修享回饋
@@ -694,7 +902,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:esun-4a36088536-1-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260901T020000Z
 DTEND:20261031T155900Z
 SUMMARY:[開放登錄] 玉山銀行｜【活動二】
@@ -711,8 +919,126 @@ DESCRIPTION:開放登錄：【活動二】
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
+UID:esun-415946dc5e-0-0@tw-card-registration-radar
+DTSTAMP:20261030T105159Z
+DTSTART:20261130T020000Z
+DTEND:20261130T021500Z
+SUMMARY:[開放登錄] 玉山銀行｜【活動一】momo全站玉山卡筆
+ 筆加碼6%
+DESCRIPTION:[開放登錄] 玉山銀行｜【活動一】momo全站玉山
+ 卡筆筆加碼6%\n官方未公告登錄截止時間\n時序：retroactive
+ _ok\n限量 3000，建議準時登錄\n於玉山銀行官網活動登錄
+ 頁或玉山 Wallet App 登錄\n官方頁：https://www.esunbank.com/zh-tw
+ /personal/credit-card/discount/shopInfo?sno=2008_11
+URL:https://www.esunbank.com/zh-tw/personal/credit-card/discount/shops
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:開放登錄：【活動一】momo全站玉山卡筆筆加碼6%
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:esun-415946dc5e-1-0@tw-card-registration-radar
+DTSTAMP:20261030T105159Z
+DTSTART:20261117T090000Z
+DTEND:20261130T155900Z
+SUMMARY:[開放登錄] 玉山銀行｜【活動二】雙11年度盛典，
+ 最高享5\,925元回饋
+DESCRIPTION:[開放登錄] 玉山銀行｜【活動二】雙11年度盛典
+ ，最高享5\,925元回饋\n登錄至 2026-11-30 23:59\n時序：retroact
+ ive_ok\n限量 1500，建議準時登錄\n於玉山銀行官網活動登
+ 錄頁或玉山 Wallet App 登錄\n官方頁：https://www.esunbank.com/zh
+ -tw/personal/credit-card/discount/shopInfo?sno=2008_11
+URL:https://www.esunbank.com/zh-tw/personal/credit-card/discount/shops
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:開放登錄：【活動二】雙11年度盛典，最高享5\,9
+ 25元回饋
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:esun-415946dc5e-2-0@tw-card-registration-radar
+DTSTAMP:20261030T105159Z
+DTSTART:20261118T070000Z
+DTEND:20261118T071500Z
+SUMMARY:[開放登錄] 玉山銀行｜【活動三】雙11高額購物加
+ 碼，最高享9\,800元回饋
+DESCRIPTION:[開放登錄] 玉山銀行｜【活動三】雙11高額購物
+ 加碼，最高享9\,800元回饋\n官方未公告登錄截止時間\n時
+ 序：retroactive_ok\n限量 400，建議準時登錄\n於玉山銀行官
+ 網活動登錄頁或玉山 Wallet App 登錄\n官方頁：https://www.esu
+ nbank.com/zh-tw/personal/credit-card/discount/shopInfo?sno=2008_11
+URL:https://www.esunbank.com/zh-tw/personal/credit-card/discount/shops
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:開放登錄：【活動三】雙11高額購物加碼，最高
+ 享9\,800元回饋
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:esun-415946dc5e-3-0@tw-card-registration-radar
+DTSTAMP:20261030T105159Z
+DTSTART:20261117T070000Z
+DTEND:20261117T071500Z
+SUMMARY:[開放登錄] 玉山銀行｜【活動四】雙11組隊加碼4% (
+ 可疊加雙11購物節活動)
+DESCRIPTION:[開放登錄] 玉山銀行｜【活動四】雙11組隊加碼4
+ % (可疊加雙11購物節活動)\n官方未公告登錄截止時間\n時
+ 序：retroactive_ok\n限量 800，建議準時登錄\n於玉山銀行官
+ 網活動登錄頁或玉山 Wallet App 登錄\n官方頁：https://www.esu
+ nbank.com/zh-tw/personal/credit-card/discount/shopInfo?sno=2008_11
+URL:https://www.esunbank.com/zh-tw/personal/credit-card/discount/shops
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:開放登錄：【活動四】雙11組隊加碼4% (可疊加雙
+ 11購物節活動)
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:esun-415946dc5e-4-0@tw-card-registration-radar
+DTSTAMP:20261030T105159Z
+DTSTART:20261110T070000Z
+DTEND:20261110T071500Z
+SUMMARY:[開放登錄] 玉山銀行｜【活動五】指定品類獨家加
+ 碼，最高享20%回饋
+DESCRIPTION:[開放登錄] 玉山銀行｜【活動五】指定品類獨家
+ 加碼，最高享20%回饋\n官方未公告登錄截止時間\n時序：r
+ egistration_closes_early\n限量 600，建議準時登錄\n於玉山銀行
+ 官網活動登錄頁或玉山 Wallet App 登錄\n官方頁：https://www.
+ esunbank.com/zh-tw/personal/credit-card/discount/shopInfo?sno=2008_11
+URL:https://www.esunbank.com/zh-tw/personal/credit-card/discount/shops
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:開放登錄：【活動五】指定品類獨家加碼，最高
+ 享20%回饋
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:esun-415946dc5e-5-0@tw-card-registration-radar
+DTSTAMP:20261030T105159Z
+DTSTART:20261125T090000Z
+DTEND:20261130T155900Z
+SUMMARY:[開放登錄] 玉山銀行｜【活動六】桃金日最高享2\,3
+ 25元回饋
+DESCRIPTION:[開放登錄] 玉山銀行｜【活動六】桃金日最高享
+ 2\,325元回饋\n登錄至 2026-11-30 23:59\n時序：retroactive_ok\n限
+ 量 800，建議準時登錄\n於玉山銀行官網活動登錄頁或玉
+ 山 Wallet App 登錄\n官方頁：https://www.esunbank.com/zh-tw/personal
+ /credit-card/discount/shopInfo?sno=2008_11
+URL:https://www.esunbank.com/zh-tw/personal/credit-card/discount/shops
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:開放登錄：【活動六】桃金日最高享2\,325元回饋
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
 UID:esun-6b7ca715ac-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261030T020000Z
 DTEND:20261030T021500Z
 SUMMARY:[開放登錄] 玉山銀行｜【活動一】momo全站玉山卡筆
@@ -731,7 +1057,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:esun-6b7ca715ac-1-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261015T090000Z
 DTEND:20261031T155900Z
 SUMMARY:[開放登錄] 玉山銀行｜【活動二】雙10週年慶，最
@@ -751,7 +1077,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:esun-6b7ca715ac-2-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261028T090000Z
 DTEND:20261031T155900Z
 SUMMARY:[開放登錄] 玉山銀行｜【活動三】桃金日最高享2\,4
@@ -770,7 +1096,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:esun-6b7ca715ac-3-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261023T090000Z
 DTEND:20261031T155900Z
 SUMMARY:[開放登錄] 玉山銀行｜【活動四】玉山Unicard專屬優
@@ -789,8 +1115,66 @@ DESCRIPTION:開放登錄：【活動四】玉山Unicard專屬優惠，最
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
+UID:esun-21c3663ea2-0-0@tw-card-registration-radar
+DTSTAMP:20261030T105159Z
+DTSTART:20261119T060000Z
+DTEND:20261130T155900Z
+SUMMARY:[開放登錄] 玉山銀行｜【活動一】雙11購物節
+DESCRIPTION:[開放登錄] 玉山銀行｜【活動一】雙11購物節\n
+ 登錄至 2026-11-30 23:59\n時序：retroactive_ok\n限量 1300，建議
+ 準時登錄\n於玉山銀行官網活動登錄頁或玉山 Wallet App 登
+ 錄\n官方頁：https://www.esunbank.com/zh-tw/personal/credit-card/disco
+ unt/shopInfo?sno=2006_11
+URL:https://www.esunbank.com/zh-tw/personal/credit-card/discount/shops
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:開放登錄：【活動一】雙11購物節
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:esun-21c3663ea2-1-0@tw-card-registration-radar
+DTSTAMP:20261030T105159Z
+DTSTART:20261120T060000Z
+DTEND:20261130T155900Z
+SUMMARY:[開放登錄] 玉山銀行｜【活動二】雙11高額購物優
+ 惠，最高享5\,500元回饋
+DESCRIPTION:[開放登錄] 玉山銀行｜【活動二】雙11高額購物
+ 優惠，最高享5\,500元回饋\n登錄至 2026-11-30 23:59\n時序：re
+ troactive_ok\n限量 700，建議準時登錄\n於玉山銀行官網活動
+ 登錄頁或玉山 Wallet App 登錄\n官方頁：https://www.esunbank.com
+ /zh-tw/personal/credit-card/discount/shopInfo?sno=2006_11
+URL:https://www.esunbank.com/zh-tw/personal/credit-card/discount/shops
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:開放登錄：【活動二】雙11高額購物優惠，最高
+ 享5\,500元回饋
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:esun-21c3663ea2-2-0@tw-card-registration-radar
+DTSTAMP:20261030T105159Z
+DTSTART:20261127T060000Z
+DTEND:20261130T155900Z
+SUMMARY:[開放登錄] 玉山銀行｜【活動三】24力會員日，最
+ 高享1\,600元回饋
+DESCRIPTION:[開放登錄] 玉山銀行｜【活動三】24力會員日，
+ 最高享1\,600元回饋\n登錄至 2026-11-30 23:59\n時序：retroactive
+ _ok\n限量 1000，建議準時登錄\n於玉山銀行官網活動登錄
+ 頁或玉山 Wallet App 登錄\n官方頁：https://www.esunbank.com/zh-tw
+ /personal/credit-card/discount/shopInfo?sno=2006_11
+URL:https://www.esunbank.com/zh-tw/personal/credit-card/discount/shops
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:開放登錄：【活動三】24力會員日，最高享1\,600
+ 元回饋
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
 UID:esun-b818f6510b-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261029T060000Z
 DTEND:20261031T155900Z
 SUMMARY:[開放登錄] 玉山銀行｜【活動一】全月活動
@@ -808,7 +1192,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:esun-b818f6510b-1-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261014T060000Z
 DTEND:20261031T155900Z
 SUMMARY:[開放登錄] 玉山銀行｜【活動二】百貨週年慶，最
@@ -828,7 +1212,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:esun-b818f6510b-2-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261030T060000Z
 DTEND:20261031T155900Z
 SUMMARY:[開放登錄] 玉山銀行｜【活動三】24力會員日，最
@@ -847,8 +1231,89 @@ DESCRIPTION:開放登錄：【活動三】24力會員日，最高享2\,500
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
+UID:esun-0298b35fa6-0-0@tw-card-registration-radar
+DTSTAMP:20261030T105159Z
+DTSTART:20261127T090000Z
+DTEND:20261130T155900Z
+SUMMARY:[開放登錄] 玉山銀行｜【活動一】11月全月活動，
+ 最高享16.5%回饋
+DESCRIPTION:[開放登錄] 玉山銀行｜【活動一】11月全月活動
+ ，最高享16.5%回饋\n登錄至 2026-11-30 23:59\n時序：retroactive_
+ ok\n限量 2000，建議準時登錄\n於玉山銀行官網活動登錄頁
+ 或玉山 Wallet App 登錄\n官方頁：https://www.esunbank.com/zh-tw/pe
+ rsonal/credit-card/discount/shopInfo?sno=2100_11
+URL:https://www.esunbank.com/zh-tw/personal/credit-card/discount/shops
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:開放登錄：【活動一】11月全月活動，最高享16.5
+ %回饋
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:esun-0298b35fa6-1-0@tw-card-registration-radar
+DTSTAMP:20261030T105159Z
+DTSTART:20261118T090000Z
+DTEND:20261130T155900Z
+SUMMARY:[開放登錄] 玉山銀行｜【活動二】11.11最強購物節
+ ，最高享3\,310元回饋
+DESCRIPTION:[開放登錄] 玉山銀行｜【活動二】11.11最強購物
+ 節，最高享3\,310元回饋\n登錄至 2026-11-30 23:59\n時序：retro
+ active_ok\n限量 1500，建議準時登錄\n於玉山銀行官網活動
+ 登錄頁或玉山 Wallet App 登錄\n官方頁：https://www.esunbank.com
+ /zh-tw/personal/credit-card/discount/shopInfo?sno=2100_11
+URL:https://www.esunbank.com/zh-tw/personal/credit-card/discount/shops
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:開放登錄：【活動二】11.11最強購物節，最高享3
+ \,310元回饋
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:esun-0298b35fa6-2-0@tw-card-registration-radar
+DTSTAMP:20261030T105159Z
+DTSTART:20261119T090000Z
+DTEND:20261130T155900Z
+SUMMARY:[開放登錄] 玉山銀行｜【活動三】11.11最強購物節_
+ 高額購物優惠，最高享5\,000元回饋
+DESCRIPTION:[開放登錄] 玉山銀行｜【活動三】11.11最強購物
+ 節_高額購物優惠，最高享5\,000元回饋\n登錄至 2026-11-30 23
+ :59\n時序：retroactive_ok\n限量 700，建議準時登錄\n於玉山
+ 銀行官網活動登錄頁或玉山 Wallet App 登錄\n官方頁：https:
+ //www.esunbank.com/zh-tw/personal/credit-card/discount/shopInfo?sno=2100_1
+ 1
+URL:https://www.esunbank.com/zh-tw/personal/credit-card/discount/shops
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:開放登錄：【活動三】11.11最強購物節_高額購物
+ 優惠，最高享5\,000元回饋
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:esun-0298b35fa6-4-0@tw-card-registration-radar
+DTSTAMP:20261030T105159Z
+DTSTART:20261130T090000Z
+DTEND:20261130T155900Z
+SUMMARY:[開放登錄] 玉山銀行｜【活動五】蝦皮狂購日 最高
+ 享3\,450元回饋
+DESCRIPTION:[開放登錄] 玉山銀行｜【活動五】蝦皮狂購日 
+ 最高享3\,450元回饋\n登錄至 2026-11-30 23:59\n時序：retroactive
+ _ok\n限量 1000，建議準時登錄\n於玉山銀行官網活動登錄
+ 頁或玉山 Wallet App 登錄\n官方頁：https://www.esunbank.com/zh-tw
+ /personal/credit-card/discount/shopInfo?sno=2100_11
+URL:https://www.esunbank.com/zh-tw/personal/credit-card/discount/shops
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:開放登錄：【活動五】蝦皮狂購日 最高享3\,450
+ 元回饋
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
 UID:esun-691f5a85b7-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261027T090000Z
 DTEND:20261031T155900Z
 SUMMARY:[開放登錄] 玉山銀行｜【活動一】10月全月活動，
@@ -868,7 +1333,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:esun-691f5a85b7-1-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261016T090000Z
 DTEND:20261031T155900Z
 SUMMARY:[開放登錄] 玉山銀行｜【活動二】10.10品牌週年慶
@@ -888,7 +1353,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:esun-691f5a85b7-3-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261029T090000Z
 DTEND:20261031T155900Z
 SUMMARY:[開放登錄] 玉山銀行｜【活動四】蝦皮狂購日 最高
@@ -908,7 +1373,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:esun-691f5a85b7-4-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261030T090000Z
 DTEND:20261031T155900Z
 SUMMARY:[開放登錄] 玉山銀行｜【活動五】玉山Unicard專屬加
@@ -927,8 +1392,104 @@ DESCRIPTION:開放登錄：【活動五】玉山Unicard專屬加碼優惠
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
+UID:esun-051b04a474-1-0@tw-card-registration-radar
+DTSTAMP:20261030T105159Z
+DTSTART:20261106T160000Z
+DTEND:20261113T155900Z
+SUMMARY:[開放登錄] 玉山銀行｜【活動二:雙11購物節補貨優
+ 惠】
+DESCRIPTION:[開放登錄] 玉山銀行｜【活動二:雙11購物節補貨
+ 優惠】\n登錄至 2026-11-13 23:59\n時序：retroactive_ok\n限量 800
+ ，建議準時登錄\n於玉山銀行官網活動登錄頁或玉山 Walle
+ t App 登錄\n官方頁：https://www.esunbank.com/zh-tw/personal/credit-c
+ ard/discount/shopInfo?sno=2021_11
+URL:https://www.esunbank.com/zh-tw/personal/credit-card/discount/shops
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:開放登錄：【活動二:雙11購物節補貨優惠】
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:esun-051b04a474-1-1@tw-card-registration-radar
+DTSTAMP:20261030T105159Z
+DTSTART:20261117T050000Z
+DTEND:20261130T155900Z
+SUMMARY:[開放登錄] 玉山銀行｜【活動二:雙11購物節補貨優
+ 惠】
+DESCRIPTION:[開放登錄] 玉山銀行｜【活動二:雙11購物節補貨
+ 優惠】\n登錄至 2026-11-30 23:59\n時序：retroactive_ok\n限量 800
+ ，建議準時登錄\n於玉山銀行官網活動登錄頁或玉山 Walle
+ t App 登錄\n官方頁：https://www.esunbank.com/zh-tw/personal/credit-c
+ ard/discount/shopInfo?sno=2021_11
+URL:https://www.esunbank.com/zh-tw/personal/credit-card/discount/shops
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:開放登錄：【活動二:雙11購物節補貨優惠】
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:esun-a4931a2ccc-0-0@tw-card-registration-radar
+DTSTAMP:20261030T105159Z
+DTSTART:20261112T070000Z
+DTEND:20261113T015900Z
+SUMMARY:[開放登錄] 玉山銀行｜【活動一】雙11精品超享購
+ ，最高回饋10.5%
+DESCRIPTION:[開放登錄] 玉山銀行｜【活動一】雙11精品超享
+ 購，最高回饋10.5%\n登錄至 2026-11-13 09:59\n時序：retroactive_
+ ok\n限量 100，建議準時登錄\n於玉山銀行官網活動登錄頁
+ 或玉山 Wallet App 登錄\n官方頁：https://www.esunbank.com/zh-tw/pe
+ rsonal/credit-card/discount/shopInfo?sno=2001_11
+URL:https://www.esunbank.com/zh-tw/personal/credit-card/discount/shops
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:開放登錄：【活動一】雙11精品超享購，最高回
+ 饋10.5%
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:esun-a4931a2ccc-1-0@tw-card-registration-radar
+DTSTAMP:20261030T105159Z
+DTSTART:20261125T070000Z
+DTEND:20261130T155900Z
+SUMMARY:[開放登錄] 玉山銀行｜【活動二】全月優惠活動
+DESCRIPTION:[開放登錄] 玉山銀行｜【活動二】全月優惠活動
+ \n登錄至 2026-11-30 23:59\n時序：retroactive_ok\n限量 700，建議
+ 準時登錄\n於玉山銀行官網活動登錄頁或玉山 Wallet App 登
+ 錄\n官方頁：https://www.esunbank.com/zh-tw/personal/credit-card/disco
+ unt/shopInfo?sno=2001_11
+URL:https://www.esunbank.com/zh-tw/personal/credit-card/discount/shops
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:開放登錄：【活動二】全月優惠活動
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:esun-a4931a2ccc-2-0@tw-card-registration-radar
+DTSTAMP:20261030T105159Z
+DTSTART:20261126T070000Z
+DTEND:20261130T155900Z
+SUMMARY:[開放登錄] 玉山銀行｜【活動三】11月特別加碼活
+ 動，最高享2\,400元回饋
+DESCRIPTION:[開放登錄] 玉山銀行｜【活動三】11月特別加碼
+ 活動，最高享2\,400元回饋\n登錄至 2026-11-30 23:59\n時序：re
+ troactive_ok\n限量 150，建議準時登錄\n於玉山銀行官網活動
+ 登錄頁或玉山 Wallet App 登錄\n官方頁：https://www.esunbank.com
+ /zh-tw/personal/credit-card/discount/shopInfo?sno=2001_11
+URL:https://www.esunbank.com/zh-tw/personal/credit-card/discount/shops
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:開放登錄：【活動三】11月特別加碼活動，最高
+ 享2\,400元回饋
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
 UID:esun-87b8558312-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261019T070000Z
 DTEND:20261031T155900Z
 SUMMARY:[開放登錄] 玉山銀行｜【活動一】分期滿額最高享1
@@ -948,7 +1509,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:esun-87b8558312-1-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261027T070000Z
 DTEND:20261031T155900Z
 SUMMARY:[開放登錄] 玉山銀行｜【活動二】累積分期滿額加
@@ -967,8 +1528,48 @@ DESCRIPTION:開放登錄：【活動二】累積分期滿額加碼，最高
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
+UID:esun-f48cb75330-0-0@tw-card-registration-radar
+DTSTAMP:20261030T105159Z
+DTSTART:20261123T070000Z
+DTEND:20261130T155900Z
+SUMMARY:[開放登錄] 玉山銀行｜【活動一】雙11全月優惠活
+ 動，最高享1\,800元回饋
+DESCRIPTION:[開放登錄] 玉山銀行｜【活動一】雙11全月優惠
+ 活動，最高享1\,800元回饋\n登錄至 2026-11-30 23:59\n時序：re
+ troactive_ok\n限量 1500，建議準時登錄\n於玉山銀行官網活
+ 動登錄頁或玉山 Wallet App 登錄\n官方頁：https://www.esunbank.
+ com/zh-tw/personal/credit-card/discount/shopInfo?sno=2003_11
+URL:https://www.esunbank.com/zh-tw/personal/credit-card/discount/shops
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:開放登錄：【活動一】雙11全月優惠活動，最高
+ 享1\,800元回饋
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:esun-f48cb75330-1-0@tw-card-registration-radar
+DTSTAMP:20261030T105159Z
+DTSTART:20261125T070000Z
+DTEND:20261130T155900Z
+SUMMARY:[開放登錄] 玉山銀行｜【活動二】雙11加碼優惠活
+ 動，滿額加贈最高1\,000元回饋
+DESCRIPTION:[開放登錄] 玉山銀行｜【活動二】雙11加碼優惠
+ 活動，滿額加贈最高1\,000元回饋\n登錄至 2026-11-30 23:59\n
+ 時序：retroactive_ok\n限量 500，建議準時登錄\n於玉山銀行
+ 官網活動登錄頁或玉山 Wallet App 登錄\n官方頁：https://www.
+ esunbank.com/zh-tw/personal/credit-card/discount/shopInfo?sno=2003_11
+URL:https://www.esunbank.com/zh-tw/personal/credit-card/discount/shops
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:開放登錄：【活動二】雙11加碼優惠活動，滿額
+ 加贈最高1\,000元回饋
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
 UID:esun-c92ea44979-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261027T070000Z
 DTEND:20261031T155900Z
 SUMMARY:[開放登錄] 玉山銀行｜東森購物10月網購活動
@@ -986,7 +1587,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:esun-a3bd44c890-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261215T090000Z
 DTEND:20261215T091500Z
 SUMMARY:[開放登錄] 玉山銀行｜明台產險線上投保，玉山專
@@ -1006,7 +1607,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:first-348094f403-4-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261007T160000Z
 DTEND:20261109T155900Z
 SUMMARY:[開放登錄] 第一銀行｜【桃園/花蓮店】檔期活動日
@@ -1027,7 +1628,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:first-6d45119d23-4-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261007T160000Z
 DTEND:20261109T155900Z
 SUMMARY:[開放登錄] 第一銀行｜【桃園/花蓮店】檔期活動日
@@ -1047,7 +1648,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:first-c39ae82631-4-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261007T160000Z
 DTEND:20261109T155900Z
 SUMMARY:[開放登錄] 第一銀行｜【桃園/花蓮店】檔期活動日
@@ -1067,7 +1668,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:first-bb5546f537-2-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260930T160000Z
 DTEND:20270630T155900Z
 SUMMARY:[開放登錄] 第一銀行｜FIRST2026Q43
@@ -1084,7 +1685,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:first-a0230e26ae-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260215T160000Z
 DTEND:20270219T155900Z
 SUMMARY:[開放登錄] 第一銀行｜長榮酒店 住宿享優惠
@@ -1101,7 +1702,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:first-4c1a5b1695-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20270101T010000Z
 DTEND:20270101T011500Z
 SUMMARY:[開放登錄] 第一銀行｜悠遊卡自動加值享回饋
@@ -1120,7 +1721,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:first-44230596c3-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260101T070000Z
 DTEND:20260101T071500Z
 SUMMARY:[開放登錄] 第一銀行｜享結帳折抵50元
@@ -1138,7 +1739,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:first-a1c740b747-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20251231T160000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 第一銀行｜【家電分期禮】分期零利率 
@@ -1158,7 +1759,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:first-a1c740b747-1-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20251231T160000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 第一銀行｜【家電分期禮】活動特店交
@@ -1182,7 +1783,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:first-ff0ec07bcd-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20251231T160000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 第一銀行｜【家電分期禮】分期零利率 
@@ -1202,7 +1803,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:first-ff0ec07bcd-1-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20251231T160000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 第一銀行｜【家電分期禮】活動特店交
@@ -1226,7 +1827,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:first-90873f4dd5-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20251231T160000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 第一銀行｜【家電分期禮】分期零利率 
@@ -1246,7 +1847,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:first-90873f4dd5-1-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20251231T160000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 第一銀行｜【家電分期禮】活動特店交
@@ -1270,7 +1871,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:first-55b03acde8-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20251231T160000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 第一銀行｜【家電分期禮】分期零利率 
@@ -1290,7 +1891,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:first-55b03acde8-1-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20251231T160000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 第一銀行｜【家電分期禮】活動特店交
@@ -1314,7 +1915,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:first-ead28d95b4-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20251231T160000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 第一銀行｜【家電分期禮】分期零利率 
@@ -1334,7 +1935,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:first-ead28d95b4-1-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20251231T160000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 第一銀行｜【家電分期禮】活動特店交
@@ -1358,7 +1959,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:first-eb7a6639c1-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260630T160000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 第一銀行｜【2026年7-12月首刷禮最高500
@@ -1377,7 +1978,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:first-eb7a6639c1-1-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260630T160000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 第一銀行｜【首刷禮享最高500元】
@@ -1394,7 +1995,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:first-f6d5de7cd0-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260630T160000Z
 DTEND:20270131T155900Z
 SUMMARY:[開放登錄] 第一銀行｜【例1】A客戶於2025年12月已
@@ -1417,7 +2018,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:first-f6d5de7cd0-1-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260630T160000Z
 DTEND:20270131T155900Z
 SUMMARY:[開放登錄] 第一銀行｜【例2】B客戶於2026.1.1首次申
@@ -1439,7 +2040,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:first-f6d5de7cd0-2-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260630T160000Z
 DTEND:20270131T155900Z
 SUMMARY:[開放登錄] 第一銀行｜【例3】C客戶於2025年12月已
@@ -1461,7 +2062,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:first-154dfbfaf8-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260630T160000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 第一銀行｜【新戶首刷好禮2選1】需登
@@ -1480,7 +2081,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:first-154dfbfaf8-1-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260630T160000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 第一銀行｜【舊戶數位首刷禮】免登錄
@@ -1498,7 +2099,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:first-154dfbfaf8-2-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261129T160000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 第一銀行｜松木多功能微電腦電子鍋
@@ -1515,7 +2116,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:first-504dc9fdc9-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20251231T160000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 第一銀行｜2026年保費刷一銀卡滿額加碼
@@ -1533,7 +2134,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:first-504dc9fdc9-1-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20251231T160000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 第一銀行｜活動內容
@@ -1550,7 +2151,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:first-17a03d111e-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20251231T160000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 第一銀行｜保費6期0利率．輕鬆零負擔
@@ -1567,7 +2168,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:first-17a03d111e-1-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20251231T160000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 第一銀行｜活動內容
@@ -1584,7 +2185,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:first-d551538ec0-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260630T160000Z
 DTEND:20260930T155900Z
 SUMMARY:[開放登錄] 第一銀行｜樂享刷卡金!
@@ -1601,7 +2202,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:first-355440c5f5-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20251231T160000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 第一銀行｜刷一銀卡繳學雜費免手續費
@@ -1618,7 +2219,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:first-a70b250057-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20251231T160000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 第一銀行｜【活動一】
@@ -1635,7 +2236,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:first-a70b250057-1-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20251231T160000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 第一銀行｜【活動二】
@@ -1652,7 +2253,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:first-2f5e48ad3d-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260622T160000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 第一銀行｜2026年7月~12月減碳綠色消費
@@ -1671,7 +2272,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:kgi-5e37064b57-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261223T080000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 凱基銀行｜信用卡活動
@@ -1689,7 +2290,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:mega-43ca9f65db-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261207T030000Z
 DTEND:20261207T031500Z
 SUMMARY:[開放登錄] 兆豐銀行｜利多御璽卡10大支付最高6%回
@@ -1708,7 +2309,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:mega-a026834998-1-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260930T160000Z
 DTEND:20261031T155900Z
 SUMMARY:[開放登錄] 兆豐銀行｜【月月登指定通路選優惠】:
@@ -1727,7 +2328,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:mega-a026834998-1-1@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261202T020000Z
 DTEND:20261202T021500Z
 SUMMARY:[開放登錄] 兆豐銀行｜【月月登指定通路選優惠】:
@@ -1746,7 +2347,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:mega-9fb3507108-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260930T160000Z
 DTEND:20261031T155900Z
 SUMMARY:[開放登錄] 兆豐銀行｜生日刷兆豐卡享好利！消費
@@ -1766,7 +2367,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:mega-4112d5ea39-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261112T060000Z
 DTEND:20261112T061500Z
 SUMMARY:[開放登錄] 兆豐銀行｜Mitsui Shopping Park LaLaport 台中
@@ -1786,7 +2387,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:mega-665e65fb51-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261022T060000Z
 DTEND:20261022T061500Z
 SUMMARY:[開放登錄] 兆豐銀行｜Mitsui Shopping Park LaLaport 南港
@@ -1806,7 +2407,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:mega-b9102f69ba-1-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261112T060000Z
 DTEND:20261112T061500Z
 SUMMARY:[開放登錄] 兆豐銀行｜MITSUI OUTLET PARK暑假檔期
@@ -1824,7 +2425,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:mega-60b6080a0e-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261016T060000Z
 DTEND:20261016T061500Z
 SUMMARY:[開放登錄] 兆豐銀行｜精選旅行社滿額回饋NT$5\,000
@@ -1842,7 +2443,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:mega-60b6080a0e-0-1@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261116T060000Z
 DTEND:20261116T061500Z
 SUMMARY:[開放登錄] 兆豐銀行｜精選旅行社滿額回饋NT$5\,000
@@ -1860,7 +2461,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:mega-60b6080a0e-0-2@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261216T060000Z
 DTEND:20261216T061500Z
 SUMMARY:[開放登錄] 兆豐銀行｜精選旅行社滿額回饋NT$5\,000
@@ -1878,7 +2479,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:mega-6a3241017d-1-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261130T160000Z
 DTEND:20261130T161500Z
 SUMMARY:[開放登錄] 兆豐銀行｜活動辦法
@@ -1896,7 +2497,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:mega-6e33565eca-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260731T160000Z
 DTEND:20261130T155900Z
 SUMMARY:[開放登錄] 兆豐銀行｜保費刷指定萬事達卡滿額最
@@ -1916,7 +2517,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:mega-cce15f8b4a-2-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260112T020000Z
 DTEND:20270108T155900Z
 SUMMARY:[開放登錄] 兆豐銀行｜【新戶首刷禮指定任務】且
@@ -1941,7 +2542,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:mega-d68a0f2247-1-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261110T160000Z
 DTEND:20261110T161500Z
 SUMMARY:[開放登錄] 兆豐銀行｜精選網購
@@ -1958,7 +2559,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:mega-71e35e629c-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260915T020000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 兆豐銀行｜「MyJapan+ by JCB」APP限定！博
@@ -1978,7 +2579,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:mega-80b9f744ce-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260915T020000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 兆豐銀行｜「MyJapan+ by JCB」APP限定！札
@@ -1998,7 +2599,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:mega-86e5828769-1-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260131T160000Z
 DTEND:20270115T155900Z
 SUMMARY:[開放登錄] 兆豐銀行｜【MEGAC】，不限金額享
@@ -2015,7 +2616,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:obank-e40eea331e-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261015T040000Z
 DTEND:20261015T041500Z
 SUMMARY:[開放登錄] 王道銀行｜關於我們
@@ -2032,7 +2633,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:scsb-de06e5ada1-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260630T160000Z
 DTEND:20260731T155900Z
 SUMMARY:[開放登錄] 上海商銀｜Mobile Phone
@@ -2049,7 +2650,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:scsb-de06e5ada1-0-1@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260731T160000Z
 DTEND:20260831T155900Z
 SUMMARY:[開放登錄] 上海商銀｜Mobile Phone
@@ -2066,7 +2667,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:scsb-59d7544f6f-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260630T160000Z
 DTEND:20260731T155900Z
 SUMMARY:[開放登錄] 上海商銀｜Mobile Phone
@@ -2083,7 +2684,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:scsb-59d7544f6f-0-1@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261130T160000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 上海商銀｜Mobile Phone
@@ -2100,7 +2701,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:scsb-6e86e6016e-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260331T160000Z
 DTEND:20270131T155900Z
 SUMMARY:[開放登錄] 上海商銀｜Mobile Phone
@@ -2118,7 +2719,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:sinopac-964298be52-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260731T160000Z
 DTEND:20261031T155900Z
 SUMMARY:[開放登錄] 永豐銀行｜刷卡享優惠
@@ -2137,7 +2738,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:sinopac-ddbe641971-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261015T070000Z
 DTEND:20261015T071500Z
 SUMMARY:[開放登錄] 永豐銀行｜刷卡享優惠
@@ -2156,7 +2757,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:sinopac-52f8c07009-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261015T070000Z
 DTEND:20261015T071500Z
 SUMMARY:[開放登錄] 永豐銀行｜刷卡享優惠
@@ -2175,7 +2776,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:sinopac-52f8c07009-0-1@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261115T070000Z
 DTEND:20261115T071500Z
 SUMMARY:[開放登錄] 永豐銀行｜刷卡享優惠
@@ -2194,7 +2795,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:sinopac-52f8c07009-0-2@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261215T070000Z
 DTEND:20261215T071500Z
 SUMMARY:[開放登錄] 永豐銀行｜刷卡享優惠
@@ -2213,7 +2814,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:sinopac-25efb0c26a-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260715T070000Z
 DTEND:20260715T071500Z
 SUMMARY:[開放登錄] 永豐銀行｜刷卡享優惠
@@ -2232,7 +2833,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:sinopac-25efb0c26a-0-1@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260807T155900Z
 DTEND:20260807T161400Z
 SUMMARY:[開放登錄] 永豐銀行｜刷卡享優惠
@@ -2251,7 +2852,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:sinopac-ec744f47c2-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260930T160000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 永豐銀行｜刷卡享優惠
@@ -2269,7 +2870,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:taipei_fubon-6ab2f8e379-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261125T060000Z
 DTEND:20261130T155900Z
 SUMMARY:[開放登錄] 台北富邦銀行｜享一次付清0.6%，分期付
@@ -2288,7 +2889,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:taipei_fubon-de7b07d172-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261124T060000Z
 DTEND:20261126T155900Z
 SUMMARY:[開放登錄] 台北富邦銀行｜指定3C家電分期滿額最
@@ -2307,7 +2908,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:taipei_fubon-3a9b74454a-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261020T060000Z
 DTEND:20261031T155900Z
 SUMMARY:[開放登錄] 台北富邦銀行｜指定購車/保修分期最高
@@ -2326,7 +2927,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:taipei_fubon-3a9b74454a-0-1@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261120T060000Z
 DTEND:20261130T155900Z
 SUMMARY:[開放登錄] 台北富邦銀行｜指定購車/保修分期最高
@@ -2345,7 +2946,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:taipei_fubon-3a9b74454a-0-2@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261218T060000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 台北富邦銀行｜指定購車/保修分期最高
@@ -2364,7 +2965,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:taipei_fubon-425c73db53-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261222T060000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 台北富邦銀行｜滿額最高享15%刷卡金回
@@ -2383,7 +2984,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:taipei_fubon-b5066f5f36-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261222T060000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 台北富邦銀行｜滿額最高享15%刷卡金回
@@ -2402,7 +3003,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:taipei_fubon-b8bbf51baf-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261222T060000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 台北富邦銀行｜分期滿額最高享15%刷卡
@@ -2421,7 +3022,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:taipei_fubon-67f719d75d-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261222T060000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 台北富邦銀行｜分期滿額最高享15%刷卡
@@ -2440,7 +3041,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:taipei_fubon-eb47c5d02e-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261001T080000Z
 DTEND:20261210T155900Z
 SUMMARY:[開放登錄] 台北富邦銀行｜最高享3%回饋
@@ -2458,7 +3059,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:taipei_fubon-b9119700af-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261021T060000Z
 DTEND:20261025T155900Z
 SUMMARY:[開放登錄] 台北富邦銀行｜指定電信通訊滿額最高
@@ -2477,7 +3078,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:taipei_fubon-b9119700af-0-1@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261125T060000Z
 DTEND:20261130T155900Z
 SUMMARY:[開放登錄] 台北富邦銀行｜指定電信通訊滿額最高
@@ -2496,7 +3097,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:taipei_fubon-a3eb935004-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260630T160000Z
 DTEND:20260731T155900Z
 SUMMARY:[開放登錄] 台北富邦銀行｜全臺餐飲/加油站、指定
@@ -2517,7 +3118,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:taipei_fubon-7e6eef551f-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260710T060000Z
 DTEND:20270131T155900Z
 SUMMARY:[開放登錄] 台北富邦銀行｜Open Possible卡超級加碼
@@ -2534,7 +3135,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:taipei_fubon-352ad8e924-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260401T010000Z
 DTEND:20270315T155900Z
 SUMMARY:[開放登錄] 台北富邦銀行｜線上辦卡每筆保費均享1
@@ -2552,7 +3153,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:taishin-73c61d1f62-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260901T020000Z
 DTEND:20261031T155900Z
 SUMMARY:[開放登錄] 台新銀行｜刷台新JCB信用卡，國內外消
@@ -2572,7 +3173,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:taishin-f30023e19e-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260803T050000Z
 DTEND:20260808T155900Z
 SUMMARY:[開放登錄] 台新銀行｜SJ-83z演唱會臺北場 8/25台新Ri
@@ -2592,7 +3193,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:taishin-f30023e19e-0-1@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260824T040000Z
 DTEND:20260825T040000Z
 SUMMARY:[開放登錄] 台新銀行｜SJ-83z演唱會臺北場 8/25台新Ri
@@ -2612,7 +3213,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:taishin-fde2f989d7-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260710T020000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 台新銀行｜【分期最優3.88%起】繳學費
@@ -2632,7 +3233,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:ubot-5be10f43cd-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260630T160000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 聯邦銀行｜海外實體消費優惠層層加碼
@@ -2649,8 +3250,54 @@ DESCRIPTION:開放登錄：海外實體消費優惠層層加碼
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:ubot-a15b031690-4-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+UID:ubot-a15b031690-2-0@tw-card-registration-radar
+DTSTAMP:20261030T105159Z
+DTSTART:20261031T160000Z
+DTEND:20261231T155900Z
+SUMMARY:[開放登錄] 聯邦銀行｜【Apple購機分期0利率】完成
+ 登錄並同意參與分期者，本行系統將主動撈取商店於同
+ 意之日起請款，且正附卡所為符合本專案條件
+DESCRIPTION:[開放登錄] 聯邦銀行｜【Apple購機分期0利率】完
+ 成登錄並同意參與分期者，本行系統將主動撈取商店於
+ 同意之日起請款，且正附卡所為符合本專案條件之交易
+ 款項分期入帳，惟於結帳日前三天內入帳之交易及已逾
+ 持卡人帳單結帳日者將不列入。\n登錄至 2026-12-31 23:59\n
+ 時序：per_period_reregister\n限量 未公告數量，建議準時登
+ 錄\n登入後於活動登錄清單找到對應活動\n官方頁：https:/
+ /activity.ubot.com.tw/aws_act/2026/202609phone/index.htm?p=telecom
+URL:https://card.ubot.com.tw/eCard/activity_login/register_activity.aspx
+RRULE:FREQ=MONTHLY;UNTIL=20261231T235900Z
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:開放登錄：【Apple購機分期0利率】完成登錄並同
+ 意參與分期者，本行系統將主動撈取商店於同
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ubot-a15b031690-3-0@tw-card-registration-radar
+DTSTAMP:20261030T105159Z
+DTSTART:20261031T160000Z
+DTEND:20261231T155900Z
+SUMMARY:[開放登錄] 聯邦銀行｜【三星智慧館】之交易，於
+ 『指定電信』活動與
+DESCRIPTION:[開放登錄] 聯邦銀行｜【三星智慧館】之交易，
+ 於『指定電信』活動與\n登錄至 2026-12-31 23:59\n時序：per_p
+ eriod_reregister\n限量 未公告數量，建議準時登錄\n登入後
+ 於活動登錄清單找到對應活動\n官方頁：https://activity.ubot
+ .com.tw/aws_act/2026/202609phone/index.htm?p=telecom
+URL:https://card.ubot.com.tw/eCard/activity_login/register_activity.aspx
+RRULE:FREQ=MONTHLY;UNTIL=20261231T235900Z
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:開放登錄：【三星智慧館】之交易，於『指定電
+ 信』活動與
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ubot-a15b031690-5-0@tw-card-registration-radar
+DTSTAMP:20261030T105159Z
 DTSTART:20260831T160000Z
 DTEND:20261031T155900Z
 SUMMARY:[開放登錄] 聯邦銀行｜【UBOT】
@@ -2667,8 +3314,8 @@ DESCRIPTION:開放登錄：【UBOT】
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:ubot-a15b031690-4-1@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+UID:ubot-a15b031690-5-1@tw-card-registration-radar
+DTSTAMP:20261030T105159Z
 DTSTART:20261031T160000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 聯邦銀行｜【UBOT】
@@ -2685,28 +3332,8 @@ DESCRIPTION:開放登錄：【UBOT】
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:ubot-1382ba545b-2-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
-DTSTART:20261018T160000Z
-DTEND:20261026T155900Z
-SUMMARY:[開放登錄] 聯邦銀行｜【刷卡金】正附卡合併計算
- ，需於活動期間完成登錄。
-DESCRIPTION:[開放登錄] 聯邦銀行｜【刷卡金】正附卡合併計
- 算，需於活動期間完成登錄。\n登錄至 2026-10-26 23:59\n時
- 序：registration_closes_early\n限量 未公告數量，建議準時登
- 錄\n登入後於活動登錄清單找到對應活動\n官方頁：https:/
- /activity.ubot.com.tw/aws_act/2026/202610departmentstoreall/index.htm
-URL:https://card.ubot.com.tw/eCard/activity_login/register_activity.aspx
-BEGIN:VALARM
-TRIGGER:-PT30M
-ACTION:DISPLAY
-DESCRIPTION:開放登錄：【刷卡金】正附卡合併計算，需於活
- 動期間完成登錄。
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
 UID:ubot-8acd4e60c7-1-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261031T160000Z
 DTEND:20261130T155900Z
 SUMMARY:[開放登錄] 聯邦銀行｜【紅利折抵100%】需於活動期
@@ -2727,7 +3354,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:ubot-0fc3135096-1-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260630T160000Z
 DTEND:20261031T155900Z
 SUMMARY:[開放登錄] 聯邦銀行｜【紅利折抵100%】自登錄當月
@@ -2750,7 +3377,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:ubot-b7dab29b78-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260331T160000Z
 DTEND:20260430T155900Z
 SUMMARY:[開放登錄] 聯邦銀行｜【登錄加碼1.5%】
@@ -2767,7 +3394,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:ubot-b7dab29b78-2-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260331T160000Z
 DTEND:20260430T155900Z
 SUMMARY:[開放登錄] 聯邦銀行｜【共同注意事項】
@@ -2784,7 +3411,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:ubot-a9fcb9c0d6-3-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261017T160000Z
 DTEND:20261025T155900Z
 SUMMARY:[開放登錄] 聯邦銀行｜【刷卡金回饋】注意事項:
@@ -2801,7 +3428,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:ubot-38a7cf74f2-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260630T160000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 聯邦銀行｜【屈臣氏銀行日活動注意事
@@ -2821,7 +3448,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:ubot-5c66a1862d-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260915T020000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 聯邦銀行｜MyJapan+ APP
@@ -2838,7 +3465,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:ubot-c65e7cb9db-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260915T020000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 聯邦銀行｜MyJapan+ APP
@@ -2855,7 +3482,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:ubot-2b44ae51cd-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260630T160000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 聯邦銀行｜【屈臣氏銀行日活動注意事
@@ -2875,7 +3502,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:ubot-7446af97ad-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260910T020000Z
 DTEND:20261109T155900Z
 SUMMARY:[開放登錄] 聯邦銀行｜OLIVE YOUNG
@@ -2892,7 +3519,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:ubot-ac0e679955-1-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260930T160000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 聯邦銀行｜智能好邦手
@@ -2910,7 +3537,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:ubot-f8c082a45e-1-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20251212T020000Z
 DTEND:20251212T021500Z
 SUMMARY:[開放登錄] 聯邦銀行｜優惠內容
@@ -2926,8 +3553,54 @@ DESCRIPTION:開放登錄：優惠內容
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:ubot-c624555163-4-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+UID:ubot-c624555163-2-0@tw-card-registration-radar
+DTSTAMP:20261030T105159Z
+DTSTART:20261031T160000Z
+DTEND:20261231T155900Z
+SUMMARY:[開放登錄] 聯邦銀行｜【Apple購機分期0利率】完成
+ 登錄並同意參與分期者，本行系統將主動撈取商店於同
+ 意之日起請款，且正附卡所為符合本專案條件
+DESCRIPTION:[開放登錄] 聯邦銀行｜【Apple購機分期0利率】完
+ 成登錄並同意參與分期者，本行系統將主動撈取商店於
+ 同意之日起請款，且正附卡所為符合本專案條件之交易
+ 款項分期入帳，惟於結帳日前三天內入帳之交易及已逾
+ 持卡人帳單結帳日者將不列入。\n登錄至 2026-12-31 23:59\n
+ 時序：per_period_reregister\n限量 未公告數量，建議準時登
+ 錄\n登入後於活動登錄清單找到對應活動\n官方頁：https:/
+ /activity.ubot.com.tw/aws_act/2026/202609phone/index.htm
+URL:https://card.ubot.com.tw/eCard/activity_login/register_activity.aspx
+RRULE:FREQ=MONTHLY;UNTIL=20261231T235900Z
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:開放登錄：【Apple購機分期0利率】完成登錄並同
+ 意參與分期者，本行系統將主動撈取商店於同
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ubot-c624555163-3-0@tw-card-registration-radar
+DTSTAMP:20261030T105159Z
+DTSTART:20261031T160000Z
+DTEND:20261231T155900Z
+SUMMARY:[開放登錄] 聯邦銀行｜【三星智慧館】之交易，於
+ 『指定電信』活動與
+DESCRIPTION:[開放登錄] 聯邦銀行｜【三星智慧館】之交易，
+ 於『指定電信』活動與\n登錄至 2026-12-31 23:59\n時序：per_p
+ eriod_reregister\n限量 未公告數量，建議準時登錄\n登入後
+ 於活動登錄清單找到對應活動\n官方頁：https://activity.ubot
+ .com.tw/aws_act/2026/202609phone/index.htm
+URL:https://card.ubot.com.tw/eCard/activity_login/register_activity.aspx
+RRULE:FREQ=MONTHLY;UNTIL=20261231T235900Z
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:開放登錄：【三星智慧館】之交易，於『指定電
+ 信』活動與
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ubot-c624555163-5-0@tw-card-registration-radar
+DTSTAMP:20261030T105159Z
 DTSTART:20260831T160000Z
 DTEND:20261031T155900Z
 SUMMARY:[開放登錄] 聯邦銀行｜【UBOT】
@@ -2944,8 +3617,8 @@ DESCRIPTION:開放登錄：【UBOT】
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:ubot-c624555163-4-1@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+UID:ubot-c624555163-5-1@tw-card-registration-radar
+DTSTAMP:20261030T105159Z
 DTSTART:20261031T160000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 聯邦銀行｜【UBOT】
@@ -2963,7 +3636,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:ubot-ab07949327-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260930T160000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 聯邦銀行｜【昇恆昌】115/X月登錄』。
@@ -2981,7 +3654,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:ubot-5922157be6-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20251031T160000Z
 DTEND:20261031T155900Z
 SUMMARY:[開放登錄] 聯邦銀行｜聯邦陪你一起變美麗
@@ -2998,7 +3671,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:yuanta-5d49873693-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260818T060000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 元大銀行｜綁定 Apple Pay 筆筆20%回饋，
@@ -3019,7 +3692,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:yuanta-3f4a32707d-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261231T155900Z
 DTEND:20261231T161400Z
 SUMMARY:[登錄截止] 元大銀行｜【已額滿】Apple Pay綁定元大
@@ -3041,7 +3714,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:yuanta-ea44c03acb-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20260818T060000Z
 DTEND:20261231T155900Z
 SUMMARY:[開放登錄] 元大銀行｜【已額滿】Mastercard信用卡綁
@@ -3063,7 +3736,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:yuanta-8d1f183847-0-0@tw-card-registration-radar
-DTSTAMP:20261030T015803Z
+DTSTAMP:20261030T105159Z
 DTSTART:20261231T155900Z
 DTEND:20261231T161400Z
 SUMMARY:[登錄截止] 元大銀行｜元大悠遊聯名卡自動加值享2
