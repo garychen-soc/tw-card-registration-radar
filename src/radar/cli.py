@@ -37,6 +37,9 @@ def main(argv: list[str] | None = None) -> int:
     run.add_argument("--model", default=DEFAULT_MODEL)
     run.add_argument("--llm-budget", type=int, default=200)
     run.add_argument("--llm-workers", type=int, default=3)
+    run.add_argument(
+        "--reuse-docs", action="store_true", help="用 var/docs 的上一輪原文，不重抓官網"
+    )
     sub.add_parser("emit")
     probe = sub.add_parser("probe")
     probe.add_argument("bank")
@@ -47,7 +50,11 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "run":
         bank_ids = [b for b in args.banks.split(",") if b] or None
         result = pipeline.run(
-            bank_ids, model=args.model, llm_budget=args.llm_budget, llm_workers=args.llm_workers
+            bank_ids,
+            model=args.model,
+            llm_budget=args.llm_budget,
+            llm_workers=args.llm_workers,
+            reuse_docs=args.reuse_docs,
         )
         for health in result.health:
             print(

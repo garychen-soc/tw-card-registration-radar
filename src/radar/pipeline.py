@@ -103,6 +103,28 @@ def fetch_bank(bank_id: str) -> Fetched:
     return out
 
 
+DOCS = ROOT / "var" / "docs"
+
+
+def save_docs(item: Fetched) -> None:
+    """本輪抓到的條款原文存在本機（不進版控），供換模型重算或除錯時免重抓官網。"""
+    DOCS.mkdir(parents=True, exist_ok=True)
+    payload = {
+        "health": item.health.model_dump(mode="json"),
+        "docs": [{"stub": s.model_dump(mode="json"), "text": t} for s, t in item.docs],
+    }
+    (DOCS / f"{item.bank_id}.json").write_text(
+        json.dumps(payload, ensure_ascii=False), encoding="utf-8"
+    )
+
+
+def load_docs(bank_id: str) -> Fetched:
+    payload = json.loads((DOCS / f"{bank_id}.json").read_text(encoding="utf-8"))
+    item = Fetched(bank_id, SourceHealth.model_validate(payload["health"]))
+    item.docs = [(Stub.model_validate(d["stub"]), d["text"]) for d in payload["docs"]]
+    return item
+
+
 def _dedupe(stubs: Iterable[Stub]) -> list[Stub]:
     seen: set[str] = set()
     out: list[Stub] = []
@@ -153,8 +175,16 @@ def group_docs(fetched: Fetched, today: date | None = None) -> list[Doc]:
         else:
             doc.stubs.append(stub)
     for doc in groups.values():
-        doc.stubs.sort(key=lambda s: (len(s.title), s.key))
+        # 最具描述性（最長）的標題當主標題；同一份條款涵蓋多個通路時標明家數
+        doc.stubs.sort(key=lambda s: (-len(s.title), s.key))
     return list(groups.values())
+
+
+def _group_title(doc: Doc) -> str:
+    titles = {s.title for s in doc.stubs}
+    if len(titles) >= 3:
+        return f"{doc.primary.title} 等 {len(titles)} 個通路"
+    return doc.primary.title
 
 
 def activity_id(bank_id: str, key: str) -> str:
@@ -169,8 +199,8 @@ def assemble(doc: Doc, output: dict[str, Any] | None, failure: str, observed: da
         id=activity_id(doc.bank_id, stub.key),
         bank_id=doc.bank_id,
         bank_name=cls.name,
-        title=stub.title,
-        aliases=sorted({s.title for s in doc.stubs[1:]} - {stub.title}),
+        title=_group_title(doc),
+        aliases=sorted({s.title for s in doc.stubs} - {stub.title}),
         url=stub.url,
         period_start=stub.period_start,
         period_end=stub.period_end,
@@ -228,19 +258,25 @@ def run(
     llm_budget: int = 200,
     fetch_workers: int = 6,
     observed: datetime | None = None,
+    reuse_docs: bool = False,
 ) -> RunResult:
     observed = observed or datetime.now(TAIPEI).replace(microsecond=0)
     bank_ids = bank_ids or banks.available()
     messages: list[str] = []
 
     fetched: dict[str, Fetched] = {}
-    http_banks = [b for b in bank_ids if banks.load(b).transport == "http"]
-    browser_banks = [b for b in bank_ids if b not in http_banks]
-    with ThreadPoolExecutor(max_workers=fetch_workers) as pool:
-        for result in pool.map(fetch_bank, http_banks):
-            fetched[result.bank_id] = result
-    for bank_id in browser_banks:
-        fetched[bank_id] = fetch_bank(bank_id)
+    if reuse_docs:
+        fetched = {b: load_docs(b) for b in bank_ids}
+    else:
+        http_banks = [b for b in bank_ids if banks.load(b).transport == "http"]
+        browser_banks = [b for b in bank_ids if b not in http_banks]
+        with ThreadPoolExecutor(max_workers=fetch_workers) as pool:
+            for result in pool.map(fetch_bank, http_banks):
+                fetched[result.bank_id] = result
+        for bank_id in browser_banks:
+            fetched[bank_id] = fetch_bank(bank_id)
+        for item in fetched.values():
+            save_docs(item)
 
     docs = [doc for bank_id in bank_ids for doc in group_docs(fetched[bank_id], observed.date())]
     outputs: dict[str, dict[str, Any]] = {}
