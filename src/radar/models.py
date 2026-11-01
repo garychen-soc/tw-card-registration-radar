@@ -1,12 +1,19 @@
-"""資料契約。
+"""v2 資料契約。
 
-兩條不可妥協的規則：
+三層，各自只有一個來源：
 
-1. 只放「事實」，不放「推導」。凡是「今天」的函數（lifecycle、是否高回饋、
-   是否即將結束、今日待登錄）一律不進 artifact，由讀取端計算。artifact 放三天
-   也不會顯示錯的狀態。
-2. 每個有解析風險的欄位都帶 confidence 與 evidence（原文節錄）。抓不到就留 None，
-   絕不用固定值填補 —— 顯示「17:00 起（截止時間未確認）」比顯示一個錯的截止時間誠實。
+``Stub``
+    銀行官方列表或 API 上的一筆活動。標題只能來自結構化欄位（卡片名稱、API
+    的 title 欄位），不得取自內文第一行 —— v1 的「關於我們」「優惠內容」
+    就是這樣來的。
+``Terms``
+    明細頁主要內容區的純文字，是登錄規則唯一的解析輸入。
+``Activity``
+    發布到網站的一筆活動。一個官方頁面＝一筆活動；同頁多個子活動放在
+    ``subs``，每個子活動只帶有原文引句佐證的登錄時點。
+
+所有時間都是台北時區的 aware datetime。資料檔不放「今天」的函數
+（是否進行中、是否即將截止），由前端計算。
 """
 
 from __future__ import annotations
@@ -14,281 +21,119 @@ from __future__ import annotations
 from datetime import date, datetime
 from typing import Literal
 
-from pydantic import BaseModel, Field, model_validator
-
-Confidence = float
-
-WindowKind = Literal[
-    "range",       # 有明確起訖：2026/8/7 17:00 ~ 2026/8/31 23:59
-    "opens_at",    # 只有開放時點，截止未知：8/17 10:00 開放登錄
-    "deadline",    # 只有截止：登錄期限 8/31 23:59 止
-    "recurring",   # 由循環規則展開：每月 1 日 10:00 開放登錄
-]
-
-ContractKind = Literal[
-    "register_before_spend",      # 先登錄後消費，登錄前的消費不計入
-    "retroactive_ok",             # 可事後補登錄
-    "registration_closes_early",  # 登錄先截止，錯過就整檔白刷
-    "per_period_reregister",      # 每期／每月需重新登錄
-    "unknown",
-]
-
-ThresholdKind = Literal["per_transaction", "cumulative", "none", "unknown"]
+from pydantic import BaseModel, ConfigDict, Field
 
 
-class Evidence(BaseModel):
-    """支撐某個解析結果的原文節錄。UI 可展開讓使用者自行核對。"""
-
-    text: str = Field(max_length=400)
-    source_url: str = ""
+class Strict(BaseModel):
+    model_config = ConfigDict(extra="forbid")
 
 
-class Period(BaseModel):
-    """活動（可消費）期間。end 為 None 代表官方未公告結束日，不推定。"""
+class Stub(Strict):
+    """列表／API 上的一筆官方活動。"""
 
-    start: date | None = None
-    end: date | None = None
-    confidence: Confidence = 0.0
-    evidence: Evidence | None = None
-
-
-class RegistrationWindow(BaseModel):
-    """單一登錄時點或區間。
-
-    end 允許 None —— 這是與舊實作最重要的差異。舊版在解析不到結束時間時
-    一律填 start + 30 分鐘（後改 15 分鐘），使 90% 的視窗帶著編造的截止時間，
-    而真正的截止日被丟棄。
-    """
-
-    kind: WindowKind
-    start: datetime | None = None
-    end: datetime | None = None
-    confidence: Confidence = 0.0
-    evidence: Evidence | None = None
-
-    @model_validator(mode="after")
-    def _coherent(self) -> RegistrationWindow:
-        if self.start is None and self.end is None:
-            raise ValueError("registration window needs at least one of start/end")
-        if self.start is not None and self.end is not None and self.end < self.start:
-            raise ValueError("registration window end precedes start")
-        return self
-
-    @property
-    def anchor(self) -> datetime:
-        """行事曆與待辦清單的時間定位點。
-
-        deadline 型的視窗只知道截止時間（「登錄期限 8/31 23:59 止」），
-        此時定位點是 end；其餘型態是 start。
-        """
-        anchor = self.start or self.end
-        assert anchor is not None  # 由 _coherent 保證
-        return anchor
-
-    @property
-    def end_known(self) -> bool:
-        return self.end is not None
+    bank_id: str
+    key: str = Field(description="該銀行內穩定且唯一的鍵：API 的活動 id，或正規化後的明細 URL")
+    title: str = Field(description="官方列表卡片名稱或 API 標題欄位，原樣保留")
+    url: str = Field(description="官方明細頁，https 且在該銀行網域白名單內")
+    period_start: date | None = None
+    period_end: date | None = None
+    summary: str = Field(default="", description="列表卡片上的一句話摘要，沒有就留空")
+    category: str = ""
+    detail_text: str | None = Field(
+        default=None,
+        description="API 已附條款全文時直接放這裡，pipeline 就不再抓明細頁",
+    )
 
 
-class Recurrence(BaseModel):
-    """登錄是否需要重複執行。實測全站 30.6% 的需登錄活動屬於此類，
-    舊 schema 完全沒有表達，使用者以為登錄一次就結束。"""
+class Terms(Strict):
+    """明細頁的條款文字。"""
 
-    kind: Literal["once", "monthly", "per_campaign_period"] = "once"
+    text: str = Field(description="主要內容區純文字，已排除導覽列、頁尾、相關活動連結")
+    title: str = Field(default="", description="明細頁自己的標題，只用於與 Stub.title 交叉檢查")
+    period_start: date | None = None
+    period_end: date | None = None
+
+
+SlotKind = Literal["opens_at", "range", "deadline"]
+SlotOrigin = Literal["explicit", "rule", "enumerated"]
+
+
+class Evidence(Strict):
+    quote: str = Field(description="逐字取自 Terms.text 的原文")
+    url: str
+
+
+class Slot(Strict):
+    """一個具體的登錄時點。"""
+
+    start: datetime | None = Field(description="開放登錄時刻；deadline 型為 None")
+    end: datetime | None = Field(description="截止時刻；None 表示官方未公告或額滿為止")
+    kind: SlotKind
+    origin: SlotOrigin = Field(
+        description="explicit=條款明寫日期；rule=依每月規則展開；enumerated=條款列舉的日期"
+    )
+    precision: Literal["minute", "day"] = Field(
+        default="minute", description="day＝原文只寫日期沒寫時刻，前端只顯示日期"
+    )
+    holiday_shifted: bool = False
     note: str = ""
-    confidence: Confidence = 0.0
-    day_of_month: int | None = Field(default=None, ge=1, le=31)
-    hour: int | None = Field(default=None, ge=0, le=23)
-    minute: int | None = Field(default=None, ge=0, le=59)
-    """循環的具體排程。``note`` 是給人看的句子，這三個欄位是給程式算的。
-
-    沒有它們，「每月17日16:00開放登錄」就只是一段文字：時間軸排不進去、
-    .ics 也產不出事件。實測全站 69 筆 monthly、97 筆 per_campaign_period 裡，
-    有 127 筆完全沒有任何具體時點 —— 那些活動在時間軸上一次都不會出現，
-    而它們正是「每個月都要重新登錄」這種最容易被忘記的類型。
-
-    刻意不在資料裡放「下一次是哪一天」—— 那是「現在幾點」的函數，凍結進資料
-    就會過期。讀取端拿這三個欄位自己算。
-    """
+    evidence: Evidence
 
 
-class Portal(BaseModel):
-    """登錄入口。
-
-    kind 是必要的誠實標記：實測 242 筆需登錄活動只有 20 個不同 URL，
-    97.9% 指向銀行的統一登錄頁。假裝是活動專屬連結，使用者到站後還要自己找。
-    """
-
-    url: str = ""
-    kind: Literal["activity_specific", "bank_portal", "unknown"] = "unknown"
-    hint: str = ""
+Reregister = Literal["each_period", "once", "unknown"]
+Order = Literal["register_before_spend", "retroactive_ok", "unknown"]
 
 
-class Quota(BaseModel):
-    """名額限制。實測 62.8% 的需登錄活動有限量或額滿字樣，決定登錄要不要搶。"""
+class SubActivity(Strict):
+    """頁面上的一個子活動。整頁只有一個活動時 ``name`` 為空字串。"""
 
-    limited: bool = False
-    seats: int | None = None
-    text: str = ""
-    confidence: Confidence = 0.0
-
-
-class ThresholdTier(BaseModel):
-    """階梯式消費門檻。
-
-    依聯邦銀行明細頁實測修正：門檻不是單一數字，而是階梯，每階有自己的
-    回饋、分期加碼與名額。舊 schema 只有單一 max_reward_amount_twd，
-    使用者看不出「我要刷多少才拿得到哪一階」。
-    """
-
-    spend_twd: int
-    reward_twd: int | None = None
-    reward_percent: float | None = None
-    reward_if_installment: int | None = None
-    installment_periods: int | None = None
-    quota_seats: int | None = None
+    name: str = ""
+    slots: list[Slot] = Field(default_factory=list)
+    rules: list[str] = Field(default_factory=list, description="登錄規則原文，供 UI 顯示")
+    reregister: Reregister = "unknown"
+    reregister_quote: str = ""
+    order: Order = "unknown"
+    order_quote: str = ""
+    quota: int | None = None
+    quota_quote: str = ""
+    review: list[str] = Field(default_factory=list)
 
 
-class Eligibility(BaseModel):
-    new_customer_only: bool = False
-    first_swipe_only: bool = False
-    primary_card_only: bool = False
-    cards: list[str] = Field(default_factory=list)
-    confidence: Confidence = 0.0
-    evidence: Evidence | None = None
+Registration = Literal["required", "not_required", "unknown"]
 
 
-class Installment(BaseModel):
-    required: bool = False
-    periods: list[int] = Field(default_factory=list)
-    rate: str = ""
-    confidence: Confidence = 0.0
-
-
-class Conditions(BaseModel):
-    eligibility: Eligibility = Field(default_factory=Eligibility)
-    threshold_kind: ThresholdKind = "unknown"
-    threshold_tiers: list[ThresholdTier] = Field(default_factory=list)
-    installment: Installment = Field(default_factory=Installment)
-    quota: Quota = Field(default_factory=Quota)
-    reward_cap_twd: int | None = None
-    reward_cap_percent: float | None = None
-
-
-class TimingContract(BaseModel):
-    """登錄與消費的時序關係 —— 使用者「會不會白刷」的答案。
-
-    舊 schema 只有 registration_required: bool，把這件事壓成一個布林值。
-    實測 242 筆需登錄活動中有 90.5% 無法回答「登錄期間 vs 消費期間」。
-    """
-
-    kind: ContractKind = "unknown"
-    spend_counts_from: datetime | None = None
-    last_chance_to_register: datetime | None = None
-    spend_days_left_after_registering: int | None = None
-    """登錄截止後還剩幾天可以消費。只在登錄先於活動結束時才有意義。"""
-    grace_days_after_period_end: int | None = None
-    """活動結束後還能補登錄幾天。只在登錄可延續到活動結束之後時才有意義。
-
-    兩個欄位刻意分開：使用者問的是兩個不同問題（「我登錄完還有多久可以刷」
-    vs「我刷完了還來得及補登錄嗎」），用同一個欄位表達會產生負數，讀不通。
-    """
-    confidence: Confidence = 0.0
-    consistency: list[str] = Field(default_factory=list)
-
-
-class Registration(BaseModel):
-    required: bool = False
-    windows: list[RegistrationWindow] = Field(default_factory=list)
-    recurrence: Recurrence = Field(default_factory=Recurrence)
-    portal: Portal = Field(default_factory=Portal)
-    timing_contract: TimingContract = Field(default_factory=TimingContract)
-    raw_text: str = ""
-
-
-class Offer(BaseModel):
-    """子活動 / 方案。
-
-    這一層是修正舊實作「活動粒度錯誤」的關鍵。舊版以明細頁 URL 雜湊當活動 ID，
-    一頁一筆；但台灣銀行的活動頁普遍單頁多活動（實測：玉山 momo 頁含活動一/二/三，
-    中信一頁 14 個活動）。合併後各子活動的登錄時點互相污染，才會出現
-    「活動至 08-15，卻有 08-17 的登錄時點」。
-    """
-
-    id: str
-    title: str
-    period: Period = Field(default_factory=Period)
-    registration: Registration = Field(default_factory=Registration)
-    conditions: Conditions = Field(default_factory=Conditions)
-    also_at: list[str] = Field(default_factory=list)
-    """同一份活動還出現在哪些網址上。
-
-    由輸出層的 ``emit.dedupe_campaigns`` 填入，解析器一律留空 —— 它是「這筆和
-    別頁的哪些筆是同一個活動」的判斷結果，一頁一 Campaign 的解析器看不到別頁。
-    放在資料契約裡而不是丟掉，是因為去重不該讓使用者失去「這個活動也公告在
-    某幾頁」這個事實（實測星展同一檔活動掛在 6 個子頁）。
-    """
-    needs_review: bool = False
-    review_codes: list[str] = Field(default_factory=list)
-    """穩定的 invariant 代碼。輸出到資料檔的是這個，不是中文句子
-    —— 代碼是契約，文案是呈現。"""
-    review_reasons: list[str] = Field(default_factory=list)
-
-
-class Campaign(BaseModel):
-    """活動頁層級。一個 source_url 對應一個 Campaign、可含多個 Offer。"""
-
+class Activity(Strict):
     id: str
     bank_id: str
     bank_name: str
     title: str
-    source_url: str
-    observed_at: datetime
-    offers: list[Offer] = Field(default_factory=list)
-    terms_raw: str = ""
+    aliases: list[str] = Field(default_factory=list, description="同一份條款在列表上的其他名稱")
+    url: str
+    period_start: date | None = None
+    period_end: date | None = None
+    summary: str = ""
+    category: str = ""
+    registration: Registration = "unknown"
+    registration_quote: str = ""
+    subs: list[SubActivity] = Field(default_factory=list)
+    portal_url: str = ""
+    portal_hint: str = ""
+    review: list[str] = Field(default_factory=list)
     content_hash: str = ""
-    text_hash: str = ""
-    """明細頁**純文字**的雜湊。與 ``content_hash``（清單指紋，含網址）不同。
-
-    用途只有一個：判斷兩個網址是不是同一頁的鏡射。抽取結果相同**不足以**證明
-    這件事 —— 實測星展 mall_08/_09/_11 抽出來的活動一模一樣，但 mall_11 的頁面
-    寫的是「91APP刷星展卡 最高回饋 NT$6,500」，其餘五頁是 NT$2,500，而我們的
-    條件抽取沒抓到那個上限，於是六筆看起來完全相同。照抽取結果合併就會刪掉
-    91APP 那筆真實活動。頁面原文相同才是鏡射的直接證據。
-    """
+    observed_at: datetime
+    stale: bool = Field(default=False, description="本輪來源失敗，沿用上一輪資料")
 
 
-AlertType = Literal[
-    "source_failed",
-    "source_access_blocked",
-    "source_emitted_invalid_url",
-    "detail_unreadable",
-    "listing_page_unreadable",
-]
+SourceStatus = Literal["ok", "partial", "failed", "blocked"]
 
 
-class Alert(BaseModel):
-    """需要人看一眼的異常。
-
-    ``source_emitted_invalid_url`` 刻意與 ``source_failed`` 分開：前者是
-    官方頁自己給了不該跟隨的連結（實測彰銀吐出內網 IP），來源本身是好的；
-    後者才是來源真的讀不到。混在一起會讓「官方頁有瑕疵」被誤判為「來源失效」。
-    """
-
-    type: AlertType
+class SourceHealth(Strict):
     bank_id: str
     bank_name: str
-    message: str
-    url: str = ""
-
-
-class SourceHealth(BaseModel):
-    bank_id: str
-    bank_name: str
-    requested_url: str
-    resolved_url: str = ""
-    status: Literal["complete", "partial", "failed", "blocked"] = "failed"
-    campaign_count: int = 0
-    offer_count: int = 0
-    checked_at: datetime | None = None
+    status: SourceStatus
+    entry_url: str
+    stubs: int = 0
+    activities: int = 0
+    detail_failures: int = 0
     message: str = ""
+    carried: int = 0

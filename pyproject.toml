@@ -1,6 +1,6 @@
 [project]
 name = "tw-card-registration-radar"
-version = "0.1.0"
+version = "2.0.0"
 description = "台灣信用卡活動登錄雷達 — 以「登錄時點」與「活動條件」為核心的官方資料監控"
 requires-python = ">=3.11"
 dependencies = [
@@ -8,10 +8,14 @@ dependencies = [
     "selectolax>=1.0.0,<2.0.0",
     "pydantic>=2.7",
     "playwright>=1.55,<2.0",
+    "pyyaml>=6",
 ]
 
+[project.scripts]
+radar = "radar.cli:main"
+
 [project.optional-dependencies]
-dev = ["pytest>=8", "ruff>=0.6", "mypy>=1.11"]
+dev = ["pytest>=8", "ruff>=0.6", "mypy>=1.11", "types-PyYAML"]
 
 [build-system]
 requires = ["setuptools>=68"]
@@ -28,7 +32,13 @@ target-version = "py311"
 select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
 # 這個專案的內容本身就是中文與全角字元（銀行活動文案、全角波浪號、全角冒號），
 # 正規化邏輯必須直接寫出這些字元。RUF001-003 的「歧義字元」警告在此全是誤報。
-ignore = ["RUF001", "RUF002", "RUF003"]
+# RUF012：擷取器以 ClassVar 宣告 domains 等設定，子類別直接指定 list 是刻意的。
+ignore = ["RUF001", "RUF002", "RUF003", "RUF012"]
+
+[tool.ruff.lint.per-file-ignores]
+# 提示詞與日期正則是整段中文／正則字面值，硬折行反而難讀
+"src/radar/extract/locate.py" = ["E501"]
+"src/radar/dates.py" = ["E501"]
 
 [tool.mypy]
 python_version = "3.11"

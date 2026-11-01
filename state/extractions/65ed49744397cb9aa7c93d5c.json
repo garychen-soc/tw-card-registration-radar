@@ -1,0 +1,16 @@
+{
+ "key": "65ed49744397cb9aa7c93d5c",
+ "prompt_version": "2026-11-01.1",
+ "model": "opus",
+ "created_at": "2026-11-01T00:10:56+00:00",
+ "title": "iPASS MONEY綁王道卡消費，樂享5%回饋(10月份活動已於10/07額滿)",
+ "duration_ms": 11324,
+ "cost_usd": 0.0712202,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "活動名額每月限量1,000名，依消費優先順序計算"
+  },
+  "subs": []
+ }
+}

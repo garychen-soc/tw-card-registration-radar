@@ -1,1074 +1,518 @@
 /**
- * 前端主程式。無框架、無 client 依賴。
+ * 刷卡登錄雷達 v2 前端。
  *
- * 三個設計重點：
- * 1. 首屏只讀 index.json（92KB）。條件細節在使用者展開時才按銀行載入 catalog。
- * 2. 所有時間狀態都在這裡算，不信任資料裡的任何「現在」。
- * 3. 篩選狀態同步到 URL —— 可分享、可書籤、上一頁會回到前一個篩選。
+ * 首屏只載 data/index.json（時間軸）；活動目錄、需人工確認在切換分頁時才載入
+ * data/banks/*.json。「今天」一律以台北時間計算；資料檔裡沒有任何隨時間變動
+ * 的狀態，放三天也不會顯示錯的「登錄中」。
  */
 
-import {
-  CONTRACT_LABEL,
-  CONTRACT_NOTE,
-  CONTRACT_RISK,
-  REVIEW_LABEL,
-  addDays,
-  anchorOf,
-  lifecycleOf,
-  nextWindow,
-  parseAt,
-  stalenessHours,
-  taipeiDay,
-  windowState,
-  scheduleWindows,
-  windowsOn,
-} from "./derive";
-import {
-  calendarWindow,
-  downloadIcs,
-  googleCalendarUrl,
-  singleEventIcs,
-} from "./calendar";
-import { formatClock, formatDate, formatDay, formatMoment, formatMoney, formatPeriod } from "./format";
-import type {
-  AgendaEntry,
-  CatalogOffer,
-  CatalogPayload,
-  IndexPayload,
-  RegWindow,
-  SourceInfo,
-} from "./types";
+import type { Activity, BankData, IndexData, SubActivity, TimelineRow } from "./types";
+import { addDays, clock, dayLabel, moment, relative, taipeiDay } from "./time";
 
-const PAGE_SIZE = 50;
-const STALE_HOURS = 36;
-const MY_BANKS_KEY = "radar.myBanks";
-const DONE_KEY = "radar.registered";
-
-type Tab = "timeline" | "catalog" | "review" | "sources";
+const BASE = (document.body.dataset.base ?? "/").replace(/\/?$/, "/");
+const SITE = new URL(BASE, location.origin).href;
+const ICS_URL = `${SITE}calendar/registration.ics`;
+const STORE_DONE = "radar.v2.done";
+const STORE_BANKS = "radar.v2.banks";
+const STALE_HOURS = 30;
+const RECENT_OPEN_DAYS = 7;
 
 interface State {
-  data: IndexPayload | null;
-  tab: Tab;
-  bank: string;
-  need: "all" | "registration" | "quota" | "before-spend";
+  index: IndexData | null;
+  banks: Map<string, Activity[]>;
+  tab: "timeline" | "catalog" | "review" | "sources";
   query: string;
-  page: number;
-  myBanksOnly: boolean;
+  bank: string;
+  mine: boolean;
+  hideDone: boolean;
+  regOnly: boolean;
 }
 
 const state: State = {
-  data: null,
+  index: null,
+  banks: new Map(),
   tab: "timeline",
-  bank: "",
-  need: "all",
   query: "",
-  page: 1,
-  myBanksOnly: false,
+  bank: "",
+  mine: false,
+  hideDone: false,
+  regOnly: true,
 };
 
-const catalogCache = new Map<string, Promise<CatalogPayload>>();
-/** 完整目錄（全部 815 筆）。index.json 的 agenda 只含有登錄時點的那些，
- *  瀏覽目錄時需要全部 —— 按需一次載入 17 個 catalog 檔（約 490KB）。 */
-let allOffers: AgendaEntry[] | null = null;
-const offerDetails = new Map<string, CatalogOffer>();
-
-function base(): string {
-  const path = document.body.dataset.base ?? "";
-  return path.endsWith("/") ? path.slice(0, -1) : path;
-}
-
-function readSet(key: string): Set<string> {
-  try {
-    const raw = localStorage.getItem(key);
-    return new Set(raw ? (JSON.parse(raw) as string[]) : []);
-  } catch {
-    return new Set();
-  }
-}
-
-function writeSet(key: string, value: Set<string>): void {
-  try {
-    localStorage.setItem(key, JSON.stringify([...value]));
-  } catch {
-    /* 隱私模式下不可寫，忽略 */
-  }
-}
+// ---- 小工具 ----------------------------------------------------------------
 
 function el<K extends keyof HTMLElementTagNameMap>(
-  tag: K,
-  className?: string,
-  text?: string,
+  tag: K, cls = "", text = "",
 ): HTMLElementTagNameMap[K] {
   const node = document.createElement(tag);
-  if (className) node.className = className;
-  if (text !== undefined) node.textContent = text;
+  if (cls) node.className = cls;
+  if (text) node.textContent = text;
   return node;
 }
 
-/** 訂閱面板：三種平台各給一條真的走得通的路。 */
-function wireSubscribePanel(): void {
-  const feedUrl = new URL(`${base()}/calendar/registration.ics`, location.href);
-  const https = feedUrl.href;
-  const webcal = `webcal://${feedUrl.host}${feedUrl.pathname}`;
+function link(href: string, text: string, cls = "btn"): HTMLAnchorElement {
+  const a = el("a", cls, text);
+  a.href = href;
+  a.target = "_blank";
+  a.rel = "noopener noreferrer";
+  return a;
+}
 
-  const apple = document.querySelector<HTMLAnchorElement>("#sub-apple");
-  if (apple) apple.href = webcal;
-
-  const google = document.querySelector<HTMLAnchorElement>("#sub-google");
-  // cid 用 https 而不是 webcal —— Google 兩種都收，但 https 在沒有登入時
-  // 至少會導到看得懂的頁面，webcal 會變成瀏覽器不認識的協定。
-  if (google) {
-    google.href = `https://calendar.google.com/calendar/render?cid=${encodeURIComponent(https)}`;
+function load<T>(key: string, fallback: T): T {
+  try {
+    const raw = localStorage.getItem(key);
+    return raw ? (JSON.parse(raw) as T) : fallback;
+  } catch {
+    return fallback;
   }
-
-  const urlBox = document.querySelector("#sub-url");
-  if (urlBox) urlBox.textContent = https;
-
-  const copy = document.querySelector<HTMLButtonElement>("#sub-copy");
-  copy?.addEventListener("click", async () => {
-    try {
-      await navigator.clipboard.writeText(https);
-      copy.textContent = "已複製";
-    } catch {
-      // 非 https 或權限被拒時 clipboard 會失敗 —— 退回讓使用者自己選取。
-      copy.textContent = "請手動複製右方網址";
-    }
-    setTimeout(() => (copy.textContent = "複製訂閱網址"), 2500);
-  });
-
-  const toggle = document.querySelector<HTMLButtonElement>("#subscribe");
-  const panel = document.querySelector<HTMLElement>("#subscribe-panel");
-  toggle?.addEventListener("click", () => {
-    if (!panel) return;
-    const open = panel.hidden;
-    panel.hidden = !open;
-    toggle.setAttribute("aria-expanded", String(open));
-  });
 }
 
-function bankName(bankId: string): string {
-  return state.data?.sources.find((s) => s.bank_id === bankId)?.bank_name ?? bankId;
-}
-
-function portalOf(bankId: string) {
-  return state.data?.sources.find((s) => s.bank_id === bankId)?.portal;
-}
-
-// ── URL 狀態 ────────────────────────────────────────────
-
-function readUrl(): void {
-  const params = new URLSearchParams(location.search);
-  const tab = params.get("tab");
-  if (tab === "timeline" || tab === "catalog" || tab === "review" || tab === "sources") {
-    state.tab = tab;
+function save(key: string, value: unknown): void {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch {
+    /* 無痕模式等情況下寫不進去，不影響閱讀 */
   }
-  state.bank = params.get("bank") ?? "";
-  const need = params.get("need");
-  if (need === "registration" || need === "quota" || need === "before-spend") state.need = need;
-  state.query = params.get("q") ?? "";
-  state.page = Math.max(1, Number(params.get("page") ?? "1") || 1);
-  state.myBanksOnly = params.get("mine") === "1";
 }
 
-function writeUrl(replace = false): void {
-  const params = new URLSearchParams();
-  if (state.tab !== "timeline") params.set("tab", state.tab);
-  if (state.bank) params.set("bank", state.bank);
-  if (state.need !== "all") params.set("need", state.need);
-  if (state.query) params.set("q", state.query);
-  if (state.page > 1) params.set("page", String(state.page));
-  if (state.myBanksOnly) params.set("mine", "1");
-  const url = `${location.pathname}${params.toString() ? `?${params}` : ""}`;
-  if (replace) history.replaceState(null, "", url);
-  else history.pushState(null, "", url);
+const done = new Set<string>(load<string[]>(STORE_DONE, []));
+const myBanks = new Set<string>(load<string[]>(STORE_BANKS, []));
+
+function doneKey(row: TimelineRow): string {
+  return `${row.aid}|${row.sub_index}|${row.start ?? row.end}`;
 }
 
-// ── 篩選 ────────────────────────────────────────────────
+// ---- 篩選 ----------------------------------------------------------------
 
-function matches(entry: AgendaEntry, offers: AgendaEntry[]): boolean {
-  void offers;
-  if (state.bank && entry.bank_id !== state.bank) return false;
-  if (state.myBanksOnly) {
-    const mine = readSet(MY_BANKS_KEY);
-    if (mine.size && !mine.has(entry.bank_id)) return false;
-  }
-  if (state.need === "registration" && !(entry.windows ?? []).length) return false;
-  if (state.need === "quota" && !entry.quota_limited) return false;
-  if (state.need === "before-spend" && entry.contract !== "register_before_spend") return false;
-  if (state.query) {
-    const needle = state.query.toLocaleLowerCase("zh-Hant");
-    // 頁面標題也要能搜到 —— 第一銀行的「大同3C」「三井3C」只出現在那裡，
-    // 子活動標題一律是「【家電分期禮】分期零利率…」。
-    const hay = `${entry.title} ${entry.page_title ?? ""} ${bankName(entry.bank_id)}`.toLocaleLowerCase(
-      "zh-Hant",
-    );
-    if (!hay.includes(needle)) return false;
-  }
+function matchesText(...fields: string[]): boolean {
+  const q = state.query.trim().toLowerCase();
+  if (!q) return true;
+  return fields.some((f) => f.toLowerCase().includes(q));
+}
+
+function matchesBank(bankId: string): boolean {
+  if (state.bank && state.bank !== bankId) return false;
+  if (state.mine && myBanks.size && !myBanks.has(bankId)) return false;
   return true;
 }
 
-// ── 元件 ────────────────────────────────────────────────
-
-function riskBadge(entry: AgendaEntry): HTMLElement | null {
-  const kind = entry.contract ?? "unknown";
-  const risk = CONTRACT_RISK[kind];
-  if (risk === "none") return null;
-  const badge = el("span", `badge risk-${risk}`, CONTRACT_LABEL[kind]);
-  badge.title = CONTRACT_NOTE[kind];
-  return badge;
+function rowVisible(row: TimelineRow): boolean {
+  if (!matchesBank(row.bank_id)) return false;
+  if (state.hideDone && done.has(doneKey(row))) return false;
+  return matchesText(row.title, row.sub, row.bank, row.quote);
 }
 
-/**
- * 雙軌時序帶：上軌是可消費期間、下軌是可登錄期間，共用同一條時間軸。
- * 兩軌的重疊區就是「刷了會被計入」的那一段 —— 這是整個產品要回答的問題。
- */
-function timingBar(entry: AgendaEntry): HTMLElement | null {
-  const periodStart = parseAt(entry.period?.start);
-  const periodEnd = parseAt(entry.period?.end);
-  const windows = entry.windows ?? [];
-  if (!periodStart && !windows.length) return null;
+// ---- 時間軸卡片 ------------------------------------------------------------
 
-  const points: number[] = [];
-  if (periodStart) points.push(periodStart.getTime());
-  if (periodEnd) points.push(periodEnd.getTime());
-  for (const w of windows) {
-    const a = parseAt(w.start);
-    const b = parseAt(w.end);
-    if (a) points.push(a.getTime());
-    if (b) points.push(b.getTime());
+const REREG = { each_period: "每期需重新登錄", once: "登錄一次即可", unknown: "" } as const;
+const ORDER = {
+  register_before_spend: "須先登錄再消費",
+  retroactive_ok: "活動期間內補登錄也算",
+  unknown: "",
+} as const;
+
+function badges(row: { quota: number | null; reregister: keyof typeof REREG; order: keyof typeof ORDER }, shifted = false): HTMLElement {
+  const box = el("div", "badges");
+  if (row.quota) box.append(el("span", "badge hot", `限量 ${row.quota.toLocaleString("zh-TW")} 名`));
+  if (REREG[row.reregister]) box.append(el("span", "badge", REREG[row.reregister]));
+  if (ORDER[row.order]) {
+    box.append(el("span", row.order === "register_before_spend" ? "badge warn" : "badge", ORDER[row.order]));
   }
-  if (points.length < 2) return null;
-
-  const min = Math.min(...points);
-  const max = Math.max(...points);
-  const span = max - min || 1;
-  const pct = (value: number) => ((value - min) / span) * 100;
-
-  const wrap = el("div", "timing");
-  const legend = el("div", "timing-legend");
-  legend.append(el("span", "swatch spend"), el("span", "", "可消費"));
-  legend.append(el("span", "swatch reg"), el("span", "", "可登錄"));
-  wrap.append(legend);
-
-  const spendTrack = el("div", "track");
-  if (periodStart) {
-    const bar = el("div", "bar spend");
-    bar.style.left = `${pct(periodStart.getTime())}%`;
-    bar.style.width = `${Math.max(2, pct(periodEnd?.getTime() ?? max) - pct(periodStart.getTime()))}%`;
-    spendTrack.append(bar);
-  }
-  wrap.append(spendTrack);
-
-  const regTrack = el("div", "track");
-  for (const w of windows) {
-    const a = parseAt(w.start) ?? parseAt(w.end);
-    if (!a) continue;
-    const b = parseAt(w.end);
-    const bar = el("div", `bar reg ${w.end ? "" : "open-ended"}`.trim());
-    bar.style.left = `${pct(a.getTime())}%`;
-    bar.style.width = `${Math.max(1.5, pct(b?.getTime() ?? a.getTime()) - pct(a.getTime()))}%`;
-    bar.title = w.end
-      ? `登錄 ${formatMoment(w.start)} → ${formatMoment(w.end)}`
-      : `${formatMoment(w.start ?? w.end)} 開放登錄（截止時間未公告）`;
-    regTrack.append(bar);
-  }
-  wrap.append(regTrack);
-
-  const scale = el("div", "timing-scale");
-  scale.append(el("span", "", formatDate(new Date(min).toISOString())));
-  scale.append(el("span", "", formatDate(new Date(max).toISOString())));
-  wrap.append(scale);
-  return wrap;
+  if (shifted) box.append(el("span", "badge", "已套用假日順延"));
+  return box;
 }
 
-function windowLine(w: RegWindow): HTMLElement {
-  const line = el("div", "window");
-  const stateLabel = { open: "登錄中", upcoming: "即將開放", closed: "已結束", unknown: "未確認" }[
-    windowState(w)
-  ];
-  const when =
-    w.kind === "deadline"
-      ? `登錄截止 ${formatMoment(w.end)}`
-      : w.end
-        ? `${formatMoment(w.start)} → ${formatMoment(w.end)}`
-        : `${formatMoment(w.start)} 起（截止未公告）`;
-  line.append(el("span", `pill state-${windowState(w)}`, stateLabel));
-  line.append(el("span", "when", when));
-  // 推算出來的時點一定要標示。官方只寫了「每月 17 日 16:00 開放登錄」，
-  // 沒有明說這個月的哪一天 —— 把推算當成官方公告是不誠實的。
-  if (w.derived) {
-    const mark = el("span", "pill derived", "依循環規則推算");
-    mark.title = "官方只公告了循環規則，這個日期是依規則推算的";
-    line.append(mark);
-  }
-  return line;
+function googleUrl(row: TimelineRow): string | null {
+  const startIso = row.start ?? row.end;
+  if (!startIso) return null;
+  const start = new Date(startIso);
+  const end = new Date(start.getTime() + 15 * 60000);
+  const z = (d: Date) => `${d.toISOString().replace(/[-:]/g, "").slice(0, 15)}Z`;
+  const params = new URLSearchParams({
+    action: "TEMPLATE",
+    text: `登錄｜${row.bank}｜${row.title}${row.sub ? `｜${row.sub}` : ""}`.slice(0, 200),
+    dates: `${z(start)}/${z(end)}`,
+    details: [`原文：${row.quote}`, row.note, `活動頁：${row.url}`, `登錄：${row.portal}`]
+      .filter(Boolean).join("\n"),
+    ctz: "Asia/Taipei",
+  });
+  return `https://calendar.google.com/calendar/render?${params}`;
 }
 
-/** also_at 連結的短標籤。整段網址塞進卡片會擠掉真正重要的登錄時點，
- *  而銀行的鏡射網址差異幾乎都在最後一段（mall_08 / mall_08_2 / mall_09）。 */
-function pageLabel(href: string): string {
-  try {
-    const url = new URL(href);
-    const last = url.pathname.split("/").filter(Boolean).pop() ?? url.hostname;
-    return (url.search ? `${last}${url.search}` : last.replace(/\.(html?|jsp|aspx?)$/i, "")) || href;
-  } catch {
-    return href;
+function slotCard(row: TimelineRow, mode: "opens" | "closes" | "open"): HTMLElement {
+  const card = el("article", "slot");
+  if (done.has(doneKey(row))) card.classList.add("is-done");
+  if (row.stale) card.classList.add("is-stale");
+
+  const when = el("div", "when");
+  if (mode === "closes" && row.end) {
+    when.append(el("strong", "", clock(row.end)), el("span", "tag end", "截止"));
+  } else if (mode === "open") {
+    when.append(el("span", "tag live", "登錄中"));
+  } else if (row.start) {
+    when.append(el("strong", "", row.precision === "day" ? "全天" : clock(row.start)));
+    when.append(el("span", "tag", "開放"));
   }
-}
+  card.append(when);
 
-/**
- * 逐筆加入行事曆。訂閱整份 feed 對「只想記這一筆」的人太重，而 Google 日曆的
- * 訂閱必須用瀏覽器加一次（Android 的 App 裡沒有這個功能），所以逐筆這條路對
- * Android 使用者反而是主要入口。
- *
- * 兩個出口涵蓋所有平台：Google 用 TEMPLATE 網址（Android 直接開 App），
- * .ics 檔給 Apple、Outlook、三星行事曆。
- */
-function calendarActions(entry: AgendaEntry): HTMLElement {
-  const wrap = el("span", "cal-actions");
-  const window_ = calendarWindow(entry);
-  if (!window_) return wrap;
-  const bank = bankName(entry.bank_id);
+  const body = el("div", "body");
+  const head = el("h3");
+  head.append(el("span", "bank", row.bank), document.createTextNode(row.title));
+  body.append(head);
+  if (row.sub) body.append(el("p", "sub", `子活動：${row.sub}`));
 
-  const google = googleCalendarUrl(entry, window_, bank);
-  if (google) {
-    const link = el("a", "action ghost", "加到 Google 日曆");
-    link.href = google;
-    link.target = "_blank";
-    link.rel = "noopener noreferrer";
-    link.title = "Android 會直接開 Google 日曆 App";
-    wrap.append(link);
+  const span = el("p", "span");
+  if (row.start && row.end) {
+    span.textContent = `${moment(row.start, row.precision)} → ${moment(row.end, row.precision)}`;
+  } else if (row.start) {
+    span.textContent = `${moment(row.start, row.precision)} 起（截止未公告，額滿為止）`;
+  } else if (row.end) {
+    span.textContent = `${moment(row.end)} 截止`;
   }
+  body.append(span);
+  body.append(badges(row, row.shifted));
+  if (row.note) body.append(el("p", "note", row.note));
+  if (row.stale) body.append(el("p", "note warn", "此來源本輪讀取失敗，顯示上一輪資料"));
 
-  const ics = singleEventIcs(entry, window_, bank);
-  if (ics) {
-    const button = el("button", "action ghost", "加到其他日曆");
-    button.type = "button";
-    button.title = "下載單筆 .ics —— Apple 行事曆、Outlook、三星行事曆都可直接開啟";
-    button.addEventListener("click", () => {
-      downloadIcs(`${entry.id}.ics`, ics);
-    });
-    wrap.append(button);
-  }
-  return wrap;
-}
+  const evidence = el("details", "evidence");
+  evidence.append(el("summary", "", "官方原文"));
+  evidence.append(el("blockquote", "", row.quote));
+  body.append(evidence);
 
-function registeredToggle(entry: AgendaEntry): HTMLElement {
-  const done = readSet(DONE_KEY);
-  const label = el("label", "done");
+  const actions = el("div", "actions");
+  actions.append(link(row.portal || row.url, "前往登錄", "btn primary"));
+  if (row.portal && row.portal !== row.url) actions.append(link(row.url, "活動頁"));
+  const google = googleUrl(row);
+  if (google) actions.append(link(google, "加到 Google 日曆"));
+  const label = el("label", "check");
   const box = el("input");
   box.type = "checkbox";
-  box.checked = done.has(entry.id);
-  box.setAttribute("aria-label", `標記「${entry.title}」已登錄`);
+  box.checked = done.has(doneKey(row));
   box.addEventListener("change", () => {
-    const set = readSet(DONE_KEY);
-    if (box.checked) set.add(entry.id);
-    else set.delete(entry.id);
-    writeSet(DONE_KEY, set);
-    label.classList.toggle("is-done", box.checked);
+    if (box.checked) done.add(doneKey(row));
+    else done.delete(doneKey(row));
+    save(STORE_DONE, [...done]);
+    card.classList.toggle("is-done", box.checked);
   });
-  label.classList.toggle("is-done", box.checked);
-  label.append(box, el("span", "", "已登錄"));
-  return label;
-}
-
-function offerCard(entry: AgendaEntry, options: { compact?: boolean } = {}): HTMLElement {
-  const card = el("article", "card");
-  if (entry.needs_review) card.classList.add("is-review");
-
-  const head = el("header", "card-head");
-  // 活動頁標題是很多筆的唯一辨識資訊。實測第一銀行的「家電分期禮─全國電子／
-  // 大同3C／三井3C」是三個不同零售商，零售商名字只在頁面標題裡 —— 切分後的
-  // 子活動標題、期間、條件全部一樣，不顯示頁面標題就是三筆看起來相同的卡片。
-  head.append(
-    el(
-      "span",
-      "bank",
-      entry.page_title
-        ? `${bankName(entry.bank_id)}・${entry.page_title}`
-        : bankName(entry.bank_id),
-    ),
-  );
-  const badges = el("div", "badges");
-  const risk = riskBadge(entry);
-  if (risk) badges.append(risk);
-  if (entry.quota_limited) {
-    const seats = entry.quota_seats ? `限量 ${entry.quota_seats}` : "限量";
-    const badge = el("span", "badge quota", seats);
-    badge.title = "名額有限，開放即需準時登錄";
-    badges.append(badge);
+  label.append(box, document.createTextNode("已登錄"));
+  actions.append(label);
+  body.append(actions);
+  if (row.portal && row.portal !== row.url) {
+    body.append(el("p", "hint", `${row.portal_hint || "統一登錄頁"}：到站後請找「${row.title}」`));
   }
-  if (entry.recurrence) badges.append(el("span", "badge recur", "每期重登"));
-  // 沿用上一版的資料一定要看得出來。沿用本身不是問題，沿用而不標示才是。
-  if (entry.stale_since) {
-    const at = parseAt(entry.stale_since);
-    const badge = el("span", "badge stale", "舊資料");
-    badge.title = at
-      ? `本次讀不到這家銀行，以下是 ${formatMoment(entry.stale_since)} 的資料`
-      : "本次讀不到這家銀行，以下是上一版的資料";
-    badges.append(badge);
-  }
-  const life = lifecycleOf(entry);
-  if (life === "upcoming") badges.append(el("span", "badge soon", "即將開始"));
-  if (life === "ended") badges.append(el("span", "badge ended", "已結束"));
-  head.append(badges);
-  card.append(head);
-
-  const title = el("h3", "card-title");
-  const link = el("a");
-  link.href = entry.url;
-  link.target = "_blank";
-  link.rel = "noopener noreferrer";
-  link.textContent = entry.title || "（無標題）";
-  title.append(link);
-  card.append(title);
-
-  card.append(el("p", "period", formatPeriod(entry.period?.start, entry.period?.end)));
-
-  // 同一份活動公告在多個子頁時只顯示一筆，但不能讓使用者失去「它也在那幾頁」
-  // 這個事實 —— 他可能是從其中某一頁找過來的，看不到會以為我們漏抓了。
-  const alsoAt = entry.also_at ?? [];
-  if (alsoAt.length) {
-    const line = el("p", "more");
-    line.append(document.createTextNode(`同一活動也公告於 ${alsoAt.length} 個頁面：`));
-    alsoAt.forEach((href, i) => {
-      if (i) line.append(document.createTextNode("、"));
-      const other = el("a");
-      other.href = href;
-      other.target = "_blank";
-      other.rel = "noopener noreferrer";
-      other.textContent = pageLabel(href);
-      line.append(other);
-    });
-    card.append(line);
-  }
-
-  const windows = scheduleWindows(entry);
-  if (windows.length) {
-    const box = el("div", "windows");
-    for (const w of windows.slice(0, 3)) box.append(windowLine(w));
-    if (windows.length > 3) {
-      box.append(el("p", "more", `另有 ${windows.length - 3} 個登錄時點`));
-    }
-    card.append(box);
-  }
-
-  if (!options.compact) {
-    const bar = timingBar(entry);
-    if (bar) card.append(bar);
-  }
-
-  if (entry.needs_review) {
-    const why = el("div", "review-why");
-    why.append(el("strong", "", "需人工確認"));
-    for (const code of entry.review_codes ?? []) {
-      why.append(el("p", "", REVIEW_LABEL[code] ?? code));
-    }
-    card.append(why);
-  }
-
-  const foot = el("footer", "card-foot");
-  const portal = portalOf(entry.bank_id);
-  if (portal?.url) {
-    const go = el("a", "action");
-    go.href = portal.url;
-    go.target = "_blank";
-    go.rel = "noopener noreferrer";
-    go.textContent = portal.kind === "bank_portal" ? "前往銀行登錄頁" : "前往登錄";
-    if (portal.hint) go.title = portal.hint;
-    foot.append(go);
-    if (portal.kind === "bank_portal") {
-      foot.append(el("span", "hint", portal.hint || "此為統一登錄頁，到站後請找這筆活動"));
-    }
-  }
-  foot.append(calendarActions(entry));
-  foot.append(registeredToggle(entry));
-
-  const details = el("button", "action ghost", "活動條件");
-  details.type = "button";
-  details.setAttribute("aria-expanded", "false");
-  const panel = el("div", "conditions");
-  panel.hidden = true;
-  details.addEventListener("click", () => {
-    const open = panel.hidden;
-    panel.hidden = !open;
-    details.setAttribute("aria-expanded", String(open));
-    if (open && !panel.dataset.loaded) void loadConditions(entry, panel);
-  });
-  foot.append(details);
-  card.append(foot, panel);
+  card.append(body);
   return card;
 }
 
-async function loadConditions(entry: AgendaEntry, panel: HTMLElement): Promise<void> {
-  panel.dataset.loaded = "1";
-  panel.textContent = "載入中…";
-  try {
-    const cached = offerDetails.get(entry.id);
-    const offer = cached ?? (await fetchCatalog(entry.bank_id)).offers.find((o) => o.id === entry.id);
-    panel.replaceChildren();
-    if (!offer) {
-      panel.append(el("p", "", "找不到這筆活動的條件資料。"));
-      return;
-    }
-    panel.append(...conditionRows(offer));
-  } catch {
-    panel.replaceChildren(el("p", "", "條件資料載入失敗，請重新整理。"));
-  }
-}
+// ---- 分頁：時間軸 ----------------------------------------------------------
 
-function conditionRows(offer: CatalogOffer): HTMLElement[] {
-  const rows: HTMLElement[] = [];
-  const conditions = offer.conditions ?? {};
-  const contract = offer.registration?.contract;
+function renderTimeline(root: HTMLElement, data: IndexData): void {
+  const now = new Date();
+  const today = taipeiDay(now);
+  const rows = data.timeline.filter(rowVisible);
 
-  const row = (label: string, value: string) => {
-    const line = el("div", "cond");
-    line.append(el("span", "cond-label", label), el("span", "cond-value", value));
-    return line;
-  };
-
-  if (contract?.kind) {
-    rows.push(row("時序", `${CONTRACT_LABEL[contract.kind]} — ${CONTRACT_NOTE[contract.kind]}`));
-    if (contract.spend_counts_from) {
-      rows.push(row("消費起算", formatMoment(contract.spend_counts_from)));
-    }
-    if (contract.last_chance_to_register) {
-      rows.push(row("最晚登錄", formatMoment(contract.last_chance_to_register)));
-    }
-    if (contract.spend_days_left_after_registering !== undefined) {
-      rows.push(row("登錄截止後", `還有 ${contract.spend_days_left_after_registering} 天可消費`));
-    }
-    if (contract.grace_days_after_period_end !== undefined) {
-      rows.push(row("活動結束後", `還能補登錄 ${contract.grace_days_after_period_end} 天`));
-    }
-  }
-
-  const eligibility = conditions.eligibility;
-  if (eligibility) {
-    const flags: string[] = [];
-    if (eligibility.new_customer_only) flags.push("新戶限定");
-    if (eligibility.first_swipe_only) flags.push("首刷限定");
-    if (eligibility.primary_card_only) flags.push("限正卡人");
-    if (flags.length) rows.push(row("資格", flags.join("、")));
-    if (eligibility.cards?.length) rows.push(row("指定卡別", eligibility.cards.join("、")));
-  }
-
-  const tiers = conditions.threshold_tiers ?? [];
-  if (tiers.length) {
-    const table = el("div", "tiers");
-    for (const tier of tiers) {
-      const line = el("div", "tier");
-      line.append(el("span", "tier-spend", `滿 ${formatMoney(tier.spend_twd)}`));
-      const parts: string[] = [];
-      if (tier.reward_twd !== undefined) parts.push(`回饋 ${formatMoney(tier.reward_twd)}`);
-      if (tier.reward_if_installment !== undefined) {
-        const periods = tier.installment_periods ? `分${tier.installment_periods}期以上` : "分期";
-        parts.push(`${periods} ${formatMoney(tier.reward_if_installment)}`);
-      }
-      if (tier.quota_seats !== undefined) parts.push(`限 ${tier.quota_seats} 名`);
-      line.append(el("span", "tier-reward", parts.join(" · ") || "—"));
-      table.append(line);
-    }
-    const wrap = el("div", "cond");
-    wrap.append(el("span", "cond-label", "階梯門檻"), table);
-    rows.push(wrap);
-  } else if (conditions.threshold_kind) {
-    rows.push(row("門檻類型", conditions.threshold_kind === "cumulative" ? "累積滿額" : "單筆滿額"));
-  }
-
-  const installment = conditions.installment;
-  if (installment?.required || installment?.periods?.length) {
-    const parts: string[] = [];
-    if (installment.required) parts.push("需分期");
-    if (installment.periods?.length) parts.push(`可分 ${installment.periods.join("／")} 期`);
-    if (installment.rate) parts.push(installment.rate);
-    rows.push(row("分期", parts.join(" · ")));
-  }
-
-  if (conditions.quota?.limited) {
-    rows.push(row("名額", conditions.quota.seats ? `限量 ${conditions.quota.seats} 名` : "限量，額滿為止"));
-  }
-  if (conditions.reward_cap_percent !== undefined) {
-    rows.push(row("最高回饋率", `${conditions.reward_cap_percent}%`));
-  }
-  if (conditions.reward_cap_twd !== undefined) {
-    rows.push(row("回饋上限", formatMoney(conditions.reward_cap_twd)));
-  }
-
-  if (!rows.length) rows.push(el("p", "", "官方頁未提供可結構化的條件資訊，請點標題查看原文。"));
-
-  const source = el("p", "cond-source");
-  const link = el("a");
-  link.href = offer.url;
-  link.target = "_blank";
-  link.rel = "noopener noreferrer";
-  link.textContent = "以官方公告為準 ↗";
-  source.append(link);
-  rows.push(source);
-  return rows;
-}
-
-/** CatalogOffer → 渲染用的 AgendaEntry。兩者共用大部分欄位。 */
-function toEntry(bankId: string, offer: CatalogOffer): AgendaEntry {
-  const registration = offer.registration;
-  const quota = offer.conditions?.quota;
-  const recurrence = registration?.recurrence;
-  return {
-    id: offer.id,
-    bank_id: bankId,
-    title: offer.title,
-    url: offer.url,
-    page_title: offer.page_title,
-    also_at: offer.also_at,
-    period: offer.period,
-    windows: registration?.windows,
-    recurrence: recurrence?.kind ? recurrence : undefined,
-    contract: registration?.contract?.kind,
-    quota_limited: quota?.limited,
-    quota_seats: quota?.seats,
-    needs_review: offer.needs_review,
-    review_codes: offer.review_codes,
-  };
-}
-
-async function loadAllOffers(): Promise<AgendaEntry[]> {
-  if (allOffers) return allOffers;
-  const data = state.data;
-  if (!data) return [];
-  const payloads = await Promise.all(
-    data.sources.map((source) =>
-      fetchCatalog(source.bank_id).catch(() => ({ bank_id: source.bank_id, offers: [] })),
-    ),
-  );
-  const entries: AgendaEntry[] = [];
-  for (const payload of payloads) {
-    for (const offer of payload.offers ?? []) {
-      offerDetails.set(offer.id, offer);
-      entries.push(toEntry(payload.bank_id, offer));
-    }
-  }
-  allOffers = entries;
-  return entries;
-}
-
-async function fetchCatalog(bankId: string): Promise<CatalogPayload> {
-  let pending = catalogCache.get(bankId);
-  if (!pending) {
-    pending = fetch(`${base()}/data/catalog/${bankId}.json`, { cache: "no-store" }).then((r) => {
-      if (!r.ok) throw new Error(`HTTP ${r.status}`);
-      return r.json() as Promise<CatalogPayload>;
-    });
-    catalogCache.set(bankId, pending);
-  }
-  return pending;
-}
-
-// ── 各分頁 ──────────────────────────────────────────────
-
-function renderTimeline(root: HTMLElement): void {
-  const data = state.data;
-  if (!data) return;
-  const today = taipeiDay();
-  const days = [0, 1, 2, 3, 4, 5, 6].map((offset) => addDays(today, offset));
-  const actionable = data.agenda.filter((entry) => !entry.needs_review && matches(entry, data.agenda));
+  const open = rows.filter((r) => {
+    if (!r.start) return false;
+    const start = new Date(r.start);
+    if (start > now || taipeiDay(start) === today) return false;
+    if (r.end) return new Date(r.end) >= now;
+    return now.getTime() - start.getTime() < RECENT_OPEN_DAYS * 86400000;
+  });
+  open.sort((a, b) => (a.end ?? "9999").localeCompare(b.end ?? "9999"));
 
   let shown = 0;
-  for (const [index, day] of days.entries()) {
-    const entries = actionable
-      .map((entry) => ({ entry, windows: windowsOn(entry, day) }))
-      .filter((item) => item.windows.length > 0)
-      .sort((a, b) => {
-        const left = anchorOf(a.windows[0]!)?.getTime() ?? 0;
-        const right = anchorOf(b.windows[0]!)?.getTime() ?? 0;
-        return left - right;
-      });
-    if (!entries.length) continue;
-    shown += entries.length;
-
-    const section = el("section", "day");
-    const heading = el("h2", "day-head");
-    const label = index === 0 ? "今日" : index === 1 ? "明日" : formatDay(day);
-    heading.append(el("span", "day-label", label));
-    heading.append(el("span", "day-date", formatDate(day)));
-    heading.append(el("span", "day-count", `${entries.length} 個登錄時點`));
-    section.append(heading);
-    for (const item of entries) {
-      const card = offerCard(item.entry, { compact: true });
-      const first = item.windows[0]!;
-      card.prepend(el("div", "clock", formatClock(first.start ?? first.end)));
-      section.append(card);
-    }
-    root.append(section);
-  }
-
-  if (!shown) {
-    const empty = el("div", "empty");
-    empty.append(el("strong", "", "未來 7 天沒有已確認的登錄時點"));
-    empty.append(
-      el("p", "", "可切到「活動目錄」瀏覽全部活動，或看「需人工確認」——那裡是官方沒公告時間的活動。"),
+  for (let offset = 0; offset < 7; offset += 1) {
+    const day = addDays(today, offset);
+    const opens = rows.filter((r) => r.start && taipeiDay(r.start) === day);
+    const closes = rows.filter(
+      (r) => r.end && taipeiDay(r.end) === day && (!r.start || taipeiDay(r.start) !== day)
+        && (offset > 0 || new Date(r.end) >= now),
     );
+    if (!opens.length && !closes.length) continue;
+    const section = el("section", "day");
+    const head = el("h2");
+    head.append(el("span", "day-label", dayLabel(day, today)));
+    head.append(el("span", "day-count", `${opens.length} 個開放 · ${closes.length} 個截止`));
+    section.append(head);
+    const items = [
+      ...opens.map((r) => ({ r, mode: "opens" as const, at: r.start! })),
+      ...closes.map((r) => ({ r, mode: "closes" as const, at: r.end! })),
+    ].sort((a, b) => a.at.localeCompare(b.at));
+    for (const item of items) section.append(slotCard(item.r, item.mode));
+    root.append(section);
+    shown += items.length;
+  }
+  if (!shown) {
+    const empty = el("p", "empty", "未來 7 天沒有符合條件的登錄時點。");
     root.append(empty);
   }
 
-  const later = actionable.filter((entry) => {
-    const next = nextWindow(entry);
-    const anchor = next ? anchorOf(next) : null;
-    return anchor !== null && taipeiDay(anchor) > days[6]!;
-  });
+  if (open.length) {
+    const box = el("details", "open-now");
+    const summary = el("summary");
+    summary.append(el("strong", "", `目前登錄中 ${open.length} 檔`),
+      el("span", "muted", "（已開放、尚未截止；依截止時間排序）"));
+    box.append(summary);
+    for (const r of open) box.append(slotCard(r, "open"));
+    root.append(box);
+  }
+
+  const later = rows.filter((r) => r.start && taipeiDay(r.start) > addDays(today, 6));
   if (later.length) {
-    const note = el("p", "later", `另有 ${later.length} 筆活動的登錄時點在 7 天後。`);
-    root.append(note);
-  }
-}
-
-function renderCatalog(root: HTMLElement, entries: AgendaEntry[]): void {
-  const total = entries.length;
-  const pages = Math.max(1, Math.ceil(total / PAGE_SIZE));
-  state.page = Math.min(state.page, pages);
-  const slice = entries.slice((state.page - 1) * PAGE_SIZE, state.page * PAGE_SIZE);
-
-  const count = el("p", "result-count");
-  count.setAttribute("aria-live", "polite");
-  count.textContent = `${total} 筆活動${pages > 1 ? `，第 ${state.page}／${pages} 頁` : ""}`;
-  root.append(count);
-
-  if (!slice.length) {
-    root.append(el("div", "empty", "沒有符合條件的活動。"));
-    return;
-  }
-  const list = el("div", "cards");
-  for (const entry of slice) list.append(offerCard(entry));
-  root.append(list);
-
-  if (pages > 1) {
-    const nav = el("nav", "pager");
-    nav.setAttribute("aria-label", "分頁");
-    const button = (label: string, target: number, disabled: boolean) => {
-      const btn = el("button", "page", label);
-      btn.type = "button";
-      btn.disabled = disabled;
-      btn.addEventListener("click", () => {
-        state.page = target;
-        writeUrl();
-        render();
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      });
-      return btn;
-    };
-    nav.append(button("上一頁", state.page - 1, state.page <= 1));
-    nav.append(el("span", "page-info", `${state.page} / ${pages}`));
-    nav.append(button("下一頁", state.page + 1, state.page >= pages));
-    root.append(nav);
-  }
-}
-
-function renderReview(root: HTMLElement, entries: AgendaEntry[]): void {
-  root.append(
-    el(
-      "p",
-      "explainer",
-      "這些活動的登錄時間或期間無法從官方頁可靠判讀。刻意不放進時間軸與行事曆 —— " +
-        "依據未確認的時間去搶登錄，比不提醒更糟。請點標題到官方頁確認。",
-    ),
-  );
-  renderCatalog(root, entries);
-}
-
-/** 顯示給使用者的筆數 —— 去重後的數字才和目錄裡真的看得到的筆數一致。
- *  offer_count 是去重前的涵蓋率基準（發布防護在用），不能拿來顯示。 */
-function shownCount(source: SourceInfo): number {
-  return source.unique_offer_count ?? source.offer_count ?? 0;
-}
-
-function renderSources(root: HTMLElement): void {
-  const data = state.data;
-  if (!data) return;
-  const table = el("div", "sources");
-  for (const source of [...data.sources].sort((a, b) => shownCount(b) - shownCount(a))) {
-    const row = el("div", `source status-${source.status}`);
-    row.append(el("span", "dot"));
-    const name = el("a", "source-name");
-    name.href = source.entry_url ?? "#";
-    name.target = "_blank";
-    name.rel = "noopener noreferrer";
-    name.textContent = source.bank_name;
-    if (source.carried_offer_count) {
-      const note = el(
-        "span",
-        "hint",
-        `本次讀不到，沿用 ${formatMoment(source.stale_since)} 的 ${source.carried_offer_count} 筆`,
-      );
-      name.append(note);
+    const box = el("details", "later");
+    box.append(el("summary", "", `7 天後還有 ${later.length} 個登錄時點`));
+    for (const r of later.slice(0, 200)) {
+      const line = el("p", "later-row");
+      line.append(el("span", "when", moment(r.start!, r.precision)),
+        el("span", "bank", r.bank), document.createTextNode(` ${r.title}${r.sub ? `｜${r.sub}` : ""}`));
+      box.append(line);
     }
-    row.append(name);
-    const count = el("span", "source-count", `${shownCount(source)} 筆`);
-    const raw = source.offer_count ?? 0;
-    if (raw > shownCount(source)) {
-      count.title = `官方頁共抓到 ${raw} 筆，其中 ${raw - shownCount(source)} 筆是同一活動重複公告，已合併`;
-    }
-    row.append(count);
-    const label = { complete: "正常", partial: "部分可讀", failed: "讀取失敗", blocked: "被阻擋" }[
-      source.status
-    ];
-    row.append(el("span", "source-status", label));
-    if (source.message) row.append(el("p", "source-note", source.message));
-    table.append(row);
-  }
-  root.append(table);
-
-  const alerts = data.alerts ?? [];
-  if (alerts.length) {
-    const box = el("section", "alerts");
-    box.append(el("h2", "", `來源警示（${alerts.length}）`));
-    for (const alert of alerts.slice(0, 30)) {
-      box.append(el("p", "", `${alert.bank_name}：${alert.message}`));
-    }
-    if (alerts.length > 30) box.append(el("p", "", `另有 ${alerts.length - 30} 則。`));
     root.append(box);
   }
 }
 
-// ── 外框 ────────────────────────────────────────────────
+// ---- 分頁：活動目錄 / 需人工確認 --------------------------------------------
 
-function renderControls(): void {
-  const data = state.data;
-  if (!data) return;
-  const bar = document.querySelector<HTMLElement>("#controls");
-  if (!bar) return;
-  bar.replaceChildren();
-
-  const search = el("input", "search");
-  search.type = "search";
-  search.placeholder = "搜尋活動或銀行";
-  search.value = state.query;
-  search.setAttribute("aria-label", "搜尋活動或銀行");
-  let timer = 0;
-  search.addEventListener("input", () => {
-    window.clearTimeout(timer);
-    timer = window.setTimeout(() => {
-      state.query = search.value.trim();
-      state.page = 1;
-      writeUrl(true);
-      render();
-    }, 150);
-  });
-  bar.append(search);
-
-  const bankSelect = el("select", "select");
-  bankSelect.setAttribute("aria-label", "篩選銀行");
-  bankSelect.append(new Option("全部銀行", ""));
-  for (const source of data.sources) {
-    bankSelect.append(new Option(`${source.bank_name}（${shownCount(source)}）`, source.bank_id));
-  }
-  bankSelect.value = state.bank;
-  bankSelect.addEventListener("change", () => {
-    state.bank = bankSelect.value;
-    state.page = 1;
-    writeUrl();
-    render();
-  });
-  bar.append(bankSelect);
-
-  const needSelect = el("select", "select");
-  needSelect.setAttribute("aria-label", "篩選條件");
-  needSelect.append(new Option("不限條件", "all"));
-  needSelect.append(new Option("有確定登錄時點", "registration"));
-  needSelect.append(new Option("限量／要搶", "quota"));
-  needSelect.append(new Option("先登錄後消費", "before-spend"));
-  needSelect.value = state.need;
-  needSelect.addEventListener("change", () => {
-    state.need = needSelect.value as State["need"];
-    state.page = 1;
-    writeUrl();
-    render();
-  });
-  bar.append(needSelect);
-
-  const mine = el("label", "toggle");
-  const box = el("input");
-  box.type = "checkbox";
-  box.checked = state.myBanksOnly;
-  box.addEventListener("change", () => {
-    state.myBanksOnly = box.checked;
-    state.page = 1;
-    writeUrl();
-    render();
-  });
-  mine.append(box, el("span", "", "只看我的銀行"));
-  bar.append(mine);
-
-  const pick = el("button", "action ghost", "設定我的銀行");
-  pick.type = "button";
-  pick.addEventListener("click", () => togglePicker());
-  bar.append(pick);
+async function loadBanks(data: IndexData): Promise<void> {
+  const pending = data.sources.filter((s) => !state.banks.has(s.bank_id));
+  await Promise.all(pending.map(async (s) => {
+    const res = await fetch(`${BASE}data/banks/${s.bank_id}.json`, { cache: "no-cache" });
+    if (!res.ok) return;
+    const body = (await res.json()) as BankData;
+    state.banks.set(s.bank_id, body.activities);
+  }));
 }
 
-function togglePicker(): void {
-  const panel = document.querySelector<HTMLElement>("#picker");
-  const data = state.data;
-  if (!panel || !data) return;
-  if (!panel.hidden) {
-    panel.hidden = true;
-    return;
+function registrationLine(a: Activity): string {
+  const slots = a.subs.reduce((n, s) => n + s.slots.length, 0);
+  if (a.registration === "required") {
+    return slots ? `需登錄 · ${slots} 個時點` : "需登錄 · 官方未寫具體時點，請看活動頁";
   }
-  panel.replaceChildren();
-  panel.append(
-    el("p", "explainer", "勾選你實際持卡的銀行。只存在這台裝置的瀏覽器裡，不會上傳。"),
-  );
-  const mine = readSet(MY_BANKS_KEY);
-  const grid = el("div", "picker-grid");
-  for (const source of data.sources) {
-    const label = el("label", "pick");
-    const box = el("input");
-    box.type = "checkbox";
-    box.checked = mine.has(source.bank_id);
-    box.addEventListener("change", () => {
-      const set = readSet(MY_BANKS_KEY);
-      if (box.checked) set.add(source.bank_id);
-      else set.delete(source.bank_id);
-      writeSet(MY_BANKS_KEY, set);
-      render();
-    });
-    label.append(box, el("span", "", source.bank_name));
-    grid.append(label);
-  }
-  panel.append(grid);
-  panel.hidden = false;
+  if (a.registration === "not_required") return "不需登錄";
+  return "是否需登錄未確認";
 }
 
-/** 實際發布的子活動總數。counts.offers 是去重前的涵蓋率基準，
- *  拿它顯示會比目錄裡真的列出來的筆數多（實測全站多 47 筆）。 */
-function publishedOffers(data: IndexPayload): number {
-  return data.counts.unique_offers ?? data.counts.offers;
+function subBlock(sub: SubActivity): HTMLElement {
+  const box = el("div", "subblock");
+  if (sub.name) box.append(el("h4", "", sub.name));
+  box.append(badges(sub));
+  const now = Date.now();
+  const upcoming = sub.slots.filter((s) => new Date(s.end ?? s.start ?? 0).getTime() >= now);
+  for (const s of upcoming.slice(0, 6)) {
+    const text = s.start && s.end
+      ? `${moment(s.start, s.precision)} → ${moment(s.end, s.precision)}`
+      : s.start ? `${moment(s.start, s.precision)} 起` : `${moment(s.end!)} 截止`;
+    box.append(el("p", "slotline", text + (s.note ? `｜${s.note}` : "")));
+  }
+  for (const rule of sub.rules) box.append(el("blockquote", "", rule));
+  for (const reason of sub.review) box.append(el("p", "note warn", reason));
+  return box;
 }
 
-function renderTabs(): void {
-  const data = state.data;
-  if (!data) return;
-  const nav = document.querySelector<HTMLElement>("#tabs");
-  if (!nav) return;
-  nav.replaceChildren();
-  const tabs: Array<[Tab, string, number | null]> = [
-    ["timeline", "登錄時間軸", null],
-    ["catalog", "活動目錄", publishedOffers(data) - data.counts.needs_review],
-    ["review", "需人工確認", data.counts.needs_review],
-    ["sources", "來源狀態", data.sources.length],
-  ];
-  for (const [id, label, count] of tabs) {
-    const btn = el("button", "tab", count === null ? label : `${label}（${count}）`);
-    btn.type = "button";
-    btn.setAttribute("aria-pressed", String(state.tab === id));
-    btn.addEventListener("click", () => {
-      state.tab = id;
-      state.page = 1;
-      writeUrl();
-      render();
-    });
-    nav.append(btn);
+function activityCard(a: Activity): HTMLElement {
+  const card = el("details", "activity");
+  if (a.stale) card.classList.add("is-stale");
+  const summary = el("summary");
+  const head = el("div", "a-head");
+  head.append(el("span", "bank", a.bank_name), el("strong", "", a.title));
+  const meta = el("div", "a-meta");
+  const period = a.period_start || a.period_end
+    ? `${a.period_start ?? "即日起"} ～ ${a.period_end ?? "未公告"}`
+    : "活動期間未公告";
+  meta.append(el("span", "", period), el("span", a.registration === "required" ? "reg" : "", registrationLine(a)));
+  summary.append(head, meta);
+  card.append(summary);
+  const body = el("div", "a-body");
+  if (a.summary) body.append(el("p", "", a.summary));
+  if (a.aliases.length) body.append(el("p", "muted", `也叫：${a.aliases.join("、")}`));
+  if (a.registration_quote) body.append(el("blockquote", "", a.registration_quote));
+  for (const sub of a.subs) if (sub.slots.length || sub.rules.length) body.append(subBlock(sub));
+  for (const reason of a.review) body.append(el("p", "note warn", reason));
+  const actions = el("div", "actions");
+  actions.append(link(a.url, "官方活動頁", "btn primary"));
+  if (a.registration === "required" && a.portal_url && a.portal_url !== a.url) {
+    actions.append(link(a.portal_url, "前往登錄"));
   }
+  body.append(actions);
+  card.append(body);
+  return card;
 }
 
-function renderMeta(): void {
-  const data = state.data;
-  if (!data) return;
-  const hours = stalenessHours(data.generated_at);
-  const banner = document.querySelector<HTMLElement>("#staleness");
-  if (banner) {
-    if (hours > STALE_HOURS) {
-      banner.hidden = false;
-      banner.textContent =
-        `資料更新於 ${formatMoment(data.generated_at)}，已超過 ${Math.floor(hours)} 小時。` +
-        "活動狀態可能已變動，請以官方公告為準。";
-    } else {
-      banner.hidden = true;
-    }
-  }
-  const updated = document.querySelector<HTMLElement>("#updated");
-  if (updated) updated.textContent = `資料更新：${formatMoment(data.generated_at)}`;
+function activityVisible(a: Activity): boolean {
+  if (!matchesBank(a.bank_id)) return false;
+  return matchesText(a.title, a.bank_name, a.summary, ...a.aliases, ...a.subs.map((s) => s.name));
+}
 
-  const stats = document.querySelector<HTMLElement>("#stats");
-  if (stats) {
-    stats.replaceChildren();
-    const items: Array<[string, number]> = [
-      ["需登錄活動", data.counts.registration_required],
-      ["已確認登錄時點", data.counts.with_window],
-      ["可直接行動", data.counts.actionable_with_window],
-      ["收錄活動", publishedOffers(data)],
-    ];
-    for (const [label, value] of items) {
-      const box = el("div", "stat");
-      box.append(el("strong", "", String(value)), el("span", "", label));
-      stats.append(box);
+function renderList(root: HTMLElement, review: boolean): void {
+  const all = [...state.banks.values()].flat().filter(activityVisible);
+  const today = taipeiDay(new Date());
+  let list = all.filter((a) => !a.period_end || a.period_end >= today);
+  if (review) {
+    list = list.filter((a) => a.review.length || a.subs.some((s) => s.review.length));
+  } else if (state.regOnly) {
+    list = list.filter((a) => a.registration === "required");
+  }
+  list.sort((a, b) => (a.period_end ?? "9999").localeCompare(b.period_end ?? "9999"));
+  root.append(el("p", "muted", `${list.length} 筆活動${review ? "需要人工確認（附原因）" : ""}`));
+  for (const a of list.slice(0, 400)) root.append(activityCard(a));
+  if (list.length > 400) root.append(el("p", "muted", `僅顯示前 400 筆，請用搜尋或銀行篩選縮小範圍。`));
+}
+
+// ---- 分頁：來源狀態 --------------------------------------------------------
+
+const STATUS = { ok: "正常", partial: "部分讀取", failed: "讀取失敗", blocked: "被擋" } as const;
+
+function renderSources(root: HTMLElement, data: IndexData): void {
+  const table = el("table", "sources");
+  const head = el("tr");
+  for (const h of ["銀行", "狀態", "活動數", "說明"]) head.append(el("th", "", h));
+  table.append(head);
+  for (const s of data.sources) {
+    const tr = el("tr", `st-${s.status}`);
+    const name = el("td");
+    name.append(link(s.entry_url, s.bank_name, ""));
+    tr.append(name, el("td", "", STATUS[s.status]), el("td", "", String(s.activities)),
+      el("td", "", [s.message, s.carried ? `沿用上一輪 ${s.carried} 筆` : ""].filter(Boolean).join("；")));
+    table.append(tr);
+  }
+  root.append(table);
+}
+
+// ---- 外框 ----------------------------------------------------------------
+
+function renderHeader(data: IndexData): void {
+  const updated = document.getElementById("updated")!;
+  const age = (Date.now() - new Date(data.generated_at).getTime()) / 3600000;
+  updated.textContent = `資料更新：${moment(data.generated_at)}（${relative(data.generated_at)}）`;
+  const warn = document.getElementById("staleness")!;
+  const bad = data.sources.filter((s) => s.status !== "ok");
+  const notes: string[] = [];
+  if (age > STALE_HOURS) notes.push(`資料已超過 ${Math.floor(age)} 小時未更新，時點可能已變動`);
+  if (bad.length) notes.push(`${bad.map((s) => s.bank_name).join("、")} 本輪未完整讀取`);
+  warn.hidden = !notes.length;
+  warn.textContent = notes.join("；");
+
+  const today = taipeiDay(new Date());
+  const todayCount = data.timeline.filter((r) => r.start && taipeiDay(r.start) === today).length;
+  const weekCount = data.timeline.filter(
+    (r) => r.start && taipeiDay(r.start) >= today && taipeiDay(r.start) <= addDays(today, 6),
+  ).length;
+  const stats = document.getElementById("stats")!;
+  stats.replaceChildren();
+  for (const [n, label] of [
+    [todayCount, "今日開放登錄"],
+    [weekCount, "7 天內開放"],
+    [data.counts.registration_required, "需登錄活動"],
+    [data.counts.with_slots, "已確認時點"],
+  ] as const) {
+    const box = el("div", "stat");
+    box.append(el("strong", "", n.toLocaleString("zh-TW")), el("span", "", label));
+    stats.append(box);
+  }
+
+  const select = document.getElementById("bank") as HTMLSelectElement;
+  if (select.options.length <= 1) {
+    for (const s of data.sources) {
+      const opt = el("option", "", s.bank_name);
+      opt.value = s.bank_id;
+      select.append(opt);
     }
   }
 }
 
-function render(): void {
-  void renderAsync();
+function renderMyBanks(data: IndexData): void {
+  const box = document.getElementById("mybanks-list")!;
+  box.replaceChildren();
+  for (const s of data.sources) {
+    const label = el("label", "check");
+    const input = el("input");
+    input.type = "checkbox";
+    input.checked = myBanks.has(s.bank_id);
+    input.addEventListener("change", () => {
+      if (input.checked) myBanks.add(s.bank_id);
+      else myBanks.delete(s.bank_id);
+      save(STORE_BANKS, [...myBanks]);
+      void render();
+    });
+    label.append(input, document.createTextNode(s.bank_name));
+    box.append(label);
+  }
 }
 
-async function renderAsync(): Promise<void> {
-  const data = state.data;
-  const root = document.querySelector<HTMLElement>("#view");
-  if (!data || !root) return;
-  renderTabs();
-  renderMeta();
-
-  if (state.tab === "timeline") {
-    root.replaceChildren();
-    renderTimeline(root);
-    return;
-  }
-  if (state.tab === "sources") {
-    root.replaceChildren();
-    renderSources(root);
-    return;
-  }
-
-  // 目錄與需人工確認要看全部 815 筆，不只 index.json 裡有登錄時點的那些
-  if (!allOffers) root.replaceChildren(el("div", "empty", "載入完整活動目錄中…"));
-  const pool = (await loadAllOffers()).filter((entry) => matches(entry, []));
+async function render(): Promise<void> {
+  const data = state.index;
+  if (!data) return;
+  const root = document.getElementById("view")!;
   root.replaceChildren();
-  const entries =
-    state.tab === "review"
-      ? pool.filter((entry) => entry.needs_review)
-      : pool.filter((entry) => !entry.needs_review);
-  if (state.tab === "review") renderReview(root, entries);
-  else renderCatalog(root, entries);
+  for (const tab of document.querySelectorAll<HTMLButtonElement>("[data-tab]")) {
+    tab.setAttribute("aria-selected", String(tab.dataset.tab === state.tab));
+  }
+  document.getElementById("reg-only-wrap")!.hidden = state.tab !== "catalog";
+  document.getElementById("hide-done-wrap")!.hidden = state.tab !== "timeline";
+  if (state.tab === "timeline") return renderTimeline(root, data);
+  if (state.tab === "sources") return renderSources(root, data);
+  if (state.banks.size < data.sources.length) {
+    root.append(el("p", "muted", "載入活動資料中…"));
+    await loadBanks(data);
+    root.replaceChildren();
+  }
+  renderList(root, state.tab === "review");
 }
 
-async function init(): Promise<void> {
-  readUrl();
-  renderControls();
-  const root = document.querySelector<HTMLElement>("#view");
-  try {
-    const response = await fetch(`${base()}/data/index.json`, { cache: "no-store" });
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    state.data = (await response.json()) as IndexPayload;
-  } catch {
-    if (root) {
-      root.replaceChildren(el("div", "empty", "目前無法載入活動資料，請稍後重新整理。"));
+function wire(): void {
+  for (const tab of document.querySelectorAll<HTMLButtonElement>("[data-tab]")) {
+    tab.addEventListener("click", () => {
+      state.tab = tab.dataset.tab as State["tab"];
+      void render();
+    });
+  }
+  const q = document.getElementById("q") as HTMLInputElement;
+  let timer = 0;
+  q.addEventListener("input", () => {
+    clearTimeout(timer);
+    timer = window.setTimeout(() => { state.query = q.value; void render(); }, 150);
+  });
+  const bank = document.getElementById("bank") as HTMLSelectElement;
+  bank.addEventListener("change", () => { state.bank = bank.value; void render(); });
+  for (const [id, key] of [["mine", "mine"], ["hide-done", "hideDone"], ["reg-only", "regOnly"]] as const) {
+    const input = document.getElementById(id) as HTMLInputElement;
+    input.checked = state[key];
+    input.addEventListener("change", () => { state[key] = input.checked; void render(); });
+  }
+  (document.getElementById("sub-apple") as HTMLAnchorElement).href = ICS_URL.replace(/^https?:/, "webcal:");
+  (document.getElementById("sub-google") as HTMLAnchorElement).href =
+    `https://calendar.google.com/calendar/r?cid=${encodeURIComponent(ICS_URL.replace(/^https?:/, "webcal:"))}`;
+  (document.getElementById("sub-url") as HTMLInputElement).value = ICS_URL;
+  document.getElementById("sub-copy")!.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(ICS_URL);
+      document.getElementById("sub-copy")!.textContent = "已複製";
+    } catch {
+      (document.getElementById("sub-url") as HTMLInputElement).select();
     }
+  });
+}
+
+async function boot(): Promise<void> {
+  wire();
+  const root = document.getElementById("view")!;
+  try {
+    const res = await fetch(`${BASE}data/index.json`, { cache: "no-cache" });
+    if (!res.ok) throw new Error(String(res.status));
+    state.index = (await res.json()) as IndexData;
+  } catch (error) {
+    root.replaceChildren(el("p", "empty", `資料載入失敗（${String(error)}），請稍後重新整理。`));
     return;
   }
-  renderControls();
-  render();
-
-  wireSubscribePanel();
-  const download = document.querySelector<HTMLAnchorElement>("#download-ics");
-  if (download) download.href = `${base()}/calendar/registration.ics`;
-
-  window.addEventListener("popstate", () => {
-    readUrl();
-    renderControls();
-    render();
-  });
-  // 跨日時自動重算（分頁在背景放到隔天也要正確）
-  document.addEventListener("visibilitychange", () => {
-    if (!document.hidden) render();
-  });
-  window.setInterval(render, 300000);
+  renderHeader(state.index);
+  renderMyBanks(state.index);
+  await render();
+  // 跨日或久開分頁時重算「今日」
+  window.setInterval(() => {
+    if (!state.index) return;
+    renderHeader(state.index);
+    if (state.tab === "timeline") void render();
+  }, 5 * 60000);
 }
 
-void init();
+void boot();

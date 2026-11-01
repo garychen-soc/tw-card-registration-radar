@@ -1,0 +1,91 @@
+{
+ "key": "3cb9ac82fe2f12467f9664cc",
+ "prompt_version": "2026-11-01.1",
+ "model": "opus",
+ "created_at": "2026-11-01T00:10:32+00:00",
+ "title": "年終犒賞季 ! 指定百貨餐飲最高享8.8%現金回饋",
+ "duration_ms": 8275,
+ "cost_usd": 0.097636,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "本活動每月總限額2,000名，須登錄"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [
+     {
+      "quote": "本活動於每月01日中午12:00起開放登錄，若遇假日順延至次一營業日。",
+      "kind": "monthly",
+      "is_example": false,
+      "holiday": "next_business_day",
+      "start": null,
+      "end": null,
+      "days_of_month": [
+       1
+      ],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": {
+       "hour": 12,
+       "minute": 0
+      },
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "(登錄日期如: 10月01日、11月02日、12月01日)",
+      "kind": "enumerated",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [
+       {
+        "year": null,
+        "month": 10,
+        "day": 1,
+        "hour": null,
+        "minute": null
+       },
+       {
+        "year": null,
+        "month": 11,
+        "day": 2,
+        "hour": null,
+        "minute": null
+       },
+       {
+        "year": null,
+        "month": 12,
+        "day": 1,
+        "hour": null,
+        "minute": null
+       }
+      ],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "each_period",
+     "quote": "活動須每月按月消費登錄"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 2000,
+     "quote": "本活動每月限額2,000名，登錄額滿將於活動登錄頁告示"
+    }
+   }
+  ]
+ }
+}

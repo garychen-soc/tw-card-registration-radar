@@ -9,99 +9,77 @@ const base = import.meta.env.BASE_URL;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="theme-color" content="#0f1210" />
     <title>刷卡登錄雷達</title>
     <meta
       name="description"
-      content="台灣跨銀行信用卡活動登錄時點與活動條件。標示登錄與消費的先後順序，避免登錄成功卻白刷。"
+      content="台灣各銀行信用卡活動的登錄時點。每個時點附官方原文、套用假日順延，並區分子活動。"
     />
     <meta property="og:title" content="刷卡登錄雷達" />
-    <meta
-      property="og:description"
-      content="什麼時候要登錄、從哪裡登錄、登錄一次夠不夠 —— 以及登錄與消費的先後順序。"
-    />
+    <meta property="og:description" content="什麼時候開放登錄、從哪裡登錄、要不要每月重登 —— 每一筆都附官方原文。" />
     <meta property="og:type" content="website" />
   </head>
   <body data-base={base}>
-    <a class="skip" href="#main">跳到主要內容</a>
-
+    <a class="skip" href="#view">跳到主要內容</a>
     <div class="shell">
       <header class="site">
-        <div class="brand">
-          <h1>刷卡登錄雷達</h1>
-          <span class="tag">台灣跨銀行 · 官方公開資料</span>
-        </div>
+        <h1>刷卡登錄雷達</h1>
         <p class="lede">
-          回答兩件事：<strong>我什麼時候要登錄</strong>，以及
-          <strong>登錄與消費的先後順序是什麼</strong>。後者決定你會不會登錄成功卻白刷。
+          台灣 18 家銀行信用卡活動的<strong>登錄開放時點</strong>。每個時點都附官方原文，
+          條款寫「遇假日順延」的已依行政院辦公日曆順延，同頁多個子活動分開列出。
         </p>
-        <p id="updated"></p>
-        <div id="staleness" hidden></div>
-
+        <p id="updated" class="muted"></p>
+        <p id="staleness" class="banner" hidden></p>
         <div class="stats" id="stats"></div>
 
-        <div class="feeds">
-          <button class="action" id="subscribe" type="button" aria-expanded="false"
-            aria-controls="subscribe-panel">訂閱登錄提醒行事曆</button>
-          <a class="action ghost" id="download-ics" href="#" download>下載 .ics</a>
-        </div>
-
-        <!-- 訂閱方式因平台而異，而且差異不是小事：Apple 一鍵就好，Google 日曆
-             必須用瀏覽器加一次（Android 的 App 裡沒有這個功能），其他行事曆
-             一律是「貼上網址」。與其猜使用者的平台，不如三條路都給。 -->
-        <div class="subscribe-panel" id="subscribe-panel" hidden>
+        <details class="subscribe">
+          <summary>訂閱登錄提醒行事曆（開放前 10 分鐘提醒）</summary>
           <div class="sub-row">
             <span class="sub-label">iPhone／iPad／Mac</span>
-            <a class="action ghost" id="sub-apple" href="#">一鍵訂閱</a>
-            <span class="hint">會加進「行事曆」App 並自動更新</span>
+            <a class="btn" id="sub-apple" href="#">一鍵訂閱</a>
           </div>
           <div class="sub-row">
             <span class="sub-label">Google 日曆（含 Android）</span>
-            <a class="action ghost" id="sub-google" href="#" target="_blank"
-              rel="noopener noreferrer">用瀏覽器加入</a>
-            <span class="hint">
-              手機的 Google 日曆 App 不能自己加訂閱網址，用瀏覽器加一次之後，
-              手機就會自動同步。Google 大約每幾小時才會抓一次更新。
-            </span>
+            <a class="btn" id="sub-google" href="#" target="_blank" rel="noopener">用瀏覽器加入</a>
+            <span class="muted">Android App 無法直接訂閱，用瀏覽器加一次後手機會自動同步。</span>
           </div>
           <div class="sub-row">
-            <span class="sub-label">Outlook／Thunderbird／三星行事曆等</span>
-            <button class="action ghost" id="sub-copy" type="button">複製訂閱網址</button>
-            <code class="sub-url" id="sub-url"></code>
+            <span class="sub-label">Outlook／其他</span>
+            <input id="sub-url" readonly aria-label="行事曆訂閱網址" />
+            <button class="btn" id="sub-copy" type="button">複製網址</button>
           </div>
-          <p class="hint">
-            「下載 .ics」是一次性匯入的備案 —— 匯入之後不會再更新，
-            活動有異動要重新下載。能訂閱就訂閱。
-          </p>
-        </div>
+        </details>
       </header>
 
-      <nav id="tabs" aria-label="檢視"></nav>
-      <div id="controls"></div>
-      <div id="picker" hidden></div>
+      <nav class="tabs" aria-label="檢視">
+        <button type="button" data-tab="timeline" aria-selected="true">登錄時間軸</button>
+        <button type="button" data-tab="catalog">活動目錄</button>
+        <button type="button" data-tab="review">需人工確認</button>
+        <button type="button" data-tab="sources">來源狀態</button>
+      </nav>
 
-      <main id="main" tabindex="-1">
-        <div id="view">
-          <div class="empty">載入官方活動資料中…</div>
-        </div>
-      </main>
+      <div class="filters">
+        <input id="q" type="search" placeholder="搜尋活動、銀行、通路" aria-label="搜尋" />
+        <select id="bank" aria-label="銀行"><option value="">全部銀行</option></select>
+        <label class="check"><input id="mine" type="checkbox" />只看我的銀行</label>
+        <span id="hide-done-wrap"><label class="check"><input id="hide-done" type="checkbox" />隱藏已登錄</label></span>
+        <span id="reg-only-wrap" hidden><label class="check"><input id="reg-only" type="checkbox" />只看需登錄</label></span>
+        <details class="mybanks">
+          <summary>設定我的銀行</summary>
+          <div id="mybanks-list"></div>
+        </details>
+      </div>
 
-      <footer class="site">
+      <main id="view" aria-live="polite"><p class="muted">載入中…</p></main>
+
+      <footer class="foot">
         <p>
-          只讀取公開的官方活動資訊。不登入銀行帳戶、不代為執行活動登錄、不收集卡號或個人資料。
-        </p>
-        <p>
-          「我的銀行」與「已登錄」只存在這台裝置的瀏覽器裡，不會上傳。
-          實際名額、資格與回饋一律以銀行官方公告為準。
-        </p>
-        <p>
-          <a href="https://github.com/garychen-soc/tw-card-registration-radar">原始碼與資料管線</a>
+          資料取自各銀行官方公開頁面，每日於本機更新。登錄時點由程式比對官方原文產生；名額、資格與回饋一律以銀行公告為準。
+          「已登錄」與「我的銀行」只存在你的瀏覽器。
         </p>
       </footer>
     </div>
-
     <script>
-      import "../lib/app";
+      import "../lib/app.ts";
     </script>
   </body>
 </html>

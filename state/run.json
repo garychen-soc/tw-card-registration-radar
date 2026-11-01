@@ -1,0 +1,20 @@
+{
+ "observed_at": "2026-11-01T08:10:13+08:00",
+ "llm_calls": 7,
+ "llm_failures": 0,
+ "publishable": true,
+ "messages": [],
+ "sources": [
+  {
+   "bank_id": "obank",
+   "bank_name": "王道銀行",
+   "status": "ok",
+   "entry_url": "https://www.o-bank.com/retail/event/event-compaign",
+   "stubs": 15,
+   "activities": 15,
+   "detail_failures": 0,
+   "message": "",
+   "carried": 0
+  }
+ ]
+}

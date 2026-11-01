@@ -1,1025 +1,197 @@
-"""輸出層：index.json、catalog/<bank>.json、detail/<bank>.json、registration.ics。
+"""從 state 產生網站資料。
 
-**三層而不是一份大檔。** 前身把 1,071 筆活動塞進單一 2.09MB 的 JSON，首屏
-要下載 241KB gzip、解壓 2.09MB、739ms。我的第一版也犯了同樣的錯：實測聯邦
-單一家銀行的完整輸出就 352KB，其中 **223 筆裡只有 19 筆是「可行動且有確定
-登錄時點」** —— 為了顯示 19 筆而載入 223 筆的完整條件，擴到 17 家會變成 1.6MB。
+``web/public/data/index.json``
+    首屏：來源健康、統計、未來 120 天（含過去 2 天）的登錄時點。前端用它畫
+    「今日／明日／7 天」與行事曆。
+``web/public/data/banks/<id>.json``
+    各銀行完整活動，瀏覽活動目錄時才載入。
+``web/public/calendar/registration.ics``
+    可訂閱的登錄提醒（只含通過驗證、精確到分鐘的開放時點）。
 
-所以分成：
-
-``index.json``
-    首屏所需。來源健康、警示、計數，以及 ``agenda`` —— 只含有登錄視窗的活動，
-    每筆只帶時間軸卡片需要的欄位。
-``catalog/<bank>.json``
-    完整的活動條件。使用者開始瀏覽或篩選才按銀行載入。
-``detail/<bank>.json``
-    原文與 evidence。展開單筆活動才載入。
-``calendar/registration.ics``
-    可訂閱的登錄提醒，循環活動用 RRULE。
-
-**去重也在這一層。** 銀行會把同一份活動內容掛在多個網址上（見 ``dedupe_campaigns``），
-一頁一 Campaign 的抓取模型必然把它切成多筆。修在輸出層而不是 runner 層，是因為
-``SourceHealth.offer_count`` 是涵蓋率防護（``guard.assess``）的比較基準：那個數字
-必須一直代表「這次真的從官方頁讀到幾筆」，才能偵測抓取退步。若在 runner 去重，
-它會混入「重複被合併掉幾筆」，防護就再也分不清筆數下降是抓取壞了還是去重生效。
-
-**兩條輸出規則。**
-
-1. 不含任何時間衍生狀態。「是否進行中」「今日待登錄」全由讀取端算。
-   ``agenda`` 的收錄條件是「有登錄視窗」這個絕對事實，不是「未來 14 天」
-   這種相對條件 —— 否則資料放三天就會漏掉該提醒的活動。
-2. 預設值不輸出。223 筆裡絕大多數的 ``threshold_tiers``、``cards``、
-   資格旗標都是空的或 false，逐筆輸出純粹是浪費。讀取端把「缺少」
-   視為預設值。
+只放事實：「今天是否進行中」這類隨時間變動的狀態由前端計算。
 """
 
 from __future__ import annotations
 
-import hashlib
 import json
-from collections import Counter
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from typing import Any
 
-from pydantic import BaseModel, Field
+from .models import Activity, SourceHealth
 
-from .models import Alert, Campaign, Offer, Recurrence, RegistrationWindow, SourceHealth
-
-SCHEMA_VERSION = 1
-CALENDAR_PRODID = "-//TW Card Registration Radar//ZH-TW//EN"
-# 行事曆事件需要長度，但「登錄開放」的真實截止往往未公告。這個長度只用於
-# 呈現，資料層的 end 仍是 None —— 兩者刻意分開，不是用它去填補未知。
-REMINDER_EVENT_MINUTES = 15
-REMINDER_LEAD_MINUTES = 15
-QUOTA_REMINDER_LEAD_MINUTES = 30
+ROOT = Path(__file__).resolve().parents[2]
+WEB = ROOT / "web" / "public"
+SCHEMA_VERSION = 2
+HORIZON = timedelta(days=120)
+LOOKBACK = timedelta(days=2)
+SITE_URL = "https://garychen-soc.github.io/tw-card-registration-radar/"
 
 
-def _is_default(value: Any) -> bool:
-    """是否為可省略的預設值。
+def timeline(activities: list[Activity], generated: datetime) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    for activity in activities:
+        for index, sub in enumerate(activity.subs):
+            for slot in sub.slots:
+                anchor = slot.start or slot.end
+                if anchor is None:
+                    continue
+                last = slot.end or slot.start or anchor
+                if last < generated - LOOKBACK or anchor > generated + HORIZON:
+                    continue
+                rows.append(
+                    {
+                        "aid": activity.id,
+                        "bank_id": activity.bank_id,
+                        "bank": activity.bank_name,
+                        "title": activity.title,
+                        "sub": sub.name,
+                        "sub_index": index,
+                        "start": slot.start.isoformat() if slot.start else None,
+                        "end": slot.end.isoformat() if slot.end else None,
+                        "kind": slot.kind,
+                        "precision": slot.precision,
+                        "origin": slot.origin,
+                        "shifted": slot.holiday_shifted,
+                        "note": slot.note,
+                        "quote": slot.evidence.quote,
+                        "url": activity.url,
+                        "portal": activity.portal_url,
+                        "portal_hint": activity.portal_hint,
+                        "quota": sub.quota,
+                        "reregister": sub.reregister,
+                        "order": sub.order,
+                        "stale": activity.stale,
+                    }
+                )
+    rows.sort(key=lambda r: (r["start"] or r["end"], r["bank_id"], r["title"]))
+    return rows
 
-    刻意不用 ``value in (None, "", [], {}, False)`` —— Python 裡 ``0 == False``
-    與 ``0.0 == False``，那種寫法會把 0 一起丟掉。而 0 是有意義的：
-    ``spend_days_left_after_registering = 0`` 代表「登錄截止日就是活動最後一天」，
-    這正是使用者最需要知道的情況。
-    """
-    if value is None:
-        return True
-    if isinstance(value, bool):
-        return value is False
-    if isinstance(value, str | list | dict | tuple):
-        return len(value) == 0
-    return False
 
-
-def prune(value: Any) -> Any:
-    """移除預設值。讀取端把「缺少」視為預設。
-
-    只作用於巢狀內容 —— 頂層的契約欄位（counts、sources、agenda、offers）
-    由呼叫端直接組裝，即使是空的也一律保留，否則消費端會拿到缺鍵的檔案。
-    """
-    if isinstance(value, dict):
-        cleaned = {key: prune(item) for key, item in value.items()}
-        return {key: item for key, item in cleaned.items() if not _is_default(item)}
-    if isinstance(value, list):
-        return [prune(item) for item in value]
-    return value
-
-
-def _window_payload(window: RegistrationWindow) -> dict[str, Any]:
+def counts(activities: list[Activity]) -> dict[str, int]:
+    required = [a for a in activities if a.registration == "required"]
+    with_slots = [a for a in required if any(s.slots for s in a.subs)]
     return {
-        "kind": window.kind,
-        "start": window.start.isoformat() if window.start else None,
-        "end": window.end.isoformat() if window.end else None,
-        "confidence": window.confidence,
+        "activities": len(activities),
+        "registration_required": len(required),
+        "with_slots": len(with_slots),
+        "without_slots": len(required) - len(with_slots),
+        "review": sum(1 for a in activities if a.review or any(s.review for s in a.subs)),
+        "stale": sum(1 for a in activities if a.stale),
     }
 
 
-def _contract_payload(offer: Offer) -> dict[str, Any]:
-    contract = offer.registration.timing_contract
-    return {
-        "kind": contract.kind,
-        "spend_counts_from": (
-            contract.spend_counts_from.isoformat() if contract.spend_counts_from else None
-        ),
-        "last_chance_to_register": (
-            contract.last_chance_to_register.isoformat()
-            if contract.last_chance_to_register
-            else None
-        ),
-        "spend_days_left_after_registering": contract.spend_days_left_after_registering,
-        "grace_days_after_period_end": contract.grace_days_after_period_end,
-        "confidence": contract.confidence,
-        "consistency": contract.consistency,
-    }
-
-
-def _period_payload(offer: Offer) -> dict[str, Any]:
-    return {
-        "start": offer.period.start.isoformat() if offer.period.start else None,
-        "end": offer.period.end.isoformat() if offer.period.end else None,
-        "confidence": offer.period.confidence,
-    }
-
-
-def _recurrence_payload(recurrence: Recurrence) -> dict[str, Any] | None:
-    """循環規則。``once`` 不輸出。
-
-    帶上 day_of_month/hour/minute 讓讀取端能算出下一次是哪一天 —— 只給
-    ``kind`` 與人類可讀的 note，時間軸就排不進去（實測 127 筆因此完全看不見）。
-    刻意不在這裡算「下一次」：那是「現在幾點」的函數，凍結進資料就會過期。
-    """
-    if recurrence.kind == "once":
-        return None
-    return {
-        "kind": recurrence.kind,
-        "note": recurrence.note,
-        "day_of_month": recurrence.day_of_month,
-        "hour": recurrence.hour,
-        "minute": recurrence.minute,
-        "confidence": recurrence.confidence,
-    }
-
-
-def has_schedule(offer: Offer) -> bool:
-    """這筆活動能不能放上時間軸。
-
-    「有登錄視窗」或「有算得出日期的循環規則」都算。只看視窗會漏掉最該提醒的
-    一類：每個月都要重新登錄、但官方只寫規則不寫日期的活動（實測 127 筆）。
-    """
-    registration = offer.registration
-    if registration.windows:
-        return True
-    recurrence = registration.recurrence
-    return recurrence.kind == "monthly" and recurrence.day_of_month is not None
-
-
-def agenda_entry(campaign: Campaign, offer: Offer) -> dict[str, Any]:
-    """時間軸卡片所需的最小欄位集合。
-
-    刻意不含條件細節 —— 使用者要看門檻與資格時再從 catalog 載入該銀行。
-    """
-    registration = offer.registration
-    return {
-        "id": offer.id,
-        "bank_id": campaign.bank_id,
-        "title": offer.title,
-        "url": campaign.source_url,
-        "page_title": campaign.title if campaign.title != offer.title else "",
-        "also_at": offer.also_at,
-        "period": _period_payload(offer),
-        "windows": [_window_payload(window) for window in registration.windows],
-        "recurrence": _recurrence_payload(registration.recurrence),
-        "contract": registration.timing_contract.kind,
-        "quota_limited": offer.conditions.quota.limited,
-        "quota_seats": offer.conditions.quota.seats,
-        "needs_review": offer.needs_review,
-        "review_codes": offer.review_codes,
-    }
-
-
-def catalog_entry(campaign: Campaign, offer: Offer) -> dict[str, Any]:
-    """完整的活動條件。使用者瀏覽或篩選時才載入。"""
-    conditions = offer.conditions
-    eligibility = conditions.eligibility
-    return {
-        "id": offer.id,
-        "campaign_id": campaign.id,
-        "title": offer.title,
-        "url": campaign.source_url,
-        "page_title": campaign.title if campaign.title != offer.title else "",
-        "also_at": offer.also_at,
-        "period": _period_payload(offer),
-        "registration": {
-            "required": offer.registration.required,
-            "windows": [_window_payload(window) for window in offer.registration.windows],
-            "recurrence": _recurrence_payload(offer.registration.recurrence) or {},
-            "contract": _contract_payload(offer),
-        },
-        "conditions": {
-            "eligibility": {
-                "new_customer_only": eligibility.new_customer_only,
-                "first_swipe_only": eligibility.first_swipe_only,
-                "primary_card_only": eligibility.primary_card_only,
-                "cards": eligibility.cards,
-            },
-            "threshold_kind": (
-                conditions.threshold_kind if conditions.threshold_kind != "unknown" else None
-            ),
-            "threshold_tiers": [
-                tier.model_dump(exclude_none=True) for tier in conditions.threshold_tiers
-            ],
-            "installment": {
-                "required": conditions.installment.required,
-                "periods": conditions.installment.periods,
-                "rate": conditions.installment.rate,
-            },
-            "quota": {"limited": conditions.quota.limited, "seats": conditions.quota.seats},
-            "reward_cap_twd": conditions.reward_cap_twd,
-            "reward_cap_percent": conditions.reward_cap_percent,
-        },
-        "needs_review": offer.needs_review,
-        "review_codes": offer.review_codes,
-    }
-
-
-# ── 去重 ────────────────────────────────────────────────
-
-# 去重鍵刻意排除的欄位。id 內含網址 slug、campaign_id 與 url 就是網址本身
-# —— 它們是「這筆從哪一頁切出來」的紀錄，不是「這是哪一個活動」。
-_KEY_EXCLUDED = ("id", "campaign_id", "url", "also_at")
-
-# 跨頁合併的最低子活動數。**這個門檻是整個設計的關鍵，理由是實測出來的。**
-#
-# 全站 17 家 1,077 筆裡，「內容完全相同」的組共 33 組（可移除 63 筆），但它們是
-# 兩個性質完全相反的族群：
-#
-# 真重複（同一份活動掛在多個網址）—— 標題具體、期間具體，整頁的子活動清單一起重複：
-#   星展 mall_08 / _08_2 / _08_3 / _08_5 / mall_09 / mall_11 六頁各切出同樣 5 筆
-#   玉山 shopInfo?sno=pi 與 ?sno=pi2 兩頁各切出同樣 8 筆
-#   聯邦 202607drugstore/index.htm 與 ...index.htm?p=cosmed（同頁的 query 變體）各 8 筆
-#
-# 假重複（不同活動，只是我們什麼都沒解析出來）—— 一頁一筆，標題是導覽字串，
-# 期間是清單層的整年 fallback，沒有登錄時點也沒有條件：
-#   凱基 5 個不同活動頁全叫「信用卡活動」、期間都是 2026-01-01~2026-12-31
-#   台北富邦 5 個不同 promotion sn 全叫「用餐享優惠」、上海商銀「Mobile Phone」3 頁
-#   王道「關於我們」、永豐「刷卡享優惠」、彰銀「請將裝置改以」4 頁
-#
-# 光靠內容雜湊無法分辨這兩者，把假重複合併掉會讓 catalog 直接少掉 4 個真實活動頁，
-# 而使用者永遠不會知道它存在 —— 這比多顯示一筆嚴重得多。兩族群唯一穩定的結構差異
-# 是「重複的是整頁還是單筆」：真重複是同一頁被鏡射到多個網址，所以整份子活動清單
-# 逐筆對得上；假重複清一色是單筆頁面，而單筆頁面無法區分「鏡射」與「解析失敗」。
-#
-# 因此跨頁合併要求「整頁清單相同且該頁有 2 筆以上」。實測這條規則抓到全部 3 組
-# 真重複（移除 41 筆）、拒絕全部假重複（0 筆誤併）。代價是少數殘留（例如富邦
-# D000268/D000269 兩個單筆頁內容相同但仍各自顯示），寧可留著。
-MIRROR_MIN_OFFERS = 2
-
-
-class MirrorGroup(BaseModel):
-    """一組「同內容、多網址」的鏡射頁。留在報告裡供人稽核每次合併了什麼。"""
-
-    bank_id: str
-    kept_url: str
-    also_at: list[str]
-    offers: int
-
-
-class DedupeReport(BaseModel):
-    """去重結果。``per_source`` 讓 index 能同時給出原始筆數與去重後筆數。"""
-
-    merged_offers: int = 0
-    merged_campaigns: int = 0
-    per_source: dict[str, int] = Field(default_factory=dict)
-    mirrors: list[MirrorGroup] = Field(default_factory=list)
-
-
-# catalog_entry 需要一個 Campaign 來取 id/source_url，但那兩個欄位正是鍵要排除的，
-# 所以用一個固定的空殼即可 —— 這也順帶保證鍵只是 Offer 的函數，跨頁比較才成立。
-_KEY_CAMPAIGN = Campaign(
-    id="",
-    bank_id="",
-    bank_name="",
-    title="",
-    source_url="",
-    observed_at=datetime(2000, 1, 1, tzinfo=UTC),
-)
-
-
-def offer_content_key(offer: Offer) -> str:
-    """「這兩筆會不會在網站上長得一模一樣」的雜湊。
-
-    刻意拿 ``catalog_entry`` 的輸出來算，而不是自己挑幾個欄位：鍵的定義因此
-    等於「使用者看得到的全部內容」，兩筆只有在渲染結果完全相同時才會被合併，
-    不可能併掉使用者本來分辨得出來的差異。實測這一點很要緊 —— 若只用
-    標題＋期間＋登錄時點當鍵，全站會誤併 21 組，包括玉山同一頁上
-    ``sno=2008_08`` 的「【活動四】」兩筆（標題期間時點全同、門檻與名額不同）。
-
-    也不能只用標題：全站 57 組同標題共 193 筆，其中包含同一活動的不同檔期
-    （聯邦「【Tomod's 】」2024-01-01~2026-06-30 與另一檔期），期間不同就是
-    不同活動，合併會讓使用者看到錯的期間。
-    """
-    payload = catalog_entry(_KEY_CAMPAIGN, offer)
-    for field in _KEY_EXCLUDED:
-        payload.pop(field, None)
-    canonical = json.dumps(payload, sort_keys=True, ensure_ascii=False)
-    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
-
-
-def _canonical_first(url: str) -> tuple[int, str]:
-    """鏡射組裡保留哪個網址：先短再字典序。
-
-    銀行的鏡射網址通常是在基底網址後面加後綴（``mall_08.html`` 之於
-    ``mall_08_2.html``、``index.htm`` 之於 ``index.htm?p=cosmed``），
-    因此「最短」幾乎總是那個基底頁 —— 對使用者也是最合理的代表。
-    用網址而不是抓取順序來決定，是為了讓 offer id 在跨次執行間穩定
-    （id 內含網址 slug，換代表就等於換 id，會讓書籤與已登錄記錄失效）。
-    """
-    return (len(url), url)
-
-
-def dedupe_campaigns(campaigns: list[Campaign]) -> tuple[list[Campaign], DedupeReport]:
-    """把同一份活動在多個網址上的重複收斂成一筆。
-
-    實測動機：星展「【網購星精彩】7/1~9/30」在網站上出現 6 次，期間、3 個登錄
-    時點、限量、時序契約完全相同，只有網址不同 —— 官方把同一個共用活動區塊放在
-    六個子頁上，一頁一 Campaign 的抓取模型必然各切出一份。
-
-    兩條規則，作用範圍不同，因為風險不同：
-
-    1. **同頁內**（同一個 Campaign）內容相同 → 直接留一筆。同一頁上的兩列若
-       渲染結果完全相同，使用者無從分辨，多顯示一列只是雜訊；而且合併的兩筆
-       同屬一頁，不存在「弄丟了另一個活動頁」的風險。實測聯邦 6 筆屬此類
-       （切段把注意事項段落重複切出）。
-    2. **跨頁**（不同 Campaign）→ 另外要求整頁清單相同且該頁 2 筆以上，
-       理由見 ``MIRROR_MIN_OFFERS``。被合併掉的網址記進留存那筆的 ``also_at``，
-       使用者仍看得到「這個活動也出現在這些頁」，不是無聲丟棄。
-
-    回傳新的 campaign 串列（不改動輸入）與一份可稽核的報告。
-    """
-    removed: Counter[str] = Counter()
-
-    # 規則 1：同頁內去重。順帶把每頁的內容雜湊算出來給規則 2 用。
-    staged: list[Campaign] = []
-    keys: list[tuple[str, ...]] = []
-    for campaign in campaigns:
-        unique: dict[str, Offer] = {}
-        for offer in campaign.offers:
-            unique.setdefault(offer_content_key(offer), offer)
-        dropped = len(campaign.offers) - len(unique)
-        if dropped:
-            removed[campaign.bank_id] += dropped
-            campaign = campaign.model_copy(update={"offers": list(unique.values())})
-        staged.append(campaign)
-        keys.append(tuple(unique))
-
-    # 規則 2：整頁清單相同的鏡射頁。簽章包含 bank_id 與**活動頁標題**。
-    #
-    # bank_id：跨銀行的「同內容」只會是兩家都沒解析出東西，那是巧合。
-    #
-    # 活動頁標題：這是「真鏡射」與「不同活動但抽取結果相同」唯一可靠的分界。
-    # 實測第一銀行的「家電分期禮─全國電子／大同3C／三井3C」是三個**不同零售商**
-    # 的活動頁，零售商名字只出現在頁面標題裡，切分後的子活動標題一律是
-    # 「【家電分期禮】分期零利率 最高再享2,500元刷卡金」，期間與條件也完全一樣
-    # —— 光看子活動內容無法分辨，合併掉會讓使用者永遠看不到大同與三井。
-    # 聯邦的「屈臣氏」與「康是美」（同一頁不同 query 參數）也是同一回事。
-    # 真鏡射則相反：星展六個子頁的標題全是「分期0%利率」、玉山兩個都是
-    # 「玉山Pi拍錢包信用卡」，因為它們本來就是同一頁被掛在多個網址上。
-    #
-    # 代價是標題不一致的真鏡射不會被合併，那只是多顯示一筆；反過來誤併會刪掉
-    # 一個真實活動頁，兩者不對稱。
-    # 簽章再加上**頁面原文的雜湊**。抽取結果相同不足以證明是鏡射 —— 實測星展
-    # mall_08/_09/_11 抽出來的活動完全一樣，但 mall_11 的頁面寫「91APP刷星展卡
-    # 最高回饋 NT$6,500」、其餘五頁是 NT$2,500，而條件抽取沒抓到那個上限。
-    # 只看抽取結果就會把 91APP 那筆真實活動刪掉（實際發生過，已上線一段時間）。
-    #
-    # 頁面標題那一層擋不住這種情形：六頁的標題都是「分期0%利率」。原文雜湊才是
-    # 鏡射的直接證據 —— mall_08 與 mall_09 的純文字逐字相同（各 2,706 字），
-    # mall_11 是 2,712 字。
-    #
-    # 代價是「同一頁但有微小差異（例如更新時間戳）」不再被合併，那只是多顯示
-    # 一筆；反過來誤併會刪掉一個真實活動，兩者不對稱。
-    families: dict[tuple[str, str, str, tuple[str, ...]], list[int]] = {}
-    for position, campaign in enumerate(staged):
-        if len(campaign.offers) < MIRROR_MIN_OFFERS:
-            continue
-        # 沒有原文雜湊的（舊資料、api 型明細）不做跨頁合併 —— 無法證明是鏡射。
-        if not campaign.text_hash:
-            continue
-        families.setdefault(
-            (campaign.bank_id, campaign.title, campaign.text_hash, keys[position]), []
-        ).append(position)
-
-    dropped_positions: set[int] = set()
-    updates: dict[int, Campaign] = {}
-    mirrors: list[MirrorGroup] = []
-    merged_campaigns = 0
-    for members in families.values():
-        if len(members) < 2:
-            continue
-        keep = min(members, key=lambda position: _canonical_first(staged[position].source_url))
-        also_at = sorted(
-            (staged[position].source_url for position in members if position != keep),
-            key=_canonical_first,
-        )
-        kept = staged[keep]
-        updates[keep] = kept.model_copy(
-            update={
-                "offers": [
-                    offer.model_copy(update={"also_at": also_at}) for offer in kept.offers
-                ]
-            }
-        )
-        for position in members:
-            if position != keep:
-                dropped_positions.add(position)
-                removed[staged[position].bank_id] += len(staged[position].offers)
-        merged_campaigns += len(members) - 1
-        mirrors.append(
-            MirrorGroup(
-                bank_id=kept.bank_id,
-                kept_url=kept.source_url,
-                also_at=also_at,
-                offers=len(kept.offers),
-            )
-        )
-
-    result = [
-        updates.get(position, campaign)
-        for position, campaign in enumerate(staged)
-        if position not in dropped_positions
-    ]
-    report = DedupeReport(
-        merged_offers=sum(removed.values()),
-        merged_campaigns=merged_campaigns,
-        per_source=dict(sorted(removed.items())),
-        mirrors=sorted(mirrors, key=lambda group: (group.bank_id, group.kept_url)),
-    )
-    return result, report
-
-
-def describe_dedupe(report: DedupeReport) -> list[str]:
-    """給 CI job summary 用的說明。合併了什麼必須看得見，不能靜默生效。"""
-    if not report.merged_offers:
-        return ["去重：沒有發現重複的子活動"]
-    lines = [
-        f"去重：合併 {report.merged_offers} 筆重複子活動"
-        f"（其中 {report.merged_campaigns} 個鏡射活動頁）",
-    ]
-    for bank_id, count in report.per_source.items():
-        lines.append(f"  {bank_id} 合併 {count} 筆")
-    for group in report.mirrors:
-        lines.append(
-            f"  鏡射頁 {group.bank_id}：保留 {group.kept_url}"
-            f"（{group.offers} 筆），另見 {len(group.also_at)} 個網址"
-        )
-    return lines
-
-
-def build_index(
-    campaigns: list[Campaign],
-    *,
+def write(
+    activities: dict[str, list[Activity]],
     health: list[SourceHealth],
-    alerts: list[Alert],
-    generated_at: datetime,
-    portals: dict[str, dict[str, str]] | None = None,
-    dedupe: DedupeReport | None = None,
-    carried: dict[str, list[dict[str, Any]]] | None = None,
-) -> dict[str, Any]:
-    """首屏索引。
-
-    ``portals`` 是每家銀行的登錄入口。實測 223 筆活動共用同一個 portal，
-    逐筆輸出是純粹的重複 —— 提到來源層級。
-
-    ``dedupe`` 有值時，``campaigns`` 是已去重的。此時計數刻意給出**兩個**數字，
-    而且 ``offers`` 與 ``sources[].offer_count`` 保持「去重前」的舊語意：
-    ``guard.assess`` 拿上一版 index.json 的這兩個欄位當涵蓋率基準，一旦它們
-    改成去重後的數字，去重上線那次就會被記成一次憑空的筆數下降 —— 而逐來源
-    防護的門檻是 40%，實測星展單一家就掉 36.8%（68→43），離誤觸只差一步。
-    改欄位語意還有更糟的後果：下一次執行的基準變小，防護從此少偵測到一截
-    真正的抓取退步。所以新增 ``unique_*``／``duplicate_offers`` 給網站顯示用，
-    舊欄位一個字都不動。
-    """
-    pairs = [(campaign, offer) for campaign in campaigns for offer in campaign.offers]
-    # prune 在最後組裝 payload 時才套用 —— 這裡先留完整的欄位，
-    # 底下的 actionable 計算要讀 needs_review。
-    agenda = [
-        agenda_entry(campaign, offer) for campaign, offer in pairs if has_schedule(offer)
-    ]
-    # 沿用的來源也要進 agenda，否則它們在時間軸上等於不存在 —— 那就回到
-    # 「整家消失」的原狀了。每一筆都帶 stale_since，UI 會標示成舊資料。
-    for bank_id, entries in sorted((carried or {}).items()):
-        for entry in entries:
-            windows = (entry.get("registration") or {}).get("windows") or []
-            if not windows:
-                continue
-            agenda.append(
-                prune({
-                    "id": entry.get("id"),
-                    "bank_id": bank_id,
-                    "title": entry.get("title"),
-                    "url": entry.get("url"),
-                    "page_title": entry.get("page_title", ""),
-                    "period": entry.get("period"),
-                    "windows": windows,
-                    "recurrence": (entry.get("registration") or {})
-                    .get("recurrence", {})
-                    .get("kind"),
-                    "contract": ((entry.get("registration") or {}).get("contract") or {}).get(
-                        "kind"
-                    ),
-                    "needs_review": entry.get("needs_review", False),
-                    "review_codes": entry.get("review_codes", []),
-                    "stale_since": entry.get("stale_since"),
-                })
-            )
-    actionable = [entry for entry in agenda if not entry["needs_review"]]
-    portal_map = portals or {}
-    merged = dedupe.merged_offers if dedupe else 0
-    merged_by_source = dedupe.per_source if dedupe else {}
-    payload = {
+    generated: datetime,
+    *,
+    out: Path = WEB,
+) -> dict[str, int]:
+    every = [a for items in activities.values() for a in items]
+    data_dir = out / "data"
+    (data_dir / "banks").mkdir(parents=True, exist_ok=True)
+    summary = counts(every)
+    index = {
         "schema_version": SCHEMA_VERSION,
-        "generated_at": generated_at.isoformat(),
+        "generated_at": generated.isoformat(),
         "timezone": "Asia/Taipei",
-        "counts": {
-            "campaigns": len(campaigns) + (dedupe.merged_campaigns if dedupe else 0),
-            # offers = 去重前，涵蓋率基準；unique_offers = 實際發布、與 catalog 筆數一致
-            "offers": len(pairs) + merged,
-            "unique_offers": len(pairs),
-            "duplicate_offers": merged,
-            "with_window": len(agenda),
-            "actionable_with_window": len(actionable),
-            "needs_review": sum(1 for _, offer in pairs if offer.needs_review),
-            "registration_required": sum(
-                1 for _, offer in pairs if offer.registration.required
-            ),
-        },
-        "sources": [
-            prune({
-                "bank_id": item.bank_id,
-                "bank_name": item.bank_name,
-                "status": item.status,
-                "entry_url": item.requested_url,
-                "campaign_count": item.campaign_count,
-                "offer_count": item.offer_count,
-                "unique_offer_count": item.offer_count - merged_by_source.get(item.bank_id, 0),
-                # 沿用的筆數刻意獨立成一個欄位 —— offer_count 必須一直代表
-                # 「這次真的從官方頁讀到幾筆」，那是涵蓋率防護的比較基準。
-                "carried_offer_count": len((carried or {}).get(item.bank_id, [])),
-                "stale_since": next(
-                    (
-                        entry.get("stale_since")
-                        for entry in (carried or {}).get(item.bank_id, [])
-                        if entry.get("stale_since")
-                    ),
-                    "",
-                ),
-                "message": item.message,
-                "portal": portal_map.get(item.bank_id, {}),
-            })
-            for item in health
-        ],
-        "alerts": [prune(alert.model_dump()) for alert in alerts],
-        "agenda": [prune(entry) for entry in agenda],
+        "counts": summary,
+        "sources": [h.model_dump(mode="json") for h in health],
+        "timeline": timeline(every, generated),
     }
-    return payload
+    _dump(data_dir / "index.json", index)
+    for bank_id, items in activities.items():
+        rows = [a.model_dump(mode="json", exclude={"content_hash"}) for a in items]
+        rows.sort(key=lambda r: (r["period_end"] or "9999", r["title"]))
+        _dump(data_dir / "banks" / f"{bank_id}.json", {"bank_id": bank_id, "activities": rows})
+    (out / "calendar").mkdir(parents=True, exist_ok=True)
+    (out / "calendar" / "registration.ics").write_text(
+        ics(index["timeline"], generated), encoding="utf-8", newline=""
+    )
+    return summary
 
 
-def build_catalog(
-    bank_id: str, campaigns: list[Campaign], *, generated_at: datetime | None = None
-) -> dict[str, Any]:
-    """單一銀行的完整活動條件。
-
-    ``generated_at`` 是**這一家**的資料時間，不是整份網站的。來源失敗時要沿用
-    上一版（見 ``carry_forward``），而判斷「這份資料多舊」只能靠它 —— 用整份
-    index 的時間會把十天前留下的 catalog 標成「6 小時前」，那正是本專案在
-    反對的靜默過期。
-    """
-    payload = {
-        "schema_version": SCHEMA_VERSION,
-        "bank_id": bank_id,
-        "generated_at": generated_at.isoformat() if generated_at else "",
-        "offers": [
-            prune(catalog_entry(campaign, offer))
-            for campaign in campaigns
-            if campaign.bank_id == bank_id
-            for offer in campaign.offers
-        ],
-    }
-    return payload
+def _dump(path: Path, payload: Any) -> None:
+    path.write_text(
+        json.dumps(payload, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8"
+    )
 
 
-def build_detail(campaign: Campaign) -> dict[str, Any]:
-    """單一活動頁的 evidence 與登錄原文。展開該筆活動時才載入。
+# ---- iCalendar ----------------------------------------------------------------
 
-    刻意**不**收錄整頁原文。第一版把 ``terms_raw`` 寫進 detail，聯邦一家就
-    1.18MB —— 展開一筆活動要載入整家銀行 92 頁的全文。而且把銀行頁面全文
-    存進公開 repo 既無必要也不妥（使用者要看全文，點官方連結就是）。
 
-    留下來的是「支撐每個解析結果的節錄」與登錄段落 —— 那才是使用者需要
-    自行核對的東西。
-    """
-    payload = {
-        "schema_version": SCHEMA_VERSION,
-        "bank_id": campaign.bank_id,
-        "campaign_id": campaign.id,
-        "title": campaign.title,
-        "url": campaign.source_url,
-        "observed_at": campaign.observed_at.isoformat(),
-        "offers": [
-            prune(
-                {
-                    "id": offer.id,
-                    "title": offer.title,
-                    "period_evidence": (
-                        offer.period.evidence.text if offer.period.evidence else ""
-                    ),
-                    "registration_raw": offer.registration.raw_text,
-                    "window_evidence": [
-                        window.evidence.text if window.evidence else ""
-                        for window in offer.registration.windows
-                    ],
-                    "eligibility_evidence": (
-                        offer.conditions.eligibility.evidence.text
-                        if offer.conditions.eligibility.evidence
-                        else ""
-                    ),
-                    "quota_text": offer.conditions.quota.text,
-                    "review_reasons": offer.review_reasons,
-                }
-            )
-            for offer in campaign.offers
-        ],
-    }
-    return payload
+def _escape(text: str) -> str:
+    return text.replace("\\", "\\\\").replace(";", "\\;").replace(",", "\\,").replace("\n", "\\n")
 
 
 def _fold(line: str) -> str:
-    """RFC 5545 的 75 octet 折行。
-
-    前身沒做，含網址的 DESCRIPTION 會超過限制 —— 多數客戶端容忍，
-    嚴格的解析器會拒絕整個檔案。
-    """
-    if len(line.encode("utf-8")) <= 75:
+    """RFC 5545：每行不超過 75 octets，續行以空白開頭。"""
+    raw = line.encode("utf-8")
+    if len(raw) <= 75:
         return line
     parts: list[str] = []
     current = b""
     for char in line:
-        char_bytes = char.encode("utf-8")
-        limit = 75 if not parts else 74  # 續行第一個字元是空白
-        if len(current) + len(char_bytes) > limit:
+        encoded = char.encode("utf-8")
+        if len(current) + len(encoded) > (75 if not parts else 74):
             parts.append(current.decode("utf-8"))
             current = b""
-        current += char_bytes
-    if current:
-        parts.append(current.decode("utf-8"))
+        current += encoded
+    parts.append(current.decode("utf-8"))
     return "\r\n ".join(parts)
 
 
-def _escape(value: str) -> str:
-    return (
-        value.replace("\\", "\\\\").replace("\n", "\\n").replace(",", "\\,").replace(";", "\\;")
-    )
+def _utc(value: str) -> str:
+    return datetime.fromisoformat(value).astimezone(UTC).strftime("%Y%m%dT%H%M%SZ")
 
 
-def _utc(value: datetime) -> str:
-    return value.astimezone(UTC).strftime("%Y%m%dT%H%M%SZ")
-
-
-def _event_lines(
-    campaign: Campaign,
-    offer: Offer,
-    window: RegistrationWindow,
-    *,
-    index: int,
-    now: datetime,
-    portal_url: str,
-) -> list[str]:
-    anchor = window.anchor
-    is_deadline = window.kind == "deadline"
-    label = "登錄截止" if is_deadline else "開放登錄"
-    quota = offer.conditions.quota
-    lead = QUOTA_REMINDER_LEAD_MINUTES if quota.limited else REMINDER_LEAD_MINUTES
-
-    if is_deadline or window.end is None:
-        event_end = anchor + timedelta(minutes=REMINDER_EVENT_MINUTES)
-        end_note = "此為登錄截止時間" if is_deadline else "官方未公告登錄截止時間"
-    else:
-        event_end = window.end
-        end_note = f"登錄至 {window.end:%Y-%m-%d %H:%M}"
-
-    contract = offer.registration.timing_contract
-    description = [
-        f"[{label}] {campaign.bank_name}｜{offer.title}",
-        end_note,
-        f"時序：{contract.kind}",
-    ]
-    if quota.limited:
-        description.append(f"限量 {quota.seats or '未公告數量'}，建議準時登錄")
-    if offer.registration.portal.hint:
-        description.append(offer.registration.portal.hint)
-    description.append(f"官方頁：{campaign.source_url}")
-
-    lines = [
-        "BEGIN:VEVENT",
-        f"UID:{offer.id}-{index}@tw-card-registration-radar",
-        f"DTSTAMP:{_utc(now)}",
-        f"DTSTART:{_utc(anchor)}",
-        f"DTEND:{_utc(event_end)}",
-        f"SUMMARY:[{label}] {_escape(campaign.bank_name)}｜{_escape(offer.title[:60])}",
-        f"DESCRIPTION:{_escape(chr(10).join(description))}",
-        f"URL:{portal_url or campaign.source_url}",
-    ]
-    if offer.registration.recurrence.kind == "monthly":
-        # 每月重複登錄用 RRULE，不列舉成多個單次事件（實測 30.6% 屬此類）
-        rule = "RRULE:FREQ=MONTHLY"
-        if offer.period.end is not None:
-            rule += f";UNTIL={offer.period.end:%Y%m%d}T235900Z"
-        lines.append(rule)
-    lines.extend(
-        [
-            "BEGIN:VALARM",
-            f"TRIGGER:-PT{lead}M",
-            "ACTION:DISPLAY",
-            f"DESCRIPTION:{_escape(f'{label}：{offer.title[:40]}')}",
-            "END:VALARM",
-            "END:VEVENT",
-        ]
-    )
-    return lines
-
-
-def build_ics(campaigns: list[Campaign], *, now: datetime) -> str:
-    """可訂閱的登錄提醒行事曆。
-
-    只收錄可直接行動的活動 —— 讓使用者依據未確認的時間去搶登錄，
-    比不提醒更糟。
-    """
+def ics(rows: list[dict[str, Any]], generated: datetime) -> str:
+    stamp = generated.astimezone(UTC).strftime("%Y%m%dT%H%M%SZ")
     lines = [
         "BEGIN:VCALENDAR",
         "VERSION:2.0",
-        f"PRODID:{CALENDAR_PRODID}",
+        "PRODID:-//tw-card-registration-radar//v2//ZH-TW",
         "CALSCALE:GREGORIAN",
         "METHOD:PUBLISH",
         "X-WR-CALNAME:刷卡登錄雷達",
         "X-WR-TIMEZONE:Asia/Taipei",
+        "REFRESH-INTERVAL;VALUE=DURATION:PT6H",
+        "X-PUBLISHED-TTL:PT6H",
     ]
-    for campaign in campaigns:
-        for offer in campaign.offers:
-            if offer.needs_review or not offer.registration.required:
-                continue
-            portal_url = offer.registration.portal.url
-            for position, window in enumerate(offer.registration.windows):
-                lines.extend(
-                    _event_lines(
-                        campaign,
-                        offer,
-                        window,
-                        index=position,
-                        now=now,
-                        portal_url=portal_url,
-                    )
-                )
-    lines.append("END:VCALENDAR")
-    return "\r\n".join(_fold(line) for line in lines) + "\r\n"
-
-
-def portals_of(campaigns: list[Campaign]) -> dict[str, dict[str, str]]:
-    """每家銀行的登錄入口。同一家的所有活動共用，提到來源層級避免逐筆重複。"""
-    result: dict[str, dict[str, str]] = {}
-    for campaign in campaigns:
-        for offer in campaign.offers:
-            portal = offer.registration.portal
-            if portal.url and campaign.bank_id not in result:
-                result[campaign.bank_id] = {
-                    "url": portal.url,
-                    "kind": portal.kind,
-                    "hint": portal.hint,
-                }
-    return result
-
-
-def write_site(
-    root: Path,
-    index: dict[str, Any],
-    campaigns: list[Campaign],
-    *,
-    now: datetime,
-    carried: dict[str, list[dict[str, Any]]] | None = None,
-) -> list[Path]:
-    written: list[Path] = []
-    data_dir = root / "data"
-    catalog_dir = data_dir / "catalog"
-    detail_dir = data_dir / "detail"
-    calendar_dir = root / "calendar"
-    for directory in (data_dir, catalog_dir, detail_dir, calendar_dir):
-        directory.mkdir(parents=True, exist_ok=True)
-
-    index_path = data_dir / "index.json"
-    _write_json(index_path, index)
-    written.append(index_path)
-
-    for bank_id in sorted({campaign.bank_id for campaign in campaigns}):
-        catalog_path = catalog_dir / f"{bank_id}.json"
-        _write_json(catalog_path, build_catalog(bank_id, campaigns, generated_at=now))
-        written.append(catalog_path)
-
-    # 沿用的來源：catalog 原樣寫回（已帶 stale_since），detail 檔留在原地不動 ——
-    # 它們是上一版的產出，本來就還在，重寫只會製造沒有意義的 diff。
-    for bank_id, entries in sorted((carried or {}).items()):
-        catalog_path = catalog_dir / f"{bank_id}.json"
-        # generated_at 保留**原本的**時間，不是這次執行的時間 —— 覆蓋它會讓
-        # 這份資料每天都看起來是新的，永遠不會觸及沿用的天數上限。
-        _write_json(
-            catalog_path,
-            {
-                "schema_version": SCHEMA_VERSION,
-                "bank_id": bank_id,
-                "generated_at": next(
-                    (e["stale_since"] for e in entries if e.get("stale_since")), ""
-                ),
-                "offers": entries,
-            },
-        )
-        written.append(catalog_path)
-
-    # 這次讀不到、又不符合沿用條件的來源（沿用逾期、catalog 沒有資料時間、
-    # 或讀取成功但 0 筆）：catalog 必須清空。前端「活動目錄」會載入**所有**來源
-    # 的 catalog，不清空的話上一版的檔案會被原樣顯示成現行活動，而且沒有
-    # 「舊資料」標記 —— 實測陽信 8/6 的 24 筆到 9/30 仍在線上，55 天沒人發現。
-    fresh = {campaign.bank_id for campaign in campaigns} | set(carried or {})
-    for source in index.get("sources", []):
-        bank_id = source.get("bank_id")
-        if not bank_id or bank_id in fresh:
+    for row in rows:
+        if not row["start"] or row["precision"] != "minute" or row["stale"]:
             continue
-        catalog_path = catalog_dir / f"{bank_id}.json"
-        _write_json(
-            catalog_path,
-            {
-                "schema_version": SCHEMA_VERSION,
-                "bank_id": bank_id,
-                "generated_at": "",
-                "offers": [],
-            },
-        )
-        written.append(catalog_path)
-
-    for campaign in campaigns:
-        bank_dir = detail_dir / campaign.bank_id
-        bank_dir.mkdir(parents=True, exist_ok=True)
-        detail_path = bank_dir / f"{campaign.id}.json"
-        if _write_json_if_changed(detail_path, build_detail(campaign)):
-            written.append(detail_path)
-
-    # 已下架活動的 detail 檔。實測 1,609 個 detail 檔中有 275 個已不在任何 catalog
-    # 裡 —— 它們仍公開在網站上、每次 clone 都要下載，卻永遠不會再被更新。
-    # 只清**這次有新鮮資料**的銀行；沿用中的銀行（carried）其 detail 是唯一副本。
-    live_ids: dict[str, set[str]] = {}
-    for campaign in campaigns:
-        live_ids.setdefault(campaign.bank_id, set()).add(campaign.id)
-    for bank_id, ids in live_ids.items():
-        if bank_id in (carried or {}):
-            continue
-        for orphan in (detail_dir / bank_id).glob("*.json"):
-            if orphan.stem not in ids:
-                orphan.unlink()
-
-    calendar_path = calendar_dir / "registration.ics"
-    calendar_path.write_text(build_ics(campaigns, now=now), encoding="utf-8")
-    written.append(calendar_path)
-    return written
-
-
-def _write_json_if_changed(
-    path: Path, payload: dict[str, Any], *, volatile: tuple[str, ...] = ("observed_at",)
-) -> bool:
-    """內容（排除時間戳）沒變就不重寫。回傳是否真的寫了。
-
-    實測每次執行提交約 1,350 個檔案，其中約 1,300 個 detail 檔唯一的差異是
-    ``observed_at``。172 次提交後 .git 已 68 MB，照每天三次的節奏一年約多 400 MB，
-    而且 git diff 完全看不出「這次到底哪些活動變了」。前端不讀 ``observed_at``，
-    新鮮度由 index.json 的 ``generated_at`` 負責。
-    """
-    if path.exists():
-        try:
-            existing = json.loads(path.read_text(encoding="utf-8"))
-        except (json.JSONDecodeError, OSError):
-            existing = None
-        if isinstance(existing, dict) and _without(existing, volatile) == _without(
-            payload, volatile
-        ):
-            return False
-    _write_json(path, payload)
-    return True
-
-
-def _without(payload: dict[str, Any], keys: tuple[str, ...]) -> dict[str, Any]:
-    return {key: value for key, value in payload.items() if key not in keys}
-
-
-def _write_json(path: Path, payload: dict[str, Any]) -> None:
-    # 機器讀的檔案用 compact 格式。實測縮排讓聯邦的輸出多了 24%。
-    path.write_text(
-        json.dumps(payload, ensure_ascii=False, separators=(",", ":")) + "\n",
-        encoding="utf-8",
-    )
-
-
-# ── 來源失敗時沿用上一版 ──────────────────────────────────
-
-# 沿用的上限。超過這個天數就寧可不顯示 —— 活動清單放了兩週以上，裡面多半已經
-# 有結束的、下架的、條件改過的，那時「有資料」比「沒資料」更誤導。
-CARRY_FORWARD_MAX_DAYS = 14
-
-
-class CarriedSource(BaseModel):
-    """一家沿用上一版資料的來源。留在報告與 index 裡供稽核。"""
-
-    bank_id: str
-    bank_name: str
-    offers: int
-    stale_since: datetime
-    stale_hours: float
-
-
-def carry_forward(
-    *,
-    site_root: Path,
-    health: list[SourceHealth],
-    previous_index: dict[str, Any] | None,
-    now: datetime,
-    max_days: int = CARRY_FORWARD_MAX_DAYS,
-) -> tuple[dict[str, list[dict[str, Any]]], list[CarriedSource]]:
-    """本次讀不到的來源，沿用上一版已發布的活動並標記為舊資料。
-
-    **為什麼要做。** 原本來源一被擋就整家歸零，使用者什麼都看不到 —— 陽信被
-    datacenter IP 擋掉時就是 0 筆。對照組（Codex 的同性質網站）在同一家遇到
-    Cloudflare 403 時保留 27 筆並標成 partial，那個產品決策比我原本的好：
-    昨天的活動清單多半今天仍然有效，直接消失對使用者沒有任何好處。
-
-    **兩條讓它不會變成謊言的規則。**
-
-    1. 逐筆帶 ``stale_since``，網站上明講「這家今天讀不到，以下是 N 小時前的
-       資料」。沿用而不標示才是問題，沿用本身不是。
-    2. 超過 ``max_days`` 就不再沿用。活動清單放兩週以上，裡面多半有已結束、
-       已下架、條件改過的，那時「有資料」比「沒資料」更誤導。
-
-    **不動 ``SourceHealth.offer_count``。** 那是「這次真的從官方頁讀到幾筆」，
-    是涵蓋率防護的比較基準；把沿用的筆數算進去，防護就再也分不清「來源掛了」
-    與「抓取退步」。與去重的處理原則相同。
-
-    回傳 ``{bank_id: [catalog entries]}`` 與一份可稽核的清單。
-    """
-    if previous_index is None:
-        return {}, []
-
-    names = {item.bank_id: item.bank_name for item in health}
-    carried: dict[str, list[dict[str, Any]]] = {}
-    report: list[CarriedSource] = []
-    for item in health:
-        # 只補「完全讀不到」的來源。partial 代表大部分讀到了，混入舊資料會讓
-        # 新舊兩批並存，使用者無從分辨哪一筆是今天的。
-        if item.status not in {"failed", "blocked"} or item.offer_count:
-            continue
-        entries, source_at = _previous_catalog(site_root, item.bank_id)
-        # 沒有記錄資料時間的 catalog 不沿用。舊版的檔案沒有這個欄位，而
-        # 「不知道多舊」的資料不該掛上一個看起來很新的時間 —— 那一家會在下次
-        # 成功讀取之後才開始享有沿用，這是可接受的啟動成本。
-        if not entries or source_at is None:
-            continue
-        stale_hours = (now - source_at).total_seconds() / 3600
-        if stale_hours > max_days * 24:
-            continue
-        for entry in entries:
-            entry["stale_since"] = source_at.isoformat()
-        carried[item.bank_id] = entries
-        report.append(
-            CarriedSource(
-                bank_id=item.bank_id,
-                bank_name=names.get(item.bank_id, item.bank_id),
-                offers=len(entries),
-                stale_since=source_at,
-                stale_hours=round(stale_hours, 1),
+        title = row["title"] + (f"｜{row['sub']}" if row["sub"] else "")
+        description = "\n".join(
+            filter(
+                None,
+                [
+                    f"原文：{row['quote']}",
+                    row["note"],
+                    f"截止：{row['end'][:16].replace('T', ' ')}" if row["end"] else "截止：未公告",
+                    f"名額：{row['quota']}" if row["quota"] else "",
+                    f"活動頁：{row['url']}",
+                    f"登錄：{row['portal']}",
+                ],
             )
         )
-    return carried, report
-
-
-def _previous_catalog(
-    site_root: Path, bank_id: str
-) -> tuple[list[dict[str, Any]], datetime | None]:
-    """上一版該銀行的活動與**它自己的**資料時間。"""
-    path = site_root / "data" / "catalog" / f"{bank_id}.json"
-    if not path.exists():
-        return [], None
-    try:
-        payload = json.loads(path.read_text(encoding="utf-8"))
-    except (json.JSONDecodeError, OSError):
-        return [], None
-    if not isinstance(payload, dict):
-        return [], None
-    offers = payload.get("offers")
-    entries = [entry for entry in offers if isinstance(entry, dict)] if offers else []
-    return entries, _parse_moment(payload.get("generated_at"))
-
-
-def _parse_moment(value: Any) -> datetime | None:
-    if not isinstance(value, str):
-        return None
-    try:
-        parsed = datetime.fromisoformat(value)
-    except ValueError:
-        return None
-    return parsed if parsed.tzinfo else parsed.replace(tzinfo=UTC)
-
-
-def describe_carry_forward(report: list[CarriedSource]) -> list[str]:
-    if not report:
-        return []
-    lines = ["沿用上一版資料（本次讀不到，已標記為舊資料）："]
-    for item in report:
-        lines.append(
-            f"  {item.bank_name} {item.offers} 筆，資料時間 "
-            f"{item.stale_since:%Y-%m-%d %H:%M}（{item.stale_hours:.0f} 小時前）"
-        )
-    return lines
+        uid = f"{row['aid']}-{row['sub_index']}-{_utc(row['start'])}@tw-card-registration-radar"
+        lines += [
+            "BEGIN:VEVENT",
+            f"UID:{uid}",
+            f"DTSTAMP:{stamp}",
+            f"DTSTART:{_utc(row['start'])}",
+            "DURATION:PT15M",
+            f"SUMMARY:{_escape(f'登錄｜{row['bank']}｜{title}')}",
+            f"DESCRIPTION:{_escape(description)}",
+            f"URL:{row['url']}",
+            "BEGIN:VALARM",
+            "ACTION:DISPLAY",
+            "TRIGGER:-PT10M",
+            f"DESCRIPTION:{_escape('即將開放登錄：' + title)}",
+            "END:VALARM",
+            "END:VEVENT",
+        ]
+    lines.append("END:VCALENDAR")
+    return "\r\n".join(_fold(line) for line in lines) + "\r\n"
