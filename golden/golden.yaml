@@ -1,0 +1,1094 @@
+# 信用卡活動「登錄時點」golden 集（新管線驗收基準）
+#
+# 依據：每筆只以官方頁面原文為準（不抄 v1 / Codex 輸出）。原文快照存於
+#   /private/tmp/claude-502/-Users-chenzhiming-Documents-Claude/b90211e4-6b90-4ade-9844-7c3a014d6fff/scratchpad/golden_src/<id>.txt
+#   （該路徑為暫存區；golden/check.py 以 --src 指定）。抓取日 2026-11-01（台北）。
+# 範圍：2026-11-01 00:00 ~ 2026-12-31 23:59（+08:00）內的登錄時點。
+#
+# 記法約定（與任務說明一致，補充本檔另外採用的幾條）：
+#   - 時間只到分鐘並帶 +08:00；原文 23:59:59 記 23:59；原文「24：00」記為次日 00:00 並註明。
+#   - start 只寫日期沒寫時刻 → 當天 00:00，note 寫「原文無時刻」。
+#   - end 只寫日期（含「至當月月底」「當月底」）→ 該日 23:59，note 註明「截止原文無時刻」。
+#   - 官方未寫截止或「額滿為止」→ end: null。
+#   - 「遇假日順延」只在條款明寫時套用（假日依 data/holidays/2026.csv）；條款沒寫就照原日期，
+#     並在 note 標「條款無順延」。條款同時列舉實際日期時以列舉為準。
+#   - 跨越範圍邊界的連續窗口（例如 7/1~12/31、10/26~11/1）照官方原始起訖記錄，
+#     check.py 只要求窗口與範圍有交集。
+#   - 擴充欄位（選填）：subs[].registration 可覆寫整頁的 registration（同頁混有免登錄子活動時用）；
+#     頂層 note 放整筆的判讀說明。period 官方未載時填 null。
+#   - registration 值：required（有可落地的時點）／not_required（不需登錄）／
+#     unspecified_time（需登錄但官方沒寫具體時點，slots 為空）。
+
+- id: obank-shopee
+  bank: obank
+  url: https://www.o-bank.com/retail/event/event-announce/debit_20261231_9
+  title: 王道購物節！刷蝦皮購物享最高新台幣1,088元現金回饋
+  registration: required
+  period: [2026-10-01, 2026-12-31]
+  subs:
+    - name: ""
+      slots:
+        - start: "2026-11-02T12:00+08:00"
+          end: "2026-11-30T23:59+08:00"
+          note: "11/1 週日，依「遇假日順延至次一營業日」改為 11/2，與列舉「11月02日」一致；截止取「當月月底前」，原文無時刻；每月限額3,000名額滿即關閉"
+        - start: "2026-12-01T12:00+08:00"
+          end: "2026-12-31T23:59+08:00"
+          note: "12/1 週二為營業日，與列舉「12月01日」一致；截止原文無時刻"
+      quotes:
+        - "本活動於每月01日中午12:00起開放登錄(遇假日順延至次一營業日)"
+        - "(登錄日期如: 10月01日、11月02日、12月01日)"
+        - "持卡人須於刷卡消費之當月月底前完成活動登錄，始符合回饋資格。"
+  difficulty: [monthly, holiday_shift, enumerated_dates, quota]
+  verified_at: "2026-11-01"
+
+- id: obank-insurance
+  bank: obank
+  url: https://www.o-bank.com/retail/event/event-announce/debit_20261231_4
+  title: 王道刷保費 最高享3.5%現金回饋
+  registration: required
+  period: [2026-09-10, 2026-12-31]
+  subs:
+    - name: ""
+      slots:
+        - start: "2026-11-10T12:00+08:00"
+          end: "2026-11-30T23:59+08:00"
+          note: "條款是「遇假日提前至前一營業日」（不是順延）；11/10 週二為營業日，與列舉一致；截止取「當月月底前」，原文無時刻"
+        - start: "2026-12-10T12:00+08:00"
+          end: "2026-12-31T23:59+08:00"
+          note: "12/10 週四為營業日，與列舉「12月：12/10」一致；截止原文無時刻"
+      quotes:
+        - "本活動於每月10日中午12 : 00起開放登錄。若遇假日提前至前一營業日。"
+        - "11月 : 11/10、12月：12/10"
+        - "持卡人須於保費實際扣繳日之當月月底前完成活動登錄，始符合回饋資格。"
+  difficulty: [monthly, holiday_advance, enumerated_dates, quota]
+  verified_at: "2026-11-01"
+
+- id: obank-overseas
+  bank: obank
+  url: https://www.o-bank.com/retail/event/event-announce/debit_20261231_7
+  title: 出國、海外網購刷王道！最高享新台幣1,500元現金回饋！
+  registration: required
+  period: [2026-10-01, 2026-12-31]
+  subs:
+    - name: ""
+      slots:
+        - start: "2026-11-02T12:00+08:00"
+          end: "2026-11-30T23:59+08:00"
+          note: "「每月第一個營業日」：11/1 週日，首個營業日為 11/2，與列舉一致；截止取「當月月底前」，原文無時刻"
+        - start: "2026-12-01T12:00+08:00"
+          end: "2026-12-31T23:59+08:00"
+          note: "截止原文無時刻"
+      quotes:
+        - "本活動於每月第一個營業日中午12:00起開放登錄，遇假日順延至次一營業日。"
+        - "(登錄日期如：10月1日、11月2日、12月1日)"
+        - "持卡人須於刷卡消費之當月月底前完成活動登錄，始符合回饋資格。"
+  difficulty: [monthly, first_business_day, holiday_shift, enumerated_dates, quota]
+  verified_at: "2026-11-01"
+
+- id: ubot-phone
+  bank: ubot
+  url: https://activity.ubot.com.tw/aws_act/2026/202609phone/index.htm
+  title: Apple輕鬆買
+  registration: required
+  period: [2026-09-01, 2026-12-31]
+  subs:
+    - name: "Apple直營"
+      slots:
+        - start: "2026-11-01T00:00+08:00"
+          end: "2026-12-31T23:59+08:00"
+          note: "第二波「活動暨登錄期間」115/11/1-12/31；原文無時刻；總限量2,000名額滿提前關閉"
+      quotes:
+        - "活動暨登錄期間：115/9/1-10/31，優惠延長第二波115/11/1-12/31"
+    - name: "指定電信"
+      slots:
+        - start: "2026-11-15T15:00+08:00"
+          end: "2026-11-30T23:59+08:00"
+          note: "11/15 週日，條款無順延，照原日期；截止「至當月月底」原文無時刻；額滿為止"
+        - start: "2026-12-15T15:00+08:00"
+          end: "2026-12-31T23:59+08:00"
+          note: "截止原文無時刻"
+      quotes:
+        - "登錄時間：每月15日下午3點開放登錄至當月月底，額滿為止。"
+        - "活動期間：115/9/1-12/31。"
+    - name: "三星摺疊星上市"
+      slots:
+        - start: "2026-11-01T00:00+08:00"
+          end: "2026-12-31T23:59+08:00"
+          note: "原文無時刻；總限量回饋300名"
+      quotes:
+        - "活動暨登錄期間：115/11/1-12/31。"
+  difficulty: [multi_sub, monthly, month_end, quota, holiday_no_shift]
+  verified_at: "2026-11-01"
+
+- id: ubot-everrich
+  bank: ubot
+  url: https://activity.ubot.com.tw/aws_act/2026/2026q4everrich/index.htm
+  title: 昇恆昌免稅店
+  registration: required
+  period: [2026-10-01, 2026-12-31]
+  subs:
+    - name: ""
+      slots:
+        - start: "2026-11-01T15:00+08:00"
+          end: "2026-11-30T23:59+08:00"
+          note: "11/1 週日，條款無順延；截止「至當月底」原文無時刻；活動期間登錄乙次即可（範例句「115/11/1登錄成功」非時點依據）"
+        - start: "2026-12-01T15:00+08:00"
+          end: "2026-12-31T23:59+08:00"
+          note: "截止原文無時刻"
+      quotes:
+        - "活動期間每月1日下午3點開放登錄至當月底，每一正卡持卡人登錄乙次即享活動資格，無需每月登錄。"
+        - "活動暨登錄期間：115/10/1-12/31。"
+  difficulty: [monthly, month_end, example_sentence, holiday_no_shift, register_once]
+  verified_at: "2026-11-01"
+
+- id: ubot-supermarket
+  bank: ubot
+  url: https://activity.ubot.com.tw/aws_act/2026/202607supermarket/index.htm
+  title: 指定通路刷聯邦
+  registration: required
+  period: [2026-07-01, 2026-12-31]
+  subs:
+    - name: ""
+      slots:
+        - start: "2026-11-20T11:00+08:00"
+          end: "2026-11-30T23:59+08:00"
+          note: "截止「至當月月底」原文無時刻；每月限量5,000名"
+        - start: "2026-12-20T11:00+08:00"
+          end: "2026-12-31T23:59+08:00"
+          note: "12/20 週日，條款無順延；截止原文無時刻"
+      quotes:
+        - "本活動於每月20日上午11點開放登錄至當月月底，參加本活動之持卡人須於消費當月完成登錄始符合當月活動資格"
+        - "活動時間：115/7/1-12/31。"
+  difficulty: [monthly, month_end, quota, holiday_no_shift]
+  verified_at: "2026-11-01"
+
+- id: first-easycard-autoload
+  bank: first
+  url: https://card.firstbank.com.tw/sites/card/zh_TW/1565691116102
+  title: 悠遊卡自動加值享回饋
+  registration: required
+  period: [2026-01-01, 2026-12-31]
+  subs:
+    - name: ""
+      slots:
+        - start: "2026-11-01T09:00+08:00"
+          end: "2026-11-05T18:00+08:00"
+          note: "11/1 週日，條款無順延；每次限量12,500卡"
+        - start: "2026-11-11T09:00+08:00"
+          end: "2026-11-15T18:00+08:00"
+        - start: "2026-11-21T09:00+08:00"
+          end: "2026-11-25T18:00+08:00"
+          note: "11/21 週六，條款無順延"
+        - start: "2026-12-01T09:00+08:00"
+          end: "2026-12-05T18:00+08:00"
+        - start: "2026-12-11T09:00+08:00"
+          end: "2026-12-15T18:00+08:00"
+        - start: "2026-12-21T09:00+08:00"
+          end: "2026-12-25T18:00+08:00"
+          note: "截止日 12/25 為行憲紀念日，條款無順延，照原日期"
+      quotes:
+        - "登錄時間：活動期間內，每月1日、11日、21日早上9點開放當月登錄，每次開放登錄期間限量12,500卡，每月活動總限量37,500卡"
+        - "每月 1日早上9點至每月 5日下午6點止"
+        - "每月11日早上9點至每月15日下午6點止"
+        - "每月21日早上9點至每月25日下午6點止"
+  difficulty: [monthly, multi_slot_per_month, example_sentence, quota, holiday_no_shift]
+  verified_at: "2026-11-01"
+
+- id: first-food-delivery
+  bank: first
+  url: https://card.firstbank.com.tw/sites/card/zh_TW/1565705058441
+  title: 美食外送筆筆5%回饋
+  registration: required
+  period: [2026-07-01, 2026-12-31]
+  subs:
+    - name: ""
+      slots:
+        - start: "2026-11-22T10:00+08:00"
+          end: null
+          note: "11/22 週日，條款無順延；原文只寫「起」，額滿即關閉"
+        - start: "2026-12-22T10:00+08:00"
+          end: null
+          note: "原文只寫「起」，額滿即關閉"
+      quotes:
+        - "每月22日上午10點起(逐月登錄，額滿即關閉)"
+        - "活動登錄：每月22日上午10時起開放登錄，需每月登錄，額滿關閉活動登錄功能。"
+  difficulty: [monthly, quota, holiday_no_shift, open_end]
+  verified_at: "2026-11-01"
+
+- id: first-tigerair
+  bank: first
+  url: https://card.firstbank.com.tw/sites/card/zh_TW/1565701714561
+  title: 台灣虎航優惠
+  registration: not_required
+  period: [2026-01-01, 2026-12-31]
+  note: "「每月1日10:00 起（遇例假日順延）」是訂位優惠名額開放時點，不是登錄；全頁無登錄要求"
+  subs:
+    - name: ""
+      slots: []
+      quotes:
+        - "每月自1日10:00AM起(遇例假日順延至次一營業日)依結帳順序前500組訂位有機會享有折扣"
+  difficulty: [negative, holiday_shift_trap, not_registration]
+  verified_at: "2026-11-01"
+
+- id: cathay-coupang-202611
+  bank: cathay
+  url: https://www.cathaybk.com.tw/cathaybk/personal/event/overview/credit-card/online-shopping/202611/Coupang_202611.html
+  title: Coupang酷澎 雙11狂歡祭
+  registration: required
+  period: [2026-11-01, 2026-11-30]
+  subs:
+    - name: ""
+      slots:
+        - start: "2026-11-26T16:00+08:00"
+          end: "2026-11-30T23:59+08:00"
+          note: "登錄期間晚於多數消費期（11/1-11/11 分期現折）；限量3,500名額滿即關閉"
+      quotes:
+        - "*2026/11/26 16:00至2026/11/30 23:59於『本行官網登錄專區』及國泰優惠 CUBE Rewards App開放登錄，活動限量登錄3,500名，額滿即關閉。"
+        - "活動期間2026/11/1至2026/11/30，於Coupang酷澎(台灣)刷國泰世華信用卡達以下門檻並完成登錄，享專屬回饋："
+  difficulty: [reg_period_differs, reg_after_spend, quota]
+  verified_at: "2026-11-01"
+
+- id: cathay-openpoint
+  bank: cathay
+  url: https://www.cathay-cube.com.tw/content/cub-aem-cs/zh-tw/cathaybk/personal/event/overview/credit-card/shopping/202610/OPENPOINT2026Q4.html
+  title: 7-ELEVEN / OPEN錢包 刷國泰世華卡滿額享10%回饋
+  registration: not_required
+  period: [2026-10-01, 2026-12-31]
+  note: "即時贈點、無登錄步驟；全頁「登錄」只出現在免責條款「持卡人登錄之資料」"
+  subs:
+    - name: ""
+      slots: []
+      quotes:
+        - "消費回饋活動之OPENPOINT點數回饋為即時贈點，且限量回饋，額滿資格認定依OPENPOINT APP之資訊系統紀錄認定為準。"
+        - "而使持卡人登錄之資料有遲延、遺失、錯誤、無法辨識或毀損之情況"
+  difficulty: [negative, boilerplate_keyword_trap]
+  verified_at: "2026-11-01"
+
+- id: cathay-watsons
+  bank: cathay
+  url: https://www.cathay-cube.com.tw/content/cub-aem-cs/zh-tw/cathaybk/personal/event/overview/credit-card/shopping/202607/2026-watsons-ec-cube-h2.html
+  title: 屈臣氏官方網路商店/APP 刷CUBE信用卡最高享5.3%回饋
+  registration: not_required
+  period: [2026-07-01, 2026-12-31]
+  note: "需於 CUBE App「領券」而非「登錄」；頁面唯一的「遇假日順延」指小樹點回饋入帳，不是登錄時點（待人工確認領券是否視同登錄）"
+  subs:
+    - name: ""
+      slots: []
+      quotes:
+        - "參加領券活動需於2026/7/1~2026/12/31登入CUBE App完成領取優惠券"
+        - "並於次二日(遇假日順延)回饋至正卡人信用卡帳戶"
+  difficulty: [negative, holiday_shift_trap, coupon_not_registration]
+  verified_at: "2026-11-01"
+
+- id: chb-mypay
+  bank: chb
+  url: https://www.bankchb.com/frontend/bonusDetail.jsp?id=3384
+  title: 【行動支付】行動支付刷My樂 筆筆皆有禮
+  registration: required
+  period: [2026-07-01, 2026-12-31]
+  subs:
+    - name: ""
+      slots:
+        - start: "2026-11-01T08:00+08:00"
+          end: "2026-11-02T00:00+08:00"
+          note: "原文「08：00─24：00」，24:00 記為次日 00:00；11/1 週日，條款無順延，照原日期"
+        - start: "2026-12-01T08:00+08:00"
+          end: "2026-12-02T00:00+08:00"
+          note: "原文「24：00」記為次日 00:00"
+      quotes:
+        - "持卡人需於每月1日08：00─24：00，至彰化銀行官網之活動登錄專區登錄"
+        - "活動期間：115/7/1-12/31"
+  difficulty: [monthly, single_day_window, holiday_no_shift, midnight_2400]
+  verified_at: "2026-11-01"
+
+- id: chb-insurance
+  bank: chb
+  url: https://www.bankchb.com/frontend/bonusDetail.jsp?id=3399
+  title: 【保險/稅費】刷卡繳保費超划算 回饋分期自由選
+  registration: required
+  period: [2026-01-01, 2026-12-31]
+  subs:
+    - name: ""
+      slots:
+        - start: "2026-01-01T00:00+08:00"
+          end: "2026-12-31T23:59+08:00"
+          note: "登錄期間＝活動期間 115/1/1-12/31，原文無時刻；活動期間僅需登錄一次"
+      quotes:
+        - "持卡人需於活動期間至彰化銀行官網之活動登錄專區登錄"
+        - "活動期間僅需登錄一次"
+        - "115年1月1日至115年12月31日"
+  difficulty: [reg_equals_period, register_once, window_crosses_range]
+  verified_at: "2026-11-01"
+
+- id: chb-hsr-infinite
+  bank: chb
+  url: https://www.bankchb.com/frontend/bonusDetail.jsp?id=3529
+  title: 【交通/加油】搭高鐵刷彰銀Visa無限卡，享最高10%回饋！
+  registration: unspecified_time
+  period: [2026-05-12, 2026-12-31]
+  note: "提到「活動登錄期間」但頁面未定義任何日期或時刻"
+  subs:
+    - name: ""
+      slots: []
+      quotes:
+        - "持Visa無限卡於每月新增一筆一般消費，並於彰銀官網完成登錄"
+        - "本活動限正卡持卡人於活動登錄期間至彰化銀行"
+  difficulty: [negative, unspecified_time, monthly]
+  verified_at: "2026-11-01"
+
+- id: chb-coupang
+  bank: chb
+  url: https://www.bankchb.com/frontend/bonusDetail.jsp?id=3581
+  title: 【線上購物】Coupang 酷澎刷彰銀最好購
+  registration: not_required
+  period: [2026-01-01, 2026-12-31]
+  note: "活動內容與注意事項無登錄要求；頁面「登錄」只在導覽列（優惠訊息/登錄、活動登錄）"
+  subs:
+    - name: ""
+      slots: []
+      quotes:
+        - "於Coupang酷澎刷My購卡當月消費享6%現金回饋"
+  difficulty: [negative, nav_keyword_trap]
+  verified_at: "2026-11-01"
+
+- id: ctbc-linepay-food
+  bank: ctbc
+  url: https://www.ctbcbank.com/content/dam/minisite/long/creditcard/LINEPay/page_food.html
+  title: 脆饗食 / 中國信託銀行LINE Pay卡
+  registration: required
+  period: [2026-07-01, 2026-12-31]
+  note: "各子活動「每季登錄一次」（10月已登錄者 11、12 月免再登錄），但每月 6 號仍開放登錄；「舉例：7月登錄…」為舉例句"
+  subs:
+    - name: "Uber Eats享LINE POINTS 5%"
+      slots:
+        - start: "2026-11-06T10:00+08:00"
+          end: null
+          note: "每月限量登錄8,000名，額滿即關閉"
+        - start: "2026-12-06T10:00+08:00"
+          end: null
+          note: "12/6 週日，條款無順延"
+      quotes:
+        - "(每月6號10:00開放登錄)"
+        - "本活動每季登錄一次(舉例：7月登錄活動僅能參加7-9月活動，欲參加10-12月活動需重新登錄)"
+    - name: "星巴克享LINE POINTS 5%"
+      slots:
+        - start: "2026-11-06T10:00+08:00"
+          end: null
+        - start: "2026-12-06T10:00+08:00"
+          end: null
+      quotes:
+        - "本活動每月限量登錄8,000名(每月6號10:00開放登錄)"
+    - name: "壽司郎享LINE POINTS 10%"
+      slots:
+        - start: "2026-11-06T13:00+08:00"
+          end: null
+          note: "JCB 卡子活動為下午1:00，與 Visa 子活動不同"
+        - start: "2026-12-06T13:00+08:00"
+          end: null
+      quotes:
+        - "(每月6號下午1:00開放登錄)"
+        - "本活動每月限量登錄5,000名(每月6號下午1:00開放登錄)"
+    - name: "客美多咖啡享LINE POINTS 10%"
+      slots:
+        - start: "2026-11-06T13:00+08:00"
+          end: null
+        - start: "2026-12-06T13:00+08:00"
+          end: null
+      quotes:
+        - "(每月6號下午1:00開放登錄)"
+    - name: "摩斯漢堡享LINE POINTS 10%"
+      slots:
+        - start: "2026-11-06T13:00+08:00"
+          end: null
+        - start: "2026-12-06T13:00+08:00"
+          end: null
+      quotes:
+        - "(每月6號下午1:00開放登錄)"
+    - name: "藏壽司享LINE POINTS 10%"
+      slots:
+        - start: "2026-11-06T13:00+08:00"
+          end: null
+        - start: "2026-12-06T13:00+08:00"
+          end: null
+      quotes:
+        - "(每月6號下午1:00開放登錄)"
+  difficulty: [multi_sub, monthly, per_quarter, example_sentence, quota, holiday_no_shift]
+  verified_at: "2026-11-01"
+
+- id: ctbc-linepay-shopping
+  bank: ctbc
+  url: https://www.ctbcbank.com/content/dam/minisite/long/creditcard/LINEPay/page_shopping.html
+  title: 脆好購 / 中國信託銀行LINE Pay卡
+  registration: required
+  period: [2026-07-01, 2026-12-31]
+  note: "同站「優惠一覽表」store.html 把 Coupang 活動②寫成「每月5號10:00」，本頁（含注意事項）為「每月6號10:00」，此處依本頁；待人工確認。各子活動每季登錄一次"
+  subs:
+    - name: "淘寶活動"
+      slots:
+        - start: "2026-11-06T10:00+08:00"
+          end: null
+        - start: "2026-12-06T10:00+08:00"
+          end: null
+      quotes:
+        - "本活動每月限量登錄8,000名(每月6號10:00開放登錄)"
+    - name: "蝦皮購物活動"
+      slots:
+        - start: "2026-11-06T10:00+08:00"
+          end: null
+        - start: "2026-12-06T10:00+08:00"
+          end: null
+      quotes:
+        - "(每月6號10:00開放登錄)"
+    - name: "Coupang酷澎(台灣)活動②"
+      slots:
+        - start: "2026-11-06T10:00+08:00"
+          end: null
+        - start: "2026-12-06T10:00+08:00"
+          end: null
+      quotes:
+        - "活動② LINE POINTS 5%(每月6號10:00開放登錄)"
+        - "本活動每季登錄一次(舉例：7月登錄活動僅能參加7-9月活動，欲參加10-12月活動需重新登錄)"
+    - name: "UNIQLO活動"
+      slots:
+        - start: "2026-11-06T13:00+08:00"
+          end: null
+        - start: "2026-12-06T13:00+08:00"
+          end: null
+      quotes:
+        - "本活動每月限量登錄5,000名(每月6號下午1:00開放登錄)"
+    - name: "GU活動"
+      slots:
+        - start: "2026-11-06T13:00+08:00"
+          end: null
+        - start: "2026-12-06T13:00+08:00"
+          end: null
+      quotes:
+        - "(每月6號下午1:00開放登錄)"
+  difficulty: [multi_sub, monthly, per_quarter, example_sentence, source_conflict, quota]
+  verified_at: "2026-11-01"
+
+- id: dbs-shopee-1111
+  bank: dbs
+  url: https://www.dbs.com.tw/personal-zh/cards/offers/ce/mall_06.html
+  title: 蝦皮購物 分期0%利率
+  registration: required
+  period: [2026-11-01, 2026-11-30]
+  note: "先消費後登錄；同一子活動不同門檻有不同開放時刻，所有門檻須個別登錄；額滿即止，無截止時刻"
+  subs:
+    - name: "活動一【全月活動】2026/11/1～11/30"
+      slots:
+        - start: "2026-11-26T15:00+08:00"
+          end: null
+          note: "單筆分期達NT$6,000門檻"
+        - start: "2026-11-26T16:00+08:00"
+          end: null
+          note: "單筆分期達NT$36,000門檻"
+      quotes:
+        - "* 於2026/11/26 下午3:00開放登錄。"
+        - "* 於2026/11/26 下午4:00開始登錄。"
+    - name: "活動二【11.11 最強購物節】2026/11/1～11/17"
+      slots:
+        - start: "2026-11-25T11:00+08:00"
+          end: null
+          note: "單筆分期滿NT$1,000門檻"
+        - start: "2026-11-25T15:00+08:00"
+          end: null
+          note: "單筆分期滿NT$20,000門檻"
+      quotes:
+        - "* 於2026/11/25 上午11:00開始登錄。"
+        - "* 於2026/11/25 下午3:00開始登錄。"
+    - name: "活動三【商城狂歡日】2026/11/18～11/25"
+      slots:
+        - start: "2026-11-26T15:00+08:00"
+          end: null
+      quotes:
+        - "* 於2026/11/26 下午3:00開始登錄。"
+    - name: "活動四【汽機車館活動】2026/11/1～11/30"
+      slots:
+        - start: "2026-11-26T16:00+08:00"
+          end: null
+      quotes:
+        - "* 於2026/11/26下午4:00開始登錄。"
+        - "* 活動一～活動四須至「星展Card+信用卡數位服務」完成登錄，登錄名額均有限，額滿即止。"
+  difficulty: [multi_sub, reg_after_spend, per_threshold_slots, quota, open_end]
+  verified_at: "2026-11-01"
+
+- id: dbs-etmall
+  bank: dbs
+  url: https://www.dbs.com.tw/personal-zh/cards/offers/ce/mall_04.html
+  title: 東森購物 分期0%利率
+  registration: required
+  period: [2026-11-01, 2026-11-30]
+  note: "原文「11/30上午11:00」未寫年份，依活動期間 2026/11/1～2026/11/30 補 2026；活動二標題中的 11/2、11/9…是消費日不是登錄日"
+  subs:
+    - name: "活動一【全月滿額】11/1～11/30"
+      slots:
+        - start: "2026-11-30T11:00+08:00"
+          end: null
+      quotes:
+        - "（以上優惠活動11/30上午11:00於東森購物活動網站開放登錄）"
+    - name: "活動二【週一星展日】11/2、11/9、11/16、11/23、11/30"
+      slots:
+        - start: "2026-11-30T11:00+08:00"
+          end: null
+      quotes:
+        - "（以上優惠活動11/30上午11:00於東森購物活動網站開放登錄，每正卡人活動期間限回饋乙次且不可跨等級重複兌換。）"
+    - name: "【星展卡友首次註冊新會員活動】"
+      registration: not_required
+      slots: []
+      quotes:
+        - "以上無需登錄，活動詳情請詳：官網活動頁"
+  difficulty: [multi_sub, reg_after_spend, date_list_trap, mixed_not_required, year_inferred]
+  verified_at: "2026-11-01"
+
+- id: esun-icashpay
+  bank: esun
+  url: https://www.esunbank.com/zh-tw/personal/credit-card/discount/shopInfo?sno=8023
+  title: 玉山信用卡綁定icash Pay 精選通路享多重優惠！
+  registration: required
+  period: [2026-07-01, 2026-12-31]
+  note: "「每月10日(含)後的週五至週日」是消費日，不是登錄時點"
+  subs:
+    - name: "綁定玉山卡於萬家福、樂家康、萬家福線上購物 (含家速配)、Mia C'bon消費，登錄最高享5%回饋"
+      slots:
+        - start: "2026-11-15T10:00+08:00"
+          end: "2026-11-30T23:59+08:00"
+          note: "原文 10:00:00~當月最後一日23:59:59；11/15 週日，條款無順延；每月限量1,200名"
+        - start: "2026-12-15T10:00+08:00"
+          end: "2026-12-31T23:59+08:00"
+      quotes:
+        - "開放登錄時間：當月15日早上10:00:00~當月最後一日23:59:59止。"
+        - "活動期間：2026/9/10~2026/12/31，每月10日 (含) 後的週五至週日"
+    - name: "綁定玉山U Bear信用卡/玉山icash聯名卡至7-ELEVEN消費登錄最高享6%回饋"
+      slots:
+        - start: "2026-11-15T10:00+08:00"
+          end: "2026-11-30T23:59+08:00"
+          note: "每月限量6,000名"
+        - start: "2026-12-15T10:00+08:00"
+          end: "2026-12-31T23:59+08:00"
+      quotes:
+        - "開放登錄時間：當月15日早上10:00:00 ~ 當月最後一日23:59:59止"
+    - name: "【icash Pay享鑽生活11%活動】首次綁定玉山卡於指定通路消費滿額最高享11%回饋"
+      registration: not_required
+      slots: []
+      quotes:
+        - "活動期間使用icash Pay首次綁定玉山信用卡 (全卡別)，於指定通路累計消費5,000元 (含) 以上，加碼贈11% OPENPOINT點數回饋"
+  difficulty: [multi_sub, monthly, month_end, consumption_day_trap, mixed_not_required, holiday_no_shift]
+  verified_at: "2026-11-01"
+
+- id: esun-wallet-weekly
+  bank: esun
+  url: https://www.esunbank.com/zh-tw/personal/credit-card/discount/shopInfo?sno=8068
+  title: 玉山Wallet週週登錄拿點趣
+  registration: required
+  period: [2026-10-05, 2026-11-01]
+  subs:
+    - name: "玉山Wallet週週登錄拿點趣 (第一波)"
+      slots:
+        - start: "2026-10-26T10:00+08:00"
+          end: "2026-11-01T23:59+08:00"
+          note: "第四週窗口跨越範圍起點，範圍內只剩 11/1 一天；前三週窗口不在範圍內；每週限量50,000名"
+      quotes:
+        - "第四週2026/10/26 10:00:00~2026/11/01 23:59:00統一開放正卡人於玉山Wallet App登錄。"
+  difficulty: [weekly, window_crosses_range_start, quota]
+  verified_at: "2026-11-01"
+
+- id: esun-coupang-202611
+  bank: esun
+  url: https://www.esunbank.com/zh-tw/personal/credit-card/discount/shopInfo?sno=2028_11
+  title: 酷澎Coupang 11月網購活動 刷玉山卡單筆分期滿額最高享現折300元及2,900元回饋
+  registration: required
+  period: [2026-11-01, 2026-11-30]
+  note: "活動二消費期 11/7~11/13 與登錄期 11/25~11/30 不同；注意事項中「2026/11/9~2026/11/11單筆分期」為範例句"
+  subs:
+    - name: "【活動一】全月活動"
+      slots:
+        - start: "2026-11-24T13:00+08:00"
+          end: "2026-11-30T23:59+08:00"
+          note: "第一批限量2,000名"
+        - start: "2026-11-26T13:00+08:00"
+          end: "2026-11-30T23:59+08:00"
+          note: "第二批限量2,000名"
+      quotes:
+        - "2026/11/24 13:00:00~2026/11/30 23:59:00統一開放正卡人於玉山銀行官網活動登錄頁、玉山Wallet App登錄 (限量2,000名，每歸戶僅限登錄1次)。"
+        - "2026/11/26 13:00:00~2026/11/30 23:59:00統一開放正卡人於玉山銀行官網活動登錄頁、玉山Wallet App登錄 (限量2,000名，每歸戶僅限登錄1次)。"
+    - name: "【活動二】雙11購物節！分期滿額享1,000點回饋"
+      slots:
+        - start: "2026-11-25T13:00+08:00"
+          end: "2026-11-30T23:59+08:00"
+          note: "限量500名"
+      quotes:
+        - "2026/11/25 13:00:00~2026/11/30 23:59:00統一開放正卡人於玉山銀行官網登錄 (限量500名，每歸戶僅限登錄1次)。"
+        - "活動期間：2026/11/7~2026/11/13"
+  difficulty: [multi_sub, multi_batch, reg_period_differs, reg_after_spend, example_sentence, quota]
+  verified_at: "2026-11-01"
+
+- id: hncb-travel
+  bank: hncb
+  url: https://www.hncb.com.tw/wps/portal/HNCB/card/!ut/p/z1/04_Sj9CPykssy0xPLMnMz0vMAfIjo8ziDQw93T3cnQ18DQIsDAzMAk3M_UMtwoxCPY30w_EpMDI0148iSj8O4GhApH7cCqLwGx-uH4XPCrAPCJlRkBsaGmGQ6QgAkO1qlw!!/?1dmy&urile=wcm%3apath%3a/wps/wcm/connect/hncb_v2/site_map/hncb/card/event/channel/travel
+  title: 華南大玩家 天涼秋爽冬好遊，美日韓泰再加碼
+  registration: required
+  period: [2026-09-01, 2026-12-31]
+  subs:
+    - name: "【出國輕鬆遊】"
+      slots:
+        - start: "2026-12-20T00:00+08:00"
+          end: null
+          note: "原文無時刻；12/20 週日，條款無順延；額滿為止"
+      quotes:
+        - "※於115年12月20日開放登錄，額滿為止。"
+        - "115年9月1日~115年12月31日。"
+    - name: "【美日韓泰再加碼】"
+      slots:
+        - start: "2026-12-20T00:00+08:00"
+          end: null
+          note: "原文無時刻；額滿為止"
+      quotes:
+        - "※於115年12月20日開放登錄，額滿為止。"
+  difficulty: [multi_sub, date_only, reg_after_spend, holiday_no_shift, roc_year]
+  verified_at: "2026-11-01"
+
+- id: hncb-bearq-mitsui
+  bank: hncb
+  url: https://www.hncb.com.tw/wps/portal/HNCB/card/introduce/cash_feedback_card/BearQcard2026
+  title: 熊Q卡
+  registration: unspecified_time
+  period: [2026-10-01, 2026-12-31]
+  note: "本筆只收錄子活動「【週一~週四】Visa熊Q卡夢時代指定用餐店櫃5%刷卡金回饋」：需每月登錄但未載開放時點；同頁其他子活動未納入"
+  subs:
+    - name: "【週一~週四】Visa熊Q卡夢時代指定用餐店櫃5%刷卡金回饋"
+      slots: []
+      quotes:
+        - "※本活動需於活動期間每月至華南銀行網站登錄活動，每月限量5,500名，額滿為止。"
+        - "115年10月1日~115年12月31日止"
+  difficulty: [negative, unspecified_time, monthly]
+  verified_at: "2026-11-01"
+
+- id: kgi-eslite
+  bank: kgi
+  url: https://www.kgibank.com.tw/zh-tw/personal/promotion/card-campaign/eslite-a
+  title: 誠品生活分店&線上購物樂 享最高7%
+  registration: required
+  period: [2026-10-01, 2026-12-31]
+  note: "同頁分店滿額禮（現場兌換）不需登錄，只有線上購物刷卡金需登錄"
+  subs:
+    - name: "誠品線上單筆分期滿6,000元享100元刷卡金 (限100份)"
+      slots:
+        - start: "2026-12-23T16:00+08:00"
+          end: "2026-12-31T23:59+08:00"
+          note: "登錄期間晚於活動起日（115/10/1）；名額額滿提前關閉"
+      quotes:
+        - "登錄期間115/12/23 16:00~115/12/31 23:59，若登錄名額額滿，將提前關閉"
+        - "活動期間：115/10/1~115/12/31"
+  difficulty: [reg_period_differs, reg_after_spend, quota, roc_year]
+  verified_at: "2026-11-01"
+
+- id: kgi-bonbons
+  bank: kgi
+  url: https://www.kgibank.com.tw/zh-tw/personal/promotion/card-campaign/bonbons
+  title: Bonbons甜點 享95折優惠
+  registration: not_required
+  period: [2026-02-01, 2026-12-31]
+  subs:
+    - name: ""
+      slots: []
+      quotes:
+        - "本活動免登錄"
+  difficulty: [negative, explicit_no_registration]
+  verified_at: "2026-11-01"
+
+- id: mega-birthday
+  bank: mega
+  url: https://www.megabank.com.tw/personal/credit-card/event/overview/megabirthday
+  title: 生日刷兆豐卡享好利！消費享最高10%回饋
+  registration: required
+  period: [2026-10-01, 2026-12-31]
+  subs:
+    - name: ""
+      slots:
+        - start: "2026-11-02T10:30+08:00"
+          end: "2026-11-30T23:59+08:00"
+          note: "「每月第一個銀行營業日」：11/1 週日，故為 11/2（官方未列舉，依假日表推得）；截止取「生日當月內完成登錄」，原文無時刻；每月限登錄1,000名"
+        - start: "2026-12-01T10:30+08:00"
+          end: "2026-12-31T23:59+08:00"
+          note: "12/1 週二為營業日；截止原文無時刻"
+      quotes:
+        - "本行分別於每月第一個銀行營業日上午10:30開放登錄"
+        - "各月壽星須於其生日當月內完成登錄並達成指定條件"
+        - "活動期間：115/10/1~12/31"
+  difficulty: [monthly, first_business_day, holiday_shift, quota]
+  verified_at: "2026-11-01"
+
+- id: mega-q4ftc
+  bank: mega
+  url: https://www.megabank.com.tw/personal/credit-card/event/overview/115q4ftc
+  title: 優惠自由選加碼１％
+  registration: required
+  period: [2026-10-01, 2026-12-31]
+  note: "注意事項「舉例：小峰…於115年10月15日成功登錄」是舉例句"
+  subs:
+    - name: ""
+      slots:
+        - start: "2026-11-02T10:00+08:00"
+          end: null
+          note: "每通路每月限登錄2,500名，額滿提前關閉"
+        - start: "2026-12-02T10:00+08:00"
+          end: null
+      quotes:
+        - "※指定通路每月限擇一登錄，115/10/2、115/11/2、115/12/2 10:00 開放正卡持卡人登錄，每通路每月限登錄2,500名。"
+        - "本活動每月2號上午10時開放登錄"
+  difficulty: [monthly, enumerated_dates, example_sentence, quota, roc_year]
+  verified_at: "2026-11-01"
+
+- id: mega-lido-foreign
+  bank: mega
+  url: https://www.megabank.com.tw/personal/credit-card/event/overview/2026h1lidoforeign
+  title: 「利多御璽卡」國外消費最高3.1%回饋
+  registration: unspecified_time
+  period: [2026-07-01, 2026-12-31]
+  note: "加碼0.1%需登錄乙次，頁面未載登錄開放時點或期限"
+  subs:
+    - name: ""
+      slots: []
+      quotes:
+        - "國外「再加碼0.1%現金回饋」活動需由正卡持卡人成功登錄"
+        - "活動期間利多御璽卡正卡人僅需登錄乙次即可"
+  difficulty: [negative, unspecified_time, register_once]
+  verified_at: "2026-11-01"
+
+- id: scsb-applepay-travel
+  bank: scsb
+  url: https://www.scsb.com.tw/content/card/hotPage/4604
+  title: ApplePay綁上海商銀信用卡，日韓消費最高加碼10%回饋
+  registration: required
+  period: [2026-07-01, 2026-12-31]
+  note: "「每月25日(含)前已完成登錄者」是回饋計算批次的截點，不是開放時點"
+  subs:
+    - name: ""
+      slots:
+        - start: "2026-07-01T00:00+08:00"
+          end: "2026-12-31T23:59+08:00"
+          note: "登錄期間同活動期間，原文無時刻；活動期間僅需登錄一次"
+      quotes:
+        - "本活動登錄期間同活動期間"
+        - "活動期間僅需登錄一次"
+        - "活動期間：2026/7/1~2026/12/31"
+        - "係依每月25日(含)前已完成登錄者"
+  difficulty: [reg_equals_period, window_crosses_range, monthly_cutoff_trap]
+  verified_at: "2026-11-01"
+
+- id: scsb-hsr-upgrade
+  bank: scsb
+  url: https://www.scsb.com.tw/content/card/news_081126sh3.html
+  title: 2026年刷世界卡尊享高鐵免費升等，全卡友享優惠價升等
+  registration: not_required
+  period: [2026-01-01, 2026-12-31]
+  note: "活動內容無登錄要求；頁面「登錄」只在導覽列"
+  subs:
+    - name: ""
+      slots: []
+      quotes:
+        - "持傳富理財世界商務卡訂票，每月不限消費門檻，可享免費升等2張。"
+        - "活動期間：115/1/1 ~ 115/12/31"
+  difficulty: [negative, nav_keyword_trap]
+  verified_at: "2026-11-01"
+
+- id: sinopac-travel
+  bank: sinopac
+  url: https://bank.sinopac.com/sinopacBT/personal/credit-card/discount/814407078.html
+  title: 旅遊消費首選永豐
+  registration: required
+  period: [2026-10-01, 2026-12-31]
+  note: "登錄日未寫年份，依活動期間 2026/10/1-2026/12/31 補 2026；範例「小永於活動期間內之11/15完成登錄」是舉例；同頁 itf 旅展現場兌換活動不需登錄，未列入"
+  subs:
+    - name: "環遊全球任你行，為今年畫下精彩句點"
+      slots:
+        - start: "2026-11-15T15:00+08:00"
+          end: null
+          note: "11/15 週日，條款無順延；每月限量3,000名"
+        - start: "2026-12-15T15:00+08:00"
+          end: null
+      quotes:
+        - "10/15、11/15、12/15的15:00開放登錄，每月限量登錄3,000名，共9,000名。活動期間內任一月份完成登錄，且有單月達消費門檻者，即享活動資格，無須重複登錄。"
+    - name: "海外消費隨你刷，回饋升級一路拿"
+      slots:
+        - start: "2026-11-15T15:00+08:00"
+          end: null
+        - start: "2026-12-15T15:00+08:00"
+          end: null
+      quotes:
+        - "四、登錄時間&名額：10/15、11/15、12/15的15:00開放登錄，每月限量登錄3,000名，共9,000名。"
+    - name: "生日之旅！海外餐廳消費加碼10%，再享旅遊專屬優惠碼!"
+      slots:
+        - start: "2026-11-15T15:00+08:00"
+          end: "2026-11-30T23:59+08:00"
+          note: "截止「至當月月底」原文無時刻；限當月壽星"
+        - start: "2026-12-15T15:00+08:00"
+          end: "2026-12-31T23:59+08:00"
+      quotes:
+        - "登錄時間&名額：10/15、11/15、12/15的15:00開放登錄至當月月底，每月限量登錄1,000名，共3,000名。"
+  difficulty: [multi_sub, enumerated_dates, example_sentence, year_inferred, month_end, quota, holiday_no_shift]
+  verified_at: "2026-11-01"
+
+- id: sinopac-autopay
+  bank: sinopac
+  url: https://bank.sinopac.com/sinopacBT/personal/credit-card/discount/020616393.html
+  title: 永豐帳戶扣繳卡費活動
+  registration: unspecified_time
+  period: [2026-01-01, 2026-12-31]
+  note: "截止為個人化相對期限（首次扣繳成功之次月底），無固定開放時點；例句中的 8月/9月、2026/9/13 不是時點"
+  subs:
+    - name: ""
+      slots: []
+      quotes:
+        - "需於成功自動扣繳之次月底前登錄（例：8月成功扣繳卡費，9月底前須登錄），限量登錄50,000名"
+  difficulty: [negative, unspecified_time, relative_deadline, example_sentence]
+  verified_at: "2026-11-01"
+
+- id: sunny-world-firstswipe
+  bank: sunny
+  url: https://www.sunnybank.com.tw/creditcard/wcardinfo/
+  title: 新卡首刷禮「陽信領航‧禮遇起航」
+  registration: not_required
+  period: [2026-07-01, 2026-12-31]
+  note: "陽信多數活動頁（activityevent/*、ActNewsView/*）內容為圖片，無可引用文字；本頁為鑫世界商務卡權益頁，首刷禮無登錄要求"
+  subs:
+    - name: "新卡首刷禮「陽信領航‧禮遇起航」"
+      slots: []
+      quotes:
+        - "活動期間: 自115/7/1起~115/12/31止，且於116/1/31前核卡成功者"
+        - "活動內容:活動期間申辦本行『鑫世界商務卡』之新卡戶，核卡後60天內一般消費累積達新臺幣8萬元(含)以上，即贈現金紅利點數 2,000點"
+  difficulty: [negative, first_swipe]
+  verified_at: "2026-11-01"
+
+- id: taipei_fubon-hawks-5pct
+  bank: taipei_fubon
+  url: https://cardpromote.taipeifubon.com.tw/promotion/Detail?sn=A000183
+  title: 悍勇卡精選通路5%回饋
+  registration: required
+  period: [2026-07-02, 2026-12-31]
+  note: "每季只需登錄一次，但每月 22 日仍開放；「ex.7月登錄成功…」為舉例"
+  subs:
+    - name: ""
+      slots:
+        - start: "2026-11-22T16:00+08:00"
+          end: "2026-11-30T23:59+08:00"
+          note: "原文「下午16:00」；11/22 週日，條款無順延；截止「至當月月底」原文無時刻"
+        - start: "2026-12-22T16:00+08:00"
+          end: "2026-12-31T23:59+08:00"
+      quotes:
+        - "※登錄時間：每月22日下午16:00開放登錄至當月月底，每季限量15,000名"
+        - "※此活動每季僅需登錄一次即符合當季活動資格，不需每月重覆登錄"
+  difficulty: [monthly, per_quarter, month_end, example_sentence, quota, holiday_no_shift]
+  verified_at: "2026-11-01"
+
+- id: taipei_fubon-costco-travel
+  bank: taipei_fubon
+  url: https://cardpromote.taipeifubon.com.tw/promotion/Detail?sn=C000270
+  title: 精選海外旅遊最高回饋5%
+  registration: required
+  period: [2026-01-01, 2026-12-31]
+  subs:
+    - name: ""
+      slots:
+        - start: "2026-11-01T00:00+08:00"
+          end: null
+          note: "11/1 週日，條款無順延；原文未寫截止，額滿提前終止"
+        - start: "2026-12-01T00:00+08:00"
+          end: null
+      quotes:
+        - "※每月1日00:00開放登錄，每月登錄名額共5萬名，限登錄正卡人資料。"
+  difficulty: [monthly, midnight_open, quota, holiday_no_shift, open_end]
+  verified_at: "2026-11-01"
+
+- id: taipei_fubon-jcard-asia
+  bank: taipei_fubon
+  url: https://cardpromote.taipeifubon.com.tw/promotion/Detail?sn=C000306
+  title: J卡亞洲精選最高享6%
+  registration: required
+  period: [2026-04-01, 2026-12-31]
+  subs:
+    - name: ""
+      slots:
+        - start: "2026-11-19T16:00+08:00"
+          end: null
+          note: "原文未寫截止；每月限量10,000名"
+        - start: "2026-12-19T16:00+08:00"
+          end: null
+          note: "12/19 週六，條款無順延"
+      quotes:
+        - "※每月19日16:00開放登錄，每月登錄名額限量10,000名，每戶每月限回饋乙張。"
+  difficulty: [monthly, quota, holiday_no_shift, open_end]
+  verified_at: "2026-11-01"
+
+- id: taipei_fubon-momo-1111
+  bank: taipei_fubon
+  url: https://cardpromote.taipeifubon.com.tw/promotion/Detail?sn=D000318
+  title: momo卡11月店內活動
+  registration: required
+  period: [2026-11-01, 2026-11-30]
+  note: "三個子活動登錄時點各不相同且都在消費期之後；活動三消費日 11/5，登錄 11/16"
+  subs:
+    - name: "【雙11暖身加碼】"
+      slots:
+        - start: "2026-11-18T15:00+08:00"
+          end: null
+          note: "登錄名額2,200名"
+      quotes:
+        - "登錄名額2,200名，2026/11/18 15點起登錄"
+    - name: "【雙11正檔加碼】"
+      slots:
+        - start: "2026-11-19T15:00+08:00"
+          end: null
+          note: "登錄名額1,600名"
+      quotes:
+        - "登錄名額1,600名，2026/11/19 15點起登錄"
+    - name: "【雙11卡友日加碼】"
+      slots:
+        - start: "2026-11-16T15:00+08:00"
+          end: null
+          note: "登錄名額1,000名"
+      quotes:
+        - "登錄名額1,000名，2026/11/16 15點起登錄"
+        - "活動期間：2026/11/5"
+  difficulty: [multi_sub, reg_after_spend, reg_period_differs, quota, open_end]
+  verified_at: "2026-11-01"
+
+- id: taipei_fubon-pxpay-firstbind
+  bank: taipei_fubon
+  url: https://cardpromote.taipeifubon.com.tw/promotion/Detail?sn=D000278
+  title: 首綁全支付，滿額送50全點
+  registration: unspecified_time
+  period: [2026-06-29, 2027-01-03]
+  note: "需每月於消費前在全支付 App 登錄，頁面未載開放時點；「每週限量」是回饋名額，不是登錄時點"
+  subs:
+    - name: ""
+      slots: []
+      quotes:
+        - "※限量且每月需於消費前至全支付App登錄"
+  difficulty: [negative, unspecified_time, partner_app, weekly_quota_trap]
+  verified_at: "2026-11-01"
+
+- id: taishin-insurance-installment
+  bank: taishin
+  url: https://mkpcard.taishinbank.com.tw/tscccms/promotion/detail/WM_20260929134706445
+  title: 【保費神卡超給利】保險新戶最高8%，Richart卡假日刷
+  registration: required
+  period: [2026-11-01, 2026-12-31]
+  note: "頁面活動期間 2026-11-01~12-31，但保費分期的登錄窗口自 6/10 起；同頁保險新戶回饋為領券制，未列入"
+  subs:
+    - name: "2026年7-12月保費分期"
+      slots:
+        - start: "2026-06-10T10:00+08:00"
+          end: "2026-12-31T23:59+08:00"
+          note: "窗口跨越範圍起點"
+      quotes:
+        - "※登錄期間：2026/6/10(三) 10:00-2026/12/31(四) 23:59，本活動僅適用於2026/7/1-12/31完成保險費扣繳之交易。"
+  difficulty: [reg_period_differs, window_crosses_range]
+  verified_at: "2026-11-01"
+
+- id: taishin-japan-visa
+  bank: taishin
+  url: https://mkpcard.taishinbank.com.tw/tscccms/promotion/detail/WM_20260824114903981
+  title: 刷台新Visa卡，日本指定商戶消費享最高13.3%回饋
+  registration: required
+  period: [2026-09-01, 2026-11-30]
+  note: "登錄在 Visa Select 優選回饋網頁；窗口 9/1 起至回饋額滿，原文未寫截止（未以活動期末 11/30 代填）"
+  subs:
+    - name: "日本高島屋，最高10%回饋"
+      slots:
+        - start: "2026-09-01T00:00+08:00"
+          end: null
+      quotes:
+        - "登錄期間：2026/9/1 00:00起-回饋額滿將關閉"
+    - name: "BicCamera，最高10%回饋"
+      slots:
+        - start: "2026-09-01T00:00+08:00"
+          end: null
+      quotes:
+        - "登錄期間：2026/9/1 00:00起-回饋額滿關閉"
+  difficulty: [multi_sub, window_crosses_range, open_end, quota]
+  verified_at: "2026-11-01"
+
+- id: taishin-pxmart-anniv
+  bank: taishin
+  url: https://mkpcard.taishinbank.com.tw/tscccms/promotion/detail/WM_20260907090737422
+  title: 全聯週年慶，最高回饋6%！
+  registration: not_required
+  period: [2026-09-28, 2027-01-03]
+  note: "每週六日消費日與「第N週」限量區間都不是登錄時點；頁面「登錄」只在導覽列"
+  subs:
+    - name: ""
+      slots: []
+      quotes:
+        - "2026/10/30-2026/12/3，每週六、日，於全臺「全聯」實體門市(不含大全聯)"
+        - "*活動期間每週每全支付會員回饋乙次，不累贈"
+  difficulty: [negative, weekly_date_trap, nav_keyword_trap]
+  verified_at: "2026-11-01"
+
+- id: tcbbank-world-card
+  bank: tcbbank
+  url: https://www.tcbbank.com.tw/CreditCard/J_Credit_World/index.html
+  title: MasterCard世界卡
+  registration: not_required
+  period: null
+  note: "「每月1日上午10:00開放索取」是至 johoo777 網站購買索取優惠，非信用卡活動登錄；道路救援「登錄」是車籍登記，無時點。台中銀行其他活動頁（Promotion/Info.html）內容為 base64 圖片，無可引用文字"
+  subs:
+    - name: ""
+      slots: []
+      quotes:
+        - "每月1日上午10:00開放索取，每月限量優惠名額，如索取已滿，請於下月提早索取。"
+        - "需於本行網站下載申請表填寫後，以郵寄或傳真方式申辦道路救援服務登錄。"
+  difficulty: [negative, claim_not_registration, monthly_trap]
+  verified_at: "2026-11-01"
+
+- id: yuanta-applepay-20pct
+  bank: yuanta
+  url: https://www.yuantabank.com.tw/bank/creditCard/promotionActivity/in.do?id=6ae9eccdb90000053f09
+  title: 綁定 Apple Pay 筆筆20%回饋，最高享200元刷卡金
+  registration: required
+  period: [2026-08-18, 2026-12-31]
+  subs:
+    - name: ""
+      slots:
+        - start: "2026-08-18T14:00+08:00"
+          end: "2026-12-31T23:59+08:00"
+          note: "窗口跨越範圍起點；限量40,000名贈完即止"
+      quotes:
+        - "*登錄期間：2026/8/18 14:00~2026/12/31 23:59止"
+  difficulty: [window_crosses_range, quota]
+  verified_at: "2026-11-01"
+
+- id: yuanta-easycard-autoload
+  bank: yuanta
+  url: https://www.yuantabank.com.tw/bank/creditCard/promotionActivity/in.do?id=6a100c82d80000053d3a
+  title: 元大悠遊聯名卡自動加值享20%
+  registration: unspecified_time
+  period: [2026-09-01, 2026-12-31]
+  subs:
+    - name: "1.【自動加值享10%刷卡金回饋】"
+      slots: []
+      quotes:
+        - "並於指定時間內完成登錄，自動加值享10%刷卡金回饋"
+    - name: "2.【悠遊卡加碼10%刷卡金回饋】"
+      registration: not_required
+      slots: []
+      quotes:
+        - "持元大悠遊聯名卡首次自動加值享10%刷卡金回饋"
+  note: "子活動1 寫「於指定時間內完成登錄」但頁面未載指定時間；子活動2 無登錄要求"
+  difficulty: [negative, unspecified_time, mixed_not_required]
+  verified_at: "2026-11-01"
+
+- id: yuanta-mastercard-linepay
+  bank: yuanta
+  url: https://www.yuantabank.com.tw/bank/creditCard/promotionActivity/in.do?id=6a1fbabf830000046e91
+  title: 申辦Mastercard信用卡綁定LINE Pay支付享10%回饋
+  registration: not_required
+  period: [2026-07-01, 2026-12-31]
+  subs:
+    - name: ""
+      slots: []
+      quotes:
+        - "(本活動不須登錄)"
+  difficulty: [negative, explicit_no_registration]
+  verified_at: "2026-11-01"
