@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  安裝（需使用者同意後才執行）：
+    cp ops/com.garychen.tw-card-radar.plist ~/Library/LaunchAgents/
+    launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.garychen.tw-card-radar.plist
+  每日 08:20、12:20、18:20（避開整點與深夜：Mac 睡眠是排程最大的失敗源；
+  睡眠中錯過的時段在喚醒後補跑一次）。
+  repo 在 ~/Documents 底下，launchd 啟動的 bash 需要「完整磁碟取用權」或把 repo
+  移出 ~/Documents，否則會出現 Operation not permitted。
+-->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.garychen.tw-card-radar</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/bash</string>
+    <string>/Users/chenzhiming/Documents/Claude/tw-card-registration-radar/ops/run_local.sh</string>
+  </array>
+  <key>StartCalendarInterval</key>
+  <array>
+    <dict><key>Hour</key><integer>8</integer><key>Minute</key><integer>20</integer></dict>
+    <dict><key>Hour</key><integer>12</integer><key>Minute</key><integer>20</integer></dict>
+    <dict><key>Hour</key><integer>18</integer><key>Minute</key><integer>20</integer></dict>
+  </array>
+  <key>StandardOutPath</key>
+  <string>/Users/chenzhiming/Library/Logs/tw-card-radar/launchd.out</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/chenzhiming/Library/Logs/tw-card-radar/launchd.err</string>
+  <key>ProcessType</key>
+  <string>Background</string>
+</dict>
+</plist>
