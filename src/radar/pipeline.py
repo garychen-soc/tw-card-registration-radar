@@ -74,7 +74,16 @@ def fetch_bank(bank_id: str) -> Fetched:
                     out.docs.append((stub, stub.detail_text))
                     continue
                 try:
-                    out.docs.append((stub, adapter.terms(stub).text))
+                    terms = adapter.terms(stub)
+                    if stub.period_end is None and terms.period_end is not None:
+                        # 列表沒有期間、明細有（玉山）：以明細為準
+                        stub = stub.model_copy(
+                            update={
+                                "period_start": terms.period_start,
+                                "period_end": terms.period_end,
+                            }
+                        )
+                    out.docs.append((stub, terms.text))
                 except TransportError as exc:
                     failures += 1
                     log.warning("%s 明細失敗 %s：%s", bank_id, stub.url, exc)

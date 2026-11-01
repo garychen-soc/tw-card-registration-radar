@@ -1,0 +1,158 @@
+{
+ "campaigns": [
+  {
+   "campaignPath": "/content/cub-aem-cs/zh-tw/cathaybk/personal/event/overview/credit-card/shopping/202507/Daimaru2025H2.html",
+   "campaignProps": {
+    "startDate": "2025-12-31T16:00:00.000+00:00",
+    "campaignFilter": [
+     "cub-tags:camapigns/credit-card/shopping",
+     "cub-tags:camapigns/credit-card/travel"
+    ],
+    "jcr:title": "日本大丸百貨福岡天神店領券消費享最高7.8%小樹點(信用卡)回饋",
+    "endDate": "2026-12-30T16:00:00.000+00:00",
+    "campaignContent": "刷CUBE信用卡領券消費享 4.5%小樹點(信用卡)回饋無上限，另切換[趣旅行]權益再享最高3.3%小樹點(信用卡)回饋 ，指定化妝品專櫃再享 5% 現折優惠！",
+    "campaignTitle": "日本大丸百貨福岡天神店刷CUBE信用卡\r\n領券消費享7.8%小樹點(信用卡)回饋無上限"
+   }
+  },
+  {
+   "campaignPath": "/content/cub-aem-cs/zh-tw/cathaybk/personal/event/overview/credit-card/online-shopping/202406/treecoupon.html",
+   "campaignProps": {
+    "campaignFilter": [
+     "cub-tags:camapigns/credit-card/online-shopping",
+     "cub-tags:camapigns/credit-card/shopping"
+    ],
+    "jcr:title": "樹享券(外連)",
+    "campaignContent": "電子現金抵用券，消費主動提醒\r\n刷卡優惠速享不漏接",
+    "campaignTitle": "樹享券"
+   }
+  },
+  {
+   "campaignPath": "/content/cub-aem-cs/zh-tw/cathaybk/personal/event/overview/credit-card/online-shopping/202611/momo202611_1.html",
+   "campaignProps": {
+    "startDate": "2026-10-31T16:00:00.000+00:00",
+    "campaignFilter": [
+     "cub-tags:camapigns/credit-card/online-shopping"
+    ],
+    "jcr:title": "momo購物網2026/11_雙11嘉年華",
+    "endDate": "2026-11-14T16:00:00.000+00:00",
+    "campaignContent": "單筆滿額最高享10.8小樹點(信用卡)回饋，再享雙11限時加碼優惠！",
+    "campaignTitle": "momo購物網 雙11嘉年華   (11/1~11/15)"
+   }
+  },
+  {
+   "campaignPath": "/content/cub-aem-cs/zh-tw/cathaybk/personal/event/overview/credit-card/transportation/2026/U-POWERQ2.html",
+   "campaignProps": {
+    "startDate": "2026-03-31T16:00:00.000+00:00",
+    "campaignFilter": [
+     "cub-tags:camapigns/credit-card/shopping"
+    ],
+    "jcr:title": "U-POWER刷CUBE信用卡領券滿千享最高回饋7%",
+    "endDate": "2026-06-29T16:00:00.000+00:00",
+    "campaignContent": "CUBE App領優惠券享最高7%小樹點(信用卡)回饋",
+    "campaignTitle": "U-POWER刷CUBE信用卡領券滿千享最高回饋7%小樹點(信用卡)"
+   }
+  },
+  {
+   "campaignPath": "/content/cub-aem-cs/zh-tw/cathaybk/personal/event/overview/credit-card/travel/202610/k-beauty.html",
+   "campaignProps": {
+    "startDate": "2026-10-14T16:00:00.000+00:00",
+    "campaignFilter": [
+     "cub-tags:camapigns/credit-card/travel"
+    ],
+    "jcr:title": "韓國玩美趁現在！完成任務最高加碼3,000點回饋",
+    "endDate": "2026-12-30T16:00:00.000+00:00",
+    "campaignContent": "大韓航空機票6%折扣(不含美洲線)\r\n雄獅旅遊指定韓國產品最高折NT$1,000\r\n可樂旅遊指定韓國產品最高折5%\r\n",
+    "campaignTitle": "韓國玩美趁現在！完成任務最高加碼3,000點回饋"
+   }
+  },
+  {
+   "campaignPath": "/content/cub-aem-cs/zh-tw/cathaybk/personal/event/overview/credit-card/payment/2024/billpayment-04.html",
+   "campaignProps": {
+    "startDate": "2023-12-31T16:00:00.000+00:00",
+    "campaignFilter": [
+     "cub-tags:camapigns/credit-card/payment"
+    ],
+    "jcr:title": "代扣繳【公共事業費&路邊停車費】",
+    "campaignContent": "繳納公共事業費、路邊停車費",
+    "campaignTitle": "代扣繳服務\r\n"
+   }
+  },
+  {
+   "campaignPath": "/content/cub-aem-cs/zh-tw/cathaybk/personal/event/overview/credit-card/payment/2025/eparking.html",
+   "campaignProps": {
+    "startDate": "2025-12-31T16:00:00.000+00:00",
+    "campaignFilter": [
+     "cub-tags:camapigns/credit-card/payment",
+     "cub-tags:camapigns/credit-card/transportation"
+    ],
+    "jcr:title": "信用卡代扣繳 eTag自動儲值/智慧停車",
+    "endDate": "2026-12-30T16:00:00.000+00:00",
+    "campaignContent": " ",
+    "campaignTitle": "eTag自動儲值/eTag智慧停車服務"
+   }
+  },
+  {
+   "campaignPath": "/content/cub-aem-cs/zh-tw/cathaybk/personal/event/overview/credit-card/payment/all/donate.html",
+   "campaignProps": {
+    "campaignFilter": [
+     "cub-tags:camapigns/credit-card/payment"
+    ],
+    "jcr:title": "捐款",
+    "campaignContent": "國泰世華邀您一同關懷社會，歡迎踴躍捐款",
+    "campaignTitle": "捐款"
+   }
+  },
+  {
+   "campaignPath": "/content/cub-aem-cs/zh-tw/cathaybk/personal/event/overview/credit-card/bonus/product/parkingfee.html",
+   "campaignProps": {
+    "startDate": "2025-12-31T16:00:00.000+00:00",
+    "campaignFilter": [
+     "cub-tags:camapigns/credit-card/card"
+    ],
+    "jcr:title": "小樹點(信用卡)折抵停車費",
+    "endDate": "2026-12-30T16:00:00.000+00:00",
+    "campaignContent": "小樹點(信用卡)折抵市區停車費",
+    "campaignTitle": "小樹點(信用卡)抵停車費\r\n最經濟的消費體驗"
+   }
+  },
+  {
+   "campaignPath": "/content/cub-aem-cs/zh-tw/cathaybk/personal/event/overview/credit-card/bonus/point-exchange/airmiles.html",
+   "campaignProps": {
+    "startDate": "2025-12-31T16:00:00.000+00:00",
+    "campaignFilter": [
+     "cub-tags:camapigns/credit-card/card"
+    ],
+    "jcr:title": "小樹點(信用卡)兌換航空里程/飯店積分｜國泰世華商業銀行",
+    "endDate": "2026-12-30T16:00:00.000+00:00",
+    "campaignContent": "小樹點(信用卡)酬賓計畫，兌換里程/飯店積分享受旅遊樂趣",
+    "campaignTitle": "點數轉換航空里程/飯店積分好優惠"
+   }
+  },
+  {
+   "campaignPath": "/content/cub-aem-cs/zh-tw/cathaybk/personal/event/overview/credit-card/bonus/rule/faq.html",
+   "campaignProps": {
+    "startDate": "2025-12-31T16:00:00.000+00:00",
+    "campaignFilter": [
+     "cub-tags:camapigns/credit-card/card"
+    ],
+    "jcr:title": "小樹點(信用卡)及小樹點(生活)FAQ",
+    "endDate": "2026-12-30T16:00:00.000+00:00",
+    "campaignContent": "小樹點為國泰推出的集團點數，1點=1元新台幣",
+    "campaignTitle": "小樹點(信用卡)及\r\n小樹點(生活)FAQ"
+   }
+  },
+  {
+   "campaignPath": "/content/cub-aem-cs/zh-tw/cathaybk/personal/event/overview/credit-card/bonus/202610/2026Q4kidsbonus.html",
+   "campaignProps": {
+    "startDate": "2026-09-30T16:00:00.000+00:00",
+    "campaignFilter": [
+     "cub-tags:camapigns/credit-card/family"
+    ],
+    "jcr:title": "【童樂匯專屬】期間限定！童樂匯通路 領券再加碼3%回饋",
+    "endDate": "2026-12-30T16:00:00.000+00:00",
+    "campaignContent": "與國泰關係更緊密，親子消費回饋多更多！領券刷CUBE信用卡 親子指定通路最高享13%回饋",
+    "campaignTitle": "【童樂匯專屬】期間限定！童樂匯通路 領券再加碼3%回饋"
+   }
+  }
+ ]
+}

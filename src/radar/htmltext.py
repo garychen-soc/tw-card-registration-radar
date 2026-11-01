@@ -127,13 +127,19 @@ def to_text(html: str) -> str:
 
 def _extract(tree: LexborHTMLParser) -> str:
     """從（可能已被過濾的）樹取出純文字。"""
+    # 內容根節點必須涵蓋全文的大部分才採用。只看「≥200 字」會在分頁或多個
+    # <article> 的頁面上只取到第一塊 —— 實測聯邦「聯邦綠卡」9,187 字只剩 213 字。
+    whole = tree.body or tree.root
+    whole_len = len((whole.text() or "").strip()) if whole is not None else 0
     root = None
     for selector in _CONTENT_ROOTS:
         root = tree.css_first(selector)
-        if root is not None and len((root.text() or "").strip()) >= 200:
-            break
+        if root is not None:
+            size = len((root.text() or "").strip())
+            if size >= 200 and size >= whole_len * 0.6:
+                break
         root = None
-    root = root or tree.body or tree.root
+    root = root or whole
     if root is None:
         return ""
     text = root.text(separator="\n", strip=True)
