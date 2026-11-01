@@ -32,6 +32,7 @@ TAIPEI = ZoneInfo("Asia/Taipei")
 ROOT = Path(__file__).resolve().parents[2]
 STATE = ROOT / "state"
 DROP_LIMIT = 0.4
+MIN_TERMS_CHARS = 80
 REGISTRATION_WORDS = re.compile(r"登錄|登記|報名")
 GENERIC_TITLE = re.compile(
     r"^(?:優惠內容|活動內容|活動說明|活動辦法|注意事項|共同注意事項|關於我們|活動詳情|"
@@ -198,6 +199,10 @@ def assemble(doc: Doc, output: dict[str, Any] | None, failure: str, observed: da
     elif failure:
         activity.registration = "unknown"
         review.append(failure)
+    elif len(doc.text.strip()) < MIN_TERMS_CHARS:
+        # 圖片型頁面、外站 SPA、已下架頁：讀不到文字不等於不需登錄
+        activity.registration = "unknown"
+        review.append("官方頁面沒有可讀的條款文字（可能是圖片或已下架），請直接查看活動頁")
     else:
         activity.registration = "not_required"
     activity.review = review
