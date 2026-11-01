@@ -1,0 +1,170 @@
+{
+"_note": "台新 D 百貨購物分類頁（只留 _csrf/totalPage）與 getMorePromotionList 第 1–2 頁原樣（2026-11-01）",
+"category_html": "<html><body><form><input type=\"hidden\" name=\"_csrf\" value=\"MqPzS3ziSyB6QEDSNkpDgwsDubClDVq9P5erGy4b-xR5VFhIBZOWeRmGfBJXcSTjB2d34j00lImUP22QBqKdLUgry3AaMmss\"/><input type=\"hidden\" id=\"totalPage\" name=\"totalPage\" value=\"2\"/></form></body></html>",
+"pages": [
+[
+{
+"promotionId": "WM_20260814165339540",
+"promotionName": "新光三越贈最高21%，週年慶刷台新信用卡",
+"listPic": "2026/WM_20260814165339540/WM_20260814165339540_list_image.jpg",
+"promotionBrief": "台新銀行新光三越聯名卡贈最高21%",
+"promotionStartDate": "2026-09-30T16:00:00.000+00:00",
+"promotionEndDate": "2026-12-13T15:59:59.000+00:00",
+"customerProperty": "信用卡",
+"regRequired": "N"
+},
+{
+"promotionId": "WM_20260825153618620",
+"promotionName": "2026新光三越夏天卡利HIGH兌領須知_憑簡訊兌領",
+"listPic": "2026/WM_20260825153618620/WM_20260825153618620_list_image.jpg",
+"promotionBrief": "憑簡訊兌領 恕不寄紙本兌換函",
+"promotionStartDate": "2026-09-30T16:00:00.000+00:00",
+"promotionEndDate": "2026-11-08T15:59:59.000+00:00",
+"customerProperty": "信用卡",
+"regRequired": "N"
+},
+{
+"promotionId": "WM_20260914193622109",
+"promotionName": "【新新券】新光三越加贈最高10%，週年慶刷台新新光三越聯名卡",
+"listPic": "",
+"promotionBrief": "2026/9/17-12/13",
+"promotionStartDate": "2026-09-16T16:00:00.000+00:00",
+"promotionEndDate": "2026-12-13T15:59:59.000+00:00",
+"customerProperty": "信用卡",
+"regRequired": "N"
+},
+{
+"promotionId": "WM_20251209150854387",
+"promotionName": "指定百貨享最高3.3%，大筆刷台新Richart卡",
+"listPic": "2025/WM_20251209150854387/WM_20251209150854387_list_image.png",
+"promotionBrief": "大筆刷台新Richart卡",
+"promotionStartDate": "2026-06-30T16:00:00.000+00:00",
+"promotionEndDate": "2027-12-31T15:59:59.000+00:00",
+"customerProperty": "信用卡",
+"regRequired": "N"
+},
+{
+"promotionId": "WM_20260820161046730",
+"promotionName": "SOGO百貨最高回饋16.6%，週年慶刷台新信用卡！",
+"listPic": "2026/WM_20260820161046730/WM_20260820161046730_list_image.jpg",
+"promotionBrief": "大筆刷，台新Richart卡",
+"promotionStartDate": "2026-10-30T16:00:00.000+00:00",
+"promotionEndDate": "2026-11-16T15:59:59.000+00:00",
+"customerProperty": "信用卡",
+"regRequired": "N"
+},
+{
+"promotionId": "WM_20260921174945806",
+"promotionName": "環球購物中心週年慶，享最高12%回饋",
+"listPic": "2026/WM_20260921174945806/WM_20260921174945806_list_image.jpg",
+"promotionBrief": "環球購物中心週年慶，享最高12%回饋",
+"promotionStartDate": "2026-10-21T16:00:00.000+00:00",
+"promotionEndDate": "2026-11-04T15:59:59.000+00:00",
+"customerProperty": "信用卡",
+"regRequired": "N"
+},
+{
+"promotionId": "WM_20260803135752528",
+"promotionName": "漢神最高15.3%回饋，週年慶刷台新信用卡！",
+"listPic": "2026/WM_20260803135752528/WM_20260803135752528_list_image.jpg",
+"promotionBrief": "大筆刷，台新Richart卡",
+"promotionStartDate": "2026-10-14T16:00:00.000+00:00",
+"promotionEndDate": "2026-12-20T15:59:59.000+00:00",
+"customerProperty": "信用卡",
+"regRequired": "N"
+},
+{
+"promotionId": "WM_20260803140216823",
+"promotionName": "比漾廣場週年慶，刷比漾聯名卡，最高12%回饋",
+"listPic": "2026/WM_20260803140216823/WM_20260803140216823_list_image.jpg",
+"promotionBrief": "最高12%回饋",
+"promotionStartDate": "2026-10-07T16:00:00.000+00:00",
+"promotionEndDate": "2026-11-09T15:59:59.000+00:00",
+"customerProperty": "信用卡",
+"regRequired": "N"
+},
+{
+"promotionId": "WM_20260819160408048",
+"promotionName": "SKM Park Outlets贈最高4.5%，刷台新信用卡",
+"listPic": "2026/WM_20260819160408048/WM_20260819160408048_list_image.jpg",
+"promotionBrief": "刷台新信用卡，贈最高4.5%",
+"promotionStartDate": "2026-10-07T16:00:00.000+00:00",
+"promotionEndDate": "2026-11-01T15:59:59.000+00:00",
+"customerProperty": "信用卡",
+"regRequired": "N"
+},
+{
+"promotionId": "WM_20260814142513557",
+"promotionName": "THE WHOO后，尊享來店禮遇，滿額贈美肌2件組",
+"listPic": "2026/WM_20260814142513557/WM_20260814142513557_list_image.jpg",
+"promotionBrief": "WHOO后，尊享來店禮遇，滿額贈美肌2件",
+"promotionStartDate": "2026-10-04T16:00:00.000+00:00",
+"promotionEndDate": "2026-12-31T15:59:59.000+00:00",
+"customerProperty": "信用卡",
+"regRequired": "N"
+},
+{
+"promotionId": "WM_20260904135821958",
+"promotionName": "單筆滿額5倍贈！ HAPPYGO Pay綁定台新信用卡",
+"listPic": "2026/WM_20260904135821958/WM_20260904135821958_list_image.jpg",
+"promotionBrief": "單筆滿額5倍贈",
+"promotionStartDate": "2026-09-30T16:00:00.000+00:00",
+"promotionEndDate": "2026-12-31T15:59:59.000+00:00",
+"customerProperty": "信用卡",
+"regRequired": "N"
+},
+{
+"promotionId": "WM_20261001134105680",
+"promotionName": "指定百貨贈最高500元  Richart卡最高3.3%",
+"listPic": "2026/WM_20261001134105680/WM_20261001134105680_list_image.jpg",
+"promotionBrief": "刷台新卡  指定百貨最高贈500元",
+"promotionStartDate": "2026-09-30T16:00:00.000+00:00",
+"promotionEndDate": "2026-11-04T15:59:59.000+00:00",
+"customerProperty": "信用卡",
+"regRequired": "N"
+}
+],
+[
+{
+"promotionId": "WM_20260806143030247",
+"promotionName": "遠東百貨最高回饋5.3%，週年慶刷台新信用卡!",
+"listPic": "2026/WM_20260806143030247/WM_20260806143030247_list_image.jpg",
+"promotionBrief": "大筆刷，台新Richart卡",
+"promotionStartDate": "2026-09-08T16:00:00.000+00:00",
+"promotionEndDate": "2026-11-29T15:59:59.000+00:00",
+"customerProperty": "信用卡",
+"regRequired": "N"
+},
+{
+"promotionId": "WM_20260402134827538",
+"promotionName": "Just Gold 鎮金店，刷台新卡最高享88折",
+"listPic": "2026/WM_20260402134827538/WM_20260402134827538_list_image.jpg",
+"promotionBrief": "鎮金店，刷台新卡最高享88折",
+"promotionStartDate": "2026-04-07T16:00:00.000+00:00",
+"promotionEndDate": "2026-12-31T15:59:59.000+00:00",
+"customerProperty": "信用卡",
+"regRequired": "N"
+},
+{
+"promotionId": "WM_20260206103244817",
+"promotionName": "雪花秀生日禮遇，刷指定台新卡，尊享護膚體驗",
+"listPic": "2026/WM_20260206103244817/WM_20260206103244817_list_image.jpg",
+"promotionBrief": "雪花秀生日禮遇，刷指定台新卡，尊享護膚體",
+"promotionStartDate": "2026-02-12T16:00:00.000+00:00",
+"promotionEndDate": "2026-12-31T15:59:59.000+00:00",
+"customerProperty": "信用卡",
+"regRequired": "N"
+},
+{
+"promotionId": "WM_20250422161906960",
+"promotionName": "麗晶精品刷賓士無限卡，滿額贈下午茶券，再享最高10倍回饋!",
+"listPic": "2025/WM_20250422161906960/WM_20250422161906960_list_image.jpg",
+"promotionBrief": "賓士無限卡滿額贈下午茶券，再享最高10倍",
+"promotionStartDate": "2025-12-31T16:00:00.000+00:00",
+"promotionEndDate": "2026-12-31T15:59:59.000+00:00",
+"customerProperty": "信用卡",
+"regRequired": "N"
+}
+]
+]
+}

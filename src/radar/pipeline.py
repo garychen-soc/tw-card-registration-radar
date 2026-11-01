@@ -14,7 +14,7 @@ import re
 from collections.abc import Iterable
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass, field
-from datetime import datetime, timedelta
+from datetime import date, datetime, timedelta
 from pathlib import Path
 from typing import Any
 from zoneinfo import ZoneInfo
@@ -127,10 +127,15 @@ class Doc:
         return Request(title=stub.title, period=period, text=self.text)
 
 
-def group_docs(fetched: Fetched) -> list[Doc]:
-    """同一家銀行、條款文字相同的多張卡片合併成一筆活動，其餘標題留作別名。"""
+def group_docs(fetched: Fetched, today: date | None = None) -> list[Doc]:
+    """同一家銀行、條款文字相同的多張卡片合併成一筆活動，其餘標題留作別名。
+
+    列表公告的結束日已過的活動直接略過 —— 不發布，也不浪費 LLM 額度。
+    """
     groups: dict[str, Doc] = {}
     for stub, text in fetched.docs:
+        if today and stub.period_end and stub.period_end < today:
+            continue
         digest = content_hash(text) if len(text) >= 200 else content_hash(stub.key)
         doc = groups.get(digest)
         if doc is None:
@@ -223,7 +228,7 @@ def run(
     for bank_id in browser_banks:
         fetched[bank_id] = fetch_bank(bank_id)
 
-    docs = [doc for bank_id in bank_ids for doc in group_docs(fetched[bank_id])]
+    docs = [doc for bank_id in bank_ids for doc in group_docs(fetched[bank_id], observed.date())]
     outputs: dict[str, dict[str, Any]] = {}
     failures: dict[str, str] = {}
     pending: list[Doc] = []
