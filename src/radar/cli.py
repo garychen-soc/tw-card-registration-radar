@@ -5,7 +5,7 @@
     radar probe <bank>                                           單一銀行擷取體檢
     radar score                                                  以 golden 集評分目前 state
 
-退出碼：0 成功；2 參數錯誤；4 來源大量失敗、本輪不發布。
+退出碼：0 成功；2 參數錯誤；4 來源大量失敗、本輪不發布；6 claude CLI 登入失效。
 """
 
 from __future__ import annotations
@@ -68,6 +68,9 @@ def main(argv: list[str] | None = None) -> int:
             print(message)
         if not result.publishable:
             return 4
+        if any("登入失效" in m for m in result.messages):
+            # 抽取全數失敗，發布只會讓時間軸缺資料：停在上一版並讓排程通知
+            return 6
         if bank_ids:
             # 只跑部分銀行時，其餘銀行沿用 state，避免把它們從網站移除
             activities, health, _ = (
