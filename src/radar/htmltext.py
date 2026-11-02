@@ -142,8 +142,28 @@ def _extract(tree: LexborHTMLParser) -> str:
     root = root or whole
     if root is None:
         return ""
-    text = root.text(separator="\n", strip=True)
-    return "\n".join(line.strip() for line in text.splitlines() if line.strip())
+    return _flatten(root)
+
+
+_BLOCK_SET = frozenset(_BLOCK) | {"ul", "ol", "table", "tbody", "thead", "dl", "main", "header",
+                                  "blockquote", "pre", "hr", "form", "figure", "figcaption"}
+_SPACES = re.compile(r"[ \t\u3000\xa0]+")
+
+
+def _flatten(root: Any) -> str:
+    """只在區塊元素邊界換行，行內元素（span、b、a）的文字接在同一行。
+
+    舊做法以換行串接每一個文字節點，「<span>10/15</span>、<b>11/15</b>」會被拆成
+    三行，LLM 引句因此只取到後半句、數字對不上而被驗證擋下（實測永豐旅遊頁）。
+    """
+    parts: list[str] = []
+    for node in root.traverse(include_text=True):
+        if node.tag == "-text":
+            parts.append(node.text_content or "")
+        elif node.tag in _BLOCK_SET:
+            parts.append("\n")
+    lines = (_SPACES.sub(" ", line).strip() for line in "".join(parts).split("\n"))
+    return "\n".join(line for line in lines if line)
 
 
 def _drop_link_lists(tree: LexborHTMLParser) -> None:
