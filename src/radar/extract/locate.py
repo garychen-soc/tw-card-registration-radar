@@ -31,7 +31,7 @@ from typing import Any
 PROMPT_VERSION = "2026-11-02.1"
 ROOT = Path(__file__).resolve().parents[3]
 CACHE_DIR = ROOT / "state" / "extractions"
-DEFAULT_MODEL = os.environ.get("RADAR_LLM_MODEL", "opus")
+DEFAULT_MODEL = os.environ.get("RADAR_LLM_MODEL", "sonnet")
 TIMEOUT_SECONDS = 420
 MAX_TERMS_CHARS = 30_000
 
