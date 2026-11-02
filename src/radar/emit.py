@@ -183,7 +183,7 @@ def ics(rows: list[dict[str, Any]], generated: datetime) -> str:
             f"DTSTAMP:{stamp}",
             f"DTSTART:{_utc(row['start'])}",
             "DURATION:PT15M",
-            f"SUMMARY:{_escape(f'登錄｜{row['bank']}｜{title}')}",
+            "SUMMARY:" + _escape("登錄｜" + row["bank"] + "｜" + title),
             f"DESCRIPTION:{_escape(description)}",
             f"URL:{row['url']}",
             "BEGIN:VALARM",

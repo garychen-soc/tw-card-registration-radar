@@ -20,7 +20,7 @@ from typing import Any
 from zoneinfo import ZoneInfo
 
 from . import banks
-from .extract.locate import DEFAULT_MODEL, LocateError, Request, cached, locate
+from .extract.locate import DEFAULT_MODEL, AuthExpired, LocateError, Request, cached, locate
 from .extract.schedule import Context, build
 from .models import Activity, SourceHealth, Stub
 from .sources import open_adapter
@@ -296,13 +296,24 @@ def run(
             failures[doc.digest] = "登錄規則本輪尚未抽取（超出額度，下輪處理）"
         pending = pending[:llm_budget]
     calls = 0
+    auth_failed = False
     with ThreadPoolExecutor(max_workers=llm_workers) as pool:
         futures = {pool.submit(locate, doc.request(), model): doc for doc in pending}
         for future in as_completed(futures):
             doc = futures[future]
+            if future.cancelled():
+                failures[doc.digest] = "登錄規則本輪尚未抽取（下輪處理）"
+                continue
             calls += 1
             try:
                 outputs[doc.digest] = future.result()
+            except AuthExpired as exc:
+                failures[doc.digest] = "登錄規則本輪尚未抽取（下輪處理）"
+                if not auth_failed:
+                    auth_failed = True
+                    messages.append(str(exc))
+                    for other in futures:
+                        other.cancel()
             except LocateError as exc:
                 failures[doc.digest] = "登錄規則抽取失敗，請查看官方頁"
                 log.warning("LLM 失敗 %s：%s", doc.primary.url, exc)

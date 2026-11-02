@@ -44,6 +44,8 @@ def main(argv: list[str] | None = None) -> int:
     probe = sub.add_parser("probe")
     probe.add_argument("bank")
     sub.add_parser("score")
+    evaluate = sub.add_parser("evaluate", help="只對 golden 頁面以指定模型抽取並評分")
+    evaluate.add_argument("--model", default=DEFAULT_MODEL)
     args = parser.parse_args(argv)
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 
@@ -90,6 +92,11 @@ def main(argv: list[str] | None = None) -> int:
         from .sources import probe as run_probe
 
         print(json.dumps(run_probe(args.bank), ensure_ascii=False, indent=1))
+        return 0
+    if args.command == "evaluate":
+        from .golden import evaluate as run_evaluate
+
+        print(json.dumps(run_evaluate(args.model), ensure_ascii=False, indent=1, default=str))
         return 0
     if args.command == "score":
         from .golden import score

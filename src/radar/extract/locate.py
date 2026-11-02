@@ -152,6 +152,10 @@ class LocateError(RuntimeError):
     pass
 
 
+class AuthExpired(LocateError):
+    """claude CLI 的登入過期。整輪都會失敗，呼叫端應停止並通知使用者重新登入。"""
+
+
 @dataclass(frozen=True)
 class Request:
     title: str
@@ -222,12 +226,15 @@ def locate(request: Request, model: str = DEFAULT_MODEL) -> dict[str, Any]:
             )
         except subprocess.TimeoutExpired as exc:
             raise LocateError(f"claude -p 逾時（{TIMEOUT_SECONDS}s）") from exc
-    if completed.returncode != 0:
-        raise LocateError(f"claude -p 失敗（{completed.returncode}）：{completed.stderr[-400:]}")
     try:
         envelope = json.loads(completed.stdout)
     except json.JSONDecodeError as exc:
-        raise LocateError(f"claude -p 輸出不是 JSON：{completed.stdout[:200]}") from exc
+        raise LocateError(
+            f"claude -p 失敗（{completed.returncode}）：{(completed.stderr or completed.stdout)[-300:]}"
+        ) from exc
+    reason = str(envelope.get("result") or "")
+    if "authenticate" in reason or "OAuth" in reason or "/login" in reason:
+        raise AuthExpired(f"claude CLI 登入失效：{reason[:200]}（請執行 claude auth login）")
     output = envelope.get("structured_output")
     if envelope.get("is_error") or not isinstance(output, dict):
         raise LocateError(f"claude -p 沒有結構化輸出：{str(envelope.get('result'))[:200]}")
