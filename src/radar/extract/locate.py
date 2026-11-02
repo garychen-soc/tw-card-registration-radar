@@ -28,7 +28,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
-PROMPT_VERSION = "2026-11-01.1"
+PROMPT_VERSION = "2026-11-02.1"
 ROOT = Path(__file__).resolve().parents[3]
 CACHE_DIR = ROOT / "state" / "extractions"
 DEFAULT_MODEL = os.environ.get("RADAR_LLM_MODEL", "opus")
@@ -135,13 +135,14 @@ INSTRUCTIONS = """你是台灣信用卡活動條款的資料標註員。下面�
 
 規則：
 1. 每個 quote 必須逐字複製自條款原文的一個連續片段，不可改字、拼接或省略中間文字；長度以足以支撐你填的數值為準（通常 10–80 字）。
-2. 只標「登錄」（含報名、登記、領券等持卡人須主動操作才能參加的動作）的時點。活動期間、消費期間、回饋入帳時間都不是登錄時點，除非條文明說「活動暨登錄期間」「登錄期間同活動期間」之類。
+2. 只標「登錄」（含報名、登記、領券等持卡人須主動操作才能參加活動回饋的動作）的時點。卡片權益服務的預約或索取（機場接送、道路救援、揮桿、貴賓室、到外部網站購買或索取優惠名額）不是活動登錄，不要標。活動期間、消費期間、回饋入帳時間都不是登錄時點，除非條文明說「活動暨登錄期間」「登錄期間同活動期間」之類。
 3. is_example=true 只用在說明情境的舉例句（例如「舉例：1月1日早上9點已登錄成功，後於1月11日再次登錄，系統將回覆…」）。「登錄日期如：10月01日、11月02日」這種列出實際開放日的寫法是真實日期：is_example=false、kind=enumerated。
 4. 頁面有多個子活動（活動一／活動二、不同通路或卡別各自的登錄規則）時，每個子活動一個 subs 項目，name 逐字取自該子活動在頁面上的標題；規則只放進它所屬的子活動，不可把 A 子活動的時點放到 B。整頁只有一個活動時 subs 只有一項且 name=""。
 5. 數值只填原文明寫的數字：沒寫年份 year=null；「中午12:00」hour=12；「下午3點」hour=15；「24:00」填 hour=23、minute=59；沒寫時刻 hour/minute=null。
 6. kind：range（明寫起訖）、opens_at（明寫開始未寫截止）、deadline（只寫截止）、monthly（每月第幾日固定時刻開放，days_of_month 可多個，時刻放 open_time）、monthly_nth_weekday（每月第 nth 個週 weekday，weekday 1=週一…7=週日）、enumerated（列舉多個具體日期，放 dates）、other（以上皆非，如「消費後 7 日內登錄」）。
-7. holiday：條文寫「遇假日順延」填 next_business_day；「提前至前一營業日」填 previous_business_day；沒寫填 none。
-8. close_time：同一天內的截止時刻（如「每月1日08:00─24:00」close_time=23:59）。end_of_month：「開放登錄至月底／當月底」填 true。
+7. holiday：條文寫「遇假日順延」填 next_business_day；「提前至前一營業日」填 previous_business_day；沒寫填 none。「每月第一個（銀行）營業日」視為 kind=monthly、days_of_month=[1]、holiday=next_business_day。
+   每月重複但沒寫月份的區間（如「每月1日早上9點至每月5日下午6點止」）用 kind=range，start/end 只填 day 與時刻、month=null。
+8. close_time：同一天內的截止時刻（如「每月1日08:00─24:00」close_time=23:59）。end_of_month：「開放登錄至月底／當月最後一日／須於當月內完成登錄」填 true（此時 close_time 留 null）；這類沒有具體日期的截止句用 kind=deadline、start/end=null。
 9. reregister.value：each_period（每月／每期須重新登錄）、once（登錄一次即可／無需每月登錄）、unclear。order.value：register_before_spend（須先登錄再消費、登錄前消費不計）、retroactive_ok（活動期間內完成登錄即可、可事後補登）、unclear。unclear 時 quote=""。
 10. quota.seats：登錄名額（如「每月限額3,000名」填 3000）；沒寫 null、quote=""。
 11. registration.value：整頁活動是否需要登錄才能參加：required、not_required、unclear，附 quote。

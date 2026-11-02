@@ -10,9 +10,10 @@
 
 from __future__ import annotations
 
+import re
 from collections.abc import Callable
 from concurrent.futures import ThreadPoolExecutor
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from pathlib import Path
 from typing import Any
 
@@ -35,6 +36,16 @@ def _minute(value: Any) -> str | None:
     return moment.strftime("%Y-%m-%dT%H:%M")
 
 
+def _end_minute(value: Any) -> str | None:
+    """截止時刻的「24:00」與「隔天 00:00」都等同當天 23:59。"""
+    if value in (None, ""):
+        return None
+    moment = value if isinstance(value, datetime) else datetime.fromisoformat(str(value))
+    if moment.hour == 0 and moment.minute == 0:
+        moment = moment - timedelta(minutes=1)
+    return moment.strftime("%Y-%m-%dT%H:%M")
+
+
 def _in_window(key: Key) -> bool:
     anchor = key[0] or key[1]
     return anchor is not None and WINDOW[0].isoformat() <= anchor[:10] <= WINDOW[1].isoformat()
@@ -45,41 +56,50 @@ def _entries() -> list[dict[str, Any]]:
     return loaded
 
 
-def _match(entry: dict[str, Any], pool: list[Activity]) -> Activity | None:
-    url = str(entry["url"]).rstrip("/")
-    for activity in pool:
-        if activity.url.rstrip("/") == url:
-            return activity
+def _base(url: str) -> str:
+    """比對用的網址：去掉片段；華南入口網址只看 urile 參數（前面的 portal 狀態每次不同）。"""
+    url = url.split("#", 1)[0].rstrip("/")
+    found = re.search(r"urile=([^&]+)", url)
+    return found.group(1) if found else url
+
+
+def _candidates(entry: dict[str, Any], pool: list[Activity]) -> list[Activity]:
+    url = _base(str(entry["url"]))
+    hits = [a for a in pool if _base(a.url) == url]
+    if hits:
+        return hits
     title = str(entry.get("title", ""))
-    for activity in pool:
-        if title and (activity.title == title or title in activity.aliases):
-            return activity
-    return None
+    return [a for a in pool if title and (a.title == title or title in a.aliases)]
+
+
+def _produced(activity: Activity) -> set[Key]:
+    keys = {
+        (_minute(slot.start), _end_minute(slot.end)) for sub in activity.subs for slot in sub.slots
+    }
+    return {k for k in keys if _in_window(k)}
 
 
 def _compare(
-    entries: list[dict[str, Any]], find: Callable[[dict[str, Any]], Activity | None]
+    entries: list[dict[str, Any]], find: Callable[[dict[str, Any]], list[Activity]]
 ) -> dict[str, Any]:
     tp = fp = fn = 0
     missing: list[str] = []
     diffs: list[dict[str, Any]] = []
     for entry in entries:
         expected: set[Key] = {
-            (_minute(slot.get("start")), _minute(slot.get("end")))
+            (_minute(slot.get("start")), _end_minute(slot.get("end")))
             for sub in entry.get("subs") or []
             for slot in sub.get("slots") or []
         }
         expected = {k for k in expected if _in_window(k)}
-        activity = find(entry)
-        if activity is None:
+        # golden 以「官方頁面」為單位；同一頁拆成多筆活動（中信 LINE Pay 各通路）時合併比對
+        candidates = find(entry)
+        if not candidates:
             if expected:
                 missing.append(str(entry["id"]))
                 fn += len(expected)
             continue
-        produced: set[Key] = {
-            (_minute(slot.start), _minute(slot.end)) for sub in activity.subs for slot in sub.slots
-        }
-        produced = {k for k in produced if _in_window(k)}
+        produced = set().union(*(_produced(a) for a in candidates))
         tp += len(expected & produced)
         fp += len(produced - expected)
         fn += len(expected - produced)
@@ -110,7 +130,7 @@ def score() -> dict[str, Any]:
         for e in entries
         if (STATE / "activities" / f"{e['bank']}.json").exists()
     }
-    return _compare(entries, lambda e: _match(e, pools.get(str(e["bank"]), [])))
+    return _compare(entries, lambda e: _candidates(e, pools.get(str(e["bank"]), [])))
 
 
 def evaluate(model: str, workers: int = 3) -> dict[str, Any]:
@@ -118,12 +138,12 @@ def evaluate(model: str, workers: int = 3) -> dict[str, Any]:
     observed = datetime.now(TAIPEI).replace(microsecond=0)
     entries = _entries()
     available = {str(e["bank"]) for e in entries if (DOCS / f"{e['bank']}.json").exists()}
-    urls = {str(e["url"]).rstrip("/") for e in entries}
+    urls = {_base(str(e["url"])) for e in entries}
     titles = {str(e.get("title", "")) for e in entries}
     targets = []
     for bank in sorted(available):
         for doc in group_docs(load_docs(bank), observed.date()):
-            if any(s.url.rstrip("/") in urls or s.title in titles for s in doc.stubs):
+            if any(_base(s.url) in urls or s.title in titles for s in doc.stubs):
                 targets.append(doc)
 
     def extract(doc: Any) -> Activity:
@@ -140,7 +160,7 @@ def evaluate(model: str, workers: int = 3) -> dict[str, Any]:
     for activity in built:
         by_bank.setdefault(activity.bank_id, []).append(activity)
     scored = [e for e in entries if str(e["bank"]) in available]
-    report = _compare(scored, lambda e: _match(e, by_bank.get(str(e["bank"]), [])))
+    report = _compare(scored, lambda e: _candidates(e, by_bank.get(str(e["bank"]), [])))
     report["model"] = model
     report["unavailable_banks"] = sorted({str(e["bank"]) for e in entries} - available)
     report["llm_docs"] = sum(1 for d in targets if REGISTRATION_WORDS.search(d.text))

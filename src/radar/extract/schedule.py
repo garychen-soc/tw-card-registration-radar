@@ -232,6 +232,47 @@ class Draft:
     precision: str = "minute"
 
 
+def _monthly_points(rule: dict[str, Any]) -> bool:
+    """「每月 1日早上9點至每月 5日下午6點止」：有日沒有月，是每月重複的區間。"""
+    start, end = rule.get("start") or {}, rule.get("end") or {}
+    has_day = start.get("day") is not None or end.get("day") is not None
+    return has_day and start.get("month") is None and end.get("month") is None
+
+
+def _monthly_range(rule: dict[str, Any], ctx: Context, policy: str) -> list[Draft]:
+    start, end = rule.get("start") or {}, rule.get("end") or {}
+    drafts: list[Draft] = []
+    for year, month in _months(ctx):
+        last = calendar.monthrange(year, month)[1]
+        open_day = start.get("day")
+        if open_day is None or open_day > last:
+            continue
+        moved, note = _shift(date(year, month, open_day), policy)
+        open_clock = _clock(start)
+        begin = datetime.combine(moved, open_clock or time(0, 0), TAIPEI)
+        finish = None
+        if end.get("day") is not None:
+            close_day = min(int(end["day"]), last)
+            close = date(year, month, close_day)
+            if close < moved:
+                continue
+            finish = datetime.combine(close, _clock(end) or time(23, 59), TAIPEI)
+        elif rule.get("end_of_month"):
+            finish = datetime.combine(date(year, month, last), time(23, 59), TAIPEI)
+        drafts.append(
+            Draft(
+                begin,
+                finish,
+                "range" if finish else "opens_at",
+                "rule",
+                note,
+                bool(note),
+                "minute" if open_clock else "day",
+            )
+        )
+    return drafts
+
+
 def _expand(rule: dict[str, Any], ctx: Context) -> list[Draft]:
     kind = rule["kind"]
     policy = rule.get("holiday") or "none"
@@ -242,11 +283,12 @@ def _expand(rule: dict[str, Any], ctx: Context) -> list[Draft]:
     def at(day: date, origin: str, missing_clock: bool) -> Draft:
         moved, note = _shift(day, policy)
         start = datetime.combine(moved, open_at, TAIPEI)
-        if close_at:
-            end = datetime.combine(moved, close_at, TAIPEI)
-        elif rule.get("end_of_month"):
+        # 「至月底」優先於當日截止時刻：LLM 常把月底的 23:59 也填進 close_time
+        if rule.get("end_of_month"):
             last = calendar.monthrange(moved.year, moved.month)[1]
-            end = datetime.combine(moved.replace(day=last), time(23, 59), TAIPEI)
+            end = datetime.combine(moved.replace(day=last), close_at or time(23, 59), TAIPEI)
+        elif close_at:
+            end = datetime.combine(moved, close_at, TAIPEI)
         else:
             end = None
         return Draft(
@@ -278,6 +320,8 @@ def _expand(rule: dict[str, Any], ctx: Context) -> list[Draft]:
             stamp, _ = _point_dt(point, ctx, end=False)
             if stamp:
                 drafts.append(at(stamp.date(), "enumerated", missing_open))
+    elif kind in ("range", "opens_at", "deadline") and _monthly_points(rule):
+        drafts.extend(_monthly_range(rule, ctx, policy))
     elif kind in ("range", "opens_at", "deadline"):
         start, start_missing = _point_dt(rule.get("start"), ctx, end=False)
         end, _ = _point_dt(rule.get("end"), ctx, end=True)
@@ -505,6 +549,9 @@ def _reconcile(drafts: list[tuple[Draft, str]]) -> list[tuple[Draft, str]]:
 
 def _finalize(drafts: list[tuple[Draft, str]], ctx: Context, review: list[str]) -> list[Slot]:
     drafts = _reconcile(drafts)
+    # 同一開放時刻同時有「只寫開放」與「寫明起訖」兩種來源時，保留較完整的那筆
+    bounded = {d.start for d, _ in drafts if d.start and d.end}
+    drafts = [(d, q) for d, q in drafts if d.end is not None or d.start not in bounded]
     floor = ctx.observed - KEEP_PAST
     low = (ctx.period_start - EARLY_GRACE) if ctx.period_start else None
     seen: set[tuple[datetime | None, datetime | None]] = set()

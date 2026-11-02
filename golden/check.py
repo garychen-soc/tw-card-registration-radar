@@ -70,7 +70,10 @@ def squash(text: str) -> str:
 
 
 def nospace(text: str) -> str:
-    return re.sub(r"\s+", "", text)
+    # 與管線相同的正規化（全形數字/冒號/波浪號折疊、民國年轉西元），只用於比對
+    from radar.textnorm import normalize
+
+    return re.sub(r"\s+", "", normalize(text))
 
 
 def main() -> int:

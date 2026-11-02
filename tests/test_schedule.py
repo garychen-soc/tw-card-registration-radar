@@ -239,3 +239,26 @@ def test_pm_hour() -> None:
     )
     result = build(out, ctx(text))
     assert stamps(result)[1] == ("11/15 15:00", "11/30 23:59")
+
+
+def test_monthly_range_without_month_and_bounded_slot_wins() -> None:
+    text = "每月1日、11日、21日早上9點開放當月登錄\n每月 1日早上9點至每月 5日下午6點止"
+    out = output(
+        rule("每月1日、11日、21日早上9點開放當月登錄", "monthly", days_of_month=[1, 11, 21],
+             open_time={"hour": 9, "minute": 0}),
+        rule("每月 1日早上9點至每月 5日下午6點止", "range",
+             start=point(None, 1, 9, 0), end=point(None, 5, 18, 0)),
+    )
+    result = build(out, ctx(text, start=date(2026, 1, 1)))
+    slots = stamps(result)
+    assert ("11/01 09:00", "11/05 18:00") in slots
+    assert ("11/01 09:00", None) not in slots
+    assert ("11/11 09:00", None) in slots
+
+
+def test_end_of_month_beats_close_time() -> None:
+    text = "開放登錄時間:當月15日早上10:00~當月最後一日23:59止"
+    out = output(rule(text, "monthly", days_of_month=[15], open_time={"hour": 10, "minute": 0},
+                      close_time={"hour": 23, "minute": 59}, end_of_month=True))
+    result = build(out, ctx(text))
+    assert ("11/15 10:00", "11/30 23:59") in stamps(result)
