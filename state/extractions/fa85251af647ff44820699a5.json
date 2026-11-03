@@ -1,0 +1,33 @@
+{
+ "key": "fa85251af647ff44820699a5",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:19:11+00:00",
+ "title": "【FUN旅宿】",
+ "duration_ms": 3827,
+ "cost_usd": 0.024138200000000002,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "需完成登錄"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [],
+    "reregister": {
+     "value": "each_period",
+     "quote": "活動需每月登錄"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 250,
+     "quote": "每月限量250名"
+    }
+   }
+  ]
+ }
+}

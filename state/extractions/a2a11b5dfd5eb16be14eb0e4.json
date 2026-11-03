@@ -1,0 +1,16 @@
+{
+ "key": "a2a11b5dfd5eb16be14eb0e4",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:22:01+00:00",
+ "title": "悠遊付滿額最高10%回饋",
+ "duration_ms": 4388,
+ "cost_usd": 0.0259462,
+ "output": {
+  "registration": {
+   "value": "unclear",
+   "quote": "滿NT$5,000再贈NT$300全家超商即享券(限量需登錄)"
+  },
+  "subs": []
+ }
+}

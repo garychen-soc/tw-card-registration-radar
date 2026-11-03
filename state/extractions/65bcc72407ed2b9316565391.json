@@ -1,0 +1,16 @@
+{
+ "key": "65bcc72407ed2b9316565391",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-02T07:37:14+00:00",
+ "title": "康是美網購eShop",
+ "duration_ms": 3246,
+ "cost_usd": 0.0297462,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "結帳輸入折扣碼「26CUBE11」，單筆滿NT$1,200(含)以上"
+  },
+  "subs": []
+ }
+}

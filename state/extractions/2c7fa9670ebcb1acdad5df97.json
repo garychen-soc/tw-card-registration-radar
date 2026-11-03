@@ -1,0 +1,16 @@
+{
+ "key": "2c7fa9670ebcb1acdad5df97",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:25:28+00:00",
+ "title": "五福旅遊行程折1,000元，台新指定卡再享最高3.3%",
+ "duration_ms": 3901,
+ "cost_usd": 0.0226742,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "本活動需於報名前主動告知五福旅遊業務人員欲使用【台新信用卡優惠】，由業務員確認折扣"
+  },
+  "subs": []
+ }
+}

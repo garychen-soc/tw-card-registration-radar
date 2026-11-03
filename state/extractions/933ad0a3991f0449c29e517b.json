@@ -1,0 +1,368 @@
+{
+ "key": "933ad0a3991f0449c29e517b",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:24:11+00:00",
+ "title": "費用代繳輕鬆享回饋",
+ "duration_ms": 23989,
+ "cost_usd": 0.1084522,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "※滿額享回饋」活動需登錄，自登錄當月起"
+  },
+  "subs": [
+   {
+    "name": "學費代繳享三重優惠，回饋最高500元刷卡金",
+    "rules": [
+     {
+      "quote": "上半年開放登錄2萬名，下半年分別於7/1及8/1各開放1萬名",
+      "kind": "enumerated",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [
+       {
+        "year": null,
+        "month": 7,
+        "day": 1,
+        "hour": null,
+        "minute": null
+       },
+       {
+        "year": null,
+        "month": 8,
+        "day": 1,
+        "hour": null,
+        "minute": null
+       }
+      ],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "once",
+     "quote": "上半年已登錄者毋須重新登錄"
+    },
+    "order": {
+     "value": "register_before_spend",
+     "quote": "完成登錄（登錄當月起之繳納費用方可納入計算）"
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   },
+   {
+    "name": "【活動二｜單筆滿額享分6期0利率】",
+    "rules": [
+     {
+      "quote": "一、活動暨登錄期間 :2026/7/1-12/31",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 7,
+       "day": 1,
+       "hour": null,
+       "minute": null
+      },
+      "end": {
+       "year": 2026,
+       "month": 12,
+       "day": 31,
+       "hour": null,
+       "minute": null
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "下半年分別於7/1及11/1各開放1萬名",
+      "kind": "enumerated",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [
+       {
+        "year": null,
+        "month": 7,
+        "day": 1,
+        "hour": null,
+        "minute": null
+       },
+       {
+        "year": null,
+        "month": 11,
+        "day": 1,
+        "hour": null,
+        "minute": null
+       }
+      ],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "統一於1/1 00:00開放登錄",
+      "kind": "opens_at",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": null,
+       "month": 1,
+       "day": 1,
+       "hour": 0,
+       "minute": 0
+      },
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "once",
+     "quote": "上半年已登錄者毋須重新登錄"
+    },
+    "order": {
+     "value": "register_before_spend",
+     "quote": "且於登錄當月起繳納牌照稅、房屋稅、地價稅"
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   },
+   {
+    "name": "【活動三｜好朋友限定!繳納指定稅款享回饋金】",
+    "rules": [
+     {
+      "quote": "一、活動暨登錄期間 :2026/7/1-12/31",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 7,
+       "day": 1,
+       "hour": null,
+       "minute": null
+      },
+      "end": {
+       "year": 2026,
+       "month": 12,
+       "day": 31,
+       "hour": null,
+       "minute": null
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "下半年分別於7月及11月各開放1萬名",
+      "kind": "enumerated",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [
+       {
+        "year": null,
+        "month": 7,
+        "day": null,
+        "hour": null,
+        "minute": null
+       },
+       {
+        "year": null,
+        "month": 11,
+        "day": null,
+        "hour": null,
+        "minute": null
+       }
+      ],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "統一於1/1 00:00開放登錄",
+      "kind": "opens_at",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": null,
+       "month": 1,
+       "day": 1,
+       "hour": 0,
+       "minute": 0
+      },
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "once",
+     "quote": "上半年已登錄者毋須重新登錄"
+    },
+    "order": {
+     "value": "register_before_spend",
+     "quote": "自登錄當月起享活動資格，不得溯及既往"
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   },
+   {
+    "name": "【2026數位通路專屬優惠】大咖DACARD APP繳稅滿額抽萬元禮券！",
+    "rules": [
+     {
+      "quote": "參加者須於活動期間內完成指定任務並於活動網頁完成登錄始具領獎資格",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 10,
+       "day": 1,
+       "hour": null,
+       "minute": null
+      },
+      "end": {
+       "year": 2026,
+       "month": 12,
+       "day": 31,
+       "hour": null,
+       "minute": null
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   },
+   {
+    "name": "一、第一~二重【首扣優惠】雙重回饋，最高回饋300元刷卡金！",
+    "rules": [
+     {
+      "quote": "本活動須於繳納當月完成登錄，次月登錄無效",
+      "kind": "deadline",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": true
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 40000,
+     "quote": "立即登錄 (限量4萬名)"
+    }
+   },
+   {
+    "name": "二、第三重【夏日大作戰】達成任務，加碼最高回饋2%刷卡金！",
+    "rules": [
+     {
+      "quote": "限量5,000名，8/1 00:00開放登錄",
+      "kind": "opens_at",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": null,
+       "month": 8,
+       "day": 1,
+       "hour": 0,
+       "minute": 0
+      },
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 5000,
+     "quote": "限量5,000名，8/1 00:00開放登錄"
+    }
+   }
+  ]
+ }
+}

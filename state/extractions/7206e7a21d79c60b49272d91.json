@@ -1,0 +1,33 @@
+{
+ "key": "7206e7a21d79c60b49272d91",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:25:08+00:00",
+ "title": "肯驛 叫⾞吧8 折起",
+ "duration_ms": 3855,
+ "cost_usd": 0.0203382,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "卡友須於叫⾞吧官網進入「會員中⼼」註冊會員並登錄。"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

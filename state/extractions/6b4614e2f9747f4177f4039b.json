@@ -1,0 +1,16 @@
+{
+ "key": "6b4614e2f9747f4177f4039b",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:22:59+00:00",
+ "title": "知本金聯世紀酒店 兆豐卡友享住宿/餐飲優惠",
+ "duration_ms": 1419,
+ "cost_usd": 0.019510200000000002,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "至「知本金聯世紀酒店」刷兆豐信用卡(含VISA金融卡) 並主動告知使用兆豐卡友優惠專案"
+  },
+  "subs": []
+ }
+}

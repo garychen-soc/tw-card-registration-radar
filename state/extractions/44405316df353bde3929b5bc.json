@@ -1,0 +1,33 @@
+{
+ "key": "44405316df353bde3929b5bc",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:25:26+00:00",
+ "title": "海外/航空、旅行社消費分期享3.88%起優惠利率",
+ "duration_ms": 4991,
+ "cost_usd": 0.0306122,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "享以下分期優惠利率(需登錄)"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "register_before_spend",
+     "quote": "登錄日需早於消費入帳日"
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

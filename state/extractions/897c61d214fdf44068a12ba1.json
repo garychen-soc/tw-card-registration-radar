@@ -1,0 +1,193 @@
+{
+ "key": "897c61d214fdf44068a12ba1",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-02T07:37:51+00:00",
+ "title": "PChome24h購物 雙11強檔 (11/9~11/12)",
+ "duration_ms": 14152,
+ "cost_usd": 0.0595722,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "登錄名額限量600名，額滿即關閉"
+  },
+  "subs": [
+   {
+    "name": "活動一:單筆滿額最高10%回饋",
+    "rules": [
+     {
+      "quote": "須於2026/11/16 15:00至2026/11/30 23:59透過『PChome登錄網頁』完成登錄",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 11,
+       "day": 16,
+       "hour": 15,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": 11,
+       "day": 30,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "once",
+     "quote": "活動會員僅登錄乙次即可，不需重複登錄"
+    },
+    "order": {
+     "value": "retroactive_ok",
+     "quote": "須於2026/11/16 15:00至2026/11/30 23:59透過『PChome登錄網頁』完成登錄"
+    },
+    "quota": {
+     "seats": 600,
+     "quote": "登錄名額限量600名，額滿即關閉"
+    }
+   },
+   {
+    "name": "活動1:PChome會員 單筆刷卡滿額加碼贈 111 P幣回饋",
+    "rules": [
+     {
+      "quote": "本活動須於2026/11/12 15:00至11/30 23:59透過『PChome限時加碼網頁』完成登錄",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 11,
+       "day": 12,
+       "hour": 15,
+       "minute": 0
+      },
+      "end": {
+       "year": null,
+       "month": 11,
+       "day": 30,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "retroactive_ok",
+     "quote": "本活動須於2026/11/12 15:00至11/30 23:59透過『PChome限時加碼網頁』完成登錄"
+    },
+    "quota": {
+     "seats": 2000,
+     "quote": "登錄名額限量2,000名，額滿即關閉"
+    }
+   },
+   {
+    "name": "活動1:PChome會員刷卡滿額加碼享最高1% P幣回饋",
+    "rules": [
+     {
+      "quote": "本活動須於2026/11/27 15:00至11/30 23:59透過『PChome 活動網頁』完成會員登錄",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 11,
+       "day": 27,
+       "hour": 15,
+       "minute": 0
+      },
+      "end": {
+       "year": null,
+       "month": 11,
+       "day": 30,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "retroactive_ok",
+     "quote": "本活動須於2026/11/27 15:00至11/30 23:59透過『PChome 活動網頁』完成會員登錄"
+    },
+    "quota": {
+     "seats": 1000,
+     "quote": "登錄名額限量1,000名，額滿即關閉"
+    }
+   },
+   {
+    "name": "活動2:累積分期滿額加碼享最高1%小樹點(信用卡)回饋",
+    "rules": [
+     {
+      "quote": "2026/11/30 16:00至2026/11/30 23:59於本行官網登錄專區及國泰優惠 CUBE Rewards App開放登錄",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 11,
+       "day": 30,
+       "hour": 16,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": 11,
+       "day": 30,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "retroactive_ok",
+     "quote": "2026/11/30 16:00至2026/11/30 23:59於本行官網登錄專區及國泰優惠 CUBE Rewards App開放登錄"
+    },
+    "quota": {
+     "seats": 1000,
+     "quote": "活動限量登錄1,000名，額滿即關閉"
+    }
+   }
+  ]
+ }
+}

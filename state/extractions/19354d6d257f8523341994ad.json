@@ -1,0 +1,16 @@
+{
+ "key": "19354d6d257f8523341994ad",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:17:20+00:00",
+ "title": "捷絲旅花蓮中正館",
+ "duration_ms": 2997,
+ "cost_usd": 0.0186282,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": ""
+  },
+  "subs": []
+ }
+}

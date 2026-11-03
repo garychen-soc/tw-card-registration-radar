@@ -1,0 +1,16 @@
+{
+ "key": "9ce5e65abe1db1d5ee27f92a",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:27:08+00:00",
+ "title": "免費機場接送",
+ "duration_ms": 3150,
+ "cost_usd": 0.0256062,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "持卡人本人（或授權委任者），透過網路或預約中心進行預約，享有此優惠。"
+  },
+  "subs": []
+ }
+}

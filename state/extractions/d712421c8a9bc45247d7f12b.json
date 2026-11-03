@@ -1,0 +1,16 @@
+{
+ "key": "d712421c8a9bc45247d7f12b",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:27:24+00:00",
+ "title": "和風饗宴",
+ "duration_ms": 3557,
+ "cost_usd": 0.0220522,
+ "output": {
+  "registration": {
+   "value": "unclear",
+   "quote": "活動期間每卡每月可享有登錄本活動乙次(以用餐日期為準)之資格"
+  },
+  "subs": []
+ }
+}

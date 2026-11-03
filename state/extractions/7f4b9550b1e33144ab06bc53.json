@@ -1,0 +1,33 @@
+{
+ "key": "7f4b9550b1e33144ab06bc53",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:26:26+00:00",
+ "title": "全臺捷運及指定海外大眾運",
+ "duration_ms": 6439,
+ "cost_usd": 0.025676199999999996,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "持卡人在Visa活動頁面進行報名，報名成功後方可參與本活動"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "register_before_spend",
+     "quote": "未報名、報名不成功及報名後未按報名之卡片乘車的交易將無法參與活動"
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

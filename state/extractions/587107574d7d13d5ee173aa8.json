@@ -1,0 +1,16 @@
+{
+ "key": "587107574d7d13d5ee173aa8",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:17:17+00:00",
+ "title": "玉山 Wallet | Surfshark 專屬領券活動",
+ "duration_ms": 1615,
+ "cost_usd": 0.0270782,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "活動期間 : 2026/5/18 (一) ~2026/12/14 (一) ，活動免登錄。"
+  },
+  "subs": []
+ }
+}

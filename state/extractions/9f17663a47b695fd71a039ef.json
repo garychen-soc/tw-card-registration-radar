@@ -1,0 +1,16 @@
+{
+ "key": "9f17663a47b695fd71a039ef",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:19:35+00:00",
+ "title": "第一銀行 X AsiaYo",
+ "duration_ms": 2906,
+ "cost_usd": 0.0185262,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "活動期間內於AsiaYo APP輸入折扣碼【FCB2026】下單，即可享"
+  },
+  "subs": []
+ }
+}

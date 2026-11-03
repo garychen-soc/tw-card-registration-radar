@@ -1,0 +1,61 @@
+{
+ "key": "ecf601952edc2b9e9b3d2001",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:24:31+00:00",
+ "title": "【幸福長駐】保費滿額回饋",
+ "duration_ms": 3020,
+ "cost_usd": 0.027766199999999998,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "若以富邦信用卡參加本活動，正卡持卡人需於指定期間內完成活動登錄方符合回饋資格"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [
+     {
+      "quote": "登錄期間自2026/10/1 16:00~2026/12/10 23:59",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 10,
+       "day": 1,
+       "hour": 16,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": 12,
+       "day": 10,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 100000,
+     "quote": "活動登錄名額限量10萬名"
+    }
+   }
+  ]
+ }
+}

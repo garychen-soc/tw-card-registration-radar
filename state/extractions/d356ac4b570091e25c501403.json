@@ -1,0 +1,93 @@
+{
+ "key": "d356ac4b570091e25c501403",
+ "prompt_version": "2026-11-02.1",
+ "model": "opus",
+ "created_at": "2026-11-02T05:44:32+00:00",
+ "title": "華南卡xklook，全站商品單筆5,000送400(需填優惠碼，限量)",
+ "duration_ms": 11533,
+ "cost_usd": 0.1117962,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "※需登錄，每戶活動期間限領一份，擇優贈送，正附卡合併計算。"
+  },
+  "subs": [
+   {
+    "name": "【出國輕鬆遊】",
+    "rules": [
+     {
+      "quote": "※於2026年12月20日開放登錄，額滿為止。",
+      "kind": "opens_at",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 12,
+       "day": 20,
+       "hour": null,
+       "minute": null
+      },
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 2000,
+     "quote": "【出國輕鬆遊】登錄限量2,000名"
+    }
+   },
+   {
+    "name": "【美日韓泰再加碼】",
+    "rules": [
+     {
+      "quote": "※於2026年12月20日開放登錄，額滿為止。",
+      "kind": "opens_at",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 12,
+       "day": 20,
+       "hour": null,
+       "minute": null
+      },
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 1000,
+     "quote": "【美日韓泰再加碼】登錄限量1,000名"
+    }
+   }
+  ]
+ }
+}

@@ -1,0 +1,60 @@
+{
+ "key": "3a23f8e896980391bf82b164",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:19:55+00:00",
+ "title": "2026年獨享禮遇JCB晶緻卡-食在日系",
+ "duration_ms": 3627,
+ "cost_usd": 0.0254942,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "透過本活動登錄網頁（恕不接受電話客服登錄），登錄成功並取得『食在日系優惠序號』後"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [
+     {
+      "quote": "本活動登錄網頁於2026年1月1日起每月1日15:00開放登錄。",
+      "kind": "monthly",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 1,
+       "day": 1,
+       "hour": 15,
+       "minute": 0
+      },
+      "end": null,
+      "days_of_month": [
+       1
+      ],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": {
+       "hour": 15,
+       "minute": 0
+      },
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "each_period",
+     "quote": "每月皆重新開放登錄。"
+    },
+    "order": {
+     "value": "register_before_spend",
+     "quote": "登錄成功並取得『食在日系優惠序號』後，於序號有效期間內持該序號至合作品牌指定門市消費"
+    },
+    "quota": {
+     "seats": 15000,
+     "quote": "每月開放15,000名，優惠序號數量有限，當月登錄額滿即截止。"
+    }
+   }
+  ]
+ }
+}

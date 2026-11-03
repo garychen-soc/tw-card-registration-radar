@@ -1,0 +1,16 @@
+{
+ "key": "d08b3a8e40e172566ca36080",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:25:51+00:00",
+ "title": "SJ-83z演唱會臺北場 8/25台新Richart卡優先購",
+ "duration_ms": 3364,
+ "cost_usd": 0.0204082,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "刷台新Richart卡或Richart簽帳金融卡，享優先購票資格。"
+  },
+  "subs": []
+ }
+}

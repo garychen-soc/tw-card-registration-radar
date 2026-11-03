@@ -1,0 +1,61 @@
+{
+ "key": "2fbda060e88647a416bbf15b",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:26:59+00:00",
+ "title": "MyJapan+ APP",
+ "duration_ms": 3048,
+ "cost_usd": 0.023874199999999998,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "於指定登錄期間內完成線上事前登錄"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [
+     {
+      "quote": "指定登錄期間:2026年9月15日10:00~2026年12月31日23:59（日本標準時間）",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 9,
+       "day": 15,
+       "hour": 10,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": 12,
+       "day": 31,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "once",
+     "quote": "於指定登錄期間內完成線上事前登錄"
+    },
+    "order": {
+     "value": "register_before_spend",
+     "quote": "需在完成事前登錄後（含登錄當日）所進行的交易方可計入"
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

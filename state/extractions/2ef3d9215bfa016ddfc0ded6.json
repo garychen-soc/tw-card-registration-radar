@@ -1,0 +1,16 @@
+{
+ "key": "2ef3d9215bfa016ddfc0ded6",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:17:20+00:00",
+ "title": "捷絲旅高雄中正館",
+ "duration_ms": 1630,
+ "cost_usd": 0.0176682,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "於捷絲旅官網一般訂房專案輸入折扣碼「JUSTBANK26」，享指定房型9折優惠，依房型贈早餐。"
+  },
+  "subs": []
+ }
+}

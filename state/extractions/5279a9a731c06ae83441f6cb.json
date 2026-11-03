@@ -1,0 +1,16 @@
+{
+ "key": "5279a9a731c06ae83441f6cb",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:25:42+00:00",
+ "title": "Trip.com滿額現折7%。Richart卡享最高3.3%",
+ "duration_ms": 3025,
+ "cost_usd": 0.031420199999999995,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "預訂飯店刷台新信用卡，並輸入優惠碼TSB26H，享下列折扣優惠"
+  },
+  "subs": []
+ }
+}

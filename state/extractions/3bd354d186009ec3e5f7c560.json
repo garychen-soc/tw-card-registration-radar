@@ -1,0 +1,16 @@
+{
+ "key": "3bd354d186009ec3e5f7c560",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:15:41+00:00",
+ "title": "玉山信用卡 加油天天省",
+ "duration_ms": 3623,
+ "cost_usd": 0.0926442,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "於山隆加油站刷玉山信用卡"
+  },
+  "subs": []
+ }
+}

@@ -1,0 +1,16 @@
+{
+ "key": "3cccd54e20e7ced0cf91ff89",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:17:31+00:00",
+ "title": "可樂旅遊",
+ "duration_ms": 3833,
+ "cost_usd": 0.022978199999999997,
+ "output": {
+  "registration": {
+   "value": "unclear",
+   "quote": "如非可樂旅遊會員，請於申請加入會員後，方可領取優惠代碼。"
+  },
+  "subs": []
+ }
+}

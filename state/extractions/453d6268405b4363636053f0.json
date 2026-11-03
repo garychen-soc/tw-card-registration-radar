@@ -1,0 +1,16 @@
+{
+ "key": "453d6268405b4363636053f0",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:16:11+00:00",
+ "title": "VOLVO 專屬尊榮購車刷卡優惠",
+ "duration_ms": 4289,
+ "cost_usd": 0.0334682,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "需於2026/12/31前使用玉山信用卡刷卡購車VOLVO不限車款 (限一次付清) 及使用玉山e速PAY方式付款始符合回饋資格"
+  },
+  "subs": []
+ }
+}

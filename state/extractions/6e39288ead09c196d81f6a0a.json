@@ -1,0 +1,169 @@
+{
+ "key": "6e39288ead09c196d81f6a0a",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-02T07:39:23+00:00",
+ "title": "【童樂匯專屬】期間限定！童樂匯通路 領券再加碼3%回饋",
+ "duration_ms": 10346,
+ "cost_usd": 0.0489702,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "需於次月6日至次次月5日期間至CUBE App領取「童樂匯3%加碼優惠券」"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [
+     {
+      "quote": "需於次月6日至次次月5日期間至CUBE App領取「童樂匯3%加碼優惠券」",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": null,
+       "month": null,
+       "day": 6,
+       "hour": null,
+       "minute": null
+      },
+      "end": {
+       "year": null,
+       "month": null,
+       "day": 5,
+       "hour": null,
+       "minute": null
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "例:10月符合活動對象，將於11/6~12/5領券",
+      "kind": "range",
+      "is_example": true,
+      "holiday": "none",
+      "start": {
+       "year": null,
+       "month": 11,
+       "day": 6,
+       "hour": null,
+       "minute": null
+      },
+      "end": {
+       "year": null,
+       "month": 12,
+       "day": 5,
+       "hour": null,
+       "minute": null
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "10月符合活動對象 → 2026/11/6~2026/12/5 領券",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 11,
+       "day": 6,
+       "hour": null,
+       "minute": null
+      },
+      "end": {
+       "year": 2026,
+       "month": 12,
+       "day": 5,
+       "hour": null,
+       "minute": null
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "11月符合活動對象 → 2026/12/6~2027/1/5 領券",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 12,
+       "day": 6,
+       "hour": null,
+       "minute": null
+      },
+      "end": {
+       "year": 2027,
+       "month": 1,
+       "day": 5,
+       "hour": null,
+       "minute": null
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "12月符合活動對象 → 2027/1/6~2027/2/5 領券",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2027,
+       "month": 1,
+       "day": 6,
+       "hour": null,
+       "minute": null
+      },
+      "end": {
+       "year": 2027,
+       "month": 2,
+       "day": 5,
+       "hour": null,
+       "minute": null
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "each_period",
+     "quote": "每月限領乙次優惠券"
+    },
+    "order": {
+     "value": "register_before_spend",
+     "quote": "回饋計算將於優惠券領取日後(含當日)之新增消費"
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

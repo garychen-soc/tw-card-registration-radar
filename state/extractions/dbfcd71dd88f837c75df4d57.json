@@ -1,0 +1,33 @@
+{
+ "key": "dbfcd71dd88f837c75df4d57",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:16:05+00:00",
+ "title": "申辦玉山帳戶自動扣繳玉山卡費",
+ "duration_ms": 2600,
+ "cost_usd": 0.022406199999999998,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "活動採登錄制，登錄後即視同已詳閱並同意接受活動辦法及相關注意事項規定。"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

@@ -1,0 +1,16 @@
+{
+ "key": "cf6ad68eba95b74e8fae5c29",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:19:59+00:00",
+ "title": "全國電子11月加碼禮與iPhone新機加贈點",
+ "duration_ms": 2819,
+ "cost_usd": 0.020602199999999998,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "購買當下符合條件即贈送"
+  },
+  "subs": []
+ }
+}

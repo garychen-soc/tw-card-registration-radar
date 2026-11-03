@@ -1,0 +1,16 @@
+{
+ "key": "c05860ea7e90816da84b5272",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:19:16+00:00",
+ "title": "享限時95折優惠！",
+ "duration_ms": 3659,
+ "cost_usd": 0.023086199999999998,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "訂單輸入優惠代碼【FCBCM2026】並刷一銀卡全額付款，享專屬95折優惠！"
+  },
+  "subs": []
+ }
+}

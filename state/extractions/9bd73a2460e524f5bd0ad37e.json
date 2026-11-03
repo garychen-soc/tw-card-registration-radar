@@ -1,0 +1,33 @@
+{
+ "key": "9bd73a2460e524f5bd0ad37e",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-02T07:39:35+00:00",
+ "title": "刷彰銀卡iPhone 18 輕鬆入手，極致新機聰明買、省更多！",
+ "duration_ms": 3901,
+ "cost_usd": 0.0259722,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "並於彰銀官網完成活動登錄"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

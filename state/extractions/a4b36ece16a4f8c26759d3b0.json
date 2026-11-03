@@ -1,0 +1,61 @@
+{
+ "key": "a4b36ece16a4f8c26759d3b0",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:20:20+00:00",
+ "title": "【2026年7-12月首刷禮最高500元】",
+ "duration_ms": 4926,
+ "cost_usd": 0.0265842,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "首次申辦指定卡別之正卡/附卡且完成登錄者"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [
+     {
+      "quote": "登錄期間\n2026.7.1~2026.12.31",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 7,
+       "day": 1,
+       "hour": null,
+       "minute": null
+      },
+      "end": {
+       "year": 2026,
+       "month": 12,
+       "day": 31,
+       "hour": null,
+       "minute": null
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

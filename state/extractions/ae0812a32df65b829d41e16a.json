@@ -1,0 +1,61 @@
+{
+ "key": "ae0812a32df65b829d41e16a",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:13:19+00:00",
+ "title": "『Now on JAPAN!』在日本MITSUI OUTLET PARK・LaLaport刷彰銀JCB享最高20%現金回饋",
+ "duration_ms": 2883,
+ "cost_usd": 0.030425999999999998,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "本活動需於指定登錄期間完成事前線上登錄，限量登錄4,500張JCB卡；登錄額滿即截止。"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [
+     {
+      "quote": "指定登錄期間 : 2026年10月1日 10:00 ~ 2026年11月30日 23:59（日本標準時間）",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 10,
+       "day": 1,
+       "hour": 10,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": 11,
+       "day": 30,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "once",
+     "quote": ""
+    },
+    "order": {
+     "value": "register_before_spend",
+     "quote": "於指定登錄期間完成事前線上登錄，並於指定消費期間內於日本MITSUI OUTLET PARK・LaLaport實體店面刷JCB卡"
+    },
+    "quota": {
+     "seats": 4500,
+     "quote": "限量登錄4,500張JCB卡；登錄額滿即截止"
+    }
+   }
+  ]
+ }
+}

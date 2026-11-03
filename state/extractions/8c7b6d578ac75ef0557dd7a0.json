@@ -1,0 +1,33 @@
+{
+ "key": "8c7b6d578ac75ef0557dd7a0",
+ "prompt_version": "2026-11-02.1",
+ "model": "opus",
+ "created_at": "2026-11-02T05:43:13+00:00",
+ "title": "【交通/加油】搭高鐵刷彰銀Visa無限卡，享最高10%回饋！",
+ "duration_ms": 4864,
+ "cost_usd": 0.069192,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "未完成登錄者，恕無法參加本活動"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

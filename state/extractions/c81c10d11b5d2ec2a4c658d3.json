@@ -1,0 +1,16 @@
+{
+ "key": "c81c10d11b5d2ec2a4c658d3",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-02T05:34:21+00:00",
+ "title": "Bonbons甜點 享95折優惠",
+ "duration_ms": 1448,
+ "cost_usd": 0.0167322,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "本活動免登錄"
+  },
+  "subs": []
+ }
+}

@@ -1,0 +1,16 @@
+{
+ "key": "bf1f230ba86bc6216c615159",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:19:20+00:00",
+ "title": "藍皮解憂號全系列/鳴日號",
+ "duration_ms": 4800,
+ "cost_usd": 0.023652199999999998,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "本專案限以第一銀行信用卡於活動時間內，報名「藍皮解憂號」系列行程且單筆滿3,000元(含)以上方符合回饋資格。"
+  },
+  "subs": []
+ }
+}

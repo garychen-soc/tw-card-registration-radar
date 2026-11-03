@@ -1,0 +1,83 @@
+{
+ "key": "957bbc2c5aea6eb01876075a",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:21:42+00:00",
+ "title": "icash Pay 最高11%回饋",
+ "duration_ms": 8474,
+ "cost_usd": 0.034966199999999996,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "加碼贈11% OPENPOINT回饋，需登錄"
+  },
+  "subs": [
+   {
+    "name": "7-ELEVEN實體門市10%回饋",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   },
+   {
+    "name": "享鑽生活11%回饋",
+    "rules": [
+     {
+      "quote": "登錄方式:每月25日於icash Pay登錄",
+      "kind": "monthly",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [
+       25
+      ],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "each_period",
+     "quote": "登錄方式:每月25日於icash Pay登錄"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 200,
+     "quote": "每月限登錄200名"
+    }
+   },
+   {
+    "name": "新戶加碼10%回饋",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 3000,
+     "quote": "活動期間總限量3,000名"
+    }
+   }
+  ]
+ }
+}

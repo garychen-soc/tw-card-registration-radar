@@ -1,0 +1,33 @@
+{
+ "key": "8045ad52a90dc9846e50e292",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-02T07:39:22+00:00",
+ "title": "【藥妝/藥局】康是美刷馬偕卡滿888元送COSMED抽取式衛生紙",
+ "duration_ms": 5678,
+ "cost_usd": 0.0257422,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "須登錄，含卡片原始回饋"
+  },
+  "subs": [
+   {
+    "name": "好康一",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

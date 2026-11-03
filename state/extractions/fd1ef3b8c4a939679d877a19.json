@@ -1,0 +1,16 @@
+{
+ "key": "fd1ef3b8c4a939679d877a19",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:20:51+00:00",
+ "title": "全聯週年慶綁凱基信用卡消費最高回饋6%",
+ "duration_ms": 1277,
+ "cost_usd": 0.020044199999999998,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "免登錄，每全聯APP會員限贈乙次，限量900份。"
+  },
+  "subs": []
+ }
+}

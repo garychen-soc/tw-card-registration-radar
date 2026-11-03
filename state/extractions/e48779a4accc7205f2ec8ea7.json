@@ -1,0 +1,57 @@
+{
+ "key": "e48779a4accc7205f2ec8ea7",
+ "prompt_version": "2026-11-01.1",
+ "model": "haiku",
+ "created_at": "2026-11-02T03:29:33+00:00",
+ "title": "昇恆昌免稅店",
+ "duration_ms": 75181,
+ "cost_usd": 0.061939999999999995,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "聯邦銀行信用卡持卡人且於指定期間完成登錄者"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [
+     {
+      "kind": "monthly",
+      "is_example": false,
+      "holiday": "none",
+      "quote": "每月1日下午3點開放登錄至當月底",
+      "start": null,
+      "end": null,
+      "days_of_month": [
+       1
+      ],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": {
+       "hour": 15,
+       "minute": 0
+      },
+      "close_time": {
+       "hour": 23,
+       "minute": 59
+      },
+      "end_of_month": true
+     }
+    ],
+    "reregister": {
+     "value": "once",
+     "quote": "每一正卡持卡人登錄乙次即享活動資格，無需每月登錄"
+    },
+    "order": {
+     "value": "retroactive_ok",
+     "quote": "客戶A於2026/11/1登錄成功，則2026/12/1無需再登錄，2026/10/1-12/31之昇恆昌消費皆適用活動"
+    },
+    "quota": {
+     "seats": 10000,
+     "quote": "限量登錄1萬名/月"
+    }
+   }
+  ]
+ }
+}

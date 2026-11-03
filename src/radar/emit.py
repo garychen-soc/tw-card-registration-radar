@@ -65,7 +65,15 @@ def timeline(activities: list[Activity], generated: datetime) -> list[dict[str, 
                     }
                 )
     rows.sort(key=lambda r: (r["start"] or r["end"], r["bank_id"], r["title"]))
-    return rows
+    # 同一銀行同名活動的不同分頁網址（聯邦 ?p=）常給出相同時點：時間軸只留一列
+    seen: set[tuple[Any, ...]] = set()
+    unique: list[dict[str, Any]] = []
+    for row in rows:
+        key = (row["bank_id"], row["title"], row["sub"], row["start"], row["end"])
+        if key not in seen:
+            seen.add(key)
+            unique.append(row)
+    return unique
 
 
 def counts(activities: list[Activity]) -> dict[str, int]:

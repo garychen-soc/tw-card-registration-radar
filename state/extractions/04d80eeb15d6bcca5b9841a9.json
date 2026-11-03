@@ -1,0 +1,57 @@
+{
+ "key": "04d80eeb15d6bcca5b9841a9",
+ "prompt_version": "2026-11-01.1",
+ "model": "haiku",
+ "created_at": "2026-11-02T03:27:07+00:00",
+ "title": "精選海外旅遊最高回饋5%",
+ "duration_ms": 85737,
+ "cost_usd": 0.06770400000000001,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "優惠內容:於精選旅遊通路刷富邦Costco聯名卡並登錄享最高回饋5%好多金"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [
+     {
+      "quote": "每月1日00:00開放登錄，每月登錄名額共5萬名，限登錄正卡人資料。",
+      "kind": "monthly",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [
+       1
+      ],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": {
+       "hour": 0,
+       "minute": 0
+      },
+      "close_time": {
+       "hour": 23,
+       "minute": 59
+      },
+      "end_of_month": true
+     }
+    ],
+    "reregister": {
+     "value": "each_period",
+     "quote": "每月1日00:00開放登錄，每月登錄名額共5萬名"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 50000,
+     "quote": "每月登錄名額共5萬名"
+    }
+   }
+  ]
+ }
+}

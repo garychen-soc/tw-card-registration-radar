@@ -1,0 +1,81 @@
+{
+ "key": "9038ebe7ae9bed3953ad2e7c",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-02T07:38:33+00:00",
+ "title": "於王品集團旗下適用餐廳/通路，使用王品瘋美食 App 內電子錢包「瘋Pay」綁定國泰世華信用卡(不含商務卡)結帳，即享每週四享最高 11.3% 回饋，天天(週四除外)享最高 6.3% 回饋!",
+ "duration_ms": 8176,
+ "cost_usd": 0.0451562,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "本活動優惠券需於活動期間完成領取，領取日後(含當日)之新增消費方符合點數回饋計算"
+  },
+  "subs": [
+   {
+    "name": "【活動一】每週四享最高 11.3% 回饋",
+    "rules": [
+     {
+      "quote": "本活動優惠券需於活動期間完成領取",
+      "kind": "other",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "register_before_spend",
+     "quote": "領取日後(含當日)之新增消費方符合點數回饋計算"
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   },
+   {
+    "name": "【活動二】天天(週四除外)享最高 6.3% 回饋",
+    "rules": [
+     {
+      "quote": "本活動優惠券需於活動期間完成領取",
+      "kind": "other",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "register_before_spend",
+     "quote": "領取日後(含當日)之新增消費方符合點數回饋計算"
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

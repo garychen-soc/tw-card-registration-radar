@@ -1,0 +1,16 @@
+{
+ "key": "27a908a6f5c3b5699ccdab67",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:13:20+00:00",
+ "title": "CUBE慶生月Q4活動",
+ "duration_ms": 4162,
+ "cost_usd": 0.06103,
+ "output": {
+  "registration": {
+   "value": "unclear",
+   "quote": ""
+  },
+  "subs": []
+ }
+}

@@ -1,0 +1,16 @@
+{
+ "key": "51d224cdf4d08f40f8ad74cb",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:26:47+00:00",
+ "title": "轉點抽高鐵TGo",
+ "duration_ms": 3361,
+ "cost_usd": 0.0247402,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "每成功兌換乙次即獲1次抽獎機會"
+  },
+  "subs": []
+ }
+}

@@ -1,0 +1,33 @@
+{
+ "key": "af63e87019123ce84d1e0dab",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-02T07:39:42+00:00",
+ "title": "彰銀卡在手，寵愛全都有",
+ "duration_ms": 3873,
+ "cost_usd": 0.0259242,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "正卡持卡人須於活動指定登錄期間於彰化銀行網站完成登錄作業"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [],
+    "reregister": {
+     "value": "each_period",
+     "quote": "單筆消費滿額並每月完成登錄"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 500,
+     "quote": "每月限量500名"
+    }
+   }
+  ]
+ }
+}

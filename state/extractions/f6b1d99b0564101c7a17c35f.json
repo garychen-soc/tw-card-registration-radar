@@ -1,0 +1,16 @@
+{
+ "key": "f6b1d99b0564101c7a17c35f",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:22:53+00:00",
+ "title": "寧夏夜市愛逮玩 台灣Pay享20%回饋",
+ "duration_ms": 2556,
+ "cost_usd": 0.0198682,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "使用「台灣 Pay」QR Code掃碼支付成功者，單筆消費不限金額可享20%之現金回饋"
+  },
+  "subs": []
+ }
+}

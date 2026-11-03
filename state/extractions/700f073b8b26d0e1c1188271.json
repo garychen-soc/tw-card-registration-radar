@@ -1,0 +1,87 @@
+{
+ "key": "700f073b8b26d0e1c1188271",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:23:47+00:00",
+ "title": "支付綁定 有PAY賺回饋",
+ "duration_ms": 9184,
+ "cost_usd": 0.0451062,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "參加本活動，須由正卡持卡人於活動期間透過永豐銀行網站進行線上登錄"
+  },
+  "subs": [
+   {
+    "name": "月月超級Pay",
+    "rules": [
+     {
+      "quote": "10/15 15:00開放4,000名、11/15 15:00開放2,000名、12/15 15:00開放2,000名",
+      "kind": "enumerated",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [
+       {
+        "year": null,
+        "month": 10,
+        "day": 15,
+        "hour": 15,
+        "minute": 0
+       },
+       {
+        "year": null,
+        "month": 11,
+        "day": 15,
+        "hour": 15,
+        "minute": 0
+       },
+       {
+        "year": null,
+        "month": 12,
+        "day": 15,
+        "hour": 15,
+        "minute": 0
+       }
+      ],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "register_before_spend",
+     "quote": "活動期間，完成登錄後使用指定支付刷永豐信用卡"
+    },
+    "quota": {
+     "seats": 8000,
+     "quote": "總限量8,000名"
+    }
+   },
+   {
+    "name": "王品瘋美食「瘋Pay」綁定永豐信用卡，最高享6%回饋!",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

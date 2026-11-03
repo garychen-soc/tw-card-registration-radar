@@ -1,0 +1,16 @@
+{
+ "key": "a8efc9e2a7f42926c513cf51",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:22:11+00:00",
+ "title": "115年新戶首刷禮",
+ "duration_ms": 1199,
+ "cost_usd": 0.022624199999999997,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "享NT$500刷卡金(不需登錄)"
+  },
+  "subs": []
+ }
+}

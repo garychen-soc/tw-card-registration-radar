@@ -1,0 +1,16 @@
+{
+ "key": "42bc4ac18cf31182ad07c644",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:19:40+00:00",
+ "title": "第一銀行 X 太平洋旅行社",
+ "duration_ms": 3455,
+ "cost_usd": 0.0204962,
+ "output": {
+  "registration": {
+   "value": "unclear",
+   "quote": "FUN旅遊:於太平洋旅行社消費後登錄滿額最高回饋8,500元!"
+  },
+  "subs": []
+ }
+}

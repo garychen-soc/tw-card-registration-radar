@@ -1,0 +1,54 @@
+{
+ "key": "e3ed4dba7b01c169b733a343",
+ "prompt_version": "2026-11-01.1",
+ "model": "opus",
+ "created_at": "2026-11-02T03:30:57+00:00",
+ "title": "美食外送",
+ "duration_ms": 5408,
+ "cost_usd": 0.0463562,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "活動登錄:每月22日上午10時起開放登錄，需每月登錄，額滿關閉活動登錄功能。"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [
+     {
+      "quote": "每月22日上午10點起(逐月登錄，額滿即關閉)",
+      "kind": "monthly",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [
+       22
+      ],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": {
+       "hour": 10,
+       "minute": 0
+      },
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "each_period",
+     "quote": "需每月登錄，額滿關閉活動登錄功能"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 1200,
+     "quote": "每月限量1,200份(每月22日上午10時起開放登錄)"
+    }
+   }
+  ]
+ }
+}

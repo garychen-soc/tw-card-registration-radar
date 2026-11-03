@@ -1,0 +1,16 @@
+{
+ "key": "2f32ed2c5223c373f59f0447",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:15:06+00:00",
+ "title": "刷星展饗美食 最優享8折",
+ "duration_ms": 1349,
+ "cost_usd": 0.10896420000000001,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "活動期間內至以下指定店家\n刷星展信用卡消費，即享優惠！"
+  },
+  "subs": []
+ }
+}

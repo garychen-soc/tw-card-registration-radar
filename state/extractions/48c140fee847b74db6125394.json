@@ -1,0 +1,16 @@
+{
+ "key": "48c140fee847b74db6125394",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:19:32+00:00",
+ "title": "長榮酒店 住宿享優惠",
+ "duration_ms": 3186,
+ "cost_usd": 0.0246542,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "持第一銀行信用卡於活動期間至長榮酒店消費可享住宿優惠"
+  },
+  "subs": []
+ }
+}

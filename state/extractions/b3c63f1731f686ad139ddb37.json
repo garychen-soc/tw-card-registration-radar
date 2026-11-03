@@ -1,0 +1,149 @@
+{
+ "key": "b3c63f1731f686ad139ddb37",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:24:26+00:00",
+ "title": "第四季淘寶活動",
+ "duration_ms": 8389,
+ "cost_usd": 0.0333522,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "並於活動開放登錄時間完成正卡人資料登錄始符合活動參加資格"
+  },
+  "subs": [
+   {
+    "name": "【活動一】",
+    "rules": [
+     {
+      "quote": "2026/12/22 14:00起開放登錄至2026/12/31 23:59止",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 12,
+       "day": 22,
+       "hour": 14,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": 12,
+       "day": 31,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 50,
+     "quote": "限量50名"
+    }
+   },
+   {
+    "name": "【活動二】",
+    "rules": [
+     {
+      "quote": "2026/12/22 14:00起開放登錄至2026/12/31 23:59止",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 12,
+       "day": 22,
+       "hour": 14,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": 12,
+       "day": 31,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 50,
+     "quote": "限量50名"
+    }
+   },
+   {
+    "name": "【活動三】",
+    "rules": [
+     {
+      "quote": "2026/12/22 14:00起開放登錄至2026/12/31 23:59止",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 12,
+       "day": 22,
+       "hour": 14,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": 12,
+       "day": 31,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 50,
+     "quote": "限量50名"
+    }
+   }
+  ]
+ }
+}

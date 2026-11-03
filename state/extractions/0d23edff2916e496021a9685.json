@@ -1,0 +1,33 @@
+{
+ "key": "0d23edff2916e496021a9685",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:19:19+00:00",
+ "title": "可樂旅遊專屬優惠",
+ "duration_ms": 5631,
+ "cost_usd": 0.0256902,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "輸入優惠代碼【FCB2026】並完成歸戶動作"
+  },
+  "subs": [
+   {
+    "name": "【活動一】高鐵假期卡友限定9折",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

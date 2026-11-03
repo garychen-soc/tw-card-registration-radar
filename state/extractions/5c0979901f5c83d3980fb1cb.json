@@ -1,0 +1,65 @@
+{
+ "key": "5c0979901f5c83d3980fb1cb",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:26:06+00:00",
+ "title": "MaiCoin聯名卡",
+ "duration_ms": 7804,
+ "cost_usd": 0.0686902,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "完成登錄享筆筆3%刷卡金。"
+  },
+  "subs": [
+   {
+    "name": "Uber Eats、foodpanda",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 6000,
+     "quote": "限量登錄6,000名/月"
+    }
+   },
+   {
+    "name": "聯邦陪您輕鬆玩世界",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 12000,
+     "quote": "限量登錄12,000名/月"
+    }
+   },
+   {
+    "name": "消費滿額享 10%",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "register_before_spend",
+     "quote": "須先同意加入一卡通綠點回饋後，方可獲得本次活動回饋點數並開始累積一卡通綠點"
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

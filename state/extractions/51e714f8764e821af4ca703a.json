@@ -1,0 +1,16 @@
+{
+ "key": "51e714f8764e821af4ca703a",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:22:23+00:00",
+ "title": "GREEN & SAFE真食物專賣店，用台灣Pay享優惠",
+ "duration_ms": 3518,
+ "cost_usd": 0.0200902,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "活動期間至活動地點消費，出示「台灣Pay」付款條碼(金融卡/帳戶/信用卡)進行支付，單筆消費金額滿新臺幣（以下同）1,500元(含)以上，即享現折300元優惠"
+  },
+  "subs": []
+ }
+}

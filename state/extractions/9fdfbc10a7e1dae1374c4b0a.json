@@ -1,0 +1,33 @@
+{
+ "key": "9fdfbc10a7e1dae1374c4b0a",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:20:13+00:00",
+ "title": "電信通路分期滿額贈-STUDIO A 、 Straight A",
+ "duration_ms": 3630,
+ "cost_usd": 0.0237822,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "消費滿額且登錄"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [],
+    "reregister": {
+     "value": "each_period",
+     "quote": "按季登錄"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

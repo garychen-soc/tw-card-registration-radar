@@ -1,0 +1,33 @@
+{
+ "key": "cfdab47f661e0e46f959a0d8",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:20:12+00:00",
+ "title": "電信通路分期滿額贈-肯驛國際Apple Rewards Store",
+ "duration_ms": 4843,
+ "cost_usd": 0.0249742,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "活動期間於Apple Rewards Store消費滿額且登錄，享以下各門檻擇優回饋乙次"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [],
+    "reregister": {
+     "value": "each_period",
+     "quote": "活動須按季登錄"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

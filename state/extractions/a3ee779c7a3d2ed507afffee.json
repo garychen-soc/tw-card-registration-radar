@@ -1,0 +1,142 @@
+{
+ "key": "a3ee779c7a3d2ed507afffee",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:14:55+00:00",
+ "title": "TESLA 尊榮保修 星展信用卡分期0%利率",
+ "duration_ms": 9115,
+ "cost_usd": 0.0374262,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "參加活動之持卡人須於指定期間至「動感活利網」登錄"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [
+     {
+      "quote": "【11月活動】2026/12/15 15:00 起至2026/12/25 23:59",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 12,
+       "day": 15,
+       "hour": 15,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": 12,
+       "day": 25,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "【12月活動】2027/1/15 15:00 起至2027/1/25 23:59",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2027,
+       "month": 1,
+       "day": 15,
+       "hour": 15,
+       "minute": 0
+      },
+      "end": {
+       "year": 2027,
+       "month": 1,
+       "day": 25,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "【01月活動】2027/2/15 15:00 起至2027/2/25 23:59",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2027,
+       "month": 2,
+       "day": 15,
+       "hour": 15,
+       "minute": 0
+      },
+      "end": {
+       "year": 2027,
+       "month": 2,
+       "day": 25,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "【02月活動】2027/3/15 15:00 起至2027/3/25 23:59",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2027,
+       "month": 3,
+       "day": 15,
+       "hour": 15,
+       "minute": 0
+      },
+      "end": {
+       "year": 2027,
+       "month": 3,
+       "day": 25,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "each_period",
+     "quote": "恕無法往前溯及未登錄之月份，亦非一次性登錄所有活動月份"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

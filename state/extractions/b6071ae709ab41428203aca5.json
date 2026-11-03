@@ -1,0 +1,54 @@
+{
+ "key": "b6071ae709ab41428203aca5",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-02T05:33:49+00:00",
+ "title": "GU",
+ "duration_ms": 5279,
+ "cost_usd": 0.0259062,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "本活動每季登錄一次"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [
+     {
+      "quote": "每月6號下午1:00開放登錄",
+      "kind": "monthly",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [
+       6
+      ],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": {
+       "hour": 13,
+       "minute": 0
+      },
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "each_period",
+     "quote": "本活動每季登錄一次"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 5000,
+     "quote": "本活動每月限量登錄5,000名"
+    }
+   }
+  ]
+ }
+}

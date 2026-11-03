@@ -1,0 +1,81 @@
+{
+ "key": "aa9a62bd6e16d2ed5bd7b573",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:20:03+00:00",
+ "title": "家電分期禮─大同3C",
+ "duration_ms": 5113,
+ "cost_usd": 0.0272922,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "需逐月登錄，登錄日期自每月1日00時起，限量名額依達成順序計算，額滿即關閉登錄功能。"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [
+     {
+      "quote": "2026.1.1~2026.12.31(每月登錄，額滿即關閉登錄功能)",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 1,
+       "day": 1,
+       "hour": null,
+       "minute": null
+      },
+      "end": {
+       "year": 2026,
+       "month": 12,
+       "day": 31,
+       "hour": null,
+       "minute": null
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "登錄日期自每月1日00時起",
+      "kind": "monthly",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [
+       1
+      ],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": {
+       "hour": 0,
+       "minute": 0
+      },
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "each_period",
+     "quote": "需逐月登錄"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

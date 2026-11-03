@@ -1,0 +1,16 @@
+{
+ "key": "a610f371eefb678508763d3a",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:19:03+00:00",
+ "title": "Klook【刷一銀卡享專屬折扣】",
+ "duration_ms": 3691,
+ "cost_usd": 0.0254702,
+ "output": {
+  "registration": {
+   "value": "unclear",
+   "quote": "FUN旅宿:於Klook下單滿額登錄享最高回饋1,000元!"
+  },
+  "subs": []
+ }
+}

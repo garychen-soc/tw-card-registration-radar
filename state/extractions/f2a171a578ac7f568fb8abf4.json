@@ -1,0 +1,49 @@
+{
+ "key": "f2a171a578ac7f568fb8abf4",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:17:35+00:00",
+ "title": "太平洋旅行社",
+ "duration_ms": 5920,
+ "cost_usd": 0.0240942,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "登錄並以玉山世界卡當月新增國內、外一般消費 (含指定休旅通路) 累積滿5萬元"
+  },
+  "subs": [
+   {
+    "name": "日本、歐洲全館享折扣",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   },
+   {
+    "name": "玉山世界卡 最高享3.2%回饋",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

@@ -1,0 +1,186 @@
+{
+ "key": "c896c1c8561175b46cc590be",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-02T07:37:09+00:00",
+ "title": "全家My FamiPay或全盈+PAY綁定CUBE信用卡使用【小樹點(信用卡)馬上折】，享專屬優惠",
+ "duration_ms": 12002,
+ "cost_usd": 0.06854199999999999,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "需先登入本行CUBE App領取全家折抵加碼優惠券"
+  },
+  "subs": [
+   {
+    "name": "享優惠! 折抵領券加碼4%回饋",
+    "rules": [
+     {
+      "quote": "本活動(2026/5/27~2026/8/31)需先登入本行CUBE App領取全家折抵加碼優惠券",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 5,
+       "day": 27,
+       "hour": null,
+       "minute": null
+      },
+      "end": {
+       "year": 2026,
+       "month": 8,
+       "day": 31,
+       "hour": null,
+       "minute": null
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "本延長加碼活動(2026/9/1~2026/12/31)需先登入本行CUBE App領取全家折抵加碼優惠券",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 9,
+       "day": 1,
+       "hour": null,
+       "minute": null
+      },
+      "end": {
+       "year": 2026,
+       "month": 12,
+       "day": 31,
+       "hour": null,
+       "minute": null
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "each_period",
+     "quote": "(每月活動皆須領券)"
+    },
+    "order": {
+     "value": "register_before_spend",
+     "quote": "回饋計算將於當月領取日後(含當日)符合本活動規範之當月新增消費方計入回饋計算"
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   },
+   {
+    "name": "首折禮! 首次使用登錄贈點",
+    "rules": [
+     {
+      "quote": "■第一波登錄:2026/06/01 16:00至06/20 23:59。",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 6,
+       "day": 1,
+       "hour": 16,
+       "minute": 0
+      },
+      "end": {
+       "year": null,
+       "month": 6,
+       "day": 20,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "■第二波登錄:2026/07/01 16:00至07/20 23:59。",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 7,
+       "day": 1,
+       "hour": 16,
+       "minute": 0
+      },
+      "end": {
+       "year": null,
+       "month": 7,
+       "day": 20,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "■第三波登錄:2026/08/03 16:00至08/20 23:59。",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 8,
+       "day": 3,
+       "hour": 16,
+       "minute": 0
+      },
+      "end": {
+       "year": null,
+       "month": 8,
+       "day": 20,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "once",
+     "quote": "活動期間內每人限領乙次"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 30000,
+     "quote": "每波限量登錄30,000名，額滿即關閉"
+    }
+   }
+  ]
+ }
+}

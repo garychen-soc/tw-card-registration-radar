@@ -1,0 +1,16 @@
+{
+ "key": "b91ab41d7d72d031c0e9e3af",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:22:21+00:00",
+ "title": "AA神隊友「手機門號轉帳」有福同享",
+ "duration_ms": 4472,
+ "cost_usd": 0.0244022,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "活動期間隨機抽出 1,000 筆之手機門號轉帳成功交易，首次抽中之該筆交易轉出用戶及收款用戶雙方均可獲得68元幸運金"
+  },
+  "subs": []
+ }
+}

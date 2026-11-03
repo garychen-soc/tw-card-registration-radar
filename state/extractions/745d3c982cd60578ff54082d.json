@@ -1,0 +1,33 @@
+{
+ "key": "745d3c982cd60578ff54082d",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:18:53+00:00",
+ "title": "居家好生活-TEMPUR丹普",
+ "duration_ms": 4213,
+ "cost_usd": 0.0243942,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "須完成登錄，限量名額依達成順序計算"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [],
+    "reregister": {
+     "value": "each_period",
+     "quote": "活動需每季登錄"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

@@ -1,0 +1,16 @@
+{
+ "key": "fb34fbd06f926fe88de9da80",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-02T07:38:37+00:00",
+ "title": "【好評延長！】日本三越伊勢丹刷JCB信用卡滿額享5%現金回饋",
+ "duration_ms": 2945,
+ "cost_usd": 0.0285402,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "本活動免登錄，限直接使用國泰世華JCB信用卡刷卡"
+  },
+  "subs": []
+ }
+}

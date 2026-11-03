@@ -1,0 +1,49 @@
+{
+ "key": "616a1d5b76d66d350120109c",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:21:46+00:00",
+ "title": "Mega One自動分期滿萬送百",
+ "duration_ms": 5781,
+ "cost_usd": 0.029812199999999997,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "並完成線上登錄始符合回饋"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [
+     {
+      "quote": "未於活動期間內完成活動登錄者，恕無法補登參加",
+      "kind": "other",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "once",
+     "quote": "活動期間內只須登錄一次"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

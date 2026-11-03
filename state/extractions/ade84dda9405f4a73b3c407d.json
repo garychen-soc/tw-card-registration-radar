@@ -1,0 +1,54 @@
+{
+ "key": "ade84dda9405f4a73b3c407d",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-02T05:41:09+00:00",
+ "title": "美食外送",
+ "duration_ms": 3378,
+ "cost_usd": 0.0217882,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "完成登錄享回饋"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [
+     {
+      "quote": "每月22日上午10點起(逐月登錄，額滿即關閉)",
+      "kind": "monthly",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [
+       22
+      ],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": {
+       "hour": 10,
+       "minute": 0
+      },
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "each_period",
+     "quote": "需每月登錄"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 1200,
+     "quote": "每月限量1,200份"
+    }
+   }
+  ]
+ }
+}

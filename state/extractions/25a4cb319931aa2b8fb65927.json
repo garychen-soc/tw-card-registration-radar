@@ -1,0 +1,86 @@
+{
+ "key": "25a4cb319931aa2b8fb65927",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:14:19+00:00",
+ "title": "統一金流",
+ "duration_ms": 6622,
+ "cost_usd": 0.032878199999999996,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "刷卡金活動須至「星展Card+信用卡數位服務」進行登錄"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [
+     {
+      "quote": "10月活動於10/23登錄下午2點整開始登錄； 11月活動於11/24下午2點整開始登錄； 12月活動於12/24下午2點整開始登錄",
+      "kind": "enumerated",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [
+       {
+        "year": null,
+        "month": 10,
+        "day": 23,
+        "hour": 14,
+        "minute": 0
+       },
+       {
+        "year": null,
+        "month": 11,
+        "day": 24,
+        "hour": 14,
+        "minute": 0
+       },
+       {
+        "year": null,
+        "month": 12,
+        "day": 24,
+        "hour": 14,
+        "minute": 0
+       }
+      ],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "當月消費須當月登錄",
+      "kind": "deadline",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": true
+     }
+    ],
+    "reregister": {
+     "value": "each_period",
+     "quote": "各月回饋須個別登錄"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

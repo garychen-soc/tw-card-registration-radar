@@ -1,0 +1,16 @@
+{
+ "key": "8ff6656630f2e6e05ba06c32",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:17:00+00:00",
+ "title": "日本COSMOS藥妝店消費享優惠",
+ "duration_ms": 5081,
+ "cost_usd": 0.0860002,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "玉山卡於日本COSMOS藥妝店指定門市，出示專屬優惠券最高可享9%折扣+10%免稅優惠"
+  },
+  "subs": []
+ }
+}

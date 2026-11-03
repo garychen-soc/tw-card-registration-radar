@@ -1,0 +1,61 @@
+{
+ "key": "dc76d077559f6db12e09969d",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:16:06+00:00",
+ "title": "百貨購 旅遊GO",
+ "duration_ms": 5511,
+ "cost_usd": 0.0303222,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "本活動採登錄參加"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [
+     {
+      "quote": "於2026/10/1 10:30起開放登錄，最後登錄時間為2026/12/31 23:59",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 10,
+       "day": 1,
+       "hour": 10,
+       "minute": 30
+      },
+      "end": {
+       "year": 2026,
+       "month": 12,
+       "day": 31,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 10000,
+     "quote": "活動限量登錄1萬名"
+    }
+   }
+  ]
+ }
+}

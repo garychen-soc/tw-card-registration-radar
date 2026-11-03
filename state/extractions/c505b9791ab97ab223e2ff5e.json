@@ -1,0 +1,33 @@
+{
+ "key": "c505b9791ab97ab223e2ff5e",
+ "prompt_version": "2026-11-01.1",
+ "model": "opus",
+ "created_at": "2026-11-02T03:33:04+00:00",
+ "title": "華南卡xklook，全站商品單筆5,000送400(需填優惠碼，限量)",
+ "duration_ms": 11418,
+ "cost_usd": 0.1078762,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "持華南信用卡，透過指定連結進入klook並輸入優惠代碼，享每月限量全站指定商品單筆滿"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [],
+    "reregister": {
+     "value": "each_period",
+     "quote": "每戶每月限領取使用一次，每月限量250組，領完為止"
+    },
+    "order": {
+     "value": "register_before_spend",
+     "quote": "優惠碼須於預訂時使用，若於預訂流程中未成功使用優惠碼，不得於交易完成後要求折抵"
+    },
+    "quota": {
+     "seats": 250,
+     "quote": "每月限量250組，領完為止"
+    }
+   }
+  ]
+ }
+}

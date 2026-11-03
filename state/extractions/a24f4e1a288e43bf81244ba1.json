@@ -1,0 +1,64 @@
+{
+ "key": "a24f4e1a288e43bf81244ba1",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:19:44+00:00",
+ "title": "汽車百貨/保養分期滿額贈-車麗屋",
+ "duration_ms": 5646,
+ "cost_usd": 0.027222200000000002,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "活動期間於車麗屋消費滿額且登錄，享以下各門檻擇優回饋乙次"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [
+     {
+      "quote": "採每季登錄一次自登錄當月起享活動參與資格",
+      "kind": "other",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "舉例說明: 客戶於二月登錄本活動，回饋僅能從二月起算，恕無法回朔至一月消費。",
+      "kind": "other",
+      "is_example": true,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "each_period",
+     "quote": "活動須按季登錄"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

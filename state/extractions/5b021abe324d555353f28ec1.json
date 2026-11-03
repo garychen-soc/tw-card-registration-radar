@@ -1,0 +1,81 @@
+{
+ "key": "5b021abe324d555353f28ec1",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:22:18+00:00",
+ "title": "兆豐JCB晶緻卡獨享禮遇 吃喝饗宴都優惠",
+ "duration_ms": 5653,
+ "cost_usd": 0.0270402,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "登錄成功用餐消費現折NT$50(15,000名/月)"
+  },
+  "subs": [
+   {
+    "name": "食在日系",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 15000,
+     "quote": "登錄成功用餐消費現折NT$50(15,000名/月)"
+    }
+   },
+   {
+    "name": "食在韓系",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 10000,
+     "quote": "登錄成功用餐消費現折NT$50(10,000名/月)"
+    }
+   },
+   {
+    "name": "和風饗宴",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 320,
+     "quote": "登錄預約成功兩人同行第二位半價(320組/週)"
+    }
+   },
+   {
+    "name": "星巴克優惠",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 10000,
+     "quote": "登錄成功指定品項一杯半價(10,000名/月)"
+    }
+   }
+  ]
+ }
+}

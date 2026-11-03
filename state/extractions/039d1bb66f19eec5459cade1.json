@@ -1,0 +1,16 @@
+{
+ "key": "039d1bb66f19eec5459cade1",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:25:03+00:00",
+ "title": "石門水庫福華渡假飯店",
+ "duration_ms": 1986,
+ "cost_usd": 0.0182682,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": ""
+  },
+  "subs": []
+ }
+}

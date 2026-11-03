@@ -1,0 +1,16 @@
+{
+ "key": "1569be412702e8f60964b073",
+ "prompt_version": "2026-11-02.1",
+ "model": "opus",
+ "created_at": "2026-11-02T05:45:43+00:00",
+ "title": "世界卡 專屬禮遇！",
+ "duration_ms": 3078,
+ "cost_usd": 0.1022722,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "國外消費不限金額皆享2.5%現金回饋"
+  },
+  "subs": []
+ }
+}

@@ -1,0 +1,297 @@
+{
+ "key": "39d601af3e513a98637cd5e3",
+ "prompt_version": "2026-11-01.1",
+ "model": "opus",
+ "created_at": "2026-11-02T03:32:01+00:00",
+ "title": "J卡亞洲精選最高享6%",
+ "duration_ms": 17158,
+ "cost_usd": 0.0872002,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "本活動須以正卡持卡人資料完成登錄，且消費達指定門檻後始符合回饋活動資格"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [
+     {
+      "quote": "每月19日16:00開放登錄",
+      "kind": "monthly",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [
+       19
+      ],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": {
+       "hour": 16,
+       "minute": 0
+      },
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "4月:2026/4/19 16:00起至2026/4/30 23:59止",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 4,
+       "day": 19,
+       "hour": 16,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": 4,
+       "day": 30,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "5月:2026/5/19 16:00起至2026/5/31 23:59止",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 5,
+       "day": 19,
+       "hour": 16,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": 5,
+       "day": 31,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "6月:2026/6/19 16:00起至2026/6/30 23:59止",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 6,
+       "day": 19,
+       "hour": 16,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": 6,
+       "day": 30,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "7月:2026/7/19 16:00起至2026/7/31 23:59止",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 7,
+       "day": 19,
+       "hour": 16,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": 7,
+       "day": 31,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "8月:2026/8/19 16:00起至2026/8/31 23:59止",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 8,
+       "day": 19,
+       "hour": 16,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": 8,
+       "day": 31,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "9月:2026/9/19 16:00起至2026/9/30 23:59止",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 9,
+       "day": 19,
+       "hour": 16,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": 9,
+       "day": 30,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "10月:2026/10/19 16:00起至2026/10/31 23:59止",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 10,
+       "day": 19,
+       "hour": 16,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": 10,
+       "day": 31,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "11月:2026/11/19 16:00起至2026/11/30 23:59止",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 11,
+       "day": 19,
+       "hour": 16,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": 11,
+       "day": 30,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "12月:2026/12/19 16:00起至2026/12/31 23:59止",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 12,
+       "day": 19,
+       "hour": 16,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": 12,
+       "day": 31,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "each_period",
+     "quote": "每月19日16:00開放登錄，每月登錄名額限量10,000名"
+    },
+    "order": {
+     "value": "retroactive_ok",
+     "quote": "於2026/4/1 00:00至2026/4/30 23:59止，於指定亞洲精選國家實體消費滿額，並完成活動登錄"
+    },
+    "quota": {
+     "seats": 10000,
+     "quote": "每月登錄名額限量10,000名"
+    }
+   }
+  ]
+ }
+}

@@ -1,0 +1,49 @@
+{
+ "key": "1a5ea85970d02b1727a6ed8b",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:23:20+00:00",
+ "title": "【學費刷上海】免手續費．登錄再享分期零利率！",
+ "duration_ms": 4922,
+ "cost_usd": 0.0262562,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "其他卡友優惠(需活動登錄)"
+  },
+  "subs": [
+   {
+    "name": "小小兵分期卡專屬",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   },
+   {
+    "name": "其他卡友優惠(需活動登錄)",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "register_before_spend",
+     "quote": "未登錄成功前之學費交易恕無法參加分期"
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

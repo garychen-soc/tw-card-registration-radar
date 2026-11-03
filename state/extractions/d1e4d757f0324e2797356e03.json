@@ -1,0 +1,33 @@
+{
+ "key": "d1e4d757f0324e2797356e03",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:20:08+00:00",
+ "title": "電信通路分期滿額贈─米可",
+ "duration_ms": 3835,
+ "cost_usd": 0.0241742,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "消費滿額且登錄，享以下各門檻擇優回饋乙次"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [],
+    "reregister": {
+     "value": "each_period",
+     "quote": "活動須 按季登錄"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

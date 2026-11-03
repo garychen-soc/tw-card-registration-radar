@@ -1,0 +1,16 @@
+{
+ "key": "ae4306d296c2a4bfede4147f",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:22:31+00:00",
+ "title": "暢遊馬祖享回饋，TWQR馬上Pay",
+ "duration_ms": 3003,
+ "cost_usd": 0.019968200000000002,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "用戶於活動期間至活動地點掃碼支付，單筆消費不限金額享10%現金回饋或點數回饋"
+  },
+  "subs": []
+ }
+}

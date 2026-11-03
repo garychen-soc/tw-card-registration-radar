@@ -1,0 +1,33 @@
+{
+ "key": "08844fc644a7220a5d8aa5b7",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:16:01+00:00",
+ "title": "玉山熊本熊卡新卡禮最高贈HAPPY GO點數500點！",
+ "duration_ms": 6346,
+ "cost_usd": 0.0419202,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "活動需登錄且活動期間內僅需登錄1次"
+  },
+  "subs": [
+   {
+    "name": "熊本熊遊日本",
+    "rules": [],
+    "reregister": {
+     "value": "once",
+     "quote": "活動期間內僅需登錄1次"
+    },
+    "order": {
+     "value": "register_before_spend",
+     "quote": "完成活動登錄後方享指定日本商店加碼6%現金回饋"
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

@@ -1,0 +1,57 @@
+{
+ "key": "7a712d7874a9b18fd67b4ae2",
+ "prompt_version": "2026-11-01.1",
+ "model": "opus",
+ "created_at": "2026-11-02T03:30:22+00:00",
+ "title": "【行動支付】行動支付刷My樂 筆筆皆有禮",
+ "duration_ms": 7342,
+ "cost_usd": 0.07689599999999999,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "已申請尚未核發卡片者可先行登錄活動"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [
+     {
+      "quote": "每月1日08:00─24:00",
+      "kind": "monthly",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [
+       1
+      ],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": {
+       "hour": 8,
+       "minute": 0
+      },
+      "close_time": {
+       "hour": 23,
+       "minute": 59
+      },
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "each_period",
+     "quote": "即當月正卡登錄成功，正附卡均享當月消費回饋"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

@@ -1,0 +1,96 @@
+{
+ "key": "3d74a0d3255ee118837d8709",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:15:23+00:00",
+ "title": "保你星想事成 最高4%回饋",
+ "duration_ms": 7636,
+ "cost_usd": 0.0403862,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "本活動限以星展信用卡於活動期間內完成合格台幣保險費繳費交易，並需完成登錄始符合回饋資格。"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [
+     {
+      "quote": "客戶需分別於2026/9/1 15:00~2026/12/31 23:59於「星展Card+信用卡數位服務」完成登錄",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 9,
+       "day": 1,
+       "hour": 15,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": 12,
+       "day": 31,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "每月第一個工作天之15:00開放該月登錄",
+      "kind": "monthly",
+      "is_example": false,
+      "holiday": "next_business_day",
+      "start": null,
+      "end": null,
+      "days_of_month": [
+       1
+      ],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": {
+       "hour": 15,
+       "minute": 0
+      },
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "須於各月完成登錄，才享有該月活動資格。",
+      "kind": "deadline",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": true
+     }
+    ],
+    "reregister": {
+     "value": "each_period",
+     "quote": "需月月登錄、依登錄月份計算當月消費回饋"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

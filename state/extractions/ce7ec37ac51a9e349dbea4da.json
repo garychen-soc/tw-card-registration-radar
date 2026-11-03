@@ -1,0 +1,16 @@
+{
+ "key": "ce7ec37ac51a9e349dbea4da",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-02T07:37:02+00:00",
+ "title": "小樹點 (信用卡) 馬上折 X 全支付專屬權益，全新登場！",
+ "duration_ms": 4823,
+ "cost_usd": 0.049679999999999995,
+ "output": {
+  "registration": {
+   "value": "unclear",
+   "quote": "持卡人於CUBE App切換「全支付」權益方案，並使用全支付綁定之CUBE信用卡於「全支付國內合作通路」消費，可享2%小樹點(信用卡)回饋。"
+  },
+  "subs": []
+ }
+}

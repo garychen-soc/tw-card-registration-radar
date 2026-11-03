@@ -1,0 +1,16 @@
+{
+ "key": "b28837587ad8fdb4c73b88fe",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:23:46+00:00",
+ "title": "美食餐飲優惠",
+ "duration_ms": 1207,
+ "cost_usd": 0.0195562,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "不需要事先登錄，惟須依活動說明於消費時輸入或出示優惠代碼"
+  },
+  "subs": []
+ }
+}

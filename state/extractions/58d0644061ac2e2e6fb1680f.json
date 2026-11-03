@@ -1,0 +1,16 @@
+{
+ "key": "58d0644061ac2e2e6fb1680f",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:22:49+00:00",
+ "title": "Autopass麻吉神助攻 用台灣Pay加油停車享20%回饋",
+ "duration_ms": 2711,
+ "cost_usd": 0.0196902,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "用戶於活動期間至活動地點消費，以「台灣Pay」QR Code掃碼支付(限金融卡/帳戶)進行支付，單筆消費不限金額享20%回饋"
+  },
+  "subs": []
+ }
+}

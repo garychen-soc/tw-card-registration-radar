@@ -1,0 +1,16 @@
+{
+ "key": "faabf046c69fcc7875628896",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:25:32+00:00",
+ "title": "台新Richart卡，日本三越・伊勢丹百貨最高8.3%",
+ "duration_ms": 2017,
+ "cost_usd": 0.0237362,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "活動免登錄。"
+  },
+  "subs": []
+ }
+}

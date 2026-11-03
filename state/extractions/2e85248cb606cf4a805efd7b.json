@@ -1,0 +1,33 @@
+{
+ "key": "2e85248cb606cf4a805efd7b",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:15:45+00:00",
+ "title": "日本博多阪急百貨 • 玉山世界卡首次合作！",
+ "duration_ms": 4917,
+ "cost_usd": 0.0270082,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "登錄並以玉山世界卡當月新增國外實體商店一般消費累積滿2萬元，享加碼最高2.5%現金回饋"
+  },
+  "subs": [
+   {
+    "name": "玉山世界卡-國外實體消費最高3.5%現金回饋",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

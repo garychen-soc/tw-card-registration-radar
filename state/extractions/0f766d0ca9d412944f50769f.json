@@ -1,0 +1,229 @@
+{
+ "key": "0f766d0ca9d412944f50769f",
+ "prompt_version": "2026-11-01.1",
+ "model": "haiku",
+ "created_at": "2026-11-02T03:12:59+00:00",
+ "title": "蝦皮購物",
+ "duration_ms": 149208,
+ "cost_usd": 0.107538,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "於指定期間內完成登錄成功，即可享刷卡金回饋"
+  },
+  "subs": [
+   {
+    "name": "活動一",
+    "rules": [
+     {
+      "quote": "於2026/11/26 下午3:00開放登錄。",
+      "kind": "opens_at",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 11,
+       "day": 26,
+       "hour": 15,
+       "minute": 0
+      },
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": {
+       "hour": 15,
+       "minute": 0
+      },
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "於2026/11/26 下午4:00開始登錄。",
+      "kind": "opens_at",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 11,
+       "day": 26,
+       "hour": 16,
+       "minute": 0
+      },
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": {
+       "hour": 16,
+       "minute": 0
+      },
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "retroactive_ok",
+     "quote": "消費達指定門檻，並於指定期間內完成登錄，即可享"
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   },
+   {
+    "name": "活動二",
+    "rules": [
+     {
+      "quote": "於2026/11/25 上午11:00開始登錄。",
+      "kind": "opens_at",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 11,
+       "day": 25,
+       "hour": 11,
+       "minute": 0
+      },
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": {
+       "hour": 11,
+       "minute": 0
+      },
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "於2026/11/25 下午3:00開始登錄。",
+      "kind": "opens_at",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 11,
+       "day": 25,
+       "hour": 15,
+       "minute": 0
+      },
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": {
+       "hour": 15,
+       "minute": 0
+      },
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "retroactive_ok",
+     "quote": "消費達指定門檻，並於指定期間內完成登錄，即可享"
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   },
+   {
+    "name": "活動三",
+    "rules": [
+     {
+      "quote": "於2026/11/26 下午3:00開始登錄。",
+      "kind": "opens_at",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 11,
+       "day": 26,
+       "hour": 15,
+       "minute": 0
+      },
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": {
+       "hour": 15,
+       "minute": 0
+      },
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "retroactive_ok",
+     "quote": "消費達指定門檻，並於指定期間內完成登錄，即可享"
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   },
+   {
+    "name": "活動四",
+    "rules": [
+     {
+      "quote": "於2026/11/26下午4:00開始登錄。",
+      "kind": "opens_at",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 11,
+       "day": 26,
+       "hour": 16,
+       "minute": 0
+      },
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": {
+       "hour": 16,
+       "minute": 0
+      },
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "retroactive_ok",
+     "quote": "消費達指定門檻，並於指定期間內完成登錄，即可享"
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

@@ -1,0 +1,16 @@
+{
+ "key": "5ea061c04989d204f3a9b153",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:22:54+00:00",
+ "title": "美十樂連鎖藥局-台灣Pay 20%回饋",
+ "duration_ms": 3076,
+ "cost_usd": 0.020270200000000002,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "用戶於活動期間至活動地點消費，並使用「台灣 Pay」QR Code (金融卡/帳戶/信用卡)進行支付，單筆消費不限金額可享20%之現金回饋"
+  },
+  "subs": []
+ }
+}

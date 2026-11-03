@@ -1,0 +1,16 @@
+{
+ "key": "013351167185a4800aec7dea",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-02T07:39:15+00:00",
+ "title": "【童樂匯專屬】TutorABC限定獨家禮遇",
+ "duration_ms": 2828,
+ "cost_usd": 0.0298422,
+ "output": {
+  "registration": {
+   "value": "unclear",
+   "quote": ""
+  },
+  "subs": []
+ }
+}

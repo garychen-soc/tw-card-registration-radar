@@ -1,0 +1,16 @@
+{
+ "key": "901a5b25fc7f7ea51e74636d",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:18:15+00:00",
+ "title": "寶雅天天滿額贈活動",
+ "duration_ms": 3282,
+ "cost_usd": 0.022012200000000003,
+ "output": {
+  "registration": {
+   "value": "unclear",
+   "quote": "使參加本活動卡友登錄之資料有錯誤、無法辨識，視同未參加"
+  },
+  "subs": []
+ }
+}

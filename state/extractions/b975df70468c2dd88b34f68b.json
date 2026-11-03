@@ -1,0 +1,49 @@
+{
+ "key": "b975df70468c2dd88b34f68b",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:26:15+00:00",
+ "title": "賴點卡有感回饋",
+ "duration_ms": 7749,
+ "cost_usd": 0.06656619999999999,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "持賴點卡於國內外一般消費累積滿2.5萬元，登錄贈500元即享券"
+  },
+  "subs": [
+   {
+    "name": "新戶保費最高2%回饋",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 2500,
+     "quote": "每戶上限1,000元/限量2,500戶"
+    }
+   },
+   {
+    "name": "國內外滿額贈500元",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 5000,
+     "quote": "歸戶限領1次/限量5,000份"
+    }
+   }
+  ]
+ }
+}

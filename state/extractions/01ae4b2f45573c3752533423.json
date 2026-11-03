@@ -1,0 +1,33 @@
+{
+ "key": "01ae4b2f45573c3752533423",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:19:59+00:00",
+ "title": "電信通路分期滿額贈",
+ "duration_ms": 4113,
+ "cost_usd": 0.024510200000000003,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "活動期間於指定通路消費滿額且登錄，享以下各門檻擇優回饋乙次"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [],
+    "reregister": {
+     "value": "each_period",
+     "quote": "活動須按季登錄"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

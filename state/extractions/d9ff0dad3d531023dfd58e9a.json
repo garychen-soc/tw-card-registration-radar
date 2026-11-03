@@ -1,0 +1,33 @@
+{
+ "key": "d9ff0dad3d531023dfd58e9a",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:22:07+00:00",
+ "title": "韓國指定OLIVE YOUNG刷兆豐JCB享最高8%回饋",
+ "duration_ms": 3854,
+ "cost_usd": 0.020932199999999998,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "於指定登錄期間完成事前線上登錄（限量登錄15,000卡）"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "register_before_spend",
+     "quote": "於指定登錄期間完成事前線上登錄"
+    },
+    "quota": {
+     "seats": 15000,
+     "quote": "限量登錄15,000卡"
+    }
+   }
+  ]
+ }
+}

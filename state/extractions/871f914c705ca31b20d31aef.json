@@ -1,0 +1,16 @@
+{
+ "key": "871f914c705ca31b20d31aef",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:24:48+00:00",
+ "title": "太平洋旅行社",
+ "duration_ms": 1461,
+ "cost_usd": 0.016818200000000002,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "使用優惠，請於訂購前主動告知您的業務人員，由業務員確認後進行折扣，無法事後追溯。"
+  },
+  "subs": []
+ }
+}

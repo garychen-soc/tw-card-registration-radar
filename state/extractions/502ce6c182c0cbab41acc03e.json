@@ -1,0 +1,16 @@
+{
+ "key": "502ce6c182c0cbab41acc03e",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:22:58+00:00",
+ "title": "漫遊苗栗南庄老街，台灣Pay給你20%驚喜回饋！",
+ "duration_ms": 3370,
+ "cost_usd": 0.0203642,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "活動期間至活動地點使用「台灣 Pay」(限金融卡/帳戶)，以 QR Code 掃碼進行支付，單筆消費不限金額可享20%回饋"
+  },
+  "subs": []
+ }
+}

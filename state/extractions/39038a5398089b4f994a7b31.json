@@ -1,0 +1,16 @@
+{
+ "key": "39038a5398089b4f994a7b31",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-02T07:38:50+00:00",
+ "title": "韓國樂天免稅店 國泰世華卡友購物享三重專屬優惠",
+ "duration_ms": 4242,
+ "cost_usd": 0.0350142,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "活動期間內，持國泰世華銀行信用卡至韓國樂天指定實體免稅店"
+  },
+  "subs": []
+ }
+}

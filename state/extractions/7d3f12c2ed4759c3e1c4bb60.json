@@ -1,0 +1,16 @@
+{
+ "key": "7d3f12c2ed4759c3e1c4bb60",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:22:27+00:00",
+ "title": "漫遊高雄．墨凡站前商圈台灣Pay樂享10%回饋",
+ "duration_ms": 2523,
+ "cost_usd": 0.0200542,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "用戶於活動期間至活動地點消費，並使用「台灣 Pay」QR Code掃碼支付(限金融卡/帳戶)成功者，單筆消費不限金額可享10%之現金回饋"
+  },
+  "subs": []
+ }
+}

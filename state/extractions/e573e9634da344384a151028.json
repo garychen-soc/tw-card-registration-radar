@@ -1,0 +1,115 @@
+{
+ "key": "e573e9634da344384a151028",
+ "prompt_version": "2026-11-01.1",
+ "model": "haiku",
+ "created_at": "2026-11-02T03:28:16+00:00",
+ "title": "【保費神卡超給利】保險新戶最高8%，Richart卡假日刷",
+ "duration_ms": 126886,
+ "cost_usd": 0.097383,
+ "output": {
+  "registration": {
+   "value": "unclear",
+   "quote": ""
+  },
+  "subs": [
+   {
+    "name": "【保險新戶，首筆保費最高8%】",
+    "rules": [
+     {
+      "quote": "開放領券期間: 2026/10/30(五)10:00-領完為止",
+      "kind": "opens_at",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 10,
+       "day": 30,
+       "hour": 10,
+       "minute": 0
+      },
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "once",
+     "quote": "每ID歸戶僅回饋乙次"
+    },
+    "order": {
+     "value": "register_before_spend",
+     "quote": "保險新戶加碼活動須於指定期間至Richart Life APP完成領券及以台新帳戶自動扣繳台新信用卡帳款，始符合回饋資格。"
+    },
+    "quota": {
+     "seats": 200000,
+     "quote": "限量200,000份"
+    }
+   },
+   {
+    "name": "【不限金額，分12期0利率；分18期，最優5.88%利率】",
+    "rules": [
+     {
+      "quote": "登錄期間:2026/6/10(三) 10:00-2026/12/31(四) 23:59",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 6,
+       "day": 10,
+       "hour": 10,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": 12,
+       "day": 31,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "each_period",
+     "quote": "曾登錄「2026年1-6月保費分期」之客戶，仍需重新登錄「2026年7-12月保費分期」"
+    },
+    "order": {
+     "value": "register_before_spend",
+     "quote": "本活動僅適用於「登錄成功後」所扣繳之保費交易。"
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   },
+   {
+    "name": "【台新網路投保，「假日刷」最高2%回饋】",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

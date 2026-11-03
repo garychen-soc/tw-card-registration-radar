@@ -1,0 +1,16 @@
+{
+ "key": "e9067a5d6a661a7fe5e55022",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:25:31+00:00",
+ "title": "東南旅遊，指定行程最高5%，玩旅刷再享最高3.3%",
+ "duration_ms": 3514,
+ "cost_usd": 0.0249262,
+ "output": {
+  "registration": {
+   "value": "unclear",
+   "quote": "且需登錄東南旅遊會員，並於2026/7/1-11/30線上完成付款方符合回饋資格"
+  },
+  "subs": []
+ }
+}

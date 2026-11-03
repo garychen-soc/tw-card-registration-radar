@@ -1,0 +1,264 @@
+{
+ "key": "0785732696dbc71968d30c69",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-02T07:37:55+00:00",
+ "title": "momo購物網 雙11強檔 (11/9~11/12)",
+ "duration_ms": 15907,
+ "cost_usd": 0.0606902,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "活動期間內於momo購物網刷國泰世華信用卡達以下門檻，登錄成功享專屬回饋"
+  },
+  "subs": [
+   {
+    "name": "活動一:單筆滿額最高享 10%回饋",
+    "rules": [
+     {
+      "quote": "2026/11/13 16:00至2026/11/13 23:59於本行官網登錄專區及國泰優惠 CUBE Rewards App開放正卡持卡人登錄",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 11,
+       "day": 13,
+       "hour": 16,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": 11,
+       "day": 13,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 800,
+     "quote": "活動限量登錄800名，額滿即關閉"
+    }
+   },
+   {
+    "name": "活動二:雙11限時組隊加碼，累積滿額再享 1,000 mo點回饋",
+    "rules": [
+     {
+      "quote": "2026/11/10(二)~2026/11/11(三)成功登記momo組隊活動",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 11,
+       "day": 10,
+       "hour": null,
+       "minute": null
+      },
+      "end": {
+       "year": 2026,
+       "month": 11,
+       "day": 11,
+       "hour": null,
+       "minute": null
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "本活動須於2026/11/13 15:00至11/13 23:59透過『momo 登錄網頁』完成會員登錄始符合資格",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 11,
+       "day": 13,
+       "hour": 15,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": 11,
+       "day": 13,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 1000,
+     "quote": "登錄名額限量1,000名，額滿即關閉"
+    }
+   },
+   {
+    "name": "活動1:momo會員刷卡滿額加碼享最高1%mo點",
+    "rules": [
+     {
+      "quote": "本活動須於2026/11/30 15:00至11/30 23:59透過『momo 登錄網頁』完成會員登錄始符合資格",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 11,
+       "day": 30,
+       "hour": 15,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": 11,
+       "day": 30,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 1000,
+     "quote": "登錄名額限量1,000名，額滿即關閉"
+    }
+   },
+   {
+    "name": "活動2:累積分期滿額加碼享最高1%小樹點(信用卡)",
+    "rules": [
+     {
+      "quote": "2026/11/30 16:00至2026/11/30 23:59於本行官網登錄專區及國泰優惠 CUBE Rewards App開放登錄",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 11,
+       "day": 30,
+       "hour": 16,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": 11,
+       "day": 30,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 1000,
+     "quote": "活動限量登錄1,000名，額滿即關閉"
+    }
+   },
+   {
+    "name": "momo購物網:卡友專屬折扣優惠",
+    "rules": [
+     {
+      "quote": "2026/11/1~2026/11/30於momo購物網 輸入專屬折價券序號【D4AA885WF122】領取指定單品滿額折價券",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 11,
+       "day": 1,
+       "hour": null,
+       "minute": null
+      },
+      "end": {
+       "year": 2026,
+       "month": 11,
+       "day": 30,
+       "hour": null,
+       "minute": null
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

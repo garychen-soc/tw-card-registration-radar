@@ -1,0 +1,16 @@
+{
+ "key": "646294ace3ef9cdc37a0e9fa",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:25:40+00:00",
+ "title": "雄獅旅遊刷台新，最高折10,000元，再享最高3.3%回饋",
+ "duration_ms": 3858,
+ "cost_usd": 0.0277542,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "本活動須透過雄獅旅遊通路(網路、雄獅旅遊直營門市、客服專線，或璽品官方line :@spcollection)訂購指定行程，刷台新銀行信用卡支付"
+  },
+  "subs": []
+ }
+}

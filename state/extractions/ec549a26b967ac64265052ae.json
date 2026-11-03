@@ -1,0 +1,16 @@
+{
+ "key": "ec549a26b967ac64265052ae",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-02T07:38:35+00:00",
+ "title": "CUBE信用卡台塑家權益台塑指定加油站2%小樹點(信用卡)回饋",
+ "duration_ms": 4080,
+ "cost_usd": 0.0446222,
+ "output": {
+  "registration": {
+   "value": "unclear",
+   "quote": "刷國泰世華CUBE信用卡並切換台塑家權益，享2%小樹點(信用卡)回饋。"
+  },
+  "subs": []
+ }
+}

@@ -1,0 +1,33 @@
+{
+ "key": "b04649d83f90a228e88c1116",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:23:26+00:00",
+ "title": "網購/電視購物優惠",
+ "duration_ms": 3802,
+ "cost_usd": 0.030292200000000002,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "參加本活動，須由正卡持卡人於指定期間透過永豐銀行網站進行線上登錄"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

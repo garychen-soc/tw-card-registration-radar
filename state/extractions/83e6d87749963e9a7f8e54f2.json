@@ -1,0 +1,16 @@
+{
+ "key": "83e6d87749963e9a7f8e54f2",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:25:42+00:00",
+ "title": "Booking.com專屬訂房網，享最高13.3%優惠",
+ "duration_ms": 3293,
+ "cost_usd": 0.0302582,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "於Booking.com x台新專屬網頁，刷台新信用卡訂房且完成入住，享稅前房價最高10% Booking Wallet旅遊點數回饋"
+  },
+  "subs": []
+ }
+}

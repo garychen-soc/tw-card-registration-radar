@@ -1,0 +1,33 @@
+{
+ "key": "ffdc2c6164fdc7d9e3f9da76",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-02T07:39:35+00:00",
+ "title": "交通/飛航刷彰銀Visa商旅御璽Fun心卡，暢行無阻享最高5%回饋！",
+ "duration_ms": 7034,
+ "cost_usd": 0.0348262,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "正卡持卡人須於活動登錄期間於彰化銀行網站 (彰銀官網--信用卡--優惠訊息/登錄--活動登錄) 成功完成登錄"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [],
+    "reregister": {
+     "value": "each_period",
+     "quote": "符合前述資格搶先登錄GO (須每月登錄)"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 500,
+     "quote": "刷卡金回饋每月限量500名，贈完為止"
+    }
+   }
+  ]
+ }
+}

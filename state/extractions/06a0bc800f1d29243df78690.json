@@ -1,0 +1,49 @@
+{
+ "key": "06a0bc800f1d29243df78690",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:18:56+00:00",
+ "title": "居家好生活-大成鋼隆美家居",
+ "duration_ms": 3925,
+ "cost_usd": 0.0239542,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "須完成登錄，限量名額依達成順序計算"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [
+     {
+      "quote": "活動需每季登錄",
+      "kind": "other",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "each_period",
+     "quote": "活動需每季登錄"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

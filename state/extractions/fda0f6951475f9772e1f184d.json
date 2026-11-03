@@ -1,0 +1,16 @@
+{
+ "key": "fda0f6951475f9772e1f184d",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:18:11+00:00",
+ "title": "康是美週四週五滿額贈",
+ "duration_ms": 2927,
+ "cost_usd": 0.0272482,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "持卡人於每週四至康是美實體門市刷第一銀行信用卡，整筆結帳金額(扣除不適用商品及折扣金額)達NT$988(含)以上，享康是美NT$100現金折價券"
+  },
+  "subs": []
+ }
+}

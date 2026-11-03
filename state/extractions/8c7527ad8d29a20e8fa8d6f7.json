@@ -1,0 +1,16 @@
+{
+ "key": "8c7527ad8d29a20e8fa8d6f7",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:25:39+00:00",
+ "title": "旅遊刷台新，最高折3,500元，Richart卡再享3.3%",
+ "duration_ms": 3680,
+ "cost_usd": 0.0334182,
+ "output": {
+  "registration": {
+   "value": "unclear",
+   "quote": "*需完成指定任務，活動詳官網"
+  },
+  "subs": []
+ }
+}

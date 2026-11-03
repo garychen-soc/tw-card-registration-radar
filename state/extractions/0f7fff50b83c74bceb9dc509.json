@@ -1,0 +1,16 @@
+{
+ "key": "0f7fff50b83c74bceb9dc509",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:22:22+00:00",
+ "title": "漢神巨蛋就愛台灣Pay 滿2000送200元漢神巨蛋商品券",
+ "duration_ms": 2327,
+ "cost_usd": 0.0198602,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "即可憑漢神APP會員條碼、當日發票及交易明細至「贈品處」兌換「200元漢神巨蛋商品券」乙份"
+  },
+  "subs": []
+ }
+}

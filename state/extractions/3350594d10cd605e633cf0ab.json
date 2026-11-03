@@ -1,0 +1,33 @@
+{
+ "key": "3350594d10cd605e633cf0ab",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:15:31+00:00",
+ "title": "玉山雙11購物盛典，最高享9,800元回饋",
+ "duration_ms": 3781,
+ "cost_usd": 0.0243422,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "各活動需分別於指定登錄時間至本行官網活動網頁登錄成功"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

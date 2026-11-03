@@ -1,0 +1,33 @@
+{
+ "key": "3d3b485012b6d3c54b432ada",
+ "prompt_version": "2026-11-02.1",
+ "model": "opus",
+ "created_at": "2026-11-02T03:37:44+00:00",
+ "title": "首綁全支付，滿額送50全點",
+ "duration_ms": 6329,
+ "cost_usd": 0.0575402,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "限量且每月需於消費前至"
+  },
+  "subs": [
+   {
+    "name": "【活動二】百大品牌最高5%",
+    "rules": [],
+    "reregister": {
+     "value": "each_period",
+     "quote": "限量且每月需於消費前至"
+    },
+    "order": {
+     "value": "register_before_spend",
+     "quote": "限量且每月需於消費前至"
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

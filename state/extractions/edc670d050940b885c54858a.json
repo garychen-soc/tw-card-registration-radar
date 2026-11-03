@@ -1,0 +1,131 @@
+{
+ "key": "edc670d050940b885c54858a",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:17:31+00:00",
+ "title": "明台產險線上投保，玉山專屬優惠開跑",
+ "duration_ms": 9366,
+ "cost_usd": 0.049750199999999994,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "活動需登錄，登錄1次即可參加活動一、活動二等二項活動"
+  },
+  "subs": [
+   {
+    "name": "活動一、單筆滿額最高贈玉山e point 200點",
+    "rules": [
+     {
+      "quote": "登錄時間:2026/10/15、2026/11/15、2026/12/15 17:00 起",
+      "kind": "enumerated",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [
+       {
+        "year": 2026,
+        "month": 10,
+        "day": 15,
+        "hour": 17,
+        "minute": 0
+       },
+       {
+        "year": 2026,
+        "month": 11,
+        "day": 15,
+        "hour": 17,
+        "minute": 0
+       },
+       {
+        "year": 2026,
+        "month": 12,
+        "day": 15,
+        "hour": 17,
+        "minute": 0
+       }
+      ],
+      "open_time": {
+       "hour": 17,
+       "minute": 0
+      },
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "once",
+     "quote": "活動期間僅需登錄1次"
+    },
+    "order": {
+     "value": "retroactive_ok",
+     "quote": "正卡人須於活動期間內完成活動登錄，始符合回饋資格"
+    },
+    "quota": {
+     "seats": 1500,
+     "quote": "每月限量1,500名"
+    }
+   },
+   {
+    "name": "活動二、單筆保費達10,000元，再加碼贈玉山e point 50點",
+    "rules": [
+     {
+      "quote": "登錄時間:2026/10/15、2026/11/15、2026/12/15 17:00 起",
+      "kind": "enumerated",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [
+       {
+        "year": 2026,
+        "month": 10,
+        "day": 15,
+        "hour": 17,
+        "minute": 0
+       },
+       {
+        "year": 2026,
+        "month": 11,
+        "day": 15,
+        "hour": 17,
+        "minute": 0
+       },
+       {
+        "year": 2026,
+        "month": 12,
+        "day": 15,
+        "hour": 17,
+        "minute": 0
+       }
+      ],
+      "open_time": {
+       "hour": 17,
+       "minute": 0
+      },
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "once",
+     "quote": "活動期間僅需登錄1次"
+    },
+    "order": {
+     "value": "retroactive_ok",
+     "quote": "正卡人須於活動期間內完成活動登錄，始符合回饋資格"
+    },
+    "quota": {
+     "seats": 1500,
+     "quote": "每月限量1,500名"
+    }
+   }
+  ]
+ }
+}

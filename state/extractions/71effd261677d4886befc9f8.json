@@ -1,0 +1,16 @@
+{
+ "key": "71effd261677d4886befc9f8",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:22:59+00:00",
+ "title": "三峽X八里攜手趴趴走 揪用台灣Pay享20%大回饋",
+ "duration_ms": 3397,
+ "cost_usd": 0.0206142,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "使用「台灣 Pay」QR Code掃碼支付成功者，單筆消費不限金額可享20%之現金回饋"
+  },
+  "subs": []
+ }
+}

@@ -1,0 +1,194 @@
+{
+ "key": "7dc90193ed3df883c748ae27",
+ "prompt_version": "2026-11-02.1",
+ "model": "opus",
+ "created_at": "2026-11-02T05:45:13+00:00",
+ "title": "旅遊優惠輕鬆享",
+ "duration_ms": 19982,
+ "cost_usd": 0.33762020000000004,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "二、活動對象:永豐信用卡持卡人且完成登錄者"
+  },
+  "subs": [
+   {
+    "name": "旅遊刷永豐，單月最高享10,000元刷卡金",
+    "rules": [
+     {
+      "quote": "10/15、11/15、12/15的15:00開放登錄，每月限量登錄3,000名，共9,000名。活動期間內任一月份完成登錄",
+      "kind": "enumerated",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [
+       {
+        "year": null,
+        "month": 10,
+        "day": 15,
+        "hour": 15,
+        "minute": 0
+       },
+       {
+        "year": null,
+        "month": 11,
+        "day": 15,
+        "hour": 15,
+        "minute": 0
+       },
+       {
+        "year": null,
+        "month": 12,
+        "day": 15,
+        "hour": 15,
+        "minute": 0
+       }
+      ],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "once",
+     "quote": "活動期間內任一月份完成登錄，且有單月達消費門檻者，即享活動資格，無須重複登錄"
+    },
+    "order": {
+     "value": "retroactive_ok",
+     "quote": "小永於活動期間內之11/15完成登錄，其中10月消費滿2萬元且於指定通路完成分期"
+    },
+    "quota": {
+     "seats": 3000,
+     "quote": "每月限量登錄3,000名，共9,000名。活動期間內任一月份完成登錄"
+    }
+   },
+   {
+    "name": "海外消費隨你刷，回饋升級一路拿",
+    "rules": [
+     {
+      "quote": "四、登錄時間&名額:10/15、11/15、12/15的15:00開放登錄",
+      "kind": "enumerated",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [
+       {
+        "year": null,
+        "month": 10,
+        "day": 15,
+        "hour": 15,
+        "minute": 0
+       },
+       {
+        "year": null,
+        "month": 11,
+        "day": 15,
+        "hour": 15,
+        "minute": 0
+       },
+       {
+        "year": null,
+        "month": 12,
+        "day": 15,
+        "hour": 15,
+        "minute": 0
+       }
+      ],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "once",
+     "quote": "活動期間僅須登錄乙次即享活動資格，無須重複登錄"
+    },
+    "order": {
+     "value": "retroactive_ok",
+     "quote": "只要持卡人於指定期間內完成活動登錄，活動期間內符合條件之消費交易，皆可列入回饋計算"
+    },
+    "quota": {
+     "seats": 3000,
+     "quote": "每月限量登錄3,000名，共9,000名。活動期間僅須登錄乙次"
+    }
+   },
+   {
+    "name": "生日之旅！海外餐廳消費加碼10%，再享旅遊專屬優惠碼!",
+    "rules": [
+     {
+      "quote": "登錄時間&名額:10/15、11/15、12/15的15:00開放登錄至當月月底",
+      "kind": "enumerated",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [
+       {
+        "year": null,
+        "month": 10,
+        "day": 15,
+        "hour": 15,
+        "minute": 0
+       },
+       {
+        "year": null,
+        "month": 11,
+        "day": 15,
+        "hour": 15,
+        "minute": 0
+       },
+       {
+        "year": null,
+        "month": 12,
+        "day": 15,
+        "hour": 15,
+        "minute": 0
+       }
+      ],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": true
+     },
+     {
+      "quote": "限當月壽星於生日當月登錄，非當月登錄無效",
+      "kind": "other",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "retroactive_ok",
+     "quote": "只要持卡人於指定期間內完成活動登錄，活動期間內符合條件之消費交易，皆可列入回饋計算"
+    },
+    "quota": {
+     "seats": 1000,
+     "quote": "每月限量登錄1,000名，共3,000名"
+    }
+   }
+  ]
+ }
+}

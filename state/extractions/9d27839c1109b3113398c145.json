@@ -1,0 +1,87 @@
+{
+ "key": "9d27839c1109b3113398c145",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:19:48+00:00",
+ "title": "汽車百貨/保養分期滿額贈-旭益汽車",
+ "duration_ms": 6365,
+ "cost_usd": 0.028034200000000002,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "須完成登錄，限量名額依達成順序計算"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [
+     {
+      "quote": "活動須按季登錄",
+      "kind": "other",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "採每季登錄一次自登錄當月起享活動參與資格",
+      "kind": "other",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "客戶於二月登錄本活動，回饋僅能從二月起算，恕無法回朔至一月消費",
+      "kind": "other",
+      "is_example": true,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [
+       {
+        "year": null,
+        "month": 2,
+        "day": null,
+        "hour": null,
+        "minute": null
+       }
+      ],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "each_period",
+     "quote": "活動須按季登錄"
+    },
+    "order": {
+     "value": "register_before_spend",
+     "quote": "回饋僅能從二月起算，恕無法回朔至一月消費"
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

@@ -1,0 +1,33 @@
+{
+ "key": "3ff356282364660a9fdc8de2",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:18:21+00:00",
+ "title": "生活百貨通路滿額享回饋-小北百貨",
+ "duration_ms": 4847,
+ "cost_usd": 0.024764199999999997,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "須完成登錄，限量名額依達成順序計算，如額滿一銀得關閉登錄功能。"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [],
+    "reregister": {
+     "value": "each_period",
+     "quote": "活動須每季登錄，每季限量1000份"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 1000,
+     "quote": "每季限量1000份"
+    }
+   }
+  ]
+ }
+}

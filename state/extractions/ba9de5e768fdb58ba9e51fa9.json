@@ -1,0 +1,16 @@
+{
+ "key": "ba9de5e768fdb58ba9e51fa9",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-02T07:38:40+00:00",
+ "title": "CUBE 信用卡 & 可樂旅遊專屬優惠｜國泰世華信用卡優惠活動",
+ "duration_ms": 1510,
+ "cost_usd": 0.0280742,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "活動期間內，於可樂旅遊刷 CUBE 信用卡購買指定品項輸入優惠代碼享專屬折扣"
+  },
+  "subs": []
+ }
+}

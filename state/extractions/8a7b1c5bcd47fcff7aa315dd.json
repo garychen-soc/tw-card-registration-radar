@@ -1,0 +1,16 @@
+{
+ "key": "8a7b1c5bcd47fcff7aa315dd",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:22:04+00:00",
+ "title": "Trip.com·機票/訂房最高現折7%",
+ "duration_ms": 3438,
+ "cost_usd": 0.024790200000000002,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "於【Trip.com專屬網頁】預訂飯店或機票，以兆豐卡結帳並輸入指定優惠碼，享最高"
+  },
+  "subs": []
+ }
+}

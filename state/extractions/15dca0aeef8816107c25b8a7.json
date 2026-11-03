@@ -1,0 +1,33 @@
+{
+ "key": "15dca0aeef8816107c25b8a7",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:22:15+00:00",
+ "title": "Mastercard海外消費滿額享現金回饋！",
+ "duration_ms": 4949,
+ "cost_usd": 0.034460199999999996,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "兆豐萬事達卡卡友於活動期間至Mastercard海外消費回饋官網註冊登記卡片"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "register_before_spend",
+     "quote": "部分活動使用前需上平台登錄啟用優惠"
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

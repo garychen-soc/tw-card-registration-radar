@@ -1,0 +1,16 @@
+{
+ "key": "c9c7baddb7640acf67a7f420",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:27:12+00:00",
+ "title": "太平洋旅行社",
+ "duration_ms": 1216,
+ "cost_usd": 0.0179482,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "本活動需於訂購前主動告知太平洋旅遊業務人員欲使用「聯邦銀行信用卡優惠」"
+  },
+  "subs": []
+ }
+}

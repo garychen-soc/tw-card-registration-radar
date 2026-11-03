@@ -1,0 +1,16 @@
+{
+ "key": "88de55df4ef9f51f9fac4631",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:14:54+00:00",
+ "title": "妮芙露國際",
+ "duration_ms": 2182,
+ "cost_usd": 0.0218062,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "限消費當日兌換，每卡每日限領乙份，不得代領，正附卡合併計算，兌換時請出示發票、簽單正本及同卡號之信用卡，影本無效。"
+  },
+  "subs": []
+ }
+}

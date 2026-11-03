@@ -1,0 +1,16 @@
+{
+ "key": "b60bc825ea7f4244aebb3915",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:25:07+00:00",
+ "title": "雄獅旅遊運動專案優惠",
+ "duration_ms": 3073,
+ "cost_usd": 0.0194342,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "本專案限刷富邦信用卡於活動時間內報名且刷付本人及同行者之全額費用可依行程享最高折1,500元之優惠折扣"
+  },
+  "subs": []
+ }
+}

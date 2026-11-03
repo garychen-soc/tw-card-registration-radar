@@ -1,0 +1,16 @@
+{
+ "key": "cca6c6d317571807a6b06355",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-02T07:39:03+00:00",
+ "title": "國泰航空秋日遊限時機票優惠指定航點最高折抵2,000元！",
+ "duration_ms": 4854,
+ "cost_usd": 0.0291122,
+ "output": {
+  "registration": {
+   "value": "unclear",
+   "quote": "於活動期間，持 CUBE 信用卡登入 CUBE App 切換「秋日遊」權益於國泰航空消費再享 3.5% 小樹點(信用卡)回饋！"
+  },
+  "subs": []
+ }
+}

@@ -1,0 +1,16 @@
+{
+ "key": "771c959b6d52f80c9766f7f3",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:22:46+00:00",
+ "title": "TWQR今夜留給我，高雄兩大夜市消費最高享15%回饋",
+ "duration_ms": 3829,
+ "cost_usd": 0.0212842,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "消費金額享10% 現金回饋"
+  },
+  "subs": []
+ }
+}

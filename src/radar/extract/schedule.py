@@ -447,6 +447,7 @@ def build(output: dict[str, Any], ctx: Context) -> Result:
                 review=sub_review,
             )
         )
+    subs = _merge_same_name(subs)
     has_slots = any(sub.slots for sub in subs)
     registration: Registration
     if has_slots or reg_value == "required":
@@ -458,6 +459,29 @@ def build(output: dict[str, Any], ctx: Context) -> Result:
     if registration == "required" and not has_slots and not any(sub.rules for sub in subs):
         review.append("需登錄但官方未寫登錄時點")
     return Result(registration, reg_quote, subs, review)
+
+
+def _merge_same_name(subs: list[SubActivity]) -> list[SubActivity]:
+    """LLM 偶爾把同一個子活動輸出兩次（同名），合併時點與規則、去重。"""
+    merged: dict[str, SubActivity] = {}
+    out: list[SubActivity] = []
+    for sub in subs:
+        if sub.name not in merged:
+            out.append(sub)
+            merged[sub.name] = sub
+            continue
+        base = merged[sub.name]
+        seen = {(s.start, s.end) for s in base.slots}
+        base.slots.extend(s for s in sub.slots if (s.start, s.end) not in seen)
+        base.slots.sort(key=lambda s: s.start or s.end or datetime.min.replace(tzinfo=TAIPEI))
+        base.rules.extend(r for r in sub.rules if r not in base.rules)
+        base.review.extend(r for r in sub.review if r not in base.review)
+        base.quota = base.quota or sub.quota
+        if base.reregister == "unknown":
+            base.reregister, base.reregister_quote = sub.reregister, sub.reregister_quote
+        if base.order == "unknown":
+            base.order, base.order_quote = sub.order, sub.order_quote
+    return out
 
 
 def _seats_supported(seats: int, quote: str) -> bool:

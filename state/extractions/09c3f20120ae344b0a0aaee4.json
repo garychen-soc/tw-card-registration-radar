@@ -1,0 +1,33 @@
+{
+ "key": "09c3f20120ae344b0a0aaee4",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:19:50+00:00",
+ "title": "汽車百貨/保養分期滿額贈-安托華",
+ "duration_ms": 5095,
+ "cost_usd": 0.0249542,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "活動期間於安托華消費滿額且登錄，享以下各門檻擇優回饋乙次"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [],
+    "reregister": {
+     "value": "each_period",
+     "quote": "活動須按季登錄"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

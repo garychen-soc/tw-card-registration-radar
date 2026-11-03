@@ -1,0 +1,60 @@
+{
+ "key": "fa5f29255b40df6d37aedeb0",
+ "prompt_version": "2026-11-01.1",
+ "model": "haiku",
+ "created_at": "2026-11-02T03:29:07+00:00",
+ "title": "美廉社、小北百貨最高8%",
+ "duration_ms": 99729,
+ "cost_usd": 0.07516400000000001,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "參加本活動之持卡人須於消費當月完成登錄始符合當月活動資格"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [
+     {
+      "quote": "每月20日上午11點開放登錄至當月月底",
+      "kind": "monthly",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": null,
+       "month": null,
+       "day": 20,
+       "hour": 11,
+       "minute": 0
+      },
+      "end": null,
+      "days_of_month": [
+       20
+      ],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": {
+       "hour": 11,
+       "minute": 0
+      },
+      "close_time": null,
+      "end_of_month": true
+     }
+    ],
+    "reregister": {
+     "value": "each_period",
+     "quote": "需每月完成登錄始符合當月活動回饋資格"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 5000,
+     "quote": "每月限量登錄5,000名"
+    }
+   }
+  ]
+ }
+}

@@ -1,0 +1,54 @@
+{
+ "key": "a0ba96502db07fc791ec8a81",
+ "prompt_version": "2026-11-01.1",
+ "model": "opus",
+ "created_at": "2026-11-02T03:32:43+00:00",
+ "title": "Komeda's Coffee 客美多咖啡",
+ "duration_ms": 6855,
+ "cost_usd": 0.0479922,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "完成活動登錄，本活動每季登錄一次"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [
+     {
+      "quote": "每月6號下午1:00開放登錄",
+      "kind": "monthly",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [
+       6
+      ],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": {
+       "hour": 13,
+       "minute": 0
+      },
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "each_period",
+     "quote": "本活動每季登錄一次(舉例:7月登錄活動僅能參加7-9月活動，欲參加10-12月活動需重新登錄)"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 5000,
+     "quote": "本活動每月限量登錄5,000名"
+    }
+   }
+  ]
+ }
+}

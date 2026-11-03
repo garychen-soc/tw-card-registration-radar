@@ -1,0 +1,16 @@
+{
+ "key": "7541057e7ad401831966f2eb",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:13:18+00:00",
+ "title": "GoAmazing 購精彩",
+ "duration_ms": 1784,
+ "cost_usd": 0.0294,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "免登錄，滿額享9折優惠+最高LINE POINTS6%，再享滿額好禮"
+  },
+  "subs": []
+ }
+}

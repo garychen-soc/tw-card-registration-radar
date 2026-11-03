@@ -1,0 +1,49 @@
+{
+ "key": "3f4c882f00dc58de9012f094",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:21:19+00:00",
+ "title": "紅葉季追楓去 旅遊最高回饋5,000元",
+ "duration_ms": 4946,
+ "cost_usd": 0.028078199999999998,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "✦ 需登錄"
+  },
+  "subs": [
+   {
+    "name": "精選20大旅行社",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   },
+   {
+    "name": "航空公司、訂房網、旅遊平台、飯店",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

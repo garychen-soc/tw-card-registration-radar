@@ -1,0 +1,16 @@
+{
+ "key": "28c6e088af734852b5600c1c",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:27:16+00:00",
+ "title": "可樂旅遊Club Med",
+ "duration_ms": 3221,
+ "cost_usd": 0.0203862,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "訂單輸入指定優惠代碼『UBOTCM2026』並刷聯邦銀行信用卡全額付款，享限時95折優惠！"
+  },
+  "subs": []
+ }
+}

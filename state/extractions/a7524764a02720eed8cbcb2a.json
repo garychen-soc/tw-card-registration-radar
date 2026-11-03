@@ -1,0 +1,16 @@
+{
+ "key": "a7524764a02720eed8cbcb2a",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-02T07:37:10+00:00",
+ "title": "寶雅POYA",
+ "duration_ms": 2834,
+ "cost_usd": 0.0295202,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "本活動限使用POYA支付儲值金單筆結帳達活動門檻方可享有回饋"
+  },
+  "subs": []
+ }
+}

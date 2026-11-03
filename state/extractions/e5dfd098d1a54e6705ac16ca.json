@@ -1,0 +1,16 @@
+{
+ "key": "e5dfd098d1a54e6705ac16ca",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:22:11+00:00",
+ "title": "Trip.com·預訂租車最低92折優惠",
+ "duration_ms": 2839,
+ "cost_usd": 0.021716199999999998,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "優惠使用方法:於活動期間填寫旅客資料後之頁面上輸入或套用已儲存的指定優惠代碼。"
+  },
+  "subs": []
+ }
+}

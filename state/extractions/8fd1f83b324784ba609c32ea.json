@@ -1,0 +1,16 @@
+{
+ "key": "8fd1f83b324784ba609c32ea",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:25:08+00:00",
+ "title": "日暉國際渡假村",
+ "duration_ms": 1205,
+ "cost_usd": 0.0204862,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "上述優惠須事先訂房方能享有，以利客房安排"
+  },
+  "subs": []
+ }
+}

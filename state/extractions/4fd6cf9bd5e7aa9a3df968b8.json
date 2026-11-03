@@ -1,0 +1,16 @@
+{
+ "key": "4fd6cf9bd5e7aa9a3df968b8",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:22:56+00:00",
+ "title": "大家一起挺小農 台灣Pay結帳全站88折",
+ "duration_ms": 2233,
+ "cost_usd": 0.0198242,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "單筆消費不限金額，立即享88折結帳金額優惠(即時折抵，採四捨五入方式計算，單筆消費金額不得拆付)"
+  },
+  "subs": []
+ }
+}

@@ -1,0 +1,16 @@
+{
+ "key": "78f6eb5953adfd0de576f793",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:22:45+00:00",
+ "title": "微碧愛點餐X台灣Pay 餐餐美味、樂享回饋",
+ "duration_ms": 3577,
+ "cost_usd": 0.020384199999999998,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "用戶於活動期間至活動地點消費，使用「台灣Pay」(金融卡/帳戶/信用卡)進行支付成功，單筆交易金額滿新臺幣(以下同)125元(含)以上，可享25元回饋"
+  },
+  "subs": []
+ }
+}

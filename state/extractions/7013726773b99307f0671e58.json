@@ -1,0 +1,33 @@
+{
+ "key": "7013726773b99307f0671e58",
+ "prompt_version": "2026-11-02.1",
+ "model": "opus",
+ "created_at": "2026-11-02T05:43:34+00:00",
+ "title": "SHOPBACK平台_PizzaHut 必勝客",
+ "duration_ms": 3641,
+ "cost_usd": 0.0649202,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "請點選「立即登錄」按鈕，完成持卡人活動登錄(僅需登錄一次)"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [],
+    "reregister": {
+     "value": "once",
+     "quote": "完成持卡人活動登錄(僅需登錄一次)"
+    },
+    "order": {
+     "value": "register_before_spend",
+     "quote": "會員成功登錄後，活動期間內透過ShopBack前往本活動頁內的指定合作商家，並使用「中國信託LINE Pay Visa卡」於線上刷卡消費"
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

@@ -1,0 +1,16 @@
+{
+ "key": "3ae9c51bd162f621eed514ac",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:15:03+00:00",
+ "title": "國內精選飯店住宿",
+ "duration_ms": 3649,
+ "cost_usd": 0.11956220000000001,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "活動期間持星展信用卡至指定國內精選飯店，尊享專案優惠價！"
+  },
+  "subs": []
+ }
+}

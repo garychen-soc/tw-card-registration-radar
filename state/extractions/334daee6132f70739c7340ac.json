@@ -1,0 +1,33 @@
+{
+ "key": "334daee6132f70739c7340ac",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:27:03+00:00",
+ "title": "日本指定藥妝電器門市",
+ "duration_ms": 2874,
+ "cost_usd": 0.0204942,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "並成功完成 Visa Select 優選回饋註冊及活動報名，報名成功後即可獲得活動專屬券碼"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

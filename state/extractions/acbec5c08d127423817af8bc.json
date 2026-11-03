@@ -1,0 +1,49 @@
+{
+ "key": "acbec5c08d127423817af8bc",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:16:15+00:00",
+ "title": "繳學費 就愛刷玉山信用卡",
+ "duration_ms": 3119,
+ "cost_usd": 0.0216662,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "請於刷卡繳納學費後，當期帳單結帳前3天於網頁登錄【學費分期活動】"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [
+     {
+      "quote": "請於刷卡繳納學費後，當期帳單結帳前3天於網頁登錄【學費分期活動】",
+      "kind": "other",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "retroactive_ok",
+     "quote": "請於刷卡繳納學費後，當期帳單結帳前3天於網頁登錄【學費分期活動】"
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

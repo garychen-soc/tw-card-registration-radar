@@ -1,0 +1,16 @@
+{
+ "key": "43262cfc68f39c1fcc6d4944",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:19:39+00:00",
+ "title": "墾丁H會館",
+ "duration_ms": 2425,
+ "cost_usd": 0.018642199999999998,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "持第一銀行信用卡於活動期間至H會館消費可享優惠如下"
+  },
+  "subs": []
+ }
+}

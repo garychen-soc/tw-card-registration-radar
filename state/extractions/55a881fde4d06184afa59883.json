@@ -1,0 +1,16 @@
+{
+ "key": "55a881fde4d06184afa59883",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:21:12+00:00",
+ "title": "文化x旅遊新體驗 刷凱基卡享8折優惠",
+ "duration_ms": 1851,
+ "cost_usd": 0.0173282,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "本活動免登錄，活動期間內若有多筆訂單"
+  },
+  "subs": []
+ }
+}

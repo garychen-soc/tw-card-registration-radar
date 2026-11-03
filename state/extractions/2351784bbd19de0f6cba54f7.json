@@ -1,0 +1,54 @@
+{
+ "key": "2351784bbd19de0f6cba54f7",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:27:28+00:00",
+ "title": "食在日系",
+ "duration_ms": 4989,
+ "cost_usd": 0.0253202,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "活動期間以聯邦JCB晶緻卡至JCB活動網頁登錄並取得『食在日系優惠序號』後"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [
+     {
+      "quote": "於活動期間之每月1日15:00起開放登錄",
+      "kind": "monthly",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [
+       1
+      ],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": {
+       "hour": 15,
+       "minute": 0
+      },
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "each_period",
+     "quote": "活動期間每卡每月限登錄一次"
+    },
+    "order": {
+     "value": "register_before_spend",
+     "quote": "登錄並取得『食在日系優惠序號』後，於序號有效期間內至指定日系美饌消費"
+    },
+    "quota": {
+     "seats": 15000,
+     "quote": "每月開放15,000名"
+    }
+   }
+  ]
+ }
+}

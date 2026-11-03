@@ -1,0 +1,16 @@
+{
+ "key": "9859ae671ecb603f38122d40",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:22:44+00:00",
+ "title": "傑昇愛用台灣Pay 獨享10%回饋",
+ "duration_ms": 3415,
+ "cost_usd": 0.0205402,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "用戶於活動期間至活動地點消費，出示「台灣 Pay」付款條碼(金融卡/帳戶/信用卡)進行支付，單筆交易結帳金額滿新臺幣(下同)1,000元(含)以上，即享現折100元優惠"
+  },
+  "subs": []
+ }
+}

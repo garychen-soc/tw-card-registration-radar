@@ -1,0 +1,277 @@
+{
+ "key": "a778ef8c5d75a3b303882fe8",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:25:00+00:00",
+ "title": "日本三大交通卡最高10%",
+ "duration_ms": 12944,
+ "cost_usd": 0.0446002,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "活動需登錄，每季限量30,000名"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [
+     {
+      "quote": "2026/4/18 16:00起至2026/4/30 23:59止",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 4,
+       "day": 18,
+       "hour": 16,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": 4,
+       "day": 30,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "2026/5/18 16:00起至2026/5/31 23:59止",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 5,
+       "day": 18,
+       "hour": 16,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": 5,
+       "day": 31,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "2026/6/18 16:00起至2026/6/30 23:59止",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 6,
+       "day": 18,
+       "hour": 16,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": 6,
+       "day": 30,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "2026/7/18 16:00起至2026/7/31 23:59止",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 7,
+       "day": 18,
+       "hour": 16,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": 7,
+       "day": 31,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "2026/8/18 16:00起至2026/8/31 23:59止",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 8,
+       "day": 18,
+       "hour": 16,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": 8,
+       "day": 31,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "2026/9/18 16:00起至2026/9/30 23:59止",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 9,
+       "day": 18,
+       "hour": 16,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": 9,
+       "day": 30,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "2026/10/18 16:00起至2026/10/31 23:59止",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 10,
+       "day": 18,
+       "hour": 16,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": 10,
+       "day": 31,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "2026/11/18 16:00起至2026/11/30 23:59止",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 11,
+       "day": 18,
+       "hour": 16,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": 11,
+       "day": 30,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "2026/12/18 16:00起至2026/12/31 23:59止",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 12,
+       "day": 18,
+       "hour": 16,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": 12,
+       "day": 31,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "once",
+     "quote": "此活動每季僅需登錄一次即符合當季活動資格，不需每月重覆登錄"
+    },
+    "order": {
+     "value": "retroactive_ok",
+     "quote": "ex.4月登錄成功，4月~6月之日本交通卡消費皆符合活動資格"
+    },
+    "quota": {
+     "seats": 30000,
+     "quote": "活動需登錄，每季限量30,000名"
+    }
+   }
+  ]
+ }
+}

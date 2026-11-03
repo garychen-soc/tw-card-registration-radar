@@ -1,0 +1,189 @@
+{
+ "key": "c9337300620b85c242404160",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-02T07:38:21+00:00",
+ "title": "蝦皮購物 11月狂購盛典 (11/16~11/30)",
+ "duration_ms": 15012,
+ "cost_usd": 0.0630162,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "須於2026/11/24 16:00至11/30 23:59透過本行官網登錄專區或國泰優惠CUBE Rewards APP完成活動登錄始符合資格"
+  },
+  "subs": [
+   {
+    "name": "活動一:全卡友最高享7.5%回饋",
+    "rules": [
+     {
+      "quote": "2026/11/24 16:00至11/30 23:59於本行官網登錄專區及國泰優惠CUBE Rewards APP開放登錄",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 11,
+       "day": 24,
+       "hour": 16,
+       "minute": 0
+      },
+      "end": {
+       "year": null,
+       "month": 11,
+       "day": 30,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 3000,
+     "quote": "兩門檻限量登錄3,000名"
+    }
+   },
+   {
+    "name": "11月全站專屬滿額享折扣優惠",
+    "rules": [
+     {
+      "quote": "2026/10/26~ 2026/11/11",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 10,
+       "day": 26,
+       "hour": null,
+       "minute": null
+      },
+      "end": {
+       "year": 2026,
+       "month": 11,
+       "day": 11,
+       "hour": null,
+       "minute": null
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "register_before_spend",
+     "quote": "卡友於領券期間完成領券並於2026/11/11於『蝦皮商城』刷國泰世華卡"
+    },
+    "quota": {
+     "seats": 1300,
+     "quote": "專屬折扣券限量1,300名"
+    }
+   },
+   {
+    "name": "11月iPhone新機滿額享折扣優惠",
+    "rules": [
+     {
+      "quote": "卡友於11/01完成領券",
+      "kind": "enumerated",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [
+       {
+        "year": null,
+        "month": 11,
+        "day": 1,
+        "hour": null,
+        "minute": null
+       }
+      ],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "register_before_spend",
+     "quote": "卡友於11/01完成領券並於活動期間內於蝦皮全站購買iPhone 18全機型刷國泰世華信用卡"
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   },
+   {
+    "name": "11月全站高檻專屬滿額享折扣優惠",
+    "rules": [
+     {
+      "quote": "2026/10/26 ~ 2026/11/25",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 10,
+       "day": 26,
+       "hour": null,
+       "minute": null
+      },
+      "end": {
+       "year": 2026,
+       "month": 11,
+       "day": 25,
+       "hour": null,
+       "minute": null
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "register_before_spend",
+     "quote": "卡友於領券期間完成領券並於2026/11/11、11/18、11/25於『蝦皮全站』刷國泰世華卡"
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

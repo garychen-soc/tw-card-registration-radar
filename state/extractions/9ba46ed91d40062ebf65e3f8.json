@@ -1,0 +1,33 @@
+{
+ "key": "9ba46ed91d40062ebf65e3f8",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-02T07:38:37+00:00",
+ "title": "日本BicCamera刷國泰世華卡享優惠",
+ "duration_ms": 5738,
+ "cost_usd": 0.0372702,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "本活動需上會員權益網站註冊登錄並啟用"
+  },
+  "subs": [
+   {
+    "name": "【萬事達卡限定】單筆消費滿30,000日圓享2,000日圓現金回饋 (*需啟用)",
+    "rules": [],
+    "reregister": {
+     "value": "each_period",
+     "quote": "本活動每一季需啟用乙次"
+    },
+    "order": {
+     "value": "register_before_spend",
+     "quote": "若在消費後啟用優惠，則不會獲得現金回饋"
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

@@ -1,0 +1,33 @@
+{
+ "key": "feedebf12c8771cdcd2d7282",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-02T07:39:37+00:00",
+ "title": "刷Visa無限卡禮遇升級，購車保修享最高10%回饋！",
+ "duration_ms": 3826,
+ "cost_usd": 0.025788199999999997,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "未完成登錄者，恕無法參加本活動"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

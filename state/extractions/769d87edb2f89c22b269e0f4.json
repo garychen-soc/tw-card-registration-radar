@@ -1,0 +1,33 @@
+{
+ "key": "769d87edb2f89c22b269e0f4",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:21:17+00:00",
+ "title": "(好評加碼)「利多御璽卡」刷遍世界拿利多・回饋最高6%",
+ "duration_ms": 3418,
+ "cost_usd": 0.0254222,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "本活動需成功登錄乙次(毋須重複登錄)，並限利多御璽卡正卡持卡人登錄"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [],
+    "reregister": {
+     "value": "once",
+     "quote": "本活動需成功登錄乙次(毋須重複登錄)"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

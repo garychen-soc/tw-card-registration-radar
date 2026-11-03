@@ -1,0 +1,91 @@
+{
+ "key": "d5ee6af056fcb4266e49855a",
+ "prompt_version": "2026-11-01.1",
+ "model": "haiku",
+ "created_at": "2026-11-02T03:21:11+00:00",
+ "title": "王道購物節！刷蝦皮購物享最高新台幣1,088元現金回饋",
+ "duration_ms": 208387,
+ "cost_usd": 0.132747,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "當月累積消費滿新台幣2,000元(含)以上並完成活動登錄"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [
+     {
+      "quote": "本活動於每月01日中午12:00起開放登錄(遇假日順延至次一營業日)",
+      "kind": "monthly",
+      "is_example": false,
+      "holiday": "next_business_day",
+      "start": null,
+      "end": null,
+      "days_of_month": [
+       1
+      ],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": {
+       "hour": 12,
+       "minute": 0
+      },
+      "close_time": null,
+      "end_of_month": true
+     }
+    ],
+    "reregister": {
+     "value": "each_period",
+     "quote": "活動期間須按月登錄消費"
+    },
+    "order": {
+     "value": "retroactive_ok",
+     "quote": "活動登錄須於消費當月完成始享有回饧"
+    },
+    "quota": {
+     "seats": 3000,
+     "quote": "每月限額3,000名"
+    }
+   },
+   {
+    "name": "限時額外加碼",
+    "rules": [
+     {
+      "quote": "本活動於每月01日中午12:00起開放登錄(遇假日順延至次一營業日)",
+      "kind": "monthly",
+      "is_example": false,
+      "holiday": "next_business_day",
+      "start": null,
+      "end": null,
+      "days_of_month": [
+       1
+      ],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": {
+       "hour": 12,
+       "minute": 0
+      },
+      "close_time": null,
+      "end_of_month": true
+     }
+    ],
+    "reregister": {
+     "value": "each_period",
+     "quote": "本限時額外加碼活動於活動期間內每人每月限回饧乙次"
+    },
+    "order": {
+     "value": "retroactive_ok",
+     "quote": "活動登錄須於消費當月完成始享有回饧"
+    },
+    "quota": {
+     "seats": 300,
+     "quote": "每月限額300名"
+    }
+   }
+  ]
+ }
+}

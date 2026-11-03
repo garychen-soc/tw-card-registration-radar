@@ -1,0 +1,16 @@
+{
+ "key": "8d5e3afdd3a2088c036bf469",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:19:30+00:00",
+ "title": "世界卡全球頂級酒店預訂服務",
+ "duration_ms": 3020,
+ "cost_usd": 0.0338402,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "本禮遇僅適用於合資格之萬事達卡持卡人透過活動網頁預訂的有效訂單。"
+  },
+  "subs": []
+ }
+}

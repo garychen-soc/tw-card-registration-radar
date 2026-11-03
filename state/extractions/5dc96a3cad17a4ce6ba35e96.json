@@ -1,0 +1,33 @@
+{
+ "key": "5dc96a3cad17a4ce6ba35e96",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:19:13+00:00",
+ "title": "【FUN購物】",
+ "duration_ms": 4097,
+ "cost_usd": 0.0241122,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "每戶每月最高回饋1,500元，需完成登錄。"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [],
+    "reregister": {
+     "value": "each_period",
+     "quote": "活動需每月登錄"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

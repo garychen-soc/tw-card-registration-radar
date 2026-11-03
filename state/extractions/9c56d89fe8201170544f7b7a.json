@@ -1,0 +1,16 @@
+{
+ "key": "9c56d89fe8201170544f7b7a",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:22:41+00:00",
+ "title": "台灣Pay在漢神洲際強棒出擊滿2000送200元電子商品券！",
+ "duration_ms": 2843,
+ "cost_usd": 0.0200382,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "用戶於活動期間於活動地點出示漢神Plus APP會員條碼消費集點且使用台灣Pay付款條碼支付，單筆滿新臺幣（以下同）2,000元（含）以上，即可獲得「200元漢神洲際電子商品券」乙份"
+  },
+  "subs": []
+ }
+}

@@ -1,0 +1,33 @@
+{
+ "key": "bb0eae2c597fe4a8375fc96f",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:20:18+00:00",
+ "title": "電信通路分期滿額贈─台灣大哥大(含myfone網路門市)",
+ "duration_ms": 4389,
+ "cost_usd": 0.024254199999999997,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "消費滿額且登錄，享以下各門檻擇優回饋乙次"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [],
+    "reregister": {
+     "value": "each_period",
+     "quote": "活動須 按季登錄"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

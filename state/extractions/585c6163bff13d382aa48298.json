@@ -1,0 +1,33 @@
+{
+ "key": "585c6163bff13d382aa48298",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:15:00+00:00",
+ "title": "揪好友辦星展卡 星動極速戰",
+ "duration_ms": 3884,
+ "cost_usd": 0.0376162,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "註冊取得專屬推薦人連結"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

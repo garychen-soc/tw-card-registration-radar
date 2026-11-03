@@ -1,0 +1,16 @@
+{
+ "key": "67a657c52f4616e755c1a4cb",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:22:55+00:00",
+ "title": "來逛樂華夜市樂享10%回饋",
+ "duration_ms": 3742,
+ "cost_usd": 0.0200142,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "用戶於活動期間於活動地點消費，以「台灣Pay」QR Code掃碼支付(限金融卡/帳戶)，單筆消費不限金額可享10%現金回饋"
+  },
+  "subs": []
+ }
+}

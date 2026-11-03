@@ -1,0 +1,245 @@
+{
+ "key": "66007c25788e05c02cd8b1c3",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-02T07:37:32+00:00",
+ "title": "小樹購 週三卡友日單筆滿額最高享10%現折優惠",
+ "duration_ms": 12157,
+ "cost_usd": 0.047002199999999994,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "並輸入下列指定日期指定折價券序號領券，享現折NT$100優惠"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [
+     {
+      "quote": "各期指定折價券序號均限期(週三當日)00:00~23:59有效",
+      "kind": "enumerated",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [
+       {
+        "year": 2026,
+        "month": 7,
+        "day": 1,
+        "hour": null,
+        "minute": null
+       },
+       {
+        "year": 2026,
+        "month": 7,
+        "day": 8,
+        "hour": null,
+        "minute": null
+       },
+       {
+        "year": 2026,
+        "month": 7,
+        "day": 15,
+        "hour": null,
+        "minute": null
+       },
+       {
+        "year": 2026,
+        "month": 7,
+        "day": 22,
+        "hour": null,
+        "minute": null
+       },
+       {
+        "year": 2026,
+        "month": 7,
+        "day": 29,
+        "hour": null,
+        "minute": null
+       },
+       {
+        "year": 2026,
+        "month": 8,
+        "day": 5,
+        "hour": null,
+        "minute": null
+       },
+       {
+        "year": 2026,
+        "month": 8,
+        "day": 12,
+        "hour": null,
+        "minute": null
+       },
+       {
+        "year": 2026,
+        "month": 8,
+        "day": 19,
+        "hour": null,
+        "minute": null
+       },
+       {
+        "year": 2026,
+        "month": 8,
+        "day": 26,
+        "hour": null,
+        "minute": null
+       },
+       {
+        "year": 2026,
+        "month": 9,
+        "day": 2,
+        "hour": null,
+        "minute": null
+       },
+       {
+        "year": 2026,
+        "month": 9,
+        "day": 9,
+        "hour": null,
+        "minute": null
+       },
+       {
+        "year": 2026,
+        "month": 9,
+        "day": 16,
+        "hour": null,
+        "minute": null
+       },
+       {
+        "year": 2026,
+        "month": 9,
+        "day": 23,
+        "hour": null,
+        "minute": null
+       },
+       {
+        "year": 2026,
+        "month": 9,
+        "day": 30,
+        "hour": null,
+        "minute": null
+       },
+       {
+        "year": 2026,
+        "month": 10,
+        "day": 7,
+        "hour": null,
+        "minute": null
+       },
+       {
+        "year": 2026,
+        "month": 10,
+        "day": 14,
+        "hour": null,
+        "minute": null
+       },
+       {
+        "year": 2026,
+        "month": 10,
+        "day": 21,
+        "hour": null,
+        "minute": null
+       },
+       {
+        "year": 2026,
+        "month": 10,
+        "day": 28,
+        "hour": null,
+        "minute": null
+       },
+       {
+        "year": 2026,
+        "month": 11,
+        "day": 4,
+        "hour": null,
+        "minute": null
+       },
+       {
+        "year": 2026,
+        "month": 11,
+        "day": 11,
+        "hour": null,
+        "minute": null
+       },
+       {
+        "year": 2026,
+        "month": 11,
+        "day": 18,
+        "hour": null,
+        "minute": null
+       },
+       {
+        "year": 2026,
+        "month": 11,
+        "day": 25,
+        "hour": null,
+        "minute": null
+       },
+       {
+        "year": 2026,
+        "month": 12,
+        "day": 2,
+        "hour": null,
+        "minute": null
+       },
+       {
+        "year": 2026,
+        "month": 12,
+        "day": 9,
+        "hour": null,
+        "minute": null
+       },
+       {
+        "year": 2026,
+        "month": 12,
+        "day": 16,
+        "hour": null,
+        "minute": null
+       },
+       {
+        "year": 2026,
+        "month": 12,
+        "day": 23,
+        "hour": null,
+        "minute": null
+       },
+       {
+        "year": 2026,
+        "month": 12,
+        "day": 30,
+        "hour": null,
+        "minute": null
+       }
+      ],
+      "open_time": {
+       "hour": 0,
+       "minute": 0
+      },
+      "close_time": {
+       "hour": 23,
+       "minute": 59
+      },
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

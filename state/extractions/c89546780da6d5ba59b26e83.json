@@ -1,0 +1,16 @@
+{
+ "key": "c89546780da6d5ba59b26e83",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:19:31+00:00",
+ "title": "力麗觀光",
+ "duration_ms": 2655,
+ "cost_usd": 0.0189122,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "憑專屬折扣碼【FCB2026】可享有95折優惠"
+  },
+  "subs": []
+ }
+}

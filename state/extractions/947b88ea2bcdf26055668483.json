@@ -1,0 +1,33 @@
+{
+ "key": "947b88ea2bcdf26055668483",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:20:41+00:00",
+ "title": "台灣Pay信用卡華南同樂會",
+ "duration_ms": 3591,
+ "cost_usd": 0.0259402,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "活動採登錄制（登錄請按此）"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 5000,
+     "quote": "每月回饋限量5,000戶（依2026年1月1日起之活動登錄先後排序）"
+    }
+   }
+  ]
+ }
+}

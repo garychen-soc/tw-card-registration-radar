@@ -1,0 +1,33 @@
+{
+ "key": "2a3d565ec75f3691d2bd2f07",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:26:44+00:00",
+ "title": "天天都是網購聯邦日",
+ "duration_ms": 4242,
+ "cost_usd": 0.0252222,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "聯邦銀行信用卡持卡人且於指定期間完成登錄者"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

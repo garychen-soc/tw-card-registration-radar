@@ -1,0 +1,115 @@
+{
+ "key": "b5177989a579fcf6e3c6b445",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:15:59+00:00",
+ "title": "玉山信用卡∣台塑石油PAY",
+ "duration_ms": 6444,
+ "cost_usd": 0.0456042,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "累積滿1,500元 (含) 以上，並登錄活動，享50點玉山e point回饋"
+  },
+  "subs": [
+   {
+    "name": "【首綁滿額禮】加油滿額並登錄活動享50點玉山e point回饋",
+    "rules": [
+     {
+      "quote": "第一波登錄時間:2026/10/23 12:00起至2026/12/31 23:59止",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 10,
+       "day": 23,
+       "hour": 12,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": 12,
+       "day": 31,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "第二波登錄時間:2026/11/23 12:00起至2026/12/31 23:59止",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 11,
+       "day": 23,
+       "hour": 12,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": 12,
+       "day": 31,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "第三波登錄時間:2026/12/23 12:00起至2026/12/31 23:59止",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 12,
+       "day": 23,
+       "hour": 12,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": 12,
+       "day": 31,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 24000,
+     "quote": "總限量24,000名，額滿即止"
+    }
+   }
+  ]
+ }
+}

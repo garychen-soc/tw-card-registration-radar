@@ -1,0 +1,16 @@
+{
+ "key": "51bdd04bfc6fcccd6a8a1a01",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:21:26+00:00",
+ "title": "週年慶放心刷兆豐，最高回饋14,000元",
+ "duration_ms": 4190,
+ "cost_usd": 0.0220142,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "優惠詳情(需登錄)"
+  },
+  "subs": []
+ }
+}

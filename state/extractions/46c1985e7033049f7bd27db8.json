@@ -1,0 +1,33 @@
+{
+ "key": "46c1985e7033049f7bd27db8",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:21:59+00:00",
+ "title": "指定信用卡自動分期設定",
+ "duration_ms": 4356,
+ "cost_usd": 0.023042200000000002,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "自動分期0利率功能開啟/關閉登錄服務"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

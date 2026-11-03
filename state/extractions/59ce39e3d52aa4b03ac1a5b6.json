@@ -1,0 +1,16 @@
+{
+ "key": "59ce39e3d52aa4b03ac1a5b6",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:22:09+00:00",
+ "title": "太平洋旅行社·日本、歐洲最高現折NT$2,000",
+ "duration_ms": 1767,
+ "cost_usd": 0.0182022,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "請告知太平洋旅行社業務要使用兆豐卡友優惠"
+  },
+  "subs": []
+ }
+}

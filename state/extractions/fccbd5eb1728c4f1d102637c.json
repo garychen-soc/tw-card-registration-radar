@@ -1,0 +1,16 @@
+{
+ "key": "fccbd5eb1728c4f1d102637c",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-02T07:38:47+00:00",
+ "title": "國泰世華卡 & 雄獅旅遊專屬優惠｜國泰世華卡優惠活動",
+ "duration_ms": 5389,
+ "cost_usd": 0.0290482,
+ "output": {
+  "registration": {
+   "value": "unclear",
+   "quote": ""
+  },
+  "subs": []
+ }
+}

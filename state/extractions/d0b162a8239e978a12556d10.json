@@ -1,0 +1,54 @@
+{
+ "key": "d0b162a8239e978a12556d10",
+ "prompt_version": "2026-11-02.1",
+ "model": "opus",
+ "created_at": "2026-11-02T05:43:23+00:00",
+ "title": "Uber Eats",
+ "duration_ms": 7758,
+ "cost_usd": 0.0480762,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "請於活動期間至中國信託銀行官網完成活動登錄"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [
+     {
+      "quote": "本活動每月限量登錄8,000名(每月6號10:00開放登錄)",
+      "kind": "monthly",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [
+       6
+      ],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": {
+       "hour": 10,
+       "minute": 0
+      },
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "each_period",
+     "quote": "本活動每季登錄一次(舉例:7月登錄活動僅能參加7-9月活動，欲參加10-12月活動需重新登錄)"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 8000,
+     "quote": "本活動每月限量登錄8,000名"
+    }
+   }
+  ]
+ }
+}

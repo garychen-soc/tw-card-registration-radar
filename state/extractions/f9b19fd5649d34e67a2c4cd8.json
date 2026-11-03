@@ -1,0 +1,33 @@
+{
+ "key": "f9b19fd5649d34e67a2c4cd8",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:27:22+00:00",
+ "title": "yesgogogo即食購",
+ "duration_ms": 6757,
+ "cost_usd": 0.0378542,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "點選「登記GO」連結並「登入會員」即完成報名"
+  },
+  "subs": [
+   {
+    "name": "【月月抽萬元購物金】",
+    "rules": [],
+    "reregister": {
+     "value": "once",
+     "quote": "活動期間凡登記一次即享月月參加抽獎資格，不需重複登記"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

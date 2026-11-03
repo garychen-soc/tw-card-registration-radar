@@ -1,0 +1,33 @@
+{
+ "key": "8762ad973805faeaeb408287",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:20:34+00:00",
+ "title": "消費分期超減擔",
+ "duration_ms": 4002,
+ "cost_usd": 0.027480200000000003,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "本活動項目需登錄，以成功登錄先後順序為準，如額滿一銀得關閉登錄功能。"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 200,
+     "quote": "每月限量200名"
+    }
+   }
+  ]
+ }
+}

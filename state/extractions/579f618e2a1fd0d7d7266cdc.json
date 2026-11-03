@@ -1,0 +1,33 @@
+{
+ "key": "579f618e2a1fd0d7d7266cdc",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:26:29+00:00",
+ "title": "網購雙11",
+ "duration_ms": 2161,
+ "cost_usd": 0.017470199999999998,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "需於指定登錄開放期間(詳各活動網頁)完成登錄始符合活動參與資格"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

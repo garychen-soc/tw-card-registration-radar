@@ -1,0 +1,49 @@
+{
+ "key": "4d8a7fd14dc03d6d48bcb3a2",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:25:23+00:00",
+ "title": "MyJapan+by JCB下載旅日APP，享最高30%回饋",
+ "duration_ms": 4622,
+ "cost_usd": 0.0256002,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "透過「My Japan+ by JCB」APP於指定期間完成事前登錄"
+  },
+  "subs": [
+   {
+    "name": "札幌美食之旅 享最高30%現金回饋",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "register_before_spend",
+     "quote": "於指定期間完成事前登錄，並於指定消費期間內於札幌指定商店刷JCB卡消費"
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   },
+   {
+    "name": "博多美食之旅 享最高30%現金回饋",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "register_before_spend",
+     "quote": "於指定期間完成事前登錄，並於指定消費期間內於博多指定商店刷JCB卡消費"
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

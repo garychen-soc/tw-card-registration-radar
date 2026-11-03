@@ -1,0 +1,33 @@
+{
+ "key": "52aa78819eb9bd7badc7caa9",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:18:37+00:00",
+ "title": "居家好生活-HOLA",
+ "duration_ms": 3820,
+ "cost_usd": 0.0237242,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "須完成登錄，限量名額依達成順序計算，如額滿一銀得關閉登錄功能。"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [],
+    "reregister": {
+     "value": "each_period",
+     "quote": "※活動需每季登錄，每戶採每季擇優回饋一次，回饋上限4,500元。"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

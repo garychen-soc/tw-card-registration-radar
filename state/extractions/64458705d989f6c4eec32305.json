@@ -1,0 +1,65 @@
+{
+ "key": "64458705d989f6c4eec32305",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-02T07:39:35+00:00",
+ "title": "彰銀VISA無限卡、商旅御璽卡Fun心旅遊，海外消費最高可享10%回饋！",
+ "duration_ms": 6108,
+ "cost_usd": 0.0330642,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "未完成登錄者，恕無法參加本活動"
+  },
+  "subs": [
+   {
+    "name": "為2026世足喝采，美/加/墨加碼5%回饋",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 500,
+     "quote": "每月回饋名額限量500名"
+    }
+   },
+   {
+    "name": "無限卡十足禮遇加碼2%回饋",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 500,
+     "quote": "每月回饋名額限量500名"
+    }
+   },
+   {
+    "name": "無限卡海外消費享3%回饋",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

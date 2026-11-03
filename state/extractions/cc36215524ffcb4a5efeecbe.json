@@ -1,0 +1,54 @@
+{
+ "key": "cc36215524ffcb4a5efeecbe",
+ "prompt_version": "2026-11-02.1",
+ "model": "opus",
+ "created_at": "2026-11-02T05:44:19+00:00",
+ "title": "美食外送",
+ "duration_ms": 5044,
+ "cost_usd": 0.0484802,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "並於上述指定通路刷一銀信用卡消費，完成登錄享回饋"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [
+     {
+      "quote": "活動登錄:每月22日上午10時起開放登錄，需每月登錄，額滿關閉活動登錄功能。",
+      "kind": "monthly",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [
+       22
+      ],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": {
+       "hour": 10,
+       "minute": 0
+      },
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "each_period",
+     "quote": "每月22日上午10時起開放登錄，需每月登錄"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 1200,
+     "quote": "每月限量1,200份(每月22日上午10時起開放登錄)"
+    }
+   }
+  ]
+ }
+}

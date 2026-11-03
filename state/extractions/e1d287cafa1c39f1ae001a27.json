@@ -1,0 +1,16 @@
+{
+ "key": "e1d287cafa1c39f1ae001a27",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:25:46+00:00",
+ "title": "博海旅行社刷賓士卡，享最高3%回饋，指定海島行程贈消費金",
+ "duration_ms": 5114,
+ "cost_usd": 0.0243102,
+ "output": {
+  "registration": {
+   "value": "unclear",
+   "quote": "請於訂購時，主動與業務人員表明參加台新銀行賓士信用卡活動，由該人員登記及確認行程"
+  },
+  "subs": []
+ }
+}

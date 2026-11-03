@@ -1,0 +1,157 @@
+{
+ "key": "341d0f165adb3893af2b064f",
+ "prompt_version": "2026-11-01.1",
+ "model": "haiku",
+ "created_at": "2026-11-02T03:17:42+00:00",
+ "title": "華南熊Q卡 熊挺你的神隊友",
+ "duration_ms": 169362,
+ "cost_usd": 0.129879,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "本活動需於活動期間每月至華南銀行網站登錄活動"
+  },
+  "subs": [
+   {
+    "name": "【週一~週四】Visa熊Q卡夢時代指定用餐店櫃5%刷卡金回饋",
+    "rules": [
+     {
+      "kind": "other",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false,
+      "quote": "本活動需於活動期間每月至華南銀行網站登錄活動，每月限量5,500名，額滿為止"
+     }
+    ],
+    "reregister": {
+     "value": "each_period",
+     "quote": "每月須完成登錄以取得當月活動參加資格"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 5500,
+     "quote": "每月限量5,500名"
+    }
+   },
+   {
+    "name": "【指定週四】Visa熊Q卡夢時代指定店櫃單筆滿1,000元回饋100元",
+    "rules": [
+     {
+      "kind": "other",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false,
+      "quote": "於消費當日於夢時代APP兌換夢時代100元電子抵用券，限消費當日兌換"
+     }
+    ],
+    "reregister": {
+     "value": "each_period",
+     "quote": "當週每華南銀行Visa熊Q卡限兌換乙份"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 2000,
+     "quote": "每月限量2,000份"
+    }
+   },
+   {
+    "name": "一般消費現金點數回饋",
+    "rules": [
+     {
+      "kind": "other",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false,
+      "quote": "指定通路排序更新需於持卡人帳單結帳日前(不含帳單結帳日當日)異動，並以帳單結帳日前最後異動結果為準"
+     }
+    ],
+    "reregister": {
+     "value": "each_period",
+     "quote": "指定通路排序更新需於持卡人帳單結帳日前(不含帳單結帳日當日)異動"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   },
+   {
+    "name": "一般消費滿額享最高12期分期0利率",
+    "rules": [
+     {
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 7,
+       "day": 27,
+       "hour": null,
+       "minute": null
+      },
+      "end": {
+       "year": 2026,
+       "month": 12,
+       "day": 31,
+       "hour": null,
+       "minute": null
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false,
+      "quote": "持卡人於活動期間，可透過下列方式申請分期"
+     }
+    ],
+    "reregister": {
+     "value": "once",
+     "quote": "每卡僅限設定單一期數"
+    },
+    "order": {
+     "value": "register_before_spend",
+     "quote": "完成新申請設定並經本行核准後，自完成設定日起至活動結束日止，凡單筆消費達指定金額，即依持卡人設定之分期期數自動進行分期入帳"
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

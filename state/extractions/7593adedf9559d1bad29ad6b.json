@@ -1,0 +1,16 @@
+{
+ "key": "7593adedf9559d1bad29ad6b",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:26:42+00:00",
+ "title": "萊爾富刷聯邦不限金額5%",
+ "duration_ms": 2391,
+ "cost_usd": 0.0269182,
+ "output": {
+  "registration": {
+   "value": "unclear",
+   "quote": ""
+  },
+  "subs": []
+ }
+}

@@ -1,0 +1,16 @@
+{
+ "key": "cb3919c01b9afb1b66aa2c73",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:20:54+00:00",
+ "title": "旅遊出行 凱基卡友專享肯驛最高20%優惠",
+ "duration_ms": 3505,
+ "cost_usd": 0.0208162,
+ "output": {
+  "registration": {
+   "value": "unclear",
+   "quote": "肯驛OTA平台需登錄成為會員並須以凱基信用卡刷卡支付，方享有優惠折抵。"
+  },
+  "subs": []
+ }
+}

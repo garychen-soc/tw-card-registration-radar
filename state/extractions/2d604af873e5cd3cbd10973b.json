@@ -1,0 +1,137 @@
+{
+ "key": "2d604af873e5cd3cbd10973b",
+ "prompt_version": "2026-11-01.1",
+ "model": "haiku",
+ "created_at": "2026-11-02T03:15:53+00:00",
+ "title": "玉山信用卡綁定icash Pay",
+ "duration_ms": 153443,
+ "cost_usd": 0.114249,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "活動統一開放正卡人於玉山銀行官網或下載玉山Wallet登錄"
+  },
+  "subs": [
+   {
+    "name": "玉山信用卡綁定icash Pay",
+    "rules": [
+     {
+      "kind": "monthly",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": null,
+       "day": 15,
+       "hour": 10,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": null,
+       "day": null,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [
+       15
+      ],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": {
+       "hour": 10,
+       "minute": 0
+      },
+      "close_time": {
+       "hour": 23,
+       "minute": 59
+      },
+      "end_of_month": true,
+      "quote": "開放登錄時間:當月15日早上10:00~當月最後一日23:59止"
+     }
+    ],
+    "reregister": {
+     "value": "each_period",
+     "quote": "每月限量名額共1,200名"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 1200,
+     "quote": "每月限量名額共1,200名"
+    }
+   },
+   {
+    "name": "綁定玉山U Bear信用卡/玉山icash聯名卡至7-ELEVEN消費登錄最高享6%回饋",
+    "rules": [
+     {
+      "kind": "monthly",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": null,
+       "day": 15,
+       "hour": 10,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": null,
+       "day": null,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [
+       15
+      ],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": {
+       "hour": 10,
+       "minute": 0
+      },
+      "close_time": {
+       "hour": 23,
+       "minute": 59
+      },
+      "end_of_month": true,
+      "quote": "開放登錄時間:當月15日早上10:00 ~ 當月最後一日23:59止"
+     }
+    ],
+    "reregister": {
+     "value": "each_period",
+     "quote": "每月限量名額共6,000名"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 6000,
+     "quote": "每月限量名額共6,000名"
+    }
+   },
+   {
+    "name": "【icash Pay享鑽生活11%活動】首次綁定玉山卡於指定通路消費滿額最高享11%回饋",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

@@ -1,0 +1,16 @@
+{
+ "key": "f92a33c2f17e668cb1fdbae3",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:14:30+00:00",
+ "title": "雄獅旅遊",
+ "duration_ms": 3319,
+ "cost_usd": 0.027666200000000002,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "持卡人須於結帳時輸入指定折扣碼，並刷星展卡分期消費方符合資格。"
+  },
+  "subs": []
+ }
+}

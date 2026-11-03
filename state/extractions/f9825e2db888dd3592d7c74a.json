@@ -1,0 +1,16 @@
+{
+ "key": "f9825e2db888dd3592d7c74a",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:16:34+00:00",
+ "title": "日本大丸百貨福岡天神店",
+ "duration_ms": 5052,
+ "cost_usd": 0.08588219999999999,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "每筆消費5%現金回饋"
+  },
+  "subs": []
+ }
+}

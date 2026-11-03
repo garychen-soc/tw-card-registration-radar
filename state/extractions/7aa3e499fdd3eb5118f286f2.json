@@ -1,0 +1,33 @@
+{
+ "key": "7aa3e499fdd3eb5118f286f2",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-02T05:33:36+00:00",
+ "title": "SHOPBACK平台_PizzaHut 必勝客",
+ "duration_ms": 3393,
+ "cost_usd": 0.0333262,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "請點選「立即登錄」按鈕，完成持卡人活動登錄(僅需登錄一次)"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [],
+    "reregister": {
+     "value": "once",
+     "quote": "完成持卡人活動登錄(僅需登錄一次)"
+    },
+    "order": {
+     "value": "register_before_spend",
+     "quote": "會員成功登錄後，活動期間內透過ShopBack前往本活動頁內的指定合作商家"
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

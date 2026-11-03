@@ -1,0 +1,57 @@
+{
+ "key": "c0da25d9e89474fbc466073e",
+ "prompt_version": "2026-11-02.1",
+ "model": "opus",
+ "created_at": "2026-11-02T05:43:15+00:00",
+ "title": "【行動支付】行動支付刷My樂 筆筆皆有禮",
+ "duration_ms": 6383,
+ "cost_usd": 0.07718,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "活動期間內成功完成登錄本活動後，於指定之6款錢包(註1)當月消費享3%現金回饋"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [
+     {
+      "quote": "持卡人需於每月1日08:00─24:00，至彰化銀行官網之活動登錄專區登錄",
+      "kind": "monthly",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [
+       1
+      ],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": {
+       "hour": 8,
+       "minute": 0
+      },
+      "close_time": {
+       "hour": 23,
+       "minute": 59
+      },
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "each_period",
+     "quote": "即當月正卡登錄成功，正附卡均享當月消費回饋"
+    },
+    "order": {
+     "value": "register_before_spend",
+     "quote": "活動期間內成功完成登錄本活動後，於指定之6款錢包(註1)當月消費享3%現金回饋"
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

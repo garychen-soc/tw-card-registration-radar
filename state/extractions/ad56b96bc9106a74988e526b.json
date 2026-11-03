@@ -1,0 +1,33 @@
+{
+ "key": "ad56b96bc9106a74988e526b",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:20:08+00:00",
+ "title": "電信通路分期滿額贈──a#shop",
+ "duration_ms": 4409,
+ "cost_usd": 0.0245682,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "活動期間於a#shop(適用門市以a#shop現場公告為準)消費滿額且登錄"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [],
+    "reregister": {
+     "value": "each_period",
+     "quote": "活動須 按季登錄"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

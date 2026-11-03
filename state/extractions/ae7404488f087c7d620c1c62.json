@@ -1,0 +1,16 @@
+{
+ "key": "ae7404488f087c7d620c1c62",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:25:05+00:00",
+ "title": "新竹福華大飯店",
+ "duration_ms": 3599,
+ "cost_usd": 0.0213502,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "本優惠僅限透過福華電話訂房之指定銀行信用卡卡友使用"
+  },
+  "subs": []
+ }
+}

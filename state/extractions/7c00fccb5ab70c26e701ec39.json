@@ -1,0 +1,16 @@
+{
+ "key": "7c00fccb5ab70c26e701ec39",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:14:46+00:00",
+ "title": "特力屋2026週年慶活動",
+ "duration_ms": 3125,
+ "cost_usd": 0.0220502,
+ "output": {
+  "registration": {
+   "value": "unclear",
+   "quote": ""
+  },
+  "subs": []
+ }
+}

@@ -1,0 +1,16 @@
+{
+ "key": "486a3edc1dcd747fe6afb00b",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:22:09+00:00",
+ "title": "可樂旅遊·Club Med精緻全包式假期95折",
+ "duration_ms": 2848,
+ "cost_usd": 0.0226422,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "結帳時輸入優惠代碼「MEGACM2026」並以兆豐信用卡(含VISA金融卡)付款享95折優惠。"
+  },
+  "subs": []
+ }
+}

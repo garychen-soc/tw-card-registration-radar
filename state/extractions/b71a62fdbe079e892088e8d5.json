@@ -1,0 +1,16 @@
+{
+ "key": "b71a62fdbe079e892088e8d5",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:14:58+00:00",
+ "title": "丞燕國際",
+ "duration_ms": 3502,
+ "cost_usd": 0.0221402,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "分期消費達指定門檻即可享優惠"
+  },
+  "subs": []
+ }
+}

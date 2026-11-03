@@ -1,0 +1,16 @@
+{
+ "key": "912cace31557f8a351fe6df9",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:27:21+00:00",
+ "title": "2026聯邦世界卡",
+ "duration_ms": 3499,
+ "cost_usd": 0.0450762,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": ""
+  },
+  "subs": []
+ }
+}

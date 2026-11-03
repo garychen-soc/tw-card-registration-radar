@@ -1,0 +1,105 @@
+{
+ "key": "9ebf4c941673e487039d8da8",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:23:57+00:00",
+ "title": "11月YAHOO奇摩線上購物刷陽信卡，最高回饋1,200元",
+ "duration_ms": 4580,
+ "cost_usd": 0.0283442,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "消費滿額並完成登錄，可獲得刷卡金回饋"
+  },
+  "subs": [
+   {
+    "name": "【活動一】11/6-11/12 雙11大促活動",
+    "rules": [
+     {
+      "quote": "登錄時間2026/11/13 15:00開放登錄至2026/11/30 23:59止",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 11,
+       "day": 13,
+       "hour": 15,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": 11,
+       "day": 30,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "retroactive_ok",
+     "quote": "登錄時間2026/11/13 15:00開放登錄至2026/11/30 23:59止"
+    },
+    "quota": {
+     "seats": 50,
+     "quote": "限量登錄50名"
+    }
+   },
+   {
+    "name": "【活動二】11/3、11/10、11/17、11/24 週二卡友日",
+    "rules": [
+     {
+      "quote": "登錄時間2026/11/26 10:00開放登錄至2026/11/30 23:59止",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 11,
+       "day": 26,
+       "hour": 10,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": 11,
+       "day": 30,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "retroactive_ok",
+     "quote": "登錄時間2026/11/26 10:00開放登錄至2026/11/30 23:59止"
+    },
+    "quota": {
+     "seats": 50,
+     "quote": "限量登錄50名"
+    }
+   }
+  ]
+ }
+}

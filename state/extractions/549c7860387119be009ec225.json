@@ -1,0 +1,16 @@
+{
+ "key": "549c7860387119be009ec225",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:16:11+00:00",
+ "title": "保險就愛刷玉山卡",
+ "duration_ms": 3849,
+ "cost_usd": 0.0238622,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "登錄最高享1.66%回饋"
+  },
+  "subs": []
+ }
+}

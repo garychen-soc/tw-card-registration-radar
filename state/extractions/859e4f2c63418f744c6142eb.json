@@ -1,0 +1,16 @@
+{
+ "key": "859e4f2c63418f744c6142eb",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:23:03+00:00",
+ "title": "捷絲旅 兆豐卡友訂房享88折起",
+ "duration_ms": 3088,
+ "cost_usd": 0.0225542,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "並請於入住登記前主動出示兆豐卡(含VISA金融卡)，結帳時須用該卡方可享有此優惠"
+  },
+  "subs": []
+ }
+}

@@ -1,0 +1,61 @@
+{
+ "key": "de12c2b5aade038a43be5479",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:20:56+00:00",
+ "title": "小北百貨刷凱基信用卡 速還金啟額最高再享20%回饋",
+ "duration_ms": 5049,
+ "cost_usd": 0.0277262,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "凱基信用卡正卡持卡人須於活動期間內完成活動登錄，始符合本活動回饋資格。"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [
+     {
+      "quote": "凱基信用卡正卡持卡人須於活動期間內完成活動登錄",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 9,
+       "day": 1,
+       "hour": null,
+       "minute": null
+      },
+      "end": {
+       "year": 2026,
+       "month": 11,
+       "day": 30,
+       "hour": null,
+       "minute": null
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

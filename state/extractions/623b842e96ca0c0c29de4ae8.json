@@ -1,0 +1,76 @@
+{
+ "key": "623b842e96ca0c0c29de4ae8",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:13:31+00:00",
+ "title": "不限國別國外實體店",
+ "duration_ms": 7019,
+ "cost_usd": 0.0304682,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "持卡人需於中國信託活動登錄平台完成活動登錄"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [
+     {
+      "quote": "活動期間2026/10/1~2026/12/31，持卡人需於中國信託活動登錄平台完成活動登錄",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 10,
+       "day": 1,
+       "hour": null,
+       "minute": null
+      },
+      "end": {
+       "year": 2026,
+       "month": 12,
+       "day": 31,
+       "hour": null,
+       "minute": null
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "每週二開放3,000名登錄名額",
+      "kind": "other",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": 2,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "register_before_spend",
+     "quote": "完成登錄後，持中國信託LINE Pay信用卡於國外實體店面消費"
+    },
+    "quota": {
+     "seats": 3000,
+     "quote": "每週二開放3,000名登錄名額"
+    }
+   }
+  ]
+ }
+}

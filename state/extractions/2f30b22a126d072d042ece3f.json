@@ -1,0 +1,16 @@
+{
+ "key": "2f30b22a126d072d042ece3f",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:23:01+00:00",
+ "title": "刷兆豐Visa卡，享booking訂房網站精選優惠",
+ "duration_ms": 1474,
+ "cost_usd": 0.0176362,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "先訂後付，無需登錄，回饋無上限！"
+  },
+  "subs": []
+ }
+}

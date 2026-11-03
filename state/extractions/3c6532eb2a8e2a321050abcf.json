@@ -1,0 +1,33 @@
+{
+ "key": "3c6532eb2a8e2a321050abcf",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:19:27+00:00",
+ "title": "Gogoro 刷卡分期購",
+ "duration_ms": 3435,
+ "cost_usd": 0.022220200000000002,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "持卡人須消費滿額且完成登錄，始能符合回饋資格"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [],
+    "reregister": {
+     "value": "each_period",
+     "quote": "活動需每季登錄"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 40,
+     "quote": "每季限量40名"
+    }
+   }
+  ]
+ }
+}

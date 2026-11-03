@@ -1,0 +1,16 @@
+{
+ "key": "ffd16ae2e6597c12a9bea9db",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:17:04+00:00",
+ "title": "玉山Wallet e起購",
+ "duration_ms": 1232,
+ "cost_usd": 0.0937942,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "Step 3:確認同意條款後即可進入"
+  },
+  "subs": []
+ }
+}

@@ -1,0 +1,16 @@
+{
+ "key": "d78da68d935df59a816ff16e",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:24:09+00:00",
+ "title": "美兆健康管理刷陽信卡 卡友健檢優惠專案服務",
+ "duration_ms": 1287,
+ "cost_usd": 0.0235422,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "持卡人於活動期間必須使用陽信商業銀行信用卡或VISA金融卡刷卡付費，始得享有購買本卡友專案的權利。"
+  },
+  "subs": []
+ }
+}

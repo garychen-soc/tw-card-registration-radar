@@ -1,0 +1,16 @@
+{
+ "key": "7a1207995b9a787d8510e761",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:24:59+00:00",
+ "title": "雲林華安大飯店",
+ "duration_ms": 1364,
+ "cost_usd": 0.0167042,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "本優惠僅限透過福華電話訂房之指定銀行信用卡卡友使用"
+  },
+  "subs": []
+ }
+}

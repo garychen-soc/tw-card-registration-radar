@@ -1,0 +1,128 @@
+{
+ "key": "a6b4d8b525f4613143ff8d22",
+ "prompt_version": "2026-11-01.1",
+ "model": "haiku",
+ "created_at": "2026-11-02T03:23:56+00:00",
+ "title": "旅遊優惠輕鬆享",
+ "duration_ms": 163922,
+ "cost_usd": 0.2088269,
+ "output": {
+  "registration": {
+   "value": "unclear",
+   "quote": ""
+  },
+  "subs": [
+   {
+    "name": "旅遊刷永豐，單月最高享10,000元刷卡金",
+    "quota": {
+     "seats": 9000,
+     "quote": "每月限量登錄 3,000 名，共 9,000 名"
+    },
+    "reregister": {
+     "value": "once",
+     "quote": "活動期間內任一月份完成登錄，且有單月達消費門檻者，即享活動資格，無須重複登錄"
+    },
+    "order": {
+     "value": "retroactive_ok",
+     "quote": "活動期間內任一月份完成登錄，且有單月達消費門檻者，即享活動資格"
+    },
+    "rules": [
+     {
+      "kind": "monthly",
+      "days_of_month": [
+       15
+      ],
+      "open_time": {
+       "hour": 15,
+       "minute": 0
+      },
+      "close_time": null,
+      "start": null,
+      "end": null,
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "quote": "10/15、11/15、12/15 的 15:00 開放登錄，每月限量登錄 3,000 名，共 9,000 名",
+      "is_example": false,
+      "holiday": "none",
+      "end_of_month": false
+     }
+    ]
+   },
+   {
+    "name": "海外實體商店消費滿額享最高4%，歐美加碼，回饋升級",
+    "quota": {
+     "seats": 9000,
+     "quote": "每月限量登錄 3,000 名，共 9,000 名"
+    },
+    "reregister": {
+     "value": "once",
+     "quote": "活動期間僅須登錄乙次即享活動資格，無須重複登錄"
+    },
+    "order": {
+     "value": "retroactive_ok",
+     "quote": "並於活動期間內登錄成功始享回饋資格"
+    },
+    "rules": [
+     {
+      "kind": "monthly",
+      "days_of_month": [
+       15
+      ],
+      "open_time": {
+       "hour": 15,
+       "minute": 0
+      },
+      "close_time": null,
+      "start": null,
+      "end": null,
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "quote": "10/15、11/15、12/15 的 15:00 開放登錄，每月限量登錄 3,000 名，共 9,000 名",
+      "is_example": false,
+      "holiday": "none",
+      "end_of_month": false
+     }
+    ]
+   },
+   {
+    "name": "生日之旅！海外餐廳消費加碼10%，再享旅遊專屬優惠碼",
+    "quota": {
+     "seats": 3000,
+     "quote": "每月限量登錄 1,000 名，共 3,000 名"
+    },
+    "reregister": {
+     "value": "each_period",
+     "quote": "限當月壽星於生日當月登錄，非當月登錄無效"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "rules": [
+     {
+      "kind": "monthly",
+      "days_of_month": [
+       15
+      ],
+      "open_time": {
+       "hour": 15,
+       "minute": 0
+      },
+      "close_time": null,
+      "start": null,
+      "end": null,
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "quote": "10/15、11/15、12/15 的 15:00 開放登錄至當月月底，每月限量登錄 1,000 名，共 3,000 名",
+      "is_example": false,
+      "holiday": "none",
+      "end_of_month": true
+     }
+    ]
+   }
+  ]
+ }
+}

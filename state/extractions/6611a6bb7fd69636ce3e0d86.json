@@ -1,0 +1,69 @@
+{
+ "key": "6611a6bb7fd69636ce3e0d86",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:26:54+00:00",
+ "title": "Klook",
+ "duration_ms": 6266,
+ "cost_usd": 0.0316342,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "活動對象:聯邦信用卡持卡人且消費當月完成登錄者"
+  },
+  "subs": [
+   {
+    "name": "指定旅遊滿額禮",
+    "rules": [
+     {
+      "quote": "活動每月10日下午3點開放登錄",
+      "kind": "monthly",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [
+       10
+      ],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": {
+       "hour": 15,
+       "minute": 0
+      },
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "活動對象:聯邦信用卡持卡人且消費當月完成登錄者",
+      "kind": "deadline",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": true
+     }
+    ],
+    "reregister": {
+     "value": "each_period",
+     "quote": "活動對象:聯邦信用卡持卡人且消費當月完成登錄者"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 12000,
+     "quote": "每月限量登錄12,000名"
+    }
+   }
+  ]
+ }
+}

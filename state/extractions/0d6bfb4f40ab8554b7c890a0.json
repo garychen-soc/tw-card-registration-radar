@@ -1,0 +1,16 @@
+{
+ "key": "0d6bfb4f40ab8554b7c890a0",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:22:09+00:00",
+ "title": "Trip.com使用JCB卡預訂飯店機票最高14%折扣",
+ "duration_ms": 2943,
+ "cost_usd": 0.0247742,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "使用兆豐JCB信用卡付款並輸入指定優惠碼，最高享14%折扣"
+  },
+  "subs": []
+ }
+}

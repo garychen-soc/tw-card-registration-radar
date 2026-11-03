@@ -1,0 +1,16 @@
+{
+ "key": "2e28d500b54df3649e8b9c38",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:16:36+00:00",
+ "title": "玉山Wallet粉絲號召令",
+ "duration_ms": 1967,
+ "cost_usd": 0.0264542,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "活動期間:2026/9/1~2026/12/31，活動免登錄。"
+  },
+  "subs": []
+ }
+}

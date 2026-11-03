@@ -1,0 +1,16 @@
+{
+ "key": "94879b292a8fdc78b74008af",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:21:08+00:00",
+ "title": "支持永續農業 滿額享9折優惠",
+ "duration_ms": 1362,
+ "cost_usd": 0.0171442,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "本活動免登錄，活動期間內若有多筆訂單"
+  },
+  "subs": []
+ }
+}

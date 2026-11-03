@@ -1,0 +1,16 @@
+{
+ "key": "49c869997d11ae8274034156",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:19:14+00:00",
+ "title": "【一銀 x KKday】專屬折扣碼",
+ "duration_ms": 4048,
+ "cost_usd": 0.0225362,
+ "output": {
+  "registration": {
+   "value": "unclear",
+   "quote": "FUN旅宿:於KKday下單滿額登錄享最高回饋1,000元!"
+  },
+  "subs": []
+ }
+}

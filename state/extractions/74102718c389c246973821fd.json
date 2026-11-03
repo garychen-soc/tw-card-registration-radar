@@ -1,0 +1,16 @@
+{
+ "key": "74102718c389c246973821fd",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:17:24+00:00",
+ "title": "OPEN錢包綁定玉山信用卡",
+ "duration_ms": 2976,
+ "cost_usd": 0.024414199999999997,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "使用OPEN錢包綁定玉山信用卡，至指定通路消費單筆滿300元 (含) 以上，享加碼10% OPENPOINT點數回饋"
+  },
+  "subs": []
+ }
+}

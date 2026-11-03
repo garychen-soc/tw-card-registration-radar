@@ -1,0 +1,16 @@
+{
+ "key": "ed3cbe02dd794e8d7cb69b85",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:15:51+00:00",
+ "title": "台灣高鐵購票新攻略",
+ "duration_ms": 4616,
+ "cost_usd": 0.0793502,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "玉山Unicard購買高鐵車票，最高享4.5%玉山e point回饋！"
+  },
+  "subs": []
+ }
+}

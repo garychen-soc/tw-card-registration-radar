@@ -1,0 +1,33 @@
+{
+ "key": "7c19e6d90ea75aca06d76ad1",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-02T07:39:28+00:00",
+ "title": "【藝文娛樂】刷Visa商旅御璽Fun心卡，追星/藝文購票最高享3%回饋！",
+ "duration_ms": 4662,
+ "cost_usd": 0.0263982,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "正卡持卡人須於活動登錄期間於彰化銀行網站 (彰銀官網--信用卡--優惠訊息/登錄--活動登錄) 成功完成登錄"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

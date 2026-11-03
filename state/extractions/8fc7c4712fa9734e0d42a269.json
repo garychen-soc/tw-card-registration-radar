@@ -1,0 +1,78 @@
+{
+ "key": "8fc7c4712fa9734e0d42a269",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-02T07:38:32+00:00",
+ "title": "《國泰世華 x 小小樹食》專屬禮遇、領券消費享加碼5%小樹點(信用卡)回饋！",
+ "duration_ms": 9000,
+ "cost_usd": 0.0403202,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "完成領券後，於「小小樹食(限大安店、敦南店)」使用 CUBE信用卡結帳，即享加碼最高5%小樹點(信用卡)回饋"
+  },
+  "subs": [
+   {
+    "name": "活動一、【童樂匯客戶專屬】小小樹食(限大安店、敦南店)領券享5%小樹點(信用卡)加碼回饋(每月回饋上限200點)",
+    "rules": [
+     {
+      "quote": "次月1日起可至CUBE App領取「小小樹食(限大安店、敦南店)加碼最高5%回饋」優惠券",
+      "kind": "monthly",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [
+       1
+      ],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "2026/9/1-9/30可領取9月當月優惠券",
+      "kind": "range",
+      "is_example": true,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 9,
+       "day": 1,
+       "hour": null,
+       "minute": null
+      },
+      "end": {
+       "year": 2026,
+       "month": 9,
+       "day": 30,
+       "hour": null,
+       "minute": null
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "each_period",
+     "quote": "於活動期間內每月可至 CUBE App 領取"
+    },
+    "order": {
+     "value": "register_before_spend",
+     "quote": "活動回饋之計算限領取日後(含當日)之新增消費交易方符合回饋計算"
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

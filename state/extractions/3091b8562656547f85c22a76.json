@@ -1,0 +1,16 @@
+{
+ "key": "3091b8562656547f85c22a76",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:13:34+00:00",
+ "title": "【日本優惠】滿額最高享10%優惠!",
+ "duration_ms": 4134,
+ "cost_usd": 0.0360722,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "限信用卡，需登錄"
+  },
+  "subs": []
+ }
+}

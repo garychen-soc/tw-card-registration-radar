@@ -1,0 +1,33 @@
+{
+ "key": "2b8f5622c957e5dd7496836c",
+ "prompt_version": "2026-11-02.1",
+ "model": "opus",
+ "created_at": "2026-11-02T03:37:04+00:00",
+ "title": "「利多御璽卡」國外消費最高3.1%回饋",
+ "duration_ms": 10051,
+ "cost_usd": 0.060548199999999996,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "國外「再加碼0.1%現金回饋」活動需由正卡持卡人成功登錄"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [],
+    "reregister": {
+     "value": "once",
+     "quote": "活動期間利多御璽卡正卡人僅需登錄乙次即可"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

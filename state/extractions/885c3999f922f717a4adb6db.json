@@ -1,0 +1,16 @@
+{
+ "key": "885c3999f922f717a4adb6db",
+ "prompt_version": "2026-11-01.1",
+ "model": "opus",
+ "created_at": "2026-11-02T03:31:01+00:00",
+ "title": "Bonbons甜點 享95折優惠",
+ "duration_ms": 2789,
+ "cost_usd": 0.0320162,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "本活動免登錄，活動期間內若有多筆訂單"
+  },
+  "subs": []
+ }
+}

@@ -1,0 +1,16 @@
+{
+ "key": "123302191a6ad1cd24291478",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:23:12+00:00",
+ "title": "線上投保汽機車任意險最高享86折，旅遊班機延誤最高賠2.4萬",
+ "duration_ms": 1576,
+ "cost_usd": 0.030562199999999998,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "車險/旅遊險早鳥投保抽:活動期間指定門檻，免登錄即可獲抽獎資格。"
+  },
+  "subs": []
+ }
+}

@@ -1,0 +1,16 @@
+{
+ "key": "c070178c1bafd804f56cf611",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:25:37+00:00",
+ "title": "太平洋旅行社，指定行程最高折2,000元",
+ "duration_ms": 3819,
+ "cost_usd": 0.0226042,
+ "output": {
+  "registration": {
+   "value": "unclear",
+   "quote": "請於訂購時，主動向旅行社業務人員表明參加台新銀行活動，由該人員登記及確認行程，於付清行程費用時扣除"
+  },
+  "subs": []
+ }
+}

@@ -1,0 +1,69 @@
+{
+ "key": "9cdd1646139fb215cd58ba27",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:27:17+00:00",
+ "title": "全國電子",
+ "duration_ms": 6984,
+ "cost_usd": 0.032054200000000005,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "聯邦銀行信用卡持卡人且完成登錄者"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [
+     {
+      "quote": "當月活動於當月20號10:00開放登錄至當月月底",
+      "kind": "monthly",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [
+       20
+      ],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": {
+       "hour": 10,
+       "minute": 0
+      },
+      "close_time": null,
+      "end_of_month": true
+     },
+     {
+      "quote": "需於消費當月完成登錄",
+      "kind": "deadline",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": true
+     }
+    ],
+    "reregister": {
+     "value": "each_period",
+     "quote": "需於消費當月完成登錄，始符合當月活動參與資格"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 3500,
+     "quote": "活動限量登錄3,500名/月"
+    }
+   }
+  ]
+ }
+}

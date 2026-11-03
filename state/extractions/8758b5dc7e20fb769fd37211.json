@@ -1,0 +1,33 @@
+{
+ "key": "8758b5dc7e20fb769fd37211",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:27:04+00:00",
+ "title": "日本商店刷聯邦Visa卡",
+ "duration_ms": 3843,
+ "cost_usd": 0.0214302,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "並成功完成 Visa Select 優選回饋註冊及活動報名，於日本指定高島屋（Takashimaya）及 BicCamera 之實體門市消費"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

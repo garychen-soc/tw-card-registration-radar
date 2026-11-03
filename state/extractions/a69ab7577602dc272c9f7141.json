@@ -1,0 +1,173 @@
+{
+ "key": "a69ab7577602dc272c9f7141",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:21:30+00:00",
+ "title": "1111網購刷兆豐 滿額享2500元",
+ "duration_ms": 10207,
+ "cost_usd": 0.0448282,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "持卡人須最晚於2026/11/30前至本行網站完成登錄"
+  },
+  "subs": [
+   {
+    "name": "【momo購物網】",
+    "rules": [
+     {
+      "quote": "※momo購物網活動於2026/11/26 14:00 開放限量登錄",
+      "kind": "opens_at",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 11,
+       "day": 26,
+       "hour": 14,
+       "minute": 0
+      },
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "持卡人須最晚於2026/11/30前至本行網站完成登錄",
+      "kind": "deadline",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": {
+       "year": 2026,
+       "month": 11,
+       "day": 30,
+       "hour": null,
+       "minute": null
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   },
+   {
+    "name": "【蝦皮購物、PChome 24h線上購物、酷澎Coupang】",
+    "rules": [
+     {
+      "quote": "※蝦皮購物、PChome 24h購物、酷澎Coupang於2026/11/27 14:00 開放限量登錄",
+      "kind": "opens_at",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 11,
+       "day": 27,
+       "hour": 14,
+       "minute": 0
+      },
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "持卡人須最晚於2026/11/30前至本行網站完成登錄",
+      "kind": "deadline",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": {
+       "year": 2026,
+       "month": 11,
+       "day": 30,
+       "hour": null,
+       "minute": null
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   },
+   {
+    "name": "蝦皮購物商城優惠券",
+    "rules": [
+     {
+      "quote": "※2026/10/26開放領券",
+      "kind": "opens_at",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 10,
+       "day": 26,
+       "hour": null,
+       "minute": null
+      },
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 100,
+     "quote": "最高折抵1,500元(限量100名)"
+    }
+   }
+  ]
+ }
+}

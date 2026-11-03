@@ -1,0 +1,16 @@
+{
+ "key": "27bc4a0243201cef6dcbb326",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-02T05:34:58+00:00",
+ "title": "鑫世界卡新卡首刷禮-陽信領航‧禮遇起航",
+ "duration_ms": 6327,
+ "cost_usd": 0.0589822,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "核卡後60天內一般消費累積達新臺幣8萬元(含)以上，即贈現金紅利點數 2,000點"
+  },
+  "subs": []
+ }
+}

@@ -1,0 +1,131 @@
+{
+ "key": "b238b0a8f477339731763029",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-02T07:37:38+00:00",
+ "title": "博客來「童書旗艦館」領券享加碼5%回饋｜童樂匯專屬禮遇",
+ "duration_ms": 13819,
+ "cost_usd": 0.0460382,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "於活動期間內每月可至 CUBE App 領取"
+  },
+  "subs": [
+   {
+    "name": "【童樂匯客戶專屬】博客來「童書旗艦館」加碼最高享5%小樹點(信用卡)回饋",
+    "rules": [
+     {
+      "quote": "次月1日起可至CUBE App領取",
+      "kind": "monthly",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [
+       1
+      ],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "2026/8/1-8/31可領取8月當月優惠券",
+      "kind": "range",
+      "is_example": true,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 8,
+       "day": 1,
+       "hour": null,
+       "minute": null
+      },
+      "end": {
+       "year": 2026,
+       "month": 8,
+       "day": 31,
+       "hour": null,
+       "minute": null
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "本活動優惠券需於活動期間完成領取",
+      "kind": "deadline",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": {
+       "year": 2026,
+       "month": 12,
+       "day": 31,
+       "hour": null,
+       "minute": null
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "each_period",
+     "quote": "於活動期間內每月可至 CUBE App 領取"
+    },
+    "order": {
+     "value": "register_before_spend",
+     "quote": "領取日後(含當日)之新增消費方符合點數回饋計算"
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   },
+   {
+    "name": "領券指定業種滿額現折100元",
+    "rules": [
+     {
+      "quote": "活動期間每月(註)至博客來活動頁面領取指定業種單品折價券",
+      "kind": "other",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "each_period",
+     "quote": "每位博客來會員於活動期間每月限兌換並使用乙次折價券"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 5000,
+     "quote": "每月單品折價券兌換上限 5,000 組"
+    }
+   }
+  ]
+ }
+}

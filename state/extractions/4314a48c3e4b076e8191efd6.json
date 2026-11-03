@@ -1,0 +1,33 @@
+{
+ "key": "4314a48c3e4b076e8191efd6",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:18:47+00:00",
+ "title": "居家好生活-KIKY睡眠概念館",
+ "duration_ms": 3484,
+ "cost_usd": 0.0225802,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "活動需每季登錄"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [],
+    "reregister": {
+     "value": "each_period",
+     "quote": "活動需每季登錄"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

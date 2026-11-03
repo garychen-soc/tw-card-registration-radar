@@ -1,0 +1,565 @@
+{
+ "key": "87495f9987676c10587cb1f2",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:16:14+00:00",
+ "title": "玉山Unicard｜U-POWER專屬活動",
+ "duration_ms": 34576,
+ "cost_usd": 0.1663042,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "本活動需登錄，限以玉山Unicard繳付國內以新臺幣計價之壽險保險商品"
+  },
+  "subs": [
+   {
+    "name": "【玉山Unicard領取專屬優惠】充電消費最高享4%回饋",
+    "rules": [
+     {
+      "quote": "領取優惠時間:2026/9/30 12:00~2026/12/31 23:59。",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 9,
+       "day": 30,
+       "hour": 12,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": 12,
+       "day": 31,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   },
+   {
+    "name": "【玉山Unicard扣繳三商美邦傳統型保費 再享0.3%回饋】",
+    "rules": [
+     {
+      "quote": "領取優惠時間:2026/11/1 12:00~2027/12/31 23:59",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 11,
+       "day": 1,
+       "hour": 12,
+       "minute": 0
+      },
+      "end": {
+       "year": 2027,
+       "month": 12,
+       "day": 31,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "正卡持卡人需於該筆保費交易結帳前一日完成優惠領取",
+      "kind": "other",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   },
+   {
+    "name": "【玉山Unicard扣繳三商美邦人壽保費專屬分12期活動】",
+    "rules": [
+     {
+      "quote": "登錄時間:2026/11/1 12:00起統一開放正卡人登錄",
+      "kind": "opens_at",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 11,
+       "day": 1,
+       "hour": 12,
+       "minute": 0
+      },
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "需於帳單結帳日前3個營業日完成活動登錄",
+      "kind": "other",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   },
+   {
+    "name": "週三玉山日 全聯/大全聯享10%回饋",
+    "rules": [
+     {
+      "quote": "領取優惠時間:2026/8/31 12:00~2026/12/31 23:59",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 8,
+       "day": 31,
+       "hour": 12,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": 12,
+       "day": 31,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   },
+   {
+    "name": "揪你一起呷飽飽 國內餐飲加碼3%",
+    "rules": [
+     {
+      "quote": "領取優惠時間:2026/10/31 12:00~2026/12/31 23:59",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 10,
+       "day": 31,
+       "hour": 12,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": 12,
+       "day": 31,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "本活動需於參加活動之當月最後一天(含)前領取優惠",
+      "kind": "deadline",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": true
+     },
+     {
+      "quote": "舉例:如欲參加2026/11/1~2026/11/30活動，顧客需於2026/11/30(含)前完成領取優惠始符合活動回饋資格",
+      "kind": "deadline",
+      "is_example": true,
+      "holiday": "none",
+      "start": null,
+      "end": {
+       "year": 2026,
+       "month": 11,
+       "day": 30,
+       "hour": null,
+       "minute": null
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "retroactive_ok",
+     "quote": "本活動需於參加活動之當月最後一天(含)前領取優惠"
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   },
+   {
+    "name": "與你走透透 U-POWER加碼3%",
+    "rules": [
+     {
+      "quote": "領取優惠時間:2026/9/30 12:00~2026/12/31 23:59",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 9,
+       "day": 30,
+       "hour": 12,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": 12,
+       "day": 31,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "本活動需於參加活動之當月最後一天(含)前領取優惠",
+      "kind": "deadline",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": true
+     },
+     {
+      "quote": "舉例:如欲參加2026/10/1~2026/10/31活動，顧客需於2026/10/31(含)前完成領取優惠始符合活動回饋資格",
+      "kind": "deadline",
+      "is_example": true,
+      "holiday": "none",
+      "start": null,
+      "end": {
+       "year": 2026,
+       "month": 10,
+       "day": 31,
+       "hour": null,
+       "minute": null
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "retroactive_ok",
+     "quote": "本活動需於參加活動之當月最後一天(含)前領取優惠"
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   },
+   {
+    "name": "玉山Unicard扣繳壽險保費最高享1.1%回饋",
+    "rules": [
+     {
+      "quote": "正卡人須於信用卡結帳前3日完成活動登錄，始符合加碼回饋資格",
+      "kind": "other",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   },
+   {
+    "name": "玉山Unicard JCB晶緻卡專享禮遇",
+    "rules": [
+     {
+      "quote": "每卡每月須完成登錄以取得當月活動參加資格",
+      "kind": "other",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "each_period",
+     "quote": "每卡每月須完成登錄以取得當月活動參加資格"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   },
+   {
+    "name": "Unicard卡友・玉山證券專屬開戶好禮",
+    "rules": [
+     {
+      "quote": "活動限正卡人登錄，且需於活動期間內登錄成功始符合回饋資格",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 10,
+       "day": 1,
+       "hour": null,
+       "minute": null
+      },
+      "end": {
+       "year": 2026,
+       "month": 12,
+       "day": 31,
+       "hour": null,
+       "minute": null
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   },
+   {
+    "name": "和你一起喝咖啡 指定咖啡品牌加碼3%",
+    "rules": [
+     {
+      "quote": "領取優惠時間:2026/8/31 12:00~2026/10/31 23:59",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 8,
+       "day": 31,
+       "hour": 12,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": 10,
+       "day": 31,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "本活動需於參加活動之當月最後一天(含)前領取優惠",
+      "kind": "deadline",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": true
+     },
+     {
+      "quote": "舉例:如欲參加2026/9/1~2026/9/30活動，顧客需於2026/9/30(含)前完成領取優惠始符合活動回饋資格",
+      "kind": "deadline",
+      "is_example": true,
+      "holiday": "none",
+      "start": null,
+      "end": {
+       "year": 2026,
+       "month": 9,
+       "day": 30,
+       "hour": null,
+       "minute": null
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "retroactive_ok",
+     "quote": "本活動需於參加活動之當月最後一天(含)前領取優惠"
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

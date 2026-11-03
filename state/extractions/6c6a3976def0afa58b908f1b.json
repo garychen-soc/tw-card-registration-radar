@@ -1,0 +1,33 @@
+{
+ "key": "6c6a3976def0afa58b908f1b",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:20:18+00:00",
+ "title": "電信通路分期滿額贈─德誼數位",
+ "duration_ms": 4110,
+ "cost_usd": 0.0236182,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "消費滿額且登錄"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [],
+    "reregister": {
+     "value": "each_period",
+     "quote": "活動須 按季登錄"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

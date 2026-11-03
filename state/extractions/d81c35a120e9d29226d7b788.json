@@ -1,0 +1,167 @@
+{
+ "key": "d81c35a120e9d29226d7b788",
+ "prompt_version": "2026-11-01.1",
+ "model": "haiku",
+ "created_at": "2026-11-02T03:29:36+00:00",
+ "title": "世界卡 專屬禮遇！",
+ "duration_ms": 147087,
+ "cost_usd": 0.11404699999999998,
+ "output": {
+  "registration": {
+   "value": "unclear",
+   "quote": "需於本行網站下載申請表填寫後，以郵寄或傳真方式申辦道路救援服務登錄；每月1日上午10:00開放索取尊崇之旅服務及專屬揮桿服務；符合資格之貴賓於收到通知簡訊後，即可致電進行U.First全球貴賓卡開卡作業。"
+  },
+  "subs": [
+   {
+    "name": "免費道路救援",
+    "rules": [
+     {
+      "quote": "需於本行網站下載申請表填寫後，以郵寄或傳真方式申辦道路救援服務登錄。",
+      "kind": "other",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "once",
+     "quote": "每卡僅限登錄一台車籍資料"
+    },
+    "order": {
+     "value": "register_before_spend",
+     "quote": "需於本行網站下載申請表填寫後，以郵寄或傳真方式申辦道路救援服務登錄。"
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   },
+   {
+    "name": "尊崇之旅服務",
+    "rules": [
+     {
+      "quote": "每月1日上午10:00開放索取，每月限量優惠名額",
+      "kind": "monthly",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [
+       1
+      ],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": {
+       "hour": 10,
+       "minute": 0
+      },
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "each_period",
+     "quote": "本優惠每卡每月限索取一次。"
+    },
+    "order": {
+     "value": "register_before_spend",
+     "quote": "須先於網站:www.johoo777.com 購買索取"
+    },
+    "quota": {
+     "seats": null,
+     "quote": "每月限量優惠名額"
+    }
+   },
+   {
+    "name": "專屬揮桿服務",
+    "rules": [
+     {
+      "quote": "每月1日上午10:00開放索取，每月限量優惠名額",
+      "kind": "monthly",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [
+       1
+      ],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": {
+       "hour": 10,
+       "minute": 0
+      },
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "each_period",
+     "quote": "本優惠每卡每月限索取一次。"
+    },
+    "order": {
+     "value": "register_before_spend",
+     "quote": "須先於網站:www.johoo777.com 購買索取"
+    },
+    "quota": {
+     "seats": null,
+     "quote": "每月限量優惠名額"
+    }
+   },
+   {
+    "name": "尊榮VIP貴賓禮",
+    "rules": [
+     {
+      "quote": "符合資格之貴賓於收到通知簡訊後，即可致電至肯驛國際免費專屬客服專線04-2206-8195，進行U.First全球貴賓卡開卡作業。",
+      "kind": "other",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 2,
+       "day": 1,
+       "hour": null,
+       "minute": null
+      },
+      "end": {
+       "year": 2026,
+       "month": 12,
+       "day": 31,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "once",
+     "quote": "符合資格之貴賓於收到通知簡訊後，即可致電...進行U.First全球貴賓卡開卡作業。"
+    },
+    "order": {
+     "value": "register_before_spend",
+     "quote": "符合資格之貴賓於收到通知簡訊後，即可致電至肯驛國際免費專屬客服專線04-2206-8195，進行U.First全球貴賓卡開卡作業。"
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

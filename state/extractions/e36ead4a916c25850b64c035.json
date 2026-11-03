@@ -1,0 +1,16 @@
+{
+ "key": "e36ead4a916c25850b64c035",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:19:22+00:00",
+ "title": "理想旅遊 X 璽寶遊輪",
+ "duration_ms": 3830,
+ "cost_usd": 0.0232842,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "本活動限於理想旅遊刷第一銀行信用卡訂購指定行程可享專案現折優惠"
+  },
+  "subs": []
+ }
+}

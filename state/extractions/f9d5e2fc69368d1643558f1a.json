@@ -1,0 +1,49 @@
+{
+ "key": "f9d5e2fc69368d1643558f1a",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-03T00:25:38+00:00",
+ "title": "日本福岡機場免稅店現折5%，Richart卡再享最高4.3%",
+ "duration_ms": 5561,
+ "cost_usd": 0.0324162,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "1%回饋活動須完成指定任務:於結帳前，向收銀台工作人員出示台新行動銀行優惠條碼序號畫面(需點下方領取優惠券，並按「使用」)"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [
+     {
+      "quote": "使用台新信用卡並於結帳前，向收銀台工作人員出示台新行動銀行優惠條碼序號畫面(需點下方領取優惠券，並按「使用」)",
+      "kind": "other",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "register_before_spend",
+     "quote": "現折5%活動需於結帳前出示台新行動銀行優惠條碼畫面，若未能出示，將無法享有現折優惠。"
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}
