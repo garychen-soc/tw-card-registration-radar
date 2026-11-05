@@ -1,0 +1,2586 @@
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="format-detection" content="telephone=no" />
+<link rel="stylesheet" href="/bank/resources/front/css/slick.css">
+
+<link rel="stylesheet" href="/bank/resources/front/css/global.css?v=2">
+<link rel="stylesheet" href="/bank/resources/front/css/yuantaman.css">
+
+<link rel="stylesheet" href="/bank/resources/front/css/index.css">
+
+<script src="/bank/resources/front/js/jquery.min.js"></script>
+
+<link href="/bank/resources/front/css/mmenu.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="/bank/resources/front/js/jquery.mmenu.min.js"></script>
+<script type="text/javascript" charset="utf-8">
+var menuIndex = "";
+function showMenu(objectId){
+	for(var i=0; i<7; i++){
+		$("#menu"+i).hide();
+	}
+	$("#"+objectId).show();
+}
+
+function showESGMenu(objectId){
+	for(var i=0; i<9; i++){
+		$("#ESGmenu"+i).hide();
+	}
+	$("#"+objectId).show();
+}
+
+function showtrustMenu(objectId){
+	for(var i=0; i<7; i++){
+		$("#trustmenu"+i).hide();
+	}
+	$("#"+objectId).show();
+}
+
+function goMoneyDJ(){
+	for(var i=0; i<7; i++){
+		$("#menu"+i).hide();
+	}
+	if(confirm('您將要離開元大銀行網域前往以下網址:\nhttps://yuantabank.moneydj.com')){
+		window.location.replace('https://yuantabank.moneydj.com');
+	}
+}
+
+function goExternalHref(HREF){
+	if(confirm('您將要離開元大銀行網域前往以下網址:\n' + HREF)){
+		window.open(HREF);
+	}
+}
+
+$(document).ready(function(){ 
+
+	var a_selector = "a[href^='http']:not([href*='yuantabank'],[href*='superatm'],[href*='localhost'],[href*='10.75'],[href*='ytbk.tw']),"+
+						"a[href^='https'][href*='facebook'],"+
+						"a[href^='https'][href*='instagram'],"+
+						"a[href^='https'][href*='t.me']";
+
+	$(a_selector).each(function(){
+		var val_href = this.href;
+		var val_onclick = "goExternalHref('" + val_href + "');";
+		$(this).attr('href', 'javascript:void(0);');
+		$(this).attr('target', '');
+		$(this).attr('onclick', val_onclick);
+// 		console.log(val_href);
+	});
+	
+	$(document).get(0).oncontextmenu = function() {
+        return false;
+    };
+	$(".nav_main_third_level").bind("mouseleave", function(){  
+        $(this).hide();  
+       
+    });
+	$("#header_bank_list").bind("mouseleave", function(){  
+        for(var i=0; i<7; i++){
+    		$("#menu"+i).hide();
+    		
+    	}
+    });
+	$("#header_corp_list").bind("mouseleave", function(){ 
+        for(var i=0; i<7; i++){
+    		$("#menu"+i).hide();
+    	}
+    });
+	$("#header_digi_list").bind("mouseleave", function(){  
+        for(var i=0; i<7; i++){
+    		$("#menu"+i).hide();
+    	}
+    });
+	$("#header_ESG_list").bind("mouseleave", function(){  
+        for(var i=0; i<8; i++){
+    		$("#menu"+i).hide();
+//     		console.log("#menu"+i);
+    	}
+    });
+	$("#header_trustservice_list").bind("mouseleave", function(){  
+        for(var i=0; i<7; i++){
+    		$("#menu"+i).hide();
+    	}
+    });
+	
+	cookieStatementCheck();
+});
+
+
+$(function(){
+	//天列表
+	if( false ){
+		$("#bank_btn").removeClass('active');
+		$("#digi_btn").addClass('active');
+		
+		$("#header_bank_list").hide();
+		$("#header_digi_list").show();
+	}else if(false){
+		$("#bank_btn").removeClass('active');
+		$("#corp_btn").addClass('active');
+		
+		$("#header_bank_list").hide();
+		$("#header_corp_list").show();
+	}else if(false){
+		$("#bank_btn").removeClass('active');
+		$("#ESG_btn").addClass('active');
+		
+		$("#header_bank_list").hide();
+		$("#header_ESG_list").show();	
+	
+	}else if(false){
+		$("#bank_btn").removeClass('active');
+		$("#ESG_btn").addClass('active');
+		
+		$("#header_bank_list").hide();
+		$("#header_ESG_list").show();
+	}else if(false){
+		$("#bank_btn").removeClass('active');
+		$("#ESG_btn").addClass('active');
+		
+		$("#header_bank_list").hide();
+		$("#header_ESG_list").show();	
+	}else if(false){
+		$("#bank_btn").removeClass('active');
+		$("#ESG_btn").addClass('active');
+		
+		$("#header_bank_list").hide();
+		$("#header_ESG_list").show();	
+	}else if(false){
+		$("#bank_btn").removeClass('active');
+		$("#ESG_btn").addClass('active');
+		
+		$("#header_bank_list").hide();
+		$("#header_ESG_list").show();	
+	}else if(false){
+		$("#bank_btn").removeClass('active');
+		$("#ESG_btn").addClass('active');
+		
+		$("#header_bank_list").hide();
+		$("#header_ESG_list").show();	
+	}else if(false){
+		$("#bank_btn").removeClass('active');
+		$("#ESG_btn").addClass('active');
+		
+		$("#header_bank_list").hide();
+		$("#header_ESG_list").show();	
+	}else if(false){
+		$("#bank_btn").removeClass('active');
+		$("#ESG_btn").addClass('active');
+		
+		$("#header_bank_list").hide();
+		$("#header_ESG_list").show();	
+	}else if(false){
+		$("#bank_btn").removeClass('active');
+		$("#ESG_btn").addClass('active');
+		
+		$("#header_bank_list").hide();
+		$("#header_ESG_list").show();	
+	}else if(false){
+		$("#bank_btn").removeClass('active');
+		$("#ESG_btn").addClass('active');
+		
+		$("#header_bank_list").hide();
+		$("#header_ESG_list").show();	
+	}else if(false){
+		$("#bank_btn").removeClass('active');
+		$("#ESG_btn").addClass('active');
+		
+		$("#header_bank_list").hide();
+		$("#header_ESG_list").show();	
+	}else if(false || false){
+		$("#bank_btn").removeClass('active');
+		$("#trustservice_btn").addClass('active');
+		
+		$("#header_bank_list").hide();
+		$("#header_trustservice_list").show();	
+	}
+	//按鈕高亮
+	if(false){
+		$("#menu1_btn").addClass('on');
+	}else if(true){
+		$("#menu2_btn").addClass('on');
+	}else if(false){
+		$("#menu3_btn").addClass('on');
+	}else if(false){
+		$("#menu4_btn").addClass('on');
+	}else if(false && true ){
+		$("#menu5_btn").addClass('on');
+	}else if(false){
+		$("#menu6_btn").addClass('on');
+	}else if(false){
+		$("#digi_menu5_btn").addClass('on');
+	}
+	//信託服務_配合子頁網址上方選單按鈕高亮
+	if(false){
+		$("#trust_menu0_btn").addClass('on');
+	}else if(false ){
+		$("#trust_menu1_btn").addClass('on');
+	}else if(false){
+		$("#trust_menu2_btn").addClass('on');
+	}else if(false || false || false){
+		$("#trust_menu3_btn").addClass('on');
+	}else if(false || false){
+		$("#trust_menu4_btn").addClass('on');
+	}	
+	$("#trustmenu5").bind( "click", function() {
+		$("#trust_menu0_btn, #trust_menu1_btn, #trust_menu2_btn, #trust_menu3_btn, #trust_menu4_btn, #trust_menu6_btn").removeClass('on');
+		$("#trust_menu5_btn").addClass('on');
+	});
+	$("#trust_menu6_btn").bind( "click", function() {
+		$("#trust_menu0_btn, #trust_menu1_btn, #trust_menu2_btn, #trust_menu3_btn, #trust_menu4_btn, #trust_menu5_btn").removeClass('on');
+		$("#trust_menu6_btn").addClass('on');
+	});
+	
+	$("#corp_btn").hover(function(){
+		if($(this).hasClass('active')){
+			$("#menu2_1").show();
+		}
+	});
+	
+	$("#menu").mmenu({
+        "slidingSubmenus": false,
+        "navbars": [
+           {
+              "position": "top",
+              "content": [
+                 "searchfield"
+              ]
+           }
+        ]
+     });
+	
+	$("#menu .mm-search input")
+    .bind( "click", function() {
+    	location.href= '/bank/siteMap/list.do';
+    });
+});
+
+function checkIE(){
+	//使用IE瀏覽器則popup視窗
+	if (isIE() &&  getCookie("YBBANKCS_IE") != "Y") {
+		//i sIE () && isIE () <= 9 
+    	popupIE('show')
+    }else{
+    	popupIE('close')
+    }
+}
+
+function popupIE(type){
+	//popup視窗顯示與否: IE瀏覽器停止支援通知
+	//console.log(type);
+	if (type =='show'){
+		document.getElementById("popup_IEoverlay").style.display = "block";
+		document.getElementById("popIEover").style.display = "block";
+	} else if (type =='close'){
+		doCookieSetup("YBBANKCS_IE", "Y", "1");
+		document.getElementById("popup_IEoverlay").style.display = "none";
+		document.getElementById("popIEover").style.display = "none";
+	}
+}
+
+function isIE () {
+	//判斷是否使用IE瀏覽器	
+	var browserInfo = getBrowser();
+	return browserInfo.browser == 'msie';
+}
+ 
+function getBrowser() { 
+	var Sys = {}; 
+	var ua = navigator.userAgent.toLowerCase(); 
+	var re =/(firefox|chrome|opera|safari)\/([\d.]+)/; 
+	var m = ua.match(re);
+	
+	if (m!= null && m.length > 1) {
+		Sys.browser = m[1];
+		Sys.ver = m[2];
+		return Sys;
+	}
+	
+	re =/msie.*?([\d.]+)/; 
+	m = ua.match(re); 
+	if (m!= null) {
+		Sys.browser = "msie";
+		Sys.ver = m[1];
+		return Sys;
+	}
+	
+	re = /windows nt.*?rv:([\d.]+).*?\)/
+	m = ua.match(re);
+	if (m!= null && m[1] >= 11) {
+		Sys.browser = "msie";
+		Sys.ver = m[1];
+		return Sys;
+	}
+
+	Sys.browser = "unknown"; 
+	Sys.ver = "0.0"; 
+	return Sys; 
+}  
+
+function appRcmd_link(){
+	var ua = navigator.userAgent.toLowerCase();
+	var isAndroid = ua.indexOf("android") > -1;
+	if(isAndroid){
+		//android
+		window.open('https://m.pbankinginyoursuperapp.yuantabank.com.tw/pmb/MHMQU001', '_blank');
+	} else {
+		//ios
+		window.open('https://m.pbankinginyoursuperapp.yuantabank.com.tw/pmb/MHMQU001', '_blank');
+	}
+}
+
+function appRcmd_close(){
+	$(".appRcmd").hide();
+	$.ajax({
+		async : true,
+		url: '/bank/appRCMDClose.do',
+		type: 'POST'
+	});
+}
+
+function cookieStatementClose(){
+	doCookieSetup("YBCS", "Y");
+	$('.cookie_statement').hide();
+}
+
+function cookieStatementCheck(){
+	if(getCookie("YBCS") != "Y"){
+		$('.cookie_statement').show();
+	}
+}
+
+function doCookieSetup(name, value, days){
+	days = days ? days : 14;
+	var expires = new Date();
+	expires.setTime(expires.getTime() + days*24*60*60*1000);
+	document.cookie = name + "=" + escape(value) + ";expires=" + expires.toGMTString();
+}
+
+function getCookie(name){
+	var arg = escape(name) + "=";
+	var nameLen = arg.length;
+	var cookieLen = document.cookie.length;
+	var i = 0;
+	while(i < cookieLen){
+		var j = i + nameLen;
+		if(document.cookie.substring(i, j) == arg){
+			return getCookieValueByIndex(j);
+		}
+		i = document.cookie.indexOf("", i) + 1;
+		if(i == 0){
+			break;
+		}
+	}
+	return null;
+}
+
+function getCookieValueByIndex(startIndex){
+	var endIndex = document.cookie.indexOf(";", startIndex);
+	if(endIndex == -1){
+		endIndex = document.cookie.length;
+	}
+	return decodeURI(document.cookie.substring(startIndex, endIndex));
+}
+
+</script>
+
+<style>
+
+.cookie_statement {position: fixed; bottom: 0px; z-index: 999; display: none;}
+.cookie_statement .content {width:auto; line-height:20px; display: inline-block; text-align: justify; text-justify:distribute; }
+.cookie_statement .content {font-size: 12px; color:#636363; padding:10px 400px 10px 408px; background-color:#eff7ff;}
+.cookie_statement .content .close{ position:relative; width:100%; height:1px; display:block;}
+.cookie_statement .content .close a{ position:absolute; top:0px; right:-21px; width:12px; height:12px; display:block; background:url(/bank/resources/front/images/icon_apprcmd_close.png) no-repeat; background-size: 100%;}
+@media screen and (max-width: 1600px){ 
+.cookie_statement .content {padding:10px 260px 10px 260px;} 
+}
+@media screen and (max-width: 980px){
+.cookie_statement .content {padding:10px 30px 10px 20px;}
+}
+</style>
+
+<link rel="shortcut icon" type="image/x-icon" href="/bank/resources/front/images/favicon.ico">
+<title>元大商業銀行</title>
+<meta name="title" content="元大銀行">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+	
+	
+		<meta name="keywords" content="元大銀行,元大,鑽金卡,銀行,網路銀行,信用卡,元大商業銀行">
+		<meta name="description" content="元大銀行提供財富管理、信用卡、個人信貸、車貸、房貸、基金、保險、存款、外匯以及各項企業金融服務。">
+	
+
+<meta name="facebook-domain-verification"content="3ptqxj89tegt7eaif3mzju7hlx1j2h" />
+
+<link rel="stylesheet" href="/bank/resources/front/css/inpage.css">
+<script>
+</script>
+
+</head>
+<body onload="checkIE();">
+
+  <div class="cookie_statement">
+    <div class="content">
+      <div class="close" onclick="cookieStatementClose();"><a style="cursor: pointer;"></a></div>
+           為提供您更好、更個人化的服務，本網站採用網路追蹤工具（包含但不限於Cookies等）來優化使用者體驗。若您繼續瀏覽本網站，即表示您同意我們使用Cookies技術，更多相關資訊請參閱<a href="/bank/privacy/statement.do" style="text-decoration: underline;">隱私權保護聲明</a>。
+      </div>
+  </div>
+<div class="container">
+  <header class="header m_hide" >
+    <div class="inner header_inner">
+    <div style="position: absolute; top: 0px; left:0; width: 370px; height: 80px; display:block;"> 
+      <a href="/bank/index.do" class="logo_company"></a>
+      </div>
+      <aside class="header_link">
+    <a href="/bank/companyProfile/list.do">關於元大</a>
+    <a href="https://accessibility.yuantabank.com.tw/aib/aibanc.jsp" target="_blank">友善服務措施</a>
+    <a href="/bank/bulletin/statutoryDisclosure/list.do">法定揭露事項</a>
+    <a href="/bank/bulletin/customerProtection/list.do">消費者保護專區</a>	
+		<a href="https://www.yuantabank.com.hk" target="_blank">香港分行</a>
+		<a href="/bank/spotMap/list.do">服務據點</a>
+		<a href="/bank/service/customer/suggest/list.do">客服專區</a>
+		<a href="https://hr.yuanta.com" target="_blank">人力資源</a>
+		<a class="fb" href="https://www.facebook.com/yuantabank" target="_blank"></a>
+		<a class="LINE" href="https://line.me/R/ti/p/%40mwr3999i" target="_blank"></a>
+		<a class="IG" href="https://www.instagram.com/yuantabank/" target="_blank"></a>
+		<a class="Youtube" href="https://www.youtube.com/channel/UCs72_Ba4-zxCCaeF7zsoAoA" target="_blank"></a>
+		<a class="Telegram" href="https://t.me/yuantabanktw" target="_blank"></a>
+	  </aside>
+      <nav class="nav_main_all">
+        <ul>
+          <li class="nav_main_content">
+            <ul class="nav_main_first_level">
+              <li><a href="/bank/index.do" class="active" id="bank_btn">個人金融</a> </li>
+              <li><a href="/bank/corp/index.do" id="corp_btn">法人金融</a> </li>
+              <li><a href="/bank/digi/index.do" id="digi_btn">數位金融</a> </li>
+              <li><a href="/bank/ESG/index.do" id="ESG_btn">永續ESG</a> </li>
+              <li><a href="/bank/trustservice/index.do" id="trustservice_btn">信託服務</a> </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    
+    
+    
+    
+
+
+
+
+
+
+
+
+
+
+<style>
+	.nav_main_second_level_all .nav_main_third_level .nav_main_third_level_block {
+	    width: 155px;
+	}
+	ul.subListMenu {
+	    margin-left: 20px;
+	    width: 150px;
+	}
+	ul.subListMenu > li {
+	    padding-bottom: 5px !important;
+	    padding-top: 10px !important;
+	}
+	ul.subListMenu > li > a {
+	    color: #397cb6;
+	}
+</style>
+<div class="nav_main_second_level_all" id="header_bank_list">
+<div class="logo"></div>
+      <div class="inner">
+        <ul class="nav_main_second_level">
+          <li onmouseover="showMenu('menu1');" ><a id="menu1_btn" href="/bank/saveExchange/index.do" style="cursor: pointer;" >存款 / 外匯</a></li>
+          <li onmouseover="showMenu('menu2');" ><a id="menu2_btn" href="/bank/creditCard/index.do" >信用卡</a></li>
+          <li onmouseover="showMenu('menu3');" ><a id="menu3_btn" href="/bank/loan/index.do" style="cursor: pointer;" >個人貸款</a></li>
+          <li onmouseover="showMenu('menu4');" ><a id="menu4_btn" href="/bank/wealthManagement/index.do" style="cursor: pointer;">財富管理</a></li>
+          <li onmouseover="showMenu('menu5');" ><a id="menu5_btn" href="/bank/invest/index.do" style="cursor: pointer;">投資理財</a></li>
+          <li onmouseover="showMenu('menu6');" ><a id="menu6_btn" href="/bank/insurance/index.do" style="cursor: pointer;" >保險</a></li>
+          <li onclick="goMoneyDJ();"><a id="menu7_btn" href="#" style="cursor: pointer;" >理財網</a></li>
+          <li><a id="menu8_btn" href="https://www.yuantabank.com.tw/bankwebIMG/event/Bank_Act2023/GlobalBond/index.html" target="_blank">全球債券網</a></li>
+        </ul>
+        
+        <div class="nav_main_third_level" style="display: none" id="menu1">
+           <div class="nav_main_third_level_block_all">
+            <div class="nav_main_third_level_block">
+               <h4 class="nav_main_third_level_block_title">新臺幣存款業務</h4>
+               <ul>
+                <li><a href="/bank/saveExchange/twDeposit/list1.do">支票存款</a></li>
+                <li><a href="/bank/saveExchange/twDeposit/list2.do">活期(儲蓄)存款</a></li>
+                <li><a href="/bank/saveExchange/twDeposit/list7.do">利優活儲存款</a></li>
+                <li><a href="/bank/saveExchange/twDeposit/list3.do">綜合存款</a></li>
+                <li><a href="/bank/saveExchange/twDeposit/list4.do">薪資轉帳存款</a></li>
+                <li><a href="/bank/saveExchange/twDeposit/list5.do">定期(儲蓄)存款</a></li>
+                <li><a href="/bank/saveExchange/twDeposit/list6.do">可轉讓定存單</a></li>
+                <li><a href="/bank/saveExchange/twDeposit/rulaiDonate.do">如來宗捐款查詢</a></li>
+              </ul>
+             </div>
+            <div class="nav_main_third_level_block">
+               <h4 class="nav_main_third_level_block_title">外幣存匯業務</h4>
+               <ul>
+                <li><a href="/bank/saveExchange/foreignDeposit/list1.do">外匯存款</a></li>
+                <li><a href="/bank/saveExchange/foreignDeposit/list2.do">外幣現鈔/外幣ATM</a></li>
+                <li><a href="/bank/saveExchange/foreignDeposit/list3.do">匯兌業務</a></li>
+                <li><a href="/bank/saveExchange/foreignDeposit/list4.do">人民幣業務專區</a></li>
+            
+              </ul>
+             </div>
+            <div class="nav_main_third_level_block">
+               <h4 class="nav_main_third_level_block_title">富樂會員2.0</h4>
+               <ul>
+                <li><a href="/bank/saveExchange/richHappyGroup/list1.do?getShowId=Tab1">富樂頂級會員</a></li>
+                <li><a href="/bank/saveExchange/richHappyGroup/list1.do?getShowId=Tab2">富樂高級會員</a></li>
+                <li><a href="/bank/saveExchange/richHappyGroup/list1.do?getShowId=Tab3">富樂二級會員</a></li>
+            	<li><a href="/bank/saveExchange/richHappyGroup/list1.do?getShowId=Tab4">富樂一級會員</a></li>
+            	<li><a href="/bank/saveExchange/richHappyGroup/list1.do?getShowId=Tab5">富樂會員</a></li>
+              </ul>
+             </div>
+            <div class="nav_main_third_level_block">
+               <h4 class="nav_main_third_level_block_title">金融卡業務</h4>
+               <ul>
+                <li><a href="/bank/saveExchange/debit/list.do">晶片金融卡</a></li>
+                <li><a href="/bank/saveExchange/visa/list.do">Visa金融卡</a></li>
+              </ul>
+             </div>
+            <div class="nav_main_third_level_block">
+               <h4 class="nav_main_third_level_block_title">活動優惠及公告</h4>
+               <ul>
+                <li><a href="/bank/activity/list.do?unit_id=5">活動優惠</a></li>
+                <li><a href="/bank/bulletin/bulletin/list.do?unit_id=5">公告訊息</a></li>
+                <li><a href="/bank/charges/list.do?product_type=4">收費標準</a></li>
+                <li><a href="/bank/download/list.do?download_type=2&unit_id=4">定型化契約</a></li>
+              </ul>
+             </div>
+            <div class="nav_main_third_level_block">
+               <h4 class="nav_main_third_level_block_title">宣導事項</h4>
+               <ul>
+                <li><a href="/bank/saveExchange/propaganda/list1.do">新臺幣業務宣導事項</a></li>
+                <li><a href="/bank/saveExchange/propaganda/list2.do">外匯業務宣導事項</a></li>
+                <li><a href="https://www.aml-ba.org.tw" target="_blank">「防制洗錢全民總動員」專區</a></li>
+              </ul>
+             </div>
+          </div>
+          <aside class="nav_main_third_level_links_block"> 
+             
+	          
+	          
+	            
+	          
+	          	<a href="/bank/exchangeRate/hostccy.do" target="_blank" class="figure_with_side_name">
+	            <div class="icon_item"><img src="https://www.yuantabank.com.tw/bankwebIMG/img/IMG_2752b421e7000000203782607f9502c2.png"></div>
+	            <div class="icon_item_hide"><img src="https://www.yuantabank.com.tw/bankwebIMG/img/IMG_2752b421e700000056144cb2c3fe53c1.png"></div>
+	            <span>匯率查詢</span> 
+	            </a> 
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	          	<a href="/bank/exchangeRate/foreignCurrency.do" target="_blank" class="figure_with_side_name">
+	            <div class="icon_item"><img src="https://www.yuantabank.com.tw/bankwebIMG/img/IMG_2752b5b5e7000000b0d715890e5ebd8d.png"></div>
+	            <div class="icon_item_hide"><img src="https://www.yuantabank.com.tw/bankwebIMG/img/IMG_2752b5b5f70000007c4521373469359e.png"></div>
+	            <span>利率查詢</span> 
+	            </a> 
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	          	<a href="https://www.yuantabank.com.tw/bank/event/referrerCategory/list.do" target="_blank" class="figure_with_side_name">
+	            <div class="icon_item"><img src="https://www.yuantabank.com.tw/bankwebIMG/img/IMG_66e87cb8b90000002dfabbefe3fc780e.png"></div>
+	            <div class="icon_item_hide"><img src="https://www.yuantabank.com.tw/bankwebIMG/img/IMG_66e87cb8b900000061e3615fd01afa29.png"></div>
+	            <span>活動登錄</span> 
+	            </a> 
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	            
+	            
+	             
+             </aside>
+        </div>
+        
+        <div class="nav_main_third_level" style="display: none" id="menu2">
+          <div class="nav_main_third_level_block_all">
+            <div class="nav_main_third_level_block">
+              <h4 class="nav_main_third_level_block_title">信用卡產品</h4>
+              <ul>
+                <li><a href="/bank/creditCard/creditCard/list.do">所有卡片</a></li>
+                <li><a href="/bank/creditCard/creditCard/list.do?creditcard_type=1">熱門卡</a></li>
+                <li><a href="/bank/creditCard/creditCard/list.do?creditcard_type=2">頂級卡</a></li>
+                <li><a href="/bank/creditCard/creditCard/list.do?creditcard_type=3">銀行卡</a></li>
+                <li><a href="/bank/creditCard/creditCard/list.do?creditcard_type=4">聯名/認同卡</a></li>
+              </ul>
+            </div>
+            <div class="nav_main_third_level_block">
+              <h4 class="nav_main_third_level_block_title">卡友權益</h4>
+              <ul>
+                <li><a href="/bank/creditCard/right/list.do?right_id=%E5%9C%8B%E5%A4%96%E6%97%85%E9%81%8A">國外旅遊</a></li>
+                <li><a href="/bank/creditCard/right/list.do?right_id=%E4%BA%A4%E9%80%9A%E9%A1%9E%E6%AC%8A%E7%9B%8A">交通類權益</a></li>
+                <li><a href="/bank/creditCard/right/list.do?right_id=%E6%9C%8D%E5%8B%99%E8%88%87%E6%A2%9D%E6%AC%BE">服務與條款</a></li>
+                <li><a href="/bank/creditCard/right/list.do?right_id=%E5%85%B6%E4%BB%96%E6%AC%8A%E7%9B%8A">其他權益</a></li>
+		<li><a href="/bank/creditCard/right/list.do?right_id=%E9%BB%9E%E6%95%B8%E5%B0%88%E5%8D%80">點數專區</a></li>
+		        <li><a href="/bank/creditCard/right/list.do?right_id=%E9%91%BD%E9%87%91%E6%9C%83%E5%93%A1">鑽金會員</a></li>
+              </ul>
+            </div>
+            <div class="nav_main_third_level_block">
+              <h4 class="nav_main_third_level_block_title">活動專區</h4>
+              <ul>
+                <!--<li><a href="/bank/event/exchangeGift/index.do" target="_blank">刷卡消費兌換活動</a></li>-->
+                <li><a href="/bank/creditCard/promotionActivity/list.do">優惠活動</a></li>
+                <li><a href="/bank/creditCard/promotionPartnerStore/list.do">優惠商店</a></li>
+                <li><a href="/bank/creditCard/installmentPartnerStore/list.do">分期特店</a></li>
+                <li><a href="/bank/creditCard/promotionBonus/list.do">紅利折抵特店</a></li>
+                <li><a href="/bank/creditCard/promotionBonusExchange/list.do">紅利兌換服務</a></li>
+              </ul>
+            </div>
+            <div class="nav_main_third_level_block">
+              <h4 class="nav_main_third_level_block_title">信用卡理財</h4>
+              <ul>
+                <li><a href="https://www.yuantabank.com.tw/bankwebIMG/event/Bank_Act2015/Card20150720/index_1.html" target="_blank">自動分期</a></li>
+                <li><a href="https://www.yuantabank.com.tw/bankwebIMG/event/Bank_Act2015/Card20150720/index_2.html" target="_blank">單筆分期</a></li>
+                <li><a href="https://www.yuantabank.com.tw/bankwebIMG/event/Bank_Act2015/Card20150720/index_3.html" target="_blank">帳單分期</a></li>
+                <li><a href="https://www.yuantabank.com.tw/bankwebIMG/event/Bank_Act2018/EDM20180731/Cash.html" target="_blank">預借現金</a></li>
+                <li><a href="https://www.yuantabank.com.tw/bankwebIMG/event/Bank_Act2018/EDM20180731/ruyiCash.html" target="_blank">如意金</a></li>
+		<li><a href="https://www.yuantabank.com.tw/bank/bulletin/bulletin/page.do?id=27565b0994000000beb6" target="_blank">長期循環轉換方案</a></li>
+              </ul>
+            </div>
+            <div class="nav_main_third_level_block">
+              <h4 class="nav_main_third_level_block_title">信用卡服務</h4>
+              <ul>
+                
+          		<li><a href="https://ebank.yuantabank.com.tw/b3/tx/authenticate?func=creditcardfeeSetting" target="_blank">信用卡款自動扣繳設定及變更</a></li>
+                <li><a href="/bank/creditCard/creditCardInstruction/list.do">信用卡須知</a></li>
+                <li><a href="/bank/creditCard/faq/list.do">常見問題</a></li>
+                <li><a href="/bank/download/list.do?download_type=1&unit_id=1">表單下載</a></li>
+                <li><a href="/bank/creditCard/payment/list.do">繳費專區</a></li>
+                <li><a href="/bank/creditCard/creditCardForeignerApply/list.do">外籍人士辦卡友善專區 How to Apply</a></li>
+                <li><a href="/bank/creditCard/einvoice/list.do">電子發票載具服務</a></li>
+              </ul>
+            </div>
+          </div>
+          <aside class="nav_main_third_level_links_block"> 
+          
+          
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+          	<a href="https://ytbk.tw/AVVJ7v"  class="figure_with_side_name">
+            <div class="icon_item"><img src="https://www.yuantabank.com.tw/bankwebIMG/img/IMG_275c9b3c11000000de4b9eb9a8833166.png"></div>
+            <div class="icon_item_hide"><img src="https://www.yuantabank.com.tw/bankwebIMG/img/IMG_275c9b3c11000000dec38c38a5b40953.png"></div>
+            <span>信用卡掛失</span> 
+            </a> 
+            
+          
+            
+          
+            
+          
+            
+          
+          	<a href="/bank/creditCard/productActivityMember/list.do"  class="figure_with_side_name">
+            <div class="icon_item"><img src="https://www.yuantabank.com.tw/bankwebIMG/img/IMG_2766b368b100000066690d9d90abfb37.png"></div>
+            <div class="icon_item_hide"><img src="https://www.yuantabank.com.tw/bankwebIMG/img/IMG_2766b42684000000fe0dafcbb9949b90.png"></div>
+            <span>活動登錄</span> 
+            </a> 
+            
+          
+            
+          
+            
+          
+          	<a href="https://ebank.yuantabank.com.tw/ecntr/tx/cdapply"  class="figure_with_side_name">
+            <div class="icon_item"><img src="https://www.yuantabank.com.tw/bankwebIMG/img/IMG_2766b55b0f00000062290f1c3f3a2c4b.png"></div>
+            <div class="icon_item_hide"><img src="https://www.yuantabank.com.tw/bankwebIMG/img/IMG_2766b55b0f000000a2166914d6f1d4b9.png"></div>
+            <span>立即申辦</span> 
+            </a> 
+            
+          
+            
+          
+            
+          
+            
+            
+            
+            
+             </aside>
+        </div>
+        
+        <div class="nav_main_third_level" style="display: none" id="menu3">
+           <div class="nav_main_third_level_block_all">
+            <div class="nav_main_third_level_block">
+               <h4 class="nav_main_third_level_block_title">房屋貸款</h4>
+               <ul>
+                <li><a href="/bank/loan/house/list01.do">指數型房貸</a></li>
+                <li><a href="/bank/loan/house/list02.do">政府優惠房貸</a></li>
+                <li><a href="/bank/loan/house/list03.do">理財型房貸</a></li>
+                <li><a href="/bank/calc/loan6.do">房貸額度試算</a></li>
+              </ul>
+             </div>
+            <div class="nav_main_third_level_block">
+               <h4 class="nav_main_third_level_block_title">信用貸款</h4>
+               <ul>
+                <li><a href="/bank/loan/credit/list.do">一般信貸</a></li>
+                <li><a href="https://www.yuantabank.com.tw/bankwebIMG/event/Bank_Act2022/loanapply/index.html" target="_blank">線上申請</a></li>
+          		<li><a href="https://www.yuantabank.com.tw/bank/service/customer/additionalDocument/list.do?source=1&product_type=4" target="_blank">線上補件</a></li>
+          		<li><a href="https://ebank.yuantabank.com.tw/ecntr/tx/PLoanOnlineComfirm" target="_blank">線上簽約</a></li>
+          		<li><a href="https://ebank.yuantabank.com.tw/ecntr/pages/creditloanquery_ProgressInquiry.jsp" target="_blank">進度查詢</a></li>
+          		<li>證券戶優選信貸專案
+				    <ul class="subListMenu">
+				     <li><a href="https://www.yuantabank.com.tw/bankwebIMG/event/Bank_Act2026/Card20260306_1/index.html" target="_blank">元氣馬上貸-分期型</a></li>
+				      <li><a href="https://www.yuantabank.com.tw/bankwebIMG/event/Bank_Act2025/Card20250420_1/index.html" target="_blank">元氣循環貸-循環型</a></li>
+				    </ul>
+				</li>
+          		<li>青年信貸專案
+					<ul class="subListMenu">
+					    <li><a href="https://www.yuantabank.com.tw/bankwebIMG/event/Bank_Act2025/Card20250210_1/index.html">青春元夢貸</a></li>
+					</ul>
+				</li>
+              </ul>
+             </div>
+            <div class="nav_main_third_level_block">
+               <h4 class="nav_main_third_level_block_title">汽車貸款</h4>
+               <ul>
+                <li><a href="/bank/loan/car/list.do">原車融資</a></li>
+                <li><a href="/bank/loan/car/list2.do">購車貸款</a></li>
+                <li><a href="/bank/loan/carLoan/loanList.do">車貸額度試算</a></li>
+              </ul>
+             </div>
+            <div class="nav_main_third_level_block">
+               <h4 class="nav_main_third_level_block_title">理財貸款</h4>
+               <ul>
+                <li><a href="/bank/loan/stock/list.do">股票貸款</a></li>
+                <li><a href="/bank/loan/pledge/list.do">自行質借</a></li>
+              </ul>
+             </div>
+            <div class="nav_main_third_level_block">
+               <h4 class="nav_main_third_level_block_title">查詢服務</h4>
+               <ul>
+                <li><a href="/bank/loan/query/product.do">產品推薦</a></li>
+                <li><a href="https://ebank.yuantabank.com.tw/nib/" target="_blank">帳務查詢</a></li>
+                <li><a href="/bank/exchangeRate/twRate.do">指標利率</a></li>
+                <li><a href="/bank/charges/list.do?product_type=2">收費標準</a></li>
+                <li><a href="/bank/careDebt/list.do">理債關懷服務</a></li>
+                <li><a href="/bank/debtcollPolicy/list.do">債務催收政策</a></li>
+                <li><a href="/bank/download/list.do?download_type=1&unit_id=2">下載專區</a></li>
+              </ul>
+             </div>
+          </div>
+           <aside class="nav_main_third_level_links_block"> 
+             
+	          
+	          
+	            
+	          
+	            
+	          
+	          	<a href="/bank/loan/query/product.do"  class="figure_with_side_name">
+	            <div class="icon_item"><img src="https://www.yuantabank.com.tw/bankwebIMG/img/IMG_276259116700000074a7ab534413009e.png"></div>
+	            <div class="icon_item_hide"><img src="https://www.yuantabank.com.tw/bankwebIMG/img/IMG_2762591167000000491a5d98ee34b5e2.png"></div>
+	            <span>適合我的貸款</span> 
+	            </a> 
+	            
+	          
+	            
+	          
+	          	<a href="https://ebank.yuantabank.com.tw/ecntr/" target="_blank" class="figure_with_side_name">
+	            <div class="icon_item"><img src="https://www.yuantabank.com.tw/bankwebIMG/img/IMG_27625aecb2000000ee6a0849089722a8.png"></div>
+	            <div class="icon_item_hide"><img src="https://www.yuantabank.com.tw/bankwebIMG/img/IMG_27625aecc1000000fe40b037ab1313bf.png"></div>
+	            <span>元大e櫃檯申辦</span> 
+	            </a> 
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	          	<a href="/bank/service/customer/application/list.do"  class="figure_with_side_name">
+	            <div class="icon_item"><img src="https://www.yuantabank.com.tw/bankwebIMG/img/IMG_27625e24ff000000e01d12edab98968e.png"></div>
+	            <div class="icon_item_hide"><img src="https://www.yuantabank.com.tw/bankwebIMG/img/IMG_27625e250f000000b4de5baf8aecaf97.png"></div>
+	            <span>請專人與我聯絡</span> 
+	            </a> 
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	            
+	            
+	             
+             </aside>
+         </div>
+         
+        <div class="nav_main_third_level" style="display: none" id="menu4">
+           <div class="nav_main_third_level_block_all">
+            <div class="nav_main_third_level_block">
+               <h4 class="nav_main_third_level_block_title">個人理財</h4>
+               <ul>
+               	<li><a href="/bank/wealthManagement/richMember/member.do?memberType=5">富鑽理財</a></li>
+                <li><a href="/bank/wealthManagement/richMember/member.do?memberType=1">富盛理財</a></li>
+                <li><a href="/bank/wealthManagement/richMember/member.do?memberType=2">富貴理財</a></li>
+                <li><a href="/bank/wealthManagement/richMember/member.do?memberType=3">富傳理財</a></li>
+                <li><a href="/bank/wealthManagement/richMember/member.do?memberType=4">富昇理財</a></li>                
+              </ul>
+             </div>
+             <div class="nav_main_third_level_block">
+               <h4 class="nav_main_third_level_block_title">家庭理財</h4>
+               <ul>
+                <li><a href="/bank/wealthManagement/familyMember/member.do?memberType=1">富盛家庭理財</a></li>
+                <li><a href="/bank/wealthManagement/familyMember/member.do?memberType=2">富貴家庭理財</a></li>
+              </ul>
+             </div>
+             <div class="nav_main_third_level_block">
+               <h4 class="nav_main_third_level_block_title" style="font-stretch: extra-condensed; white-space: nowrap;">財管2.0高資產服務</h4>
+               <ul>
+                <li><a href="/bank/wealthManagement/highAsset/list.do?tagType=1">業務說明</a></li>
+                <li><a href="/bank/wealthManagement/highAsset/list.do?tagType=2">客戶資格</a></li>
+                <li><a href="/bank/wealthManagement/highAsset/list.do?tagType=3">頂級尊榮禮遇</a></li>
+              </ul>
+             </div>
+             <div class="nav_main_third_level_block">
+               <h4 class="nav_main_third_level_block_title">鑽金智富卡</h4>
+               <ul>
+                  <li><a href="https://www.yuantabank.com.tw/bank/creditCard/creditCard/in.do?id=473f33ce38000002e0e9">鑽石會籍</a></li>
+		              <li><a href="https://www.yuantabank.com.tw/bank/creditCard/creditCard/in.do?id=473f33ce38000002e0e9">翡翠會籍</a></li>
+		              <li><a href="https://www.yuantabank.com.tw/bank/creditCard/creditCard/in.do?id=470c0634cd0000059efa">鈦金會籍</a></li>
+		              <li><a href="https://www.yuantabank.com.tw/bank/creditCard/creditCard/in.do?id=470c0634cd0000059efa">菁英會籍</a></li>
+              </ul>
+             </div>
+            <div class="nav_main_third_level_block">
+               <h4 class="nav_main_third_level_block_title">活動專區</h4>
+               <ul>
+                <li><a href="/bank/activity/list.do?unit_id=9">活動訊息</a></li>
+              </ul>
+             </div>
+          </div>
+           <aside class="nav_main_third_level_links_block"> 
+             
+	          
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	          	<a href="https://www.yuantabank.com.tw/bank/wealthManagement/wmActivitySignIn/list.do"  class="figure_with_side_name">
+	            <div class="icon_item"><img src="https://www.yuantabank.com.tw/bankwebIMG/img/IMG_33791f8b91000000afc5d2682ac2f124.png"></div>
+	            <div class="icon_item_hide"><img src="https://www.yuantabank.com.tw/bankwebIMG/img/IMG_33791f8b910000000a4059668eb24cc1.png"></div>
+	            <span>活動登錄 專人聯繫</span> 
+	            </a> 
+	            
+	          
+	            
+	            
+	            
+	             
+             </aside>
+         </div>
+         
+         <div class="nav_main_third_level" style="display: none" id="menu5">
+           <div class="nav_main_third_level_block_all">
+            <div class="nav_main_third_level_block">
+               <h4 class="nav_main_third_level_block_title">基金</h4>
+               <ul>
+                <li onclick="goMoneyDJ();"><a href="#">元大理財網</a></li>
+                <li><a href="https://ebank.yuantabank.com.tw/nib/ibanc_b.jsp?fundbuy" target="_blank">基金交易</a></li>
+                <li><a href="/bank/invest/fund/list.do">基金通路報酬揭露</a></li>
+                <li><a href="https://www.yuantabank.com.tw/bankwebIMG/dwn/DWN_5c1052a54100000097e195a883a26065.pdf" target="_blank">收費標準及基金交易需知</a></li>
+              </ul>
+             </div>
+            <div class="nav_main_third_level_block">
+               <h4 class="nav_main_third_level_block_title">ETF/股票/債券</h4>
+               <ul>
+                <li><a href="/bank/invest/etf/list1.do">境外ETF</a></li>
+                <li><a href="/bank/invest/etf/list2.do">境外股票</a></li>
+                <li><a href="/bank/invest/etf/list3.do">境外特別股</a></li>
+                <li><a href="/bank/invest/etf/list4.do">海外債券</a></li>
+                <li><a href="/bank/invest/etf/list5.do">境外結構型商品</a></li>
+              </ul>
+             </div>
+	    <div class="nav_main_third_level_block">
+               <h4 class="nav_main_third_level_block_title">境內結構型商品</h4>
+               <ul>
+               <li><a href="/bank/invest/dsg/list1.do">【SI】境內結構型商品</a></li>
+               <li><a href="/bank/invest/dsg/list2.do">【DCI】雙元貨幣境內結構型商品</a></li>
+               </ul>
+            </div> 
+            <div class="nav_main_third_level_block">
+               <h4 class="nav_main_third_level_block_title">黃金存摺</h4>
+               <ul>
+                <li><a href="/bank/invest/passbook/list1.do">認識黃金存摺</a></li>
+                <li><a href="/bank/invest/passbook/list2.do">黃金存摺開戶</a></li>
+                <li><a href="/bank/invest/passbook/list3.do">黃金存摺買賣</a></li>
+                <li><a href="/bank/exchangeRate/goldenPassbook/current.do">黃金牌價</a></li>
+                <li><a href="/bank/invest/passbook/list4.do">黃金存摺問與答</a></li>
+                <li><a href="/bank/calc/golden.do">黃金存摺買進試算</a></li>
+              </ul>
+             </div>
+          </div>
+           <aside class="nav_main_third_level_links_block"> 
+             
+	          
+	          
+	          	<a href="https://yuantabank.moneydj.com/" target="_blank" class="figure_with_side_name">
+	            <div class="icon_item"><img src="https://www.yuantabank.com.tw/bankwebIMG/img/IMG_27520410c2000000e41fb640365568ed.png"></div>
+	            <div class="icon_item_hide"><img src="https://www.yuantabank.com.tw/bankwebIMG/img/IMG_27520410c2000000c9e737c956776dc7.png"></div>
+	            <span>基金理財網</span> 
+	            </a> 
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	          	<a href="https://yuantabank.moneydj.com/"  class="figure_with_side_name">
+	            <div class="icon_item"><img src="https://www.yuantabank.com.tw/bankwebIMG/img/IMG_278bb53e320000001c5ae236c3fdc889.png"></div>
+	            <div class="icon_item_hide"><img src="https://www.yuantabank.com.tw/bankwebIMG/img/IMG_278bb53e320000001eecbfbcb50083d4.png"></div>
+	            <span>投資商品報價</span> 
+	            </a> 
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	          	<a href="/bank/invest/etf/list4.do"  class="figure_with_side_name">
+	            <div class="icon_item"><img src="https://www.yuantabank.com.tw/bankwebIMG/img/IMG_27520512b3000000ce827331b1b402bf.png"></div>
+	            <div class="icon_item_hide"><img src="https://www.yuantabank.com.tw/bankwebIMG/img/IMG_27520512c30000003a1b2f993196cd39.png"></div>
+	            <span>海外債券</span> 
+	            </a> 
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	            
+	            
+	             
+             </aside>
+         </div>
+         
+         <div class="nav_main_third_level" style="display: none" id="menu6"> 
+           <div class="nav_main_third_level_block_all">
+            <div class="nav_main_third_level_block">
+               <h4 class="nav_main_third_level_block_title">利率變動型保險</h4>
+               <ul>
+                <li><a href="/bank/insurance/insuranceProduct/list.do?insurance_type=%E5%88%A9%E7%8E%87%E8%AE%8A%E5%8B%95%E5%9E%8B%E4%BF%9D%E9%9A%AA&subproject=%E5%88%A9%E7%8E%87%E8%AE%8A%E5%8B%95%E5%9E%8B%E5%A3%BD%E9%9A%AA">利率變動型壽險</a></li>
+                <li><a href="/bank/insurance/insuranceProduct/list.do?insurance_type=%E5%88%A9%E7%8E%87%E8%AE%8A%E5%8B%95%E5%9E%8B%E4%BF%9D%E9%9A%AA&subproject=%E5%88%A9%E7%8E%87%E8%AE%8A%E5%8B%95%E5%9E%8B%E5%B9%B4%E9%87%91">利率變動型年金</a></li>
+                <li><a href="/bank/insurance/insuranceProduct/list.do?insurance_type=%E5%88%A9%E7%8E%87%E8%AE%8A%E5%8B%95%E5%9E%8B%E4%BF%9D%E9%9A%AA&subproject=%E5%85%B6%E5%AE%83%E7%B2%BE%E9%81%B8">其它精選</a></li>
+              </ul>
+             </div>
+            <div class="nav_main_third_level_block">
+               <h4 class="nav_main_third_level_block_title">投資型保險</h4>
+               <ul>
+                <li><a href="/bank/insurance/insuranceProduct/list.do?insurance_type=%E6%8A%95%E8%B3%87%E5%9E%8B%E4%BF%9D%E9%9A%AA&subproject=%E6%8A%95%E8%B3%87%E5%9E%8B%E5%A3%BD%E9%9A%AA">投資型壽險</a></li>
+                <li><a href="/bank/insurance/insuranceProduct/list.do?insurance_type=%E6%8A%95%E8%B3%87%E5%9E%8B%E4%BF%9D%E9%9A%AA&subproject=%E6%8A%95%E8%B3%87%E5%9E%8B%E5%B9%B4%E9%87%91">投資型年金</a></li>
+              </ul>
+             </div>
+            <div class="nav_main_third_level_block">
+               <h4 class="nav_main_third_level_block_title">保障型保險</h4>
+               <ul>
+                <li><a href="/bank/insurance/insuranceProduct/list.do?insurance_type=%E4%BF%9D%E9%9A%9C%E5%9E%8B%E4%BF%9D%E9%9A%AA&subproject=%E5%AE%9A%E6%9C%9F/%E7%B5%82%E8%BA%AB%E5%A3%BD%E9%9A%AA">定期/終身壽險</a></li>
+                <li><a href="/bank/insurance/insuranceProduct/list.do?insurance_type=%E4%BF%9D%E9%9A%9C%E5%9E%8B%E4%BF%9D%E9%9A%AA&subproject=%E5%81%A5%E5%BA%B7/%E6%84%8F%E5%A4%96%E9%9A%AA">健康/意外險</a></li>
+                <li><a href="/bank/insurance/insuranceProduct/list.do?insurance_type=%E4%BF%9D%E9%9A%9C%E5%9E%8B%E4%BF%9D%E9%9A%AA&subproject=%E9%87%8D%E5%A4%A7/%E7%89%B9%E5%AE%9A%E5%82%B7%E7%97%85%E9%9A%AA">重大/特定傷病險</a></li>                
+                <li><a href="/bank/insurance/insuranceProduct/list.do?insurance_type=%E4%BF%9D%E9%9A%9C%E5%9E%8B%E4%BF%9D%E9%9A%AA&subproject=%E9%98%B2%E7%99%8C%E4%BF%9D%E9%9A%AA">防癌保險</a></li>                
+                <li><a href="/bank/insurance/insuranceProduct/list.do?insurance_type=%E4%BF%9D%E9%9A%9C%E5%9E%8B%E4%BF%9D%E9%9A%AA&subproject=%E6%88%BF%E8%B2%B8%E5%A3%BD%E9%9A%AA">房貸壽險</a></li>
+              </ul>
+             </div>
+            <div class="nav_main_third_level_block">
+               <h4 class="nav_main_third_level_block_title">財產保險</h4>
+               <ul>
+                <li><a href="/bank/insurance/propertyInsurance/list.do?insurance_type=%E8%B2%A1%E7%94%A2%E4%BF%9D%E9%9A%AA&subproject=%E5%80%8B%E4%BA%BA%E5%81%A5%E5%BA%B7%E5%82%B7%E5%AE%B3%E4%BF%9D%E9%9A%AA">個人健康傷害保險</a></li>
+                <li><a href="/bank/insurance/propertyInsurance/list.do?insurance_type=%E8%B2%A1%E7%94%A2%E4%BF%9D%E9%9A%AA&subproject=%E6%97%85%E8%A1%8C%E5%B9%B3%E5%AE%89%E4%BF%9D%E9%9A%AA">旅行平安保險</a></li>
+                <li><a href="/bank/insurance/propertyInsurance/list.do?insurance_type=%E8%B2%A1%E7%94%A2%E4%BF%9D%E9%9A%AA&subproject=%E6%B1%BD%E6%A9%9F%E8%BB%8A%E4%BF%9D%E9%9A%AA">汽機車保險</a></li>
+                <li><a href="/bank/insurance/propertyInsurance/list.do?insurance_type=%E8%B2%A1%E7%94%A2%E4%BF%9D%E9%9A%AA&subproject=%E4%BD%8F%E5%AE%85%E7%81%AB%E7%81%BD%E4%BF%9D%E9%9A%AA">住宅火災保險</a></li>
+              </ul>
+             </div>
+             <div class="nav_main_third_level_block">
+               <h4 class="nav_main_third_level_block_title">小額終老/微型保險</h4>
+               <ul>
+                <li><a href="/bank/insurance/insuranceProduct/list.do?insurance_type=%E5%B0%8F%E9%A1%8D%E7%B5%82%E8%80%81/%E5%BE%AE%E5%9E%8B%E4%BF%9D%E9%9A%AA&subproject=%E5%B0%8F%E9%A1%8D%E7%B5%82%E8%80%81%E4%BF%9D%E9%9A%AA">小額終老保險</a></li>
+                <li><a href="/bank/insurance/insuranceProduct/list.do?insurance_type=%E5%B0%8F%E9%A1%8D%E7%B5%82%E8%80%81/%E5%BE%AE%E5%9E%8B%E4%BF%9D%E9%9A%AA&subproject=%E5%BE%AE%E5%9E%8B%E4%BF%9D%E9%9A%AA">微型保險</a></li>
+               </ul>
+             </div>  
+             <div class="nav_main_third_level_block">
+               <h4 class="nav_main_third_level_block_title">分紅保險</h4>
+               <ul>
+                <li><a href="/bank/insurance/insuranceProduct/list.do?insurance_type=%E5%88%86%E7%B4%85%E4%BF%9D%E9%9A%AA&subproject=%E5%8F%B0%E5%B9%A3">台幣</a></li>
+                <li><a href="/bank/insurance/insuranceProduct/list.do?insurance_type=%E5%88%86%E7%B4%85%E4%BF%9D%E9%9A%AA&subproject=%E5%A4%96%E5%B9%A3">外幣</a></li>
+               </ul>
+             </div>  
+          </div>
+          <aside class="nav_main_third_level_links_block"> 
+             
+	          
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	          	<a href="/bank/insurance/insuranceCompany/list.do"  class="figure_with_side_name">
+	            <div class="icon_item"><img src="https://www.yuantabank.com.tw/bankwebIMG/img/IMG_2751c73ac90000002a8b80090d0b7bcd.png"></div>
+	            <div class="icon_item_hide"><img src="https://www.yuantabank.com.tw/bankwebIMG/img/IMG_2751c73ac900000084440c6ff9a21187.png"></div>
+	            <span>合作夥伴</span> 
+	            </a> 
+	            
+	          
+	            
+	          
+	            
+	          
+	          	<a href="http://www.ib.gov.tw/ch/home.jsp?id=125&amp;parentpath=0%2C8"  class="figure_with_side_name">
+	            <div class="icon_item"><img src="https://www.yuantabank.com.tw/bankwebIMG/img/IMG_2751c7e35e000000643c96a010ac9de9.png"></div>
+	            <div class="icon_item_hide"><img src="https://www.yuantabank.com.tw/bankwebIMG/img/IMG_2751c7e35e0000008dc33044ee46ac16.png"></div>
+	            <span>微型保險專區</span> 
+	            </a> 
+	            
+	          
+	            
+	          
+	            
+	          
+	          	<a href="https://www.lia-roc.org.tw/list_article?article_content=163&amp;menu_title=%E5%B8%B8%E7%94%A8%E5%8A%9F%E8%83%BD"  class="figure_with_side_name">
+	            <div class="icon_item"><img src="https://www.yuantabank.com.tw/bankwebIMG/img/IMG_2751c87aad000000382f9cfbd65ebcc6.png"></div>
+	            <div class="icon_item_hide"><img src="https://www.yuantabank.com.tw/bankwebIMG/img/IMG_2751c87abc000000f4851fec735378e7.png"></div>
+	            <span>高齡化保險專區</span> 
+	            </a> 
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	            
+	          
+	          	<a href="https://ytbk.tw/ZB3Unu"  class="figure_with_side_name">
+	            <div class="icon_item"><img src="https://www.yuantabank.com.tw/bankwebIMG/img/IMG_5a5648b51f000000d928547df11edc2c.png"></div>
+	            <div class="icon_item_hide"><img src="https://www.yuantabank.com.tw/bankwebIMG/img/IMG_5a5648b51f0000005951c5b27baef24d.png"></div>
+	            <span>合作產險投保專區</span> 
+	            </a> 
+	            
+	          
+	            
+	          
+	            
+	            
+	            
+	             
+             </aside>
+         </div>
+      </div>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+<div class="nav_main_second_level_all" id="header_corp_list" style="display:none;">
+<div class="logo"></div>
+    <div class="inner">
+        <ul class="nav_main_second_level">
+           <li><a id="corp_menu1_btn" href="/bank/corp/credit/list1.do">授信業務</a></li>
+           <li><a id="corp_menu2_btn" href="/bank/corp/foreign/list1.do">外匯進出口業務</a></li>
+           <li><a id="corp_menu3_btn" href="/bank/corp/international/list1.do">國際金融業務分行</a></li>
+           <li><a id="corp_menu4_btn" href="/bank/corp/exchange/list1.do">利匯率商品</a></li>
+           <li><a id="corp_menu5_btn" href="/bank/corp/ticket/list1.do">票債券</a></li>
+           <li><a id="corp_menu6_btn" href="/bank/corp/cashflow/list1.do">金流服務</a></li>
+           <li onmouseover="showMenu('corp_menu1');"><a id="corp_menu7_btn" href="javascript:void(0)">中小企業匯率避險服務專區</a></li>
+         </ul>
+         <div class="nav_ESG9_third_level nav_main_third_level" style="display: none" id="corp_menu1">
+          <div class="nav_main_third_level_block_all">
+            <div class="nav_main_third_level_block">
+              <ul>
+                <li><a href="/bank/corp/exchange/list6.do">匯率避險業務介紹</a></li>
+                <li><a href="https://www.yuantabank.com.tw/bankwebIMG/dwn/DWN_63717e4d0e000000afdc5b5d492d2270.pdf">匯率避險服務窗口</a></li>
+                <li><a href="https://www.yuantabank.com.tw/bankwebIMG/dwn/DWN_6479ddabe6000000924ee83afef133a6.pdf">匯率避險專屬優惠方案</a></li>
+                <li><a href="https://www.smeg.org.tw/basic/?node=10399">信保基金「匯率避險保證措施」</a></li>
+              </ul>
+            </div>
+           </div>
+	</div>
+      </div>	
+</div>
+    
+
+
+
+
+
+
+
+
+
+
+<div class="nav_main_second_level_all" id="header_digi_list" style="display:none;">
+	<div class="logo"></div>
+	<div class="inner">
+        <ul class="nav_main_second_level">
+           <li><a id="digi_menu1_btn" href="https://www.yuantabank.com.tw/bankwebIMG/event/Bank_Act2025/MobileBankingAPP/index.html">行動銀行</a></li>
+           <li><a id="digi_menu1_btn" href="https://ebank.yuantabank.com.tw/nib/" target="_blank">個人網銀</a></li>
+           <li><a id="digi_menu3_btn" href="https://www.yuantabank.com.tw/bankwebIMG/event/Bank_Act2022/B2B/index.html">鑽金商務網</a></li>
+           <li><a id="digi_menu3_btn" href="https://www.yuantabank.com.tw/bankwebIMG/event/Bank_Act2025/MobileCorporateBankingAPP/index.html">商務行動銀行</a></li>
+           <li><a id="digi_menu4_btn" href="https://superatm.tw/jwss/jsp/atm/index.jsp" target="_blank">SuperATM</a></li>
+           <li><a id="digi_menu5_btn" href="/bank/digi/phone/list.do">電話銀行</a></li>
+           <li><a id="digi_menu7_btn" href="/bank/digi/campus/list.do">校園服務</a></li>
+           <li><a id="digi_menu8_btn" href="/bank/digi/epay/list1.do">支付服務</a></li>
+           <li><a id="digi_menu9_btn" href="https://ebank.yuantabank.com.tw/ecntr/" target="_blank">元大e櫃檯</a></li>
+         </ul>
+      </div>
+</div>
+    
+
+
+
+
+
+
+
+
+
+
+<div class="nav_main_second_level_all" id="header_ESG_list" style="display:none;">
+<div class="logo"></div>
+    <div class="inner">
+        <ul class="nav_main_second_level">
+           <li onmouseover="showESGMenu('ESGmenu0');" onclick="showESGMenu('ESGmenu0');"><a id="ESG_menu0_btn" style="cursor: default;" >社會參與</a></li>
+           <li onmouseover="showESGMenu('ESGmenu1');" onclick="showESGMenu('ESGmenu1');"><a id="ESG_menu1_btn" style="cursor: default;" >幸福職場</a></li>
+           <li onmouseover="showESGMenu('ESGmenu2');" onclick="showESGMenu('ESGmenu2');"><a id="ESG_menu2_btn" style="cursor: default;" >環境永續</a></li>
+           <li onmouseover="showESGMenu('ESGmenu3');" onclick="showESGMenu('ESGmenu3');"><a id="ESG_menu3_btn" style="cursor: default;" >普惠金融</a></li>
+           <li onmouseover="showESGMenu('ESGmenu4');" onclick="showESGMenu('ESGmenu4');"><a id="ESG_menu4_btn" style="cursor: default;" >永續金融</a></li>
+           <li onmouseover="showESGMenu('ESGmenu5');" onclick="showESGMenu('ESGmenu5');"><a id="ESG_menu5_btn" style="cursor: default;" >友善服務</a></li>
+           <li onmouseover="showESGMenu('ESGmenu6');" onclick="showESGMenu('ESGmenu6');"><a id="ESG_menu6_btn" style="cursor: default;" >公平待客</a></li>
+           <li onmouseover="showESGMenu('ESGmenu7');" onclick="showESGMenu('ESGmenu7');"><a id="ESG_menu7_btn" style="cursor: default;" >永續發展</a></li>
+           <li onmouseover="showESGMenu('ESGmenu8');" onclick="showESGMenu('ESGmenu8');"><a id="ESG_menu8_btn" style="cursor: default;" >金融大回饋</a></li>
+         </ul>
+        
+        <div class="nav_ESG1_third_level nav_main_third_level" style="display: none" id="ESGmenu0">
+           <div class="nav_main_third_level_block_all">
+            <div class="nav_main_third_level_block">               
+               <ul>
+                <li><a href="/bank/environmentalSustainability/socialParticipation/list19.do">目標與策略</a></li>
+                <li><a href="/bank/environmentalSustainability/socialParticipation/list20.do">專案計畫</a></li>
+                <li><a href="/bank/environmentalSustainability/socialParticipation/list21.do">公益關懷</a></li>
+                <li><a href="/bank/environmentalSustainability/socialParticipation/list22.do">助學育才</a></li>
+                <li><a href="/bank/environmentalSustainability/socialParticipation/list23.do">社區共好</a></li>                
+              </ul>
+             </div>
+            </div>	
+        </div>
+        
+        <div class="nav_ESG2_third_level nav_main_third_level" style="display: none" id="ESGmenu1">
+           <div class="nav_main_third_level_block_all">
+            <div class="nav_main_third_level_block" style="width:145px">               
+               <ul>
+                <li><a href="/bank/environmentalSustainability/happinessWorkplace/list13.do">人才聘僱與留任</a></li>
+                <li><a href="/bank/environmentalSustainability/happinessWorkplace/list14.do">績效考核與職涯發展</a></li>
+                <li><a href="/bank/environmentalSustainability/happinessWorkplace/list15.do">人才發展與訓練</a></li>
+                <li><a href="/bank/environmentalSustainability/happinessWorkplace/list16.do">員工健康與安全</a></li>
+                <li><a href="/bank/environmentalSustainability/happinessWorkplace/list17.do">人權政策</a></li>                
+              </ul>
+             </div>
+            </div>	
+        </div>
+        
+        <div class="nav_ESG3_third_level nav_main_third_level" style="display: none" id="ESGmenu2">
+           <div class="nav_main_third_level_block_all">
+            <div class="nav_main_third_level_block">               
+               <ul>
+                <li><a href="/bank/environmentalSustainability/eco/list12.do">自然生態保護</a></li>
+                <li><a href="/bank/environmentalSustainability/eco/list8.do">節能減碳專區</a></li>
+                <li><a href="https://www.yuantabank.com.tw/bankwebIMG/event/Bank_Act2022/greenacc/index.html">鑽金碳吉帳戶</a></li>
+                <li><a href="/bank/creditCard/creditCard/list.do">信用卡</a></li>                
+              </ul>
+             </div>
+            </div>	
+        </div>
+        
+        <div class="nav_ESG4_third_level nav_main_third_level" style="display: none" id="ESGmenu3">
+           <div class="nav_main_third_level_block_all">
+            <div class="nav_main_third_level_block" style="width:145px">               
+               <ul>
+                <li><a href="/bank/environmentalSustainability/list3.do">普惠金融</a></li>
+                <li><a href="https://www.yuantabank.com.tw/bankwebIMG/event/Bank_Act2022/smartinvest/index.html">小額投資</a></li>
+                <li><a href="/bank/insurance/insuranceProduct/list.do?insurance_type=%E5%B0%8F%E9%A1%8D%E7%B5%82%E8%80%81/%E5%BE%AE%E5%9E%8B%E4%BF%9D%E9%9A%AA&subproject=%E5%B0%8F%E9%A1%8D%E7%B5%82%E8%80%81%E4%BF%9D%E9%9A%AA">小額終老保險</a></li> 
+                <li><a href="https://www.yuantabank.com.tw/bankwebIMG/event/Bank_Act2022/ElderCareTrust/index.html">安養信託</a></li>
+                <li><a href="/bank/environmentalSustainability/list2.do">金融商品創新與服務</a></li>                
+              </ul>
+             </div>
+            </div>	
+        </div>
+        
+        <div class="nav_ESG5_third_level nav_main_third_level" style="display: none" id="ESGmenu4">
+           <div class="nav_main_third_level_block_all">
+            <div class="nav_main_third_level_block">               
+               <ul>
+                <li><a href="/bank/environmentalSustainability/list1.do">責任授信</a></li>
+                <li><a href="/bank/environmentalSustainability/list5.do">責任投資</a></li>
+                <li><a href="/bank/companyGovernance/equatorPrinciples/list.do">赤道原則</a></li>
+                <li><a href="https://www.yuantabank.com.tw/bankwebIMG/event/Bank_Act2020/ACCLink/">行動支付</a></li>
+                <li><a href="https://ebank.yuantabank.com.tw/ecntr/">線上申辦</a></li>                
+              </ul>
+             </div>
+            </div>	
+        </div>
+        
+        <div class="nav_ESG6_third_level nav_main_third_level" style="display: none" id="ESGmenu5">
+           <div class="nav_main_third_level_block_all">
+            <div class="nav_main_third_level_block">               
+               <ul>
+                <li><a href="https://accessibility.yuantabank.com.tw/aib/aibanc.jsp">友善服務措施</a></li>
+                <li><a href="/bank/bulletin/bulletin/page.do?id=4d23d6cbd80000044053">防制詐騙宣導</a></li>
+                <li><a href="/bank/bulletin/customerProtection/list.do">消費者保護</a></li>                
+              </ul>
+             </div>
+            </div>	
+        </div>
+        
+        <div class="nav_ESG7_third_level nav_main_third_level" style="display: none" id="ESGmenu6">
+           <div class="nav_main_third_level_block_all">
+            <div class="nav_main_third_level_block">               
+               <ul>                
+                <li><a href="/bank/companyGovernance/principlesFairly/list1.do">公平待客專區</a></li>                               
+              </ul>
+             </div>
+            </div>	
+        </div>
+        
+        <div class="nav_ESG8_third_level nav_main_third_level" style="display: none" id="ESGmenu7">
+           <div class="nav_main_third_level_block_all">
+            <div class="nav_main_third_level_block">               
+               <ul>
+                <li><a href="/bank/environmentalSustainability/list.do">發展願景</a></li>
+                <li><a href="/bank/environmentalSustainability/list10.do">運作模式</a></li>
+                <li><a href="/bank/companyGovernance/list1.do">公司治理</a></li>
+                <li><a href="https://www.yuanta.com/TW/ESG/ESG-Report">永續報告書</a></li>
+                <li><a href="/bank/tcfd/list.do">TCFD</a></li>                
+              </ul>
+             </div>
+            </div>	
+        </div>
+        
+        <div class="nav_ESG9_third_level nav_main_third_level" style="display: none" id="ESGmenu8">
+           <div class="nav_main_third_level_block_all">
+            <div class="nav_main_third_level_block">               
+               <ul>                
+                <li><a href="/bank/contribution/list1.do">金融大回饋專區</a></li>                               
+              </ul>
+             </div>
+            </div>	
+        </div>
+</div>
+</div>
+    
+
+
+
+
+
+
+
+
+
+
+<div class="nav_main_second_level_all" id="header_trustservice_list" style="display:none;">
+<div class="logo"></div>
+    <div class="inner">
+        <ul class="nav_main_second_level">
+           <li onmouseover="showtrustMenu('trustmenu0');" onclick="showtrustMenu('trustmenu0');"><a id="trust_menu0_btn" style="cursor: default;">認識信託</a></li>
+           <li onmouseover="showtrustMenu('trustmenu1');" onclick="showtrustMenu('trustmenu1');"><a id="trust_menu1_btn" style="cursor: default;">信託業務介紹</a></li>
+           <li onmouseover="showtrustMenu('trustmenu2');" onclick="showtrustMenu('trustmenu2');"><a id="trust_menu2_btn" style="cursor: default;">商品/優惠</a></li>
+           <li onmouseover="showtrustMenu('trustmenu3');" onclick="showtrustMenu('trustmenu3');"><a id="trust_menu3_btn" style="cursor: default;">服務專區</a></li>
+           <li onmouseover="showtrustMenu('trustmenu4');" onclick="showtrustMenu('trustmenu4');"><a id="trust_menu4_btn" style="cursor: default;">關於元大信託</a></li>
+           <li onmouseover="showtrustMenu('trustmenu5');" onclick="showtrustMenu('trustmenu5');"><a id="trust_menu5_btn" href="/bank/trustservice/elderlyresource/list.do" style="cursor: default;">高齡資源服務</a></li>
+<!--            <li onmouseover="showtrustMenu('trustmenu6');" onclick="showtrustMenu('trustmenu6');"><a id="trust_menu6_btn" style="cursor: default;">我的信託</a></li> -->
+         </ul>
+        
+        <div class="nav_trust1_third_level nav_main_third_level" style="display: none" id="trustmenu0">
+           <div class="nav_main_third_level_block_all">
+            <div class="nav_main_third_level_block">               
+               <ul>
+                <li><a href="/bank/trustservice/know/list1.do">認識信託</a></li>
+<!--                 <li><a href="#">信託案例</a></li>                                 -->
+              </ul>
+             </div>
+            </div>	
+        </div>
+        
+        <div class="nav_trust2_third_level nav_main_third_level" style="display: none" id="trustmenu1">
+           <div class="nav_main_third_level_block_all">
+            <div class="nav_main_third_level_block">
+               <h4 class="nav_main_third_level_block_title">信託規劃</h4>               
+               <ul>
+                <li><a href="/bank/trustservice/introduce/list.do?listType=5">金錢信託</a></li>
+                <li><a href="/bank/trustservice/introduce/list.do?listType=5">有價證券信託</a></li>
+                <li><a href="/bank/trustservice/introduce/list.do?listType=5">安養信託</a></li>
+                <li><a href="/bank/trustservice/introduce/list.do?listType=5">身心障礙者信託</a></li>
+                <li><a href="/bank/trustservice/introduce/list.do?listType=5">保險金信託</a></li>                
+                <li><a href="/bank/trustservice/introduce/list.do?listType=5">特定金錢信託投資國內外有價證券</a></li>                
+              </ul>
+             </div>
+             <div class="nav_main_third_level_block">
+               <h4 class="nav_main_third_level_block_title">不動產信託</h4>
+               <ul>
+                <li><a href="/bank/trustservice/introduce/list.do?listType=1">不動產信託</a></li>
+                <li><a href="/bank/trustservice/introduce/list.do?listType=1">不動產開發信託</a></li>
+                <li><a href="/bank/trustservice/introduce/list.do?listType=1">不動產買賣價金信託</a></li>            
+              </ul>
+             </div>
+             <div class="nav_main_third_level_block">
+               <h4 class="nav_main_third_level_block_title">法人信託</h4>
+               <ul>
+                <li><a href="/bank/trustservice/introduce/list.do?listType=2">員工福利信託</a></li>
+                <li><a href="/bank/trustservice/introduce/list.do?listType=2">禮券預收款信託</a></li>
+                <li><a href="/bank/trustservice/introduce/list.do?listType=2">公益信託</a></li>            
+              </ul>
+             </div>
+             <div class="nav_main_third_level_block">
+               <h4 class="nav_main_third_level_block_title">保管及簽證業務</h4>
+               <ul>
+                <li><a href="/bank/trustservice/introduce/list.do?listType=3">保管業務</a></li>
+                <li><a href="/bank/trustservice/introduce/list.do?listType=3">有價證券簽證</a></li>                            
+              </ul>
+             </div>
+             <div class="nav_main_third_level_block">
+               <h4 class="nav_main_third_level_block_title">其他附屬業務</h4>
+               <ul>
+                <li><a href="/bank/trustservice/introduce/list.do?listType=4">臺灣存託憑證業務</a></li>
+               </ul>
+             </div>  
+            </div>
+<!--        <aside class="nav_main_third_level_links_block"> 
+
+
+
+	          	<a href="/bank/trustservice/search/antai/list.do" class="figure_with_side_name">
+	            <div class="icon_item"><img src="/bank/resources/front/images/btn_shortcut_intRate-normal.png"></div>
+	            <div class="icon_item_hide"><img src="/bank/resources/front/images/btn_shortcut_intRate-hover.png"></div>
+	            <span>信託資料查詢</span> 
+	            </a> 
+
+
+
+	            
+
+
+
+
+
+
+
+             </aside> -->	
+        </div>
+        
+        <div class="nav_trust3_third_level nav_main_third_level" style="display: none" id="trustmenu2">
+           <div class="nav_main_third_level_block_all">
+            <div class="nav_main_third_level_block">               
+               <ul>
+                <li><a class="site" href="/bank/trustservice/activityTrust/list.do">優惠商品快訊</a></li>
+<!--                 <li><a href="#">攜手合作企業</a></li>                                 -->
+              </ul>
+             </div>
+            </div>	
+        </div>        
+        
+        <div class="nav_trust4_third_level nav_main_third_level" style="display: none" id="trustmenu3">
+           <div class="nav_main_third_level_block_all">
+            <div class="nav_main_third_level_block">               
+               <ul>
+                <li><a href="/bank/trustservice/search/antai/list.do">信託資料查詢</a></li>
+                <li><a href="/bank/trustservice/serving/faqList.do?unit_id=16">常見問題</a></li>
+                <li><a href="/bank/trustservice/serving/contactUs.do">聯絡我們</a></li>
+                <li><a href="/bank/trustservice/serving/trustApply/list.do">信託需求</a></li>
+                <li><a href="/bank/trustservice/serving/downloadServing/list.do">表單下載</a></li>
+                <li><a href="/bank/trustservice/serving/trustAnnouncement/list.do">信託公告</a></li>
+                <li><a href="/bank/invest/trust/apply/list.do">線上申請</a></li>
+              </ul>
+             </div>
+            </div>	
+        </div>
+        
+        <div class="nav_trust5_third_level nav_main_third_level" style="display: none" id="trustmenu4">
+           <div class="nav_main_third_level_block_all">
+            <div class="nav_main_third_level_block">               
+               <ul>
+                <li><a href="/bank/trustservice/aboutTrust/index.do">元大信託優勢</a></li>
+                <li><a href="/bank/trustservice/aboutTrust/latestNews/list.do">最新消息</a></li>
+              </ul>
+             </div>
+            </div>	
+        </div>
+        
+        <div class="nav_trust6_third_level nav_main_third_level" style="display: none" id="trustmenu5">
+           <div class="nav_main_third_level_block_all">
+            <div class="nav_main_third_level_block">               
+               <ul>
+                <li><a href="https://1966.gov.tw/LTC/mp-207.html">衛福部長照平台</a></li>
+                <li><a href="https://dementiafriendly.hpa.gov.tw/">衛福部失智友善資源整合平台</a></li>
+                <li><a href="https://www.trust.org.tw/sinopac/risk-assessment/">信託公會高齡風險評估試算表</a></li>                                
+              </ul>
+             </div>
+            </div>	
+        </div>
+        
+        
+</div>
+</div>
+    
+    
+    
+    
+    
+    <div class="ha-waypoint"  data-animate-down="ha-header-scroll" data-animate-up="ha-header-normal"></div>
+    <div class="header_tools"> <a class="header_tools_world" href="/bank/en/En.do" target="_self"></a> <a class="header_tools_search" href="/bank/siteMap/list.do"></a> </div>
+  </header>
+  
+  
+  <input type="hidden" name="appRcmdShow" id="appRcmdShow" value="1" />
+  <div class="appRcmd m_block" >
+    <a class="appRcmd_close" href="#" onclick="appRcmd_close()"></a>
+    <div class="appRcmdBox">
+      <div class="icon"><img src="/bank/resources/front/images/img_apprcmd_logo.png"></div>
+      <div class="appRcmdInner">
+        <h6>元大行動銀行</h6>
+        <div class="stars"><span></span><span></span><span></span><span></span><span></span></div>
+      </div>
+      <a class="appRcmd_link" href="#" onclick="appRcmd_link()">安裝</a>
+    </div>
+  </div>
+  
+  
+  <div class="m_header m_block">
+    <div class="menu-btn opemenu"><a href="#menu"></a></div>
+    <a href="/bank/index.do" class="logo_company"></a>
+    <div class="header_tools_locate header_customer_service"><a href="https://ics.yuantabank.com.tw/?chatwebId=20221011105530297&traceTag=WEB" target="_blank"></a></div>
+    <div class="header_tools_locate" style="width: 65px;"><a href="https://ebank.yuantabank.com.tw/nib/" target="_blank">登入</a></div>
+  </div>
+  
+  <div id="contentPage">
+  
+  
+  
+    
+
+
+
+
+
+
+
+
+
+
+
+
+	
+		
+  		<div class="bn_inpage" style="background-image:url(https://www.yuantabank.com.tw/bankwebIMG/img/IMG_6bc113d8e30000009e8d9054fc6c8a3c.png)"></div>
+  	
+ 
+	
+ 
+	
+ 
+	
+ 
+	
+ 
+	
+ 
+	
+ 
+	
+ 
+	
+ 
+ 
+    
+    <div class="main_block">
+    
+
+
+
+
+
+
+
+
+
+
+<ul class="side_menu">
+      <li ><a href="#"><span></span>信用卡產品</a>
+        <ul class="sub_menu">
+          <li class="noSub"><a class="on" href="/bank/creditCard/creditCard/list.do">所有卡片</a></li>
+          <li class="noSub"><a  href="/bank/creditCard/creditCard/list.do?creditcard_type=1">熱門卡</a></li>
+          <li class="noSub"><a  href="/bank/creditCard/creditCard/list.do?creditcard_type=2">頂級卡</a></li>
+          <li class="noSub"><a  href="/bank/creditCard/creditCard/list.do?creditcard_type=3">銀行卡</a></li>
+          <li class="noSub"><a  href="/bank/creditCard/creditCard/list.do?creditcard_type=4">聯名/認同卡</a></li>
+        </ul>
+      </li>
+      <li ><a href="#"><span></span>卡友權益</a>
+        <ul class="sub_menu">
+          <li class="noSub"><a  href="/bank/creditCard/right/list.do?right_id=%E5%9C%8B%E5%A4%96%E6%97%85%E9%81%8A">國外旅遊</a></li>
+          <li class="noSub"><a  href="/bank/creditCard/right/list.do?right_id=%E4%BA%A4%E9%80%9A%E9%A1%9E%E6%AC%8A%E7%9B%8A">交通類權益</a></li>
+          <li class="noSub"><a  href="/bank/creditCard/right/list.do?right_id=%E6%9C%8D%E5%8B%99%E8%88%87%E6%A2%9D%E6%AC%BE">服務與條款</a></li>
+          <li class="noSub"><a  href="/bank/creditCard/right/list.do?right_id=%E5%85%B6%E4%BB%96%E6%AC%8A%E7%9B%8A">其他權益</a></li>
+	  <li class="noSub"><a  href="/bank/creditCard/right/list.do?right_id=%E9%BB%9E%E6%95%B8%E5%B0%88%E5%8D%80">點數專區</a></li>
+	      <li class="noSub"><a  href="/bank/creditCard/right/list.do?right_id=%E9%91%BD%E9%87%91%E6%9C%83%E5%93%A1">鑽金會員</a></li>
+        </ul>
+      </li>
+      <li class="open"><a href="#"><span></span>活動專區</a>
+        <ul class="sub_menu">
+          <!-- <li class="noSub"><a href="https://www.yuantabank.com.tw/bank/event/exchangeGift/index.do" target="_blank">刷卡消費兌換活動</a></li> -->
+          <li class="noSub"><a class="on" href="/bank/creditCard/promotionActivity/list.do">優惠活動</a></li>
+          <li class="noSub"><a  href="/bank/creditCard/promotionPartnerStore/list.do">優惠商店</a></li>
+          <li class="noSub"><a  href="/bank/creditCard/installmentPartnerStore/list.do">分期特店</a></li>
+          <li class="noSub"><a  href="/bank/creditCard/promotionBonus/list.do">紅利折抵特店</a></li>
+          <li class="noSub"><a  href="/bank/creditCard/promotionBonusExchange/list.do">紅利兌換服務</a></li>
+        </ul>
+      </li>
+      <li ><a href="#"><span></span>信用卡理財</a>
+        <ul class="sub_menu">
+          <li class="noSub"><a href="https://www.yuantabank.com.tw/bankwebIMG/event/Bank_Act2015/Card20150720/index_1.html" target="_blank">自動分期</a></li>
+          <li class="noSub"><a href="https://www.yuantabank.com.tw/bankwebIMG/event/Bank_Act2015/Card20150720/index_2.html" target="_blank">單筆分期</a></li>
+          <li class="noSub"><a href="https://www.yuantabank.com.tw/bankwebIMG/event/Bank_Act2015/Card20150720/index_3.html" target="_blank">帳單分期</a></li>
+          <li class="noSub"><a href="https://www.yuantabank.com.tw/bankwebIMG/event/Bank_Act2018/EDM20180731/Cash.html" target="_blank">預借現金</a></li>
+          <li class="noSub"><a href="https://www.yuantabank.com.tw/bankwebIMG/event/Bank_Act2018/EDM20180731/ruyiCash.html" target="_blank">如意金</a></li>
+        </ul>
+      </li>
+      <li ><a href="#"><span></span>信用卡服務</a>
+        <ul class="sub_menu">
+          
+          <li class="noSub"><a href="https://ebank.yuantabank.com.tw/ecntr/tx/creditcardfeeSetting?method=login" target="_blank">信用卡款自動扣繳設定及變更</a></li>
+          <li class="noSub"><a  href="/bank/creditCard/creditCardInstruction/list.do">信用卡須知</a></li>
+          <li class="noSub"><a  href="/bank/creditCard/faq/list.do">常見問題</a></li>
+          <li class="noSub"><a href="/bank/download/list.do?download_type=1&unit_id=1">表單下載</a></li>
+          <li class="noSub"><a  href="/bank/creditCard/payment/list.do">繳費專區</a></li>
+          <li class="noSub"><a  href="/bank/creditCard/creditCardForeignerApply/list.do">外籍人士辦卡友善專區 How to Apply</a></li>
+          <li class="noSub"><a  href="/bank/creditCard/einvoice/list.do">電子發票載具服務</a></li>
+        </ul>
+      </li>
+    </ul>
+    <div class="main_box"> 
+       
+       <ul class="breadcrumb">
+        <li><a href="/bank/index.do">個人金融</a></li>
+        <li><a href="/bank/creditCard/index.do">信用卡</a></li>
+        <li><a href="/bank/creditCard/promotionActivity/list.do?data_type=1">優惠專區</a></li>
+        <li>優惠活動</li>
+      </ul>
+       
+       <div class="inner_box">
+        <h5 class="tit"><span>優惠活動</span></h5>
+        
+        <div class="event_info">
+        
+           <div class="pic">
+           	<img src="https://www.yuantabank.com.tw/bankwebIMG/img/IMG_6b7ed49cb80000001b34da30c50f2ab1.png"/>
+           </div>
+        
+           <h6>綁定 Apple Pay 筆筆20%回饋，最高享200元刷卡金</h6>
+           <ul>
+            <li>
+               <div class="tit">活動類別：</div>
+               	
+					熱門
+					,
+				
+					專屬
+					
+				
+            </li>
+            <li>
+               <div class="tit">活動時間：</div>
+               2026/08/18~2026/12/31</li>
+            <li>
+               <div class="tit">指定卡別：</div>
+               Visa、MasterCard</li>
+            <li>
+               <div class="tit">活動內容：</div>
+              <p><span style="font-size: 12pt;">活動期間內持元大銀行發行之<strong><span style="color: #333399;">Visa / MasterCard</span></strong>信用卡綁定<strong> Apple Pay</strong> ，並於指定登錄期限內完成<strong><a href="https://www.yuantabank.com.tw/bank/creditCard/productActivityMember/list.do"><span style="color: #333399;">官網登錄</span></a></strong>，每筆一般消費之交易可享<span style="color: #ff0000;"><strong>20%</strong></span>刷卡金回饋，每戶活動期間回饋上限<span style="color: #ff0000;"><strong>200元</strong></span>刷卡金。<br /></span><br /><span style="font-size: 12pt;">*登錄期間：2026/8/18 14:00~2026/12/31 23:59止<br /></span><span style="font-size: 12pt;">*活動限量<span style="color: #333399;"><strong>40,000</strong></span>名，贈完即止。</span></p>
+<p><span style="font-size: 12pt;">*本活動不限信用卡新/舊戶、正/附卡，每戶（<strong>正、附卡併計</strong>）活動期間回饋上限200元刷卡金。</span></p>
+<p><span style="color: #333399; font-size: 12pt;">*<strong>此活動不適用於Visa卡號前六碼為402750(舊卡已停發)之信用卡及463212之簽帳金融卡</strong></span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 12pt;"><u>注意事項：<br /></u></span><span style="font-size: 16px;">1. 活動期間為2026/8/18&ndash;2026/12/31，參加人於本活動期間以元大銀行發行之任一Visa/Mastercard信用卡首次綁定Apple Pay，並於指定登錄期限內完成官網登錄，每筆一般消費之交易可享20%刷卡金回饋，正附卡交易合併計算，每戶活動期間回饋上限200元刷卡金。<br /></span><span style="font-size: 16px;">2. 活動不適用之Visa卡號前六碼為402750(舊卡已停發)及463212(簽帳金融卡)。<br /></span><span style="font-size: 16px;">3. 本活動回饋名額以達成活動條件之先後順序計算。持卡人須於2026/12/31 23:59前至活動登錄專區完成登錄，活動限量40,000名，額滿即止，登錄完成時間及名額之計算依本行系統接收完成登錄紀錄為準。若未於登錄截止時間內完成登錄（包括但不限於任何因電腦、網路、電話、技術問題等事由）或資料輸入錯誤者（最終登錄資料以元大銀行系統留存紀錄為準），即視為自動放棄參加活動資格，恕無法補登錄或要求延期，亦不得額外要求以其他方式獲得回饋或主張任何權益。<br /></span><span style="font-size: 16px;">4. 消費認列邏輯：以交易日為計算基準且須於活動期間內完成之一般消費；如為分期交易以其原始交易日期為計算基準，各期分期入帳不予計算；紅利折抵交易係以折抵後金額計算。不列入計算之刷卡消費項目請參元大銀行官網之一般消費定義。<br /></span><span style="font-size: 16px;">5. 刷卡金預計於2027年2月底前統一回饋至正卡持卡人信用卡帳單，將自動折抵當期帳單之一般消費金額，未折抵完之刷卡金，將會於次期繼續抵扣，恕不得要求轉讓、提領或兌現；回饋之刷卡金倘未於2028/3/31前全額折抵完畢，將於次月信用卡帳單以負項回收未抵用之餘額，持卡人不得要求元大銀行以任何方式補貼、發還、折現或延長刷卡金使用期限，亦不得要求元大銀行轉為現金或以溢繳款等名義退回或變更回饋內容。持卡人於回饋刷卡金入帳後始辦理退貨退款、取消分期者，元大銀行得不經通知逕行取消持卡人回饋資格，並於次期帳單扣回已回饋之刷卡金。<br /></span><span style="font-size: 16px;">6. 本活動係以登錄成功且同時符合活動條件之成功交易為回饋依據，若於回饋時經檢核不符合回饋資格，或持卡人（含正卡持卡人）持有之符合本活動之「元大信用卡」非有效卡、或有遲繳、已遭停用、申請停用、停卡、凍結、掛失不補發、到期不續卡、因簽帳爭議而暫停付款或因其他原因以致須退還消費款項、已解除綁定Apple Pay、或其他違反元大銀行信用卡約定條款及本活動注意事項之情形時，即喪失參與本活動之資格。元大銀行有權檢視是否涉嫌人為操作、違反元大銀行信用卡約定條款、詐欺、以任何其他不正當的方式進行交易，且元大銀行保有取消贈禮資格之權利，持卡人並同意元大銀行得逕行以持卡人所有之信用卡收取相當於元大銀行已回饋之贈禮等額之金額。<br /></span><span style="font-size: 16px;">7. 元大銀行保留變更、修改或終止本活動及審核持卡人參加本活動資格之權利。<br /></span><span style="font-size: 16px;">8. 本注意事項及其他未盡事宜，悉依元大銀行官網公告內容、元大銀行信用卡約定條款及相關規定辦理。持卡人於參加本活動之同時，即同意接受本活動辦法及注意事項之相關規範。</span></p></li>
+          </ul>
+         </div>
+        
+        
+        	<div class="btnArea"> <a href="https://www.yuantabank.com.tw/bankwebIMG/event/Bank_Act2026/Apple0818/index.html" target="_blank">前往活動頁</a> </div>
+        
+      </div>
+     </div>
+    <div class="bt_warnings"><img src="/bank/resources/front/images/bn_warnings.png" class="warn_web"/><img src="/bank/resources/front/images/bn_warnings_m.png" class="warn_phone"/></div>
+  </div>
+
+  </div>
+  
+  <footer>
+    <div class="corporation_all">
+      <div class="inner">
+        <ul class="corporation_ul">
+          <li class="corporation_title"><span class="hide_icon">+</span>集團成員</li>
+          <li class="corporation_item"><a href="https://www.yuanta.com/" target="_blank">元大金控</a></li>
+          <li class="corporation_item"><a href="https://www.yuanta.com.tw/eyuanta/" target="_blank">元大證券</a></li>
+          <li class="corporation_item"><a href="https://www.yuantalife.com.tw/" target="_blank">元大人壽</a></li>
+          <li class="corporation_item"><a href="https://www.yuantafunds.com" target="_blank">元大投信</a></li>
+          <li class="corporation_item"><a href="https://www.yuantafutures.com.tw" target="_blank">元大期貨</a></li>
+          <li class="corporation_item"><a href="https://www.yuanta-consulting.com.tw/" target="_blank">元大投顧</a></li>
+          <li class="corporation_item"><a href="https://www.yuantafinance.com.tw" target="_blank">元大證金</a></li>
+          <li class="corporation_item"><a href="https://www.yuanta.com/VentureCapital/" target="_blank">元大創投</a></li>
+          <li class="corporation_item"><a href="https://www.yuanta.com/AssetManagement/" target="_blank">元大國際資產</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer clearfix">
+      <div class="inner">
+        <div class="footer_link" style="line-height:25px;"> <a href="/bank/privacy/statement.do">隱私權保護聲明</a> | <a href="/bank/privacy/customerData.do">客戶資料保密措施</a> | <a href="/bank/bulletin/propaganda/list.do">宣導連結</a> | <a href="/bank/siteMap/list.do">網站導覽</a> | <a href="https://accessibility.yuantabank.com.tw/aib/aibanc.jsp" target="_blank">無障礙官網</a></div>
+        <div class="copyright" style="line-height:14px;" id="footer_address"> 地址：106台北市大安區仁愛路三段157號   電子信箱：service@yuanta.com 客服專線：0800-688-168
+        <p >防詐諮詢專線(02)2182-6165&emsp; 營業人：元大商業銀行股份有限公司&emsp;<br class="copyright_br">營利事業統一編號：86517315 </p>
+        </div>
+      	<div class="copyright" id="cdic_small"><img src="/bank/resources/front/images/cfp.png" height="48" style="float: left; position: relative; left: 90px;" alt=""/><a href="https://www.cdic.gov.tw/main_ch/chinese.html" target="_blank" style=" width:48px; height:48px;  background:url(/bank/resources/front/images/cdic_logo.jpg)  14px 0 no-repeat; background-size:48px 48px; vertical-align:middle; padding-left: 90px; color:#030303; display: inline-block; float: inline-end;"></a></div>
+      </div>
+    </div>
+    <div id="cdic_big" style="position:absolute; bottom: 0px; right: 0px;"><img src="/bank/resources/front/images/cfp.png" height="48" style="float: inline-start;" alt=""/><a href="https://www.cdic.gov.tw/main_ch/chinese.html" target="_blank" style=" width:48px; height:48px;  background:url(/bank/resources/front/images/cdic_logo.jpg)  4px 0 no-repeat; background-size:48px 48px; vertical-align:middle; padding-left: 8px; padding-bottom: 2px; color:#030303; display: inline-block; float: inline-end;"></a></div>
+  </footer>
+</div>
+
+<nav id="menu">
+  <ul>
+    <li><a href="/bank/index.do">個人金融</a>
+      <ul>
+        <li><a href="/bank/saveExchange/index.do">存款  / 外匯</a>
+          <ul>
+            <li><a href="#">新臺幣存款業務</a>
+           		<ul>
+		            <li><a href="/bank/saveExchange/twDeposit/list1.do">支票存款</a></li>
+	                <li><a href="/bank/saveExchange/twDeposit/list2.do">活期(儲蓄)存款</a></li>
+	                <li><a href="/bank/saveExchange/twDeposit/list7.do">利優活儲存款</a></li>
+	                <li><a href="/bank/saveExchange/twDeposit/list3.do">綜合存款</a></li>
+	                <li><a href="/bank/saveExchange/twDeposit/list4.do">薪資轉帳存款</a></li>
+	                <li><a href="/bank/saveExchange/twDeposit/list5.do">定期(儲蓄)存款</a></li>
+		            <li><a href="/bank/saveExchange/twDeposit/list6.do">可轉讓定存單</a></li>
+		            <li><a href="/bank/saveExchange/twDeposit/rulaiDonate.do">如來宗捐款查詢</a></li>
+          		</ul>
+            </li>
+            <li><a href="#">外幣存匯業務</a>
+            	<ul>
+	                <li><a href="/bank/saveExchange/foreignDeposit/list1.do">外匯存款</a></li>
+	                <li><a href="/bank/saveExchange/foreignDeposit/list2.do">外幣現鈔/旅支</a></li>
+	                <li><a href="/bank/saveExchange/foreignDeposit/list3.do">匯兌業務</a></li>
+	                <li><a href="/bank/saveExchange/foreignDeposit/list4.do">人民幣業務專區</a></li>
+	              
+              	</ul>
+            </li>
+            <li><a href="#">富樂會員2.0</a>
+            	<ul>
+	                <li><a href="/bank/saveExchange/richHappyGroup/list1.do?getShowId=Tab1">富樂頂級會員</a></li>
+	                <li><a href="/bank/saveExchange/richHappyGroup/list1.do?getShowId=Tab2">富樂高級會員</a></li>
+	                <li><a href="/bank/saveExchange/richHappyGroup/list1.do?getShowId=Tab3">富樂二級會員</a></li>
+	                <li><a href="/bank/saveExchange/richHappyGroup/list1.do?getShowId=Tab4">富樂一級會員</a></li>
+	              	<li><a href="/bank/saveExchange/richHappyGroup/list1.do?getShowId=Tab5">富樂會員</a></li>
+              	</ul>
+            </li>
+            <li><a href="#">金融卡業務</a>
+            	<ul>
+	                <li><a href="/bank/saveExchange/debit/list.do">晶片金融卡</a></li>
+	                <li><a href="/bank/saveExchange/visa/list.do">Visa金融卡</a></li>
+	                <li><a href="https://www.yuantabank.com.tw/event/Bank_Act2016/Act20160527/action_home.html" target="_blank">行動金融卡</a></li>
+              	</ul>
+            </li>
+            <li><a href="#">活動優惠及公告</a>
+            	<ul>
+	                <li><a href="/bank/activity/list.do?unit_id=5">活動優惠</a></li>
+	                <li><a href="/bank/bulletin/bulletin/list.do?unit_id=5">公告訊息</a></li>
+	                <li><a href="/bank/charges/list.do?product_type=4">收費標準</a></li>
+	                <li><a href="/bank/download/list.do?download_type=2&unit_id=4">定型化契約</a></li>
+              	</ul>
+            </li>
+            <li><a href="#">宣導事項</a>
+            	<ul>
+	                <li><a href="/bank/saveExchange/propaganda/list1.do">新臺幣業務宣導事項</a></li>
+	                <li><a href="/bank/saveExchange/propaganda/list2.do">外匯業務宣導事項</a></li>
+	                <li><a href="https://www.aml-ba.org.tw" target="_blank">「防制洗錢全民總動員」專區</a></li>
+              	</ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="/bank/creditCard/index.do">信用卡</a>
+          <ul>
+            <li><a href="#">信用卡產品</a>
+            	<ul>
+	                <li><a href="/bank/creditCard/creditCard/list.do">所有卡片</a></li>
+	                <li><a href="/bank/creditCard/creditCard/list.do?creditcard_type=1">熱門卡</a></li>
+	                <li><a href="/bank/creditCard/creditCard/list.do?creditcard_type=2">頂級卡</a></li>
+	                <li><a href="/bank/creditCard/creditCard/list.do?creditcard_type=3">銀行卡</a></li>
+	                <li><a href="/bank/creditCard/creditCard/list.do?creditcard_type=4">聯名/認同卡</a></li>
+              	</ul>
+            </li>
+            <li><a href="#">卡友權益</a>
+            	<ul>
+	                <li><a href="/bank/creditCard/right/list.do?right_id=%E5%9C%8B%E5%A4%96%E6%97%85%E9%81%8A">國外旅遊</a></li>
+	                <li><a href="/bank/creditCard/right/list.do?right_id=%E4%BA%A4%E9%80%9A%E9%A1%9E%E6%AC%8A%E7%9B%8A">交通類權益</a></li>
+	                <li><a href="/bank/creditCard/right/list.do?right_id=%E6%9C%8D%E5%8B%99%E8%88%87%E6%A2%9D%E6%AC%BE">服務與條款</a></li>
+	                <li><a href="/bank/creditCard/right/list.do?right_id=%E5%85%B6%E4%BB%96%E6%AC%8A%E7%9B%8A">其他權益</a></li>
+			<li><a href="/bank/creditCard/right/list.do?right_id=%E9%BB%9E%E6%95%B8%E5%B0%88%E5%8D%80">點數專區</a></li>
+					<li><a href="/bank/creditCard/right/list.do?right_id=%E9%91%BD%E9%87%91%E6%9C%83%E5%93%A1">鑽金會員</a></li>
+              	</ul>
+            </li>
+            <li><a href="#">優惠專區</a>
+            	<ul>
+	                <li><a href="/bank/creditCard/promotionActivity/list.do">優惠活動</a></li>
+	                <li><a href="/bank/creditCard/promotionPartnerStore/list.do">優惠商店</a></li>
+	                <li><a href="/bank/creditCard/installmentPartnerStore/list.do">分期特店</a></li>
+	                <li><a href="/bank/creditCard/promotionBonus/list.do">紅利折抵特店</a></li>
+	                <li><a href="/bank/creditCard/promotionBonusExchange/list.do">紅利兌換服務</a></li>
+              	</ul>
+            </li>
+            <li><a href="#">信用卡理財</a>
+            	<ul>
+	                <li><a href="https://www.yuantabank.com.tw/bankwebIMG/event/Bank_Act2015/Card20150720/index_1.html" target="_blank">自動分期</a></li>
+	                <li><a href="https://www.yuantabank.com.tw/bankwebIMG/event/Bank_Act2015/Card20150720/index_2.html" target="_blank">單筆分期</a></li>
+	                <li><a href="https://www.yuantabank.com.tw/bankwebIMG/event/Bank_Act2015/Card20150720/index_3.html" target="_blank">帳單分期</a></li>
+	                <li><a href="https://www.yuantabank.com.tw/bankwebIMG/event/Bank_Act2018/EDM20180731/Cash.html" target="_blank">預借現金</a></li>
+	                <li><a href="https://www.yuantabank.com.tw/bankwebIMG/event/Bank_Act2018/EDM20180731/ruyiCash.html" target="_blank">如意金</a></li>
+			<li><a href="https://www.yuantabank.com.tw/bank/bulletin/bulletin/page.do?id=27565b0994000000beb6" target="_blank">長期循環轉換方案</a></li>			
+              	</ul>
+            </li>
+            <li><a href="#">信用卡服務</a>
+            	<ul>
+            		<li><a href="https://ebank.yuantabank.com.tw/ib/ibanc_b.jsp?CreditcardQuickLogin" target="_blank">信用卡查詢</a></li>
+          			<li><a href="https://ebank.yuantabank.com.tw/b3/tx/authenticate?func=creditcardfeeSetting" target="_blank">信用卡款自動扣繳設定及變更</a></li>
+	                <li><a href="/bank/creditCard/creditCardInstruction/list.do">信用卡須知</a></li>
+	                <li><a href="/bank/creditCard/faq/list.do?unit_id=6">常見問題</a></li>
+	                <li><a href="/bank/download/list.do?download_type=1&unit_id=1">表單下載</a></li>
+	                <li><a href="/bank/creditCard/payment/list.do">繳費專區</a></li>
+									<li><a href="/bank/creditCard/creditCardInstruction/list.do">外籍人士辦卡友善專區 How to Apply</a></li>
+					<li><a href="/bank/creditCard/einvoice/list.do">電子發票載具服務</a></li>				
+              	</ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="/bank/loan/index.do">個人貸款</a>
+        	<ul>
+                <li><a href="#">房屋貸款</a>
+                	<ul>
+		                <li><a href="/bank/loan/house/list01.do">指數型房貸</a></li>
+		                <li><a href="/bank/loan/house/list02.do">政府優惠房貸</a></li>
+		                <li><a href="/bank/loan/house/list03.do">理財型房貸</a></li>
+              		</ul>
+                </li>
+                <li><a href="#">信用貸款</a>
+                	<ul>
+                		<li><a href="/bank/loan/credit/list.do">一般信貸</a></li>
+                		<li><a href="https://www.yuantabank.com.tw/bankwebIMG/event/Bank_Act2022/loanapply/index.html" target="_blank">線上申請</a></li>
+                		<li><a href="https://www.yuantabank.com.tw/bank/service/customer/additionalDocument/list.do?source=1&product_type=4" target="_blank">線上補件</a></li>
+                		<li><a href="https://ebank.yuantabank.com.tw/ecntr/tx/PLoanOnlineComfirm" target="_blank">線上簽約</a></li>
+                		<li><a href="https://ebank.yuantabank.com.tw/ecntr/pages/creditloanquery_ProgressInquiry.jsp" target="_blank">進度查詢</a></li>
+          				<li><a href="https://www.yuantabank.com.tw/bankwebIMG/event/Bank_Act2025/Card20250420_1/index.html" target="_blank">元證客戶專屬信貸(元氣循環貸)</a></li>
+          				<li><a href="https://www.yuantabank.com.tw/bankwebIMG/event/Bank_Act2025/Card20250210_1/index.html" target="_blank">青春元夢貸(青年信貸)</a></li>                		
+              		</ul>
+                </li>
+                <li><a href="#">汽車貸款</a>
+                	<ul>
+                		<li><a href="/bank/loan/car/list.do">原車融資</a></li>
+                		<li><a href="/bank/loan/car/list2.do">購車貸款</a></li>
+              		</ul>
+                </li>
+                <li><a href="#">理財貸款</a>
+                	<ul>
+                		<li><a href="/bank/loan/stock/list.do">股票貸款</a></li>
+                		<li><a href="/bank/loan/pledge/list.do">自行質借</a></li>
+              		</ul>
+                </li>
+		        <li><a href="/bank/calc/loan6.do">房貸額度試算</a></li>
+                <li><a href="#">查詢服務</a>
+                	<ul>
+		                <li><a href="/bank/loan/query/product.do">產品推薦</a></li>
+		                <li><a href="https://ebank.yuantabank.com.tw/ib/" target="_blank">帳務查詢</a></li>
+		                <li><a href="/bank/exchangeRate/twRate.do">指標利率</a></li>
+		                <li><a href="/bank/charges/list.do?product_type=2">收費標準</a></li>
+		                <li><a href="/bank/careDebt/list.do">理債關懷服務</a></li>
+		                <li><a href="/bank/debtcollPolicy/list.do">債務催收政策</a></li>
+		                <li><a href="/bank/download/list.do?unit_id=2">下載專區</a></li>
+              		</ul>
+                </li>
+            </ul>
+        </li>
+        <li><a href="/bank/wealthManagement/index.do">財富管理</a>
+        	<ul>
+                <li><a href="#">個人理財</a>
+                	<ul>
+                		<li><a href="/bank/wealthManagement/richMember/member.do?memberType=5">富鑽理財</a></li>
+		                <li><a href="/bank/wealthManagement/richMember/member.do?memberType=1">富盛理財</a></li>
+		                <li><a href="/bank/wealthManagement/richMember/member.do?memberType=2">富貴理財</a></li>
+		                <li><a href="/bank/wealthManagement/richMember/member.do?memberType=3">富傳理財</a></li>
+		                <li><a href="/bank/wealthManagement/richMember/member.do?memberType=4">富昇理財</a></li>                
+              		</ul>
+                </li>
+                <li><a href="#">家庭理財</a>
+                	<ul>
+		                <li><a href="/bank/wealthManagement/familyMember/member.do?memberType=1">富盛家庭理財</a></li>
+		                <li><a href="/bank/wealthManagement/familyMember/member.do?memberType=2">富貴家庭理財</a></li>
+              		</ul>
+                </li>
+                <li><a href="#">財管2.0高資產服務</a>
+                	<ul>
+		                <li><a href="/bank/wealthManagement/highAsset/list.do?tagType=1">業務說明</a></li>
+		                <li><a href="/bank/wealthManagement/highAsset/list.do?tagType=2">客戶資格</a></li>
+		                <li><a href="/bank/wealthManagement/highAsset/list.do?tagType=3">頂級尊榮禮遇</a></li>
+              		</ul>
+                </li>
+                <li><a href="#">鑽金智富卡</a>
+                	<ul>
+		                <li><a href="https://www.yuantabank.com.tw/bank/creditCard/creditCard/in.do?id=473f33ce38000002e0e9">鑽石會籍</a></li>
+		                <li><a href="https://www.yuantabank.com.tw/bank/creditCard/creditCard/in.do?id=473f33ce38000002e0e9">翡翠會籍</a></li>
+		                <li><a href="https://www.yuantabank.com.tw/bank/creditCard/creditCard/in.do?id=470c0634cd0000059efa">鈦金會籍</a></li>
+		                <li><a href="https://www.yuantabank.com.tw/bank/creditCard/creditCard/in.do?id=470c0634cd0000059efa">菁英會籍</a></li>
+              		</ul>
+                </li>
+                <li><a href="#">活動專區</a>
+                	<ul>
+                		<li><a href="/bank/activity/list.do?unit_id=9">活動訊息</a></li>
+              		</ul>
+                </li>
+                <li><a href="/bank/wealthManagement/note.do">注意事項</a></li>
+                <li><a href="/bank/wealthManagement/wmActivitySignIn/list.do">專人與我連絡</a></li>
+                <li><a href="#">客戶推薦活動</a>
+                	<ul>
+                		<li><a href="/bank/wealthManagement/financeRecommend/recommendList.do">推薦人登錄</a></li>
+                		<li><a href="/bank/wealthManagement/financeRecommend/recommendedList.do">被推薦人登錄</a></li>
+              		</ul>
+                </li>
+             </ul>
+        </li>
+        <li><a href="/bank/invest/index.do">投資理財</a>
+        	<ul>
+                <li><a href="#">基金</a>
+                	<ul>
+		                <li onclick="goMoneyDJ();"><a href="#">元大理財網</a></li>
+		                <li><a href="https://ebank.yuantabank.com.tw/nib/ibanc_b.jsp?fundbuy" target="_blank">基金交易</a></li>
+		                <li><a href="/bank/invest/fund/list.do">基金通路報酬揭露</a></li>
+		                <li><a href="https://www.yuantabank.com.tw/bankwebIMG/dwn/DWN_5c1052a54100000097e195a883a26065.pdf" target="_blank">收費標準及基金交易需知</a></li>
+              		</ul>
+                </li>
+                <li><a href="#">ETF/股票/債券</a>
+                	<ul>
+		                <li><a href="/bank/invest/etf/list1.do">境外ETF</a></li>
+		                <li><a href="/bank/invest/etf/list2.do">境外股票</a></li>
+		                <li><a href="/bank/invest/etf/list3.do">境外特別股</a></li>
+		                <li><a href="/bank/invest/etf/list4.do">海外債券</a></li>
+		                <li><a href="/bank/invest/etf/list5.do">境外結構型商品</a></li>
+              		</ul>
+                </li>              
+                <li><a href="#">黃金存摺</a>
+                	<ul>
+		                <li><a href="/bank/invest/passbook/list1.do">認識黃金存摺</a></li>
+		                <li><a href="/bank/invest/passbook/list2.do">黃金存摺開戶</a></li>
+		                <li><a href="/bank/invest/passbook/list3.do">黃金存摺買賣</a></li>
+		                <li><a href="/bank/exchangeRate/goldenPassbook/current.do">黃金牌價</a></li>
+		                <li><a href="/bank/invest/passbook/list4.do">黃金存摺問與答</a></li>
+		                <li><a href="/bank/calc/golden.do">黃金存摺買進試算</a></li>
+              		</ul>
+                </li>
+            </ul>
+        </li>
+        <li><a href="/bank/insurance/index.do">保險</a>
+        	<ul>
+                <li><a href="#">利率變動型保險</a>
+                	<ul>
+		                <li><a href="/bank/insurance/insuranceProduct/list.do?insurance_type=%E5%88%A9%E7%8E%87%E8%AE%8A%E5%8B%95%E5%9E%8B%E4%BF%9D%E9%9A%AA&subproject=%E5%88%A9%E7%8E%87%E8%AE%8A%E5%8B%95%E5%9E%8B%E5%A3%BD%E9%9A%AA">利率變動型壽險</a></li>
+		                <li><a href="/bank/insurance/insuranceProduct/list.do?insurance_type=%E5%88%A9%E7%8E%87%E8%AE%8A%E5%8B%95%E5%9E%8B%E4%BF%9D%E9%9A%AA&subproject=%E5%88%A9%E7%8E%87%E8%AE%8A%E5%8B%95%E5%9E%8B%E5%B9%B4%E9%87%91">利率變動型年金</a></li>
+		                <li><a href="/bank/insurance/insuranceProduct/list.do?insurance_type=%E5%88%A9%E7%8E%87%E8%AE%8A%E5%8B%95%E5%9E%8B%E4%BF%9D%E9%9A%AA&subproject=%E5%85%B6%E5%AE%83%E7%B2%BE%E9%81%B8">其它精選</a></li>
+		                
+              		</ul>
+                </li>
+                <li><a href="#">投資型保險</a>
+                	<ul>
+		                <li><a href="/bank/insurance/insuranceProduct/list.do?insurance_type=%E6%8A%95%E8%B3%87%E5%9E%8B%E4%BF%9D%E9%9A%AA&subproject=%E6%8A%95%E8%B3%87%E5%9E%8B%E4%BF%9D%E9%9A%AA">投資型壽險</a></li>
+						<li><a href="/bank/insurance/insuranceProduct/list.do?insurance_type=%E6%8A%95%E8%B3%87%E5%9E%8B%E4%BF%9D%E9%9A%AA&subproject=%E6%8A%95%E8%B3%87%E5%9E%8B%E5%B9%B4%E9%87%91">投資型年金</a></li>
+              		</ul>
+                </li>
+                <li><a href="#">保障型保險</a>
+                	<ul>
+		                <li><a href="/bank/insurance/insuranceProduct/list.do?insurance_type=%E4%BF%9D%E9%9A%9C%E5%9E%8B%E4%BF%9D%E9%9A%AA&subproject=%E5%AE%9A%E6%9C%9F/%E7%B5%82%E8%BA%AB%E5%A3%BD%E9%9A%AA">定期/終身壽險</a></li>
+		                <li><a href="/bank/insurance/insuranceProduct/list.do?insurance_type=%E4%BF%9D%E9%9A%9C%E5%9E%8B%E4%BF%9D%E9%9A%AA&subproject=%E5%81%A5%E5%BA%B7%2F%E6%84%8F%E5%A4%96%E9%9A%AA">健康/意外險</a></li>
+		                <li><a href="/bank/insurance/insuranceProduct/list.do?insurance_type=%E4%BF%9D%E9%9A%9C%E5%9E%8B%E4%BF%9D%E9%9A%AA&subproject=%E9%87%8D%E5%A4%A7%2F%E7%89%B9%E5%AE%9A%E5%82%B7%E7%97%85%E9%9A%AA">重大/特定傷病險</a></li>		                
+		                <li><a href="/bank/insurance/insuranceProduct/list.do?insurance_type=%E4%BF%9D%E9%9A%9C%E5%9E%8B%E4%BF%9D%E9%9A%AA&subproject=%E7%99%8C%E7%97%87%E4%BF%9D%E9%9A%AA">防癌保險</a></li>
+		                <li><a href="/bank/insurance/insuranceProduct/list.do?insurance_type=%E4%BF%9D%E9%9A%9C%E5%9E%8B%E4%BF%9D%E9%9A%AA&subproject=%E6%88%BF%E8%B2%B8%E5%A3%BD%E9%9A%AA">房貸壽險</a></li>		                
+              		</ul>
+                </li>
+                <li><a href="#">財產保險</a>
+                	<ul>
+		                <li><a href="/bank/insurance/propertyInsurance/list.do?insurance_type=%E8%B2%A1%E7%94%A2%E4%BF%9D%E9%9A%AA&subproject=%E5%80%8B%E4%BA%BA%E5%81%A5%E5%BA%B7%E5%82%B7%E5%AE%B3%E4%BF%9D%E9%9A%AA">個人健康傷害保險</a></li>
+		                <li><a href="/bank/insurance/propertyInsurance/list.do?insurance_type=%E8%B2%A1%E7%94%A2%E4%BF%9D%E9%9A%AA&subproject=%E6%97%85%E8%A1%8C%E5%B9%B3%E5%AE%89%E4%BF%9D%E9%9A%AA">旅行平安保險</a></li>
+		                <li><a href="/bank/insurance/propertyInsurance/list.do?insurance_type=%E8%B2%A1%E7%94%A2%E4%BF%9D%E9%9A%AA&subproject=%E6%B1%BD%E6%A9%9F%E8%BB%8A%E4%BF%9D%E9%9A%AA">汽機車保險</a></li>
+		                <li><a href="/bank/insurance/propertyInsurance/list.do?insurance_type=%E8%B2%A1%E7%94%A2%E4%BF%9D%E9%9A%AA&subproject=%E4%BD%8F%E5%AE%85%E7%81%AB%E7%81%BD%E4%BF%9D%E9%9A%AA">住宅火災保險</a></li>
+              		</ul>
+                </li>
+                <li><a href="#">小額終老/微型保險</a>
+                    <ul>
+                        <li><a href="/bank/insurance/insuranceProduct/list.do?insurance_type=%E5%B0%8F%E9%A1%8D%E7%B5%82%E8%80%81%2F%E5%BE%AE%E5%9E%8B%E4%BF%9D%E9%9A%AA&subproject=%E5%B0%8F%E9%A1%8D%E7%B5%82%E8%80%81%E4%BF%9D%E9%9A%AA">小額終老保險</a></li>
+                        <li><a href="/bank/insurance/insuranceProduct/list.do?insurance_type=%E5%B0%8F%E9%A1%8D%E7%B5%82%E8%80%81%2F%E5%BE%AE%E5%9E%8B%E4%BF%9D%E9%9A%AA&subproject=%E5%BE%AE%E5%9E%8B%E4%BF%9D%E9%9A%AA">微型保險</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">分紅保險</a>
+                    <ul>
+                        <li><a href="/bank/insurance/insuranceProduct/list.do?insurance_type=%E5%88%86%E7%B4%85%E4%BF%9D%E9%9A%AA&subproject=%E5%8F%B0%E5%B9%A3">台幣</a></li>
+                        <li><a href="/bank/insurance/insuranceProduct/list.do?insurance_type=%E5%88%86%E7%B4%85%E4%BF%9D%E9%9A%AA&subproject=%E5%A4%96%E5%B9%A3">外幣</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li onclick="goMoneyDJ();"><a href="#">元大理財網</a></li>
+		<li><a href="https://www.yuantabank.com.tw/bankwebIMG/event/Bank_Act2023/GlobalBond/index.html" target="blank">全球債券網</a></li>
+      </ul>
+    </li>
+    <li><a href="/bank/corp/index.do">法人金融</a>
+      <ul>
+        <li><a href="#">授信業務</a>
+        	<ul>
+                <li><a href="/bank/corp/credit/list1.do">政策性融資</a></li>
+                <li><a href="/bank/corp/credit/list2.do">保證承兌業務</a></li>
+                <li><a href="/bank/corp/credit/list3.do">應收帳款融資</a></li>
+                <li><a href="/bank/corp/credit/list4.do">一般企業貸款</a></li>
+                <li><a href="/bank/corp/credit/list5.do">中小企業專案貸款</a></li>
+                <li><a href="/bank/corp/cash/list.do">現金管理</a></li>
+                <li><a href="/bank/corp/voucher/list.do">禮券履約保證查詢</a></li>
+            </ul>
+        </li>
+        <li><a href="#">外匯進出口業務</a>
+        	<ul>
+                <li><a href="/bank/corp/foreign/list1.do">進口業務</a></li>
+                <li><a href="/bank/corp/foreign/list2.do">出口業務</a></li>
+                <li><a href="/bank/saveExchange/foreignDeposit/list4.do">人民幣業務專區</a></li>
+                <li><a href="/bank/corp/foreign/list3.do">外匯業務訊息公告</a></li>
+            </ul>
+        </li>
+        <li><a href="#">國際金融業務分行</a>
+        	<ul>
+                <li><a href="/bank/corp/international/list1.do">OBU業務簡介</a></li>
+                <li><a href="/bank/corp/international/list2.do">OBU服務項目</a></li>
+                <li><a href="/bank/corp/international/list3.do">OBU存款開戶文件</a></li>
+            </ul>
+        </li>
+        <li><a href="#">利匯率商品</a>
+        	<ul>
+                <li><a href="/bank/corp/exchange/list1.do">匯率商品</a></li>
+                <li><a href="/bank/corp/exchange/list2.do">利率商品</a></li>
+                <li><a href="/bank/exchangeRate/hostccy.do">行情查詢</a></li>
+                <li><a href="/bank/corp/exchange/list4.do">結構型商品</a></li>
+            </ul>
+        </li>
+        <li><a href="#">票債券</a>
+	        <ul>
+	        	    <li><a href="/bank/corp/ticket/list1.do">票券</a></li>
+                <li><a href="/bank/corp/ticket/list2.do">公債</a></li>
+                <li><a href="/bank/corp/ticket/list3.do">票債券附條件</a></li>
+                <li><a href="/bank/corp/ticket/list4.do">中央登錄債券清算銀行</a></li>
+                <li><a href="/bank/corp/ticket/list5.do">代理清算業務</a></li>
+                <li><a href="/bank/corp/ticket/list6.do">短期票券清算交割銀行業務</a></li>
+	        </ul>
+        </li>
+        <li><a href="#">金流服務</a>
+	        <ul>
+	        	<li><a href="/bank/corp/cashflow/list1.do">薪資轉帳禮遇</a></li>
+                <li><a href="/bank/corp/cashflow/list2.do">現金管理服務</a></li>
+                
+	        </ul>
+        </li>
+        <li ><a href="#"><span></span>中小企業匯率避險服務專區</a>
+	        <ul>
+           		<li ><a href="/bank/corp/exchange/list1.do">匯率避險業務介紹</a></li>
+           		<li ><a href="https://www.yuantabank.com.tw/bankwebIMG/dwn/DWN_63717e4d0e000000afdc5b5d492d2270.pdf">匯率避險服務窗口</a></li>
+           		<li ><a href="https://www.yuantabank.com.tw/bankwebIMG/dwn/DWN_6479ddabe6000000924ee83afef133a6.pdf">匯率避險專屬優惠方案</a></li>
+           		<li ><a href="https://www.smeg.org.tw/basic/?node=10399">信保基金「匯率避險保證措施」</a></li>
+	        </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="/bank/digi/index.do">數位金融</a>
+    	<ul>
+    		<li><a href="https://www.yuantabank.com.tw/bankwebIMG/event/Bank_Act2025/MobileBankingAPP/index.html">行動銀行</a></li>
+    		<li><a href="https://ebank.yuantabank.com.tw/nib/" target="_blank">個人網銀</a></li>           	
+           	<li><a href="https://www.yuantabank.com.tw/bankwebIMG/event/Bank_Act2022/B2B/index.html">鑽金商務網</a>
+	      		<ul>
+	          		<li><a href="https://www.yuantabank.com.tw/bankwebIMG/event/Bank_Act2022/B2B/index.html">產品介紹</a></li>
+	          		<li><a href="/bank/digi/cib/list1.do">下載專區</a></li>
+	          		<li><a href="/bank/digi/cib/list2.do">常見問題</a></li>
+	          		<li><a href="https://b2bank.yuantabank.com.tw/B2C/" target="_blank">立即登入</a></li>
+				</ul>
+           	</li>
+           	<li><a id="digi_menu3_btn" href="https://www.yuantabank.com.tw/bankwebIMG/event/Bank_Act2025/MobileCorporateBankingAPP/index.html">商務行動銀行</a></li>
+           	<li><a href="https://superatm.tw/jwss/jsp/atm/index.jsp" target="_blank">SuperATM</a></li>
+           	<li><a href="/bank/digi/phone/list.do">電話銀行</a></li>
+           	<li><a href="/bank/digi/campus/list.do">校園服務</a></li>
+           	<li><a href="/bank/digi/epay/list1.do">跨境支付寶</a>
+	      		<ul>
+	          		<li><a href="/bank/digi/epay/list1.do">業務說明</a></li>
+	          		<li><a href="https://www.yuantabank.com.tw/bankwebIMG/event/Bank_Act2021/yuantaepay/index.html" target="_blank">元大收款通</a></li>
+	          		<li><a href="https://www.yuantabank.com.tw/bankwebIMG/event/Bank_Act2021/cashoutbound/index.html" target="_blank">淘寶天貓購物支付</a></li>
+				</ul>
+           	<li><a href="https://ebank.yuantabank.com.tw/ecntr/" target="_blank">元大e櫃檯</a></li>
+        </ul>
+    </li>
+     <li><a href="/bank/ESG/index.do">永續ESG</a>
+      <ul>
+        <li><a href="/bank/environmentalSustainability/socialParticipation/list19.do">社會參與</a>
+        	<ul>
+                <li><a href="/bank/environmentalSustainability/socialParticipation/list19.do">目標與策略</a></li>
+                <li><a href="/bank/environmentalSustainability/socialParticipation/list24.do">文化發展及支持運動產業</a></li>
+                <li><a href="/bank/environmentalSustainability/socialParticipation/list21.do">公益關懷</a></li>
+                <li><a href="/bank/environmentalSustainability/socialParticipation/list22.do">助學育才</a></li>
+                <li><a href="/bank/environmentalSustainability/socialParticipation/list23.do">社區共好</a></li>                
+            </ul>
+        </li>
+        <li><a href="/bank/environmentalSustainability/happinessWorkplace/list13.do">幸福職場</a>
+        	<ul>
+                <li><a href="/bank/environmentalSustainability/happinessWorkplace/list13.do">人才聘僱與留任</a></li>
+                <li><a href="/bank/environmentalSustainability/happinessWorkplace/list14.do">績效考核與職涯發展</a></li>
+                <li><a href="/bank/environmentalSustainability/happinessWorkplace/list15.do">人才發展與訓練</a></li>
+                <li><a href="/bank/environmentalSustainability/happinessWorkplace/list16.do">員工健康與安全</a></li>
+                <li><a href="/bank/environmentalSustainability/happinessWorkplace/list17.do">人權政策</a></li>                
+            </ul>
+        </li>
+        <li><a href="/bank/environmentalSustainability/eco/list8.do">環境永續</a>
+            <ul>
+                <li><a href="/bank/environmentalSustainability/eco/list12.do">自然生態保護</a></li>
+                <li><a href="/bank/environmentalSustainability/eco/list8.do">節能減碳專區</a></li>
+                <li><a href="https://www.yuantabank.com.tw/bankwebIMG/event/Bank_Act2022/greenacc/index.html">鑽金碳吉帳戶</a></li>
+                <li><a href="/bank/creditCard/creditCard/list.do">零碳信用卡</a></li>
+            </ul>         	
+        </li>
+        <li><a href="/bank/environmentalSustainability/list3.do">普惠金融</a>
+        	<ul>
+                <li><a href="/bank/environmentalSustainability/list3.do">普惠金融</a></li>
+                <li><a href="https://www.yuantabank.com.tw/bankwebIMG/event/Bank_Act2022/smartinvest/index.html">小額投資</a></li>
+                <li><a href="/bank/insurance/insuranceProduct/list.do?insurance_type=%E4%BF%9D%E9%9A%9C%E5%9E%8B%E4%BF%9D%E9%9A%AA&subproject=%E5%B0%8F%E9%A1%8D%E7%B5%82%E8%80%81%E4%BF%9D%E9%9A%AA">小額終老保險</a></li> 
+		<li><a href="https://www.yuantabank.com.tw/bankwebIMG/event/Bank_Act2022/ElderCareTrust/index.html">安養信託</a></li>
+                <li><a href="/bank/environmentalSustainability/list2.do">金融商品創新與服務</a></li>
+            </ul>
+        </li>
+        <li><a href="/bank/environmentalSustainability/list1.do">永續金融</a>
+	        <ul>
+	        	<li><a href="/bank/environmentalSustainability/list1.do">責任授信</a></li>
+		<li><a href="/bank/environmentalSustainability/list5.do">責任投資</a></li>
+                <li><a href="/bank/companyGovernance/equatorPrinciples/list.do">赤道原則</a></li>
+                <li><a href="https://www.yuantabank.com.tw/bankwebIMG/event/Bank_Act2020/ACCLink/">綠色行動支付</a></li>
+                <li><a href="https://ebank.yuantabank.com.tw/ecntr/">綠色線上申辦</a></li>
+	        </ul>
+        </li>
+        <li><a href="https://accessibility.yuantabank.com.tw/aib/aibanc.jsp">友善服務</a>
+	        <ul>
+	        	<li><a href="https://accessibility.yuantabank.com.tw/aib/aibanc.jsp">友善服務措施</a></li>
+                <li><a href="/bank/bulletin/bulletin/page.do?id=4d23d6cbd80000044053">防制詐騙宣導</a></li>
+                <li><a href="/bank/bulletin/customerProtection/list.do">消費者保護</a></li>                
+	        </ul>
+        </li>
+        <li><a href="/bank/companyGovernance/principlesFairly/list1.do">公平待客</a>
+	        <ul>
+	        	<li><a href="/bank/companyGovernance/principlesFairly/list1.do">公平待客專區</a></li>                
+	        </ul>
+        </li>
+        <li><a href="#">永續發展</a>
+	        <ul>
+	        	<li><a href="/bank/environmentalSustainability/list.do">發展願景</a></li>
+                <li><a href="/bank/environmentalSustainability/list10.do">運作模式</a></li>
+                <li><a href="/bank/companyGovernance/list1.do">公司治理</a></li>
+                <li><a href="https://www.yuanta.com/TW/ESG/ESG-Report">永續報告書</a></li>
+                <li><a href="/bank/tcfd/list.do">TCFD</a></li>                
+	        </ul>
+        </li>        
+        <li><a href="/bank/contribution/list1.do">金融大回饋</a>
+	        <ul>
+	        	<li><a href="/bank/contribution/list1.do">金融大回饋專區</a></li>                
+	        </ul>
+        </li>   
+      </ul>
+    </li>
+    <li><a href="/bank/trustservice/index.do">信託服務</a>
+      <ul>
+        <li><a href="#">認識信託</a>
+        	<ul>
+                <li><a href="/bank/trustservice/know/list1.do">認識信託</a></li>
+
+            </ul>
+        </li>
+        <li><a href="#">信託業務介紹</a>
+        	<ul>
+                <li><a href="#">信託規劃</a>
+            <ul>
+                <li><a href="/bank/trustservice/introduce/list.do?listType=5">金錢信託</a></li>
+                <li><a href="/bank/trustservice/introduce/list.do?listType=5">有價證券信託</a></li>
+                <li><a href="/bank/trustservice/introduce/list.do?listType=5">安養信託</a></li>
+                <li><a href="/bank/trustservice/introduce/list.do?listType=5">身伈障礙者信託</a></li>
+                <li><a href="/bank/trustservice/introduce/list.do?listType=5">保險金信託</a></li>
+                <li><a href="/bank/trustservice/introduce/list.do?listType=5">公職人員財產信託</a></li>
+            </ul>
+                </li>       
+                <li><a href="#">不動產信託</a>
+            <ul>
+                <li><a href="/bank/trustservice/introduce/list.do?listType=1">不動產信託</a></li>
+                <li><a href="/bank/trustservice/introduce/list.do?listType=1">不動產開發信託</a></li>
+                <li><a href="/bank/trustservice/introduce/list.do?listType=1">不動產買賣價金信託</a></li>
+            </ul>    
+                </li>
+                <li><a href="#">法人信託</a>
+            <ul>
+                <li><a href="/bank/trustservice/introduce/list.do?listType=2">員工持股儲蓄信託</a></li>
+                <li><a href="/bank/trustservice/introduce/list.do?listType=2">禮券預收款信託</a></li>
+                <li><a href="/bank/trustservice/introduce/list.do?listType=2">公益信託</a></li>
+            </ul>    
+                </li>
+                <li><a href="#">保管及簽證業務</a>
+            <ul>
+                <li><a href="/bank/trustservice/introduce/list.do?listType=3">保管業務</a></li>
+                <li><a href="/bank/trustservice/introduce/list.do?listType=3">有價證簽證</a></li>                
+            </ul>    
+                </li>
+                <li><a href="#">其他附屬業務</a>
+            <ul>    
+                <li><a href="/bank/trustservice/introduce/list.do?listType=4">臺灣存託憑證業務</a></li>
+            </ul>                    
+			</li>                   
+            </ul>
+        </li>
+        <li><a href="/bank/trustservice/activityTrust/list.do">商品/優惠</a></li>
+        <li><a href="#">服務專區</a>
+        	<ul>
+        		<li><a href="/bank/trustservice/search/antai/list.do">信託資料查詢</a></li>
+                <li><a href="/bank/trustservice/serving/faqList.do?unit_id=16">常見問題</a></li>
+                <li><a href="/bank/trustservice/serving/contactUs.do">聯絡我們</a></li>
+                <li><a href="/bank/trustservice/serving/trustApply/list.do">信託需求</a></li>
+                <li><a href="/bank/trustservice/serving/downloadServing/list.do">表單下載</a></li>
+                <li><a href="/bank/trustservice/serving/trustAnnouncement/list.do">信託公告</a></li>
+                <li><a href="/bank/invest/trust/apply/list.do">線上申請</a></li>
+            </ul>
+        </li>
+        <li><a href="#">關於元大信託</a>
+	        <ul>
+	        	<li><a href="/bank/trustservice/aboutTrust/index.do">元大信託優勢</a></li>
+	        	<li><a href="/bank/trustservice/aboutTrust/latestNews/list.do">最新消息</a></li>                
+	        </ul>
+        </li>
+        <li><a href="#">高齡資源服務</a>
+	        <ul>
+	        	<li><a href="https://1966.gov.tw/LTC/mp-207.html">衛福部長照平台</a></li>
+                <li><a href="https://dementiafriendly.hpa.gov.tw/">衛福部失智友善資源整合平台</a></li>
+                <li><a href="https://www.trust.org.tw/tw/special/view/200">信託公會高齡風險評估試算表</a></li>                
+	        </ul>
+        </li>
+
+      </ul>
+    </li>
+    <li><a href="/bank/companyProfile/list.do">關於元大</a>
+    	<ul>
+    		<li><a href="/bank/companyProfile/list.do"><span></span>公司簡介與經營理念</a></li>
+    		<li><a href="#"><span></span>組織架構</a>
+	      		<ul>
+	          		<li><a href="/bank/resources/front/pdf/YTorganization.pdf?v=3" target="_blank">組織圖</a></li>
+	          	</ul>
+	        </li>
+      		<li><a href="#"><span></span>永續發展專區</a>
+	      		<ul>
+	          		<li><a href="/bank/environmentalSustainability/list.do">發展願景</a></li>
+	          		<li><a href="/bank/environmentalSustainability/list10.do">運作模式及策略藍圖</a></li>
+								<li><a href="/bank/environmentalSustainability/list6.do">經營團隊</a></li>
+	          		<li><a href="#"><span></span>公司治理</a>
+						<ul>
+							<li><a href="/bank/companyGovernance/list1.do">公司治理實務守則</a></li>
+							<li><a href="/bank/companyGovernance/list2.do">公司治理相關規章</a></li>
+							<li><a href="/bank/companyGovernance/firmStatus/list.do">公司治理運作情形</a></li>
+							<li><a href="/bank/companyGovernance/list11.do">永續發展執行情形</a></li>
+							<li><a href="/bank/companyGovernance/list8.do">董事進修情形</a></li>
+							<li><a href="/bank/companyGovernance/list9.do">公司治理主管設置暨進修情形</a></li>
+							<li><a href="/bank/companyGovernance/list4.do">誠信經營規章暨落實情形</a></li>
+							<li><a href="/bank/companyGovernance/list5.do">機構投資人盡職治理</a></li>
+							<li><a href="/bank/companyGovernance/list6.do">利害關係人專區</a></li>	
+							
+							<li><a href="/bank/companyGovernance/list12.do">防制洗錢及打擊資恐</a></li>
+							<li><a href="/bank/companyGovernance/reportMechanism/list.do">檢舉制度</a></li>
+							<li><a href="/bank/companyGovernance/audit/list.do">內部稽核制度</a></li>
+							<li><a href="/bank/companyGovernance/list7.do">智慧財產權</a></li>
+							<li><a href="/bank/companyGovernance/list10.do">資訊安全</a></li>
+						</ul>
+					</li>
+	          		<li><a href="#"><span></span>公平待客</a>
+						<ul>
+							<li><a href="/bank/companyGovernance/principlesFairly/list1.do">經營理念</a></li>
+							<li><a href="/bank/companyGovernance/principlesFairly/list2.do">公平待客原則</a></li>
+							<li><a href="/bank/companyGovernance/principlesFairly/list3.do">推動組織</a></li>
+							<li><a href="/bank/companyGovernance/principlesFairly/list4.do">相關規章</a></li>
+							<li><a href="/bank/companyGovernance/principlesFairly/list6.do">客戶權益與申訴機制</a></li>
+							<li><a href="/bank/service/customer/suggest/list.do">客戶服務網</a></li>
+							<li><a href="/bank/companyGovernance/principlesFairly/list5.do">服務措施</a></li>	
+						</ul>
+					</li>
+	          		<li><a href="https://www.yuanta.com/TW/ESG/ESG-Report" target="_blank">永續報告書</a></li>
+	          		<li><a href="#"><span></span>永續金融</a>
+						<ul>
+							<li><a href="/bank/environmentalSustainability/list1.do">責任授信</a></li>
+							<li><a href="/bank/companyGovernance/equatorPrinciples/list.do">赤道原則</a></li>
+							<li><a href="/bank/environmentalSustainability/list5.do">責任投資</a></li>
+							<li style="display:none;"><a href="/bank/environmentalSustainability/list11.do">攜手企業永續經營</a></li>
+						</ul>
+					</li>
+				<li><a href="/bank/tcfd/list.do">氣候相關財務揭露(TCFD)</a></li>
+	          		<li><a href="/bank/environmentalSustainability/list2.do">金融商品創新與服務</a></li>
+	          		<li><a href="/bank/environmentalSustainability/list3.do">普惠金融</a></li>
+	          		<li><a href="#"><span></span>幸福職場</a>
+						<ul>
+							<li><a href="/bank/environmentalSustainability/happinessWorkplace/list13.do">人才聘僱與留任</a></li>
+							<li><a href="/bank/environmentalSustainability/happinessWorkplace/list14.do">績效考核與職涯發展</a></li>
+							<li><a href="/bank/environmentalSustainability/happinessWorkplace/list15.do">人才發展與訓練</a></li>
+							<li><a href="/bank/environmentalSustainability/happinessWorkplace/list16.do">員工健康與安全</a></li>
+							<li><a href="/bank/environmentalSustainability/happinessWorkplace/list17.do">人權政策</a></li>
+							<li><a href="/bank/environmentalSustainability/happinessWorkplace/list18.do">員工溝通</a></li>
+						</ul>
+					</li>
+	          		<li><a href="#"><span></span>環境永續</a>
+						<ul>
+							<li><a href="https://www.yuanta.com/TW/ESG/Environmental-Sustainability" target="_blank">永續發展</a></li>
+							<li><a href="/bank/environmentalSustainability/eco/list12.do">自然生態保護</a></li>
+							<li><a href="/bank/environmentalSustainability/eco/list8.do">節能減碳專區</a></li>
+						</ul>
+					</li>
+	          		<li><a href="#"><span></span>社會參與</a>
+						<ul>
+							<li><a href="/bank/environmentalSustainability/socialParticipation/list19.do">目標與策略</a></li>
+							<li><a href="/bank/environmentalSustainability/socialParticipation/list24.do">文化發展及支持運動產業</a></li>
+							<li><a href="/bank/environmentalSustainability/socialParticipation/list21.do">公益關懷</a></li>
+							<li><a href="/bank/environmentalSustainability/socialParticipation/list22.do">助學育才</a></li>
+							<li><a href="/bank/environmentalSustainability/socialParticipation/list23.do">社區共好</a></li>
+						</ul>
+					</li>
+	          		<li><a href="/bank/environmentalSustainability/list4.do">對政黨、利害關係人及公益團體所為之捐贈情形</a></li>	
+	          		<li><a href="/bank/contribution/list1.do">金融大回饋專區</a></li>
+	        	</ul>
+      		</li>
+      		<li><a href="/bank/creditRating/list.do"><span></span>信用評等</a></li>
+      		<li><a href="https://www.yuanta.com/tw/IR01/IR0114/" target="_blank"><span></span>獎項榮耀</a></li>
+      		<li><a href="https://www.yuanta.com/tw/IR05/IR0502/" target="_blank"><span></span>新聞中心</a></li>
+      		<li><a href="/bank/conferencHall/list.do"><span></span>國際會議廳簡介</a></li>
+    	</ul>
+    </li>
+    <li><a href="https://www.facebook.com/yuantabank" target="_blank">官方社群</a>
+    	<ul>
+     		<li><a href="https://www.facebook.com/yuantabank" target="_blank">元大銀行鑽金生活Fans</a></li>
+        <li><a href="https://line.me/R/ti/p/%40mwr3999i" target="_blank">元大銀行LINE官方帳號</a></li>
+      	<li><a href="https://www.instagram.com/yuantabank/" target="_blank">元大銀行IG官方帳號</a></li>
+      	<li><a href="https://www.youtube.com/channel/UCs72_Ba4-zxCCaeF7zsoAoA" target="_blank">元大銀行YouTube官方頻道</a></li>
+      	<li><a href="https://t.me/yuantabanktw" target="_blank">元大銀行Telegram官方頻道</a></li>
+    	</ul>
+    </li>
+    <li><a href="/bank/spotMap/list.do">服務據點</a>
+    	<ul>
+    		<li><a href="/bank/spotMap/list.do"><span></span>分行據點</a></li>
+      		<li><a href="/bank/spotMap/list.do?type=1"><span></span>提款機據點</a></li>
+      		<li><a href="/bank/spotMap/list.do?type=2"><span></span>存提款機據點</a></li>
+      		<li><a href="/bank/spotMap/list.do?type=5"><span></span>外幣提款機據點</a></li>
+      		<li><a href="/bank/spotMap/list.do?type=4"><span></span>補摺機據點</a></li>
+      		<li><a href="/bank/spotMap/list.do?type=3"><span></span>保管箱據點</a></li>
+      		<li><a href="/bank/spotMap/oversea/list.do"><span></span>海外分子行據點</a></li>
+		    <li><a href="/bank/spotMap/list.do?type=7"><span></span>雙語分行據點</a></li>
+ 
+    	</ul>
+    </li>
+    <li><a href="/bank/service/customer/suggest/list.do">客服專區</a>
+    	<ul>
+    		<li><a href="#"><span></span>客戶服務</a>
+	      		<ul>
+	          		<li><a href="/bank/service/customer/application/list.do">專人申請</a></li>
+	          		<li><a href="/bank/service/customer/additionalDocument/list.do">資料補件</a></li>
+	          		<li><a href="/bank/service/customer/suggest/list.do">問題建議</a></li>
+	        	</ul>
+      		</li>
+     		<li><a href="/bank/service/voiceService.do"><span></span>語音服務</a></li>
+      		<li><a href="https://ebank.yuantabank.com.tw/b3/index.jsp" target="_blank"><span></span>元大E櫃檯</a></li>
+    	</ul>
+    </li>
+    <li><a href="https://hr.yuanta.com" target="_blank">人力資源</a></li>
+    <li><a href="/bank/exchangeRate/hostccy.do">金融看板</a>
+    	<ul>
+    		<li><a href="/bank/exchangeRate/hostccy.do"><span></span>牌告匯率</a></li>
+      		<li><a href="/bank/exchangeRate/twRate.do"><span></span>新臺幣利率</a></li>
+      		<li><a href="/bank/exchangeRate/foreignCurrency.do"><span></span>外幣存款利率</a></li>
+     		<li><a href="/bank/exchangeRate/projectRate.do"><span></span>專案利率查詢</a></li>
+      		<li><a href="/bank/exchangeRate/ticketDebt.do"><span></span>票債券報價</a></li>
+      		<li><a href="/bank/exchangeRate/bond.do"><span></span>連動債報價</a></li>
+      		<li><a href="/bank/exchangeRate/abroad.do"><span></span>海外債報價</a></li>
+      		<li><a href="/bank/exchangeRate/domestic.do"><span></span>境內結構型商品報價</a></li>
+      		<li><a href="/bank/exchangeRate/structure.do"><span></span>結構型商品(DCI/SI)</a></li>
+      		<li><a href="/bank/exchangeRate/externalDebt.do"><span></span>外幣結構債報價</a></li>
+      		<li><a href="/bank/exchangeRate/goldenPassbook/current.do"><span></span>黃金存摺牌價</a></li>
+    	</ul>
+    </li>
+    <li><a href="/bank/bulletin/latestNews/list.do">訊息總覽</a>
+    	<ul>
+    		<li><a href="/bank/bulletin/latestNews/list.do"><span></span>最新消息</a></li>
+      		<li><a href="/bank/activity/list.do"><span></span>活動優惠</a></li>
+      		<li><a href="/bank/bulletin/bulletin/list.do"><span></span>公告資訊</a></li>
+     		<li><a href="/bank/bulletin/statutoryDisclosure/list.do"><span></span>法定揭露事項</a></li>
+      		<li><a href="/bank/bulletin/propaganda/list.do"><span></span>宣導連結</a></li>
+      		<li><a href="/bank/download/list.do"><span></span>下載專區</a></li>
+      		<li><a href="#"><span></span>我要試算</a>
+	      		<ul>
+	          		<li><a href="/bank/calc/deposit1.do">存款試算</a></li>
+	          		<li><a href="/bank/calc/loan1.do">貸款試算</a></li>
+	          		<li><a href="/bank/calc/golden.do">黃金存摺買進試算</a></li>
+	        	</ul>
+      		</li>
+      		<li><a href="/bank/charges/list.do"><span></span>收費標準</a></li>
+			<li><a href="/bank/bulletin/customerProtection/list.do"><span></span>消費者保護專區</a></li>
+    	</ul>
+    </li>
+    <li><a href="/bank/siteMap/list.do">網站導覽</a></li>
+    <li><a href="/bank/en/En.do">English</a>
+  </ul>
+</nav> 
+
+
+<div class="popup_overlay" id="popup_IEoverlay" style="display:none;"></div>
+<div class="pop" id="popIE" style="display:none;">
+	<div class="close" onclick="popupIE('close')"><a style="cursor: pointer;"></a></div>
+<h6>親愛的客戶 您好</h6>
+<p style="text-align: justify; text-justify:distribute;">為持續提供網路用戶的交易安全及最佳瀏覽體驗，本行將停止支援 Windows XP作業系統與IE9(含)以下瀏覽器、Android 4.0以下版本及TLS 1.0加密通訊協定，以確保網路傳輸安全。屆時若您未進行更新，將出現「Internet Explorer無法顯示網頁」，建議您立即升級您的IE瀏覽器或選用其他瀏覽器:</p>
+	<ul>
+		<li>
+		<ul>
+		<li><a href="https://support.microsoft.com/zh-tw/help/17621/internet-explorer-downloads" target="_blank">【升級Internet Explorer】</a></li>
+		<li><a href="https://www.google.com.tw/chrome/browser/desktop/index.html" target="_blank">【下載 Google Chrome】</a></li>
+		<li><a href="https://www.mozilla.org/zh-TW/firefox/new/" target="_blank">【下載 Firefox】</a></li>
+		</ul>
+		</li>	    
+	</ul>
+</div>
+<div class="pop" id="popIEover" style="display:none;">
+	<div class="close" onclick="popupIE('close')"><a style="cursor: pointer;"></a></div>
+<h6>IE瀏覽器停止支援通知</h6>
+<p style="text-align: justify; text-justify:distribute;">
+	親愛的客戶，您好：<br/>
+　　		因應微軟將於2022/06/15起停止支援IE瀏覽器，元大銀行官方網站將配合同步調整，部分功能可能會有無法正常顯示的情況。為持續提供您最優質的服務，建議您使用其他瀏覽器，如：Microsoft Edge、Chrome、Safari或Firefox等，相關公告詳見官網
+	<a href="https://www.yuantabank.com.tw/bank/bulletin/bulletin/page.do?id=4bfe1ae27c0000018b99">最新消息</a>，謝謝。
+</p>
+</div>
+<script type="text/javascript" src="/bank/resources/front/js/slick.min.js"></script> 
+<script src="/bank/resources/front/js/main.js"></script> 
+ 
+<script src="/bank/resources/front/js/swiper-bundle.min.js"></script>  
+<script src="/bank/resources/front/js/YuantaJsonpConfig.js"></script> 
+<script src="/bank/resources/front/js/yuantaman.js"></script> 
+ 
+<script>
+$(function() {
+	$(window).bind('resize', function(){
+		var pageheight = $(window).height()-$('.footer').outerHeight()- $('.header').outerHeight();
+		$('#contentPage').css("min-height", pageheight-42);
+	}).resize();
+});
+const resourcesPathUrl = '/bank/resources/front/';
+
+/**
+* Scrolls the container to the target position minus the offset
+*
+* @param target    - the destination to scroll to, can be a jQuery object
+*                    jQuery selector, or numeric position
+* @param offset    - the offset in pixels from the target position, e.g.
+*                    pass -80 to scroll to 80 pixels above the target
+* @param speed     - the scroll speed in milliseconds, or one of the
+*                    strings "fast" or "slow". default: 500
+* @param container - a jQuery object or selector for the container to
+*                    be scrolled. default: "html, body"
+*/
+jQuery.scrollTo = function (target, offset, speed, container) {
+
+    if (isNaN(target)) {
+
+        if (!(target instanceof jQuery))
+            target = $(target);
+
+        target = parseInt(target.offset().top);
+    }
+
+    container = container || "html, body";
+    if (!(container instanceof jQuery))
+        container = $(container);
+
+    speed = speed || 500;
+    offset = offset || 0;
+
+    container.animate({
+        scrollTop: target + offset
+    }, speed);
+};
+</script>
+</body>
+</html>

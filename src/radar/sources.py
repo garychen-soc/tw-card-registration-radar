@@ -19,9 +19,13 @@ def open_adapter(bank_id: str) -> Iterator[Adapter]:
     if cls.transport == "browser":
         from .browser import BrowserFetcher
 
-        fetcher = BrowserFetcher(cls.domains, min_host_interval=cls.min_host_interval)
+        fetcher = BrowserFetcher(
+            cls.domains, min_host_interval=cls.min_host_interval, user_agent=cls.user_agent
+        )
     else:
-        fetcher = Fetcher(cls.domains, min_host_interval=cls.min_host_interval)
+        fetcher = Fetcher(
+            cls.domains, min_host_interval=cls.min_host_interval, user_agent=cls.user_agent
+        )
     with fetcher:
         yield cls(fetcher)
 

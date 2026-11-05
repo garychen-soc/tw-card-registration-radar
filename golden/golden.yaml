@@ -1093,21 +1093,25 @@
   bank: yuanta
   url: https://www.yuantabank.com.tw/bank/creditCard/promotionActivity/in.do?id=6a100c82d80000053d3a
   title: 元大悠遊聯名卡自動加值享20%
-  registration: unspecified_time
+  registration: required
   period: [2026-09-01, 2026-12-31]
   subs:
     - name: "1.【自動加值享10%刷卡金回饋】"
-      slots: []
+      slots:
+        - start: null
+          end: "2026-12-31T23:59+08:00"
+          note: "主文只寫「指定時間內」，截止時間在注意事項 2)"
       quotes:
         - "並於指定時間內完成登錄，自動加值享10%刷卡金回饋"
+        - "並於2026年12月31日 23:59前至登錄網址完成登錄（尚未核卡前亦可登錄）"
     - name: "2.【悠遊卡加碼10%刷卡金回饋】"
       registration: not_required
       slots: []
       quotes:
         - "持元大悠遊聯名卡首次自動加值享10%刷卡金回饋"
-  note: "子活動1 寫「於指定時間內完成登錄」但頁面未載指定時間；子活動2 無登錄要求"
-  difficulty: [negative, unspecified_time, mixed_not_required]
-  verified_at: "2026-11-01"
+  note: "子活動1 主文寫「於指定時間內完成登錄」，截止時間藏在注意事項；子活動2 無登錄要求（11-05 更正：原標 unspecified_time 是漏看注意事項）"
+  difficulty: [deadline_in_notes, mixed_not_required]
+  verified_at: "2026-11-05"
 
 - id: yuanta-mastercard-linepay
   bank: yuanta

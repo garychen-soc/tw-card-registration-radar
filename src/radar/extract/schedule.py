@@ -576,6 +576,9 @@ def _finalize(drafts: list[tuple[Draft, str]], ctx: Context, review: list[str]) 
     # 同一開放時刻同時有「只寫開放」與「寫明起訖」兩種來源時，保留較完整的那筆
     bounded = {d.start for d, _ in drafts if d.start and d.end}
     drafts = [(d, q) for d, q in drafts if d.end is not None or d.start not in bounded]
+    # 同理，「只寫截止」與「寫明起訖」截止相同時，截止已含在範圍內
+    closes = {d.end for d, _ in drafts if d.start and d.end}
+    drafts = [(d, q) for d, q in drafts if d.start is not None or d.end not in closes]
     floor = ctx.observed - KEEP_PAST
     low = (ctx.period_start - EARLY_GRACE) if ctx.period_start else None
     seen: set[tuple[datetime | None, datetime | None]] = set()

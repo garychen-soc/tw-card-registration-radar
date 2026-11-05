@@ -17,7 +17,8 @@
 4. 同一份明細被多張卡片指到時，照樣各回一個 Stub；合併由 pipeline 依條款
    內容雜湊處理（標題會保留成 aliases）。
 5. 只用 ``self.get()`` 取網頁 —— 它帶網域白名單、節流與重試；不登入、不解
-   CAPTCHA、不偽造身分。
+   CAPTCHA。預設 UA 帶專案識別字串；只有 ``user_agent`` 類別屬性明確覆寫
+   的擷取器改用一般瀏覽器 UA（逐家經 Gary 核准，理由寫在該模組 docstring）。
 6. 解析不到就留空（``None`` / ``""``），不推測。登錄時點完全不在這層處理。
 """
 
@@ -38,6 +39,12 @@ from ..transport import Fetcher, Response
 Transport = Literal["http", "browser"]
 
 
+BROWSER_USER_AGENT = (
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
+    "(KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36"
+)
+
+
 class Adapter(ABC):
     id: ClassVar[str]
     name: ClassVar[str]
@@ -46,6 +53,7 @@ class Adapter(ABC):
     portal_url: ClassVar[str] = ""
     portal_hint: ClassVar[str] = ""
     transport: ClassVar[Transport] = "http"
+    user_agent: ClassVar[str | None] = None
     min_host_interval: ClassVar[float] = 0.5
 
     def __init__(self, http: Fetcher) -> None:

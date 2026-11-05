@@ -1,12 +1,17 @@
 """元大擷取器。
 
-官方清單頁在本機以專案 UA 存取回 403，沒有官方回應樣本；下列 HTML 是依 v1
-selector 與 Codex 版測試重建的**結構樣本**，只驗證解析與表單分頁邏輯。
+清單頁 HTML 是依 v1 selector 重建的結構樣本（驗證表單分頁邏輯）；明細頁用
+2026-11-05 以瀏覽器 UA 取得的官方回應 ``fixtures/yuanta/detail_applepay.html``。
 """
 
 from __future__ import annotations
 
+from datetime import date
+from pathlib import Path
+
+from radar.banks.base import BROWSER_USER_AGENT
 from radar.banks.yuanta import YuantaAdapter
+from radar.models import Stub
 from radar.transport import Response
 
 PAGE = """<html><body><nav><a href="/bank/creditCard/index.do">信用卡</a></nav>
@@ -44,3 +49,31 @@ def test_discover_follows_form_pages() -> None:
     )
     assert http.forms == [{"pN": "2", "pA": "2", "iA": "3"}]
     assert not adapter.skipped
+
+
+DETAIL = (Path(__file__).parents[1] / "fixtures/yuanta/detail_applepay.html").read_text("utf-8")
+
+
+class DetailHttp:
+    def get(self, url: str, **_: object) -> Response:
+        return Response(url, url, 200, DETAIL, "text/html", "")
+
+
+def test_terms_scoped_to_event_info() -> None:
+    adapter = YuantaAdapter(DetailHttp())  # type: ignore[arg-type]
+    url = "https://www.yuantabank.com.tw/bank/creditCard/promotionActivity/in.do?id=6ae9eccdb90000053f09"
+    terms = adapter.terms(Stub(bank_id="yuanta", key=url, title="x", url=url))
+
+    assert terms.title == "綁定 Apple Pay 筆筆20%回饋，最高享200元刷卡金"
+    assert (terms.period_start, terms.period_end) == (date(2026, 8, 18), date(2026, 12, 31))
+    assert "登錄期間:2026/8/18 14:00~2026/12/31 23:59止" in terms.text
+    for noise in ("個人金融", "IE瀏覽器停止支援", "元大行動銀行"):
+        assert noise not in terms.text
+
+
+def test_browser_user_agent_is_opt_in() -> None:
+    from radar.banks.base import Adapter
+
+    assert YuantaAdapter.user_agent == BROWSER_USER_AGENT
+    assert "TwCardRegistrationRadar" not in BROWSER_USER_AGENT
+    assert Adapter.user_agent is None

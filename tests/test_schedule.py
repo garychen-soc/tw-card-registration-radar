@@ -262,3 +262,14 @@ def test_end_of_month_beats_close_time() -> None:
                       close_time={"hour": 23, "minute": 59}, end_of_month=True))
     result = build(out, ctx(text))
     assert ("11/15 10:00", "11/30 23:59") in stamps(result)
+
+
+def test_deadline_with_same_end_as_range_is_dropped() -> None:
+    window = "*登錄期間:2026/8/18 14:00~2026/12/31 23:59止"
+    deadline = "持卡人須於2026/12/31 23:59前至活動登錄專區完成登錄"
+    out = output(
+        rule(window, "range", start=point(8, 18, 14, 0, 2026), end=point(12, 31, 23, 59, 2026)),
+        rule(deadline, "deadline", end=point(12, 31, 23, 59, 2026)),
+    )
+    result = build(out, ctx(window + "\n" + deadline, start=date(2026, 8, 18)))
+    assert stamps(result) == [("08/18 14:00", "12/31 23:59")]
