@@ -16,6 +16,7 @@ from concurrent.futures import ThreadPoolExecutor
 from datetime import date, datetime, timedelta
 from pathlib import Path
 from typing import Any
+from urllib.parse import urlsplit
 
 import yaml
 
@@ -60,7 +61,13 @@ def _base(url: str) -> str:
     """比對用的網址：去掉片段；華南入口網址只看 urile 參數（前面的 portal 狀態每次不同）。"""
     url = url.split("#", 1)[0].rstrip("/")
     found = re.search(r"urile=([^&]+)", url)
-    return found.group(1) if found else url
+    if found:
+        return found.group(1)
+    # 同一頁常有兩個官方網域（國泰 cathaybk.com.tw／cathay-cube.com.tw）與有無 .html 兩種寫法；
+    # 比對只在同一家銀行內進行，以路徑（含 query）為準
+    parts = urlsplit(url)
+    path = re.sub(r"\.html?$", "", parts.path)
+    return f"{path}?{parts.query}" if parts.query else path
 
 
 def _candidates(entry: dict[str, Any], pool: list[Activity]) -> list[Activity]:
