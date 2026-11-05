@@ -34,7 +34,7 @@
   "portal_hint": "華南銀行網路銀行「信用卡活動登錄」",
   "review": [],
   "content_hash": "a2b8809d2c648086",
-  "observed_at": "2026-11-05T13:25:39+08:00",
+  "observed_at": "2026-11-05T13:32:12+08:00",
   "stale": false
  },
  {
@@ -55,7 +55,7 @@
   "portal_hint": "華南銀行網路銀行「信用卡活動登錄」",
   "review": [],
   "content_hash": "acd3f77d67295922",
-  "observed_at": "2026-11-05T13:25:39+08:00",
+  "observed_at": "2026-11-05T13:32:12+08:00",
   "stale": false
  },
  {
@@ -76,7 +76,7 @@
   "portal_hint": "華南銀行網路銀行「信用卡活動登錄」",
   "review": [],
   "content_hash": "3af4d034420c7af6",
-  "observed_at": "2026-11-05T13:25:39+08:00",
+  "observed_at": "2026-11-05T13:32:12+08:00",
   "stale": false
  },
  {
@@ -114,7 +114,7 @@
   "portal_hint": "華南銀行網路銀行「信用卡活動登錄」",
   "review": [],
   "content_hash": "de2887ebfa0c75e1",
-  "observed_at": "2026-11-05T13:25:39+08:00",
+  "observed_at": "2026-11-05T13:32:12+08:00",
   "stale": false
  },
  {
@@ -196,7 +196,7 @@
   "portal_hint": "華南銀行網路銀行「信用卡活動登錄」",
   "review": [],
   "content_hash": "5dd3ca9c3e9459aa",
-  "observed_at": "2026-11-05T13:25:39+08:00",
+  "observed_at": "2026-11-05T13:32:12+08:00",
   "stale": false
  },
  {
@@ -217,7 +217,7 @@
   "portal_hint": "華南銀行網路銀行「信用卡活動登錄」",
   "review": [],
   "content_hash": "b3b72f4abe012dc6",
-  "observed_at": "2026-11-05T13:25:39+08:00",
+  "observed_at": "2026-11-05T13:32:12+08:00",
   "stale": false
  },
  {
@@ -253,7 +253,7 @@
    "需登錄但官方未寫登錄時點"
   ],
   "content_hash": "d1694bdcecdac024",
-  "observed_at": "2026-11-05T13:25:39+08:00",
+  "observed_at": "2026-11-05T13:32:12+08:00",
   "stale": false
  },
  {
@@ -289,7 +289,7 @@
    "需登錄但官方未寫登錄時點"
   ],
   "content_hash": "51730616947fb9c8",
-  "observed_at": "2026-11-05T13:25:39+08:00",
+  "observed_at": "2026-11-05T13:32:12+08:00",
   "stale": false
  }
 ]
