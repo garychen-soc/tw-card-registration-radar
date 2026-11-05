@@ -25,6 +25,7 @@ WEB = ROOT / "web" / "public"
 SCHEMA_VERSION = 2
 HORIZON = timedelta(days=120)
 LOOKBACK = timedelta(days=2)
+STALE_NOTE = "⚠️ 官方頁本輪讀取失敗，以下為上一輪資料，請以活動頁為準"
 SITE_URL = "https://garychen-soc.github.io/tw-card-registration-radar/"
 
 
@@ -64,7 +65,11 @@ def timeline(activities: list[Activity], generated: datetime) -> list[dict[str, 
                         "stale": activity.stale,
                     }
                 )
-    rows.sort(key=lambda r: (r["start"] or r["end"], r["bank_id"], r["title"]))
+    # 排序鍵含 aid／sub_index：下方去重保留哪一列（＝ICS 的 UID）不能取決於輸入順序，
+    # 否則每輪抓取順序不同就換 UID，訂閱者的事件會被刪掉重建
+    rows.sort(
+        key=lambda r: (r["start"] or r["end"], r["bank_id"], r["title"], r["aid"], r["sub_index"])
+    )
     # 同一銀行同名活動的不同分頁網址（聯邦 ?p=）常給出相同時點：時間軸只留一列
     seen: set[tuple[Any, ...]] = set()
     unique: list[dict[str, Any]] = []
@@ -169,13 +174,16 @@ def ics(rows: list[dict[str, Any]], generated: datetime) -> str:
         "X-PUBLISHED-TTL:PT6H",
     ]
     for row in rows:
-        if not row["start"] or row["precision"] != "minute" or row["stale"]:
+        # stale（本輪來源讀取失敗、沿用上一輪）也照常輸出：UID 不變，訂閱者的事件與提醒
+        # 不會因一時讀取失敗被刪掉又重建；描述第一行標明是舊資料。
+        if not row["start"] or row["precision"] != "minute":
             continue
         title = row["title"] + (f"｜{row['sub']}" if row["sub"] else "")
         description = "\n".join(
             filter(
                 None,
                 [
+                    STALE_NOTE if row["stale"] else "",
                     f"原文：{row['quote']}",
                     row["note"],
                     f"截止：{row['end'][:16].replace('T', ' ')}" if row["end"] else "截止：未公告",
