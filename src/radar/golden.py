@@ -10,6 +10,7 @@
 
 from __future__ import annotations
 
+import json
 import re
 from collections.abc import Callable
 from concurrent.futures import ThreadPoolExecutor
@@ -26,7 +27,9 @@ from .pipeline import DOCS, REGISTRATION_WORDS, STATE, TAIPEI, assemble, group_d
 from .pipeline import previous as previous_state
 
 GOLDEN = Path(__file__).resolve().parents[2] / "golden" / "golden.yaml"
-WINDOW = (date(2026, 11, 1), date(2026, 12, 31))
+# 檢核窗口（golden 涵蓋的兩個月）；每批換新只改 golden/window.json
+_WINDOW = json.loads((GOLDEN.parent / "window.json").read_text(encoding="utf-8"))
+WINDOW = (date.fromisoformat(_WINDOW["start"]), date.fromisoformat(_WINDOW["end"]))
 Key = tuple[str | None, str | None]
 
 

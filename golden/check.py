@@ -9,7 +9,8 @@
   2. id 唯一，且以「<bank>-」開頭；bank 屬於 18 家清單。
   3. registration（頂層與子活動覆寫）屬於 required / not_required / unspecified_time。
   4. 每個時點為 "YYYY-MM-DDTHH:MM+08:00"（或 null），可解析；start <= end；
-     slot 與檢核範圍 2026-11-01 00:00 ~ 2026-12-31 23:59（+08:00）有交集（end=null 視為開放到期）；同一子活動內依時間排序。
+     slot 與檢核範圍（golden/window.json，台北時間整日）有交集（end=null 視為開放到期）；
+     同一子活動內依時間排序。
   5. required 的筆至少有一個需登錄子活動帶時點；not_required / unspecified_time 的子活動不得有時點。
   6. 每個 quote 逐字出現在 <src>/<id>.txt（比對前把連續空白壓成一個空格；
      若仍找不到再試「去掉全部空白」，此情形列為 note 但不算失敗）。
@@ -19,6 +20,7 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
+import json
 import re
 import sys
 from pathlib import Path
@@ -32,12 +34,12 @@ BANKS = {
 REG = {"required", "not_required", "unspecified_time"}
 TS_RE = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}\+08:00$")
 TZ = dt.timezone(dt.timedelta(hours=8))
-RANGE_START = dt.datetime(2026, 11, 1, 0, 0, tzinfo=TZ)
-RANGE_END = dt.datetime(2026, 12, 31, 23, 59, tzinfo=TZ)
-DEFAULT_SRC = Path(
-    "/private/tmp/claude-502/-Users-chenzhiming-Documents-Claude/"
-    "b90211e4-6b90-4ade-9844-7c3a014d6fff/scratchpad/golden_src"
-)
+_HERE = Path(__file__).resolve().parent
+_WINDOW = json.loads((_HERE / "window.json").read_text(encoding="utf-8"))
+RANGE_START = dt.datetime.fromisoformat(_WINDOW["start"]).replace(tzinfo=TZ)
+RANGE_END = dt.datetime.fromisoformat(_WINDOW["end"]).replace(hour=23, minute=59, tzinfo=TZ)
+# 官方原文副本（每筆 <id>.txt）只留本機，不進版控
+DEFAULT_SRC = _HERE.parent / "var" / "golden_src"
 REQUIRED_KEYS = ("id", "bank", "url", "title", "registration", "period", "subs", "difficulty", "verified_at")
 
 
@@ -191,7 +193,7 @@ def main() -> int:
                 lo = start or end
                 hi = end if end is not None else dt.datetime.max.replace(tzinfo=TZ)
                 if lo and (hi < RANGE_START or lo > RANGE_END):
-                    errors.append(f"{tw}: 與檢核範圍 2026-11-01~12-31 無交集")
+                    errors.append(f"{tw}: 與檢核範圍 {_WINDOW['start']}~{_WINDOW['end']} 無交集")
                 key = start or end
                 if key and prev_key and key < prev_key:
                     errors.append(f"{tw}: 未依時間排序")

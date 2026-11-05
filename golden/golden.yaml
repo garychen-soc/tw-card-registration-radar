@@ -1,9 +1,9 @@
 # 信用卡活動「登錄時點」golden 集（新管線驗收基準）
 #
-# 依據：每筆只以官方頁面原文為準（不抄 v1 / Codex 輸出）。原文快照存於
-#   /private/tmp/claude-502/-Users-chenzhiming-Documents-Claude/b90211e4-6b90-4ade-9844-7c3a014d6fff/scratchpad/golden_src/<id>.txt
-#   （該路徑為暫存區；golden/check.py 以 --src 指定）。抓取日 2026-11-01（台北）。
-# 範圍：2026-11-01 00:00 ~ 2026-12-31 23:59（+08:00）內的登錄時點。
+# 依據：每筆只以官方頁面原文為準（不抄 v1 / Codex / 本管線輸出）。原文快照存於
+#   var/golden_src/<id>.txt（只留本機，不進版控；golden/check.py 預設讀這裡）。
+#   本批抓取日 2026-11-01（台北），個別更正見各筆 verified_at。
+# 範圍：golden/window.json 所列兩個月內的登錄時點。換新流程見 golden/RENEWAL.md。
 #
 # 記法約定（與任務說明一致，補充本檔另外採用的幾條）：
 #   - 時間只到分鐘並帶 +08:00；原文 23:59:59 記 23:59；原文「24：00」記為次日 00:00 並註明。
