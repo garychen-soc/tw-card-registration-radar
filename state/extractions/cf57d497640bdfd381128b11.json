@@ -1,0 +1,49 @@
+{
+ "key": "cf57d497640bdfd381128b11",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-05T07:11:27+00:00",
+ "title": "元大VISA信用卡日本指定通路刷卡回饋",
+ "duration_ms": 6048,
+ "cost_usd": 0.0290402,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "完成註冊與報名，且成功上傳刷卡憑證之"
+  },
+  "subs": [
+   {
+    "name": "全球精品名牌享最高10%現金回饋",
+    "rules": [
+     {
+      "quote": "於購物前至 Visa Select 優選回饋網頁",
+      "kind": "other",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "register_before_spend",
+     "quote": "於購物前至 Visa Select 優選回饋網頁"
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

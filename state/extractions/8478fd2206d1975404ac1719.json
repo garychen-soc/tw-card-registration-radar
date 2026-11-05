@@ -1,0 +1,16 @@
+{
+ "key": "8478fd2206d1975404ac1719",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-05T07:11:19+00:00",
+ "title": "【可樂旅遊】Club Med精緻全包式假期 刷元大卡享95折優惠",
+ "duration_ms": 3872,
+ "cost_usd": 0.023420200000000002,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "活動期間內於可樂旅遊官網訂購【Club Med】精緻全包式假期系列商品，訂單輸入優惠代碼「YUANTACM2026」並刷元大銀行信用卡全額付款，享專屬95折優惠！"
+  },
+  "subs": []
+ }
+}

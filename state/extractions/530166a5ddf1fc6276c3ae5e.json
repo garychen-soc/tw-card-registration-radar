@@ -1,0 +1,16 @@
+{
+ "key": "530166a5ddf1fc6276c3ae5e",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-05T07:11:19+00:00",
+ "title": "KYMCO Ionex節能新未來，刷元大卡滿額分期享回饋!",
+ "duration_ms": 2210,
+ "cost_usd": 0.0254842,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "本活動免登錄，依活動期間內單筆分期消費滿額者之實際交易順序判定回饋資格"
+  },
+  "subs": []
+ }
+}

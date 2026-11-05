@@ -1,0 +1,16 @@
+{
+ "key": "ce32568d3265aaefa450a6b9",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-05T07:11:23+00:00",
+ "title": "刷卡分期購宏佳騰電車，輕鬆入手又享優惠!",
+ "duration_ms": 1947,
+ "cost_usd": 0.025480199999999998,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "本活動免登錄，依活動期間內單筆分期消費滿額者之實際交易順序判定回饋資格"
+  },
+  "subs": []
+ }
+}

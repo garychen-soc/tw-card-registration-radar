@@ -1,5 +1,5 @@
 {
- "observed_at": "2026-11-05T13:32:12+08:00",
+ "observed_at": "2026-11-05T15:12:48+08:00",
  "llm_calls": 0,
  "llm_failures": 0,
  "publishable": true,
@@ -195,12 +195,12 @@
   {
    "bank_id": "yuanta",
    "bank_name": "元大銀行",
-   "status": "blocked",
+   "status": "ok",
    "entry_url": "https://www.yuantabank.com.tw/bank/creditCard/promotionActivity/list.do",
-   "stubs": 0,
-   "activities": 0,
+   "stubs": 59,
+   "activities": 59,
    "detail_failures": 0,
-   "message": "來源拒絕自動化存取 https://www.yuantabank.com.tw/bank/creditCard/promotionActivity/list.do：HTTP 403（此類拒絕重試無效，需改用住宅 IP 或等官方解除限制）",
+   "message": "",
    "carried": 0
   }
  ]

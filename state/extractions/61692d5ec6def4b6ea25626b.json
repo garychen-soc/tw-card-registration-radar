@@ -1,0 +1,16 @@
+{
+ "key": "61692d5ec6def4b6ea25626b",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-05T07:11:24+00:00",
+ "title": "信用卡【卡片安全管理】功能介紹",
+ "duration_ms": 3093,
+ "cost_usd": 0.030352200000000003,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "正卡可透過在元大行動銀行APP設定卡片安全管理功能"
+  },
+  "subs": []
+ }
+}

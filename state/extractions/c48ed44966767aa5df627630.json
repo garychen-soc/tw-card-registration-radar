@@ -1,0 +1,16 @@
+{
+ "key": "c48ed44966767aa5df627630",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-05T07:11:16+00:00",
+ "title": "馥蘭朵烏來/墾丁 酒店優惠85折起",
+ "duration_ms": 1161,
+ "cost_usd": 0.019764200000000003,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "活動期間刷元大信用卡享以下優惠:"
+  },
+  "subs": []
+ }
+}

@@ -1,0 +1,16 @@
+{
+ "key": "175a06cbfce71f636760d445",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-05T07:11:13+00:00",
+ "title": "指定地方稅費 分期0利率優惠",
+ "duration_ms": 1555,
+ "cost_usd": 0.0217942,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "無須另外登錄或來電申請"
+  },
+  "subs": []
+ }
+}
