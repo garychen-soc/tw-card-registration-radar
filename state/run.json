@@ -1,6 +1,6 @@
 {
- "observed_at": "2026-11-05T15:12:48+08:00",
- "llm_calls": 0,
+ "observed_at": "2026-11-05T18:29:20+08:00",
+ "llm_calls": 6,
  "llm_failures": 0,
  "publishable": true,
  "messages": [],
@@ -11,8 +11,8 @@
    "status": "ok",
    "entry_url": "https://www.cathay-cube.com.tw/cathaybk/personal/event/overview",
    "stubs": 150,
-   "activities": 146,
-   "detail_failures": 0,
+   "activities": 145,
+   "detail_failures": 1,
    "message": "",
    "carried": 0
   },
@@ -78,7 +78,7 @@
    "entry_url": "https://www.hncb.com.tw/wps/portal/HNCB/card/?1dmy&urile=wcm%3apath%3a/wps/wcm/connect/hncb_v2/site_map/hncb/per_finance/service/public_item/best_offer",
    "stubs": 13,
    "activities": 8,
-   "detail_failures": 0,
+   "detail_failures": 1,
    "message": "",
    "carried": 0
   },
@@ -98,8 +98,8 @@
    "bank_name": "兆豐銀行",
    "status": "ok",
    "entry_url": "https://www.megabank.com.tw/personal/credit-card/event/overview",
-   "stubs": 255,
-   "activities": 251,
+   "stubs": 256,
+   "activities": 252,
    "detail_failures": 0,
    "message": "",
    "carried": 0
@@ -162,12 +162,12 @@
   {
    "bank_id": "taishin",
    "bank_name": "台新銀行",
-   "status": "ok",
+   "status": "partial",
    "entry_url": "https://mkpcard.taishinbank.com.tw/tscccms/promotion/offerList/A",
-   "stubs": 201,
-   "activities": 198,
+   "stubs": 181,
+   "activities": 179,
    "detail_failures": 0,
-   "message": "",
+   "message": "分類失敗：I 其他優惠（來源拒絕自動化存取 https://mkpcard.taishinbank.com.tw/tscccms/promotion/getMorePromotionList/：HTTP 403（此類拒絕重試無效，需改用住宅 IP 或等官方解除限制））",
    "carried": 0
   },
   {

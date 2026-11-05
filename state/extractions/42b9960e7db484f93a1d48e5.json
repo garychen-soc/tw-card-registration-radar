@@ -1,0 +1,16 @@
+{
+ "key": "42b9960e7db484f93a1d48e5",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-05T15:57:27+00:00",
+ "title": "易遊網線上旅展，最高折800元，刷指定卡再享最高3.3%",
+ "duration_ms": 8610,
+ "cost_usd": 0.0259422,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "於易遊網APP消費，輸入折扣碼【26tsibitf】，並刷台新信用卡"
+  },
+  "subs": []
+ }
+}

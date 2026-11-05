@@ -1,0 +1,16 @@
+{
+ "key": "069d1985e2348d07fa07e1ad",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-05T15:57:12+00:00",
+ "title": "可樂旅遊",
+ "duration_ms": 6406,
+ "cost_usd": 0.058384,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "本優惠活動須於活動期間內下單並輸入優惠代碼，限以玉山國民旅遊卡刷付訂單全額。"
+  },
+  "subs": []
+ }
+}

@@ -1,0 +1,49 @@
+{
+ "key": "7943debd395433b93bc2b502",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-05T15:57:13+00:00",
+ "title": "百貨購物總表",
+ "duration_ms": 7983,
+ "cost_usd": 0.06268,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "每日每戶擇優回饋一次。(需登錄)"
+  },
+  "subs": [
+   {
+    "name": "LaLaport",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   },
+   {
+    "name": "MITSUI OUTLET PARK",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

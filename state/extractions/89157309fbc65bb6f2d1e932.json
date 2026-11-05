@@ -1,0 +1,101 @@
+{
+ "key": "89157309fbc65bb6f2d1e932",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-05T15:57:35+00:00",
+ "title": "聯邦陪您輕鬆玩世界",
+ "duration_ms": 9654,
+ "cost_usd": 0.0485402,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "活動對象:聯邦信用卡持卡人且消費當月完成登錄者"
+  },
+  "subs": [
+   {
+    "name": "指定旅遊滿額禮",
+    "rules": [
+     {
+      "quote": "活動每月10日下午3:00開放登錄，每月限量登錄12,000名",
+      "kind": "monthly",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [
+       10
+      ],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": {
+       "hour": 15,
+       "minute": 0
+      },
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "活動對象:聯邦信用卡持卡人且消費當月完成登錄者",
+      "kind": "deadline",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": true
+     }
+    ],
+    "reregister": {
+     "value": "each_period",
+     "quote": "聯邦信用卡持卡人且消費當月完成登錄者"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 12000,
+     "quote": "每月限量登錄12,000名"
+    }
+   },
+   {
+    "name": "雄獅線上旅展",
+    "rules": [
+     {
+      "quote": "須於消費當月各自完成登錄",
+      "kind": "deadline",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": true
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 100,
+     "quote": "活動限量回饋100名，如額滿系統將提前關閉並於登錄頁面公告"
+    }
+   }
+  ]
+ }
+}
