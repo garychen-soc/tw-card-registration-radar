@@ -1,0 +1,33 @@
+{
+ "key": "1ceeab91c7e1adae0f0e46a8",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-05T05:21:57+00:00",
+ "title": "4.彰銀Visa御璽卡超利嗨！海外、日、韓消費最高5%回饋",
+ "duration_ms": 4376,
+ "cost_usd": 0.0292742,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "正卡持卡人須於活動指定登錄期間於彰化銀行網站完成登錄作業"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

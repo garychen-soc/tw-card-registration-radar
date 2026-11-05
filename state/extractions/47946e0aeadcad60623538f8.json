@@ -1,0 +1,160 @@
+{
+ "key": "47946e0aeadcad60623538f8",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-05T05:22:46+00:00",
+ "title": "玉山信用卡綁定全盈+PAY",
+ "duration_ms": 14834,
+ "cost_usd": 0.0901662,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "本活動採登錄參加"
+  },
+  "subs": [
+   {
+    "name": "【全場域加碼6%】",
+    "rules": [
+     {
+      "quote": "11月於11/4、12月於12/1上午10:00起開放登錄活動",
+      "kind": "enumerated",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [
+       {
+        "year": null,
+        "month": 11,
+        "day": 4,
+        "hour": 10,
+        "minute": 0
+       },
+       {
+        "year": null,
+        "month": 12,
+        "day": 1,
+        "hour": 10,
+        "minute": 0
+       }
+      ],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "於當月最後一日截止登錄",
+      "kind": "deadline",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": true
+     }
+    ],
+    "reregister": {
+     "value": "each_period",
+     "quote": "當月登錄限享當月消費回饋，不跨月計算"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 20000,
+     "quote": "每月限量登錄20,000名"
+    }
+   },
+   {
+    "name": "【首綁滿額禮】",
+    "rules": [
+     {
+      "quote": "2026/10/1上午10:00起開放登錄活動，於活動最後一日2026/12/31 23:59截止登錄",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 10,
+       "day": 1,
+       "hour": 10,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": 12,
+       "day": 31,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 30000,
+     "quote": "活動限量登錄3萬名"
+    }
+   },
+   {
+    "name": "【玉山Unicard專屬全家加碼5%】",
+    "rules": [
+     {
+      "quote": "每月於當月1日上午10:00起開放登錄活動，於當月最後一日截止登錄",
+      "kind": "monthly",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [
+       1
+      ],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": {
+       "hour": 10,
+       "minute": 0
+      },
+      "close_time": null,
+      "end_of_month": true
+     }
+    ],
+    "reregister": {
+     "value": "each_period",
+     "quote": "當月登錄限享當月消費回饋，不跨月計算"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 15000,
+     "quote": "每月限量登錄15,000名"
+    }
+   }
+  ]
+ }
+}

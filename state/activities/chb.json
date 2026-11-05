@@ -1,9 +1,164 @@
 [
  {
+  "id": "chb-01c7271754",
+  "bank_id": "chb",
+  "bank_name": "彰化銀行",
+  "title": "1.【線上購物】MOMO全通路11月促刷活動",
+  "aliases": [],
+  "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3751",
+  "period_start": null,
+  "period_end": null,
+  "summary": "",
+  "category": "購物消費",
+  "registration": "required",
+  "registration_quote": "並於指定日完成登錄，可享以下滿額回饋",
+  "subs": [
+   {
+    "name": "活動一:「全月活動」",
+    "slots": [
+     {
+      "start": "2026-11-28T10:00:00+08:00",
+      "end": "2026-11-30T23:59:00+08:00",
+      "kind": "range",
+      "origin": "explicit",
+      "precision": "minute",
+      "holiday_shifted": false,
+      "note": "",
+      "evidence": {
+       "quote": "【全月活動】指定登錄日:2026/11/28 10:00至2026/11/30 23:59，登錄額滿即提前終止。",
+       "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3751"
+      }
+     }
+    ],
+    "rules": [
+     "【全月活動】指定登錄日:2026/11/28 10:00至2026/11/30 23:59，登錄額滿即提前終止。"
+    ],
+    "reregister": "unknown",
+    "reregister_quote": "",
+    "order": "unknown",
+    "order_quote": "",
+    "quota": null,
+    "quota_quote": "",
+    "review": []
+   },
+   {
+    "name": "活動二:「雙11購物節」",
+    "slots": [
+     {
+      "start": "2026-11-28T10:00:00+08:00",
+      "end": "2026-11-30T23:59:00+08:00",
+      "kind": "range",
+      "origin": "explicit",
+      "precision": "minute",
+      "holiday_shifted": false,
+      "note": "",
+      "evidence": {
+       "quote": "【雙11購物節】指定登錄日:2026/11/28 10:00至2026/11/30 23:59，登錄額滿即提前終止。",
+       "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3751"
+      }
+     }
+    ],
+    "rules": [
+     "【雙11購物節】指定登錄日:2026/11/28 10:00至2026/11/30 23:59，登錄額滿即提前終止。"
+    ],
+    "reregister": "unknown",
+    "reregister_quote": "",
+    "order": "unknown",
+    "order_quote": "",
+    "quota": null,
+    "quota_quote": "",
+    "review": []
+   },
+   {
+    "name": "活動三:「桃金日」",
+    "slots": [
+     {
+      "start": "2026-11-28T10:00:00+08:00",
+      "end": "2026-11-30T23:59:00+08:00",
+      "kind": "range",
+      "origin": "explicit",
+      "precision": "minute",
+      "holiday_shifted": false,
+      "note": "",
+      "evidence": {
+       "quote": "【桃金日】指定登錄日:2026/11/28 10:00至2026/11/30 23:59，登錄額滿即提前終止。",
+       "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3751"
+      }
+     }
+    ],
+    "rules": [
+     "【桃金日】指定登錄日:2026/11/28 10:00至2026/11/30 23:59，登錄額滿即提前終止。"
+    ],
+    "reregister": "unknown",
+    "reregister_quote": "",
+    "order": "unknown",
+    "order_quote": "",
+    "quota": null,
+    "quota_quote": "",
+    "review": []
+   },
+   {
+    "name": "活動四:加碼回饋「網購瘋狂購・電商消費月」",
+    "slots": [
+     {
+      "start": "2026-11-01T00:00:00+08:00",
+      "end": "2026-11-30T23:59:00+08:00",
+      "kind": "range",
+      "origin": "explicit",
+      "precision": "day",
+      "holiday_shifted": false,
+      "note": "",
+      "evidence": {
+       "quote": "【網購瘋狂購・電商消費月】指定登錄日:2026/11/1至2026/11/30。",
+       "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3751"
+      }
+     }
+    ],
+    "rules": [
+     "【網購瘋狂購・電商消費月】指定登錄日:2026/11/1至2026/11/30。"
+    ],
+    "reregister": "unknown",
+    "reregister_quote": "",
+    "order": "unknown",
+    "order_quote": "",
+    "quota": null,
+    "quota_quote": "",
+    "review": []
+   }
+  ],
+  "portal_url": "https://www.bankchb.com/frontend/CampaignLog.jsp",
+  "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
+  "review": [],
+  "content_hash": "122ce2f28f2faaea",
+  "observed_at": "2026-11-05T13:14:49+08:00",
+  "stale": false
+ },
+ {
+  "id": "chb-025d786403",
+  "bank_id": "chb",
+  "bank_name": "彰化銀行",
+  "title": "1.全國加油站刷彰銀卡 天天享現折優惠(HOT)",
+  "aliases": [],
+  "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3767",
+  "period_start": "2026-11-01",
+  "period_end": "2026-12-31",
+  "summary": "",
+  "category": "其他優惠",
+  "registration": "not_required",
+  "registration_quote": "",
+  "subs": [],
+  "portal_url": "https://www.bankchb.com/frontend/CampaignLog.jsp",
+  "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
+  "review": [],
+  "content_hash": "7483bff9da12fac8",
+  "observed_at": "2026-11-05T13:14:49+08:00",
+  "stale": false
+ },
+ {
   "id": "chb-03d2033f0f",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "【交通/加油】刷彰銀卡搭高鐵 享商務車廂升等優惠",
+  "title": "11.【交通/加油】刷彰銀卡搭高鐵 享商務車廂升等優惠",
   "aliases": [],
   "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3388",
   "period_start": "2026-01-01",
@@ -17,83 +172,95 @@
   "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "84f1886477ca1faa",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
-  "id": "chb-049e074ab4",
+  "id": "chb-0d473eb470",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "【保險/稅費】年中繳保費，限量分期荷包更輕鬆",
+  "title": "2.全國電子「彰享生活 家電煥新季」",
   "aliases": [],
-  "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3594",
-  "period_start": null,
-  "period_end": null,
+  "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3763",
+  "period_start": "2026-11-01",
+  "period_end": "2026-11-30",
   "summary": "",
-  "category": "購物消費",
-  "registration": "unknown",
-  "registration_quote": "",
-  "subs": [],
+  "category": "其他優惠",
+  "registration": "required",
+  "registration_quote": "參加本活動，須由持卡人於活動期間透過彰化銀行官網信用卡活動登錄專區，於指定日完成登錄作業始符合資格",
+  "subs": [
+   {
+    "name": "活動一:【單筆分期滿額贈】",
+    "slots": [
+     {
+      "start": "2026-11-10T10:00:00+08:00",
+      "end": null,
+      "kind": "opens_at",
+      "origin": "explicit",
+      "precision": "minute",
+      "holiday_shifted": false,
+      "note": "",
+      "evidence": {
+       "quote": "2026/11/10 10:00 (以本行電腦系統時間為準)開放登錄，登錄額滿活動即提前終止。",
+       "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3763"
+      }
+     }
+    ],
+    "rules": [
+     "2026/11/10 10:00 (以本行電腦系統時間為準)開放登錄，登錄額滿活動即提前終止。",
+     "正卡持卡人並於活動期間完成登錄"
+    ],
+    "reregister": "unknown",
+    "reregister_quote": "",
+    "order": "unknown",
+    "order_quote": "",
+    "quota": null,
+    "quota_quote": "",
+    "review": [
+     "規則無法驗證（year=2026 在引句中找不到）：正卡持卡人並於活動期間完成登錄"
+    ]
+   },
+   {
+    "name": "活動二:【單筆消費滿額贈】",
+    "slots": [
+     {
+      "start": "2026-11-10T10:00:00+08:00",
+      "end": null,
+      "kind": "opens_at",
+      "origin": "explicit",
+      "precision": "minute",
+      "holiday_shifted": false,
+      "note": "",
+      "evidence": {
+       "quote": "2026/11/10 10:00 (以本行電腦系統時間為準)開放登錄，登錄額滿活動即提前終止。",
+       "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3763"
+      }
+     }
+    ],
+    "rules": [
+     "2026/11/10 10:00 (以本行電腦系統時間為準)開放登錄，登錄額滿活動即提前終止。"
+    ],
+    "reregister": "unknown",
+    "reregister_quote": "",
+    "order": "unknown",
+    "order_quote": "",
+    "quota": null,
+    "quota_quote": "",
+    "review": []
+   }
+  ],
   "portal_url": "https://www.bankchb.com/frontend/CampaignLog.jsp",
   "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
-  "review": [
-   "官方頁面沒有可讀的條款文字（可能是圖片或已下架），請直接查看活動頁"
-  ],
-  "content_hash": "ca4ed364011fe484",
-  "observed_at": "2026-11-03T08:29:14+08:00",
-  "stale": false
- },
- {
-  "id": "chb-080d02f5f5",
-  "bank_id": "chb",
-  "bank_name": "彰化銀行",
-  "title": "【百貨購物】十月寵愛卡友 指定百貨通路刷彰銀 最高享20%回饋",
-  "aliases": [],
-  "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3720",
-  "period_start": null,
-  "period_end": null,
-  "summary": "",
-  "category": "購物消費",
-  "registration": "unknown",
-  "registration_quote": "",
-  "subs": [],
-  "portal_url": "https://www.bankchb.com/frontend/CampaignLog.jsp",
-  "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
-  "review": [
-   "官方頁面沒有可讀的條款文字（可能是圖片或已下架），請直接查看活動頁"
-  ],
-  "content_hash": "62dd3d66c7d1e2df",
-  "observed_at": "2026-11-03T08:29:14+08:00",
-  "stale": false
- },
- {
-  "id": "chb-0a39d168e4",
-  "bank_id": "chb",
-  "bank_name": "彰化銀行",
-  "title": "【百貨購物】裕隆城週年慶 獨家滿額禮",
-  "aliases": [],
-  "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3732",
-  "period_start": null,
-  "period_end": null,
-  "summary": "",
-  "category": "購物消費",
-  "registration": "unknown",
-  "registration_quote": "",
-  "subs": [],
-  "portal_url": "https://www.bankchb.com/frontend/CampaignLog.jsp",
-  "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
-  "review": [
-   "官方頁面沒有可讀的條款文字（可能是圖片或已下架），請直接查看活動頁"
-  ],
-  "content_hash": "4e2844dd448fae9c",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "review": [],
+  "content_hash": "70f6096db2df06ae",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
   "id": "chb-1004b7799b",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "刷彰銀卡旅遊超優惠，AVIS租車自駕7折起，機場接送代駕92折",
+  "title": "2.刷彰銀卡旅遊超優惠，AVIS租車自駕7折起，機場接送代駕92折",
   "aliases": [],
   "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3398",
   "period_start": "2026-01-01",
@@ -107,37 +274,120 @@
   "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "b6e3125c18d30a46",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
-  "id": "chb-19bf6bfd30",
+  "id": "chb-17586df330",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "【藝文娛樂】優人神鼓《我回來了–做一部作品給自己的靈魂》刷彰銀卡購票9折",
+  "title": "2.【線上購物】PChome線上購物11月促刷活動",
   "aliases": [],
-  "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3567",
+  "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3752",
   "period_start": null,
   "period_end": null,
   "summary": "",
   "category": "購物消費",
-  "registration": "unknown",
-  "registration_quote": "",
-  "subs": [],
+  "registration": "required",
+  "registration_quote": "參加本活動，須由持卡人於指定期間透過彰化銀行官網信用卡活動登錄專區，於指定日完成登錄作業始符合資格",
+  "subs": [
+   {
+    "name": "活動一:「全月活動」",
+    "slots": [
+     {
+      "start": "2026-11-28T10:00:00+08:00",
+      "end": "2026-11-30T23:59:00+08:00",
+      "kind": "range",
+      "origin": "explicit",
+      "precision": "minute",
+      "holiday_shifted": false,
+      "note": "",
+      "evidence": {
+       "quote": "【全月活動】指定登錄日:2026/11/28 10:00至2026/11/30 23:59，登錄額滿即提前終止。",
+       "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3752"
+      }
+     }
+    ],
+    "rules": [
+     "【全月活動】指定登錄日:2026/11/28 10:00至2026/11/30 23:59，登錄額滿即提前終止。"
+    ],
+    "reregister": "unknown",
+    "reregister_quote": "",
+    "order": "unknown",
+    "order_quote": "",
+    "quota": 200,
+    "quota_quote": "回饋60元刷卡金 (限量200名)",
+    "review": []
+   },
+   {
+    "name": "活動二:「雙11超省超速購」",
+    "slots": [
+     {
+      "start": "2026-11-28T10:00:00+08:00",
+      "end": "2026-11-30T23:59:00+08:00",
+      "kind": "range",
+      "origin": "explicit",
+      "precision": "minute",
+      "holiday_shifted": false,
+      "note": "",
+      "evidence": {
+       "quote": "【雙11超省超速購】指定登錄日:2026/11/28 10:00至2026/11/30 23:59，登錄額滿即提前終止。",
+       "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3752"
+      }
+     }
+    ],
+    "rules": [
+     "【雙11超省超速購】指定登錄日:2026/11/28 10:00至2026/11/30 23:59，登錄額滿即提前終止。"
+    ],
+    "reregister": "unknown",
+    "reregister_quote": "",
+    "order": "unknown",
+    "order_quote": "",
+    "quota": null,
+    "quota_quote": "",
+    "review": []
+   },
+   {
+    "name": "活動三:加碼回饋「網購瘋狂購・電商消費月」",
+    "slots": [
+     {
+      "start": "2026-11-01T00:00:00+08:00",
+      "end": "2026-11-30T23:59:00+08:00",
+      "kind": "range",
+      "origin": "explicit",
+      "precision": "day",
+      "holiday_shifted": false,
+      "note": "",
+      "evidence": {
+       "quote": "【網購瘋狂購・電商消費月】指定登錄日:2026/11/1至2026/11/30。",
+       "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3752"
+      }
+     }
+    ],
+    "rules": [
+     "【網購瘋狂購・電商消費月】指定登錄日:2026/11/1至2026/11/30。"
+    ],
+    "reregister": "unknown",
+    "reregister_quote": "",
+    "order": "unknown",
+    "order_quote": "",
+    "quota": null,
+    "quota_quote": "",
+    "review": []
+   }
+  ],
   "portal_url": "https://www.bankchb.com/frontend/CampaignLog.jsp",
   "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
-  "review": [
-   "官方頁面沒有可讀的條款文字（可能是圖片或已下架），請直接查看活動頁"
-  ],
-  "content_hash": "d89d07925461701b",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "review": [],
+  "content_hash": "69702750217944a3",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
   "id": "chb-1fb38d1bb0",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "刷彰銀卡gogoout線上預約租車真方便",
+  "title": "13.刷彰銀卡gogoout線上預約租車真方便",
   "aliases": [],
   "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3448",
   "period_start": "2026-01-01",
@@ -151,30 +401,7 @@
   "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "5331346e29a8d2cb",
-  "observed_at": "2026-11-03T08:29:14+08:00",
-  "stale": false
- },
- {
-  "id": "chb-24708a76cc",
-  "bank_id": "chb",
-  "bank_name": "彰化銀行",
-  "title": "【線上購物】蝦皮購物10月促刷活動",
-  "aliases": [],
-  "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3701",
-  "period_start": null,
-  "period_end": null,
-  "summary": "",
-  "category": "購物消費",
-  "registration": "unknown",
-  "registration_quote": "",
-  "subs": [],
-  "portal_url": "https://www.bankchb.com/frontend/CampaignLog.jsp",
-  "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
-  "review": [
-   "官方頁面沒有可讀的條款文字（可能是圖片或已下架），請直接查看活動頁"
-  ],
-  "content_hash": "c84412490942fe34",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
@@ -210,14 +437,14 @@
    "需登錄但官方未寫登錄時點"
   ],
   "content_hash": "d8370093e83b4e21",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
   "id": "chb-2e66f52a83",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "松屋銀座使用JCB卡消費享95折優惠！",
+  "title": "20.松屋銀座使用JCB卡消費享95折優惠！",
   "aliases": [],
   "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3739",
   "period_start": "2026-04-01",
@@ -231,14 +458,14 @@
   "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "7a40d527a1f12951",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
   "id": "chb-2e792a7d16",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "東京鐵塔×JCB卡特別聯名企劃",
+  "title": "21.東京鐵塔×JCB卡特別聯名企劃",
   "aliases": [],
   "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3738",
   "period_start": "2026-05-01",
@@ -252,14 +479,14 @@
   "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "671322ccef850d7a",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
   "id": "chb-2f7169e911",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "刷彰銀卡iPhone 18 輕鬆入手，極致新機聰明買、省更多！",
+  "title": "3.刷彰銀卡iPhone 18 輕鬆入手，極致新機聰明買、省更多！",
   "aliases": [],
   "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3689",
   "period_start": "2026-09-10",
@@ -267,7 +494,7 @@
   "summary": "",
   "category": "其他優惠",
   "registration": "required",
-  "registration_quote": "並於彰銀官網完成活動登錄",
+  "registration_quote": "未完成登錄者，恕無法參加本活動。",
   "subs": [
    {
     "name": "",
@@ -288,14 +515,14 @@
    "需登錄但官方未寫登錄時點"
   ],
   "content_hash": "75f6cb9be84d0079",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
   "id": "chb-343699d05b",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "全卡友消費滿額贈洗車服務",
+  "title": "6.全卡友消費滿額贈洗車服務",
   "aliases": [],
   "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3600",
   "period_start": "2026-07-01",
@@ -309,14 +536,14 @@
   "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "3f06f8be33e828d1",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
   "id": "chb-35b9b412f8",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "【藥妝/藥局】康是美刷馬偕卡滿888元送COSMED抽取式衛生紙",
+  "title": "7.【藥妝/藥局】康是美刷馬偕卡滿888元送COSMED抽取式衛生紙",
   "aliases": [],
   "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3397",
   "period_start": "2026-01-01",
@@ -324,7 +551,7 @@
   "summary": "",
   "category": "購物消費",
   "registration": "required",
-  "registration_quote": "須登錄，含卡片原始回饋",
+  "registration_quote": "須登錄，含卡片原始回饋，4%現金回饋為額外加碼",
   "subs": [
    {
     "name": "",
@@ -347,14 +574,35 @@
    "需登錄但官方未寫登錄時點"
   ],
   "content_hash": "dd0a4c1c67b243bf",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "observed_at": "2026-11-05T13:14:49+08:00",
+  "stale": false
+ },
+ {
+  "id": "chb-3b5aef6747",
+  "bank_id": "chb",
+  "bank_name": "彰化銀行",
+  "title": "25.【百貨購物】彰銀信用卡專屬禮遇 於麗晶精品最高享9,000元回饋",
+  "aliases": [],
+  "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3771",
+  "period_start": null,
+  "period_end": null,
+  "summary": "",
+  "category": "購物消費",
+  "registration": "not_required",
+  "registration_quote": "",
+  "subs": [],
+  "portal_url": "https://www.bankchb.com/frontend/CampaignLog.jsp",
+  "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
+  "review": [],
+  "content_hash": "44e96cff3ea42242",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
   "id": "chb-3d84c3ba4d",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "【行動支付】台灣行動支付APP x彰銀信用卡感應購物2%回饋",
+  "title": "14.【行動支付】台灣行動支付APP x彰銀信用卡感應購物2%回饋",
   "aliases": [],
   "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3420",
   "period_start": "2026-01-01",
@@ -368,14 +616,14 @@
   "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "b14ae7352272178c",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
   "id": "chb-402f8bdf78",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "I-PRIMO「 克拉閃耀 雙享鑽到」",
+  "title": "11.I-PRIMO「 克拉閃耀 雙享鑽到」",
   "aliases": [],
   "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3718",
   "period_start": "2026-10-01",
@@ -389,14 +637,14 @@
   "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "6b84d9ba71051f51",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
   "id": "chb-459ecd50a6",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "『Now on JAPAN!』在日本MITSUI OUTLET PARK・LaLaport刷彰銀JCB享最高20%現金回饋",
+  "title": "17.『Now on JAPAN!』在日本MITSUI OUTLET PARK・LaLaport刷彰銀JCB享最高20%現金回饋",
   "aliases": [],
   "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3745",
   "period_start": null,
@@ -404,7 +652,7 @@
   "summary": "",
   "category": "其他優惠",
   "registration": "required",
-  "registration_quote": "本活動需於指定登錄期間完成事前線上登錄，限量登錄4,500張JCB卡；登錄額滿即截止。",
+  "registration_quote": "本活動需於指定登錄期間完成事前線上登錄",
   "subs": [
    {
     "name": "",
@@ -429,7 +677,7 @@
     "reregister": "unknown",
     "reregister_quote": "",
     "order": "register_before_spend",
-    "order_quote": "於指定登錄期間完成事前線上登錄，並於指定消費期間內於日本MITSUI OUTLET PARK・LaLaport實體店面刷JCB卡",
+    "order_quote": "於指定登錄期間完成事前線上登錄",
     "quota": 4500,
     "quota_quote": "限量登錄4,500張JCB卡；登錄額滿即截止",
     "review": []
@@ -439,14 +687,35 @@
   "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "c2fa99e6eccf9186",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "observed_at": "2026-11-05T13:14:49+08:00",
+  "stale": false
+ },
+ {
+  "id": "chb-4ac3e6243e",
+  "bank_id": "chb",
+  "bank_name": "彰化銀行",
+  "title": "20.【百貨購物】百貨檔期刷彰銀卡最優惠 當日最高享54,000元回饋",
+  "aliases": [],
+  "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3750",
+  "period_start": null,
+  "period_end": null,
+  "summary": "",
+  "category": "購物消費",
+  "registration": "not_required",
+  "registration_quote": "",
+  "subs": [],
+  "portal_url": "https://www.bankchb.com/frontend/CampaignLog.jsp",
+  "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
+  "review": [],
+  "content_hash": "2705a0646f2d93fb",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
   "id": "chb-4b01126cf5",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "【線上購物】Coupang 酷澎刷彰銀最好購",
+  "title": "6.【線上購物】Coupang 酷澎刷彰銀最好購",
   "aliases": [],
   "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3581",
   "period_start": "2026-01-01",
@@ -460,14 +729,14 @@
   "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "2f08ef1e210d8659",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
   "id": "chb-57c6bab8b2",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "K.uno「 克拉閃耀 雙享鑽到」",
+  "title": "13.K.uno「 克拉閃耀 雙享鑽到」",
   "aliases": [],
   "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3730",
   "period_start": "2026-10-01",
@@ -481,14 +750,14 @@
   "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "6fb27785bde70ec6",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
   "id": "chb-59bd2dc9ee",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "刷Visa無限卡禮遇升級，購車保修享最高10%回饋！",
+  "title": "5.刷Visa無限卡禮遇升級，購車保修享最高10%回饋！",
   "aliases": [],
   "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3528",
   "period_start": "2026-05-12",
@@ -506,8 +775,8 @@
     "reregister_quote": "",
     "order": "unknown",
     "order_quote": "",
-    "quota": null,
-    "quota_quote": "",
+    "quota": 100,
+    "quota_quote": "刷卡金回饋每月限量100名，贈完為止",
     "review": []
    }
   ],
@@ -517,37 +786,102 @@
    "需登錄但官方未寫登錄時點"
   ],
   "content_hash": "86a0aaa431b087e0",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
-  "id": "chb-5cbc3170cd",
+  "id": "chb-5d584786ec",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "日本百家連鎖家電大集合！最高享好康10%+5%OFF優惠！",
+  "title": "9.美廉社用台灣Pay彰銀信用卡付 享最高20%額外回饋",
   "aliases": [],
-  "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3613",
-  "period_start": null,
-  "period_end": null,
+  "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3765",
+  "period_start": "2026-11-01",
+  "period_end": "2026-12-28",
   "summary": "",
   "category": "其他優惠",
-  "registration": "unknown",
-  "registration_quote": "",
-  "subs": [],
+  "registration": "required",
+  "registration_quote": "活動期間內，於彰銀官網完成活動登錄",
+  "subs": [
+   {
+    "name": "",
+    "slots": [],
+    "rules": [
+     "正卡持卡人須於活動期間於彰化銀行網站 (彰銀官網--信用卡--優惠訊息/登錄--活動登錄) 成功完成登錄"
+    ],
+    "reregister": "unknown",
+    "reregister_quote": "",
+    "order": "unknown",
+    "order_quote": "",
+    "quota": null,
+    "quota_quote": "",
+    "review": [
+     "規則無法驗證（year=2026 在引句中找不到）：正卡持卡人須於活動期間於彰化銀行網站 (彰銀官網--信用卡--優惠訊息/登錄--"
+    ]
+   }
+  ],
   "portal_url": "https://www.bankchb.com/frontend/CampaignLog.jsp",
   "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
-  "review": [
-   "官方頁面沒有可讀的條款文字（可能是圖片或已下架），請直接查看活動頁"
+  "review": [],
+  "content_hash": "d4f93dc04b28e835",
+  "observed_at": "2026-11-05T13:14:49+08:00",
+  "stale": false
+ },
+ {
+  "id": "chb-5dbc2b27dc",
+  "bank_id": "chb",
+  "bank_name": "彰化銀行",
+  "title": "22.【百貨購物】十一月寵愛卡友 指定百貨通路刷彰銀 最高享20%回饋",
+  "aliases": [],
+  "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3768",
+  "period_start": "2026-11-01",
+  "period_end": "2026-11-30",
+  "summary": "",
+  "category": "購物消費",
+  "registration": "required",
+  "registration_quote": "未完成登錄者，恕無法參加本活動",
+  "subs": [
+   {
+    "name": "",
+    "slots": [
+     {
+      "start": "2026-11-05T10:00:00+08:00",
+      "end": "2026-11-30T23:59:00+08:00",
+      "kind": "range",
+      "origin": "explicit",
+      "precision": "minute",
+      "holiday_shifted": false,
+      "note": "",
+      "evidence": {
+       "quote": "登錄時間:2026/11/5 10:00至2026/11/30 23:59",
+       "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3768"
+      }
+     }
+    ],
+    "rules": [
+     "登錄時間:2026/11/5 10:00至2026/11/30 23:59"
+    ],
+    "reregister": "unknown",
+    "reregister_quote": "",
+    "order": "retroactive_ok",
+    "order_quote": "消費滿額並於活動期間內完成登錄(限正卡)",
+    "quota": 1000,
+    "quota_quote": "各指定百貨通路，各限量登錄1,000名，額滿即提前終止",
+    "review": []
+   }
   ],
-  "content_hash": "deb4d3414cde5cbb",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "portal_url": "https://www.bankchb.com/frontend/CampaignLog.jsp",
+  "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
+  "review": [],
+  "content_hash": "a4b854545df7d445",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
   "id": "chb-5eefc48093",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "「實木美學 一刷帶回」詩肯柚木輕鬆分期優惠",
+  "title": "14.「實木美學 一刷帶回」詩肯柚木輕鬆分期優惠",
   "aliases": [],
   "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3714",
   "period_start": "2026-10-01",
@@ -555,7 +889,7 @@
   "summary": "",
   "category": "其他優惠",
   "registration": "required",
-  "registration_quote": "正卡持卡人並於活動期間完成登錄",
+  "registration_quote": "正卡持卡人並於活動期間完成登錄，可享以下回饋",
   "subs": [
    {
     "name": "",
@@ -564,9 +898,9 @@
      "正卡持卡人並於活動期間完成登錄"
     ],
     "reregister": "each_period",
-    "reregister_quote": "每月皆需重新登錄(即如11月登錄於12月消費，則不符合回饋資格)",
-    "order": "register_before_spend",
-    "order_quote": "即如11月登錄於12月消費，則不符合回饋資格",
+    "reregister_quote": "每月皆需重新登錄",
+    "order": "retroactive_ok",
+    "order_quote": "刷卡交易為10/19 12點10分20秒，完成登錄為10/20 1點30分20秒，則以10/19 12點10分20秒作為排序之時間",
     "quota": 100,
     "quota_quote": "每月限量100名",
     "review": [
@@ -578,14 +912,14 @@
   "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "09c99ae14502ea94",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
   "id": "chb-60aa7f1fdc",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "深度體驗日本旅遊，彰銀卡友享日本旅之行TabiNoKo遊程10%折扣",
+  "title": "10.深度體驗日本旅遊，彰銀卡友享日本旅之行TabiNoKo遊程10%折扣",
   "aliases": [],
   "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3409",
   "period_start": "2026-01-01",
@@ -599,7 +933,7 @@
   "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "f2a0f9d50bec2d84",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
@@ -620,14 +954,14 @@
   "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "f7157c4304828ea8",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
   "id": "chb-65f936b054",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "交通/飛航刷彰銀Visa商旅御璽Fun心卡，暢行無阻享最高5%回饋！",
+  "title": "12.交通/飛航刷彰銀Visa商旅御璽Fun心卡，暢行無阻享最高5%回饋！",
   "aliases": [],
   "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3403",
   "period_start": null,
@@ -656,14 +990,14 @@
    "需登錄但官方未寫登錄時點"
   ],
   "content_hash": "672dd51a4b148a8a",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
   "id": "chb-66a9e7f85e",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "百貨‧餐廳‧電商月月狂享祭",
+  "title": "15.百貨‧餐廳‧電商月月狂享祭",
   "aliases": [],
   "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3676",
   "period_start": "2026-09-01",
@@ -709,7 +1043,7 @@
      "11/1~11/30"
     ],
     "reregister": "each_period",
-    "reregister_quote": "每月完成登錄",
+    "reregister_quote": "每月完成登錄，享當月主題通路及類別特選商店之消費加碼回饋。",
     "order": "unknown",
     "order_quote": "",
     "quota": null,
@@ -721,14 +1055,14 @@
   "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "eff7d79e52534812",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
   "id": "chb-67685c0a1a",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "彰銀VISA無限卡、商旅御璽卡Fun心旅遊，海外消費最高可享10%回饋！",
+  "title": "17.彰銀VISA無限卡、商旅御璽卡Fun心旅遊，海外消費最高可享10%回饋！",
   "aliases": [],
   "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3526",
   "period_start": null,
@@ -747,7 +1081,7 @@
     "order": "unknown",
     "order_quote": "",
     "quota": 500,
-    "quota_quote": "每月回饋名額限量500名",
+    "quota_quote": "須登錄，每月回饋名額限量500名",
     "review": []
    },
    {
@@ -759,7 +1093,7 @@
     "order": "unknown",
     "order_quote": "",
     "quota": 500,
-    "quota_quote": "每月回饋名額限量500名",
+    "quota_quote": "須登錄，每月回饋名額限量500名",
     "review": []
    },
    {
@@ -781,37 +1115,120 @@
    "需登錄但官方未寫登錄時點"
   ],
   "content_hash": "4dbd28c124de961f",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
-  "id": "chb-6932318f32",
+  "id": "chb-69108b2561",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "VOLVO 保修刷彰銀卡 滿額贈「VOLVO 攜帶式摺疊凳」",
+  "title": "3.【線上購物】淘寶網11月促刷活動",
   "aliases": [],
-  "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3673",
+  "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3754",
   "period_start": null,
   "period_end": null,
   "summary": "",
-  "category": "其他優惠",
-  "registration": "unknown",
-  "registration_quote": "",
-  "subs": [],
+  "category": "購物消費",
+  "registration": "required",
+  "registration_quote": "須由持卡人於指定期間透過彰化銀行官網信用卡活動登錄專區，完成登錄作業始符合資格",
+  "subs": [
+   {
+    "name": "活動一:「全月活動」",
+    "slots": [
+     {
+      "start": "2026-11-28T10:00:00+08:00",
+      "end": "2026-11-30T23:59:00+08:00",
+      "kind": "range",
+      "origin": "explicit",
+      "precision": "minute",
+      "holiday_shifted": false,
+      "note": "",
+      "evidence": {
+       "quote": "【全月活動】指定登錄日:2026/11/28 10:00至2026/11/30 23:59",
+       "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3754"
+      }
+     }
+    ],
+    "rules": [
+     "【全月活動】指定登錄日:2026/11/28 10:00至2026/11/30 23:59"
+    ],
+    "reregister": "unknown",
+    "reregister_quote": "",
+    "order": "unknown",
+    "order_quote": "",
+    "quota": null,
+    "quota_quote": "",
+    "review": []
+   },
+   {
+    "name": "活動二:「雙11大促活動」",
+    "slots": [
+     {
+      "start": "2026-11-28T10:00:00+08:00",
+      "end": "2026-11-30T23:59:00+08:00",
+      "kind": "range",
+      "origin": "explicit",
+      "precision": "minute",
+      "holiday_shifted": false,
+      "note": "",
+      "evidence": {
+       "quote": "【雙11大促活動】指定登錄日:2026/11/28 10:00至2026/11/30 23:59",
+       "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3754"
+      }
+     }
+    ],
+    "rules": [
+     "【雙11大促活動】指定登錄日:2026/11/28 10:00至2026/11/30 23:59"
+    ],
+    "reregister": "unknown",
+    "reregister_quote": "",
+    "order": "unknown",
+    "order_quote": "",
+    "quota": null,
+    "quota_quote": "",
+    "review": []
+   },
+   {
+    "name": "活動三:加碼回饋「網購瘋狂購・電商消費月」",
+    "slots": [
+     {
+      "start": "2026-11-01T00:00:00+08:00",
+      "end": "2026-11-30T23:59:00+08:00",
+      "kind": "range",
+      "origin": "explicit",
+      "precision": "day",
+      "holiday_shifted": false,
+      "note": "",
+      "evidence": {
+       "quote": "【網購瘋狂購・電商消費月】指定登錄日:2026/11/1至2026/11/30。",
+       "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3754"
+      }
+     }
+    ],
+    "rules": [
+     "【網購瘋狂購・電商消費月】指定登錄日:2026/11/1至2026/11/30。"
+    ],
+    "reregister": "unknown",
+    "reregister_quote": "",
+    "order": "unknown",
+    "order_quote": "",
+    "quota": null,
+    "quota_quote": "",
+    "review": []
+   }
+  ],
   "portal_url": "https://www.bankchb.com/frontend/CampaignLog.jsp",
   "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
-  "review": [
-   "官方頁面沒有可讀的條款文字（可能是圖片或已下架），請直接查看活動頁"
-  ],
-  "content_hash": "5859ca90a2b58916",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "review": [],
+  "content_hash": "92c59c46c8208f03",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
   "id": "chb-6bd658c624",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "【交通/加油】刷彰銀悠遊卡&一卡通聯名卡，台亞加油享優惠",
+  "title": "13.【交通/加油】刷彰銀悠遊卡&一卡通聯名卡，台亞加油享優惠",
   "aliases": [],
   "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3593",
   "period_start": "2026-10-01",
@@ -825,14 +1242,14 @@
   "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "4fc719be23abea09",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
   "id": "chb-72d5a0ebe4",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "【藥妝/藥局】內外「偕」具 藥妝/藥局5%優惠隨心享",
+  "title": "8.【藥妝/藥局】內外「偕」具 藥妝/藥局5%優惠隨心享",
   "aliases": [],
   "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3390",
   "period_start": "2026-01-01",
@@ -846,8 +1263,7 @@
     "name": "",
     "slots": [],
     "rules": [
-     "活動期間內成功完成登錄本活動後",
-     "持卡人需於活動期間至彰化銀行官網之活動登錄專區登錄，活動期間僅需登錄一次"
+     "持卡人需於活動期間至彰化銀行官網之活動登錄專區登錄"
     ],
     "reregister": "once",
     "reregister_quote": "活動期間僅需登錄一次",
@@ -856,8 +1272,7 @@
     "quota": null,
     "quota_quote": "",
     "review": [
-     "規則無法驗證（year=2026 在引句中找不到）：活動期間內成功完成登錄本活動後",
-     "規則無法驗證（year=2026 在引句中找不到）：持卡人需於活動期間至彰化銀行官網之活動登錄專區登錄，活動期間僅需登錄一次"
+     "規則無法驗證（year=2026 在引句中找不到）：持卡人需於活動期間至彰化銀行官網之活動登錄專區登錄"
     ]
    }
   ],
@@ -865,14 +1280,14 @@
   "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "5de298262d4b70b8",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
   "id": "chb-74c8afa69c",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "Trip.com刷彰銀卡限定優惠，一鍵預訂機票+飯店，最高享9.5%折扣！",
+  "title": "11.Trip.com刷彰銀卡限定優惠，一鍵預訂機票+飯店，最高享9.5%折扣！",
   "aliases": [],
   "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3408",
   "period_start": null,
@@ -886,7 +1301,7 @@
   "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "4e052ca608b3a074",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
@@ -907,14 +1322,14 @@
   "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "d22f16c29be46589",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
   "id": "chb-846cf4de61",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "出國首選無限卡/商旅御璽Fun心卡，易遊網機票天天滿萬折仟，機加酒現折1,200元！",
+  "title": "14.出國首選無限卡/商旅御璽Fun心卡，易遊網機票天天滿萬折仟，機加酒現折1,200元！",
   "aliases": [],
   "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3525",
   "period_start": "2026-05-01",
@@ -928,14 +1343,14 @@
   "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "7776feab9103da09",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
   "id": "chb-8647674487",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "Star Jewelry 「 克拉閃耀 雙享鑽到」",
+  "title": "12.Star Jewelry 「 克拉閃耀 雙享鑽到」",
   "aliases": [],
   "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3731",
   "period_start": "2026-10-01",
@@ -949,37 +1364,14 @@
   "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "99c6a0d15d51511d",
-  "observed_at": "2026-11-03T08:29:14+08:00",
-  "stale": false
- },
- {
-  "id": "chb-8c288793f0",
-  "bank_id": "chb",
-  "bank_name": "彰化銀行",
-  "title": "【線上購物】網購平台10月優惠活動",
-  "aliases": [],
-  "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3450",
-  "period_start": null,
-  "period_end": null,
-  "summary": "",
-  "category": "購物消費",
-  "registration": "unknown",
-  "registration_quote": "",
-  "subs": [],
-  "portal_url": "https://www.bankchb.com/frontend/CampaignLog.jsp",
-  "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
-  "review": [
-   "官方頁面沒有可讀的條款文字（可能是圖片或已下架），請直接查看活動頁"
-  ],
-  "content_hash": "6006afefdffbbc00",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
   "id": "chb-908e88e85b",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "彰銀卡友享受旅行．高鐵假期9折",
+  "title": "8.彰銀卡友享受旅行．高鐵假期9折",
   "aliases": [],
   "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3404",
   "period_start": "2026-01-01",
@@ -993,37 +1385,14 @@
   "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "6b18d447cd37611d",
-  "observed_at": "2026-11-03T08:29:14+08:00",
-  "stale": false
- },
- {
-  "id": "chb-92dd1ae1cd",
-  "bank_id": "chb",
-  "bank_name": "彰化銀行",
-  "title": "【線上購物】Yahoo購物10月促刷活動",
-  "aliases": [],
-  "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3703",
-  "period_start": null,
-  "period_end": null,
-  "summary": "",
-  "category": "購物消費",
-  "registration": "unknown",
-  "registration_quote": "",
-  "subs": [],
-  "portal_url": "https://www.bankchb.com/frontend/CampaignLog.jsp",
-  "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
-  "review": [
-   "官方頁面沒有可讀的條款文字（可能是圖片或已下架），請直接查看活動頁"
-  ],
-  "content_hash": "ca1506600aaf0424",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
   "id": "chb-942415e676",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "【保險/費用】繳學費~刷彰銀卡最輕鬆",
+  "title": "10.【保險/費用】繳學費~刷彰銀卡最輕鬆",
   "aliases": [],
   "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3400",
   "period_start": "2026-07-01",
@@ -1054,37 +1423,14 @@
   "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "77c1f450fc00291e",
-  "observed_at": "2026-11-03T08:29:14+08:00",
-  "stale": false
- },
- {
-  "id": "chb-9a9ec4795e",
-  "bank_id": "chb",
-  "bank_name": "彰化銀行",
-  "title": "【線上購物】淘寶網10月促刷活動",
-  "aliases": [],
-  "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3702",
-  "period_start": null,
-  "period_end": null,
-  "summary": "",
-  "category": "購物消費",
-  "registration": "unknown",
-  "registration_quote": "",
-  "subs": [],
-  "portal_url": "https://www.bankchb.com/frontend/CampaignLog.jsp",
-  "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
-  "review": [
-   "官方頁面沒有可讀的條款文字（可能是圖片或已下架），請直接查看活動頁"
-  ],
-  "content_hash": "cf6f75892ddea36c",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
   "id": "chb-9cf8a5dd58",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "利達租車OPEL/ MAZDA 刷彰銀卡不限平假日最低36折起",
+  "title": "3.利達租車OPEL/ MAZDA 刷彰銀卡不限平假日最低36折起",
   "aliases": [],
   "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3413",
   "period_start": "2026-01-01",
@@ -1098,14 +1444,14 @@
   "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "bb59f08179a12279",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
   "id": "chb-9decee447b",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "彰銀卡在手，寵愛全都有",
+  "title": "16.彰銀卡在手，寵愛全都有",
   "aliases": [],
   "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3679",
   "period_start": "2026-09-01",
@@ -1113,35 +1459,37 @@
   "summary": "",
   "category": "其他優惠",
   "registration": "required",
-  "registration_quote": "正卡持卡人須於活動指定登錄期間於彰化銀行網站完成登錄作業",
+  "registration_quote": "未完成登錄者，恕無法參加本活動",
   "subs": [
    {
     "name": "",
     "slots": [],
-    "rules": [],
+    "rules": [
+     "單筆消費滿額並每月完成登錄"
+    ],
     "reregister": "each_period",
     "reregister_quote": "單筆消費滿額並每月完成登錄",
     "order": "unknown",
     "order_quote": "",
     "quota": 500,
     "quota_quote": "每月限量500名",
-    "review": []
+    "review": [
+     "登錄時間為相對規則（例如消費後幾日內），沒有固定時點"
+    ]
    }
   ],
   "portal_url": "https://www.bankchb.com/frontend/CampaignLog.jsp",
   "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
-  "review": [
-   "需登錄但官方未寫登錄時點"
-  ],
+  "review": [],
   "content_hash": "de4fe3ba11a17420",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
   "id": "chb-9e69d5781c",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "Budget Rent A Car汽車租賃公司 × JCB 優惠活動",
+  "title": "19.Budget Rent A Car汽車租賃公司 × JCB 優惠活動",
   "aliases": [],
   "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3740",
   "period_start": null,
@@ -1155,14 +1503,64 @@
   "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "9f0e0033f923d72a",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "observed_at": "2026-11-05T13:14:49+08:00",
+  "stale": false
+ },
+ {
+  "id": "chb-a3ec699627",
+  "bank_id": "chb",
+  "bank_name": "彰化銀行",
+  "title": "24.【百貨購物】誠品線上 滿額登錄送刷卡金",
+  "aliases": [],
+  "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3769",
+  "period_start": "2026-11-01",
+  "period_end": "2026-11-30",
+  "summary": "",
+  "category": "購物消費",
+  "registration": "required",
+  "registration_quote": "正卡持卡人需於開放登錄日(11/1-11/30)至彰化銀行官網之活動登錄專區登錄",
+  "subs": [
+   {
+    "name": "",
+    "slots": [
+     {
+      "start": "2026-11-01T00:00:00+08:00",
+      "end": "2026-11-30T23:59:00+08:00",
+      "kind": "range",
+      "origin": "explicit",
+      "precision": "day",
+      "holiday_shifted": false,
+      "note": "",
+      "evidence": {
+       "quote": "正卡持卡人需於開放登錄日(11/1-11/30)至彰化銀行官網之活動登錄專區登錄",
+       "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3769"
+      }
+     }
+    ],
+    "rules": [
+     "正卡持卡人需於開放登錄日(11/1-11/30)至彰化銀行官網之活動登錄專區登錄"
+    ],
+    "reregister": "unknown",
+    "reregister_quote": "",
+    "order": "unknown",
+    "order_quote": "",
+    "quota": null,
+    "quota_quote": "",
+    "review": []
+   }
+  ],
+  "portal_url": "https://www.bankchb.com/frontend/CampaignLog.jsp",
+  "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
+  "review": [],
+  "content_hash": "8f0521d5eb079644",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
   "id": "chb-a5e31ee367",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "【行動支付】行動支付刷My樂 筆筆皆有禮",
+  "title": "15.【行動支付】行動支付刷My樂 筆筆皆有禮",
   "aliases": [],
   "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3384",
   "period_start": "2026-07-01",
@@ -1218,14 +1616,14 @@
   "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "fddf527d2c790a68",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
   "id": "chb-a610c9d723",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "TOYOTA Rent a Car × JCB Special Offers",
+  "title": "18.TOYOTA Rent a Car × JCB Special Offers",
   "aliases": [],
   "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3741",
   "period_start": "2026-04-01",
@@ -1239,14 +1637,14 @@
   "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "bccea4694abe8dec",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
   "id": "chb-a6417e7375",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "刷彰銀卡享Club Med全系列95折",
+  "title": "7.刷彰銀卡享Club Med全系列95折",
   "aliases": [],
   "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3405",
   "period_start": "2026-01-01",
@@ -1260,14 +1658,136 @@
   "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "c06e0bdb3be90350",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "observed_at": "2026-11-05T13:14:49+08:00",
+  "stale": false
+ },
+ {
+  "id": "chb-a7425cf12e",
+  "bank_id": "chb",
+  "bank_name": "彰化銀行",
+  "title": "8.億進寢具『億進買好眠，彰銀送好禮』",
+  "aliases": [],
+  "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3742",
+  "period_start": "2026-11-01",
+  "period_end": "2027-02-28",
+  "summary": "",
+  "category": "其他優惠",
+  "registration": "required",
+  "registration_quote": "未完成登錄者，恕無法參加本活動",
+  "subs": [
+   {
+    "name": "活動一:【單筆滿額現場贈新光三越禮券100元】",
+    "slots": [],
+    "rules": [],
+    "reregister": "unknown",
+    "reregister_quote": "",
+    "order": "unknown",
+    "order_quote": "",
+    "quota": null,
+    "quota_quote": "",
+    "review": []
+   },
+   {
+    "name": "活動二:【綁定台灣PAY信用卡，單筆消費滿額贈】",
+    "slots": [
+     {
+      "start": "2026-11-01T10:00:00+08:00",
+      "end": "2026-11-30T23:59:00+08:00",
+      "kind": "range",
+      "origin": "rule",
+      "precision": "minute",
+      "holiday_shifted": false,
+      "note": "",
+      "evidence": {
+       "quote": "當月活動於當月1號10:00(以本行電腦系統時間為準)開放登錄至當月月底",
+       "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3742"
+      }
+     },
+     {
+      "start": "2026-12-01T10:00:00+08:00",
+      "end": "2026-12-31T23:59:00+08:00",
+      "kind": "range",
+      "origin": "rule",
+      "precision": "minute",
+      "holiday_shifted": false,
+      "note": "",
+      "evidence": {
+       "quote": "當月活動於當月1號10:00(以本行電腦系統時間為準)開放登錄至當月月底",
+       "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3742"
+      }
+     },
+     {
+      "start": "2027-01-01T10:00:00+08:00",
+      "end": "2027-01-31T23:59:00+08:00",
+      "kind": "range",
+      "origin": "rule",
+      "precision": "minute",
+      "holiday_shifted": false,
+      "note": "",
+      "evidence": {
+       "quote": "當月活動於當月1號10:00(以本行電腦系統時間為準)開放登錄至當月月底",
+       "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3742"
+      }
+     },
+     {
+      "start": "2027-02-01T10:00:00+08:00",
+      "end": "2027-02-28T23:59:00+08:00",
+      "kind": "range",
+      "origin": "rule",
+      "precision": "minute",
+      "holiday_shifted": false,
+      "note": "",
+      "evidence": {
+       "quote": "當月活動於當月1號10:00(以本行電腦系統時間為準)開放登錄至當月月底",
+       "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3742"
+      }
+     }
+    ],
+    "rules": [
+     "當月活動於當月1號10:00(以本行電腦系統時間為準)開放登錄至當月月底"
+    ],
+    "reregister": "each_period",
+    "reregister_quote": "當月活動於當月1號10:00(以本行電腦系統時間為準)開放登錄至當月月底",
+    "order": "unknown",
+    "order_quote": "",
+    "quota": 100,
+    "quota_quote": "每月限量100名",
+    "review": []
+   }
+  ],
+  "portal_url": "https://www.bankchb.com/frontend/CampaignLog.jsp",
+  "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
+  "review": [],
+  "content_hash": "1d459aa30dc3216f",
+  "observed_at": "2026-11-05T13:14:49+08:00",
+  "stale": false
+ },
+ {
+  "id": "chb-a7d26a5185",
+  "bank_id": "chb",
+  "bank_name": "彰化銀行",
+  "title": "21.【百貨購物】遠東SOGO百貨週年慶 刷彰銀信用卡 享當日最高54,000元回饋",
+  "aliases": [],
+  "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3749",
+  "period_start": null,
+  "period_end": null,
+  "summary": "",
+  "category": "購物消費",
+  "registration": "not_required",
+  "registration_quote": "",
+  "subs": [],
+  "portal_url": "https://www.bankchb.com/frontend/CampaignLog.jsp",
+  "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
+  "review": [],
+  "content_hash": "8c3d30b430f394ef",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
   "id": "chb-ae72d6380b",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "【保險/稅費】刷卡繳保費超划算 回饋分期自由選",
+  "title": "9.【保險/稅費】刷卡繳保費超划算 回饋分期自由選",
   "aliases": [],
   "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3399",
   "period_start": "2026-01-01",
@@ -1298,14 +1818,14 @@
   "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "2dadad3292e9f596",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
   "id": "chb-b186b42640",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "日本旅遊刷 Visa全球精品名牌享最高10%現金回饋！",
+  "title": "7.日本旅遊刷 Visa全球精品名牌享最高10%現金回饋！",
   "aliases": [],
   "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3650",
   "period_start": null,
@@ -1313,7 +1833,7 @@
   "summary": "",
   "category": "其他優惠",
   "registration": "required",
-  "registration_quote": "持卡人在Visa活動頁面進行報名，報名成功後方可參與本活動",
+  "registration_quote": "持卡人在Visa活動頁面進行報名，報名成功後方可參與本活動；未報名、報名不成功",
   "subs": [
    {
     "name": "",
@@ -1336,14 +1856,14 @@
   "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "819786c9f9d792d6",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
   "id": "chb-b323ee1d66",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "刷彰銀卡海外上網不間斷，iVideo全站商品9折優惠！",
+  "title": "5.刷彰銀卡海外上網不間斷，iVideo全站商品9折優惠！",
   "aliases": [],
   "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3407",
   "period_start": "2026-01-01",
@@ -1357,14 +1877,52 @@
   "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "9963d17a574bae21",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "observed_at": "2026-11-05T13:14:49+08:00",
+  "stale": false
+ },
+ {
+  "id": "chb-b4b33f1f7b",
+  "bank_id": "chb",
+  "bank_name": "彰化銀行",
+  "title": "19.【百貨購物】Mitsui Shopping Park LaLaport台中 週年慶檔期",
+  "aliases": [],
+  "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3723",
+  "period_start": "2026-10-23",
+  "period_end": "2026-11-22",
+  "summary": "",
+  "category": "購物消費",
+  "registration": "required",
+  "registration_quote": "正卡持卡人需於活動期間至彰化銀行官網之活動登錄專區登錄",
+  "subs": [
+   {
+    "name": "",
+    "slots": [],
+    "rules": [
+     "正卡持卡人需於活動期間至彰化銀行官網之活動登錄專區登錄"
+    ],
+    "reregister": "unknown",
+    "reregister_quote": "",
+    "order": "unknown",
+    "order_quote": "",
+    "quota": null,
+    "quota_quote": "",
+    "review": [
+     "規則無法驗證（year=2026 在引句中找不到）：正卡持卡人需於活動期間至彰化銀行官網之活動登錄專區登錄"
+    ]
+   }
+  ],
+  "portal_url": "https://www.bankchb.com/frontend/CampaignLog.jsp",
+  "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
+  "review": [],
+  "content_hash": "5c7cb708563b7262",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
   "id": "chb-b5eb820863",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "彰銀卡友旅遊享優惠~「OTA旅遊平台網站」",
+  "title": "4.彰銀卡友旅遊享優惠~「OTA旅遊平台網站」",
   "aliases": [],
   "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3501",
   "period_start": null,
@@ -1378,14 +1936,14 @@
   "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "ac93c71f289446b8",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
   "id": "chb-c355c9c341",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "【3C/通訊】數位生活，刷彰銀卡最smart",
+  "title": "16.【3C/通訊】數位生活，刷彰銀卡最smart",
   "aliases": [],
   "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3381",
   "period_start": "2026-07-01",
@@ -1416,76 +1974,49 @@
   "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "a19b7fd9ed9880a1",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
-  "id": "chb-c393e406c1",
+  "id": "chb-c7b7f16806",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "【百貨購物】彰銀信用卡專屬禮遇 於麗晶精品最高享9,000元回饋",
+  "title": "5.【線上購物】網購平台11月優惠活動",
   "aliases": [],
-  "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3721",
+  "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3496",
   "period_start": null,
   "period_end": null,
   "summary": "",
   "category": "購物消費",
-  "registration": "unknown",
+  "registration": "not_required",
   "registration_quote": "",
   "subs": [],
   "portal_url": "https://www.bankchb.com/frontend/CampaignLog.jsp",
   "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
-  "review": [
-   "官方頁面沒有可讀的條款文字（可能是圖片或已下架），請直接查看活動頁"
-  ],
-  "content_hash": "0aebdb98acaf0f50",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "review": [],
+  "content_hash": "a7fea8e801ef25a2",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
-  "id": "chb-c5b6a5cc87",
+  "id": "chb-cffe019c52",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "『Now on JAPAN!』在日本人氣主題樂園刷彰銀JCB享最高20%現金回饋",
+  "title": "1.秋季旅遊節~易遊網刷彰銀卡滿額現折800元！",
   "aliases": [],
-  "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3683",
+  "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3772",
   "period_start": null,
   "period_end": null,
   "summary": "",
-  "category": "其他優惠",
-  "registration": "unknown",
+  "category": "旅遊住宿",
+  "registration": "not_required",
   "registration_quote": "",
   "subs": [],
   "portal_url": "https://www.bankchb.com/frontend/CampaignLog.jsp",
   "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
-  "review": [
-   "官方頁面沒有可讀的條款文字（可能是圖片或已下架），請直接查看活動頁"
-  ],
-  "content_hash": "00501a6d3ee02c7c",
-  "observed_at": "2026-11-03T08:29:14+08:00",
-  "stale": false
- },
- {
-  "id": "chb-d2692c0f0c",
-  "bank_id": "chb",
-  "bank_name": "彰化銀行",
-  "title": "【線上購物】MOMO全通路10月促刷活動",
-  "aliases": [],
-  "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3699",
-  "period_start": null,
-  "period_end": null,
-  "summary": "",
-  "category": "購物消費",
-  "registration": "unknown",
-  "registration_quote": "",
-  "subs": [],
-  "portal_url": "https://www.bankchb.com/frontend/CampaignLog.jsp",
-  "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
-  "review": [
-   "官方頁面沒有可讀的條款文字（可能是圖片或已下架），請直接查看活動頁"
-  ],
-  "content_hash": "a0a2bf6cd603e104",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "review": [],
+  "content_hash": "f05a09f3a324f12b",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
@@ -1506,14 +2037,35 @@
   "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "e1c625c9febd5596",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "observed_at": "2026-11-05T13:14:49+08:00",
+  "stale": false
+ },
+ {
+  "id": "chb-d90cb1a1af",
+  "bank_id": "chb",
+  "bank_name": "彰化銀行",
+  "title": "23.【百貨購物】彰化銀行與夢時代購物中心~卡友集合享好康",
+  "aliases": [],
+  "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3770",
+  "period_start": "2026-11-01",
+  "period_end": "2026-11-30",
+  "summary": "",
+  "category": "購物消費",
+  "registration": "not_required",
+  "registration_quote": "",
+  "subs": [],
+  "portal_url": "https://www.bankchb.com/frontend/CampaignLog.jsp",
+  "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
+  "review": [],
+  "content_hash": "0d1d36ee4682c9a6",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
   "id": "chb-dd5dbbb7fb",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "出國首選彰銀卡，易遊網機票天天折！",
+  "title": "15.出國首選彰銀卡，易遊網機票天天折！",
   "aliases": [],
   "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3670",
   "period_start": "2026-08-10",
@@ -1527,14 +2079,14 @@
   "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "28bfc6afe14a8f2f",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
   "id": "chb-ec60556c53",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "Klook刷彰銀卡最高16%優惠，旅遊海外現省千元！",
+  "title": "9.Klook刷彰銀卡最高16%優惠，旅遊海外現省千元！",
   "aliases": [],
   "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3410",
   "period_start": "2026-01-01",
@@ -1548,14 +2100,14 @@
   "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "0a30b7760b91a775",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
   "id": "chb-ef82804b6b",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "彰銀Visa御璽卡超利嗨！海外、日、韓消費最高5%回饋",
+  "title": "4.彰銀Visa御璽卡超利嗨！海外、日、韓消費最高5%回饋",
   "aliases": [],
   "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3391",
   "period_start": "2026-07-01",
@@ -1563,37 +2115,35 @@
   "summary": "",
   "category": "旅遊住宿",
   "registration": "required",
-  "registration_quote": "每戶加碼上限1,000元/月（須登錄）",
+  "registration_quote": "正卡持卡人須於活動指定登錄期間於彰化銀行網站完成登錄作業",
   "subs": [
    {
     "name": "",
     "slots": [],
-    "rules": [
-     "正卡持卡人須於活動指定登錄期間於彰化銀行網站完成登錄作業"
-    ],
+    "rules": [],
     "reregister": "unknown",
     "reregister_quote": "",
     "order": "unknown",
     "order_quote": "",
     "quota": null,
     "quota_quote": "",
-    "review": [
-     "登錄時間為相對規則（例如消費後幾日內），沒有固定時點"
-    ]
+    "review": []
    }
   ],
   "portal_url": "https://www.bankchb.com/frontend/CampaignLog.jsp",
   "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
-  "review": [],
+  "review": [
+   "需登錄但官方未寫登錄時點"
+  ],
   "content_hash": "5aa299c516f3d2ad",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
   "id": "chb-f1b6b6e73b",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "可樂旅遊跟團玩世界，刷Visa無限卡/商旅御璽Fun心卡最高折26,000元！",
+  "title": "16.可樂旅遊跟團玩世界，刷Visa無限卡/商旅御璽Fun心卡最高折26,000元！",
   "aliases": [],
   "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3524",
   "period_start": "2026-05-01",
@@ -1607,37 +2157,14 @@
   "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "a544d696ecf99328",
-  "observed_at": "2026-11-03T08:29:14+08:00",
-  "stale": false
- },
- {
-  "id": "chb-f4a4063763",
-  "bank_id": "chb",
-  "bank_name": "彰化銀行",
-  "title": "全國電子10月「彰享生活 家電煥新季」",
-  "aliases": [],
-  "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3709",
-  "period_start": null,
-  "period_end": null,
-  "summary": "",
-  "category": "其他優惠",
-  "registration": "unknown",
-  "registration_quote": "",
-  "subs": [],
-  "portal_url": "https://www.bankchb.com/frontend/CampaignLog.jsp",
-  "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
-  "review": [
-   "官方頁面沒有可讀的條款文字（可能是圖片或已下架），請直接查看活動頁"
-  ],
-  "content_hash": "fea8c9fc96f84dc5",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
   "id": "chb-f84582c659",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "【藝文娛樂】刷Visa商旅御璽Fun心卡，追星/藝文購票最高享3%回饋！",
+  "title": "17.【藝文娛樂】刷Visa商旅御璽Fun心卡，追星/藝文購票最高享3%回饋！",
   "aliases": [],
   "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3531",
   "period_start": "2026-05-12",
@@ -1645,7 +2172,7 @@
   "summary": "",
   "category": "購物消費",
   "registration": "required",
-  "registration_quote": "正卡持卡人須於活動登錄期間於彰化銀行網站 (彰銀官網--信用卡--優惠訊息/登錄--活動登錄) 成功完成登錄",
+  "registration_quote": "未完成登錄者，恕無法參加本活動",
   "subs": [
    {
     "name": "",
@@ -1666,14 +2193,120 @@
    "需登錄但官方未寫登錄時點"
   ],
   "content_hash": "0cecfb91ae745c1c",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "observed_at": "2026-11-05T13:14:49+08:00",
+  "stale": false
+ },
+ {
+  "id": "chb-f8c15191a4",
+  "bank_id": "chb",
+  "bank_name": "彰化銀行",
+  "title": "4.【線上購物】Yahoo購物11月促刷活動",
+  "aliases": [],
+  "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3755",
+  "period_start": null,
+  "period_end": null,
+  "summary": "",
+  "category": "購物消費",
+  "registration": "required",
+  "registration_quote": "須由持卡人於指定期間透過彰化銀行官網信用卡活動登錄專區，於指定日完成登錄作業始符合資格",
+  "subs": [
+   {
+    "name": "活動一:「全月活動」",
+    "slots": [
+     {
+      "start": "2026-11-28T10:00:00+08:00",
+      "end": "2026-11-30T23:59:00+08:00",
+      "kind": "range",
+      "origin": "explicit",
+      "precision": "minute",
+      "holiday_shifted": false,
+      "note": "",
+      "evidence": {
+       "quote": "【全月活動】指定登錄日:2026/11/28 10:00至2026/11/30 23:59，登錄額滿即提前終止。",
+       "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3755"
+      }
+     }
+    ],
+    "rules": [
+     "【全月活動】指定登錄日:2026/11/28 10:00至2026/11/30 23:59，登錄額滿即提前終止。"
+    ],
+    "reregister": "unknown",
+    "reregister_quote": "",
+    "order": "unknown",
+    "order_quote": "",
+    "quota": null,
+    "quota_quote": "",
+    "review": []
+   },
+   {
+    "name": "活動二:「雙11大促」",
+    "slots": [
+     {
+      "start": "2026-11-28T10:00:00+08:00",
+      "end": "2026-11-30T23:59:00+08:00",
+      "kind": "range",
+      "origin": "explicit",
+      "precision": "minute",
+      "holiday_shifted": false,
+      "note": "",
+      "evidence": {
+       "quote": "【雙11大促】指定登錄日:2026/11/28 10:00至2026/11/30 23:59，登錄額滿即提前終止。",
+       "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3755"
+      }
+     }
+    ],
+    "rules": [
+     "【雙11大促】指定登錄日:2026/11/28 10:00至2026/11/30 23:59，登錄額滿即提前終止。"
+    ],
+    "reregister": "unknown",
+    "reregister_quote": "",
+    "order": "unknown",
+    "order_quote": "",
+    "quota": null,
+    "quota_quote": "",
+    "review": []
+   },
+   {
+    "name": "活動三:加碼回饋「網購瘋狂購・電商消費月」",
+    "slots": [
+     {
+      "start": "2026-11-01T00:00:00+08:00",
+      "end": "2026-11-30T23:59:00+08:00",
+      "kind": "range",
+      "origin": "explicit",
+      "precision": "day",
+      "holiday_shifted": false,
+      "note": "",
+      "evidence": {
+       "quote": "【網購瘋狂購・電商消費月】指定登錄日:2026/11/1至2026/11/30。",
+       "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3755"
+      }
+     }
+    ],
+    "rules": [
+     "【網購瘋狂購・電商消費月】指定登錄日:2026/11/1至2026/11/30。"
+    ],
+    "reregister": "unknown",
+    "reregister_quote": "",
+    "order": "unknown",
+    "order_quote": "",
+    "quota": null,
+    "quota_quote": "",
+    "review": []
+   }
+  ],
+  "portal_url": "https://www.bankchb.com/frontend/CampaignLog.jsp",
+  "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
+  "review": [],
+  "content_hash": "1e0ef701f44ed4bc",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
   "id": "chb-fbd6018a86",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "刷彰銀卡海外上網好方便，GLOBAL WiFi 享優惠",
+  "title": "6.刷彰銀卡海外上網好方便，GLOBAL WiFi 享優惠",
   "aliases": [],
   "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3406",
   "period_start": "2026-01-01",
@@ -1687,14 +2320,14 @@
   "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "033e97c5000c529d",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  },
  {
   "id": "chb-fc7fc27bc4",
   "bank_id": "chb",
   "bank_name": "彰化銀行",
-  "title": "【交通/加油】搭高鐵刷彰銀Visa無限卡，享最高10%回饋！",
+  "title": "12.【交通/加油】搭高鐵刷彰銀Visa無限卡，享最高10%回饋！",
   "aliases": [],
   "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3529",
   "period_start": "2026-05-12",
@@ -1723,30 +2356,7 @@
    "需登錄但官方未寫登錄時點"
   ],
   "content_hash": "7a4f0ff424fbfe40",
-  "observed_at": "2026-11-03T08:29:14+08:00",
-  "stale": false
- },
- {
-  "id": "chb-fe7cab689b",
-  "bank_id": "chb",
-  "bank_name": "彰化銀行",
-  "title": "【線上購物】PChome線上購物10月促刷活動",
-  "aliases": [],
-  "url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3700",
-  "period_start": null,
-  "period_end": null,
-  "summary": "",
-  "category": "購物消費",
-  "registration": "unknown",
-  "registration_quote": "",
-  "subs": [],
-  "portal_url": "https://www.bankchb.com/frontend/CampaignLog.jsp",
-  "portal_hint": "彰化銀行官網「活動登錄」頁，找到對應活動登錄",
-  "review": [
-   "官方頁面沒有可讀的條款文字（可能是圖片或已下架），請直接查看活動頁"
-  ],
-  "content_hash": "774151e95a1de6de",
-  "observed_at": "2026-11-03T08:29:14+08:00",
+  "observed_at": "2026-11-05T13:14:49+08:00",
   "stale": false
  }
 ]

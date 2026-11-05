@@ -1,0 +1,237 @@
+{
+ "key": "04a89ffc474dbbf081f363b4",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-05T05:23:09+00:00",
+ "title": "momo卡11月店內活動",
+ "duration_ms": 12385,
+ "cost_usd": 0.049470200000000006,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "本活動需於Fubon+台北富邦行動銀行App登錄活動"
+  },
+  "subs": [
+   {
+    "name": "【雙11暖身加碼】",
+    "rules": [
+     {
+      "quote": "登記時間:自2026/11/18 15點起，至2026/11/30 23時止，登錄額滿即截止。",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 11,
+       "day": 18,
+       "hour": 15,
+       "minute": null
+      },
+      "end": {
+       "year": 2026,
+       "month": 11,
+       "day": 30,
+       "hour": 23,
+       "minute": null
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 2200,
+     "quote": "登錄名額2,200名"
+    }
+   },
+   {
+    "name": "【雙11正檔加碼】",
+    "rules": [
+     {
+      "quote": "登記時間:自2026/11/19 15點起，至2026/11/30 23時止，登錄額滿即截止。",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 11,
+       "day": 19,
+       "hour": 15,
+       "minute": null
+      },
+      "end": {
+       "year": 2026,
+       "month": 11,
+       "day": 30,
+       "hour": 23,
+       "minute": null
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 1600,
+     "quote": "登錄名額1,600名"
+    }
+   },
+   {
+    "name": "【雙11卡友日加碼】",
+    "rules": [
+     {
+      "quote": "登記時間:自2026/11/16 15點起，至2026/11/30 23時止，登錄額滿即截止。",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 11,
+       "day": 16,
+       "hour": 15,
+       "minute": null
+      },
+      "end": {
+       "year": 2026,
+       "month": 11,
+       "day": 30,
+       "hour": 23,
+       "minute": null
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 1000,
+     "quote": "登錄名額1,000名，2026/11/16"
+    }
+   },
+   {
+    "name": "【雙11組隊加碼】",
+    "rules": [
+     {
+      "quote": "登記時間:自2026/11/17 15點起，至2026/11/30 23時止，登錄額滿即截止。",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 11,
+       "day": 17,
+       "hour": 15,
+       "minute": null
+      },
+      "end": {
+       "year": 2026,
+       "month": 11,
+       "day": 30,
+       "hour": 23,
+       "minute": null
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 1000,
+     "quote": "登錄名額1,000名，2026/11/17"
+    }
+   },
+   {
+    "name": "【全月分期送】",
+    "rules": [
+     {
+      "quote": "登記時間:自2026/11/24 15點起，至2026/11/30 23時止，登錄額滿即截止。",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 11,
+       "day": 24,
+       "hour": 15,
+       "minute": null
+      },
+      "end": {
+       "year": 2026,
+       "month": 11,
+       "day": 30,
+       "hour": 23,
+       "minute": null
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 1700,
+     "quote": "登錄名額1,700名"
+    }
+   }
+  ]
+ }
+}

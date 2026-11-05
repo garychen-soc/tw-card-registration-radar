@@ -1,28 +1,17 @@
 {
- "observed_at": "2026-11-03T08:29:14+08:00",
- "llm_calls": 0,
+ "observed_at": "2026-11-05T13:14:49+08:00",
+ "llm_calls": 56,
  "llm_failures": 0,
  "publishable": true,
  "messages": [],
  "sources": [
   {
-   "bank_id": "obank",
-   "bank_name": "王道銀行",
-   "status": "ok",
-   "entry_url": "https://www.o-bank.com/retail/event/event-compaign",
-   "stubs": 15,
-   "activities": 14,
-   "detail_failures": 0,
-   "message": "",
-   "carried": 0
-  },
-  {
    "bank_id": "cathay",
    "bank_name": "國泰世華",
    "status": "ok",
    "entry_url": "https://www.cathay-cube.com.tw/cathaybk/personal/event/overview",
-   "stubs": 148,
-   "activities": 145,
+   "stubs": 150,
+   "activities": 146,
    "detail_failures": 0,
    "message": "",
    "carried": 0
@@ -32,8 +21,8 @@
    "bank_name": "彰化銀行",
    "status": "ok",
    "entry_url": "https://www.bankchb.com/frontend/bonusDetail.jsp?id=3657",
-   "stubs": 66,
-   "activities": 63,
+   "stubs": 67,
+   "activities": 65,
    "detail_failures": 0,
    "message": "",
    "carried": 0
@@ -54,8 +43,8 @@
    "bank_name": "星展銀行",
    "status": "ok",
    "entry_url": "https://www.dbs.com.tw/personal-zh/cards/cards-offers/default.page",
-   "stubs": 133,
-   "activities": 73,
+   "stubs": 134,
+   "activities": 74,
    "detail_failures": 0,
    "message": "",
    "carried": 0
@@ -65,8 +54,8 @@
    "bank_name": "玉山銀行",
    "status": "ok",
    "entry_url": "https://www.esunbank.com/zh-tw/personal/credit-card/discount/shops",
-   "stubs": 168,
-   "activities": 168,
+   "stubs": 170,
+   "activities": 170,
    "detail_failures": 0,
    "message": "",
    "carried": 0
@@ -83,12 +72,23 @@
    "carried": 0
   },
   {
+   "bank_id": "hncb",
+   "bank_name": "華南銀行",
+   "status": "ok",
+   "entry_url": "https://www.hncb.com.tw/wps/portal/HNCB/card/?1dmy&urile=wcm%3apath%3a/wps/wcm/connect/hncb_v2/site_map/hncb/per_finance/service/public_item/best_offer",
+   "stubs": 13,
+   "activities": 8,
+   "detail_failures": 0,
+   "message": "",
+   "carried": 0
+  },
+  {
    "bank_id": "kgi",
    "bank_name": "凱基銀行",
    "status": "ok",
    "entry_url": "https://www.kgibank.com.tw/zh-tw/personal/promotion/card-campaign",
-   "stubs": 42,
-   "activities": 40,
+   "stubs": 47,
+   "activities": 45,
    "detail_failures": 0,
    "message": "",
    "carried": 0
@@ -98,8 +98,19 @@
    "bank_name": "兆豐銀行",
    "status": "ok",
    "entry_url": "https://www.megabank.com.tw/personal/credit-card/event/overview",
-   "stubs": 257,
-   "activities": 253,
+   "stubs": 255,
+   "activities": 251,
+   "detail_failures": 0,
+   "message": "",
+   "carried": 0
+  },
+  {
+   "bank_id": "obank",
+   "bank_name": "王道銀行",
+   "status": "ok",
+   "entry_url": "https://www.o-bank.com/retail/event/event-compaign",
+   "stubs": 14,
+   "activities": 14,
    "detail_failures": 0,
    "message": "",
    "carried": 0
@@ -127,12 +138,23 @@
    "carried": 0
   },
   {
+   "bank_id": "sunny",
+   "bank_name": "陽信銀行",
+   "status": "ok",
+   "entry_url": "https://www.sunnybank.com.tw/net/Main/Page/6?onews=1",
+   "stubs": 48,
+   "activities": 48,
+   "detail_failures": 0,
+   "message": "",
+   "carried": 0
+  },
+  {
    "bank_id": "taipei_fubon",
    "bank_name": "台北富邦銀行",
    "status": "ok",
    "entry_url": "https://cardpromote.taipeifubon.com.tw/promotion/Result",
-   "stubs": 173,
-   "activities": 168,
+   "stubs": 176,
+   "activities": 171,
    "detail_failures": 0,
    "message": "",
    "carried": 0
@@ -142,8 +164,8 @@
    "bank_name": "台新銀行",
    "status": "ok",
    "entry_url": "https://mkpcard.taishinbank.com.tw/tscccms/promotion/offerList/A",
-   "stubs": 194,
-   "activities": 191,
+   "stubs": 201,
+   "activities": 198,
    "detail_failures": 0,
    "message": "",
    "carried": 0
@@ -164,32 +186,21 @@
    "bank_name": "聯邦銀行",
    "status": "ok",
    "entry_url": "https://card.ubot.com.tw/CardActivity",
-   "stubs": 97,
-   "activities": 95,
+   "stubs": 100,
+   "activities": 97,
    "detail_failures": 0,
    "message": "",
    "carried": 0
   },
   {
-   "bank_id": "hncb",
-   "bank_name": "華南銀行",
-   "status": "ok",
-   "entry_url": "https://www.hncb.com.tw/wps/portal/HNCB/card/?1dmy&urile=wcm%3apath%3a/wps/wcm/connect/hncb_v2/site_map/hncb/per_finance/service/public_item/best_offer",
-   "stubs": 13,
-   "activities": 8,
+   "bank_id": "yuanta",
+   "bank_name": "元大銀行",
+   "status": "blocked",
+   "entry_url": "https://www.yuantabank.com.tw/bank/creditCard/promotionActivity/list.do",
+   "stubs": 0,
+   "activities": 0,
    "detail_failures": 0,
-   "message": "",
-   "carried": 0
-  },
-  {
-   "bank_id": "sunny",
-   "bank_name": "陽信銀行",
-   "status": "ok",
-   "entry_url": "https://www.sunnybank.com.tw/net/Main/Page/6?onews=1",
-   "stubs": 48,
-   "activities": 48,
-   "detail_failures": 0,
-   "message": "",
+   "message": "來源拒絕自動化存取 https://www.yuantabank.com.tw/bank/creditCard/promotionActivity/list.do：HTTP 403（此類拒絕重試無效，需改用住宅 IP 或等官方解除限制）",
    "carried": 0
   }
  ]

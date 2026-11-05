@@ -1,0 +1,104 @@
+{
+ "key": "36a1e751c74841f9220fe4d9",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-05T05:22:28+00:00",
+ "title": "東震",
+ "duration_ms": 9392,
+ "cost_usd": 0.0368242,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "（限量，需登錄）"
+  },
+  "subs": [
+   {
+    "name": "分期新戶專屬回饋",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 1000,
+     "quote": "每月限量1,000名"
+    }
+   },
+   {
+    "name": "每月分期滿額禮",
+    "rules": [
+     {
+      "quote": "【11月活動】2026/12/15 15:00 起至2026/12/25 23:59",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 12,
+       "day": 15,
+       "hour": 15,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": 12,
+       "day": 25,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "【12月活動】2027/1/15 15:00 起至2027/1/25 23:59",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2027,
+       "month": 1,
+       "day": 15,
+       "hour": 15,
+       "minute": 0
+      },
+      "end": {
+       "year": 2027,
+       "month": 1,
+       "day": 25,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "each_period",
+     "quote": "亦非一次性登錄所有活動月份"
+    },
+    "order": {
+     "value": "retroactive_ok",
+     "quote": "當月消費須於次月指定時間至「星展Card+信用卡數位服務」登錄"
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

@@ -1,0 +1,81 @@
+{
+ "key": "f26eb9cc72a2bd2a4087c767",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-05T05:23:10+00:00",
+ "title": "MaiCoin聯名卡",
+ "duration_ms": 9252,
+ "cost_usd": 0.0687402,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "完成登錄享筆筆3%刷卡金"
+  },
+  "subs": [
+   {
+    "name": "Uber Eats、foodpanda",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 6000,
+     "quote": "限量登錄6,000名/月"
+    }
+   },
+   {
+    "name": "聯邦陪您輕鬆玩世界",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 12000,
+     "quote": "限量登錄12,000名/月"
+    }
+   },
+   {
+    "name": "一卡通多重活動(消費滿額)",
+    "rules": [
+     {
+      "quote": "參加本活動前須先至iPASS MONEY APP首頁右上角 「一卡通綠點 」＞登入iPASS MONEY帳戶＞同意加入一卡通綠點回饋",
+      "kind": "other",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "register_before_spend",
+     "quote": "須先同意加入一卡通綠點回饋，方可獲得本次活動回饋點數並開始累積一卡通綠點"
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

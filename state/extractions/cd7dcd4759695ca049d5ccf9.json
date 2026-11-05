@@ -1,0 +1,16 @@
+{
+ "key": "cd7dcd4759695ca049d5ccf9",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-05T05:22:57+00:00",
+ "title": "身心療癒 完善治療",
+ "duration_ms": 2259,
+ "cost_usd": 0.0189562,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "本活動免登錄，須以凱基信用卡或指定卡別消費方可享有優惠。"
+  },
+  "subs": []
+ }
+}

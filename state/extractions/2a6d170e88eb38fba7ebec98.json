@@ -1,0 +1,70 @@
+{
+ "key": "2a6d170e88eb38fba7ebec98",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-05T05:22:13+00:00",
+ "title": "8.億進寢具『億進買好眠，彰銀送好禮』",
+ "duration_ms": 7095,
+ "cost_usd": 0.0351982,
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "未完成登錄者，恕無法參加本活動"
+  },
+  "subs": [
+   {
+    "name": "活動一:【單筆滿額現場贈新光三越禮券100元】",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   },
+   {
+    "name": "活動二:【綁定台灣PAY信用卡，單筆消費滿額贈】",
+    "rules": [
+     {
+      "quote": "當月活動於當月1號10:00(以本行電腦系統時間為準)開放登錄至當月月底",
+      "kind": "monthly",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [
+       1
+      ],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": {
+       "hour": 10,
+       "minute": 0
+      },
+      "close_time": null,
+      "end_of_month": true
+     }
+    ],
+    "reregister": {
+     "value": "each_period",
+     "quote": "當月活動於當月1號10:00(以本行電腦系統時間為準)開放登錄至當月月底"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 100,
+     "quote": "每月限量100名"
+    }
+   }
+  ]
+ }
+}

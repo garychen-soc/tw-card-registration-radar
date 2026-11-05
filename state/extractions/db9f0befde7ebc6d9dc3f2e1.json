@@ -1,0 +1,16 @@
+{
+ "key": "db9f0befde7ebc6d9dc3f2e1",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-05T05:22:54+00:00",
+ "title": "一銀卡繳地價稅",
+ "duration_ms": 6199,
+ "cost_usd": 0.0225782,
+ "output": {
+  "registration": {
+   "value": "unclear",
+   "quote": "單筆繳稅金額滿5,000元(含)以上登錄享3期/6期0利率"
+  },
+  "subs": []
+ }
+}

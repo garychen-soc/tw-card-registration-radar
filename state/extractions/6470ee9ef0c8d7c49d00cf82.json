@@ -1,0 +1,16 @@
+{
+ "key": "6470ee9ef0c8d7c49d00cf82",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-05T05:22:44+00:00",
+ "title": "OPEN錢包綁定玉山信用卡",
+ "duration_ms": 3479,
+ "cost_usd": 0.024116199999999997,
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "回饋點數將於付款成功後即時入點"
+  },
+  "subs": []
+ }
+}
