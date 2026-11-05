@@ -53,6 +53,9 @@ class Fetched:
     bank_id: str
     health: SourceHealth
     docs: list[tuple[Stub, str]] = field(default_factory=list)
+    # 本輪讀取不完整的線索，供 _carry_missing 判斷哪些舊活動該沿用
+    failed_urls: set[str] = field(default_factory=set)
+    category_failed: bool = False
 
 
 @dataclass
@@ -96,9 +99,11 @@ def fetch_bank(bank_id: str) -> Fetched:
                     out.docs.append((stub, terms.text))
                 except TransportError as exc:
                     failures += 1
+                    out.failed_urls.add(stub.url)
                     log.warning("%s 明細失敗 %s：%s", bank_id, stub.url, exc)
             health.detail_failures = failures
             partial = [s for s in adapter.skipped if s.startswith("分類失敗")]
+            out.category_failed = bool(partial)
             if partial or (stubs and failures > len(stubs) * 0.2):
                 health.status = "partial"
                 health.message = "；".join(partial[:3]) or f"{failures} 筆明細讀取失敗"
@@ -123,6 +128,8 @@ def save_docs(item: Fetched) -> None:
     payload = {
         "health": item.health.model_dump(mode="json"),
         "docs": [{"stub": s.model_dump(mode="json"), "text": t} for s, t in item.docs],
+        "failed_urls": sorted(item.failed_urls),
+        "category_failed": item.category_failed,
     }
     (DOCS / f"{item.bank_id}.json").write_text(
         json.dumps(payload, ensure_ascii=False), encoding="utf-8"
@@ -133,6 +140,8 @@ def load_docs(bank_id: str) -> Fetched:
     payload = json.loads((DOCS / f"{bank_id}.json").read_text(encoding="utf-8"))
     item = Fetched(bank_id, SourceHealth.model_validate(payload["health"]))
     item.docs = [(Stub.model_validate(d["stub"]), d["text"]) for d in payload["docs"]]
+    item.failed_urls = set(payload.get("failed_urls", []))
+    item.category_failed = bool(payload.get("category_failed", False))
     return item
 
 
@@ -358,6 +367,14 @@ def run(
             )
             built = [a.model_copy(update={"stale": True}) for a in old]
             item.health.carried = len(built)
+        else:
+            built, carried = _carry_missing(built, old, item)
+            if carried:
+                item.health.carried = carried
+                item.health.status = "partial"
+                note = f"沿用上一輪 {carried} 筆（本輪讀取不完整）"
+                prior = item.health.message
+                item.health.message = f"{prior}；{note}" if prior else note
         item.health.activities = len(built)
         activities[bank_id] = built
         health.append(item.health)
@@ -382,6 +399,31 @@ def _still_valid(activity: Activity, observed: datetime) -> bool:
     return (
         activity.period_end is None or activity.period_end >= (observed - timedelta(days=1)).date()
     )
+
+
+def _carry_missing(
+    built: list[Activity], old: list[Activity], fetched: Fetched
+) -> tuple[list[Activity], int]:
+    """局部讀取失敗時，把本輪漏掉、上一輪仍有效的活動標 stale 沿用。
+
+    - 某分類讀不到：無從得知該分類原有哪些活動，所有本輪缺席的舊活動都沿用。
+    - 只有個別明細頁失敗：只沿用 URL 落在失敗清單裡的舊活動；其餘缺席者視為
+      官方已下架，照常移除。
+    讀取完整的一輪不沿用任何東西，因此 stale 活動會在來源恢復後的第一輪消失。
+    ``old`` 須已濾掉過期活動。
+    """
+    if not fetched.category_failed and not fetched.failed_urls:
+        return built, 0
+    present_ids = {a.id for a in built}
+    present_hashes = {a.content_hash for a in built if a.content_hash}
+    carried = [
+        a.model_copy(update={"stale": True})
+        for a in old
+        if a.id not in present_ids
+        and not (a.content_hash and a.content_hash in present_hashes)
+        and (fetched.category_failed or a.url in fetched.failed_urls)
+    ]
+    return built + carried, len(carried)
 
 
 def _carry_unextracted(built: list[Activity], bank_id: str) -> list[Activity]:
