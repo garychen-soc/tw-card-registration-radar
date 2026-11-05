@@ -180,7 +180,8 @@ def cached(request: Request, model: str = DEFAULT_MODEL) -> dict[str, Any] | Non
     if not path.exists():
         return None
     payload: dict[str, Any] = json.loads(path.read_text(encoding="utf-8"))
-    return payload["output"]
+    output: dict[str, Any] = payload["output"]
+    return output
 
 
 def _claude_bin() -> str:

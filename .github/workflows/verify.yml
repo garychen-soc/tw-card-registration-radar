@@ -40,15 +40,15 @@ jobs:
       - name: Type check
         run: mypy
 
-      - name: Tests and golden corpus
+      - name: Tests
         run: pytest -q
 
-      - name: Validate declarative source specs
+      - name: Golden set integrity
         run: |
           python - <<'PY'
-          import pathlib, tomllib
-          specs = sorted(pathlib.Path("sources").glob("*.toml"))
-          for path in specs:
-              tomllib.loads(path.read_text(encoding="utf-8"))
-          print(f"{len(specs)} 份 adapter spec 語法正確")
+          import yaml
+          entries = yaml.safe_load(open("golden/golden.yaml", encoding="utf-8"))
+          ids = [e["id"] for e in entries]
+          assert len(ids) == len(set(ids)), "golden id 重複"
+          print(f"golden {len(entries)} 筆")
           PY

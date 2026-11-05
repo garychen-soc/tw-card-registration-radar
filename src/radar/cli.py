@@ -58,10 +58,10 @@ def main(argv: list[str] | None = None) -> int:
             llm_workers=args.llm_workers,
             reuse_docs=args.reuse_docs,
         )
-        for health in result.health:
+        for item in result.health:
             print(
-                f"{health.bank_id:13s} {health.status:8s} stubs={health.stubs:4d} "
-                f"activities={health.activities:4d} carried={health.carried:3d} {health.message}"
+                f"{item.bank_id:13s} {item.status:8s} stubs={item.stubs:4d} "
+                f"activities={item.activities:4d} carried={item.carried:3d} {item.message}"
             )
         print(f"LLM 呼叫 {result.llm_calls} 次，失敗 {result.llm_failures}")
         for message in result.messages:
