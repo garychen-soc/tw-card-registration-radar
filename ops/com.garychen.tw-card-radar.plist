@@ -4,8 +4,12 @@
   安裝（需使用者同意後才執行）：
     cp ops/com.garychen.tw-card-radar.plist ~/Library/LaunchAgents/
     launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.garychen.tw-card-radar.plist
-  每日 08:20、12:20、18:20（避開整點與深夜：Mac 睡眠是排程最大的失敗源；
-  睡眠中錯過的時段在喚醒後補跑一次）。
+  每日 08:20 一次（2026-11-06 Gary 要求由每日三次改為一次以節省 token；
+  避開整點與深夜：Mac 睡眠是排程最大的失敗源；睡眠中錯過的時段在喚醒後補跑一次）。
+  改時間後重新載入：
+    launchctl bootout gui/$(id -u)/com.garychen.tw-card-radar
+    cp ops/com.garychen.tw-card-radar.plist ~/Library/LaunchAgents/
+    launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.garychen.tw-card-radar.plist
   repo 必須在 ~/Projects 這類不受 TCC 保護的位置：2026-11-05 實測 launchd 啟動的
   bash 讀 ~/Documents 會被擋（Operation not permitted），因此 repo 已搬離 ~/Documents。
 -->
@@ -19,11 +23,7 @@
     <string>/Users/chenzhiming/Projects/tw-card-registration-radar/ops/run_local.sh</string>
   </array>
   <key>StartCalendarInterval</key>
-  <array>
-    <dict><key>Hour</key><integer>8</integer><key>Minute</key><integer>20</integer></dict>
-    <dict><key>Hour</key><integer>12</integer><key>Minute</key><integer>20</integer></dict>
-    <dict><key>Hour</key><integer>18</integer><key>Minute</key><integer>20</integer></dict>
-  </array>
+  <dict><key>Hour</key><integer>8</integer><key>Minute</key><integer>20</integer></dict>
   <key>StandardOutPath</key>
   <string>/Users/chenzhiming/Library/Logs/tw-card-radar/launchd.out</string>
   <key>StandardErrorPath</key>

@@ -23,7 +23,8 @@ import os
 import shutil
 import subprocess
 import tempfile
-from dataclasses import dataclass
+import threading
+from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
@@ -34,6 +35,71 @@ CACHE_DIR = ROOT / "state" / "extractions"
 DEFAULT_MODEL = os.environ.get("RADAR_LLM_MODEL", "sonnet")
 TIMEOUT_SECONDS = 420
 MAX_TERMS_CHARS = 30_000
+
+# claude -p 回傳 modelUsage 的欄位 → 本專案的用量鍵
+_USAGE_KEYS = {
+    "inputTokens": "input",
+    "outputTokens": "output",
+    "cacheCreationInputTokens": "cache_creation",
+    "cacheReadInputTokens": "cache_read",
+}
+
+
+def envelope_usage(envelope: dict[str, Any]) -> dict[str, int]:
+    """一次 ``claude -p`` 的 token 用量（所有模型加總）。"""
+    totals = dict.fromkeys(_USAGE_KEYS.values(), 0)
+    per_model = envelope.get("modelUsage")
+    if isinstance(per_model, dict) and per_model:
+        for item in per_model.values():
+            for source, key in _USAGE_KEYS.items():
+                totals[key] += int(item.get(source) or 0)
+        return totals
+    usage = envelope.get("usage") or {}
+    totals["input"] = int(usage.get("input_tokens") or 0)
+    totals["output"] = int(usage.get("output_tokens") or 0)
+    totals["cache_creation"] = int(usage.get("cache_creation_input_tokens") or 0)
+    totals["cache_read"] = int(usage.get("cache_read_input_tokens") or 0)
+    return totals
+
+
+@dataclass
+class Meter:
+    """一輪的 LLM 用量累計（多執行緒共用）。只計實際呼叫，快取命中不算。"""
+
+    calls: int = 0
+    input: int = 0
+    output: int = 0
+    cache_creation: int = 0
+    cache_read: int = 0
+    cost_usd: float = 0.0
+    seconds: float = 0.0
+    _lock: threading.Lock = field(default_factory=threading.Lock, repr=False, compare=False)
+
+    def add(self, usage: dict[str, int], cost_usd: float, duration_ms: int) -> None:
+        with self._lock:
+            self.calls += 1
+            self.input += usage.get("input", 0)
+            self.output += usage.get("output", 0)
+            self.cache_creation += usage.get("cache_creation", 0)
+            self.cache_read += usage.get("cache_read", 0)
+            self.cost_usd += cost_usd
+            self.seconds += duration_ms / 1000
+
+    @property
+    def tokens(self) -> int:
+        return self.input + self.output + self.cache_creation + self.cache_read
+
+    def as_dict(self) -> dict[str, Any]:
+        return {
+            "calls": self.calls,
+            "input_tokens": self.input,
+            "output_tokens": self.output,
+            "cache_creation_tokens": self.cache_creation,
+            "cache_read_tokens": self.cache_read,
+            "total_tokens": self.tokens,
+            "cost_usd": round(self.cost_usd, 4),
+            "llm_seconds": round(self.seconds, 1),
+        }
 
 _POINT = {
     "type": "object",
@@ -194,8 +260,10 @@ def _claude_bin() -> str:
     raise LocateError("找不到 claude CLI（設定 CLAUDE_BIN 或把它加進 PATH）")
 
 
-def locate(request: Request, model: str = DEFAULT_MODEL) -> dict[str, Any]:
-    """回傳符合 ``SCHEMA`` 的 dict。有快取直接回快取。"""
+def locate(
+    request: Request, model: str = DEFAULT_MODEL, meter: Meter | None = None
+) -> dict[str, Any]:
+    """回傳符合 ``SCHEMA`` 的 dict。有快取直接回快取；實際呼叫的用量記入 ``meter``。"""
     hit = cached(request, model)
     if hit is not None:
         return hit
@@ -234,6 +302,13 @@ def locate(request: Request, model: str = DEFAULT_MODEL) -> dict[str, Any]:
         raise LocateError(
             f"claude -p 失敗（{completed.returncode}）：{(completed.stderr or completed.stdout)[-300:]}"
         ) from exc
+    usage = envelope_usage(envelope)
+    if meter is not None:
+        meter.add(
+            usage,
+            float(envelope.get("total_cost_usd") or 0),
+            int(envelope.get("duration_ms") or 0),
+        )
     reason = str(envelope.get("result") or "")
     if "authenticate" in reason or "OAuth" in reason or "/login" in reason:
         raise AuthExpired(f"claude CLI 登入失效：{reason[:200]}（請執行 claude auth login）")
@@ -249,6 +324,7 @@ def locate(request: Request, model: str = DEFAULT_MODEL) -> dict[str, Any]:
         "title": request.title,
         "duration_ms": envelope.get("duration_ms"),
         "cost_usd": envelope.get("total_cost_usd"),
+        "usage": usage,
         "output": output,
     }
     path = CACHE_DIR / f"{record['key']}.json"

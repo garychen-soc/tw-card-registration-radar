@@ -20,7 +20,15 @@ from typing import Any
 from zoneinfo import ZoneInfo
 
 from . import banks
-from .extract.locate import DEFAULT_MODEL, AuthExpired, LocateError, Request, cached, locate
+from .extract.locate import (
+    DEFAULT_MODEL,
+    AuthExpired,
+    LocateError,
+    Meter,
+    Request,
+    cached,
+    locate,
+)
 from .extract.schedule import Context, build
 from .models import Activity, SourceHealth, Stub
 from .sources import open_adapter
@@ -56,6 +64,7 @@ class RunResult:
     llm_failures: int
     publishable: bool
     messages: list[str]
+    usage: dict[str, Any] = field(default_factory=dict)
 
 
 # ---- 擷取 ----------------------------------------------------------------
@@ -104,6 +113,8 @@ def fetch_bank(bank_id: str) -> Fetched:
 
 
 DOCS = ROOT / "var" / "docs"
+# 每輪 LLM 用量一行（只留本機，`radar usage` 讀它）
+USAGE_LOG = ROOT / "var" / "usage.jsonl"
 
 
 def save_docs(item: Fetched) -> None:
@@ -302,8 +313,9 @@ def run(
         pending = pending[:llm_budget]
     calls = 0
     auth_failed = False
+    meter = Meter()
     with ThreadPoolExecutor(max_workers=llm_workers) as pool:
-        futures = {pool.submit(locate, doc.request(), model): doc for doc in pending}
+        futures = {pool.submit(locate, doc.request(), model, meter): doc for doc in pending}
         for future in as_completed(futures):
             doc = futures[future]
             if future.cancelled():
@@ -362,6 +374,7 @@ def run(
         sum(1 for v in failures.values() if "失敗" in v),
         publishable,
         messages,
+        {"model": model, **meter.as_dict()},
     )
 
 
@@ -402,6 +415,7 @@ def save(result: RunResult) -> None:
         "observed_at": result.observed.isoformat(),
         "llm_calls": result.llm_calls,
         "llm_failures": result.llm_failures,
+        "llm_usage": result.usage,
         "publishable": result.publishable,
         "messages": result.messages,
         "sources": [h.model_dump(mode="json") for h in result.health],
@@ -409,3 +423,24 @@ def save(result: RunResult) -> None:
     (STATE / "run.json").write_text(
         json.dumps(run_info, ensure_ascii=False, indent=1) + "\n", encoding="utf-8"
     )
+
+
+def log_usage(result: RunResult, scope: list[str] | None, *, path: Path | None = None) -> None:
+    """把本輪 LLM 用量附加到 ``var/usage.jsonl``；不論本輪是否發布都記（token 已花掉）。"""
+    target = path or USAGE_LOG
+    target.parent.mkdir(parents=True, exist_ok=True)
+    row = {
+        "observed_at": result.observed.isoformat(),
+        "scope": ",".join(scope) if scope else "all",
+        "publishable": result.publishable,
+        **result.usage,
+    }
+    with target.open("a", encoding="utf-8") as handle:
+        handle.write(json.dumps(row, ensure_ascii=False) + "\n")
+
+
+def read_usage(path: Path | None = None) -> list[dict[str, Any]]:
+    target = path or USAGE_LOG
+    if not target.exists():
+        return []
+    return [json.loads(line) for line in target.read_text(encoding="utf-8").splitlines() if line]
