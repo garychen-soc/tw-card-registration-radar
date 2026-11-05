@@ -100,14 +100,14 @@ def write(
     data_dir = out / "data"
     (data_dir / "banks").mkdir(parents=True, exist_ok=True)
     summary = counts(every)
-    rows = timeline(every, generated)
+    timeline_rows = timeline(every, generated)
     index = {
         "schema_version": SCHEMA_VERSION,
         "generated_at": generated.isoformat(),
         "timezone": "Asia/Taipei",
         "counts": summary,
         "sources": [h.model_dump(mode="json") for h in health],
-        "timeline": rows,
+        "timeline": timeline_rows,
     }
     _dump(data_dir / "index.json", index)
     for bank_id, items in activities.items():
@@ -116,7 +116,7 @@ def write(
         _dump(data_dir / "banks" / f"{bank_id}.json", {"bank_id": bank_id, "activities": rows})
     (out / "calendar").mkdir(parents=True, exist_ok=True)
     (out / "calendar" / "registration.ics").write_text(
-        ics(rows, generated), encoding="utf-8", newline=""
+        ics(timeline_rows, generated), encoding="utf-8", newline=""
     )
     return summary
 
