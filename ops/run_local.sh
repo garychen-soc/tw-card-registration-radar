@@ -9,7 +9,9 @@ REPO="$(cd "$(dirname "$0")/.." && pwd)"
 LOG_DIR="$HOME/Library/Logs/tw-card-radar"
 BRANCH="${RADAR_BRANCH:-main}"
 LLM_BUDGET="${RADAR_LLM_BUDGET:-120}"
-MIN_PRECISION="${RADAR_MIN_PRECISION:-0.98}"
+# golden 精確率：低於 WARN 通知（多半是官方頁換內容、golden 該更新）；低於 BLOCK 才不發布
+WARN_PRECISION="${RADAR_WARN_PRECISION:-0.98}"
+MIN_PRECISION="${RADAR_MIN_PRECISION:-0.90}"
 export PATH="$HOME/.local/bin:/opt/homebrew/bin:/usr/bin:/bin"
 
 mkdir -p "$LOG_DIR"
@@ -44,6 +46,9 @@ fi
 .venv/bin/python -m pytest -q
 precision="$(.venv/bin/radar score | .venv/bin/python -c 'import json,sys; print(json.load(sys.stdin)["precision"])')"
 echo "golden precision=$precision"
+if ! .venv/bin/python -c "import sys; sys.exit(0 if float('$precision') >= float('$WARN_PRECISION') else 1)"; then
+  notify "golden 精確率 $precision，請檢查是否有官方頁換了內容（照常發布）"
+fi
 if .venv/bin/python -c "import sys; sys.exit(0 if float('$precision') >= float('$MIN_PRECISION') else 1)"; then
   :
 else

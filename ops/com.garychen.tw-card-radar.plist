@@ -6,8 +6,8 @@
     launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.garychen.tw-card-radar.plist
   每日 08:20、12:20、18:20（避開整點與深夜：Mac 睡眠是排程最大的失敗源；
   睡眠中錯過的時段在喚醒後補跑一次）。
-  repo 在 ~/Documents 底下，launchd 啟動的 bash 需要「完整磁碟取用權」或把 repo
-  移出 ~/Documents，否則會出現 Operation not permitted。
+  repo 必須在 ~/Projects 這類不受 TCC 保護的位置：2026-11-05 實測 launchd 啟動的
+  bash 讀 ~/Documents 會被擋（Operation not permitted），因此 repo 已搬離 ~/Documents。
 -->
 <plist version="1.0">
 <dict>
@@ -16,7 +16,7 @@
   <key>ProgramArguments</key>
   <array>
     <string>/bin/bash</string>
-    <string>/Users/chenzhiming/Documents/Claude/tw-card-registration-radar/ops/run_local.sh</string>
+    <string>/Users/chenzhiming/Projects/tw-card-registration-radar/ops/run_local.sh</string>
   </array>
   <key>StartCalendarInterval</key>
   <array>
