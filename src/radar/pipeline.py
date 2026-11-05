@@ -180,11 +180,16 @@ def group_docs(fetched: Fetched, today: date | None = None) -> list[Doc]:
     return list(groups.values())
 
 
+_LIST_NUMBER = re.compile(r"^\d{1,3}[.、](?!\d)\s*")
+
+
 def _group_title(doc: Doc) -> str:
+    # 列表連結文字常帶序號（彰銀「22.【百貨購物】…」）；「11.11」這類日期不受影響
+    primary = _LIST_NUMBER.sub("", doc.primary.title)
     titles = {s.title for s in doc.stubs}
     if len(titles) >= 3:
-        return f"{doc.primary.title} 等 {len(titles)} 個通路"
-    return doc.primary.title
+        return f"{primary} 等 {len(titles)} 個通路"
+    return primary
 
 
 def activity_id(bank_id: str, key: str) -> str:
