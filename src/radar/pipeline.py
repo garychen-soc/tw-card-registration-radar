@@ -107,6 +107,9 @@ def fetch_bank(bank_id: str) -> Fetched:
             if partial or (stubs and failures > len(stubs) * 0.2):
                 health.status = "partial"
                 health.message = "；".join(partial[:3]) or f"{failures} 筆明細讀取失敗"
+            elif failures:
+                # 比例不高仍判 ok，但要讓人看得到缺口（中信 mkt 站 11 頁卡 JS 驗證，曾顯示「正常」）
+                health.message = f"{failures} 頁明細讀不到，這些活動未收錄"
             if not stubs:
                 health.status = "failed"
                 health.message = "列表為空"

@@ -1,100 +1,109 @@
 # 刷卡登錄雷達
 
-台灣跨銀行信用卡活動監控，設計目標只有兩個 —— 回答使用者真正在問的問題：
+台灣 18 家銀行的信用卡活動「登錄時點」雷達：每天抓官方活動頁，找出**什麼時候要登錄、
+登錄到什麼時候、要不要每月重登、名額多少**，發布成網站與可訂閱的行事曆（ICS）。
 
-1. **登錄**：我什麼時候要登錄？從哪裡登錄？登錄一次夠嗎？要不要搶？我登過了沒？
-2. **活動條件**：這活動我拿不拿得到？新戶限定嗎？要刷多少？要不要分期？
-   **登錄與消費的先後順序是什麼 —— 會不會白刷？**
+網站：GitHub Pages（`web/`，Astro）。行事曆：`web/public/calendar/registration.ics`。
 
-第二點的最後一句是整個專案的核心。使用者最怕的不是漏看活動，是
-「登錄成功了但消費期已過」「先刷了才登錄，結果不計入」。
+## 架構（v2，2026-11 上線）
 
-## 為什麼是一個新專案
+```
+擷取器（src/radar/banks/*）      只產 Stub：標題、網址、期間取自官方列表／API 的結構化欄位
+   ↓ 明細頁文字
+合併（pipeline.group_docs）       條款文字相同的多張卡片＝一筆活動，其餘卡名留作別名
+   ↓ 含「登錄／登記／報名」的頁才送 LLM
+LLM 定位（extract/locate.py）     claude -p --json-schema：回傳逐字引句＋結構化數值，不做換算
+   ↓ 內容雜湊快取（state/extractions/），內容沒變就不再呼叫
+程式換算與驗證（extract/schedule.py）
+                                 引句必須逐字在原文、數字必須出現在引句；年份錨定活動期間；
+                                 依行政院辦公日曆順延；每月規則展開；列舉日期與規則對帳
+   ↓
+沿用與防護（pipeline.run）        來源整家失敗、或局部讀取失敗（某分類 403、明細逾時）時，
+                                 上一輪仍有效的活動標 stale 沿用，不讓它從網站消失
+   ↓ state/activities/<bank>.json（唯一正本，進版控）
+輸出（emit.py）                  web/public/data/*.json、registration.ics
+```
 
-前身 [`taiwan-credit-card-promotions`](https://github.com/garychen-soc/taiwan-credit-card-promotions)
-覆蓋 17 家銀行、1,069 筆活動，發布防護與快取策略都做得紮實。但實測顯示它的
-資料模型無法回答上面第 2 點：
+設計原則：
 
-| 量測 | 結果 |
+- **只放事實、不放推導**：時點由程式依原文換算，LLM 只負責「指出原文哪一句」。
+- **抓不到就留空**：截止未公告就顯示未公告；讀不到條款就標「未確認」，不猜。
+- **每個時點都附原文引句**，網站可展開核對；無法驗證的規則進「需人工確認」。
+
+## 排程與維運
+
+| 項目 | 說明 |
 |---|---|
-| 需登錄活動 | 242 筆 |
-| 能回答「登錄期間 vs 消費期間」 | 23 筆（9.5%） |
-| 登錄視窗是「起點 + 固定分鐘數」的合成值 | 348 / 388（90%） |
-| 登錄時點落在活動結束日之後（矛盾資料） | 5 筆 |
-| 資格／門檻／分期／名額的結構化欄位 | 0 個 |
-| `registration_text` 長度中位數 | 245 字元（上限 2400，截斷 0 筆） |
+| 排程 | launchd `com.garychen.tw-card-radar`（`ops/com.garychen.tw-card-radar.plist`），每日 08:20 |
+| 入口 | `ops/run_local.sh`：pull → `radar run` → pytest → `radar gate` → 建站 → commit → push |
+| 部署 | push 後 GitHub Actions `deploy.yml` 建置 Pages；`verify.yml` 跑測試 |
+| 執行紀錄 | `~/Library/Logs/tw-card-radar/run-YYYYMMDD.log` |
+| LLM 用量 | 每輪寫入 `state/run.json` 的 `llm_usage` 與本機 `var/usage.jsonl`；`radar usage --days 30` |
+| 通知 | macOS 通知中心（標題「刷卡登錄雷達」） |
 
-最後一列是關鍵：資訊不是被長度砍掉的，是被「只保留含『登錄』二字的行」這道
-濾網濾掉的。活動辦法整段在進入資料前就消失了。
+`run_local.sh` 的保護：
 
-兩邊平行演進、不共用檔案，前身仍在維護。差異詳見
-[`docs/adr/0001-architecture.md`](docs/adr/0001-architecture.md)。
+- 執行期間以 `caffeinate` 防止 Mac 睡眠；整輪上限 45 分鐘（`RADAR_MAX_SECONDS`），逾時終止整棵子程序樹。
+- 任何一步失敗都不 push，並還原 `state/`、`web/public/` 的未發布變更（保留 LLM 快取）、通知失敗行號；
+  開頭也會清掉被強制中止留下的殘留與中斷的 rebase，避免之後每輪卡死。
+- push 被拒時 rebase 重試一次；沒有新資料也會 push，補送上一輪沒推出去的 commit。
 
-## 三條不可妥協的規則
+退出碼：`0` 已發布或無變化；`4` 來源大量失敗；`5` 發布前閘門擋下；`6` claude CLI 登入失效；`143` 逾時；其他＝程式或環境錯誤。
 
-**一、只放事實，不放推導。**
-凡是「今天」的函數（是否進行中、是否即將結束、是否高回饋、今日待登錄）
-一律不寫進資料檔，由讀取端計算。資料放三天也不會顯示錯的狀態。
+### 發布前閘門（`src/radar/gate.py`）
 
-**二、抓不到就留空，絕不填補。**
-`RegistrationWindow.end` 允許 `None`。顯示「17:00 起（截止時間未確認）」
-比顯示一個錯的截止時間誠實 —— 而且會促使使用者去點官方頁確認。
+| 條件 | 動作 |
+|---|---|
+| golden 精確率 < 0.90 | **擋下**，網站維持上一版 |
+| 精確率 < 0.98、召回 < 0.95、golden 頁找不到 | 通知（照常發布） |
+| golden 可評分時點 < 30 個 | 通知：golden 窗口快過期，閘門快失效 |
+| 上一版仍在期間內的活動消失 ≥ 10 筆或 ≥ 8% | 通知：擷取器可能壞了卻沒報錯 |
+| 有來源沿用上一輪資料 | 通知 |
 
-**三、每個有風險的欄位都帶 confidence 與 evidence。**
-金融資訊的錯誤成本是實質金錢損失。UI 必須能區分「我確定」與「我猜的」，
-並讓使用者展開原文自行核對。
+警告不擋發布：官方頁改版也會觸發，擋下會讓網站停更，交由人判斷。
 
-## 時序契約
+## golden 集
 
-四種型態，由幾何關係（登錄期間 vs 活動期間）加上文字訊號共同判定：
+`golden/golden.yaml`：47 頁、約 68 個時點，涵蓋 `golden/window.json` 的兩個月窗口。
+每雙月 15 日由 Claude 例行任務 `tw-card-radar-golden-renewal` 依 `golden/RENEWAL.md` 換下一批。
 
-| 型態 | 意義 | 風險 |
-|---|---|---|
-| `register_before_spend` | 先登錄後消費，登錄前的消費不計入 | 高 —— 先刷就白刷 |
-| `retroactive_ok` | 可事後補登錄 | 低 |
-| `registration_closes_early` | 登錄先截止，之後才刷仍算，但錯過登錄就整檔沒了 | 中 —— 要及早登錄 |
-| `per_period_reregister` | 每期／每月需重新登錄 | 中 —— 登錄一次不夠（實測 30.6% 屬此類） |
+**限制（請先讀）**：golden 由 Claude 子代理對照官方原文建立，評分分歧時也由 Claude 裁定，
+提示詞也曾依 golden 調整，**尚未經人工抽查**（commit `5aeac381a`「待人工抽查」）。
+因此 golden 的 100% 比較接近「訓練集成績」，不是獨立驗證。改善方式見下方「已知缺口」。
 
-## 現況
-
-已完成並通過驗證的部分：
-
-- 資料契約（`src/radar/models.py`）—— 兩層 Campaign / Offer，含階梯門檻
-- 文字正規化（民國年、全角、`HH:MM:SS` 收斂）
-- 登錄時點解析（tokenizer + 狀態機，取代前身的六層疊加正則）
-- 時序契約推導與消費區間交集
-- 後置一致性檢查（invariants）
-- golden corpus —— 取自官方頁的真實原文節錄，改動解析器時做回歸 diff
-
-尚未開始：transport 層、宣告式 adapter、明細頁分段、輸出層、Astro 前端。
-
-## 開發
+## 指令
 
 ```bash
 python3 -m venv .venv && .venv/bin/pip install -e '.[dev]'
-.venv/bin/python -m pytest -q      # 45 tests
-.venv/bin/ruff check src tests
-.venv/bin/mypy
+.venv/bin/python -m pytest -q
+.venv/bin/ruff check src tests && .venv/bin/mypy src
+
+.venv/bin/radar run [--banks a,b] [--model sonnet] [--llm-budget 200] [--reuse-docs]
+.venv/bin/radar emit                 # 只從 state 重產網站資料
+.venv/bin/radar probe <bank>         # 單一銀行擷取體檢
+.venv/bin/radar score                # golden 評分
+.venv/bin/radar gate --previous HEAD # 發布前閘門
+.venv/bin/radar evaluate --model X   # 只對 golden 頁以指定模型抽取並評分（會呼叫 LLM）
+.venv/bin/radar usage --days 30      # LLM token 用量
 ```
 
-### 瀏覽器來源
+抽取模型預設 Sonnet（`RADAR_LLM_MODEL`）。11-02 在 golden 上比較：Sonnet 與 Opus 同分、
+費用約一半；Haiku 精確率 64%，不採用。
 
-華南與陽信宣告 `transport = "browser"`，使用標準有視窗 Chromium 取得原始
-官方 HTML；其餘來源維持 HTTP。執行實際抓取前需安裝瀏覽器：
+## 已知缺口與取捨
 
-```bash
-.venv/bin/python -m playwright install chromium
-# Linux 需安裝系統相依套件，並提供 Xvfb 顯示環境
-.venv/bin/python -m playwright install --with-deps chromium
-xvfb-run .venv/bin/python scripts/build_site.py --dry-run
-```
-
-單元測試不啟動瀏覽器，也不需要網路。GitHub Scrape 會自行安裝 Chromium；
-華南在受管 macOS 抓取，陽信在受管 Linux 使用 Xvfb。快照驗證後集中去重與
-核對發布防護；詳見 [ADR 0004](docs/adr/0004-native-browser-sources.md)。
+- **中信 `mkt.ctbcbank.com` 主題活動頁**（約 11 頁）回 JS 驗證（HTTP 202），不解驗證，這些活動未收錄；
+  來源狀態顯示「正常（有缺頁）」。
+- **元大**以一般瀏覽器 UA 讀取（2026-11-05 Gary 核准，只限元大）；其餘銀行用專案 UA。
+- **與 v2 提案不同的地方**（未在上線時明講，於此補記）：
+  - 提案原本保留 v1 regex 解析器做交叉比對，v2 已刪除，目前沒有確定性的交叉檢查。
+  - 提案原本要與 Codex 版並行兩週再切換，實際於 11-05 直接切換。
+  - 驗收標準原為「資料更新間隔 ≤ 12 小時」，11-06 為省 token 改成每日一次。
+- **golden 獨立性**：見上方「golden 集」。建議每批抽 5～10 筆人工核對官方頁。
+- **只有精確到分鐘的時點進 ICS**；只到「日」的區間只在網站顯示。
 
 ## 安全邊界
 
-只讀取公開官方資訊。不登入銀行帳戶、不代使用者執行活動登錄、不收集卡號或
-個人資料。「我的卡片」與「已登錄」狀態只存在瀏覽器 localStorage，不進 repo、
-不上傳。實際名額、資格與回饋一律以銀行官方公告為準。
+只讀取公開官方資訊。不登入銀行帳戶、不代使用者登錄活動、不解 CAPTCHA 或 JS 驗證、
+不收集卡號或個人資料。「我的卡片」與「已登錄」狀態只存在瀏覽器 localStorage。
+實際名額、資格與回饋一律以銀行官方公告為準。

@@ -4,6 +4,7 @@
     radar emit                                                   只從 state 重產網站資料
     radar probe <bank>                                           單一銀行擷取體檢
     radar score                                                  以 golden 集評分目前 state
+    radar gate [--previous HEAD]                                 發布前閘門（golden＋與上一版比較）
     radar usage [--days 30]                                      每輪 LLM token 用量統計
 
 退出碼：0 成功；2 參數錯誤；4 來源大量失敗、本輪不發布；6 claude CLI 登入失效。
@@ -89,6 +90,8 @@ def main(argv: list[str] | None = None) -> int:
     probe = sub.add_parser("probe")
     probe.add_argument("bank")
     sub.add_parser("score")
+    gate = sub.add_parser("gate", help="發布前閘門：golden 評分＋與上一版筆數比較")
+    gate.add_argument("--previous", default="", help="上一版的 git ref（例如 HEAD）")
     usage = sub.add_parser("usage", help="每輪 LLM token 用量（var/usage.jsonl）")
     usage.add_argument("--days", type=int, default=30)
     evaluate = sub.add_parser("evaluate", help="只對 golden 頁面以指定模型抽取並評分")
@@ -158,6 +161,19 @@ def main(argv: list[str] | None = None) -> int:
 
         report = score()
         print(json.dumps(report, ensure_ascii=False, indent=1))
+        return 0
+    if args.command == "gate":
+        from .gate import evaluate as run_gate
+        from .gate import vanished_since
+        from .golden import score
+
+        run_now = json.loads((pipeline.STATE / "run.json").read_text(encoding="utf-8"))
+        today = datetime.fromisoformat(run_now["observed_at"]).date()
+        vanished = vanished_since(args.previous, pipeline.STATE, today) if args.previous else {}
+        report = score()
+        verdict = run_gate(report, vanished)
+        print(json.dumps({**verdict.as_dict(), "precision": report["precision"],
+                          "recall": report["recall"]}, ensure_ascii=False))
         return 0
     return 2
 

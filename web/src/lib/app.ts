@@ -371,7 +371,8 @@ function renderSources(root: HTMLElement, data: IndexData): void {
     const tr = el("tr", `st-${s.status}`);
     const name = el("td");
     name.append(link(s.entry_url, s.bank_name, ""));
-    tr.append(name, el("td", "", STATUS[s.status]), el("td", "", String(s.activities)),
+    const status = STATUS[s.status] + (s.status === "ok" && s.detail_failures ? "（有缺頁）" : "");
+    tr.append(name, el("td", "", status), el("td", "", String(s.activities)),
       el("td", "", [s.message, s.carried ? `沿用上一輪 ${s.carried} 筆` : ""].filter(Boolean).join("；")));
     table.append(tr);
   }
