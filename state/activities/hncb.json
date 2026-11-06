@@ -34,7 +34,7 @@
   "portal_hint": "華南銀行網路銀行「信用卡活動登錄」",
   "review": [],
   "content_hash": "a2b8809d2c648086",
-  "observed_at": "2026-11-05T18:29:20+08:00",
+  "observed_at": "2026-11-06T08:31:26+08:00",
   "stale": false
  },
  {
@@ -55,7 +55,7 @@
   "portal_hint": "華南銀行網路銀行「信用卡活動登錄」",
   "review": [],
   "content_hash": "acd3f77d67295922",
-  "observed_at": "2026-11-05T18:29:20+08:00",
+  "observed_at": "2026-11-06T08:31:26+08:00",
   "stale": false
  },
  {
@@ -76,7 +76,7 @@
   "portal_hint": "華南銀行網路銀行「信用卡活動登錄」",
   "review": [],
   "content_hash": "3af4d034420c7af6",
-  "observed_at": "2026-11-05T18:29:20+08:00",
+  "observed_at": "2026-11-06T08:31:26+08:00",
   "stale": false
  },
  {
@@ -114,16 +114,17 @@
   "portal_hint": "華南銀行網路銀行「信用卡活動登錄」",
   "review": [],
   "content_hash": "de2887ebfa0c75e1",
-  "observed_at": "2026-11-05T18:29:20+08:00",
+  "observed_at": "2026-11-06T08:31:26+08:00",
   "stale": false
  },
  {
   "id": "hncb-60f445208b",
   "bank_id": "hncb",
   "bank_name": "華南銀行",
-  "title": "華南卡xklook，全站商品單筆5,000送400(需填優惠碼，限量) 等 3 個通路",
+  "title": "華南卡xklook，全站商品單筆5,000送400(需填優惠碼，限量) 等 4 個通路",
   "aliases": [
    "可樂旅遊高鐵假期享9折優惠",
+   "機場接送 尊享禮遇",
    "華南大玩家 天涼秋爽冬好遊"
   ],
   "url": "https://www.hncb.com.tw/wps/portal/HNCB/card/?1dmy&urile=wcm%3apath%3a/wps/wcm/connect/hncb_v2/site_map/hncb/card/event/channel/travel",
@@ -195,7 +196,7 @@
   "portal_hint": "華南銀行網路銀行「信用卡活動登錄」",
   "review": [],
   "content_hash": "5dd3ca9c3e9459aa",
-  "observed_at": "2026-11-05T18:29:20+08:00",
+  "observed_at": "2026-11-06T08:31:26+08:00",
   "stale": false
  },
  {
@@ -216,7 +217,7 @@
   "portal_hint": "華南銀行網路銀行「信用卡活動登錄」",
   "review": [],
   "content_hash": "b3b72f4abe012dc6",
-  "observed_at": "2026-11-05T18:29:20+08:00",
+  "observed_at": "2026-11-06T08:31:26+08:00",
   "stale": false
  },
  {
@@ -252,7 +253,7 @@
    "需登錄但官方未寫登錄時點"
   ],
   "content_hash": "d1694bdcecdac024",
-  "observed_at": "2026-11-05T18:29:20+08:00",
+  "observed_at": "2026-11-06T08:31:26+08:00",
   "stale": false
  },
  {
@@ -288,7 +289,7 @@
    "需登錄但官方未寫登錄時點"
   ],
   "content_hash": "51730616947fb9c8",
-  "observed_at": "2026-11-05T18:29:20+08:00",
+  "observed_at": "2026-11-06T08:31:26+08:00",
   "stale": false
  }
 ]
