@@ -15,7 +15,7 @@ from __future__ import annotations
 
 import calendar
 import re
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from datetime import date, datetime, time, timedelta
 from typing import Any
 from zoneinfo import ZoneInfo
@@ -142,6 +142,8 @@ def _clock(value: dict[str, Any] | None) -> time | None:
 
 
 def _resolve_year(month: int, day: int, ctx: Context) -> int:
+    if ctx.period_start is None:
+        return _nearest_year(month, day, ctx)
     years = sorted(
         {
             y
@@ -165,6 +167,29 @@ def _resolve_year(month: int, day: int, ctx: Context) -> int:
         ):
             return year
     return ctx.period_end.year if ctx.period_end else ctx.observed.year
+
+
+def _nearest_year(month: int, day: int, ctx: Context) -> int:
+    """沒有活動起日可錨定時：取不晚於活動結束日、離觀察日最近的那一年。
+
+    舊作法由小到大挑第一個符合的年份，12 月看到「1/5 開放登錄」會被算成今年 1/5
+    （已過去）而被丟棄；跨年前後兩個月必定踩到。
+    """
+    today = ctx.observed.date()
+    best: tuple[int, int] | None = None
+    for year in range(today.year - 1, today.year + 2):
+        try:
+            candidate = date(year, month, day)
+        except ValueError:
+            continue
+        if ctx.period_end is not None and candidate > ctx.period_end:
+            continue
+        distance = abs((candidate - today).days)
+        if best is None or distance < best[0]:
+            best = (distance, year)
+    if best is not None:
+        return best[1]
+    return ctx.period_end.year if ctx.period_end else today.year
 
 
 def _point_dt(
@@ -252,8 +277,13 @@ def _monthly_range(rule: dict[str, Any], ctx: Context, policy: str) -> list[Draf
         begin = datetime.combine(moved, open_clock or time(0, 0), TAIPEI)
         finish = None
         if end.get("day") is not None:
-            close_day = min(int(end["day"]), last)
-            close = date(year, month, close_day)
+            end_day = int(end["day"])
+            if end_day < open_day:
+                # 「每月25日起至次月5日止」：截止日小於開放日＝跨到下個月
+                ny, nm = (year + 1, 1) if month == 12 else (year, month + 1)
+                close = date(ny, nm, min(end_day, calendar.monthrange(ny, nm)[1]))
+            else:
+                close = date(year, month, min(end_day, last))
             if close < moved:
                 continue
             finish = datetime.combine(close, _clock(end) or time(23, 59), TAIPEI)
@@ -373,12 +403,47 @@ class Result:
     review: list[str]
 
 
+def _with_explicit_period(ctx: Context, raw: dict[str, Any]) -> Context:
+    """列表沒給活動期間時，借用子活動條款裡寫明年份的期間當錨點。
+
+    例：永豐列表無期間，條款寫「活動暨登錄期間：2026/7/1-12/31」又殘留一句
+    「統一於1/1 00:00開放登錄」。沒有錨點時，無年份的 1/1 會被猜成明年、
+    產生超出活動期間的時點；有了錨點，它會落到期間外而進人工檢查。
+    """
+    if ctx.period_start is not None and ctx.period_end is not None:
+        return ctx
+    starts: list[date] = []
+    ends: list[date] = []
+    for rule in raw.get("rules") or []:
+        if rule.get("kind") != "range" or rule.get("is_example"):
+            continue
+        if not ctx.quote_ok(rule.get("quote", "")):
+            continue
+        start, end = rule.get("start") or {}, rule.get("end") or {}
+        try:
+            if start.get("year") and start.get("month") and start.get("day"):
+                starts.append(date(int(start["year"]), int(start["month"]), int(start["day"])))
+            if end.get("year") and end.get("month") and end.get("day"):
+                ends.append(date(int(end["year"]), int(end["month"]), int(end["day"])))
+        except ValueError:
+            continue
+    if not starts and not ends:
+        return ctx
+    return replace(
+        ctx,
+        period_start=ctx.period_start or (min(starts) if starts else None),
+        period_end=ctx.period_end or (max(ends) if ends else None),
+    )
+
+
 def build(output: dict[str, Any], ctx: Context) -> Result:
     review: list[str] = []
     reg_raw = output.get("registration") or {}
     reg_value, reg_quote = _claim(reg_raw, ("required", "not_required"), ctx)
     subs: list[SubActivity] = []
+    base_ctx = ctx
     for raw in output.get("subs") or []:
+        ctx = _with_explicit_period(base_ctx, raw)
         sub_review: list[str] = []
         drafts: list[tuple[Draft, str]] = []
         rules: list[str] = []
@@ -509,18 +574,32 @@ def _reconcile(drafts: list[tuple[Draft, str]]) -> list[tuple[Draft, str]]:
     日期不同以列舉為準，沿用規則的時刻。列舉本身沒寫時刻、又沒有規則可借時，
     維持「原文無時刻」。
     """
-    rules = {_month(d): (d, q) for d, q in drafts if d.origin == "rule" and _month(d)}
+    # 一個月可能有多個規則日（每月 1/11/21 日）：依日期對帳，不能以月份為鍵只留一個
+    rules: dict[tuple[int, int], list[tuple[Draft, str]]] = {}
+    for d, q in drafts:
+        month_key = _month(d)
+        if d.origin == "rule" and month_key:
+            rules.setdefault(month_key, []).append((d, q))
     replaced: set[tuple[int, int] | None] = set()
+    used: set[int] = set()
     merged: list[tuple[Draft, str]] = []
     for draft, quote in drafts:
         if draft.origin != "enumerated" or draft.start is None:
             continue
         month = _month(draft)
-        pair = rules.get(month)
-        if pair is None:
+        candidates = rules.get(month) if month else None
+        if not candidates:
             merged.append((draft, quote))
             continue
-        rule_draft, rule_quote = pair
+        enumerated_day = draft.start.date()
+        free = [c for c in candidates if id(c[0]) not in used] or candidates
+
+        def gap(pair: tuple[Draft, str], day: date = enumerated_day) -> int:
+            assert pair[0].start is not None
+            return abs((pair[0].start.date() - day).days)
+
+        rule_draft, rule_quote = min(free, key=gap)
+        used.add(id(rule_draft))
         assert rule_draft.start is not None
         replaced.add(month)
         if rule_draft.start.date() == draft.start.date():

@@ -29,8 +29,8 @@ from .extract.locate import (
     cached,
     locate,
 )
-from .extract.schedule import Context, build
-from .models import Activity, SourceHealth, Stub
+from .extract.schedule import Context, build, squash
+from .models import Activity, SourceHealth, Stub, SubActivity
 from .sources import open_adapter
 from .textnorm import normalize
 from .transport import AccessDenied, TransportError
@@ -203,13 +203,75 @@ def group_docs(fetched: Fetched, today: date | None = None) -> list[Doc]:
 _LIST_NUMBER = re.compile(r"^\d{1,3}[.、](?!\d)\s*")
 
 
-def _group_title(doc: Doc) -> str:
+def _group_title(doc: Doc, owner: str | None = None) -> str:
     # 列表連結文字常帶序號（彰銀「22.【百貨購物】…」）；「11.11」這類日期不受影響
-    primary = _LIST_NUMBER.sub("", doc.primary.title)
+    primary = _LIST_NUMBER.sub("", owner or doc.primary.title)
     titles = {s.title for s in doc.stubs}
     if len(titles) >= 3:
         return f"{primary} 等 {len(titles)} 個通路"
     return primary
+
+
+MIN_OWNER_CHARS = 6
+MIN_CROWD_CHARS = 3
+LIST_WINDOW = 120
+
+
+def _owner_title(doc: Doc, subs: list[SubActivity]) -> str | None:
+    """多張列表卡共用同一頁時，找出登錄時點真正屬於哪一張卡。
+
+    主標題原本取最長的卡名，但共用頁常是多個活動並列（華南：Klook、可樂旅遊、
+    機場接送、華南大玩家同一頁），時點就會掛到不相干的卡名下。作法：在原文中找每個
+    有時點的子活動引句的位置，往前找最近出現的卡名當它的主人。保守起見，以下情況
+    一律維持原標題：
+    - 原主標題就出現在引句之前（它本身就是合理的段落標題，例：聯邦 Uber Eats）；
+    - 候選卡名周圍擠著其他卡名（是商家清單裡的一項，不是段落標題，例：星展 40 通路）；
+    - 找不到位置，或各子活動指向不同卡名。
+    """
+    titles = {s.title for s in doc.stubs}
+    if len(titles) < 2:
+        return None
+    text = squash(doc.text)
+    primary_key = squash(_LIST_NUMBER.sub("", doc.primary.title))
+    # 所有卡名的出現位置（判斷「商家清單」用）；只有夠長的卡名可以當主人
+    every: list[tuple[int, str]] = []
+    for title in titles:
+        key = squash(_LIST_NUMBER.sub("", title))
+        if len(key) < MIN_CROWD_CHARS:
+            continue
+        start = text.find(key)
+        while start != -1:
+            every.append((start, title))
+            start = text.find(key, start + 1)
+    marks = [
+        (p, t) for p, t in every if len(squash(_LIST_NUMBER.sub("", t))) >= MIN_OWNER_CHARS
+    ]
+    if not marks:
+        return None
+    owners: set[str] = set()
+    for sub in subs:
+        if not sub.slots:
+            continue
+        pos = text.find(squash(sub.slots[0].evidence.quote))
+        if pos < 0 and sub.name:
+            pos = text.find(squash(sub.name))
+        if pos < 0:
+            return None
+        primary_at = text.find(primary_key) if primary_key else -1
+        if 0 <= primary_at <= pos:
+            return None
+        before = [mark for mark in marks if mark[0] <= pos]
+        if not before:
+            return None
+        at, owner = max(before)
+        crowd = {t for p, t in every if t != owner and abs(p - at) <= LIST_WINDOW}
+        if len(crowd) >= 2:
+            return None
+        owners.add(owner)
+    if len(owners) != 1:
+        return None
+    owner = owners.pop()
+    return None if owner == doc.primary.title else owner
 
 
 def activity_id(bank_id: str, key: str) -> str:
@@ -251,6 +313,11 @@ def assemble(doc: Doc, output: dict[str, Any] | None, failure: str, observed: da
         activity.registration_quote = result.registration_quote
         activity.subs = result.subs
         review.extend(result.review)
+        owner = _owner_title(doc, result.subs)
+        if owner is not None:
+            # id 仍取自原主卡（ICS 的 UID 不變），只換顯示標題
+            activity.title = _group_title(doc, owner)
+            activity.aliases = sorted({s.title for s in doc.stubs} - {owner})
     elif failure:
         activity.registration = "unknown"
         review.append(failure)
