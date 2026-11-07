@@ -17,7 +17,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "06283d612dbe93d5",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -38,7 +38,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "b254ab49d7d95637",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -59,7 +59,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "f7ac055af815b39f",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -80,7 +80,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "f3da02c557ec9f9e",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -101,7 +101,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "78415d620399bac8",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -122,7 +122,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "f6006492192405f7",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -143,7 +143,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "f9a978f4e29f4aee",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -164,7 +164,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "0cf3be270d264f7f",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -184,19 +184,6 @@
    {
     "name": "",
     "slots": [
-     {
-      "start": "2026-10-06T13:00:00+08:00",
-      "end": null,
-      "kind": "opens_at",
-      "origin": "rule",
-      "precision": "minute",
-      "holiday_shifted": false,
-      "note": "",
-      "evidence": {
-       "quote": "本活動每月限量登錄5,000名(每月6號下午1:00開放登錄)",
-       "url": "https://www.ctbcbank.com/content/dam/minisite/long/creditcard/LINEPay/page_food.html#lightbox_kurasushi"
-      }
-     },
      {
       "start": "2026-11-06T13:00:00+08:00",
       "end": null,
@@ -240,7 +227,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "dd9cba281e5683f1",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -306,7 +293,7 @@
    "需登錄但官方未寫登錄時點"
   ],
   "content_hash": "8587ca62c6141110",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -359,7 +346,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "c40bce5769a97102",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -380,7 +367,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "a40fa11229abafef",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -401,7 +388,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "cf27f1d0a45dde79",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -421,19 +408,6 @@
    {
     "name": "",
     "slots": [
-     {
-      "start": "2026-10-06T10:00:00+08:00",
-      "end": null,
-      "kind": "opens_at",
-      "origin": "rule",
-      "precision": "minute",
-      "holiday_shifted": false,
-      "note": "",
-      "evidence": {
-       "quote": "每月限量登錄8,000名(每月6號10:00開放登錄)",
-       "url": "https://www.ctbcbank.com/content/dam/minisite/long/creditcard/LINEPay/page_life.html#lightbox_ikea"
-      }
-     },
      {
       "start": "2026-11-06T10:00:00+08:00",
       "end": null,
@@ -477,7 +451,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "5fb6f3fc41773f69",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -529,7 +503,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "803e91226f9e3b9b",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -555,7 +529,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "cda3b9d93856772d",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -578,7 +552,7 @@
    "需登錄但官方未寫登錄時點"
   ],
   "content_hash": "17e1e0fabe8b7981",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -599,7 +573,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "1832ebc82e762bec",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -620,7 +594,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "fb891135749a7544",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -640,19 +614,6 @@
    {
     "name": "",
     "slots": [
-     {
-      "start": "2026-10-06T10:00:00+08:00",
-      "end": null,
-      "kind": "opens_at",
-      "origin": "rule",
-      "precision": "minute",
-      "holiday_shifted": false,
-      "note": "",
-      "evidence": {
-       "quote": "本活動每月限量登錄8,000名(每月6號10:00開放登錄)",
-       "url": "https://www.ctbcbank.com/content/dam/minisite/long/creditcard/LINEPay/page_life.html#lightbox_uniprosperity"
-      }
-     },
      {
       "start": "2026-11-06T10:00:00+08:00",
       "end": null,
@@ -699,7 +660,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "239887a9f3215648",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -719,19 +680,6 @@
    {
     "name": "",
     "slots": [
-     {
-      "start": "2026-10-06T10:00:00+08:00",
-      "end": null,
-      "kind": "opens_at",
-      "origin": "rule",
-      "precision": "minute",
-      "holiday_shifted": false,
-      "note": "",
-      "evidence": {
-       "quote": "每月6號10:00開放登錄",
-       "url": "https://www.ctbcbank.com/content/dam/minisite/long/creditcard/LINEPay/page_food.html#lightbox_ubereats"
-      }
-     },
      {
       "start": "2026-11-06T10:00:00+08:00",
       "end": null,
@@ -775,7 +723,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "1b640321ec9e8fef",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -796,7 +744,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "986d5407bb42304d",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -817,7 +765,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "ae6e7edd4261ce3b",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -838,7 +786,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "274f9f5385cf22a3",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -859,7 +807,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "a91a43f466bfa642",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -880,7 +828,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "1fa347fb16d8e0f8",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -901,7 +849,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "deab03a93aa87e33",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -922,7 +870,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "83d39d096673c44c",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -943,7 +891,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "497f565ab1ddb66b",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -963,19 +911,6 @@
    {
     "name": "",
     "slots": [
-     {
-      "start": "2026-10-06T13:00:00+08:00",
-      "end": null,
-      "kind": "opens_at",
-      "origin": "rule",
-      "precision": "minute",
-      "holiday_shifted": false,
-      "note": "",
-      "evidence": {
-       "quote": "每月6號下午1:00開放登錄",
-       "url": "https://www.ctbcbank.com/content/dam/minisite/long/creditcard/LINEPay/page_food.html#lightbox_komedascoffee"
-      }
-     },
      {
       "start": "2026-11-06T13:00:00+08:00",
       "end": null,
@@ -1019,7 +954,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "1645a1a042c63a9c",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -1040,7 +975,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "87f166c0a9464a96",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -1061,7 +996,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "7380103decd72a31",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -1082,7 +1017,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "caf36bfdd85e2381",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -1103,7 +1038,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "99aa3045b1ecac84",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -1124,7 +1059,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "bc88e4303c830e35",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -1144,19 +1079,6 @@
    {
     "name": "",
     "slots": [
-     {
-      "start": "2026-10-06T10:00:00+08:00",
-      "end": null,
-      "kind": "opens_at",
-      "origin": "rule",
-      "precision": "minute",
-      "holiday_shifted": false,
-      "note": "",
-      "evidence": {
-       "quote": "每月限量登錄8,000名(每月6號10:00開放登錄)",
-       "url": "https://www.ctbcbank.com/content/dam/minisite/long/creditcard/LINEPay/page_travel.html#lightbox_tripcom"
-      }
-     },
      {
       "start": "2026-11-06T10:00:00+08:00",
       "end": null,
@@ -1200,7 +1122,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "0ab081b898b0c55e",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -1221,7 +1143,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "1a8fdf99dff4b489",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -1242,7 +1164,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "c68debb3260ae92b",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -1263,7 +1185,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "85a5a066c261291d",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -1284,7 +1206,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "85e34e9ef1c0bdc7",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -1304,19 +1226,6 @@
    {
     "name": "",
     "slots": [
-     {
-      "start": "2026-10-06T13:00:00+08:00",
-      "end": null,
-      "kind": "opens_at",
-      "origin": "rule",
-      "precision": "minute",
-      "holiday_shifted": false,
-      "note": "",
-      "evidence": {
-       "quote": "每月6號下午1:00開放登錄",
-       "url": "https://www.ctbcbank.com/content/dam/minisite/long/creditcard/LINEPay/page_shopping.html#lightbox_uniqlo"
-      }
-     },
      {
       "start": "2026-11-06T13:00:00+08:00",
       "end": null,
@@ -1360,7 +1269,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "2cff4d1ef985e475",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -1380,19 +1289,6 @@
    {
     "name": "",
     "slots": [
-     {
-      "start": "2026-10-06T10:00:00+08:00",
-      "end": null,
-      "kind": "opens_at",
-      "origin": "rule",
-      "precision": "minute",
-      "holiday_shifted": false,
-      "note": "",
-      "evidence": {
-       "quote": "本活動每月限量登錄8,000名(每月6號10:00開放登錄)",
-       "url": "https://www.ctbcbank.com/content/dam/minisite/long/creditcard/LINEPay/page_food.html#lightbox_starbucks"
-      }
-     },
      {
       "start": "2026-11-06T10:00:00+08:00",
       "end": null,
@@ -1436,7 +1332,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "9988beeacc882e3e",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -1456,19 +1352,6 @@
    {
     "name": "",
     "slots": [
-     {
-      "start": "2026-10-06T13:00:00+08:00",
-      "end": null,
-      "kind": "opens_at",
-      "origin": "rule",
-      "precision": "minute",
-      "holiday_shifted": false,
-      "note": "",
-      "evidence": {
-       "quote": "每月6號下午1:00開放登錄",
-       "url": "https://www.ctbcbank.com/content/dam/minisite/long/creditcard/LINEPay/page_shopping.html#lightbox_gu"
-      }
-     },
      {
       "start": "2026-11-06T13:00:00+08:00",
       "end": null,
@@ -1512,7 +1395,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "bd376cd079f6fab2",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -1535,7 +1418,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "42f7e944d9ed3c55",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -1556,7 +1439,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "f92e9fdb66ccc333",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -1584,7 +1467,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "e34fedd63a24c79d",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -1604,19 +1487,6 @@
    {
     "name": "",
     "slots": [
-     {
-      "start": "2026-10-06T10:00:00+08:00",
-      "end": null,
-      "kind": "opens_at",
-      "origin": "rule",
-      "precision": "minute",
-      "holiday_shifted": false,
-      "note": "",
-      "evidence": {
-       "quote": "每月6號10:00開放登錄",
-       "url": "https://www.ctbcbank.com/content/dam/minisite/long/creditcard/LINEPay/page_life.html#lightbox_netflix"
-      }
-     },
      {
       "start": "2026-11-06T10:00:00+08:00",
       "end": null,
@@ -1660,7 +1530,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "c7be55bfbceb2af6",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -1681,7 +1551,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "e7214fb8c7a66459",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -1702,7 +1572,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "e8f33c844c0477ec",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -1723,7 +1593,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "a613cf77cc9f1da5",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -1743,19 +1613,6 @@
    {
     "name": "",
     "slots": [
-     {
-      "start": "2026-10-06T10:00:00+08:00",
-      "end": null,
-      "kind": "opens_at",
-      "origin": "rule",
-      "precision": "minute",
-      "holiday_shifted": false,
-      "note": "",
-      "evidence": {
-       "quote": "每月限量登錄8,000名(每月6號10:00開放登錄)",
-       "url": "https://www.ctbcbank.com/content/dam/minisite/long/creditcard/LINEPay/page_travel.html#lightbox_airbnb"
-      }
-     },
      {
       "start": "2026-11-06T10:00:00+08:00",
       "end": null,
@@ -1799,7 +1656,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "4e3f1b9c74c128e6",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -1820,7 +1677,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "dfe34443058a0740",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -1840,19 +1697,6 @@
    {
     "name": "",
     "slots": [
-     {
-      "start": "2026-10-06T13:00:00+08:00",
-      "end": null,
-      "kind": "opens_at",
-      "origin": "rule",
-      "precision": "minute",
-      "holiday_shifted": false,
-      "note": "",
-      "evidence": {
-       "quote": "每月限量登錄5,000名(每月6號下午1:00開放登錄)",
-       "url": "https://www.ctbcbank.com/content/dam/minisite/long/creditcard/LINEPay/page_food.html#lightbox_sushiro"
-      }
-     },
      {
       "start": "2026-11-06T13:00:00+08:00",
       "end": null,
@@ -1899,7 +1743,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "41458570dff7712e",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -1920,7 +1764,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "a810b91309bedf6c",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -1941,7 +1785,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "cf3bb585c1e880e8",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -1964,7 +1808,7 @@
    "官方頁面沒有可讀的條款文字（可能是圖片或已下架），請直接查看活動頁"
   ],
   "content_hash": "ad1757d41ce5a7ba",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -1985,7 +1829,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "6639894125551043",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -2006,7 +1850,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "a0fed3b21dd39537",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -2027,7 +1871,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "ca4d030a7dd9713c",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -2050,7 +1894,7 @@
    "官方頁面沒有可讀的條款文字（可能是圖片或已下架），請直接查看活動頁"
   ],
   "content_hash": "eda221da15f12817",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -2071,7 +1915,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "26b2f53de91558c2",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -2092,7 +1936,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "ee29a73330e113d7",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -2112,19 +1956,6 @@
    {
     "name": "",
     "slots": [
-     {
-      "start": "2026-10-06T13:00:00+08:00",
-      "end": null,
-      "kind": "opens_at",
-      "origin": "rule",
-      "precision": "minute",
-      "holiday_shifted": false,
-      "note": "",
-      "evidence": {
-       "quote": "每月6號下午1:00開放登錄",
-       "url": "https://www.ctbcbank.com/content/dam/minisite/long/creditcard/LINEPay/page_food.html#lightbox_mosburger"
-      }
-     },
      {
       "start": "2026-11-06T13:00:00+08:00",
       "end": null,
@@ -2171,7 +2002,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "df27bc692c8d71b9",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -2192,7 +2023,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "3853cfe6483e3e59",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -2213,7 +2044,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "5506e7629af3af50",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -2245,19 +2076,6 @@
    {
     "name": "Coupang酷澎(台灣)活動②・注意事項",
     "slots": [
-     {
-      "start": "2026-10-06T10:00:00+08:00",
-      "end": null,
-      "kind": "opens_at",
-      "origin": "rule",
-      "precision": "minute",
-      "holiday_shifted": false,
-      "note": "",
-      "evidence": {
-       "quote": "每月6號10:00開放登錄",
-       "url": "https://www.ctbcbank.com/content/dam/minisite/long/creditcard/LINEPay/page_shopping.html#lightbox_coupang"
-      }
-     },
      {
       "start": "2026-11-06T10:00:00+08:00",
       "end": null,
@@ -2301,7 +2119,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "4480dd5bce56ccb7",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -2322,7 +2140,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "f0c1fbcd90a95d08",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -2343,7 +2161,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "23e7e053cea84b77",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -2363,19 +2181,6 @@
    {
     "name": "",
     "slots": [
-     {
-      "start": "2026-10-06T10:00:00+08:00",
-      "end": null,
-      "kind": "opens_at",
-      "origin": "rule",
-      "precision": "minute",
-      "holiday_shifted": false,
-      "note": "",
-      "evidence": {
-       "quote": "每月限量登錄8,000名(每月6號10:00開放登錄)",
-       "url": "https://www.ctbcbank.com/content/dam/minisite/long/creditcard/LINEPay/page_shopping.html#lightbox_shopee"
-      }
-     },
      {
       "start": "2026-11-06T10:00:00+08:00",
       "end": null,
@@ -2419,7 +2224,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "bff53a2f182e0a37",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -2439,19 +2244,6 @@
    {
     "name": "",
     "slots": [
-     {
-      "start": "2026-10-06T13:00:00+08:00",
-      "end": null,
-      "kind": "opens_at",
-      "origin": "rule",
-      "precision": "minute",
-      "holiday_shifted": false,
-      "note": "",
-      "evidence": {
-       "quote": "每月6號下午1:00開放登錄",
-       "url": "https://www.ctbcbank.com/content/dam/minisite/long/creditcard/LINEPay/page_travel.html#lightbox_tigerairtw"
-      }
-     },
      {
       "start": "2026-11-06T13:00:00+08:00",
       "end": null,
@@ -2495,7 +2287,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "25c889e6e0800b65",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -2516,7 +2308,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "c287a293b9fbcfb0",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -2536,19 +2328,6 @@
    {
     "name": "",
     "slots": [
-     {
-      "start": "2026-10-06T13:00:00+08:00",
-      "end": null,
-      "kind": "opens_at",
-      "origin": "rule",
-      "precision": "minute",
-      "holiday_shifted": false,
-      "note": "",
-      "evidence": {
-       "quote": "本活動每月限量登錄5,000名(每月6號下午1:00開放登錄)",
-       "url": "https://www.ctbcbank.com/content/dam/minisite/long/creditcard/LINEPay/page_life.html#lightbox_nitori"
-      }
-     },
      {
       "start": "2026-11-06T13:00:00+08:00",
       "end": null,
@@ -2592,7 +2371,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "60ce9d90a27b0a77",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -2613,7 +2392,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "3cef20a0f3cd2113",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -2634,7 +2413,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "82946f9c9d12f3ec",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -2654,19 +2433,6 @@
    {
     "name": "",
     "slots": [
-     {
-      "start": "2026-10-06T13:00:00+08:00",
-      "end": null,
-      "kind": "opens_at",
-      "origin": "rule",
-      "precision": "minute",
-      "holiday_shifted": false,
-      "note": "",
-      "evidence": {
-       "quote": "每月6號下午1:00開放登錄",
-       "url": "https://www.ctbcbank.com/content/dam/minisite/long/creditcard/LINEPay/page_life.html#lightbox_dondondonki"
-      }
-     },
      {
       "start": "2026-11-06T13:00:00+08:00",
       "end": null,
@@ -2710,7 +2476,7 @@
   "portal_hint": "中國信託官網「信用卡活動登錄」頁，找到對應活動登錄",
   "review": [],
   "content_hash": "013f4378f8572618",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  }
 ]

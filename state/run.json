@@ -1,17 +1,17 @@
 {
- "observed_at": "2026-11-06T08:31:26+08:00",
- "llm_calls": 0,
- "llm_failures": 0,
+ "observed_at": "2026-11-07T08:20:07+08:00",
+ "llm_calls": 13,
+ "llm_failures": 13,
  "llm_usage": {
   "model": "sonnet",
-  "calls": 0,
+  "calls": 13,
   "input_tokens": 0,
   "output_tokens": 0,
   "cache_creation_tokens": 0,
   "cache_read_tokens": 0,
   "total_tokens": 0,
   "cost_usd": 0.0,
-  "llm_seconds": 0.0
+  "llm_seconds": 11.8
  },
  "publishable": true,
  "messages": [],
@@ -46,7 +46,7 @@
    "stubs": 127,
    "activities": 75,
    "detail_failures": 11,
-   "message": "",
+   "message": "11 頁明細讀不到，這些活動未收錄",
    "carried": 0
   },
   {
@@ -98,8 +98,8 @@
    "bank_name": "凱基銀行",
    "status": "ok",
    "entry_url": "https://www.kgibank.com.tw/zh-tw/personal/promotion/card-campaign",
-   "stubs": 47,
-   "activities": 45,
+   "stubs": 48,
+   "activities": 46,
    "detail_failures": 0,
    "message": "",
    "carried": 0
@@ -131,8 +131,8 @@
    "bank_name": "上海商銀",
    "status": "ok",
    "entry_url": "https://www.scsb.com.tw/content/card/hotList",
-   "stubs": 24,
-   "activities": 22,
+   "stubs": 23,
+   "activities": 21,
    "detail_failures": 0,
    "message": "",
    "carried": 0
@@ -175,7 +175,7 @@
    "bank_name": "台新銀行",
    "status": "ok",
    "entry_url": "https://mkpcard.taishinbank.com.tw/tscccms/promotion/offerList/A",
-   "stubs": 201,
+   "stubs": 200,
    "activities": 198,
    "detail_failures": 0,
    "message": "",

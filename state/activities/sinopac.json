@@ -17,7 +17,7 @@
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
   "content_hash": "73a31ba0f4d303db",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -79,7 +79,7 @@
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
   "content_hash": "f6daac3c66ec792f",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -263,7 +263,7 @@
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
   "content_hash": "e277bc9d25ff7eed",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -284,7 +284,7 @@
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
   "content_hash": "94533fc6e5f340ef",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -334,7 +334,7 @@
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
   "content_hash": "8cc308e9dafe0869",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -406,7 +406,9 @@
     "order_quote": "且於登錄當月起繳納牌照稅、房屋稅、地價稅",
     "quota": null,
     "quota_quote": "",
-    "review": []
+    "review": [
+     "登錄時點 2026/01/01 遠早於活動開始日"
+    ]
    },
    {
     "name": "【活動三｜好朋友限定!繳納指定稅款享回饋金】",
@@ -436,7 +438,9 @@
     "order_quote": "自登錄當月起享活動資格，不得溯及既往",
     "quota": null,
     "quota_quote": "",
-    "review": []
+    "review": [
+     "登錄時點 2026/01/01 遠早於活動開始日"
+    ]
    },
    {
     "name": "【2026數位通路專屬優惠】大咖DACARD APP繳稅滿額抽萬元禮券！",
@@ -487,7 +491,7 @@
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
   "content_hash": "413756f2ecfa430f",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -508,7 +512,7 @@
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
   "content_hash": "a57cd0c42ad329ef",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -529,7 +533,7 @@
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
   "content_hash": "bd3136e901dd17b5",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -567,7 +571,7 @@
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
   "content_hash": "25685756fbed44e0",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -603,7 +607,7 @@
    "需登錄但官方未寫登錄時點"
   ],
   "content_hash": "9716b43ec64d01da",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -626,7 +630,7 @@
    "需登錄但官方未寫登錄時點"
   ],
   "content_hash": "50cb61dc30a2c357",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -663,7 +667,7 @@
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
   "content_hash": "92799da7f48eeea0",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -684,7 +688,7 @@
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
   "content_hash": "99f786d07e2c252a",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -724,7 +728,7 @@
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
   "content_hash": "491ef5128687e9f2",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -772,7 +776,7 @@
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
   "content_hash": "4cc1d7f3ed356918",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -793,7 +797,7 @@
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
   "content_hash": "c621adb01544aa44",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -814,7 +818,7 @@
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
   "content_hash": "8fa1728d5355c0e7",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -880,7 +884,7 @@
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
   "content_hash": "e90c12f19835a9d2",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -1025,7 +1029,7 @@
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
   "content_hash": "7599b8f8b8169432",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -1075,7 +1079,7 @@
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
   "content_hash": "ec4b88272acb53e5",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  },
  {
@@ -1111,7 +1115,7 @@
    "需登錄但官方未寫登錄時點"
   ],
   "content_hash": "cc1e02a4e4197bd7",
-  "observed_at": "2026-11-06T08:31:26+08:00",
+  "observed_at": "2026-11-07T08:20:07+08:00",
   "stale": false
  }
 ]
