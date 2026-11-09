@@ -1,17 +1,17 @@
 {
- "observed_at": "2026-11-08T08:20:08+08:00",
- "llm_calls": 14,
- "llm_failures": 14,
+ "observed_at": "2026-11-09T08:57:07+08:00",
+ "llm_calls": 16,
+ "llm_failures": 16,
  "llm_usage": {
   "model": "sonnet",
-  "calls": 14,
+  "calls": 16,
   "input_tokens": 0,
   "output_tokens": 0,
   "cache_creation_tokens": 0,
   "cache_read_tokens": 0,
   "total_tokens": 0,
   "cost_usd": 0.0,
-  "llm_seconds": 16.6
+  "llm_seconds": 29.2
  },
  "publishable": true,
  "messages": [],
@@ -21,8 +21,8 @@
    "bank_name": "國泰世華",
    "status": "ok",
    "entry_url": "https://www.cathay-cube.com.tw/cathaybk/personal/event/overview",
-   "stubs": 150,
-   "activities": 145,
+   "stubs": 149,
+   "activities": 144,
    "detail_failures": 0,
    "message": "",
    "carried": 0
@@ -65,8 +65,8 @@
    "bank_name": "玉山銀行",
    "status": "ok",
    "entry_url": "https://www.esunbank.com/zh-tw/personal/credit-card/discount/shops",
-   "stubs": 170,
-   "activities": 170,
+   "stubs": 168,
+   "activities": 168,
    "detail_failures": 0,
    "message": "",
    "carried": 0
@@ -109,8 +109,8 @@
    "bank_name": "兆豐銀行",
    "status": "ok",
    "entry_url": "https://www.megabank.com.tw/personal/credit-card/event/overview",
-   "stubs": 256,
-   "activities": 252,
+   "stubs": 254,
+   "activities": 251,
    "detail_failures": 0,
    "message": "",
    "carried": 0
@@ -164,8 +164,8 @@
    "bank_name": "台北富邦銀行",
    "status": "ok",
    "entry_url": "https://cardpromote.taipeifubon.com.tw/promotion/Result",
-   "stubs": 176,
-   "activities": 171,
+   "stubs": 175,
+   "activities": 170,
    "detail_failures": 0,
    "message": "",
    "carried": 0
@@ -197,8 +197,8 @@
    "bank_name": "聯邦銀行",
    "status": "ok",
    "entry_url": "https://card.ubot.com.tw/CardActivity",
-   "stubs": 100,
-   "activities": 97,
+   "stubs": 99,
+   "activities": 96,
    "detail_failures": 0,
    "message": "",
    "carried": 0
