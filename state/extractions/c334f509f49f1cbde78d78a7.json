@@ -1,0 +1,22 @@
+{
+ "key": "c334f509f49f1cbde78d78a7",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-11T01:01:36+00:00",
+ "title": "全國電子感受星生活揪感心！",
+ "duration_ms": 4158,
+ "cost_usd": 0.0220722,
+ "usage": {
+  "input": 2,
+  "output": 286,
+  "cache_creation": 4690,
+  "cache_read": 2241
+ },
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "現場享850點全國電子點數"
+  },
+  "subs": []
+ }
+}

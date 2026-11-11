@@ -1,0 +1,60 @@
+{
+ "key": "91d0f31b87937daee91cb730",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-11T01:01:19+00:00",
+ "title": "Coupang 酷澎(台灣)",
+ "duration_ms": 6947,
+ "cost_usd": 0.042268,
+ "usage": {
+  "input": 2,
+  "output": 896,
+  "cache_creation": 8326,
+  "cache_read": 0
+ },
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "請於活動期間至中國信託銀行官網完成活動登錄"
+  },
+  "subs": [
+   {
+    "name": "Coupang酷澎(台灣)活動②・注意事項",
+    "rules": [
+     {
+      "quote": "每月6號10:00開放登錄",
+      "kind": "monthly",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [
+       6
+      ],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": {
+       "hour": 10,
+       "minute": 0
+      },
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "each_period",
+     "quote": "本活動每季登錄一次"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 8000,
+     "quote": "本活動每月限量登錄8,000名"
+    }
+   }
+  ]
+ }
+}

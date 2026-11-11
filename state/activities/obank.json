@@ -74,7 +74,7 @@
   "portal_hint": "王道銀行活動登錄頁",
   "review": [],
   "content_hash": "1037c061dfa119d5",
-  "observed_at": "2026-11-09T08:57:07+08:00",
+  "observed_at": "2026-11-11T08:52:01+08:00",
   "stale": false
  },
  {
@@ -138,7 +138,7 @@
   "portal_hint": "王道銀行活動登錄頁",
   "review": [],
   "content_hash": "6777ba22b0e2f36b",
-  "observed_at": "2026-11-09T08:57:07+08:00",
+  "observed_at": "2026-11-11T08:52:01+08:00",
   "stale": false
  },
  {
@@ -216,22 +216,22 @@
   "portal_hint": "王道銀行活動登錄頁",
   "review": [],
   "content_hash": "150e694ef7c347a6",
-  "observed_at": "2026-11-09T08:57:07+08:00",
+  "observed_at": "2026-11-11T08:52:01+08:00",
   "stale": false
  },
  {
   "id": "obank-34b17cd051",
   "bank_id": "obank",
   "bank_name": "王道銀行",
-  "title": "iPASS MONEY綁王道卡消費，樂享5%回饋(10月份活動已於10/07額滿)",
+  "title": "iPASS MONEY綁王道卡消費，樂享5%回饋(11月份活動已於11/09額滿)",
   "aliases": [],
   "url": "https://www.o-bank.com/retail/event/event-announce/debit_20261231_3",
   "period_start": "2026-08-01",
   "period_end": "2026-12-31",
-  "summary": "活動期間 : 2026/08/01~2026/12/31 活動對象 : 本行簽帳金融卡持卡人 活動內容 : 活動期間使用iPASS MONEY綁王道銀行簽帳金融卡刷卡一般消費，享一卡通綠點額外加碼5%回饋，每人每月回饋上限100點，活動名額每月限量1,000名，依消費優先順序計算，額滿將提前於王道銀行官網公告。 (10",
+  "summary": "活動期間 : 2026/08/01~2026/12/31 活動對象 : 本行簽帳金融卡持卡人 活動內容 : 活動期間使用iPASS MONEY綁王道銀行簽帳金融卡刷卡一般消費，享一卡通綠點額外加碼5%回饋，每人每月回饋上限100點，活動名額每月限量1,000名，依消費優先順序計算，額滿將提前於王道銀行官網公告。 (11",
   "category": "",
   "registration": "required",
-  "registration_quote": "須先同意加入一卡通綠點回饋後，方可開始累積及獲得一卡通綠點",
+  "registration_quote": "須先同意加入一卡通綠點回饋後，方可開始累積及獲得一卡通綠點。若未同意加入一卡通綠點計畫，導致入點失敗，視為放棄獲點資格。",
   "subs": [
    {
     "name": "",
@@ -243,16 +243,16 @@
     "reregister_quote": "",
     "order": "unknown",
     "order_quote": "",
-    "quota": null,
-    "quota_quote": "",
+    "quota": 1000,
+    "quota_quote": "活動名額每月限量1,000名",
     "review": []
    }
   ],
   "portal_url": "https://www.o-bank.com/egift/RegisterCampaign",
   "portal_hint": "王道銀行活動登錄頁",
   "review": [],
-  "content_hash": "7f416a2c8904469f",
-  "observed_at": "2026-11-09T08:57:07+08:00",
+  "content_hash": "8cdeb68634f5b477",
+  "observed_at": "2026-11-11T08:52:01+08:00",
   "stale": false
  },
  {
@@ -330,7 +330,7 @@
   "portal_hint": "王道銀行活動登錄頁",
   "review": [],
   "content_hash": "9b6dce8c09b4bc4f",
-  "observed_at": "2026-11-09T08:57:07+08:00",
+  "observed_at": "2026-11-11T08:52:01+08:00",
   "stale": false
  },
  {
@@ -351,7 +351,7 @@
   "portal_hint": "王道銀行活動登錄頁",
   "review": [],
   "content_hash": "23e888a760076dfd",
-  "observed_at": "2026-11-09T08:57:07+08:00",
+  "observed_at": "2026-11-11T08:52:01+08:00",
   "stale": false
  },
  {
@@ -372,7 +372,7 @@
   "portal_hint": "王道銀行活動登錄頁",
   "review": [],
   "content_hash": "84b4aac930d2df7b",
-  "observed_at": "2026-11-09T08:57:07+08:00",
+  "observed_at": "2026-11-11T08:52:01+08:00",
   "stale": false
  },
  {
@@ -450,7 +450,7 @@
   "portal_hint": "王道銀行活動登錄頁",
   "review": [],
   "content_hash": "356e20889c80f1f3",
-  "observed_at": "2026-11-09T08:57:07+08:00",
+  "observed_at": "2026-11-11T08:52:01+08:00",
   "stale": false
  },
  {
@@ -471,7 +471,7 @@
   "portal_hint": "王道銀行活動登錄頁",
   "review": [],
   "content_hash": "c1dcfccdaca8823c",
-  "observed_at": "2026-11-09T08:57:07+08:00",
+  "observed_at": "2026-11-11T08:52:01+08:00",
   "stale": false
  },
  {
@@ -549,7 +549,7 @@
   "portal_hint": "王道銀行活動登錄頁",
   "review": [],
   "content_hash": "7a4a2d3b21df1d2b",
-  "observed_at": "2026-11-09T08:57:07+08:00",
+  "observed_at": "2026-11-11T08:52:01+08:00",
   "stale": false
  },
  {
@@ -570,7 +570,7 @@
   "portal_hint": "王道銀行活動登錄頁",
   "review": [],
   "content_hash": "0dcc3f29c933554e",
-  "observed_at": "2026-11-09T08:57:07+08:00",
+  "observed_at": "2026-11-11T08:52:01+08:00",
   "stale": false
  },
  {
@@ -648,7 +648,7 @@
   "portal_hint": "王道銀行活動登錄頁",
   "review": [],
   "content_hash": "b78227d38edb8ab7",
-  "observed_at": "2026-11-09T08:57:07+08:00",
+  "observed_at": "2026-11-11T08:52:01+08:00",
   "stale": false
  },
  {
@@ -669,7 +669,7 @@
   "portal_hint": "王道銀行活動登錄頁",
   "review": [],
   "content_hash": "241eb4225661d665",
-  "observed_at": "2026-11-09T08:57:07+08:00",
+  "observed_at": "2026-11-11T08:52:01+08:00",
   "stale": false
  },
  {
@@ -690,7 +690,7 @@
   "portal_hint": "王道銀行活動登錄頁",
   "review": [],
   "content_hash": "6d3b255b387e9cad",
-  "observed_at": "2026-11-09T08:57:07+08:00",
+  "observed_at": "2026-11-11T08:52:01+08:00",
   "stale": false
  }
 ]

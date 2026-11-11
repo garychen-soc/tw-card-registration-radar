@@ -1,0 +1,55 @@
+{
+ "key": "a79171d5d53c3a3ae489ada7",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-11T01:01:46+00:00",
+ "title": "玉山Wallet樂掃全家｜週週掃2筆，50元週週送",
+ "duration_ms": 6255,
+ "cost_usd": 0.0274462,
+ "usage": {
+  "input": 2,
+  "output": 707,
+  "cache_creation": 4981,
+  "cache_read": 2241
+ },
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "每週一開放領取當週登錄券，當週至全家便利商店使用玉山Wallet出示TWQR付款條碼"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [
+     {
+      "quote": "每週一開放領取當週登錄券",
+      "kind": "other",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": 1,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "each_period",
+     "quote": "每週領取登錄券"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

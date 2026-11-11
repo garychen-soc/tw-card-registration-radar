@@ -1,0 +1,39 @@
+{
+ "key": "12e3a36c1ce6ac2693ea1589",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-11T01:01:46+00:00",
+ "title": "燦坤3C家電",
+ "duration_ms": 5599,
+ "cost_usd": 0.0223002,
+ "usage": {
+  "input": 2,
+  "output": 546,
+  "cache_creation": 4097,
+  "cache_read": 2241
+ },
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "刷玉山信用卡並至燦坤活動登錄頁完成登錄享"
+  },
+  "subs": [
+   {
+    "name": "【會員特典分期滿額贈】",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}
