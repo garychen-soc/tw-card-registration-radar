@@ -62,15 +62,18 @@ def _entries() -> list[dict[str, Any]]:
 
 def _base(url: str) -> str:
     """比對用的網址：去掉片段；華南入口網址只看 urile 參數（前面的 portal 狀態每次不同）。"""
-    url = url.split("#", 1)[0].rstrip("/")
+    url, _, fragment = url.partition("#")
+    url = url.rstrip("/")
+    # 中信 LINE Pay 一頁數十個活動，各以 #lightbox_<名稱> 區分，片段是活動身分
+    tail = f"#{fragment}" if fragment.startswith("lightbox_") else ""
     found = re.search(r"urile=([^&]+)", url)
     if found:
-        return found.group(1)
+        return found.group(1) + tail
     # 同一頁常有兩個官方網域（國泰 cathaybk.com.tw／cathay-cube.com.tw）與有無 .html 兩種寫法；
     # 比對只在同一家銀行內進行，以路徑（含 query）為準
     parts = urlsplit(url)
     path = re.sub(r"\.html?$", "", parts.path)
-    return f"{path}?{parts.query}" if parts.query else path
+    return (f"{path}?{parts.query}" if parts.query else path) + tail
 
 
 def _candidates(entry: dict[str, Any], pool: list[Activity]) -> list[Activity]:
@@ -102,7 +105,8 @@ def _compare(
             for slot in sub.get("slots") or []
         }
         expected = {k for k in expected if _in_window(k)}
-        # golden 以「官方頁面」為單位；同一頁拆成多筆活動（中信 LINE Pay 各通路）時合併比對
+        # golden 以「官方頁面」為單位；同一頁拆成多筆活動時合併比對
+        # （中信 LINE Pay 以 lightbox 片段區分，不合併）
         candidates = find(entry)
         if not candidates:
             if expected:

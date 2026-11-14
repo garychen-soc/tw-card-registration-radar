@@ -4,7 +4,7 @@
 # 任何一步失敗都不 push：寧可網站停在上一版，也不發布沒驗過的資料。
 # 失敗時一律：還原 state/ 與 web/public/ 的未發布變更（保留 LLM 抽取快取）並發通知，
 # 確保下一輪能從乾淨的工作樹重新開始，不會因殘留變更讓 git pull 每輪卡死。
-# 退出碼：0 已發布或無變化；4 來源大量失敗；5 發布前閘門擋下（golden 精確率）；6 claude CLI 登入失效；
+# 退出碼：0 已發布或無變化；3 網路未就緒；4 來源大量失敗；5 發布前閘門擋下（golden 精確率）；6 claude CLI 登入失效；
 #         其他＝程式或環境錯誤（log 會記下失敗的行號）。
 set -euo pipefail
 
@@ -98,6 +98,21 @@ if ! git diff --quiet -- state web/public || [ -d .git/rebase-merge ] || [ -d .g
   echo "found leftovers from an interrupted run; restoring"
   restore_tree
 fi
+
+# Mac 剛喚醒時網路常未就緒（11-10、11-12、11-13 皆因 DNS 解析失敗整輪報廢）：
+# 先等 GitHub 與一家銀行都能解析，最多等 NET_WAIT_SECONDS
+NET_WAIT_SECONDS="${RADAR_NET_WAIT_SECONDS:-600}"
+waited=0
+until /usr/bin/dscacheutil -q host -a name github.com | grep -q ip_address \
+  && /usr/bin/dscacheutil -q host -a name www.esunbank.com | grep -q ip_address; do
+  if [ "$waited" -ge "$NET_WAIT_SECONDS" ]; then
+    fail_notify "網路 ${NET_WAIT_SECONDS} 秒內未就緒，本輪略過，網站維持上一版"
+    exit 3
+  fi
+  sleep 15
+  waited=$((waited + 15))
+done
+[ "$waited" -gt 0 ] && echo "network ready after ${waited}s"
 
 git switch -q "$BRANCH"
 git pull -q --rebase origin "$BRANCH"
