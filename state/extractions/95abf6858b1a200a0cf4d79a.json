@@ -1,0 +1,217 @@
+{
+ "key": "95abf6858b1a200a0cf4d79a",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-13T02:06:48+00:00",
+ "title": "momo",
+ "duration_ms": 226707,
+ "cost_usd": 0.046582200000000004,
+ "usage": {
+  "input": 2,
+  "output": 2167,
+  "cache_creation": 6115,
+  "cache_read": 2241
+ },
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "並於指定期間內完成登錄，即可享"
+  },
+  "subs": [
+   {
+    "name": "活動一【週二星展日】11/3、11/10、11/17、11/24",
+    "rules": [
+     {
+      "quote": "於2026/11/24 15:30開始登錄",
+      "kind": "opens_at",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 11,
+       "day": 24,
+       "hour": 15,
+       "minute": 30
+      },
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 1000,
+     "quote": "（共限1,000名登錄者）"
+    }
+   },
+   {
+    "name": "活動二【全月】11/1~11/30",
+    "rules": [
+     {
+      "quote": "於2026/11/30 15:30開始登錄",
+      "kind": "opens_at",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 11,
+       "day": 30,
+       "hour": 15,
+       "minute": 30
+      },
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 1500,
+     "quote": "（共限1,500名登錄者）"
+    }
+   },
+   {
+    "name": "活動二【雙11正檔】11/10~11/13",
+    "rules": [
+     {
+      "quote": "於2026/11/16 15:30開始登錄",
+      "kind": "opens_at",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 11,
+       "day": 16,
+       "hour": 15,
+       "minute": 30
+      },
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "於2026/11/17 15:30開始登錄",
+      "kind": "opens_at",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 11,
+       "day": 17,
+       "hour": 15,
+       "minute": 30
+      },
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "機車活動排除，11/30 16:00於momo購物網活動網站開放登錄",
+      "kind": "opens_at",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": null,
+       "month": 11,
+       "day": 30,
+       "hour": 16,
+       "minute": 0
+      },
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 350,
+     "quote": "（共限350名登錄者）"
+    }
+   },
+   {
+    "name": "活動三【全月機車館】11/1~11/30",
+    "rules": [
+     {
+      "quote": "機車館活動以及累積分期活動（mo幣）2026/11/30 16:00於momo購物網活動網站開放登錄",
+      "kind": "opens_at",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 11,
+       "day": 30,
+       "hour": 16,
+       "minute": 0
+      },
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 100,
+     "quote": "（共限100名登錄者）"
+    }
+   }
+  ]
+ }
+}

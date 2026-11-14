@@ -1,0 +1,92 @@
+{
+ "key": "add2f9270a631a97a6dcda39",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-13T02:07:19+00:00",
+ "title": "博客來網路書店",
+ "duration_ms": 10406,
+ "cost_usd": 0.0381602,
+ "usage": {
+  "input": 2,
+  "output": 1452,
+  "cache_creation": 5797,
+  "cache_read": 2241
+ },
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "並於指定期間內完成登錄，即可享"
+  },
+  "subs": [
+   {
+    "name": "【網購星精彩】10/1~12/31",
+    "rules": [
+     {
+      "quote": "10月活動於10/23上午11點整開始登錄；11月活動於11/23登錄上午11點整開始登錄； 12月活動於12/23上午11點整開始登錄",
+      "kind": "enumerated",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [
+       {
+        "year": null,
+        "month": 10,
+        "day": 23,
+        "hour": 11,
+        "minute": 0
+       },
+       {
+        "year": null,
+        "month": 11,
+        "day": 23,
+        "hour": 11,
+        "minute": 0
+       },
+       {
+        "year": null,
+        "month": 12,
+        "day": 23,
+        "hour": 11,
+        "minute": 0
+       }
+      ],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "當月消費當月登錄",
+      "kind": "deadline",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": null,
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": true
+     }
+    ],
+    "reregister": {
+     "value": "each_period",
+     "quote": "本活動每月須至「星展Card+信用卡數位服務」進行登錄"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

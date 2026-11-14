@@ -1,0 +1,22 @@
+{
+ "key": "683b767d4bac21a580b8adda",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-14T00:27:37+00:00",
+ "title": "玉山信用卡 加油天天省",
+ "duration_ms": 6332,
+ "cost_usd": 0.0925582,
+ "usage": {
+  "input": 2,
+  "output": 383,
+  "cache_creation": 22069,
+  "cache_read": 2241
+ },
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "本活動依現場牌告油價做自動降價，且浮動油價均依現場公告為準"
+  },
+  "subs": []
+ }
+}

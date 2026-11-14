@@ -17,7 +17,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "8d4d7456c32987a1",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -53,7 +53,7 @@
    "需登錄但官方未寫登錄時點"
   ],
   "content_hash": "6bf67324618c123e",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -74,7 +74,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "c2057ce6a201efa7",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -110,7 +110,7 @@
    "需登錄但官方未寫登錄時點"
   ],
   "content_hash": "a1117a4d5306a74f",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -131,7 +131,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "fae56ab2f34afae2",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -152,7 +152,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "877c74f5cb753ccf",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -173,7 +173,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "16d9f391a67f4c4a",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -194,7 +194,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "0e15071763bb5e3c",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -298,7 +298,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "68cc3eb529df73c3",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -348,7 +348,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "6de26ef09895ebc7",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -369,7 +369,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "c2a20aeaef4eea30",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -384,7 +384,7 @@
   "summary": "活動期間:2026/11/1-11/30",
   "category": "需登錄",
   "registration": "required",
-  "registration_quote": "持卡人應就各優惠活動分別完成登錄，完成登錄者視為同意本活動內容與注意事項之條款及約定",
+  "registration_quote": "",
   "subs": [
    {
     "name": "優惠2-信用卡分期優惠",
@@ -409,7 +409,7 @@
     "reregister": "unknown",
     "reregister_quote": "",
     "order": "register_before_spend",
-    "order_quote": "於登錄開放期間且於繳稅前至本行網站完成登錄，恕無法辦理事後分期、期數變更",
+    "order_quote": "於登錄開放期間且於繳稅前至本行網站完成登錄",
     "quota": null,
     "quota_quote": "",
     "review": []
@@ -446,8 +446,8 @@
   "portal_url": "https://www.megabank.com.tw/personal/credit-card/event/overview",
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
-  "content_hash": "7141a3683ff99bd0",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "content_hash": "c839c3f3c12d16a1",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -468,7 +468,28 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "0527bad1f3b9f9ed",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
+  "stale": false
+ },
+ {
+  "id": "mega-08547875cc",
+  "bank_id": "mega",
+  "bank_name": "兆豐銀行",
+  "title": "桃園市復興區 TWQR 10% 任一Pay回饋",
+  "aliases": [],
+  "url": "https://www.megabank.com.tw/personal/credit-card/event/overview/twpaytaoyuan202611",
+  "period_start": "2026-11-01",
+  "period_end": "2027-01-31",
+  "summary": "活動期間:2026/11/1~2027/1/31",
+  "category": "",
+  "registration": "not_required",
+  "registration_quote": "",
+  "subs": [],
+  "portal_url": "https://www.megabank.com.tw/personal/credit-card/event/overview",
+  "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
+  "review": [],
+  "content_hash": "62f48cbf0c60ff71",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -489,7 +510,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "aff3c29713f6c052",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -510,7 +531,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "3f427100a84f1d94",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -560,7 +581,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "6a2cc0570b26838a",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -584,7 +605,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "eef6987053cca205",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -605,7 +626,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "395393ea08310f6b",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -626,7 +647,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "77c6e4a5581533be",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -647,7 +668,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "614afd3ed420d530",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -668,7 +689,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "d1acbeda42e6a5ba",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -704,7 +725,7 @@
    "需登錄但官方未寫登錄時點"
   ],
   "content_hash": "5c89e832b1067c63",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -740,7 +761,7 @@
    "需登錄但官方未寫登錄時點"
   ],
   "content_hash": "02e5dcc70b0fd000",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -761,7 +782,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "6aef24e884557e66",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -782,7 +803,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "9845452ddc7a7161",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -803,7 +824,28 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "445307fdfd8b5edc",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
+  "stale": false
+ },
+ {
+  "id": "mega-1d75652617",
+  "bank_id": "mega",
+  "bank_name": "兆豐銀行",
+  "title": "阿爾法集美味 台灣Pay享15%回饋",
+  "aliases": [],
+  "url": "https://www.megabank.com.tw/personal/credit-card/event/overview/alpha15",
+  "period_start": "2026-11-01",
+  "period_end": "2027-04-30",
+  "summary": "活動期間:2026/11/1~2027/4/30",
+  "category": "",
+  "registration": "not_required",
+  "registration_quote": "用戶於活動期間至活動地點消費，使用「台灣Pay」QR Code掃碼支付成功者，單筆消費不限金額可享15%現金回饋",
+  "subs": [],
+  "portal_url": "https://www.megabank.com.tw/personal/credit-card/event/overview",
+  "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
+  "review": [],
+  "content_hash": "0e5d8e42a320a3a8",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -824,7 +866,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "b767ea3a49f21567",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -845,7 +887,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "6cf470923a5d5476",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -866,7 +908,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "2f175491fbd3a020",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -887,7 +929,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "d58598c88f1cf431",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -908,7 +950,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "f63c9760970d4e66",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -929,7 +971,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "ff5bd8d11c58bd1a",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -950,7 +992,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "b532ab556ba01c9f",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -986,7 +1028,7 @@
    "需登錄但官方未寫登錄時點"
   ],
   "content_hash": "17d571d8f54b12cc",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -1007,28 +1049,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "3f5e9bd27767a05e",
-  "observed_at": "2026-11-11T08:52:01+08:00",
-  "stale": false
- },
- {
-  "id": "mega-28fe7c9001",
-  "bank_id": "mega",
-  "bank_name": "兆豐銀行",
-  "title": "廣三SOGO-週年慶",
-  "aliases": [],
-  "url": "https://www.megabank.com.tw/personal/credit-card/event/overview/guansansogo11509",
-  "period_start": "2026-09-17",
-  "period_end": "2026-11-11",
-  "summary": "活動期間:2026/9/17-11/11",
-  "category": "",
-  "registration": "not_required",
-  "registration_quote": "",
-  "subs": [],
-  "portal_url": "https://www.megabank.com.tw/personal/credit-card/event/overview",
-  "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
-  "review": [],
-  "content_hash": "ba607567249a4f98",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -1049,7 +1070,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "c02d26be757ce7c8",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -1070,7 +1091,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "41f9be9e2e8896f3",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -1091,7 +1112,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "0bf8db470ba0c2bc",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -1112,7 +1133,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "6463c3afecc3fcd0",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -1133,7 +1154,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "0c36895978c7e8f3",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -1154,7 +1175,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "920063ce09e7d110",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -1175,7 +1196,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "960efbff44ab70fd",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -1196,7 +1217,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "a1023dd3343dc49a",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -1217,7 +1238,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "45acfbb647b5f392",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -1238,7 +1259,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "567e1b44c26b32f1",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -1259,7 +1280,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "39eda21a34ba92e1",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -1323,7 +1344,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "be1deb6d323de008",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -1344,7 +1365,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "67a6c157d7d57ec9",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -1365,7 +1386,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "f513b08602ddcfbe",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -1442,7 +1463,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "4946144fbd56dbfa",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -1463,7 +1484,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "a443fe01a330b79e",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -1484,7 +1505,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "38096f7bce4216f6",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -1505,7 +1526,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "43d3bda412480ccc",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -1526,7 +1547,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "0018dc915579ae09",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -1603,7 +1624,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "4fdd2b6906d5b05d",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -1624,7 +1645,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "5f552a8a2f268bb5",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -1645,7 +1666,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "6d104d1e49d808f1",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -1666,7 +1687,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "6596d3f9d0cc1b29",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -1687,7 +1708,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "12669dffa9151ae5",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -1708,7 +1729,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "daa74b89775f0424",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -1729,7 +1750,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "2b2cc6433efef40c",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -1750,7 +1771,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "07ea0d5ff95b5756",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -1771,7 +1792,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "02f0bfc890f7723c",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -1905,7 +1926,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "99de55813b8ca58c",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -1926,7 +1947,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "557538f11febff8c",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -1947,7 +1968,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "ac2cd7fe6e7670b8",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -1968,7 +1989,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "bf6512bc1c417e17",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -2022,7 +2043,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "39af85d441616cd6",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -2045,7 +2066,7 @@
    "官方頁面沒有可讀的條款文字（可能是圖片或已下架），請直接查看活動頁"
   ],
   "content_hash": "60b6080a0ed6de45",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -2066,7 +2087,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "1fb3b5707101d5b7",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -2087,7 +2108,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "48e3889209d18f67",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -2138,7 +2159,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "4e1d63ceae18480b",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -2159,7 +2180,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "fc0ea04ec1b75c81",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -2193,7 +2214,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "5a99a046ca3447d3",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -2214,7 +2235,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "655d76f878659818",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -2235,7 +2256,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "14cca9a7704e7cd0",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -2256,7 +2277,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "67637e7a275f3dbb",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -2277,7 +2298,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "3540f63619fd3bd4",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -2298,7 +2319,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "154d046d67ea4a2d",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -2319,7 +2340,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "3e6986f359e45735",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -2340,7 +2361,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "96bec312eec76b72",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -2361,7 +2382,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "f7c9aafc1c4f6812",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -2382,7 +2403,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "d07dc39460ffc9b6",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -2403,7 +2424,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "5308925d81f67850",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -2424,7 +2445,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "14bcc720910aa628",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -2445,7 +2466,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "5e88ae4a97d91875",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -2466,7 +2487,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "b62cf3bfbddf3cf2",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -2518,7 +2539,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "ac2d02bc5715e44a",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -2539,7 +2560,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "cd9f65c5b31a277b",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -2603,7 +2624,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "8830bee0beefd3f3",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -2624,7 +2645,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "3904944361cd4f5c",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -2645,7 +2666,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "ce68bde504e84e7b",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -2666,7 +2687,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "92a187b10375737c",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -2714,7 +2735,7 @@
    "需登錄但官方未寫登錄時點"
   ],
   "content_hash": "a5cbb8f22a479321",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -2764,7 +2785,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "b51924d47a61a592",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -2785,7 +2806,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "0e0ffe3f92ea9d06",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -2806,7 +2827,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "6c975e3adb3a4a00",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -2856,7 +2877,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "1ac50da7340d90c5",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -2877,7 +2898,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "512124ea4dfa69ba",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -2898,7 +2919,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "559e0a25e3b7da81",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -2919,7 +2940,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "851abbd9387ced35",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -2940,7 +2961,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "43ca9f65db7d7c73",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -2961,7 +2982,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "32420b2a1f1e46e8",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -2982,7 +3003,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "55c30f88cc1cefd9",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -3003,7 +3024,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "3f0ed6b4ebee9228",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -3024,7 +3045,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "9f673a26ad17c237",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -3045,7 +3066,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "0697041761d07668",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -3066,7 +3087,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "4a81953db6fedff6",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -3087,7 +3108,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "dc8df5bb265f976e",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -3108,7 +3129,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "ab50730a8c83e0c8",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -3129,7 +3150,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "ca6886150b15b42d",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -3150,7 +3171,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "2aa977ee3908cb11",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -3171,7 +3192,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "946feec1a2856b6c",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -3192,7 +3213,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "c3cef7a7efe28af4",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -3213,7 +3234,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "e869cecf8fd6a2cb",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -3234,7 +3255,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "fa32114bfd1b870d",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -3272,7 +3293,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "1b5e0c060cb6c6db",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -3375,7 +3396,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "1cda5786fd67de19",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -3396,7 +3417,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "af5d92dde54b66eb",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -3417,7 +3438,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "f9abab9629114713",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -3438,7 +3459,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "8a5371145964f758",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -3459,7 +3480,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "f313f0c3b78a87e9",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -3480,7 +3501,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "c8d132abfba40630",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -3501,7 +3522,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "db774474cb43b478",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -3522,7 +3543,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "979f55e2e6ff883b",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -3543,7 +3564,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "9589cab68f3a11e2",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -3564,7 +3585,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "4401626a01377770",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -3585,7 +3606,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "48ce95f328048098",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -3606,7 +3627,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "05f3eb7b1759322f",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -3627,7 +3648,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "d4c8478cb04bfb07",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -3648,7 +3669,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "882f92d1058abf21",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -3686,7 +3707,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "6e972966d648b3da",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -3707,7 +3728,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "7a162eeae7e0d504",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -3728,7 +3749,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "f198912166eb66c5",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -3749,7 +3770,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "97c09331c8482128",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -3770,7 +3791,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "1e196b6e7409a560",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -3791,7 +3812,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "766ff49aee9fda8a",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -3812,7 +3833,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "4e200d17347d306a",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -3833,7 +3854,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "cc54ab56621dc010",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -3854,7 +3875,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "f8e5eae488442bc7",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -3875,7 +3896,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "fb4a464026bf9c65",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -3896,7 +3917,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "b0ef32b09ca143b2",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -3917,7 +3938,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "99ab9ac277df657e",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -3938,7 +3959,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "ecd6fee7f13a005e",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -3959,7 +3980,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "317f1031a44ca898",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -3980,7 +4001,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "c62d576a307b7583",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -4001,7 +4022,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "e725c595a4748f57",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -4022,7 +4043,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "4150b2b6e70e586d",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -4043,7 +4064,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "19cc63c97699e612",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -4064,7 +4085,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "e3e1557364b22ca3",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -4085,7 +4106,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "ebb58f5da3171d9c",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -4106,7 +4127,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "b3f87d637aed3f35",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -4127,7 +4148,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "b9ab0cfee7d172dc",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -4148,7 +4169,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "cd9e8aa7817f919a",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -4169,7 +4190,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "b132276e5ca555c3",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -4190,7 +4211,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "978ca43d94fb6f22",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -4211,7 +4232,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "5ddb70ecea98e4db",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -4232,7 +4253,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "3e328a150ba4f6bd",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -4253,7 +4274,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "14a4344bbfb37b5c",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -4274,7 +4295,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "61da485a8aefc865",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -4295,7 +4316,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "d6b792537687a8f5",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -4316,7 +4337,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "7c2566d259c78b62",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -4337,7 +4358,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "173d347fcb5815b4",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -4358,7 +4379,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "64f7052f206227a2",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -4418,7 +4439,28 @@
    "需登錄但官方未寫登錄時點"
   ],
   "content_hash": "802713902e89d144",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
+  "stale": false
+ },
+ {
+  "id": "mega-b026db06d4",
+  "bank_id": "mega",
+  "bank_name": "兆豐銀行",
+  "title": "花蓮縣秀林鄉、萬榮鄉及卓溪鄉 TWQR 10% 任一Pay回饋",
+  "aliases": [],
+  "url": "https://www.megabank.com.tw/personal/credit-card/event/overview/twpayhualien202611",
+  "period_start": "2026-11-01",
+  "period_end": "2027-01-31",
+  "summary": "活動期間:2026/11/1~2027/1/31",
+  "category": "",
+  "registration": "not_required",
+  "registration_quote": "",
+  "subs": [],
+  "portal_url": "https://www.megabank.com.tw/personal/credit-card/event/overview",
+  "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
+  "review": [],
+  "content_hash": "99ae991fb561f8c9",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -4439,7 +4481,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "915c2f76add29303",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -4460,7 +4502,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "1b89c6405a42e55d",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -4481,7 +4523,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "a40391028578a7e1",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -4502,7 +4544,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "a7e89bf52ce8604a",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -4523,7 +4565,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "4dfc6e6b37ae228f",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -4544,7 +4586,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "d6a0b9003aa4d418",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -4565,7 +4607,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "9c5cfce4a740f12c",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -4586,7 +4628,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "acbb6644beb9711b",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -4624,14 +4666,14 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "6b1c61b148369f06",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
   "id": "mega-bec4b48d02",
   "bank_id": "mega",
   "bank_name": "兆豐銀行",
-  "title": "台灣Pay購物消費滿3筆 享50元數位券",
+  "title": "(已額滿)台灣Pay購物消費滿3筆 享50元數位券",
   "aliases": [],
   "url": "https://www.megabank.com.tw/personal/credit-card/event/overview/voucher11510",
   "period_start": "2026-11-01",
@@ -4644,8 +4686,8 @@
   "portal_url": "https://www.megabank.com.tw/personal/credit-card/event/overview",
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
-  "content_hash": "26f1f047200deead",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "content_hash": "7b82d4982ede1ea3",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -4666,7 +4708,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "2202127de6bd92db",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -4687,7 +4729,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "ef13e546db922e8d",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -4708,7 +4750,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "2fe5e57411d4d348",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -4729,7 +4771,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "a2a344ffdb953250",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -4750,7 +4792,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "3b8f7e628d649d60",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -4771,7 +4813,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "72ea9305b801c473",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -4792,7 +4834,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "1451c5b5f6d7b59b",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -4856,7 +4898,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "dfb75cf0cc99020e",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -4877,7 +4919,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "63cf038cadae67ec",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -4898,7 +4940,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "8a13557b7aaa1af2",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -4948,7 +4990,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "9e3c96301e3868bd",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -4969,7 +5011,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "2c5a0c89cf02bac0",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -4990,7 +5032,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "defdf2288751702a",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -5011,7 +5053,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "2d2b35694f821eed",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -5061,7 +5103,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "7ce6160acdb879e4",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -5082,7 +5124,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "d12c26498b8245e7",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -5103,7 +5145,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "694347727858b217",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -5124,7 +5166,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "58ebc0ba377801f0",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -5145,7 +5187,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "2d2e3796d5aad039",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -5166,7 +5208,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "660b2d57f55675c5",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -5187,7 +5229,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "5afb36d2b6fe62cd",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -5225,7 +5267,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "29b0017f92e2a7d8",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -5297,7 +5339,7 @@
    "需登錄但官方未寫登錄時點"
   ],
   "content_hash": "e4cd5fd6c2cf8300",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -5318,7 +5360,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "4f31b785ce0ced2b",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -5339,7 +5381,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "2bdceecedffd805d",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -5360,7 +5402,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "dcec67281fdfd049",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -5381,7 +5423,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "93bd1ae7302015de",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -5402,7 +5444,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "bee5eee686f02b18",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -5423,7 +5465,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "90f3a5694bb543ee",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -5444,7 +5486,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "96185cddf47a7fbb",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -5465,7 +5507,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "1cf1ec05e5dfe2cf",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -5486,7 +5528,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "c5d0cea23fd97961",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -5507,7 +5549,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "3bbb6c051de53fe0",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -5528,7 +5570,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "0954b3bdfefc8caf",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -5549,7 +5591,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "4d85c3b974828272",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -5599,7 +5641,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "4e0568e5ba3b2b98",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -5620,7 +5662,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "2a91e05791765af7",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -5641,7 +5683,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "29659ac724803f6e",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -5662,7 +5704,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "5afb153558092321",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -5683,7 +5725,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "9bb2153d082b7bbb",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -5704,7 +5746,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "a1d03a90b87345d9",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -5725,7 +5767,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "99eb6093765f2ecc",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -5775,7 +5817,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "a5d467755a7dad90",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -5852,7 +5894,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "7533c8c3dc3ac7dd",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -5873,7 +5915,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "df465ecd0f5690aa",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -5894,7 +5936,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "845cf0909b4159b8",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -5915,7 +5957,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "0ea08abc8d487756",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -5936,7 +5978,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "39482245cc4c7108",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -5957,7 +5999,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "2d2ad3fb1ebc5ee1",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -5978,7 +6020,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "54c3f80c271f3105",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -5999,7 +6041,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "4bf6cef1e899fa91",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -6020,7 +6062,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "ef369a46f6c136e1",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -6041,7 +6083,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "1b4ca7e688962684",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -6062,7 +6104,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "d6d79ae7b6b2f123",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -6083,7 +6125,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "c0bc4340cad27395",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -6104,7 +6146,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "97f06cedd1ac9336",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -6140,7 +6182,7 @@
    "需登錄但官方未寫登錄時點"
   ],
   "content_hash": "98beae34c048a9e1",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -6161,7 +6203,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "ace80d2d84bc1fe9",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -6182,7 +6224,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "4a7fc0a534969e43",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -6203,7 +6245,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "72353bdc3a8393c9",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -6224,7 +6266,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "f8a1c3a85628cd07",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -6245,7 +6287,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "f872de81cad2f1d6",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -6266,7 +6308,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "91262d10360ad850",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -6287,7 +6329,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "7f9e83d58ee17c96",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -6308,7 +6350,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "d123e25a5c76a99f",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -6329,7 +6371,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "db4ea7ced475886e",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -6350,7 +6392,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "805be8fef32ac5ee",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -6371,7 +6413,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "74b16aeeb6598945",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -6392,7 +6434,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "71f4c7adc287b229",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -6413,7 +6455,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "0c7875c336ad3b6f",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -6434,7 +6476,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "f0dea87082d0ecc1",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -6455,7 +6497,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "5fee53edd573f026",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -6476,7 +6518,28 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "6accb6722259f357",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
+  "stale": false
+ },
+ {
+  "id": "mega-fde0bf931f",
+  "bank_id": "mega",
+  "bank_name": "兆豐銀行",
+  "title": "台灣Pay×PChome 24h購物．最高享10%P幣歡樂送",
+  "aliases": [],
+  "url": "https://www.megabank.com.tw/personal/credit-card/event/overview/twppchome202611",
+  "period_start": "2026-11-06",
+  "period_end": "2027-01-31",
+  "summary": "活動期間:2026/11/6~2027/1/31",
+  "category": "",
+  "registration": "not_required",
+  "registration_quote": "活動期間內用戶於PChome24h購物網站或以PChome24h購物APP消費，使用「台灣Pay」(限金融卡/帳戶)成功付款且單筆消費滿新臺幣",
+  "subs": [],
+  "portal_url": "https://www.megabank.com.tw/personal/credit-card/event/overview",
+  "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
+  "review": [],
+  "content_hash": "64b92a8f0636ca47",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -6514,7 +6577,7 @@
   "portal_hint": "兆豐信用卡優惠總覽（篩選「需登錄」），於各活動頁的登錄按鈕完成登錄",
   "review": [],
   "content_hash": "35a95909a9b95d15",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  }
 ]

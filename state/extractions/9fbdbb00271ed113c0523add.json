@@ -1,0 +1,22 @@
+{
+ "key": "9fbdbb00271ed113c0523add",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-14T00:27:40+00:00",
+ "title": "台灣高鐵購票新攻略",
+ "duration_ms": 3963,
+ "cost_usd": 0.07722820000000001,
+ "usage": {
+  "input": 2,
+  "output": 292,
+  "cache_creation": 18464,
+  "cache_read": 2241
+ },
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "核卡後預設簡單選方案。"
+  },
+  "subs": []
+ }
+}

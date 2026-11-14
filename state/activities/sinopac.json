@@ -17,7 +17,7 @@
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
   "content_hash": "73a31ba0f4d303db",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -79,7 +79,7 @@
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
   "content_hash": "f6daac3c66ec792f",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -94,7 +94,7 @@
   "summary": "旅行社、航空、旅遊平台、飯店、海外消費等享好康優惠，刷永豐越玩越輕鬆!",
   "category": "",
   "registration": "required",
-  "registration_quote": "二、活動對象:永豐信用卡持卡人且完成登錄者",
+  "registration_quote": "活動對象:永豐信用卡持卡人且完成登錄者",
   "subs": [
    {
     "name": "旅遊刷永豐，單月最高享10,000元刷卡金",
@@ -216,7 +216,7 @@
       "holiday_shifted": false,
       "note": "",
       "evidence": {
-       "quote": "10/15、11/15、12/15的15:00開放登錄至當月月底",
+       "quote": "10/15、11/15、12/15的15:00開放登錄",
        "url": "https://bank.sinopac.com/sinopacBT/personal/credit-card/discount/814407078.html"
       }
      },
@@ -229,7 +229,7 @@
       "holiday_shifted": false,
       "note": "",
       "evidence": {
-       "quote": "10/15、11/15、12/15的15:00開放登錄至當月月底",
+       "quote": "10/15、11/15、12/15的15:00開放登錄",
        "url": "https://bank.sinopac.com/sinopacBT/personal/credit-card/discount/814407078.html"
       }
      },
@@ -242,13 +242,14 @@
       "holiday_shifted": false,
       "note": "",
       "evidence": {
-       "quote": "10/15、11/15、12/15的15:00開放登錄至當月月底",
+       "quote": "10/15、11/15、12/15的15:00開放登錄",
        "url": "https://bank.sinopac.com/sinopacBT/personal/credit-card/discount/814407078.html"
       }
      }
     ],
     "rules": [
-     "10/15、11/15、12/15的15:00開放登錄至當月月底"
+     "10/15、11/15、12/15的15:00開放登錄",
+     "開放登錄至當月月底"
     ],
     "reregister": "unknown",
     "reregister_quote": "",
@@ -262,8 +263,8 @@
   "portal_url": "https://bank.sinopac.com/sinopacBT/personal/credit-card/discount/list.html",
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
-  "content_hash": "f8f3dc2a0d1ef41a",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "content_hash": "901778d57fb1477c",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -284,7 +285,7 @@
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
   "content_hash": "94533fc6e5f340ef",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -334,7 +335,7 @@
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
   "content_hash": "8cc308e9dafe0869",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -491,7 +492,7 @@
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
   "content_hash": "413756f2ecfa430f",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -512,7 +513,7 @@
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
   "content_hash": "a57cd0c42ad329ef",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -533,7 +534,7 @@
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
   "content_hash": "bd3136e901dd17b5",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -571,7 +572,7 @@
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
   "content_hash": "25685756fbed44e0",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -607,7 +608,7 @@
    "需登錄但官方未寫登錄時點"
   ],
   "content_hash": "9716b43ec64d01da",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -630,7 +631,7 @@
    "需登錄但官方未寫登錄時點"
   ],
   "content_hash": "50cb61dc30a2c357",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -667,7 +668,7 @@
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
   "content_hash": "92799da7f48eeea0",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -688,7 +689,7 @@
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
   "content_hash": "99f786d07e2c252a",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -728,7 +729,7 @@
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
   "content_hash": "491ef5128687e9f2",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -776,7 +777,7 @@
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
   "content_hash": "4cc1d7f3ed356918",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -797,7 +798,7 @@
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
   "content_hash": "c621adb01544aa44",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -818,7 +819,7 @@
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
   "content_hash": "8fa1728d5355c0e7",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -835,6 +836,18 @@
   "registration": "required",
   "registration_quote": "參加本活動，須由正卡持卡人於指定期間透過永豐銀行網站進行線上登錄",
   "subs": [
+   {
+    "name": "週年慶檔期 單筆分期滿額最高送700元",
+    "slots": [],
+    "rules": [],
+    "reregister": "unknown",
+    "reregister_quote": "",
+    "order": "unknown",
+    "order_quote": "",
+    "quota": null,
+    "quota_quote": "",
+    "review": []
+   },
    {
     "name": "特選家具通路單筆分期滿額 最高送1,800元刷卡金",
     "slots": [
@@ -878,13 +891,25 @@
     "review": [
      "規則無法驗證（year=2026 在引句中找不到）：須由正卡持卡人於活動期間透過永豐銀行網站進行線上登錄"
     ]
+   },
+   {
+    "name": "特力屋週年慶",
+    "slots": [],
+    "rules": [],
+    "reregister": "unknown",
+    "reregister_quote": "",
+    "order": "unknown",
+    "order_quote": "",
+    "quota": null,
+    "quota_quote": "",
+    "review": []
    }
   ],
   "portal_url": "https://bank.sinopac.com/sinopacBT/personal/credit-card/discount/list.html",
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
-  "content_hash": "e90c12f19835a9d2",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "content_hash": "917ce7fcd059995d",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -1029,7 +1054,7 @@
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
   "content_hash": "7599b8f8b8169432",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -1044,7 +1069,7 @@
   "summary": "各大精選百貨、OUTLET滿額享優惠，讓您購好購滿！",
   "category": "",
   "registration": "required",
-  "registration_quote": "當日累積分期滿額享刷卡金回饋(需登錄)",
+  "registration_quote": "活動期間於下列特選百貨刷永豐信用卡，當日累積分期滿額享刷卡金回饋(需登錄)",
   "subs": [
    {
     "name": "Mitsui Shopping Park LaLaport 南港/台中",
@@ -1067,9 +1092,9 @@
      "本活動需於活動期間2026/10/1~2026/12/31完成登錄"
     ],
     "reregister": "once",
-    "reregister_quote": "活動期間內完成登錄，且達消費門檻者，即享活動資格，無須重複登錄",
-    "order": "unknown",
-    "order_quote": "",
+    "reregister_quote": "活動期間內完成登錄，且達消費門檻者，即享活動資格，無須重複登錄。",
+    "order": "retroactive_ok",
+    "order_quote": "活動期間內完成登錄，且達消費門檻者，即享活動資格",
     "quota": 15000,
     "quota_quote": "總限量登錄15,000名",
     "review": []
@@ -1078,8 +1103,8 @@
   "portal_url": "https://bank.sinopac.com/sinopacBT/personal/credit-card/discount/list.html",
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
-  "content_hash": "59f9483f2e8cb18b",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "content_hash": "dac546fa21e2d91f",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  },
  {
@@ -1115,7 +1140,7 @@
    "需登錄但官方未寫登錄時點"
   ],
   "content_hash": "cc1e02a4e4197bd7",
-  "observed_at": "2026-11-11T08:52:01+08:00",
+  "observed_at": "2026-11-14T11:11:44+08:00",
   "stale": false
  }
 ]
