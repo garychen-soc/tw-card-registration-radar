@@ -44,3 +44,27 @@ def test_still_valid_activities_vanishing_warns() -> None:
 def test_small_source_losing_a_large_share_warns() -> None:
     verdict = evaluate(score(), {"陽信銀行": (24, 4)})
     assert any("陽信銀行" in w for w in verdict.warnings)
+
+
+def test_suspect_golden_entries_are_quarantined_and_published() -> None:
+    # 11-14 實例：精確率 0.88，錯誤全來自 golden 漏看原文的條目
+    report = {**score(precision=0.88, wrong=4),
+              "suspects": [{"id": "dbs-dutyfree"}, {"id": "dbs-domestictravel"}],
+              "trusted": {"precision": 1.0, "recall": 1.0, "entries": 45}}
+    verdict = evaluate(report)
+    assert verdict.block == ""
+    assert any("自我修復" in w and "dbs-dutyfree" in w for w in verdict.warnings)
+
+
+def test_too_many_suspects_still_blocks() -> None:
+    report = {**score(precision=0.6, wrong=30),
+              "suspects": [{"id": f"x{i}"} for i in range(8)],
+              "trusted": {"precision": 1.0, "recall": 1.0, "entries": 39}}
+    assert "不發布" in evaluate(report).block
+
+
+def test_suspects_that_do_not_explain_errors_still_block() -> None:
+    report = {**score(precision=0.8, wrong=10),
+              "suspects": [{"id": "a"}],
+              "trusted": {"precision": 0.85, "recall": 1.0, "entries": 46}}
+    assert "不發布" in evaluate(report).block

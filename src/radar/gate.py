@@ -7,6 +7,10 @@
 - 上一版仍在期間內的活動，這一版憑空消失（不含自然到期）達門檻：通知——擷取器可能
   壞了卻沒報錯；局部讀取失敗已由 pipeline 沿用處理，不會算進來。
 警告不擋發布：官方頁改版也會造成這些現象，擋下會讓網站停更，交由人判斷。
+
+自我修復（Gary 11-14 核准）：精確率低於擋下門檻時，若錯誤全來自「抽取引句逐字出現在
+golden 原文副本」的條目（疑似 golden 漏看），改用排除這些條目後的分數判定並通知複核。
+疑似條目過多（> max_suspects 或 > suspect_ratio）視為系統性問題，照樣擋下。
 """
 
 from __future__ import annotations
@@ -27,6 +31,8 @@ class Thresholds:
     min_sample: int = 30
     vanish_min: int = 10
     vanish_ratio: float = 0.08
+    max_suspects: int = 5
+    suspect_ratio: float = 0.10
 
 
 @dataclass
@@ -51,6 +57,21 @@ def evaluate(
     sample = sum(int(score.get(k, 0)) for k in ("matched_slots", "wrong_slots", "missed_slots"))
     not_found = score.get("not_found") or []
 
+    suspects = score.get("suspects") or []
+    trusted = score.get("trusted") or {}
+    if precision < t.block_precision and suspects and trusted:
+        entries = int(trusted.get("entries", 0)) + len(suspects)
+        if len(suspects) <= t.max_suspects and len(suspects) <= max(1, entries * t.suspect_ratio):
+            ids = "、".join(str(s["id"]) for s in suspects)
+            verdict.warnings.append(
+                f"自我修復：golden 精確率 {precision:.3f}，{len(suspects)} 筆疑似 golden 漏看原文"
+                f"（{ids}），本輪以其餘條目判定，請複核 golden"
+            )
+            precision = float(trusted.get("precision", precision))
+            recall = float(trusted.get("recall", recall))
+    elif suspects:
+        ids = "、".join(str(s["id"]) for s in suspects)
+        verdict.warnings.append(f"{len(suspects)} 筆 golden 疑似漏看原文（{ids}），請複核")
     if precision < t.block_precision:
         verdict.block = f"golden 精確率 {precision:.3f} 低於 {t.block_precision}，本輪不發布"
     elif precision < t.warn_precision:

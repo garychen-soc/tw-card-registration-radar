@@ -25,6 +25,7 @@ from .extract.locate import LocateError, locate
 from .models import Activity
 from .pipeline import DOCS, REGISTRATION_WORDS, STATE, TAIPEI, assemble, group_docs, load_docs
 from .pipeline import previous as previous_state
+from .textnorm import normalize
 
 GOLDEN = Path(__file__).resolve().parents[2] / "golden" / "golden.yaml"
 # 檢核窗口（golden 涵蓋的兩個月）；每批換新只改 golden/window.json
@@ -137,14 +138,74 @@ def _compare(
     }
 
 
+SOURCES = GOLDEN.parents[1] / "var" / "golden_src"
+_WS = re.compile(r"\s+")
+
+
+def _squash(text: str) -> str:
+    return _WS.sub("", normalize(text))
+
+
+def suspect_entries(
+    entries: list[dict[str, Any]],
+    find: Callable[[dict[str, Any]], list[Activity]],
+    sources: Path = SOURCES,
+) -> list[dict[str, Any]]:
+    """疑似 golden 漏看原文的條目（自我修復用）。
+
+    判準：該筆有「多出的時點」，而每個多出時點的抽取引句都逐字出現在該筆 golden 的
+    官方原文副本裡——抽取有原文佐證、golden 卻沒記，最常見的原因是 golden 漏看
+    表格或注意事項（11-14 dbs 兩筆即此類）。沒有原文副本的條目不判定。
+    """
+    out: list[dict[str, Any]] = []
+    for entry in entries:
+        src = sources / f"{entry['id']}.txt"
+        if not src.exists():
+            continue
+        expected = {
+            (_minute(slot.get("start")), _end_minute(slot.get("end")))
+            for sub in entry.get("subs") or []
+            for slot in sub.get("slots") or []
+        }
+        quotes: dict[Key, list[str]] = {}
+        for activity in find(entry):
+            for sub in activity.subs:
+                for slot in sub.slots:
+                    key = (_minute(slot.start), _end_minute(slot.end))
+                    if _in_window(key):
+                        quotes.setdefault(key, []).append(slot.evidence.quote)
+        extra = {k: q for k, q in quotes.items() if k not in expected}
+        if not extra:
+            continue
+        text = _squash(src.read_text(encoding="utf-8"))
+        if all(any(_squash(q) in text for q in qs) for qs in extra.values()):
+            out.append({
+                "id": entry["id"],
+                "extra": sorted(extra, key=str),
+                "quotes": sorted({q for qs in extra.values() for q in qs})[:3],
+            })
+    return out
+
+
 def score() -> dict[str, Any]:
+    """評分；另列 ``suspects``（疑似 golden 漏看）與排除它們後的 ``trusted`` 分數。"""
     entries = _entries()
     pools = {
         str(e["bank"]): previous_state(str(e["bank"]))
         for e in entries
         if (STATE / "activities" / f"{e['bank']}.json").exists()
     }
-    return _compare(entries, lambda e: _candidates(e, pools.get(str(e["bank"]), [])))
+
+    def find(entry: dict[str, Any]) -> list[Activity]:
+        return _candidates(entry, pools.get(str(entry["bank"]), []))
+
+    report = _compare(entries, find)
+    suspects = suspect_entries(entries, find)
+    ids = {s["id"] for s in suspects}
+    trusted = _compare([e for e in entries if e["id"] not in ids], find) if ids else report
+    report["suspects"] = suspects
+    report["trusted"] = {k: trusted[k] for k in ("precision", "recall", "entries")}
+    return report
 
 
 def evaluate(model: str, workers: int = 3) -> dict[str, Any]:

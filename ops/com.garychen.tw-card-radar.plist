@@ -4,7 +4,8 @@
   安裝（需使用者同意後才執行）：
     cp ops/com.garychen.tw-card-radar.plist ~/Library/LaunchAgents/
     launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.garychen.tw-card-radar.plist
-  每日 08:20 一次（2026-11-06 Gary 要求由每日三次改為一次以節省 token；
+  每日 08:20 起跑一次；失敗或睡過頭由每 30 分鐘的喚醒自動重試／補跑（11-14 起）。
+  原為每日 08:20 一次（2026-11-06 Gary 要求由每日三次改為一次以節省 token；
   避開整點與深夜：Mac 睡眠是排程最大的失敗源；睡眠中錯過的時段在喚醒後補跑一次）。
   改時間後重新載入：
     launchctl bootout gui/$(id -u)/com.garychen.tw-card-radar
@@ -24,6 +25,9 @@
   </array>
   <key>StartCalendarInterval</key>
   <dict><key>Hour</key><integer>8</integer><key>Minute</key><integer>20</integer></dict>
+  <!-- 自我修復：每 30 分鐘叫一次，腳本自行判斷今天是否已成功、是否該重試（見 run_local.sh） -->
+  <key>StartInterval</key>
+  <integer>1800</integer>
   <key>StandardOutPath</key>
   <string>/Users/chenzhiming/Library/Logs/tw-card-radar/launchd.out</string>
   <key>StandardErrorPath</key>

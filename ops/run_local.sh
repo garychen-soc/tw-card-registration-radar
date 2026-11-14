@@ -9,25 +9,50 @@
 set -euo pipefail
 
 REPO="$(cd "$(dirname "$0")/.." && pwd)"
-LOG_DIR="$HOME/Library/Logs/tw-card-radar"
+LOG_DIR="${RADAR_LOG_DIR:-$HOME/Library/Logs/tw-card-radar}"
 BRANCH="${RADAR_BRANCH:-main}"
 LLM_BUDGET="${RADAR_LLM_BUDGET:-120}"
 # 整輪上限：Mac 半睡眠時一輪曾斷斷續續拖 5.5 小時（11-05），還一直佔著鎖
 MAX_SECONDS="${RADAR_MAX_SECONDS:-2700}"
 export PATH="$HOME/.local/bin:/opt/homebrew/bin:/usr/bin:/bin"
 
-mkdir -p "$LOG_DIR"
+# ---- 自我修復：重試與補跑（Gary 11-14 核准）-------------------------------------
+# launchd 每 30 分鐘叫一次本腳本（另加 08:20 定時）。今天已成功、還沒到 08:20、
+# 距上次嘗試不到 RETRY_GAP、或今天已放棄時，立刻安靜退出（不寫 log、不花 token）。
+# 失敗就由下一次喚醒自動重試；Mac 睡過 08:20 也會在醒來後補跑。
+# 登入失效（6）與閘門擋下（5）重試無用，當天放棄；其餘失敗最多 MAX_ATTEMPTS 次。
+# 手動強制執行：bash ops/run_local.sh --force
+STAMP_DIR="$REPO/var/schedule"
+MAX_ATTEMPTS="${RADAR_MAX_ATTEMPTS:-4}"
+RETRY_GAP="${RADAR_RETRY_GAP:-1200}"
+START_HHMM="${RADAR_START_HHMM:-0820}"
+TODAY="$(date +%F)"
+mkdir -p "$STAMP_DIR" "$LOG_DIR"
+if [ "${1:-}" != "--force" ]; then
+  [ "$(cat "$STAMP_DIR/last_ok" 2>/dev/null)" = "$TODAY" ] && exit 0
+  [ "$(cat "$STAMP_DIR/gave_up" 2>/dev/null)" = "$TODAY" ] && exit 0
+  [ "$(date +%H%M)" -lt "$START_HHMM" ] && exit 0
+  attempts_file="$STAMP_DIR/attempts-$TODAY"
+  attempts="$(cat "$attempts_file" 2>/dev/null || echo 0)"
+  [ "$attempts" -ge "$MAX_ATTEMPTS" ] && exit 0
+  last_try="$(stat -f %m "$attempts_file" 2>/dev/null || echo 0)"
+  [ $(( $(date +%s) - last_try )) -lt "$RETRY_GAP" ] && exit 0
+  echo $((attempts + 1)) >"$attempts_file"
+  find "$STAMP_DIR" -name 'attempts-*' -mtime +7 -delete 2>/dev/null || true
+fi
+
 exec >>"$LOG_DIR/run-$(date +%Y%m%d).log" 2>&1
-echo "==== $(date '+%F %T') start"
+echo "==== $(date '+%F %T') start (attempt $(cat "$STAMP_DIR/attempts-$TODAY" 2>/dev/null || echo manual)/$MAX_ATTEMPTS)"
 
 notify() {
   /usr/bin/osascript -e "display notification \"$1\" with title \"刷卡登錄雷達\"" || true
 }
-# 已針對「本輪失敗」發過具體通知時，on_exit 不再重複發泛用通知
-FAIL_NOTIFIED=0
+# 本輪失敗的具體原因。通知延到 on_exit 才決定發不發：還會自動重試的失敗只寫 log，
+# 放棄（重試用完、閘門擋下、登入失效）時才通知，避免同一天被同一件事轟炸。
+FAIL_MSG=""
 fail_notify() {
-  FAIL_NOTIFIED=1
-  notify "$1"
+  FAIL_MSG="$1"
+  echo "fail: $1"
 }
 
 # 還原本輪產生、尚未發布的資料。state/extractions 是以內容雜湊為鍵的 LLM 結果快取，
@@ -57,14 +82,22 @@ on_exit() {
     pkill -P "$WATCHDOG" 2>/dev/null || true
     kill "$WATCHDOG" 2>/dev/null || true
   fi
-  if [ "$rc" -ne 0 ]; then
+  if [ "$rc" -eq 0 ]; then
+    echo "$TODAY" >"$STAMP_DIR/last_ok"
+  else
     echo "==== $(date '+%F %T') failed rc=$rc line=${FAILED_LINE:-?}"
     restore_tree
+    tries="$(cat "$STAMP_DIR/attempts-$TODAY" 2>/dev/null || echo 0)"
     if [ -e "$TIMEOUT_FLAG" ]; then
       if [ "$MAX_SECONDS" -ge 60 ]; then limit="$((MAX_SECONDS / 60)) 分鐘"; else limit="$MAX_SECONDS 秒"; fi
-      notify "本輪超過 $limit 被中止（Mac 可能在睡眠中執行），網站維持上一版"
-    elif [ "$FAIL_NOTIFIED" -eq 0 ]; then
-      notify "本輪失敗（退出碼 $rc，run_local.sh 第 ${FAILED_LINE:-?} 行），網站維持上一版，詳見 $LOG_DIR"
+      FAIL_MSG="本輪超過 $limit 被中止（Mac 可能在睡眠中執行）"
+    fi
+    [ -n "$FAIL_MSG" ] || FAIL_MSG="本輪失敗（退出碼 $rc，run_local.sh 第 ${FAILED_LINE:-?} 行）"
+    if [ "$rc" -ne 5 ] && [ "$rc" -ne 6 ] && [ "$tries" -lt "$MAX_ATTEMPTS" ]; then
+      echo "==== will retry in $((RETRY_GAP / 60))+ min (attempt $tries/$MAX_ATTEMPTS)"
+    else
+      echo "$TODAY" >"$STAMP_DIR/gave_up"
+      notify "$FAIL_MSG；今天不再重試，網站維持上一版，詳見 $LOG_DIR"
     fi
   fi
   rm -f "$LOCK" "$TIMEOUT_FLAG"
@@ -106,7 +139,7 @@ waited=0
 until /usr/bin/dscacheutil -q host -a name github.com | grep -q ip_address \
   && /usr/bin/dscacheutil -q host -a name www.esunbank.com | grep -q ip_address; do
   if [ "$waited" -ge "$NET_WAIT_SECONDS" ]; then
-    fail_notify "網路 ${NET_WAIT_SECONDS} 秒內未就緒，本輪略過，網站維持上一版"
+    fail_notify "網路 ${NET_WAIT_SECONDS} 秒內未就緒"
     exit 3
   fi
   sleep 15
@@ -123,7 +156,7 @@ status=$?
 set -e
 if [ "$status" -ne 0 ]; then
   # 逾時被中止時由 on_exit 發「逾時」通知，這裡不重複
-  [ -e "$TIMEOUT_FLAG" ] || fail_notify "本輪未發布（radar run 退出碼 $status），詳見 $LOG_DIR"
+  [ -e "$TIMEOUT_FLAG" ] || fail_notify "radar run 退出碼 $status"
   exit "$status"
 fi
 
