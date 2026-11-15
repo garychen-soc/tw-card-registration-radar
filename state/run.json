@@ -1,17 +1,17 @@
 {
- "observed_at": "2026-11-14T11:11:44+08:00",
- "llm_calls": 0,
+ "observed_at": "2026-11-15T08:20:08+08:00",
+ "llm_calls": 1,
  "llm_failures": 0,
  "llm_usage": {
   "model": "sonnet",
-  "calls": 0,
-  "input_tokens": 0,
-  "output_tokens": 0,
-  "cache_creation_tokens": 0,
+  "calls": 1,
+  "input_tokens": 2,
+  "output_tokens": 458,
+  "cache_creation_tokens": 23840,
   "cache_read_tokens": 0,
-  "total_tokens": 0,
-  "cost_usd": 0.0,
-  "llm_seconds": 0.0
+  "total_tokens": 24300,
+  "cost_usd": 0.0999,
+  "llm_seconds": 6.8
  },
  "publishable": true,
  "messages": [],
@@ -175,8 +175,8 @@
    "bank_name": "台新銀行",
    "status": "ok",
    "entry_url": "https://mkpcard.taishinbank.com.tw/tscccms/promotion/offerList/A",
-   "stubs": 199,
-   "activities": 197,
+   "stubs": 198,
+   "activities": 196,
    "detail_failures": 0,
    "message": "",
    "carried": 0
