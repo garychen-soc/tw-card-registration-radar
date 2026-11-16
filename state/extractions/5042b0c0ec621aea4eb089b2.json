@@ -1,0 +1,83 @@
+{
+ "key": "5042b0c0ec621aea4eb089b2",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-16T01:38:45+00:00",
+ "title": "玉山熊本熊卡新卡禮最高贈HAPPY GO點數500點！",
+ "duration_ms": 12579,
+ "cost_usd": 0.05656799999999999,
+ "usage": {
+  "input": 2,
+  "output": 1416,
+  "cache_creation": 10601,
+  "cache_read": 0
+ },
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "活動需登錄且活動期間內僅需登錄1次"
+  },
+  "subs": [
+   {
+    "name": "熊本熊遊日本",
+    "rules": [],
+    "reregister": {
+     "value": "once",
+     "quote": "活動需登錄且活動期間內僅需登錄1次"
+    },
+    "order": {
+     "value": "register_before_spend",
+     "quote": "完成活動登錄後方享指定日本商店加碼6%現金回饋"
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   },
+   {
+    "name": "【卡友滿額禮】",
+    "rules": [
+     {
+      "quote": "活動期間:2026/11/12~2026/12/31\n活動期間登錄並使用玉山熊本熊卡",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 11,
+       "day": 12,
+       "hour": null,
+       "minute": null
+      },
+      "end": {
+       "year": 2026,
+       "month": 12,
+       "day": 31,
+       "hour": null,
+       "minute": null
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

@@ -1,0 +1,154 @@
+{
+ "key": "261fac11c4766fd0b72d2923",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-16T01:38:40+00:00",
+ "title": "酷澎Coupang 11月網購活動",
+ "duration_ms": 7455,
+ "cost_usd": 0.044927999999999996,
+ "usage": {
+  "input": 2,
+  "output": 1006,
+  "cache_creation": 8716,
+  "cache_read": 0
+ },
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "登錄成功且下載玉山Wallet並註冊成功者始符合活動資格。"
+  },
+  "subs": [
+   {
+    "name": "【活動一】全月活動",
+    "rules": [
+     {
+      "quote": "2026/11/24 13:00~2026/11/30 23:59統一開放正卡人於玉山銀行官網活動登錄頁、玉山Wallet App登錄",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 11,
+       "day": 24,
+       "hour": 13,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": 11,
+       "day": 30,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     },
+     {
+      "quote": "2026/11/26 13:00~2026/11/30 23:59統一開放正卡人於玉山銀行官網活動登錄頁、玉山Wallet App登錄",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 11,
+       "day": 26,
+       "hour": 13,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": 11,
+       "day": 30,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "once",
+     "quote": "每歸戶僅限登錄一次。"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 4000,
+     "quote": "限量登錄4,000名，額滿為止"
+    }
+   },
+   {
+    "name": "【活動二】雙11購物節！分期滿額享1,000點回饋",
+    "rules": [
+     {
+      "quote": "2026/11/25 13:00~2026/11/30 23:59統一開放正卡人於玉山銀行官網登錄",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 11,
+       "day": 25,
+       "hour": 13,
+       "minute": 0
+      },
+      "end": {
+       "year": 2026,
+       "month": 11,
+       "day": 30,
+       "hour": 23,
+       "minute": 59
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "once",
+     "quote": "每歸戶僅限登錄1次"
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": 500,
+     "quote": "限量登錄500名，額滿為止"
+    }
+   },
+   {
+    "name": "【現折活動】刷玉山卡買酷澎滿額享現折300元",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}
