@@ -74,7 +74,7 @@
   "portal_hint": "王道銀行活動登錄頁",
   "review": [],
   "content_hash": "1037c061dfa119d5",
-  "observed_at": "2026-11-16T09:29:55+08:00",
+  "observed_at": "2026-11-17T09:16:55+08:00",
   "stale": false
  },
  {
@@ -138,7 +138,7 @@
   "portal_hint": "王道銀行活動登錄頁",
   "review": [],
   "content_hash": "6777ba22b0e2f36b",
-  "observed_at": "2026-11-16T09:29:55+08:00",
+  "observed_at": "2026-11-17T09:16:55+08:00",
   "stale": false
  },
  {
@@ -215,8 +215,8 @@
   "portal_url": "https://www.o-bank.com/egift/RegisterCampaign",
   "portal_hint": "王道銀行活動登錄頁",
   "review": [],
-  "content_hash": "150e694ef7c347a6",
-  "observed_at": "2026-11-16T09:29:55+08:00",
+  "content_hash": "b57e013f1e94b40d",
+  "observed_at": "2026-11-17T09:16:55+08:00",
   "stale": false
  },
  {
@@ -252,7 +252,7 @@
   "portal_hint": "王道銀行活動登錄頁",
   "review": [],
   "content_hash": "8cdeb68634f5b477",
-  "observed_at": "2026-11-16T09:29:55+08:00",
+  "observed_at": "2026-11-17T09:16:55+08:00",
   "stale": false
  },
  {
@@ -330,7 +330,7 @@
   "portal_hint": "王道銀行活動登錄頁",
   "review": [],
   "content_hash": "9b6dce8c09b4bc4f",
-  "observed_at": "2026-11-16T09:29:55+08:00",
+  "observed_at": "2026-11-17T09:16:55+08:00",
   "stale": false
  },
  {
@@ -351,7 +351,7 @@
   "portal_hint": "王道銀行活動登錄頁",
   "review": [],
   "content_hash": "23e888a760076dfd",
-  "observed_at": "2026-11-16T09:29:55+08:00",
+  "observed_at": "2026-11-17T09:16:55+08:00",
   "stale": false
  },
  {
@@ -372,7 +372,7 @@
   "portal_hint": "王道銀行活動登錄頁",
   "review": [],
   "content_hash": "84b4aac930d2df7b",
-  "observed_at": "2026-11-16T09:29:55+08:00",
+  "observed_at": "2026-11-17T09:16:55+08:00",
   "stale": false
  },
  {
@@ -450,7 +450,7 @@
   "portal_hint": "王道銀行活動登錄頁",
   "review": [],
   "content_hash": "356e20889c80f1f3",
-  "observed_at": "2026-11-16T09:29:55+08:00",
+  "observed_at": "2026-11-17T09:16:55+08:00",
   "stale": false
  },
  {
@@ -471,7 +471,28 @@
   "portal_hint": "王道銀行活動登錄頁",
   "review": [],
   "content_hash": "c1dcfccdaca8823c",
-  "observed_at": "2026-11-16T09:29:55+08:00",
+  "observed_at": "2026-11-17T09:16:55+08:00",
+  "stale": false
+ },
+ {
+  "id": "obank-60451a3b20",
+  "bank_id": "obank",
+  "bank_name": "王道銀行",
+  "title": "王道卡綁Samsung Wallet任刷爽拿新台幣100元現金回饋",
+  "aliases": [],
+  "url": "https://www.o-bank.com/retail/event/event-announce/debit_20261231_14",
+  "period_start": "2026-11-16",
+  "period_end": "2027-02-28",
+  "summary": "活動期間： 2026/11/16~2027/02/28 活動對象： 本行簽帳金融卡持卡人 活動內容： 活動期間以本行簽帳金融卡首次成功綁定Samsung Wallet，再以Samsung Wallet使用本行簽帳金融卡任刷一筆一般消費即可獲得新台幣100元現金回饋，每人於活動期間限回饋乙次，活動期間限量3,000名。(",
+  "category": "",
+  "registration": "not_required",
+  "registration_quote": "活動期間以本行簽帳金融卡首次成功綁定Samsung Wallet，再以Samsung Wallet使用本行簽帳金融卡任刷一筆一般消費即可獲得新台幣100元現金回饋",
+  "subs": [],
+  "portal_url": "https://www.o-bank.com/egift/RegisterCampaign",
+  "portal_hint": "王道銀行活動登錄頁",
+  "review": [],
+  "content_hash": "34b1cd11b849bfed",
+  "observed_at": "2026-11-17T09:16:55+08:00",
   "stale": false
  },
  {
@@ -549,7 +570,7 @@
   "portal_hint": "王道銀行活動登錄頁",
   "review": [],
   "content_hash": "7a4a2d3b21df1d2b",
-  "observed_at": "2026-11-16T09:29:55+08:00",
+  "observed_at": "2026-11-17T09:16:55+08:00",
   "stale": false
  },
  {
@@ -570,7 +591,7 @@
   "portal_hint": "王道銀行活動登錄頁",
   "review": [],
   "content_hash": "0dcc3f29c933554e",
-  "observed_at": "2026-11-16T09:29:55+08:00",
+  "observed_at": "2026-11-17T09:16:55+08:00",
   "stale": false
  },
  {
@@ -648,7 +669,7 @@
   "portal_hint": "王道銀行活動登錄頁",
   "review": [],
   "content_hash": "b78227d38edb8ab7",
-  "observed_at": "2026-11-16T09:29:55+08:00",
+  "observed_at": "2026-11-17T09:16:55+08:00",
   "stale": false
  },
  {
@@ -669,7 +690,7 @@
   "portal_hint": "王道銀行活動登錄頁",
   "review": [],
   "content_hash": "241eb4225661d665",
-  "observed_at": "2026-11-16T09:29:55+08:00",
+  "observed_at": "2026-11-17T09:16:55+08:00",
   "stale": false
  },
  {
@@ -690,7 +711,7 @@
   "portal_hint": "王道銀行活動登錄頁",
   "review": [],
   "content_hash": "6d3b255b387e9cad",
-  "observed_at": "2026-11-16T09:29:55+08:00",
+  "observed_at": "2026-11-17T09:16:55+08:00",
   "stale": false
  }
 ]

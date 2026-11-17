@@ -1,0 +1,22 @@
+{
+ "key": "6f4b68e9551cb631c76bb28c",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-17T01:24:45+00:00",
+ "title": "王道卡綁Samsung Wallet任刷爽拿新台幣100元現金回饋",
+ "duration_ms": 3910,
+ "cost_usd": 0.027024199999999998,
+ "usage": {
+  "input": 2,
+  "output": 248,
+  "cache_creation": 6023,
+  "cache_read": 2241
+ },
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "活動期間以本行簽帳金融卡首次成功綁定Samsung Wallet，再以Samsung Wallet使用本行簽帳金融卡任刷一筆一般消費即可獲得新台幣100元現金回饋"
+  },
+  "subs": []
+ }
+}

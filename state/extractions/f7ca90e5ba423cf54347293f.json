@@ -1,0 +1,55 @@
+{
+ "key": "f7ca90e5ba423cf54347293f",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-17T01:24:35+00:00",
+ "title": "百貨購物總表",
+ "duration_ms": 6765,
+ "cost_usd": 0.05069799999999999,
+ "usage": {
+  "input": 2,
+  "output": 659,
+  "cache_creation": 11026,
+  "cache_read": 0
+ },
+ "output": {
+  "registration": {
+   "value": "unclear",
+   "quote": "(需登錄)"
+  },
+  "subs": [
+   {
+    "name": "LaLaport",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   },
+   {
+    "name": "MITSUI OUTLET PARK",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

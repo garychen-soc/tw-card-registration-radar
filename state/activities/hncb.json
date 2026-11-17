@@ -3,7 +3,7 @@
   "id": "hncb-1472696798",
   "bank_id": "hncb",
   "bank_name": "華南銀行",
-  "title": "台灣Pay信用卡繳「地價稅」華南超回饋",
+  "title": "【已於2026年11月16日9:45額滿】台灣Pay信用卡繳「地價稅」華南超回饋",
   "aliases": [],
   "url": "https://www.hncb.com.tw/wps/portal/HNCB/msg/co-management/pb-best-offer/c1/t5/TWPAY_115tax_LADN",
   "period_start": "2026-11-01",
@@ -17,7 +17,7 @@
     "name": "台灣Pay繳稅滿額分期優惠",
     "slots": [],
     "rules": [
-     "活動對象繳納地價稅並於活動期間內至本行信用卡官網登錄"
+     "並於活動期間內至本行信用卡官網登錄"
     ],
     "reregister": "unknown",
     "reregister_quote": "",
@@ -26,15 +26,15 @@
     "quota": null,
     "quota_quote": "",
     "review": [
-     "登錄時間為相對規則（例如消費後幾日內），沒有固定時點"
+     "規則無法驗證（year=2026 在引句中找不到）：並於活動期間內至本行信用卡官網登錄"
     ]
    }
   ],
   "portal_url": "https://netbank.hncb.com.tw/netbank/servlet/TrxDispatcher?trx=com.lb.wibc.trx.CardPromoteOverall_RWD&state=prompt",
   "portal_hint": "華南銀行網路銀行「信用卡活動登錄」",
   "review": [],
-  "content_hash": "a2b8809d2c648086",
-  "observed_at": "2026-11-16T09:29:55+08:00",
+  "content_hash": "895746521d4bb3c9",
+  "observed_at": "2026-11-17T09:16:55+08:00",
   "stale": false
  },
  {
@@ -55,7 +55,7 @@
   "portal_hint": "華南銀行網路銀行「信用卡活動登錄」",
   "review": [],
   "content_hash": "acd3f77d67295922",
-  "observed_at": "2026-11-16T09:29:55+08:00",
+  "observed_at": "2026-11-17T09:16:55+08:00",
   "stale": false
  },
  {
@@ -76,7 +76,7 @@
   "portal_hint": "華南銀行網路銀行「信用卡活動登錄」",
   "review": [],
   "content_hash": "3af4d034420c7af6",
-  "observed_at": "2026-11-16T09:29:55+08:00",
+  "observed_at": "2026-11-17T09:16:55+08:00",
   "stale": false
  },
  {
@@ -114,7 +114,7 @@
   "portal_hint": "華南銀行網路銀行「信用卡活動登錄」",
   "review": [],
   "content_hash": "de2887ebfa0c75e1",
-  "observed_at": "2026-11-16T09:29:55+08:00",
+  "observed_at": "2026-11-17T09:16:55+08:00",
   "stale": false
  },
  {
@@ -196,7 +196,7 @@
   "portal_hint": "華南銀行網路銀行「信用卡活動登錄」",
   "review": [],
   "content_hash": "5dd3ca9c3e9459aa",
-  "observed_at": "2026-11-16T09:29:55+08:00",
+  "observed_at": "2026-11-17T09:16:55+08:00",
   "stale": false
  },
  {
@@ -217,7 +217,7 @@
   "portal_hint": "華南銀行網路銀行「信用卡活動登錄」",
   "review": [],
   "content_hash": "b3b72f4abe012dc6",
-  "observed_at": "2026-11-16T09:29:55+08:00",
+  "observed_at": "2026-11-17T09:16:55+08:00",
   "stale": false
  },
  {
@@ -253,7 +253,7 @@
    "需登錄但官方未寫登錄時點"
   ],
   "content_hash": "d1694bdcecdac024",
-  "observed_at": "2026-11-16T09:29:55+08:00",
+  "observed_at": "2026-11-17T09:16:55+08:00",
   "stale": false
  },
  {
@@ -289,7 +289,7 @@
    "需登錄但官方未寫登錄時點"
   ],
   "content_hash": "51730616947fb9c8",
-  "observed_at": "2026-11-16T09:29:55+08:00",
+  "observed_at": "2026-11-17T09:16:55+08:00",
   "stale": false
  }
 ]

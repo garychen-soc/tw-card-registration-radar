@@ -1,0 +1,67 @@
+{
+ "key": "8674fc494369ac2aa92d6818",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-17T01:24:45+00:00",
+ "title": "【已於2026年11月16日9:45額滿】台灣Pay信用卡繳「地價稅」華南超回饋",
+ "duration_ms": 7028,
+ "cost_usd": 0.030492199999999997,
+ "usage": {
+  "input": 2,
+  "output": 774,
+  "cache_creation": 5575,
+  "cache_read": 2241
+ },
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "地價稅滿額享分期優惠活動採登錄制，需以正卡持卡人身分登錄"
+  },
+  "subs": [
+   {
+    "name": "台灣Pay繳稅滿額分期優惠",
+    "rules": [
+     {
+      "quote": "並於活動期間內至本行信用卡官網登錄",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 11,
+       "day": 1,
+       "hour": null,
+       "minute": null
+      },
+      "end": {
+       "year": 2026,
+       "month": 11,
+       "day": 30,
+       "hour": null,
+       "minute": null
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

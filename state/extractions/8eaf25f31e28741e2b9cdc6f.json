@@ -1,0 +1,22 @@
+{
+ "key": "8eaf25f31e28741e2b9cdc6f",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-17T01:24:33+00:00",
+ "title": "亞洲萬里通聯名卡，購買國泰航空機票，最高享TWD1,200折扣！",
+ "duration_ms": 4752,
+ "cost_usd": 0.035222,
+ "usage": {
+  "input": 2,
+  "output": 303,
+  "cache_creation": 8047,
+  "cache_read": 0
+ },
+ "output": {
+  "registration": {
+   "value": "not_required",
+   "quote": "並輸入限量指定優惠編號，每張機票享最高TWD1,200折扣！"
+  },
+  "subs": []
+ }
+}
