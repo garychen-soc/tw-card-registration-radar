@@ -1,0 +1,39 @@
+{
+ "key": "fa4c6f32cc4d00b47490f1d2",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-20T00:54:28+00:00",
+ "title": "大全聯超級週年慶刷國泰世華信用卡單筆消費滿額享加碼回饋",
+ "duration_ms": 5391,
+ "cost_usd": 0.03126,
+ "usage": {
+  "input": 2,
+  "output": 388,
+  "cache_creation": 6844,
+  "cache_read": 0
+ },
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "符合本活動資格者需現場登記，採事後回饋。"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

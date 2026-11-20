@@ -1,0 +1,105 @@
+{
+ "key": "e1bd8bd4de1c884cb7ed14cd",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-20T00:54:47+00:00",
+ "title": "日本福岡機場免稅店",
+ "duration_ms": 15417,
+ "cost_usd": 0.0961482,
+ "usage": {
+  "input": 2,
+  "output": 1518,
+  "cache_creation": 20129,
+  "cache_read": 2241
+ },
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "點我！領券"
+  },
+  "subs": [
+   {
+    "name": "【滿額禮】",
+    "rules": [
+     {
+      "quote": "活動期間:2026/11/12~2026/12/31\n活動期間登錄並使用玉山熊本熊卡",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 11,
+       "day": 12,
+       "hour": null,
+       "minute": null
+      },
+      "end": {
+       "year": 2026,
+       "month": 12,
+       "day": 31,
+       "hour": null,
+       "minute": null
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   },
+   {
+    "name": "【雙幣卡限定】",
+    "rules": [
+     {
+      "quote": "2026/12/31前不限新舊戶",
+      "kind": "deadline",
+      "is_example": false,
+      "holiday": "none",
+      "start": null,
+      "end": {
+       "year": 2026,
+       "month": 12,
+       "day": 31,
+       "hour": null,
+       "minute": null
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}
