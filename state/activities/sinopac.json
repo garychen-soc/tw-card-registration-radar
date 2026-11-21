@@ -17,7 +17,7 @@
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
   "content_hash": "73a31ba0f4d303db",
-  "observed_at": "2026-11-20T08:47:45+08:00",
+  "observed_at": "2026-11-21T08:20:08+08:00",
   "stale": false
  },
  {
@@ -79,7 +79,7 @@
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
   "content_hash": "f6daac3c66ec792f",
-  "observed_at": "2026-11-20T08:47:45+08:00",
+  "observed_at": "2026-11-21T08:20:08+08:00",
   "stale": false
  },
  {
@@ -108,7 +108,7 @@
       "holiday_shifted": false,
       "note": "",
       "evidence": {
-       "quote": "10/15、11/15、12/15的15:00開放登錄，每月限量登錄3,000名，共9,000名",
+       "quote": "10/15、11/15、12/15的15:00開放登錄，每月限量登錄3,000名，共9,000名。",
        "url": "https://bank.sinopac.com/sinopacBT/personal/credit-card/discount/814407078.html"
       }
      },
@@ -121,18 +121,18 @@
       "holiday_shifted": false,
       "note": "",
       "evidence": {
-       "quote": "10/15、11/15、12/15的15:00開放登錄，每月限量登錄3,000名，共9,000名",
+       "quote": "10/15、11/15、12/15的15:00開放登錄，每月限量登錄3,000名，共9,000名。",
        "url": "https://bank.sinopac.com/sinopacBT/personal/credit-card/discount/814407078.html"
       }
      }
     ],
     "rules": [
-     "10/15、11/15、12/15的15:00開放登錄，每月限量登錄3,000名，共9,000名"
+     "10/15、11/15、12/15的15:00開放登錄，每月限量登錄3,000名，共9,000名。"
     ],
     "reregister": "once",
-    "reregister_quote": "活動期間內任一月份完成登錄，且有單月達消費門檻者，即享活動資格，無須重複登錄",
+    "reregister_quote": "無須重複登錄",
     "order": "retroactive_ok",
-    "order_quote": "活動期間內任一月份完成登錄且有單月達消費門檻者，即享活動資格",
+    "order_quote": "活動期間內任一月份完成登錄，且有單月達消費門檻者，即享活動資格",
     "quota": 3000,
     "quota_quote": "每月限量登錄3,000名",
     "review": []
@@ -149,7 +149,7 @@
       "holiday_shifted": false,
       "note": "",
       "evidence": {
-       "quote": "10/15、11/15、12/15的15:00開放登錄",
+       "quote": "10/15、11/15、12/15的15:00開放登錄，每月限量登錄3,000名，共9,000名。",
        "url": "https://bank.sinopac.com/sinopacBT/personal/credit-card/discount/814407078.html"
       }
      },
@@ -162,18 +162,18 @@
       "holiday_shifted": false,
       "note": "",
       "evidence": {
-       "quote": "10/15、11/15、12/15的15:00開放登錄",
+       "quote": "10/15、11/15、12/15的15:00開放登錄，每月限量登錄3,000名，共9,000名。",
        "url": "https://bank.sinopac.com/sinopacBT/personal/credit-card/discount/814407078.html"
       }
      }
     ],
     "rules": [
-     "10/15、11/15、12/15的15:00開放登錄"
+     "10/15、11/15、12/15的15:00開放登錄，每月限量登錄3,000名，共9,000名。"
     ],
     "reregister": "once",
     "reregister_quote": "活動期間僅須登錄乙次即享活動資格，無須重複登錄",
-    "order": "unknown",
-    "order_quote": "",
+    "order": "retroactive_ok",
+    "order_quote": "並於活動期間內登錄成功始享回饋資格",
     "quota": 3000,
     "quota_quote": "每月限量登錄3,000名",
     "review": []
@@ -190,7 +190,7 @@
       "holiday_shifted": false,
       "note": "",
       "evidence": {
-       "quote": "10/15、11/15、12/15的15:00開放登錄至當月月底",
+       "quote": "10/15、11/15、12/15的15:00開放登錄至當月月底，每月限量登錄1,000名，共3,000名。",
        "url": "https://bank.sinopac.com/sinopacBT/personal/credit-card/discount/814407078.html"
       }
      },
@@ -203,7 +203,20 @@
       "holiday_shifted": false,
       "note": "",
       "evidence": {
-       "quote": "10/15、11/15、12/15的15:00開放登錄至當月月底",
+       "quote": "10/15、11/15、12/15的15:00開放登錄至當月月底，每月限量登錄1,000名，共3,000名。",
+       "url": "https://bank.sinopac.com/sinopacBT/personal/credit-card/discount/814407078.html"
+      }
+     },
+     {
+      "start": "2026-11-23T15:00:00+08:00",
+      "end": null,
+      "kind": "opens_at",
+      "origin": "explicit",
+      "precision": "minute",
+      "holiday_shifted": false,
+      "note": "",
+      "evidence": {
+       "quote": "將於2026/11/23(一) 15:00起新增登錄名額100名",
        "url": "https://bank.sinopac.com/sinopacBT/personal/credit-card/discount/814407078.html"
       }
      },
@@ -216,13 +229,14 @@
       "holiday_shifted": false,
       "note": "",
       "evidence": {
-       "quote": "10/15、11/15、12/15的15:00開放登錄至當月月底",
+       "quote": "10/15、11/15、12/15的15:00開放登錄至當月月底，每月限量登錄1,000名，共3,000名。",
        "url": "https://bank.sinopac.com/sinopacBT/personal/credit-card/discount/814407078.html"
       }
      }
     ],
     "rules": [
-     "10/15、11/15、12/15的15:00開放登錄至當月月底"
+     "10/15、11/15、12/15的15:00開放登錄至當月月底，每月限量登錄1,000名，共3,000名。",
+     "將於2026/11/23(一) 15:00起新增登錄名額100名"
     ],
     "reregister": "unknown",
     "reregister_quote": "",
@@ -236,8 +250,8 @@
   "portal_url": "https://bank.sinopac.com/sinopacBT/personal/credit-card/discount/list.html",
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
-  "content_hash": "4f46139712b341cb",
-  "observed_at": "2026-11-20T08:47:45+08:00",
+  "content_hash": "6fdc9f78624dad73",
+  "observed_at": "2026-11-21T08:20:08+08:00",
   "stale": false
  },
  {
@@ -258,7 +272,7 @@
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
   "content_hash": "94533fc6e5f340ef",
-  "observed_at": "2026-11-20T08:47:45+08:00",
+  "observed_at": "2026-11-21T08:20:08+08:00",
   "stale": false
  },
  {
@@ -294,7 +308,7 @@
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
   "content_hash": "8cc308e9dafe0869",
-  "observed_at": "2026-11-20T08:47:45+08:00",
+  "observed_at": "2026-11-21T08:20:08+08:00",
   "stale": false
  },
  {
@@ -451,7 +465,7 @@
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
   "content_hash": "413756f2ecfa430f",
-  "observed_at": "2026-11-20T08:47:45+08:00",
+  "observed_at": "2026-11-21T08:20:08+08:00",
   "stale": false
  },
  {
@@ -472,7 +486,7 @@
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
   "content_hash": "a57cd0c42ad329ef",
-  "observed_at": "2026-11-20T08:47:45+08:00",
+  "observed_at": "2026-11-21T08:20:08+08:00",
   "stale": false
  },
  {
@@ -493,7 +507,7 @@
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
   "content_hash": "bd3136e901dd17b5",
-  "observed_at": "2026-11-20T08:47:45+08:00",
+  "observed_at": "2026-11-21T08:20:08+08:00",
   "stale": false
  },
  {
@@ -531,7 +545,7 @@
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
   "content_hash": "25685756fbed44e0",
-  "observed_at": "2026-11-20T08:47:45+08:00",
+  "observed_at": "2026-11-21T08:20:08+08:00",
   "stale": false
  },
  {
@@ -567,7 +581,7 @@
    "需登錄但官方未寫登錄時點"
   ],
   "content_hash": "9716b43ec64d01da",
-  "observed_at": "2026-11-20T08:47:45+08:00",
+  "observed_at": "2026-11-21T08:20:08+08:00",
   "stale": false
  },
  {
@@ -590,7 +604,7 @@
    "需登錄但官方未寫登錄時點"
   ],
   "content_hash": "50cb61dc30a2c357",
-  "observed_at": "2026-11-20T08:47:45+08:00",
+  "observed_at": "2026-11-21T08:20:08+08:00",
   "stale": false
  },
  {
@@ -627,7 +641,7 @@
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
   "content_hash": "92799da7f48eeea0",
-  "observed_at": "2026-11-20T08:47:45+08:00",
+  "observed_at": "2026-11-21T08:20:08+08:00",
   "stale": false
  },
  {
@@ -648,7 +662,7 @@
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
   "content_hash": "99f786d07e2c252a",
-  "observed_at": "2026-11-20T08:47:45+08:00",
+  "observed_at": "2026-11-21T08:20:08+08:00",
   "stale": false
  },
  {
@@ -688,7 +702,7 @@
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
   "content_hash": "491ef5128687e9f2",
-  "observed_at": "2026-11-20T08:47:45+08:00",
+  "observed_at": "2026-11-21T08:20:08+08:00",
   "stale": false
  },
  {
@@ -736,7 +750,7 @@
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
   "content_hash": "4cc1d7f3ed356918",
-  "observed_at": "2026-11-20T08:47:45+08:00",
+  "observed_at": "2026-11-21T08:20:08+08:00",
   "stale": false
  },
  {
@@ -757,7 +771,7 @@
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
   "content_hash": "c621adb01544aa44",
-  "observed_at": "2026-11-20T08:47:45+08:00",
+  "observed_at": "2026-11-21T08:20:08+08:00",
   "stale": false
  },
  {
@@ -778,7 +792,7 @@
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
   "content_hash": "8fa1728d5355c0e7",
-  "observed_at": "2026-11-20T08:47:45+08:00",
+  "observed_at": "2026-11-21T08:20:08+08:00",
   "stale": false
  },
  {
@@ -856,7 +870,7 @@
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
   "content_hash": "3565873eca4c225e",
-  "observed_at": "2026-11-20T08:47:45+08:00",
+  "observed_at": "2026-11-21T08:20:08+08:00",
   "stale": false
  },
  {
@@ -871,14 +885,14 @@
   "summary": "特店分期、來電/上網分期，均可享優惠，讓您消費好輕鬆！",
   "category": "",
   "registration": "required",
-  "registration_quote": "參加本活動，須由正卡持卡人於指定期間透過永豐銀行網站進行線上登錄",
+  "registration_quote": "分期消費(限分3期、6期、12期)並完成登錄，享最高回饋2%刷卡金",
   "subs": [
    {
     "name": "特店分期享雙重好禮",
     "slots": [],
     "rules": [],
     "reregister": "once",
-    "reregister_quote": "活動期間完成上述好禮第1重、第2重之分期條件後僅須登錄乙次即享好禮第1重、第2重之活動資格，無須重複登錄",
+    "reregister_quote": "僅須登錄乙次即享好禮第1重、第2重之活動資格，無須重複登錄",
     "order": "unknown",
     "order_quote": "",
     "quota": 12000,
@@ -887,31 +901,16 @@
    },
    {
     "name": "分期享筆筆2%刷卡金回饋",
-    "slots": [
-     {
-      "start": "2026-10-01T00:00:00+08:00",
-      "end": "2026-12-31T23:59:00+08:00",
-      "kind": "range",
-      "origin": "explicit",
-      "precision": "day",
-      "holiday_shifted": false,
-      "note": "",
-      "evidence": {
-       "quote": "活動期間:2026/10/1~2026/12/31",
-       "url": "https://bank.sinopac.com/sinopacBT/personal/credit-card/discount/502664361.html"
-      }
-     }
-    ],
+    "slots": [],
     "rules": [
-     "於2026/10/1當日開放登錄2,000名",
-     "活動期間:2026/10/1~2026/12/31"
+     "於2026/10/1當日開放登錄2,000名"
     ],
     "reregister": "unknown",
     "reregister_quote": "",
     "order": "unknown",
     "order_quote": "",
-    "quota": 2000,
-    "quota_quote": "於2026/10/1當日開放登錄2,000名",
+    "quota": 5000,
+    "quota_quote": "2026/11/4起增加名額至5,000名",
     "review": []
    },
    {
@@ -924,8 +923,8 @@
     "reregister_quote": "每波活動須分別登錄乙次",
     "order": "unknown",
     "order_quote": "",
-    "quota": 12000,
-    "quota_quote": "於2026/7/1、2026/10/1當日開放登錄12,000名",
+    "quota": 15000,
+    "quota_quote": "2026/9/4起增加名額至15,000名",
     "review": []
    },
    {
@@ -938,15 +937,15 @@
     "reregister_quote": "每波活動須分別登錄乙次",
     "order": "unknown",
     "order_quote": "",
-    "quota": 10000,
-    "quota_quote": "於2026/7/1、2026/10/1當日開放登錄10,000名",
+    "quota": 12000,
+    "quota_quote": "2026/9/4起增加名額至12,000名",
     "review": []
    },
    {
     "name": "分期滿2筆抽500元刷卡金折抵分期利息",
     "slots": [],
     "rules": [
-     "活動須登錄，於2026/9/15當日開放登錄50,000名"
+     "活動須登錄，於2026/9/15當日開放登錄50,000名。"
     ],
     "reregister": "unknown",
     "reregister_quote": "",
@@ -957,37 +956,9 @@
     "review": []
    },
    {
-    "name": "【2026分期加碼活動】完成分期最高享NT$500刷卡金！",
+    "name": "【2026數位通路專屬優惠】分期滿額抽萬元禮券！",
     "slots": [],
     "rules": [],
-    "reregister": "unknown",
-    "reregister_quote": "",
-    "order": "unknown",
-    "order_quote": "",
-    "quota": null,
-    "quota_quote": "",
-    "review": []
-   },
-   {
-    "name": "【2026數位通路專屬優惠】分期滿額抽萬元禮券！",
-    "slots": [
-     {
-      "start": "2026-10-01T00:00:00+08:00",
-      "end": "2026-12-31T23:59:00+08:00",
-      "kind": "range",
-      "origin": "explicit",
-      "precision": "day",
-      "holiday_shifted": false,
-      "note": "",
-      "evidence": {
-       "quote": "活動期間:2026/10/01-2026/12/31",
-       "url": "https://bank.sinopac.com/sinopacBT/personal/credit-card/discount/502664361.html"
-      }
-     }
-    ],
-    "rules": [
-     "活動期間:2026/10/01-2026/12/31"
-    ],
     "reregister": "unknown",
     "reregister_quote": "",
     "order": "unknown",
@@ -1000,8 +971,8 @@
   "portal_url": "https://bank.sinopac.com/sinopacBT/personal/credit-card/discount/list.html",
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
-  "content_hash": "7599b8f8b8169432",
-  "observed_at": "2026-11-20T08:47:45+08:00",
+  "content_hash": "75a28563b9a05a1c",
+  "observed_at": "2026-11-21T08:20:08+08:00",
   "stale": false
  },
  {
@@ -1016,7 +987,7 @@
   "summary": "各大精選百貨、OUTLET滿額享優惠，讓您購好購滿！",
   "category": "",
   "registration": "required",
-  "registration_quote": "本活動需於活動期間2026/10/1~2026/12/31完成登錄，總限量登錄15,000名。",
+  "registration_quote": "本活動需於活動期間2026/10/1~2026/12/31完成登錄",
   "subs": [
    {
     "name": "Mitsui Shopping Park LaLaport 南港/台中",
@@ -1039,7 +1010,7 @@
      "本活動需於活動期間2026/10/1~2026/12/31完成登錄"
     ],
     "reregister": "once",
-    "reregister_quote": "活動期間內完成登錄，且達消費門檻者，即享活動資格，無須重複登錄。",
+    "reregister_quote": "活動期間內完成登錄，且達消費門檻者，即享活動資格，無須重複登錄",
     "order": "unknown",
     "order_quote": "",
     "quota": 15000,
@@ -1050,8 +1021,8 @@
   "portal_url": "https://bank.sinopac.com/sinopacBT/personal/credit-card/discount/list.html",
   "portal_hint": "查無統一登錄頁；請由刷卡享優惠總覽進入各活動頁，依頁內指定方式登錄",
   "review": [],
-  "content_hash": "70784c4388b9f277",
-  "observed_at": "2026-11-20T08:47:45+08:00",
+  "content_hash": "bddb8e91ba51d104",
+  "observed_at": "2026-11-21T08:20:08+08:00",
   "stale": false
  },
  {
@@ -1087,7 +1058,7 @@
    "需登錄但官方未寫登錄時點"
   ],
   "content_hash": "cc1e02a4e4197bd7",
-  "observed_at": "2026-11-20T08:47:45+08:00",
+  "observed_at": "2026-11-21T08:20:08+08:00",
   "stale": false
  }
 ]

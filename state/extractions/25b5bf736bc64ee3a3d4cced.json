@@ -1,0 +1,155 @@
+{
+ "key": "25b5bf736bc64ee3a3d4cced",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-21T00:27:44+00:00",
+ "title": "百貨歡慶聖誕",
+ "duration_ms": 11526,
+ "cost_usd": 0.0662842,
+ "usage": {
+  "input": 2,
+  "output": 1696,
+  "cache_creation": 12218,
+  "cache_read": 2241
+ },
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "刷卡金活動需於活動期間完成登錄始符合活動資格"
+  },
+  "subs": [
+   {
+    "name": "MITSUI OUTLET PARK【第四季滿額禮】",
+    "rules": [
+     {
+      "quote": "活動暨登錄期間:2026/10/1-12/31",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 10,
+       "day": 1,
+       "hour": null,
+       "minute": null
+      },
+      "end": {
+       "year": 2026,
+       "month": 12,
+       "day": 31,
+       "hour": null,
+       "minute": null
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "retroactive_ok",
+     "quote": "須有符合門檻之消費且於活動期間完成登錄始符合活動資格"
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   },
+   {
+    "name": "Mitsui Shopping Park LaLaport南港【聖誕節滿額禮】",
+    "rules": [
+     {
+      "quote": "活動暨登錄期間:2026/12/3-12/31",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 12,
+       "day": 3,
+       "hour": null,
+       "minute": null
+      },
+      "end": {
+       "year": 2026,
+       "month": 12,
+       "day": 31,
+       "hour": null,
+       "minute": null
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "retroactive_ok",
+     "quote": "須有符合門檻之消費且於活動期間完成登錄始符合活動資格"
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   },
+   {
+    "name": "Mitsui Shopping Park LaLaport台中【第四季滿額禮】",
+    "rules": [
+     {
+      "quote": "活動暨登錄期間:2026/10/1-12/31",
+      "kind": "range",
+      "is_example": false,
+      "holiday": "none",
+      "start": {
+       "year": 2026,
+       "month": 10,
+       "day": 1,
+       "hour": null,
+       "minute": null
+      },
+      "end": {
+       "year": 2026,
+       "month": 12,
+       "day": 31,
+       "hour": null,
+       "minute": null
+      },
+      "days_of_month": [],
+      "nth": null,
+      "weekday": null,
+      "dates": [],
+      "open_time": null,
+      "close_time": null,
+      "end_of_month": false
+     }
+    ],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "retroactive_ok",
+     "quote": "須有符合門檻之消費且於活動期間完成登錄始符合活動資格"
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}
