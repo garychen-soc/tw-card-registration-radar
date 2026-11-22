@@ -1,17 +1,17 @@
 {
- "observed_at": "2026-11-21T08:20:08+08:00",
- "llm_calls": 9,
+ "observed_at": "2026-11-22T08:44:53+08:00",
+ "llm_calls": 0,
  "llm_failures": 0,
  "llm_usage": {
   "model": "sonnet",
-  "calls": 9,
-  "input_tokens": 18,
-  "output_tokens": 13192,
-  "cache_creation_tokens": 125786,
-  "cache_read_tokens": 13446,
-  "total_tokens": 152442,
-  "cost_usd": 0.6378,
-  "llm_seconds": 92.1
+  "calls": 0,
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "cache_creation_tokens": 0,
+  "cache_read_tokens": 0,
+  "total_tokens": 0,
+  "cost_usd": 0.0,
+  "llm_seconds": 0.0
  },
  "publishable": true,
  "messages": [],
@@ -19,13 +19,13 @@
   {
    "bank_id": "cathay",
    "bank_name": "國泰世華",
-   "status": "ok",
+   "status": "partial",
    "entry_url": "https://www.cathay-cube.com.tw/cathaybk/personal/event/overview",
    "stubs": 141,
    "activities": 135,
-   "detail_failures": 0,
-   "message": "",
-   "carried": 0
+   "detail_failures": 3,
+   "message": "3 頁明細讀不到，這些活動未收錄；沿用上一輪 3 筆（本輪讀取不完整）",
+   "carried": 3
   },
   {
    "bank_id": "chb",
@@ -74,13 +74,13 @@
   {
    "bank_id": "first",
    "bank_name": "第一銀行",
-   "status": "ok",
+   "status": "partial",
    "entry_url": "https://card.firstbank.com.tw/sites/card/touch/1565690686288",
    "stubs": 178,
    "activities": 176,
-   "detail_failures": 0,
-   "message": "",
-   "carried": 0
+   "detail_failures": 2,
+   "message": "2 頁明細讀不到，這些活動未收錄；沿用上一輪 2 筆（本輪讀取不完整）",
+   "carried": 2
   },
   {
    "bank_id": "hncb",
@@ -107,13 +107,13 @@
   {
    "bank_id": "mega",
    "bank_name": "兆豐銀行",
-   "status": "ok",
+   "status": "partial",
    "entry_url": "https://www.megabank.com.tw/personal/credit-card/event/overview",
    "stubs": 255,
    "activities": 252,
-   "detail_failures": 0,
-   "message": "",
-   "carried": 0
+   "detail_failures": 1,
+   "message": "1 頁明細讀不到，這些活動未收錄；沿用上一輪 1 筆（本輪讀取不完整）",
+   "carried": 1
   },
   {
    "bank_id": "obank",
@@ -164,8 +164,8 @@
    "bank_name": "台北富邦銀行",
    "status": "ok",
    "entry_url": "https://cardpromote.taipeifubon.com.tw/promotion/Result",
-   "stubs": 175,
-   "activities": 172,
+   "stubs": 173,
+   "activities": 170,
    "detail_failures": 0,
    "message": "",
    "carried": 0
@@ -173,24 +173,24 @@
   {
    "bank_id": "taishin",
    "bank_name": "台新銀行",
-   "status": "ok",
+   "status": "partial",
    "entry_url": "https://mkpcard.taishinbank.com.tw/tscccms/promotion/offerList/A",
-   "stubs": 197,
+   "stubs": 185,
    "activities": 195,
    "detail_failures": 0,
-   "message": "",
-   "carried": 0
+   "message": "分類失敗：D 百貨購物（來源拒絕自動化存取 https://mkpcard.taishinbank.com.tw/tscccms/promotion/getMorePromotionList/：HTTP 403（此類拒絕重試無效，需改用住宅 IP 或等官方解除限制））；沿用上一輪 12 筆（本輪讀取不完整）",
+   "carried": 12
   },
   {
    "bank_id": "tcbbank",
    "bank_name": "台中銀行",
-   "status": "ok",
+   "status": "failed",
    "entry_url": "https://www.tcbbank.com.tw/creditcard/J_01.html",
-   "stubs": 24,
+   "stubs": 0,
    "activities": 24,
    "detail_failures": 0,
-   "message": "",
-   "carried": 0
+   "message": "FetchFailed: 抓取失敗 https://www.tcbbank.com.tw/WWWAPI/api/Promotion/Entrance?ID=2：[Errno 54] Connection reset by peer（已重試 3 次）",
+   "carried": 24
   },
   {
    "bank_id": "ubot",
