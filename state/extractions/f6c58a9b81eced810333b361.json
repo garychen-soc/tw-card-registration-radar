@@ -1,0 +1,22 @@
+{
+ "key": "f6c58a9b81eced810333b361",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-23T01:27:14+00:00",
+ "title": "玉山信用卡年末犒賞計畫",
+ "duration_ms": 4017,
+ "cost_usd": 0.033026,
+ "usage": {
+  "input": 2,
+  "output": 307,
+  "cache_creation": 7488,
+  "cache_read": 0
+ },
+ "output": {
+  "registration": {
+   "value": "unclear",
+   "quote": ""
+  },
+  "subs": []
+ }
+}

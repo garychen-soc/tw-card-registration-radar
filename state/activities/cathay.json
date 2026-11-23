@@ -17,7 +17,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "18f26a6f8de777cc",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -38,7 +38,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "85f5013b35db1326",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -59,7 +59,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "9445593d605c853e",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -80,7 +80,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "053cb62573de3d40",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -101,7 +101,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "9043c79b073a5f9d",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -122,7 +122,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "f862303c03cfffbb",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -188,8 +188,8 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "dd12bb8bb78312a4",
-  "observed_at": "2026-11-21T08:20:08+08:00",
-  "stale": true
+  "observed_at": "2026-11-23T09:19:16+08:00",
+  "stale": false
  },
  {
   "id": "cathay-0bc98b4557",
@@ -209,7 +209,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "953bde250370aa62",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -224,27 +224,13 @@
   "summary": "你在日本旅行嗎？打開國泰世華『旅日優惠口袋』，各種日本購物藥妝、電器、百貨、玩具優惠券不私藏，消費刷國泰世華信用卡，日本旅遊吃喝玩樂超划算！ 2026/4/30前切換日本賞，喜愛吃美食或是逛街買買買，日本實體消費筆筆享3.5%小樹點(信用卡)回饋，搭配專屬優惠券指定機場免稅店現折5%、BicCamera集團、愛電王等享",
   "category": "travel",
   "registration": "required",
-  "registration_quote": "本活動限CUBE信用卡持卡人於活動期間登入本行CUBE App完成領取「日本MITSUI指定商場最高5%回饋」優惠券",
+  "registration_quote": "本活動限CUBE信用卡持卡人於活動期間登入本行CUBE App完成領取優惠券",
   "subs": [
    {
-    "name": "日本三井指定商場",
-    "slots": [
-     {
-      "start": "2026-08-01T00:00:00+08:00",
-      "end": "2026-12-31T23:59:00+08:00",
-      "kind": "range",
-      "origin": "explicit",
-      "precision": "minute",
-      "holiday_shifted": false,
-      "note": "",
-      "evidence": {
-       "quote": "2026/08/01 00:00 ~ 2026/12/31 23:59 (台灣時間)",
-       "url": "https://www.cathay-cube.com.tw/cathaybk/personal/event/overview/credit-card/travel/202501/JP_DiscountPocket"
-      }
-     }
-    ],
+    "name": "日本大丸百貨福岡天神店",
+    "slots": [],
     "rules": [
-     "2026/08/01 00:00 ~ 2026/12/31 23:59 (台灣時間)"
+     "本活動限CUBE信用卡持卡人於活動期間登入本行CUBE App完成領取優惠券"
     ],
     "reregister": "unknown",
     "reregister_quote": "",
@@ -252,14 +238,32 @@
     "order_quote": "並於領取日後(含當日)刷CUBE信用卡於指定通路消費方符合回饋計算",
     "quota": null,
     "quota_quote": "",
-    "review": []
+    "review": [
+     "規則無法驗證（year=2026 在引句中找不到）：本活動限CUBE信用卡持卡人於活動期間登入本行CUBE App完成領取優惠券"
+    ]
+   },
+   {
+    "name": "日本MITSUI指定商場",
+    "slots": [],
+    "rules": [
+     "本活動限CUBE信用卡持卡人於活動期間登入本行CUBE App完成領取「日本MITSUI指定商場最高5%回饋」優惠券"
+    ],
+    "reregister": "unknown",
+    "reregister_quote": "",
+    "order": "register_before_spend",
+    "order_quote": "並於領取日後(含當日)刷CUBE信用卡於指定通路消費方符合回饋計算",
+    "quota": null,
+    "quota_quote": "",
+    "review": [
+     "規則無法驗證（year=2026 在引句中找不到）：本活動限CUBE信用卡持卡人於活動期間登入本行CUBE App完成領取「日本MI"
+    ]
    }
   ],
   "portal_url": "https://www.cathaybk.com.tw/promotion/",
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
-  "content_hash": "3d6979a763894b42",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "content_hash": "6afd1b17cda5549e",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -280,7 +284,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "46a4386f84dfd81d",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -301,7 +305,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "2692498fbcf1d5a0",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -322,7 +326,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "a80a4ffaa4cdfc1f",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -343,7 +347,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "bd2cfe887dd3763a",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -364,7 +368,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "e8af609608b24f5f",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -385,29 +389,8 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "9d739c7b3d6d377b",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
- },
- {
-  "id": "cathay-1cf20aa12f",
-  "bank_id": "cathay",
-  "bank_name": "國泰世華",
-  "title": "國泰世華銀行 彭佳慧《數著時間的日子》巡迴演唱會",
-  "aliases": [],
-  "url": "https://www.cathay-cube.com.tw/cathaybk/personal/event/overview/credit-card/entertainment/2026/JuliaPeng",
-  "period_start": "2026-07-28",
-  "period_end": "2026-11-21",
-  "summary": "世界卡及CUBE信用卡優先購票",
-  "category": "entertainment",
-  "registration": "not_required",
-  "registration_quote": "",
-  "subs": [],
-  "portal_url": "https://www.cathaybk.com.tw/promotion/",
-  "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
-  "review": [],
-  "content_hash": "a088f4632eebf341",
-  "observed_at": "2026-11-21T08:20:08+08:00",
-  "stale": true
  },
  {
   "id": "cathay-1e95799021",
@@ -541,7 +524,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "64e9bd80abc5838a",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -562,7 +545,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "a8e79ef7cc33a265",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -612,7 +595,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "058cabffd0604184",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -633,7 +616,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "21a64ecf6b625111",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -683,7 +666,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "2daa92072c9f3d8e",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -704,7 +687,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "ae75f9b01f48999c",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -740,7 +723,7 @@
    "需登錄但官方未寫登錄時點"
   ],
   "content_hash": "76cf8a9a3adcfa72",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -761,7 +744,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "2b21a1eb1c31c780",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -811,7 +794,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "3f32ffac1e26634e",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -832,7 +815,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "7fef83474c4b148b",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -853,7 +836,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "383abbd98f810d1d",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -874,7 +857,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "935315404f5e32fd",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -895,7 +878,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "430e052828b79195",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -916,7 +899,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "016eb17b93786716",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -937,7 +920,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "b056dfd0603c69e4",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -958,7 +941,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "16c326513eb057a2",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -979,7 +962,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "bb2143ac5620c938",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -1000,7 +983,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "4b346caa12519ada",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -1021,7 +1004,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "19ff85f2a16d5269",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -1042,7 +1025,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "7c617d2907490400",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -1063,7 +1046,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "9ba4217f15ad60e2",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -1101,7 +1084,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "bb9f48c4d6743ff6",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -1122,8 +1105,8 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "89a2ad2963be814a",
-  "observed_at": "2026-11-21T08:20:08+08:00",
-  "stale": true
+  "observed_at": "2026-11-23T09:19:16+08:00",
+  "stale": false
  },
  {
   "id": "cathay-48d29d9ef6",
@@ -1191,7 +1174,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "90a98ac574b3e6b9",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -1212,7 +1195,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "9bef17b738822b59",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -1233,7 +1216,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "942542c55ab318cb",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -1254,7 +1237,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "d06d5ff526b4e8f2",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -1275,7 +1258,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "31fac1383c0331f9",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -1296,7 +1279,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "bc67f8c22e8c5de1",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -1317,7 +1300,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "309bff6263b02abd",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -1338,7 +1321,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "e3c351420ba54561",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -1430,7 +1413,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "a9ef4a5b13c47ff2",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -1468,7 +1451,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "008417ea19e36b66",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -1489,7 +1472,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "3a79c03e0f8c42ed",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -1510,7 +1493,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "976cb5ad2bdde5db",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -1561,7 +1544,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "061996a33470b323",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -1615,7 +1598,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "778e8417fa0bae09",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -1651,7 +1634,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "8e3927b690d3038b",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -1672,7 +1655,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "8beaa0191975470d",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -1722,7 +1705,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "8ea3a48bc3b3b418",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -1743,7 +1726,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "6b0fa16d8d0aa4ad",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -1764,7 +1747,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "7b80b24db3140069",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -1785,7 +1768,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "1f7e45da59c6b7c7",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -1806,7 +1789,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "bd8c5b9163a7a7fd",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -1827,7 +1810,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "e7ba2ca320f7929a",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -1848,7 +1831,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "9c41fb6d133b2b2f",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -1869,7 +1852,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "2d772ae93477ee24",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -1890,7 +1873,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "6d162a0c49db0d0d",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -1911,7 +1894,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "f6864323dcb0583b",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -1932,7 +1915,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "819d071b417d4c4c",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -1970,7 +1953,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "7f256adfeee454a8",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -1991,7 +1974,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "277a0b04ac28127c",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -2083,7 +2066,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "0998f6d825f99f27",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -2104,7 +2087,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "a1d72a8dd2bc6057",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -2125,7 +2108,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "fb36c2b29c12b88b",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -2146,7 +2129,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "0c3e1cf50b406897",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -2167,7 +2150,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "889621785c337c4c",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -2188,7 +2171,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "3119758414c394b1",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -2211,7 +2194,7 @@
    "官方頁面沒有可讀的條款文字（可能是圖片或已下架），請直接查看活動頁"
   ],
   "content_hash": "72995ec817b7493e",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -2345,7 +2328,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "229ed33cc7fd6332",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -2366,7 +2349,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "013506f66020399c",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -2472,7 +2455,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "ddb39bbd3e547e73",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -2522,7 +2505,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "9187d5229bb44464",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -2543,7 +2526,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "66fff683ba22fd6d",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -2564,7 +2547,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "0cb1b8622daf026e",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -2585,7 +2568,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "89fe9aba9801b820",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -2606,7 +2589,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "9dfda8bb3bd2af49",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -2627,7 +2610,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "c5cc122b726b8772",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -2648,7 +2631,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "656b53709ce3a7d4",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -2669,7 +2652,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "39c98e51dc55bbc9",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -2690,7 +2673,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "0830a3c7f5ce9058",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -2768,7 +2751,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "a0bc8c5e0131ac40",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -2831,7 +2814,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "dd1835643fb9f6c5",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -2852,7 +2835,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "718ff5dfddfa548d",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -2873,7 +2856,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "b85786b11804f09a",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -2894,7 +2877,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "78d8bb30e0773e88",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -2915,7 +2898,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "c923a3c232cbbae1",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -2936,7 +2919,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "6c74cb3332559ad2",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -2957,7 +2940,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "102f7d65efa7cc5f",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -3019,7 +3002,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "af95811d993160c5",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -3040,7 +3023,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "b53dd57424eccd2f",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -3061,7 +3044,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "37735cd23fee96fb",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -3082,7 +3065,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "fc2520bae3974419",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -3103,7 +3086,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "1aecc8546363618b",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -3124,7 +3107,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "f09253a90ad1c857",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -3230,7 +3213,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "ada7e3d3773d5504",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -3251,7 +3234,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "829d4c64d91fa7cc",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -3272,7 +3255,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "72b2c394621082f8",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -3293,7 +3276,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "97cea322f3767b6f",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -3314,7 +3297,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "8beb5d4e657b4cf1",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -3335,7 +3318,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "85d3b5ca506c8825",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -3356,7 +3339,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "226c0e60473ae508",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -3377,7 +3360,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "1a0735f297f147bb",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -3398,7 +3381,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "7c30a7d086084943",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -3449,7 +3432,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "e1b09543f65550da",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -3470,7 +3453,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "5cad033219723949",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -3491,7 +3474,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "258b32239e0f62bd",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -3512,7 +3495,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "931c98880dcb507b",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -3593,7 +3576,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "7d972f5e9dd3fc6a",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -3614,7 +3597,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "4338fcc0f6c24c98",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -3635,7 +3618,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "498a1b547e78df6e",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -3656,7 +3639,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "7d3a07ec3684585b",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -3677,7 +3660,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "1eefcf7a5ff328cf",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -3698,7 +3681,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "5e30c26044bbedf1",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -3780,7 +3763,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "fbf345ba9abf3e15",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -3801,7 +3784,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "a46698ffe965d106",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -3822,7 +3805,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "34d847314b966b26",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -3862,7 +3845,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "8a6da1d7f57bba32",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -3929,7 +3912,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "0084ebcd31a3a5c3",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -4007,7 +3990,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "7073bdfda0a6c668",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -4070,7 +4053,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "0cb14a4409a1a9b5",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -4121,7 +4104,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "98f85ff374176aa6",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -4142,7 +4125,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "e54cf3e33480b58a",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -4163,7 +4146,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "5b273e4e75d1ef74",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -4184,7 +4167,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "d4167380a06587a7",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -4205,7 +4188,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "82597ab61eeae91b",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -4226,7 +4209,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "51c8c80d6dd440e2",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -4247,7 +4230,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "5c604226deb928b5",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  },
  {
@@ -4301,7 +4284,7 @@
   "portal_hint": "國泰世華信用卡活動登錄（卡友登錄專區）；標示 CUBE App 領券的活動改在 App 內領取",
   "review": [],
   "content_hash": "f31f69c1a10f9d94",
-  "observed_at": "2026-11-22T08:44:53+08:00",
+  "observed_at": "2026-11-23T09:19:16+08:00",
   "stale": false
  }
 ]
