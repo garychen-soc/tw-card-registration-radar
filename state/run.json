@@ -1,17 +1,17 @@
 {
- "observed_at": "2026-11-23T09:19:16+08:00",
+ "observed_at": "2026-11-24T08:53:19+08:00",
  "llm_calls": 3,
  "llm_failures": 0,
  "llm_usage": {
   "model": "sonnet",
   "calls": 3,
   "input_tokens": 6,
-  "output_tokens": 2238,
-  "cache_creation_tokens": 63448,
-  "cache_read_tokens": 0,
-  "total_tokens": 65692,
-  "cost_usd": 0.2762,
-  "llm_seconds": 19.0
+  "output_tokens": 2697,
+  "cache_creation_tokens": 19548,
+  "cache_read_tokens": 2241,
+  "total_tokens": 24492,
+  "cost_usd": 0.1056,
+  "llm_seconds": 22.4
  },
  "publishable": true,
  "messages": [],
@@ -21,7 +21,7 @@
    "bank_name": "國泰世華",
    "status": "ok",
    "entry_url": "https://www.cathay-cube.com.tw/cathaybk/personal/event/overview",
-   "stubs": 139,
+   "stubs": 138,
    "activities": 134,
    "detail_failures": 0,
    "message": "",
@@ -74,13 +74,13 @@
   {
    "bank_id": "first",
    "bank_name": "第一銀行",
-   "status": "ok",
+   "status": "partial",
    "entry_url": "https://card.firstbank.com.tw/sites/card/touch/1565690686288",
    "stubs": 179,
    "activities": 177,
-   "detail_failures": 0,
-   "message": "",
-   "carried": 0
+   "detail_failures": 2,
+   "message": "2 頁明細讀不到，這些活動未收錄；沿用上一輪 2 筆（本輪讀取不完整）",
+   "carried": 2
   },
   {
    "bank_id": "hncb",
@@ -107,13 +107,13 @@
   {
    "bank_id": "mega",
    "bank_name": "兆豐銀行",
-   "status": "ok",
+   "status": "partial",
    "entry_url": "https://www.megabank.com.tw/personal/credit-card/event/overview",
    "stubs": 251,
    "activities": 247,
-   "detail_failures": 0,
-   "message": "",
-   "carried": 0
+   "detail_failures": 2,
+   "message": "2 頁明細讀不到，這些活動未收錄；沿用上一輪 2 筆（本輪讀取不完整）",
+   "carried": 2
   },
   {
    "bank_id": "obank",
@@ -164,8 +164,8 @@
    "bank_name": "台北富邦銀行",
    "status": "ok",
    "entry_url": "https://cardpromote.taipeifubon.com.tw/promotion/Result",
-   "stubs": 173,
-   "activities": 170,
+   "stubs": 179,
+   "activities": 176,
    "detail_failures": 0,
    "message": "",
    "carried": 0
@@ -175,8 +175,8 @@
    "bank_name": "台新銀行",
    "status": "ok",
    "entry_url": "https://mkpcard.taishinbank.com.tw/tscccms/promotion/offerList/A",
-   "stubs": 196,
-   "activities": 194,
+   "stubs": 200,
+   "activities": 198,
    "detail_failures": 0,
    "message": "",
    "carried": 0
