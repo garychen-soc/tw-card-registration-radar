@@ -1,0 +1,39 @@
+{
+ "key": "fcc79915cb6eb87ee179a066",
+ "prompt_version": "2026-11-02.1",
+ "model": "sonnet",
+ "created_at": "2026-11-25T00:51:26+00:00",
+ "title": "日本山田電機，享最高免稅10%+現折7%",
+ "duration_ms": 10094,
+ "cost_usd": 0.032844,
+ "usage": {
+  "input": 2,
+  "output": 482,
+  "cache_creation": 7005,
+  "cache_read": 0
+ },
+ "output": {
+  "registration": {
+   "value": "required",
+   "quote": "本活動需於結帳前，出示專屬優惠券條碼，並刷台新銀行信用卡或簽帳金融卡"
+  },
+  "subs": [
+   {
+    "name": "",
+    "rules": [],
+    "reregister": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "order": {
+     "value": "unclear",
+     "quote": ""
+    },
+    "quota": {
+     "seats": null,
+     "quote": ""
+    }
+   }
+  ]
+ }
+}

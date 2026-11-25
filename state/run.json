@@ -1,17 +1,17 @@
 {
- "observed_at": "2026-11-24T08:53:19+08:00",
- "llm_calls": 3,
+ "observed_at": "2026-11-25T09:21:54+08:00",
+ "llm_calls": 1,
  "llm_failures": 0,
  "llm_usage": {
   "model": "sonnet",
-  "calls": 3,
-  "input_tokens": 6,
-  "output_tokens": 2697,
-  "cache_creation_tokens": 19548,
+  "calls": 1,
+  "input_tokens": 2,
+  "output_tokens": 1709,
+  "cache_creation_tokens": 9412,
   "cache_read_tokens": 2241,
-  "total_tokens": 24492,
-  "cost_usd": 0.1056,
-  "llm_seconds": 22.4
+  "total_tokens": 13364,
+  "cost_usd": 0.0552,
+  "llm_seconds": 11.5
  },
  "publishable": true,
  "messages": [],
@@ -65,8 +65,8 @@
    "bank_name": "玉山銀行",
    "status": "ok",
    "entry_url": "https://www.esunbank.com/zh-tw/personal/credit-card/discount/shops",
-   "stubs": 161,
-   "activities": 158,
+   "stubs": 160,
+   "activities": 157,
    "detail_failures": 1,
    "message": "1 頁明細讀不到，這些活動未收錄",
    "carried": 0
@@ -74,13 +74,13 @@
   {
    "bank_id": "first",
    "bank_name": "第一銀行",
-   "status": "partial",
+   "status": "ok",
    "entry_url": "https://card.firstbank.com.tw/sites/card/touch/1565690686288",
-   "stubs": 179,
-   "activities": 177,
-   "detail_failures": 2,
-   "message": "2 頁明細讀不到，這些活動未收錄；沿用上一輪 2 筆（本輪讀取不完整）",
-   "carried": 2
+   "stubs": 180,
+   "activities": 178,
+   "detail_failures": 0,
+   "message": "",
+   "carried": 0
   },
   {
    "bank_id": "hncb",
@@ -107,13 +107,13 @@
   {
    "bank_id": "mega",
    "bank_name": "兆豐銀行",
-   "status": "partial",
+   "status": "ok",
    "entry_url": "https://www.megabank.com.tw/personal/credit-card/event/overview",
-   "stubs": 251,
-   "activities": 247,
-   "detail_failures": 2,
-   "message": "2 頁明細讀不到，這些活動未收錄；沿用上一輪 2 筆（本輪讀取不完整）",
-   "carried": 2
+   "stubs": 250,
+   "activities": 246,
+   "detail_failures": 0,
+   "message": "",
+   "carried": 0
   },
   {
    "bank_id": "obank",
@@ -175,8 +175,8 @@
    "bank_name": "台新銀行",
    "status": "ok",
    "entry_url": "https://mkpcard.taishinbank.com.tw/tscccms/promotion/offerList/A",
-   "stubs": 200,
-   "activities": 198,
+   "stubs": 201,
+   "activities": 199,
    "detail_failures": 0,
    "message": "",
    "carried": 0
